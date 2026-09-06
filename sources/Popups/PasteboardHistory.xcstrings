@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
         }
       }
     },
@@ -21,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Time"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "时间"
           }
         }
       }
@@ -34,10 +46,17 @@
             "state": "new",
             "value": "Value"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "值"
+          }
         }
       }
     },
     "120.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"120\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -46,16 +65,29 @@
             "state": "new",
             "value": "Text Cell"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
         }
       }
     },
     "121.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"121\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }

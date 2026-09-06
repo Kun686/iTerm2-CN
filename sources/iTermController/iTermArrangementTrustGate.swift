@@ -20,11 +20,23 @@ final class iTermArrangementTrustGate: NSObject {
         }
 
         let filename = (path as NSString).lastPathComponent
-        let heading = "Open the arrangement “\(filename)”?"
+        let heading = String(localized: "ui.arrangements.trust.heading",
+                             defaultValue: "Open the arrangement “\(filename)”?",
+                             bundle: .main,
+                             comment: "Confirmation heading before opening a quarantined window arrangement.")
         let body = buildBody(summary: summary)
 
         let selection = iTermWarning.show(withTitle: body,
-                                          actions: ["Cancel", "Open"],
+                                          actions: [
+                                            String(localized: "ui.arrangements.trust.action.cancel",
+                                                   defaultValue: "Cancel",
+                                                   bundle: .main,
+                                                   comment: "Cancel opening an untrusted window arrangement."),
+                                            String(localized: "ui.arrangements.trust.action.open",
+                                                   defaultValue: "Open",
+                                                   bundle: .main,
+                                                   comment: "Open an untrusted window arrangement after confirmation.")
+                                          ],
                                           accessory: nil,
                                           identifier: nil,
                                           silenceable: .kiTermWarningTypePersistent,
@@ -39,16 +51,25 @@ final class iTermArrangementTrustGate: NSObject {
 
     private static func buildBody(summary: RiskSummary) -> String {
         var parts: [String] = []
-        parts.append("Window arrangements embed session profiles, which can run commands, connect to remote hosts, and configure triggers or smart-selection actions that execute when the terminal sees matching output. Opening an arrangement from an untrusted source is equivalent to running a program they gave you.")
+        parts.append(String(localized: "ui.arrangements.trust.explanation",
+                            defaultValue: "Window arrangements embed session profiles, which can run commands, connect to remote hosts, and configure triggers or smart-selection actions that execute when the terminal sees matching output. Opening an arrangement from an untrusted source is equivalent to running a program they gave you.",
+                            bundle: .main,
+                            comment: "Security explanation shown before opening an untrusted window arrangement."))
         if !summary.findings.isEmpty {
             parts.append("")
-            parts.append("This arrangement contains:")
+            parts.append(String(localized: "ui.arrangements.trust.contains",
+                                defaultValue: "This arrangement contains:",
+                                bundle: .main,
+                                comment: "Heading for risks found in an untrusted window arrangement."))
             for finding in summary.findings {
                 parts.append("  • " + finding)
             }
         }
         parts.append("")
-        parts.append("Open it only if you trust where it came from.")
+        parts.append(String(localized: "ui.arrangements.trust.only_if_trusted",
+                            defaultValue: "Open it only if you trust where it came from.",
+                            bundle: .main,
+                            comment: "Final warning before opening an untrusted window arrangement."))
         return parts.joined(separator: "\n")
     }
 
@@ -114,23 +135,77 @@ enum RiskAnalyzer {
 
         var findings: [String] = []
         if sessionCount > 0 {
-            findings.append(plural(sessionCount, "embedded session profile"))
+            findings.append(counted(
+                sessionCount,
+                singular: String(localized: "ui.arrangements.trust.risk.embedded_session_profile.one",
+                                 defaultValue: "embedded session profile",
+                                 bundle: .main,
+                                 comment: "One embedded session profile in an untrusted arrangement."),
+                plural: String(localized: "ui.arrangements.trust.risk.embedded_session_profile.many",
+                               defaultValue: "embedded session profiles",
+                               bundle: .main,
+                               comment: "Multiple embedded session profiles in an untrusted arrangement.")))
         }
         let commandTotal = customCommandCount + programCount
         if commandTotal > 0 {
-            findings.append(plural(commandTotal, "custom command") + " that will run when the arrangement opens")
+            findings.append(counted(
+                commandTotal,
+                singular: String(localized: "ui.arrangements.trust.risk.custom_command.one",
+                                 defaultValue: "custom command that will run when the arrangement opens",
+                                 bundle: .main,
+                                 comment: "One custom command found in an untrusted arrangement."),
+                plural: String(localized: "ui.arrangements.trust.risk.custom_command.many",
+                               defaultValue: "custom commands that will run when the arrangement opens",
+                               bundle: .main,
+                               comment: "Multiple custom commands found in an untrusted arrangement.")))
         }
         if sshCount > 0 {
-            findings.append(plural(sshCount, "SSH connection") + " that will be opened automatically")
+            findings.append(counted(
+                sshCount,
+                singular: String(localized: "ui.arrangements.trust.risk.ssh_connection.one",
+                                 defaultValue: "SSH connection that will be opened automatically",
+                                 bundle: .main,
+                                 comment: "One automatic SSH connection found in an untrusted arrangement."),
+                plural: String(localized: "ui.arrangements.trust.risk.ssh_connection.many",
+                               defaultValue: "SSH connections that will be opened automatically",
+                               bundle: .main,
+                               comment: "Multiple automatic SSH connections found in an untrusted arrangement.")))
         }
         if initialTextCount > 0 {
-            findings.append(plural(initialTextCount, "session") + " with text that will be typed into the terminal on startup")
+            findings.append(counted(
+                initialTextCount,
+                singular: String(localized: "ui.arrangements.trust.risk.initial_text_session.one",
+                                 defaultValue: "session with text that will be typed into the terminal on startup",
+                                 bundle: .main,
+                                 comment: "One session with startup text found in an untrusted arrangement."),
+                plural: String(localized: "ui.arrangements.trust.risk.initial_text_session.many",
+                               defaultValue: "sessions with text that will be typed into the terminal on startup",
+                               bundle: .main,
+                               comment: "Multiple sessions with startup text found in an untrusted arrangement.")))
         }
         if triggerCount > 0 {
-            findings.append(plural(triggerCount, "trigger") + " that runs actions when matching output appears")
+            findings.append(counted(
+                triggerCount,
+                singular: String(localized: "ui.arrangements.trust.risk.trigger.one",
+                                 defaultValue: "trigger that runs actions when matching output appears",
+                                 bundle: .main,
+                                 comment: "One trigger found in an untrusted arrangement."),
+                plural: String(localized: "ui.arrangements.trust.risk.trigger.many",
+                               defaultValue: "triggers that run actions when matching output appears",
+                               bundle: .main,
+                               comment: "Multiple triggers found in an untrusted arrangement.")))
         }
         if smartRuleCount > 0 {
-            findings.append(plural(smartRuleCount, "smart-selection rule") + " with custom actions")
+            findings.append(counted(
+                smartRuleCount,
+                singular: String(localized: "ui.arrangements.trust.risk.smart_selection_rule.one",
+                                 defaultValue: "smart-selection rule with custom actions",
+                                 bundle: .main,
+                                 comment: "One smart-selection rule found in an untrusted arrangement."),
+                plural: String(localized: "ui.arrangements.trust.risk.smart_selection_rule.many",
+                               defaultValue: "smart-selection rules with custom actions",
+                               bundle: .main,
+                               comment: "Multiple smart-selection rules found in an untrusted arrangement.")))
         }
         return RiskSummary(findings: findings)
     }
@@ -184,10 +259,11 @@ enum RiskAnalyzer {
         }
     }
 
-    private static func plural(_ count: Int, _ noun: String) -> String {
-        if count == 1 {
-            return "1 \(noun)"
-        }
-        return "\(count) \(noun)s"
+    private static func counted(_ count: Int, singular: String, plural: String) -> String {
+        let item = count == 1 ? singular : plural
+        return String(localized: "ui.arrangements.trust.risk.counted_item",
+                      defaultValue: "\(count) \(item)",
+                      bundle: .main,
+                      comment: "A count followed by a localized risk found in an untrusted arrangement.")
     }
 }

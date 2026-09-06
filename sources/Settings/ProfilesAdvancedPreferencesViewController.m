@@ -196,7 +196,7 @@
     [[triggerController.window undoManager] registerUndoWithTarget:self
                                                           selector:@selector(setTriggersValue:)
                                                             object:[self objectForKey:KEY_TRIGGERS]];
-    [[triggerController.window undoManager] setActionName:@"Edit Triggers"];
+    [[triggerController.window undoManager] setActionName:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesadvancedpreferencesviewcontroller.edit_triggers.65f45106", nil, NSBundle.mainBundle, @"Edit Triggers", @"User-facing text in ProfilesAdvancedPreferencesViewController (triggerChanged:newValue:).")];
 
     // No side effects because we don't want the tableview to get reloaded. We'll save when the
     // panel is closed. by setting the _triggersModelHasChanged flag.
@@ -358,12 +358,12 @@
     }
     if (dupProfile) {
         NSString *theTitle;
-        theTitle = [NSString stringWithFormat:@"The profile “%@” is already bound to hostname “%@”.",
+        theTitle = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesadvancedpreferencesviewcontroller.the_profile_is_already_bound_to_hostname.af7a7ca1", nil, NSBundle.mainBundle, @"The profile “%@” is already bound to hostname “%@”.", @"User-facing text in ProfilesAdvancedPreferencesViewController (indirect UI)."),
                     dupProfile[KEY_NAME], anObject];
-        NSString *removeFromOtherAction = [NSString stringWithFormat:@"Remove from “%@”", dupProfile[KEY_NAME]];
+        NSString *removeFromOtherAction = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesadvancedpreferencesviewcontroller.remove_from.feae7b27", nil, NSBundle.mainBundle, @"Remove from “%@”", @"User-facing action label in ProfilesAdvancedPreferencesViewController."), dupProfile[KEY_NAME]];
         switch ([iTermWarning showWarningWithTitle:theTitle
                                            actions:@[ removeFromOtherAction,
-                                                      @"Remove from This Profile" ]
+                                                      NSLocalizedStringWithDefaultValue(@"ui.settings.profilesadvancedpreferencesviewcontroller.remove_from_this_profile.f98a1960", nil, NSBundle.mainBundle, @"Remove from This Profile", @"User-facing action label in ProfilesAdvancedPreferencesViewController (actions).") ]
                                         identifier:nil
                                        silenceable:kiTermWarningTypePersistent
                                             window:self.view.window]) {
@@ -398,7 +398,7 @@
     dataCellForTableColumn:(NSTableColumn *)tableColumn
                        row:(NSInteger)row {
     NSTextFieldCell *cell = [[NSTextFieldCell alloc] initTextCell:@"hostname"];
-    [cell setPlaceholderString:@"Enter a rule…"];
+    [cell setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesadvancedpreferencesviewcontroller.enter_a_rule.346a42ce", nil, NSBundle.mainBundle, @"Enter a rule…", @"User-facing text in ProfilesAdvancedPreferencesViewController (tableView:dataCellForTableColumn:row:).")];
     [cell setEditable:YES];
     return cell;
 }

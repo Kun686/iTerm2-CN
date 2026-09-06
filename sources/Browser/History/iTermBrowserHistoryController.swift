@@ -33,17 +33,29 @@ class iTermBrowserHistoryController {
             // Reconstruct full URL for display (add https:// if needed)
             let displayUrl = visit.url
 
-            let suggestion = if let title = visit.title, !title.isEmpty {
-                URLSuggestion(
+            let suggestion: URLSuggestion
+            if let title = visit.title, !title.isEmpty {
+                suggestion = URLSuggestion(
                     url: displayUrl,
                     displayText: NSAttributedString(string: title, attributes: attributes),
                     detail: displayUrl,
                     type: .history)
             } else {
-                URLSuggestion(
+                let visitDetail = if visit.visitCount == 1 {
+                    String(localized: "ui.browser.history.visited_once",
+                           defaultValue: "Visited \(visit.visitCount) time",
+                           bundle: .main,
+                           comment: "Number of times a browser history entry was visited, singular.")
+                } else {
+                    String(localized: "ui.browser.history.visited_multiple",
+                           defaultValue: "Visited \(visit.visitCount) times",
+                           bundle: .main,
+                           comment: "Number of times a browser history entry was visited, plural.")
+                }
+                suggestion = URLSuggestion(
                     url: displayUrl,
                     displayText: NSAttributedString(string: displayUrl, attributes: attributes),
-                    detail: "Visited \(visit.visitCount) time\(visit.visitCount == 1 ? "" : "s")",
+                    detail: visitDetail,
                     type: .history)
             }
 

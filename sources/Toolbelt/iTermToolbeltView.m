@@ -286,7 +286,7 @@ static NSString *const kDynamicToolURL = @"URL";
 
         _noToolsMessage = [NSTextField newLabelStyledTextField];
         _noToolsMessage.alignment = NSTextAlignmentCenter;
-        _noToolsMessage.stringValue = @"No Tools enabled. Select them from the menu above.";
+        _noToolsMessage.stringValue = NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolbeltview.no_tools_enabled_select_them_from_the_menu.07d609b8", nil, NSBundle.mainBundle, @"No Tools enabled. Select them from the menu above.", @"User-facing text in iTermToolbeltView (initWithFrame:delegate:).");
         _noToolsMessage.frame = self.bounds;
         [self addSubview:_noToolsMessage];
         [self layoutNoToolsMessage];
@@ -304,7 +304,7 @@ static NSString *const kDynamicToolURL = @"URL";
         [self addSubview:_dragHandle];
 
         _menuButton = [[iTermHamburgerButton alloc] initWithMenuProvider:^NSMenu * _Nonnull {
-            NSMenu *menu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+            NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolbeltview.contextual_menu.3db60c37", nil, NSBundle.mainBundle, @"Contextual Menu", @"User-facing text in iTermToolbeltView (source UI).")];
             [iTermToolbeltView addToolsToMenu:menu];
             return menu;
         }];

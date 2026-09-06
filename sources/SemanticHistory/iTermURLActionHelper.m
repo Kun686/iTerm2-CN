@@ -382,8 +382,8 @@ workingDirectory:(NSString *)workingDirectory
     iTermBackgroundCommandRunner *runner =
         [[iTermBackgroundCommandRunner alloc] initWithCommand:command
                                                         shell:[self.delegate urlActionHelperShell:self]
-                                                        title:@"URL Handler"];
-    runner.notificationTitle = @"URL Handler Command Failed";
+                                                        title:NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermurlactionhelper.url_handler.f3a83da0", nil, NSBundle.mainBundle, @"URL Handler", @"User-facing text in iTermURLActionHelper (title).")];
+    runner.notificationTitle = NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermurlactionhelper.url_handler_command_failed_notification_title", nil, NSBundle.mainBundle, @"URL Handler Command Failed", @"Notification title when a URL handler background command fails.");
     [runner run];
 }
 
@@ -522,9 +522,9 @@ workingDirectory:(NSString *)workingDirectory
 
 + (NSString *)usernameToDownloadFileOnHost:(NSString *)host {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = [NSString stringWithFormat:@"Enter username for host %@ to download file with scp", host];
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermurlactionhelper.enter_username_for_host_to_download_file_with.10bb9167", nil, NSBundle.mainBundle, @"Enter username for host %@ to download file with scp", @"User-facing text in iTermURLActionHelper (messageText)."), host];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermurlactionhelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermURLActionHelper (usernameToDownloadFileOnHost:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermurlactionhelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermURLActionHelper (usernameToDownloadFileOnHost:).")];
 
     NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
     [input setStringValue:NSUserName()];

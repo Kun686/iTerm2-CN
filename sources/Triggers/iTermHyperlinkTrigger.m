@@ -15,11 +15,11 @@
 @implementation iTermHyperlinkTrigger
 
 + (NSString *)title {
-    return @"Make Hyperlink…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhyperlinktrigger.make_hyperlink.0df9e2a5", nil, NSBundle.mainBundle, @"Make Hyperlink…", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Make Hyperlink with URL “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhyperlinktrigger.make_hyperlink_with_url.29ec4a5f", nil, NSBundle.mainBundle, @"Make Hyperlink with URL “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (BOOL)takesParameter {

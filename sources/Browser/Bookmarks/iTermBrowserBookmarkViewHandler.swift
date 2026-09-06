@@ -32,19 +32,46 @@ extension iTermBrowserBookmarkViewHandler {
     // MARK: - Public Interface
     
     func generateBookmarksHTML() -> String {
+        let scriptSubstitutions = [
+            "DELETE_BOOKMARK_PROMPT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.confirm.delete", defaultValue: "Delete this bookmark?"),
+            "CLEAR_ALL_PROMPT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.confirm.clear_all", defaultValue: "This will delete all bookmarks. This action cannot be undone. Continue?"),
+            "UNTITLED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.untitled", defaultValue: "Untitled"),
+            "ADDED_FORMAT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.added_format", defaultValue: "Added %1$@"),
+            "NAVIGATE_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.navigate_tooltip", defaultValue: "Click to navigate to this URL"),
+            "DELETE_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.delete_tooltip", defaultValue: "Delete this bookmark"),
+            "NO_BOOKMARKS_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.empty.title", defaultValue: "No bookmarks found"),
+            "EMPTY_DESCRIPTION_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.empty.description", defaultValue: "Start bookmarking your favorite websites to see them here."),
+            "BOOKMARK_DELETED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.status.deleted", defaultValue: "Bookmark deleted"),
+            "ALL_BOOKMARKS_CLEARED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.status.cleared", defaultValue: "All bookmarks cleared"),
+            "PAGE_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.bookmarks.title", defaultValue: "Bookmarks")
+        ]
         let script = iTermBrowserTemplateLoader.loadTemplate(named: "bookmarks-page",
                                                              type: "js",
-                                                             substitutions: [:])
+                                                             substitutions: scriptSubstitutions)
         return iTermBrowserTemplateLoader.loadTemplate(named: "bookmarks-page",
                                                        type: "html",
-                                                       substitutions: ["BOOKMARKS_SCRIPT": script])
+                                                       substitutions: [
+                                                           "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+                                                           "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.title", defaultValue: "Bookmarks"),
+                                                           "PAGE_SUBTITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.subtitle", defaultValue: "Manage and organize your saved websites"),
+                                                           "CLEAR_ALL": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.clear_all", defaultValue: "Clear All"),
+                                                           "SEARCH_PLACEHOLDER": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.search_placeholder", defaultValue: "Search bookmarks..."),
+                                                           "SORT_BY": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.sort_by", defaultValue: "Sort by:"),
+                                                           "SORT_DATE_ADDED": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.sort.date_added", defaultValue: "Date Added"),
+                                                           "SORT_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.sort.title", defaultValue: "Title"),
+                                                           "SORT_URL": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.sort.url", defaultValue: "URL"),
+                                                           "FILTER_BY_TAGS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.filter_by_tags", defaultValue: "Filter by tags:"),
+                                                           "LOADING": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.loading", defaultValue: "Loading bookmarks..."),
+                                                           "LOAD_MORE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.load_more", defaultValue: "Load More"),
+                                                           "BOOKMARKS_SCRIPT": script
+                                                       ])
     }
     
     func start(urlSchemeTask: WKURLSchemeTask, url: URL) {
         let htmlToServe = generateBookmarksHTML()
         
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserBookmarkViewHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserBookmarkViewHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.bookmarks.itermbrowserbookmarkviewhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "Error shown when the browser bookmarks page cannot be encoded.")]))
             return
         }
         

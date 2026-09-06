@@ -8,6 +8,12 @@
             "state": "new",
             "value": "An application in iTerm2 wants to use AppleScript."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用 AppleScript。"
+          }
         }
       }
     },
@@ -17,6 +23,12 @@
           "stringUnit": {
             "state": "new",
             "value": "An application in iTerm2 wants to use Bluetooth."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用蓝牙。"
           }
         }
       }
@@ -28,6 +40,12 @@
             "state": "new",
             "value": "An application in iTerm2 wants to use Calendar data."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用日历数据。"
+          }
         }
       }
     },
@@ -37,6 +55,12 @@
           "stringUnit": {
             "state": "new",
             "value": "An application in iTerm2 wants to use the camera."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用摄像头。"
           }
         }
       }
@@ -48,6 +72,12 @@
             "state": "new",
             "value": "An application in iTerm2 wants to use your contacts."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用你的通讯录。"
+          }
         }
       }
     },
@@ -57,6 +87,12 @@
           "stringUnit": {
             "state": "new",
             "value": "An application in iTerm2 wants to access the local network."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要访问本地网络。"
           }
         }
       }
@@ -68,6 +104,12 @@
             "state": "new",
             "value": "An application in iTerm2 wants to use your location information, even in the background."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用你的位置信息，包括在后台运行时。"
+          }
         }
       }
     },
@@ -77,6 +119,12 @@
           "stringUnit": {
             "state": "new",
             "value": "An application in iTerm2 wants to use your location information."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用你的位置信息。"
           }
         }
       }
@@ -88,6 +136,12 @@
             "state": "new",
             "value": "An application in iTerm2 wants to use your location information while active."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要在使用期间访问你的位置信息。"
+          }
         }
       }
     },
@@ -97,6 +151,12 @@
           "stringUnit": {
             "state": "new",
             "value": "An application in iTerm2 wants to use your microphone."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用你的麦克风。"
           }
         }
       }
@@ -108,6 +168,12 @@
             "state": "new",
             "value": "An application in iTerm2 wants to use the photo library."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用你的照片图库。"
+          }
         }
       }
     },
@@ -117,6 +183,12 @@
           "stringUnit": {
             "state": "new",
             "value": "An application in iTerm2 wants to use your reminders."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用你的提醒事项。"
           }
         }
       }
@@ -128,6 +200,12 @@
             "state": "new",
             "value": "An application in iTerm2 wants to use speech recognition."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的某个应用想要使用语音识别。"
+          }
         }
       }
     },
@@ -137,6 +215,12 @@
           "stringUnit": {
             "state": "new",
             "value": "The operation being performed by a program in iTerm2 requires elevated permission."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 中的程序正在执行的操作需要提升权限。"
           }
         }
       }

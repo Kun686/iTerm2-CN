@@ -343,11 +343,11 @@ const CGFloat iTermGetStatusBarHeight(void) {
 }
 
 - (void)showContextMenuForEvent:(NSEvent *)event {
-    NSMenu *menu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.statusbar.core.itermstatusbarcontainerview.contextual_menu.3db60c37", nil, NSBundle.mainBundle, @"Contextual Menu", @"User-facing text in iTermStatusBarContainerView (showContextMenuForEvent:).")];
     if ([_component respondsToSelector:@selector(statusBarComponentCopyableString)]) {
         NSString *copyableString = [_component statusBarComponentCopyableString];
         if (copyableString.length > 0) {
-            [menu addItemWithTitle:@"Copy"
+            [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.statusbar.core.itermstatusbarcontainerview.copy.e21f935f", nil, NSBundle.mainBundle, @"Copy", @"User-facing text in iTermStatusBarContainerView (showContextMenuForEvent:).")
                             action:@selector(copyComponentValue:)
                      keyEquivalent:@""];
             [menu addItem:[NSMenuItem separatorItem]];
@@ -355,18 +355,18 @@ const CGFloat iTermGetStatusBarHeight(void) {
     }
     if (![_component statusBarComponentIsInternal]) {
         if ([[_component statusBarComponentKnobs] count]) {
-            [menu addItemWithTitle:[NSString stringWithFormat:@"Configure %@", [self.component statusBarComponentShortDescription]]
+            [menu addItemWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.statusbar.core.itermstatusbarcontainerview.configure_component.11f4eb50", nil, NSBundle.mainBundle, @"Configure %@", @"Context-menu action to configure a named status bar component."), [self.component statusBarComponentShortDescription]]
                             action:@selector(configureComponent:)
                      keyEquivalent:@""];
         }
-        [menu addItemWithTitle:[NSString stringWithFormat:@"Hide %@", [self.component statusBarComponentShortDescription]]
+        [menu addItemWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.statusbar.core.itermstatusbarcontainerview.hide_component.93367d5f", nil, NSBundle.mainBundle, @"Hide %@", @"Context-menu action to hide a named status bar component."), [self.component statusBarComponentShortDescription]]
                         action:@selector(hideComponent:)
                  keyEquivalent:@""];
     }
-    [menu addItemWithTitle:@"Configure Status Bar"
+    [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.statusbar.core.itermstatusbarcontainerview.configure_status_bar.2efca2ac", nil, NSBundle.mainBundle, @"Configure Status Bar", @"User-facing text in iTermStatusBarContainerView (showContextMenuForEvent:).")
                     action:@selector(configureStatusBar:)
              keyEquivalent:@""];
-    [menu addItemWithTitle:@"Disable Status Bar"
+    [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.statusbar.core.itermstatusbarcontainerview.disable_status_bar.1466e356", nil, NSBundle.mainBundle, @"Disable Status Bar", @"User-facing text in iTermStatusBarContainerView (showContextMenuForEvent:).")
                     action:@selector(disableStatusBar:)
              keyEquivalent:@""];
     NSDictionary<NSString *, id> *values = [self.component statusBarComponentKnobValues];

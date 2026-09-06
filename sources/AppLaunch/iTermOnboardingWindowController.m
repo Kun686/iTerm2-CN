@@ -28,22 +28,22 @@ static NSString *const iTermOnboardingWindowControllerHasBeenShown = @"NoSyncOnb
 static void iTermOpenWhatsNewURL(NSString *path, NSWindow *window) {
     if ([path isEqualToString:@"companion"]) {
         if (![iTermAdvancedSettingsModel generativeAIAllowed]) {
-            [iTermWarning showWarningWithTitle:@"Generative AI features have been disabled. Talk to your enterprise system administrator."
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.generative_ai_features_have_been_disabled_talk_to.38a7ef4a", nil, NSBundle.mainBundle, @"Generative AI features have been disabled. Talk to your enterprise system administrator.", @"User-facing warning message.")
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermOnboardingWindowController (actions).") ]
                                      accessory:nil
                                     identifier:nil
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Feature Unavailable"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.feature_unavailable.5031e0f3", nil, NSBundle.mainBundle, @"Feature Unavailable", @"User-facing text in iTermOnboardingWindowController (heading).")
                                         window:window];
             return;
         }
         if (![iTermAdvancedSettingsModel companionPairingAllowed]) {
-            [iTermWarning showWarningWithTitle:@"Companion device pairing has been disabled. Talk to your enterprise system administrator."
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.companion_device_pairing_has_been_disabled_talk_to.05640220", nil, NSBundle.mainBundle, @"Companion device pairing has been disabled. Talk to your enterprise system administrator.", @"User-facing warning message.")
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermOnboardingWindowController (actions).") ]
                                      accessory:nil
                                     identifier:nil
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Feature Unavailable"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.feature_unavailable.5031e0f3", nil, NSBundle.mainBundle, @"Feature Unavailable", @"User-facing text in iTermOnboardingWindowController (heading).")
                                         window:window];
             return;
         }
@@ -60,12 +60,12 @@ static void iTermOpenWhatsNewURL(NSString *path, NSWindow *window) {
     }
     if ([path isEqualToString:@"screenshot"]) {
         if (![iTermController sharedInstance].currentTerminal) {
-            [iTermWarning showWarningWithTitle:@"You need an open terminal window to make a screenshot."
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.you_need_an_open_terminal_window_to_make.dd65fbac", nil, NSBundle.mainBundle, @"You need an open terminal window to make a screenshot.", @"User-facing warning message.")
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermOnboardingWindowController (actions).") ]
                                      accessory:nil
                                     identifier:nil
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"No Terminal Window"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermonboardingwindowcontroller.no_terminal_window.922005e1", nil, NSBundle.mainBundle, @"No Terminal Window", @"User-facing text in iTermOnboardingWindowController (heading).")
                                         window:window];
             return;
         }

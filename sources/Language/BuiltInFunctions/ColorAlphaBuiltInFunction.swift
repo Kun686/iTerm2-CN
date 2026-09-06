@@ -32,7 +32,7 @@ extension ColorAlphaBuiltInFunction: iTermBuiltInFunctionProtocol {
                       let alpha = parameters[alphaArg] as? NSNumber else {
                     completion(nil, NSError(domain: "com.iterm2.with-alpha",
                                             code: 1,
-                                            userInfo: [NSLocalizedDescriptionKey: "with_alpha requires a color string and a numeric alpha"]))
+                                            userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.language.builtinfunctions.coloralphabuiltinfunction.with_alpha_requires_a_color_string_and_a.068a44b2", defaultValue: "with_alpha requires a color string and a numeric alpha", bundle: .main, comment: "Error shown when with_alpha receives arguments of the wrong types.")]))
                     return
                 }
                 guard let color = NSColor(fromHexString: colorString, allowingAlpha: true) else {
@@ -44,7 +44,7 @@ extension ColorAlphaBuiltInFunction: iTermBuiltInFunctionProtocol {
                     DLog("with_alpha: could not parse color \(colorString)")
                     completion(nil, NSError(domain: "com.iterm2.with-alpha",
                                             code: 2,
-                                            userInfo: [NSLocalizedDescriptionKey: "with_alpha could not parse color “\(colorString)”"]))
+                                            userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.language.builtinfunctions.coloralphabuiltinfunction.with_alpha_could_not_parse_color_0.107fff37", defaultValue: "with_alpha could not parse color “\(colorString)”", bundle: .main, comment: "Error shown when with_alpha cannot parse a color value.")]))
                     return
                 }
                 let clamped = max(0.0, min(1.0, alpha.doubleValue))

@@ -64,7 +64,7 @@ class CodeReviewPromptView: iTermLayerBackedSolidColorView {
         textView = ShiftReturnSubmittingTextView(frame: .zero)
         startButton = NSButton(frame: .zero)
         promptMenuButton = NSPopUpButton(frame: .zero, pullsDown: true)
-        titleLabel = NSTextField(labelWithString: "Code review prompt:")
+        titleLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.codereviewpromptview.code_review_prompt.57c62f0f", defaultValue: "Code review prompt:", bundle: .main, comment: "User-facing text in CodeReviewPromptView."))
 
         super.init(frame: frameRect)
 
@@ -99,7 +99,7 @@ class CodeReviewPromptView: iTermLayerBackedSolidColorView {
         scrollView.autoresizingMask = [.width, .height]
         addSubview(scrollView)
 
-        startButton.title = "Start"
+        startButton.title = String(localized: "ui.swift.workgroups.codereviewpromptview.start.e4bb9f1e", defaultValue: "Start", bundle: .main, comment: "User-facing text in CodeReviewPromptView.")
         startButton.bezelStyle = .rounded
         // Shift-Return submits via the text view's keyDown override
         // (set above); plain Return inserts a newline. The button
@@ -262,7 +262,7 @@ class CodeReviewPromptView: iTermLayerBackedSolidColorView {
     // saved prompt is currently loaded.
     private func rebuildPromptMenu() {
         let menu = NSMenu()
-        menu.addItem(withTitle: "Prompts", action: nil, keyEquivalent: "")
+        menu.addItem(withTitle: String(localized: "ui.swift.workgroups.codereviewpromptview.prompts.5f2e66e6", defaultValue: "Prompts", bundle: .main, comment: "User-facing text in CodeReviewPromptView."), action: nil, keyEquivalent: "")
 
         let store = CodeReviewPromptStore.shared
         if !store.prompts.isEmpty {
@@ -277,14 +277,14 @@ class CodeReviewPromptView: iTermLayerBackedSolidColorView {
             menu.addItem(.separator())
         }
 
-        let saveItem = NSMenuItem(title: "Save Current as New…",
+        let saveItem = NSMenuItem(title: String(localized: "ui.swift.workgroups.codereviewpromptview.save_current_as_new.1ae4a1da", defaultValue: "Save Current as New…", bundle: .main, comment: "User-facing text in CodeReviewPromptView."),
                                    action: #selector(saveAsNewMenuItem(_:)),
                                    keyEquivalent: "")
         saveItem.target = self
         saveItem.identifier = Self.saveItemIdentifier
         menu.addItem(saveItem)
 
-        let manageItem = NSMenuItem(title: "Manage Prompts…",
+        let manageItem = NSMenuItem(title: String(localized: "ui.swift.workgroups.codereviewpromptview.manage_prompts.a1e009a4", defaultValue: "Manage Prompts…", bundle: .main, comment: "User-facing text in CodeReviewPromptView."),
                                      action: #selector(manageMenuItem(_:)),
                                      keyEquivalent: "")
         manageItem.target = self
@@ -309,14 +309,14 @@ class CodeReviewPromptView: iTermLayerBackedSolidColorView {
     @objc private func saveAsNewMenuItem(_ sender: Any) {
         guard let host = window else { return }
         let alert = NSAlert()
-        alert.messageText = "Name this prompt"
+        alert.messageText = String(localized: "ui.swift.workgroups.codereviewpromptview.name_this_prompt.d6666c98", defaultValue: "Name this prompt", bundle: .main, comment: "User-facing text in CodeReviewPromptView.")
         alert.informativeText =
-            "Saved prompts can be re-loaded from the Prompts pulldown."
-        alert.addButton(withTitle: "Save")
-        alert.addButton(withTitle: "Cancel")
+            String(localized: "ui.swift.workgroups.codereviewpromptview.saved_prompts_can_be_re_loaded_from_the.eb039bc3", defaultValue: "Saved prompts can be re-loaded from the Prompts pulldown.", bundle: .main, comment: "User-facing text in CodeReviewPromptView.")
+        alert.addButton(withTitle: String(localized: "ui.swift.workgroups.codereviewpromptview.save.1509f561", defaultValue: "Save", bundle: .main, comment: "User-facing text in CodeReviewPromptView."))
+        alert.addButton(withTitle: String(localized: "ui.swift.workgroups.codereviewpromptview.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in CodeReviewPromptView."))
 
         let field = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 22))
-        field.placeholderString = "Prompt name"
+        field.placeholderString = String(localized: "ui.swift.workgroups.codereviewpromptview.prompt_name.9a116fa9", defaultValue: "Prompt name", bundle: .main, comment: "User-facing text in CodeReviewPromptView.")
         alert.accessoryView = field
 
         alert.beginSheetModal(for: host) { [weak self] response in

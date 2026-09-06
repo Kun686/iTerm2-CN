@@ -117,7 +117,7 @@ class iTermBrowserLocalPageManager: NSObject {
         setupPageContext(for: urlString)
 
         guard let context = activePageContexts[urlString] else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserLocalPageManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown \(iTermBrowserSchemes.about) URL"]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserLocalPageManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserlocalpagemanager.unknown_0_url.fcaa1a81", defaultValue: "Unknown \(iTermBrowserSchemes.about) URL", bundle: .main, comment: "Error shown when an internal browser URL is not recognized.")]))
             return true
         }
 
@@ -189,7 +189,7 @@ class iTermBrowserLocalPageManager: NSObject {
     func showFilePage(for path: String, webView: iTermBrowserWebView) {
         // Navigate to iterm2-file:// URL with the file path
         guard let fileURL = URL(string: "\(iTermBrowserSchemes.file)://\(path)") else {
-            showErrorPage(for: iTermError("Invalid file path: \(path)"),
+            showErrorPage(for: iTermError(String(localized: "ui.swift.browser.localpages.itermbrowserlocalpagemanager.invalid_file_path_0.d09d4a68", defaultValue: "Invalid file path: \(path)", bundle: .main, comment: "User-facing browser error; preserve the invalid path.")),
                           failedURL: URL(fileURLWithPath: path),
                           webView: webView)
             return

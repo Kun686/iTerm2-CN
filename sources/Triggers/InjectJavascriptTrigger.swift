@@ -8,11 +8,11 @@
 @objc(InjectJavascriptURLTrigger)
 class InjectJavascriptURLTrigger: Trigger {
     override var description: String {
-        return "Inject Javascript (URL Regex)"
+        return String(localized: "ui.swift.triggers.injectjavascripttrigger.inject_javascript_url_regex.ad9221c7", defaultValue: "Inject Javascript (URL Regex)", bundle: .main, comment: "User-facing text in InjectJavascriptTrigger.")
     }
 
     override static var title: String {
-        return "Inject Javascript (URL Regex)"
+        return String(localized: "ui.swift.triggers.injectjavascripttrigger.inject_javascript_url_regex.ad9221c7", defaultValue: "Inject Javascript (URL Regex)", bundle: .main, comment: "User-facing text in InjectJavascriptTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -22,7 +22,7 @@ class InjectJavascriptURLTrigger: Trigger {
         false
     }
     override func triggerOptionalParameterPlaceholder(withInterpolation interpolation: Bool) -> String? {
-        return "Javascript"
+        return String(localized: "ui.swift.triggers.injectjavascripttrigger.javascript.75712c3e", defaultValue: "Javascript", bundle: .main, comment: "User-facing text in InjectJavascriptTrigger.")
     }
     override func triggerOptionalDefaultParameterValue(withInterpolation interpolation: Bool) -> String? {
         "console.log('Testing');"
@@ -64,11 +64,11 @@ extension InjectJavascriptURLTrigger: BrowserTrigger {
 @objc(InjectJavascriptContentTrigger)
 class InjectJavascriptContentTrigger: Trigger {
     override var description: String {
-        return "Inject Javascript (Content Regex)"
+        return String(localized: "ui.swift.triggers.injectjavascripttrigger.inject_javascript_content_regex.a9f64e67", defaultValue: "Inject Javascript (Content Regex)", bundle: .main, comment: "User-facing text in InjectJavascriptTrigger.")
     }
 
     override static var title: String {
-        return "Inject Javascript (Content Regex)"
+        return String(localized: "ui.swift.triggers.injectjavascripttrigger.inject_javascript_content_regex.a9f64e67", defaultValue: "Inject Javascript (Content Regex)", bundle: .main, comment: "User-facing text in InjectJavascriptTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -78,7 +78,7 @@ class InjectJavascriptContentTrigger: Trigger {
         false
     }
     override func triggerOptionalParameterPlaceholder(withInterpolation interpolation: Bool) -> String? {
-        return "Javascript"
+        return String(localized: "ui.swift.triggers.injectjavascripttrigger.javascript.75712c3e", defaultValue: "Javascript", bundle: .main, comment: "User-facing text in InjectJavascriptTrigger.")
     }
     override func triggerOptionalDefaultParameterValue(withInterpolation interpolation: Bool) -> String? {
         "console.log('Testing');"

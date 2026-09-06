@@ -190,7 +190,7 @@ extension iTermBrowserWebView {
                 pasteboard.clearContents()
                 pasteboard.setString(url.absoluteString, forType: .string)
                 PasteboardHistory.sharedInstance().save(url.absoluteString)
-                ToastWindowController.showToast(withMessage: "Copied",
+                ToastWindowController.showToast(withMessage: String(localized: "ui.swift.browser.webviewadditions.itermbrowserwebview_actions.copied.8d525e5f", defaultValue: "Copied", bundle: .main, comment: "User-facing text in iTermBrowserWebView+Actions."),
                                                 duration: 1,
                                                 screenCoordinate: NSEvent.mouseLocation,
                                                 pointSize: 12)

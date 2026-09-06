@@ -25,19 +25,19 @@ enum SpecialExceptionRangePreset: CaseIterable {
     var title: String {
         switch self {
         case .han:
-            return "Han (CJK Unified Ideographs)"
+            return String(localized: "ui.swift.settings.specialexceptionswindowcontroller.han_cjk_unified_ideographs.86807005", defaultValue: "Han (CJK Unified Ideographs)", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .hiraganaKatakana:
-            return "Hiragana/Katakana"
+            return String(localized: "ui.swift.settings.specialexceptionswindowcontroller.hiragana_katakana.aee37c4e", defaultValue: "Hiragana/Katakana", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .hangulSyllables:
-            return "Hangul Syllables"
+            return String(localized: "ui.swift.settings.specialexceptionswindowcontroller.hangul_syllables.f73896af", defaultValue: "Hangul Syllables", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .arabic:
-            return "Arabic"
+            return String(localized: "ui.swift.settings.specialexceptionswindowcontroller.arabic.bafb66f3", defaultValue: "Arabic", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .cyrillic:
-            return "Cyrillic"
+            return String(localized: "ui.swift.settings.specialexceptionswindowcontroller.cyrillic.c2ce0b67", defaultValue: "Cyrillic", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .greek:
-            return "Greek (Greek and Coptic)"
+            return String(localized: "ui.swift.settings.specialexceptionswindowcontroller.greek_greek_and_coptic.f307accc", defaultValue: "Greek (Greek and Coptic)", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .privateUseArea:
-            return "Private Use Area"
+            return String(localized: "ui.swift.settings.specialexceptionswindowcontroller.private_use_area.f4b3aeae", defaultValue: "Private Use Area", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         }
     }
 
@@ -142,32 +142,32 @@ class SpecialExceptionEntryEditorWindowController: NSWindowController, NSTextFie
         preview.textColor = .textColor
         switch checkedRange {
         case .ascii:
-            preview.string = "Start must be at least U+80. ASCII doesn’t support special exceptions."
+            preview.string = String(localized: "ui.swift.settings.specialexceptionswindowcontroller.start_must_be_at_least_u_80_ascii.0672203b", defaultValue: "Start must be at least U+80. ASCII doesn’t support special exceptions.", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .incomplete:
             preview.string = ""
         case .inverted:
-            preview.string = "Invalid range."
+            preview.string = String(localized: "ui.swift.settings.specialexceptionswindowcontroller.invalid_range.37ef0f0c", defaultValue: "Invalid range.", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .limitTooLarge:
-            preview.string = "End is higher than U+110000, the maximum Unicode code point."
+            preview.string = String(localized: "ui.swift.settings.specialexceptionswindowcontroller.end_is_higher_than_u_110000_the_maximum.73a25b55", defaultValue: "End is higher than U+110000, the maximum Unicode code point.", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .taken:
-            preview.string = "Range includes an already-assigned code point."
+            preview.string = String(localized: "ui.swift.settings.specialexceptionswindowcontroller.range_includes_an_already_assigned_code_point.d4f48174", defaultValue: "Range includes an already-assigned code point.", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case .invalidDestination:
-            preview.string = "Invalid destination"
+            preview.string = String(localized: "ui.swift.settings.specialexceptionswindowcontroller.invalid_destination.14f03ffa", defaultValue: "Invalid destination", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
         case let .valid(source: sourceRange, destination: _):
             guard let familyName = affordance.familyName,
                   let font = NSFont(name: familyName, size: NSFont.systemFontSize) else {
-                preview.string = "No font selected."
+                preview.string = String(localized: "ui.swift.settings.specialexceptionswindowcontroller.no_font_selected.fbdfbcaf", defaultValue: "No font selected.", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
                 return
             }
             if (!destinationIsValid(range: sourceRange)) {
-                preview.string = "Invalid destination."
+                preview.string = String(localized: "ui.swift.settings.specialexceptionswindowcontroller.invalid_destination.9dae5c8d", defaultValue: "Invalid destination.", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")
                 return
             }
             let disallowed = IndexSet([9, 10, 13, 0xad, 0x200e, 0x200f, 0x200b, 0x200c])
             let combined = NSMutableAttributedString()
             for i in sourceRange {
                 if combined.length >= 1024 * 10 {
-                    combined.append(NSAttributedString(string: " [truncated]",
+                    combined.append(NSAttributedString(string: String(localized: "ui.swift.settings.specialexceptionswindowcontroller.truncated.37733b7c", defaultValue: " [truncated]", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController."),
                                                        attributes: [
                                                         .foregroundColor: NSColor.textColor,
                                                         .font: NSFont.systemFont(ofSize: NSFont.systemFontSize)]))
@@ -478,16 +478,16 @@ final class SpecialExceptionsWindowController: NSWindowController {
 
     private func importString(_ content: String) {
         guard let newConfig = FontTable.Config(string: content) else {
-            showError("This file is not well formed. Is it from a newer version of iTerm2?")
+            showError(String(localized: "ui.swift.settings.specialexceptionswindowcontroller.this_file_is_not_well_formed_is_it.e2a5505c", defaultValue: "This file is not well formed. Is it from a newer version of iTerm2?", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController."))
             return
         }
         guard newConfig.version <= FontTable.Config.latestKnownVersion else {
-            showError("This file is from a newer version of iTerm2 and cannot be loaded.")
+            showError(String(localized: "ui.swift.settings.specialexceptionswindowcontroller.this_file_is_from_a_newer_version_of.9ed125ba", defaultValue: "This file is from a newer version of iTerm2 and cannot be loaded.", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController."))
             return
         }
         let missing = missingFonts(newConfig)
         guard missing.isEmpty else {
-            showError("You must install the following fonts to use the exceptions in this file:\n\n\(missing.joined(separator: "\n"))")
+            showError(String(localized: "ui.swift.settings.specialexceptionswindowcontroller.you_must_install_the_following_fonts_to_use.12d906fe", defaultValue: "You must install the following fonts to use the exceptions in this file:\n\n\(missing.joined(separator: "\n"))", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController."))
             return
         }
         crud.undoable {
@@ -521,11 +521,11 @@ final class SpecialExceptionsWindowController: NSWindowController {
 
     private func showError(_ message: String) {
         iTermWarning.show(withTitle: message,
-                          actions: ["OK"],
+                          actions: [String(localized: "ui.swift.settings.specialexceptionswindowcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")],
                           accessory: nil,
                           identifier: "SpecialExceptionsImportError",
                           silenceable: .kiTermWarningTypePersistent,
-                          heading: "Problem Importing Special Exceptions",
+                          heading: String(localized: "ui.swift.settings.specialexceptionswindowcontroller.problem_importing_special_exceptions.996a03a2", defaultValue: "Problem Importing Special Exceptions", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController."),
                           window: window)
     }
 
@@ -540,12 +540,12 @@ final class SpecialExceptionsWindowController: NSWindowController {
 
     @IBAction func installNerdFontBundle(_ sender: Any) {
         if !config.entries.isEmpty {
-            let selection = iTermWarning.show(withTitle: "This will replace existing special exceptions. Continue?",
-                                              actions: ["OK", "Cancel"],
+            let selection = iTermWarning.show(withTitle: String(localized: "ui.swift.settings.specialexceptionswindowcontroller.this_will_replace_existing_special_exceptions_continue.3d1e4275", defaultValue: "This will replace existing special exceptions. Continue?", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController."),
+                                              actions: [String(localized: "ui.swift.settings.specialexceptionswindowcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController."), String(localized: "ui.swift.settings.specialexceptionswindowcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController.")],
                                               accessory: nil,
                                               identifier: "SpecialExceptionsInstallNerdBundleConfirmation",
                                               silenceable: .kiTermWarningTypePersistent,
-                                              heading: "Confirm",
+                                              heading: String(localized: "ui.swift.settings.specialexceptionswindowcontroller.confirm.eebdd24a", defaultValue: "Confirm", bundle: .main, comment: "User-facing text in SpecialExceptionsWindowController."),
                                               window: window)
             if selection == .kiTermWarningSelection1 {
                 return

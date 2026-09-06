@@ -173,7 +173,7 @@ final class WorkgroupVisualView: NSView {
             .foregroundColor: NSColor.secondaryLabelColor,
             .font: NSFont.systemFont(ofSize: NSFont.systemFontSize),
         ]
-        let text = "No workgroup" as NSString
+        let text = String(localized: "ui.swift.workgroups.workgroupvisualview.no_workgroup.31da8dbe", defaultValue: "No workgroup", bundle: .main, comment: "User-facing text in WorkgroupVisualView.") as NSString
         let size = text.size(withAttributes: attrs)
         text.draw(at: NSPoint(x: bounds.midX - size.width / 2,
                               y: bounds.midY - size.height / 2),
@@ -207,8 +207,8 @@ final class WorkgroupVisualView: NSView {
     private func tabLabel(for s: iTermWorkgroupSessionConfig) -> String {
         if !s.displayName.isEmpty { return s.displayName }
         switch s.kind {
-        case .root: return "Main"
-        case .tab: return "Tab"
+        case .root: return String(localized: "ui.swift.workgroups.workgroupvisualview.main.eb814be3", defaultValue: "Main", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
+        case .tab: return String(localized: "ui.swift.workgroups.workgroupvisualview.tab.90ddf196", defaultValue: "Tab", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
         default: return "?"
         }
     }
@@ -294,10 +294,10 @@ final class WorkgroupVisualView: NSView {
     private func peerLabel(for s: iTermWorkgroupSessionConfig) -> String {
         if !s.displayName.isEmpty { return s.displayName }
         switch s.kind {
-        case .root: return "Main"
-        case .peer: return "Peer"
-        case .tab: return "Tab"
-        case .split: return "Split"
+        case .root: return String(localized: "ui.swift.workgroups.workgroupvisualview.main.eb814be3", defaultValue: "Main", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
+        case .peer: return String(localized: "ui.swift.workgroups.workgroupvisualview.peer.f8e77246", defaultValue: "Peer", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
+        case .tab: return String(localized: "ui.swift.workgroups.workgroupvisualview.tab.90ddf196", defaultValue: "Tab", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
+        case .split: return String(localized: "ui.swift.workgroups.workgroupvisualview.split.32afaa78", defaultValue: "Split", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
         }
     }
 
@@ -410,10 +410,10 @@ final class WorkgroupVisualView: NSView {
     private func paneLabel(for s: iTermWorkgroupSessionConfig) -> String {
         if !s.displayName.isEmpty { return s.displayName }
         switch s.kind {
-        case .root: return "Main"
-        case .peer: return "Peer"
-        case .split: return "Split"
-        case .tab: return "Tab"
+        case .root: return String(localized: "ui.swift.workgroups.workgroupvisualview.main.eb814be3", defaultValue: "Main", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
+        case .peer: return String(localized: "ui.swift.workgroups.workgroupvisualview.peer.f8e77246", defaultValue: "Peer", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
+        case .split: return String(localized: "ui.swift.workgroups.workgroupvisualview.split.32afaa78", defaultValue: "Split", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
+        case .tab: return String(localized: "ui.swift.workgroups.workgroupvisualview.tab.90ddf196", defaultValue: "Tab", bundle: .main, comment: "User-facing text in WorkgroupVisualView.")
         }
     }
 

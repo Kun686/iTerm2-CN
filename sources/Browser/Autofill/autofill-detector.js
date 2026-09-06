@@ -9,6 +9,27 @@
     
     const handlerName = 'iTermAutofillHandler';
     const sessionSecret = "{{SECRET}}";
+    const autofillActionFormat = {{AUTOFILL_ACTION_FORMAT_JSON}};
+    const genericFieldLabel = {{AUTOFILL_FIELD_GENERIC_JSON}};
+    const fieldTypeLabels = {
+        firstName: {{AUTOFILL_FIELD_FIRST_NAME_JSON}},
+        lastName: {{AUTOFILL_FIELD_LAST_NAME_JSON}},
+        fullName: {{AUTOFILL_FIELD_FULL_NAME_JSON}},
+        email: {{AUTOFILL_FIELD_EMAIL_JSON}},
+        phone: {{AUTOFILL_FIELD_PHONE_JSON}},
+        address1: {{AUTOFILL_FIELD_ADDRESS1_JSON}},
+        address2: {{AUTOFILL_FIELD_ADDRESS2_JSON}},
+        city: {{AUTOFILL_FIELD_CITY_JSON}},
+        state: {{AUTOFILL_FIELD_STATE_JSON}},
+        zip: {{AUTOFILL_FIELD_ZIP_JSON}},
+        country: {{AUTOFILL_FIELD_COUNTRY_JSON}},
+        company: {{AUTOFILL_FIELD_COMPANY_JSON}}
+    };
+
+    function autofillLabel(fieldType) {
+        const fieldLabel = fieldTypeLabels[fieldType] || genericFieldLabel;
+        return autofillActionFormat.split('%1$@').join(fieldLabel);
+    }
 
     // Include core autofill detection logic
     {{INCLUDE:autofill-core.js}}
@@ -19,9 +40,10 @@
     // Create autofill button for a field
     function createAutofillButton(field, fieldType) {
         const btn = document.createElement('button');
+        const label = autofillLabel(fieldType);
         btn.type = 'button';
         btn.tabIndex = -1;
-        btn.setAttribute('aria-label', `Autofill ${fieldType}`);
+        btn.setAttribute('aria-label', label);
         btn.setAttribute('data-iterm-autofill', 'true');
         
         Object.assign(btn.style, {
@@ -76,7 +98,7 @@
         };
         
         btn.textContent = icons[fieldType] || '📝';
-        btn.title = `Autofill ${fieldType.replace(/([A-Z])/g, ' $1').toLowerCase()}`;
+        btn.title = label;
         
         // Handle click
         btn.addEventListener('click', e => {

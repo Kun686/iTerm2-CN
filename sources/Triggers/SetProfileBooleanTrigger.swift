@@ -62,14 +62,26 @@ class SetProfileBooleanTrigger: Trigger {
     // MARK: - Trigger overrides
 
     override static var title: String {
-        return "Set Profile Setting…"
+        return String(localized: "ui.swift.triggers.setprofilebooleantrigger.set_profile_setting.8630c091", defaultValue: "Set Profile Setting…", bundle: .main, comment: "User-facing text in SetProfileBooleanTrigger.")
     }
 
     override var description: String {
         if let (key, value) = keyAndValue(param as? String) {
-            return "Set “\(label(forKey: key))” to \(value ? "On" : "Off")"
+            let valueLabel = value
+                ? String(localized: "ui.triggers.set_profile_boolean.value.on",
+                         defaultValue: "On",
+                         bundle: .main,
+                         comment: "Enabled value shown by the profile-setting trigger.")
+                : String(localized: "ui.triggers.set_profile_boolean.value.off",
+                         defaultValue: "Off",
+                         bundle: .main,
+                         comment: "Disabled value shown by the profile-setting trigger.")
+            return String(localized: "ui.triggers.set_profile_boolean.description",
+                          defaultValue: "Set “\(label(forKey: key))” to \(valueLabel)",
+                          bundle: .main,
+                          comment: "Summary of a trigger that changes a profile setting.")
         }
-        return "Set Profile Setting"
+        return String(localized: "ui.swift.triggers.setprofilebooleantrigger.set_profile_setting.d7fe03be", defaultValue: "Set Profile Setting", bundle: .main, comment: "User-facing text in SetProfileBooleanTrigger.")
     }
 
     override func takesParameter() -> Bool {

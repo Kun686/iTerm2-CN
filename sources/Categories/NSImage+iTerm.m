@@ -257,7 +257,7 @@
 }
 
 + (NSImage *)it_hamburgerForClass:(Class)theClass {
-    return [self it_imageForSymbolName:SFSymbolGetString(SFSymbolEllipsisCircle) accessibilityDescription:@"Menu"];
+    return [self it_imageForSymbolName:SFSymbolGetString(SFSymbolEllipsisCircle) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.categories.nsimage_iterm.menu.99af6606", nil, NSBundle.mainBundle, @"Menu", @"Accessibility description for a menu icon.")];
 }
 
 + (instancetype)it_imageNamed:(NSImageName)name forClass:(Class)theClass {

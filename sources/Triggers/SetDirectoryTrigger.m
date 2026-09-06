@@ -13,11 +13,11 @@
 @implementation SetDirectoryTrigger
 
 + (NSString *)title {
-  return @"Report Directory";
+  return NSLocalizedStringWithDefaultValue(@"ui.triggers.setdirectorytrigger.report_directory.974789f5", nil, NSBundle.mainBundle, @"Report Directory", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Report Directory as “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.setdirectorytrigger.report_directory_as.668fe98e", nil, NSBundle.mainBundle, @"Report Directory as “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (BOOL)takesParameter{
@@ -25,7 +25,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-  return @"Directory";
+  return NSLocalizedStringWithDefaultValue(@"ui.triggers.setdirectorytrigger.directory.c8f84c3c", nil, NSBundle.mainBundle, @"Directory", @"Trigger parameter placeholder.");
 }
 
 - (BOOL)isIdempotent {

@@ -42,13 +42,13 @@ class PeerSessionSettingsViewController: NSViewController {
         titleLabel.sizeToFit()
 
         let helpLabel = NSTextField(wrappingLabelWithString:
-            "Command to run in this pane. Changes take effect the next time the pane is restarted.")
+            String(localized: "ui.swift.claudecode.peersessionsettingsviewcontroller.command_to_run_in_this_pane_changes_take.85f25c40", defaultValue: "Command to run in this pane. Changes take effect the next time the pane is restarted.", bundle: .main, comment: "User-facing text in PeerSessionSettingsViewController."))
         helpLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
         helpLabel.textColor = .secondaryLabelColor
         helpLabel.preferredMaxLayoutWidth = width - 2 * margin
         helpLabel.frame.size = helpLabel.fittingSize
 
-        let commandHeaderLabel = NSTextField(labelWithString: "Command:")
+        let commandHeaderLabel = NSTextField(labelWithString: String(localized: "ui.swift.claudecode.peersessionsettingsviewcontroller.command.a7a9c915", defaultValue: "Command:", bundle: .main, comment: "User-facing text in PeerSessionSettingsViewController."))
         commandHeaderLabel.sizeToFit()
 
         let field = NSTextField(string: command)

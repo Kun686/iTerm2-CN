@@ -198,9 +198,9 @@
     for (NSInteger i = 0; i < self.previewCommandButtons.count; i++){
         buttons[i].hidden = unavailable || (i != stage) || preview == nil;
         if (_busy && i == stage) {
-            [buttons[i] setTitle:@"Send Again"];
+            [buttons[i] setTitle:NSLocalizedStringWithDefaultValue(@"ui.shellintegrationinstaller.itermshellintegrationpasteshellcommandsviewcontroller.send_again.48a3e1af", nil, NSBundle.mainBundle, @"Send Again", @"User-facing text in iTermShellIntegrationPasteShellCommandsViewController (update).")];
         } else {
-            [buttons[i] setTitle:@"Preview Command"];
+            [buttons[i] setTitle:NSLocalizedStringWithDefaultValue(@"ui.shellintegrationinstaller.itermshellintegrationpasteshellcommandsviewcontroller.preview_command.7ba90cea", nil, NSBundle.mainBundle, @"Preview Command", @"User-facing text in iTermShellIntegrationPasteShellCommandsViewController (update).")];
         }
     }
     self.previewTextView.string = preview ?: @"";

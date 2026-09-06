@@ -20,14 +20,14 @@
 @implementation CaptureTrigger
 
 + (NSString *)title {
-    return @"Capture Output";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.capturetrigger.capture_output.2543ca4b", nil, NSBundle.mainBundle, @"Capture Output", @"Trigger action title.");
 }
 
 - (NSString *)description {
     if ([NSString castFrom:self.param].length > 0) {
-        return [NSString stringWithFormat:@"Capture output, running “%@” on double-click", self.param];
+        return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.capturetrigger.capture_output_running_on_double_click.4e9d0f95", nil, NSBundle.mainBundle, @"Capture output, running “%@” on double-click", @"Trigger action summary. Preserve the placeholder."), self.param];
     } else {
-        return @"Capture Output";
+        return NSLocalizedStringWithDefaultValue(@"ui.triggers.capturetrigger.capture_output.2543ca4b", nil, NSBundle.mainBundle, @"Capture Output", @"Trigger action summary.");
     }
 }
 
@@ -36,7 +36,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Coprocess to run on activation";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.capturetrigger.coprocess_to_run_on_activation.d97dd8bc", nil, NSBundle.mainBundle, @"Coprocess to run on activation", @"Trigger parameter placeholder.");
 }
 
 - (void)showCaptureOutputToolInSession:(id<iTermTriggerSession>)aSession {

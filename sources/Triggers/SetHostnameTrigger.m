@@ -11,11 +11,11 @@
 @implementation SetHostnameTrigger
 
 + (NSString *)title {
-    return @"Report User & Host";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.sethostnametrigger.report_user_host.3028a648", nil, NSBundle.mainBundle, @"Report User & Host", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Report User & Host as “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.sethostnametrigger.report_user_host_as.5ca5f16d", nil, NSBundle.mainBundle, @"Report User & Host as “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (BOOL)takesParameter{
@@ -23,7 +23,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"username@hostname";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.sethostnametrigger.username_hostname.d5c25947", nil, NSBundle.mainBundle, @"username@hostname", @"Nontranslatable example format for the Set Hostname trigger parameter.");
 }
 
 - (BOOL)isIdempotent {

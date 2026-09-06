@@ -90,22 +90,22 @@ class PasteboardReporter: NSObject {
             return
         }
         let alert = NSAlert()
-        alert.messageText = "Error Updating Settings"
-        alert.informativeText = "An error occurred while removing the file that authorizes clipboard reporting: \(error.localizedDescription).\nAs long as this file exists, clipboard reporting could be enabled by programs running on this computer."
+        alert.messageText = String(localized: "ui.swift.pasting.pasteboardreporter.error_updating_settings.506c7933", defaultValue: "Error Updating Settings", bundle: .main, comment: "User-facing text in PasteboardReporter.")
+        alert.informativeText = String(localized: "ui.swift.pasting.pasteboardreporter.an_error_occurred_while_removing_the_file_that.fd712c50", defaultValue: "An error occurred while removing the file that authorizes clipboard reporting: \(error.localizedDescription).\nAs long as this file exists, clipboard reporting could be enabled by programs running on this computer.", bundle: .main, comment: "User-facing text in PasteboardReporter.")
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "Reveal in Finder")
+        alert.addButton(withTitle: String(localized: "ui.swift.pasting.pasteboardreporter.reveal_in_finder.cc849385", defaultValue: "Reveal in Finder", bundle: .main, comment: "User-facing text in PasteboardReporter."))
         alert.runModal()
         NSWorkspace.shared.activateFileViewerSelecting([url])
     }
 
     private static func doubleCheck() -> Bool {
         let alert = NSAlert()
-        alert.messageText = "Really Enable Clipboard Reporting?"
-        alert.informativeText = "Reporting the content of the clipboard to apps running inside iTerm2 may expose sensitive information such as passwords. Think carefully before enabling this."
+        alert.messageText = String(localized: "ui.swift.pasting.pasteboardreporter.really_enable_clipboard_reporting.2c2ce6a6", defaultValue: "Really Enable Clipboard Reporting?", bundle: .main, comment: "User-facing text in PasteboardReporter.")
+        alert.informativeText = String(localized: "ui.swift.pasting.pasteboardreporter.reporting_the_content_of_the_clipboard_to_apps.02ee8b33", defaultValue: "Reporting the content of the clipboard to apps running inside iTerm2 may expose sensitive information such as passwords. Think carefully before enabling this.", bundle: .main, comment: "User-facing text in PasteboardReporter.")
         alert.alertStyle = .warning
-        let button = alert.addButton(withTitle: "OK")
+        let button = alert.addButton(withTitle: String(localized: "ui.swift.pasting.pasteboardreporter.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in PasteboardReporter."))
         button.hasDestructiveAction = true
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "ui.swift.pasting.pasteboardreporter.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in PasteboardReporter."))
         return alert.runModal() == .alertFirstButtonReturn
     }
 

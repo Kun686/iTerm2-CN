@@ -964,7 +964,8 @@ final class OrchestratorDispatcher {
         return linkedTerminal
     }
 
-    // Human label for a watched target in status_update text. A standalone
+    // Stable-English label for a watched target in model-facing status_update
+    // text. A standalone
     // session is modeled as a synthetic single-session workgroup where the role
     // and workgroup names are identical (both the session name); collapse THAT
     // so the text reads "Terminal reached ..." instead of "Terminal in Terminal
@@ -975,6 +976,14 @@ final class OrchestratorDispatcher {
                                                workgroup: String,
                                                workgroupID: String) -> String {
         return isSyntheticWorkgroup(id: workgroupID) ? role : "\(role) in \(workgroup)"
+    }
+
+    private static func localizedWatcherTargetLabel(role: String,
+                                                    workgroup: String,
+                                                    workgroupID: String) -> String {
+        return isSyntheticWorkgroup(id: workgroupID)
+            ? role
+            : String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.0_in_1.f789d5d1", defaultValue: "\(role) in \(workgroup)", bundle: .main, comment: "User-facing watcher target label; preserve the role and workgroup names.")
     }
 
     // A synthetic single-session workgroup (a standalone session) vs a real
@@ -1181,7 +1190,7 @@ final class OrchestratorDispatcher {
             do {
                 try await enforce(
                     outcome,
-                    actionSummary: "The agent wants to create the file `\(fileArgs.filename)`.")
+                    actionSummary: String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_agent_wants_to_create_the_file_0.ba771a46", defaultValue: "The agent wants to create the file `\(fileArgs.filename)`.", bundle: .main, comment: "User-facing file-creation safety summary; preserve the file name."))
             } catch let error as OrchestratorError {
                 return Data(error.message.utf8)
             } catch {
@@ -1473,16 +1482,9 @@ final class OrchestratorDispatcher {
         let workgroupName = WorkgroupIntrospection.displayName(forWorkgroupID: workgroupID)
         let summary: String
         if workgroupID.hasPrefix(WorkgroupIntrospection.syntheticWorkgroupIDPrefix) {
-            summary = "The agent is asking to send keystrokes and interrupt "
-                + "running commands in session \u{201C}\(workgroupName)\u{201D}. "
-                + "Approval is sticky for the rest of this chat. Deny to refuse "
-                + "this and future control of this session until you "
-                + "explicitly approve."
+            summary = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_agent_is_asking_to_send_keystrokes_and.7a57f250", defaultValue: "The agent is asking to send keystrokes and interrupt running commands in session \u{201C}\(workgroupName)\u{201D}. Approval is sticky for the rest of this chat. Deny to refuse this and future control of this session until you explicitly approve.", bundle: .main, comment: "User-facing session-control permission summary; preserve the session name.")
         } else {
-            summary = "The agent is asking to send keystrokes, interrupt running "
-                + "commands, and post clippings to this workgroup. Approval is sticky "
-                + "for the rest of this chat. Deny to refuse this and future control "
-                + "of this workgroup until you explicitly approve."
+            summary = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_agent_is_asking_to_send_keystrokes_interrupt.420013f5", defaultValue: "The agent is asking to send keystrokes, interrupt running commands, and post clippings to this workgroup. Approval is sticky for the rest of this chat. Deny to refuse this and future control of this workgroup until you explicitly approve.", bundle: .main, comment: "User-facing workgroup-control permission summary.")
         }
         return await awaitPermission(workgroupID: workgroupID,
                                       workgroupName: workgroupName,
@@ -1533,22 +1535,25 @@ final class OrchestratorDispatcher {
         let placement: String
         if case .startSession(let args) = command {
             switch args.window ?? .tab {
-            case .new: placement = "a new window"
-            case .tab: placement = "a new tab in the current window"
-            case .current: placement = "a vertical split of the current pane"
+            case .new:
+                placement = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.a_new_window.0ae01211", defaultValue: "a new window", bundle: .main, comment: "Session placement in a user-facing permission summary.")
+            case .tab:
+                placement = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.a_new_tab_in_the_current_window.c5f85949", defaultValue: "a new tab in the current window", bundle: .main, comment: "Session placement in a user-facing permission summary.")
+            case .current:
+                placement = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.a_vertical_split_of_the_current_pane.970c1058", defaultValue: "a vertical split of the current pane", bundle: .main, comment: "Session placement in a user-facing permission summary.")
             }
         } else {
-            placement = "a new session"
+            placement = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.a_new_session.0a8601be", defaultValue: "a new session", bundle: .main, comment: "Session placement in a user-facing permission summary.")
         }
         let cmd = Self.spawnCommand(from: command)
         let detail: String
         if let cmd {
-            detail = "The agent is asking to open \(placement) and run \u{201C}\(cmd)\u{201D}."
+            detail = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_agent_is_asking_to_open_0_and.9dd2bd5e", defaultValue: "The agent is asking to open \(placement) and run \u{201C}\(cmd)\u{201D}.", bundle: .main, comment: "User-facing new-session permission summary; preserve the command.")
         } else {
-            detail = "The agent is asking to open \(placement)."
+            detail = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_agent_is_asking_to_open_0.f6dd81cb", defaultValue: "The agent is asking to open \(placement).", bundle: .main, comment: "User-facing new-session permission summary.")
         }
         return await awaitPermission(workgroupID: WorkgroupIntrospection.spawnWorkgroupID,
-                                      workgroupName: "New session",
+                                      workgroupName: String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.new_session.cffdba22", defaultValue: "New session", bundle: .main, comment: "User-facing new-session permission title."),
                                       summary: detail)
     }
 
@@ -1643,9 +1648,7 @@ final class OrchestratorDispatcher {
         guard claimedScopes.remove(scope) != nil else { return }
         persistClaimedScopes()
         let name = WorkgroupIntrospection.displayName(forWorkgroupID: scope)
-        let notice = "Revoked this chat’s permission to control "
-            + "\u{201C}\(name)\u{201D}. The agent will ask before its "
-            + "next action there."
+        let notice = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.revoked_this_chat_s_permission_to_control_0.9ebe8a9c", defaultValue: "Revoked this chat’s permission to control \u{201C}\(name)\u{201D}. The agent will ask before its next action there.", bundle: .main, comment: "User-facing permission-revocation notice; preserve the target name.")
         do {
             try broker?.publishNotice(chatID: chatID, notice: notice)
         } catch {
@@ -2146,7 +2149,10 @@ final class OrchestratorDispatcher {
     @MainActor
     private func promptForWatchScreenRead(
         resolved: WorkgroupIntrospection.ResolvedTarget) async -> Bool {
-        let summary = "This watch reads \(Self.watcherTargetLabel(role: resolved.roleName, workgroup: resolved.workgroupName, workgroupID: resolved.workgroupID))'s screen repeatedly while it waits. View Contents is set to Ask for this session, so allow this background reading until the watch finishes?"
+        let target = Self.localizedWatcherTargetLabel(role: resolved.roleName,
+                                                      workgroup: resolved.workgroupName,
+                                                      workgroupID: resolved.workgroupID)
+        let summary = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.this_watch_reads_0_s_screen_repeatedly_while.fa42599f", defaultValue: "This watch reads \(target)'s screen repeatedly while it waits. View Contents is set to Ask for this session, so allow this background reading until the watch finishes?", bundle: .main, comment: "User-facing repeated-screen-read permission summary; preserve the target name.")
         return await awaitPermission(
             workgroupID: WorkgroupIntrospection.watchApprovalWorkgroupID,
             workgroupName: resolved.workgroupName,
@@ -2523,10 +2529,10 @@ final class OrchestratorDispatcher {
             // round-trip and block inert payloads.
             try await enforce(await Self.classifyCommand(
                 command, inTUI: false, classifier: safetyClassifier()),
-                              actionSummary: "The agent wants to run:\n\n`\(command)`")
+                              actionSummary: String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_agent_wants_to_run_0.67dbab6e", defaultValue: "The agent wants to run:\n\n`\(command)`", bundle: .main, comment: "User-facing command safety summary; preserve the command."))
         case .failClosed(let reason):
             try await enforce(.requireApproval(reason: reason),
-                              actionSummary: "The agent wants to run a command in the session.")
+                              actionSummary: String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_agent_wants_to_run_a_command_in.b7b83a9b", defaultValue: "The agent wants to run a command in the session.", bundle: .main, comment: "User-facing command safety summary."))
         }
 
         // Concurrency guard. gateTypedText runs on the main actor, but the
@@ -2597,7 +2603,7 @@ final class OrchestratorDispatcher {
         try await enforce(
             await Self.tuiKeystrokeOutcome(
                 keystroke: effective, screen: screen, classifier: safetyClassifier()),
-            actionSummary: "The agent wants to send this to the session's foreground program:\n\n`\(TUISafetyPrompt.displayKeystroke(effective))`")
+            actionSummary: String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_agent_wants_to_send_this_to_the.875ade32", defaultValue: "The agent wants to send this to the session's foreground program:\n\n`\(TUISafetyPrompt.displayKeystroke(effective))`", bundle: .main, comment: "User-facing keystroke safety summary; preserve the keystroke preview."))
     }
 
     // Enforce a safety-gate outcome. On .allow, return so the action proceeds.
@@ -2638,12 +2644,12 @@ final class OrchestratorDispatcher {
                                           reason: String,
                                           flagged: Bool) async -> Bool {
         let lead = flagged
-            ? "The safety check flagged this as potentially dangerous.\n\n"
+            ? String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.the_safety_check_flagged_this_as_potentially_dangerous.e5e25829", defaultValue: "The safety check flagged this as potentially dangerous.\n\n", bundle: .main, comment: "Strong warning in a user-facing command safety summary.")
             : ""
-        let summary = "\(lead)\(actionSummary)\n\nWhy it needs review: \(reason)"
+        let summary = String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.0_1_why_it_needs_review_2.debb2439", defaultValue: "\(lead)\(actionSummary)\n\nWhy it needs review: \(reason)", bundle: .main, comment: "User-facing command safety summary; preserve the action and classifier-provided reason.")
         return await awaitPermission(
             workgroupID: WorkgroupIntrospection.commandApprovalWorkgroupID,
-            workgroupName: "Run command",
+            workgroupName: String(localized: "ui.swift.claudecode.orchestration.orchestratordispatcher.run_command.87e30f34", defaultValue: "Run command", bundle: .main, comment: "User-facing command-approval title."),
             summary: summary)
     }
 

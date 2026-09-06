@@ -147,14 +147,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {
     iTermStatusBarComponentKnob *backgroundColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Background Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarattributedtextcomponent.background_color.2f484fe0", nil, NSBundle.mainBundle, @"Background Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
                                                            key:iTermStatusBarSharedBackgroundColorKey];
 
     iTermStatusBarComponentKnob *textColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Text Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarattributedtextcomponent.text_color.87715c40", nil, NSBundle.mainBundle, @"Text Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil

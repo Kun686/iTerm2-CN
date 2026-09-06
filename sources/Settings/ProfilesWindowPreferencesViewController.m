@@ -526,13 +526,13 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
             _percentageHeightField.enabled = YES;
 
             _columnsUnitsButton.hidden = NO;
-            _columnsUnitsButton.menu.itemArray[0].title = @"Columns";
-            _columnsUnitsButton.menu.itemArray[1].title = @"% of screen width";
+            _columnsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.columns.53aade77", nil, NSBundle.mainBundle, @"Columns", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _columnsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_width.7fc98e08", nil, NSBundle.mainBundle, @"% of screen width", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_columnsUnitsButton selectItemWithTag:columnsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _rowsUnitsButton.hidden = NO;
-            _rowsUnitsButton.menu.itemArray[0].title = @"Rows";
-            _rowsUnitsButton.menu.itemArray[1].title = @"% of screen height";
+            _rowsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.rows.101f2ff3", nil, NSBundle.mainBundle, @"Rows", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _rowsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_height.1214fece", nil, NSBundle.mainBundle, @"% of screen height", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_rowsUnitsButton selectItemWithTag:rowsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _widthLabel.hidden = YES;
@@ -554,8 +554,8 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
             _widthLabel.hidden = NO;
             _heightLabel.hidden = NO;
 
-            _widthLabel.stringValue = @"columns by";
-            _heightLabel.stringValue = @"rows";
+            _widthLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.columns_by.14b82ebb", nil, NSBundle.mainBundle, @"columns by", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _heightLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.rows.bc51e9e6", nil, NSBundle.mainBundle, @"rows", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
 
             _byLabel.hidden = YES;
             break;
@@ -572,13 +572,13 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
             _percentageHeightField.hidden = YES;
 
             _columnsUnitsButton.hidden = NO;
-            _columnsUnitsButton.menu.itemArray[0].title = @"Columns";
-            _columnsUnitsButton.menu.itemArray[1].title = @"% of screen width";
+            _columnsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.columns.53aade77", nil, NSBundle.mainBundle, @"Columns", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _columnsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_width.7fc98e08", nil, NSBundle.mainBundle, @"% of screen width", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_columnsUnitsButton selectItemWithTag:columnsIsCells ? 0 : 1];
 
             _rowsUnitsButton.hidden = NO;
-            _rowsUnitsButton.menu.itemArray[0].title = @"Rows";
-            _rowsUnitsButton.menu.itemArray[1].title = @"% of screen height";
+            _rowsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.rows.101f2ff3", nil, NSBundle.mainBundle, @"Rows", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _rowsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_height.1214fece", nil, NSBundle.mainBundle, @"% of screen height", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_rowsUnitsButton selectItemWithTag:rowsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _widthLabel.hidden = YES;
@@ -599,13 +599,13 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
             _percentageHeightField.hidden = YES;
 
             _columnsUnitsButton.hidden = NO;
-            _columnsUnitsButton.menu.itemArray[0].title = @"Columns";
-            _columnsUnitsButton.menu.itemArray[1].title = @"% of screen width";
+            _columnsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.columns.53aade77", nil, NSBundle.mainBundle, @"Columns", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _columnsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_width.7fc98e08", nil, NSBundle.mainBundle, @"% of screen width", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_columnsUnitsButton selectItemWithTag:columnsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _rowsUnitsButton.hidden = NO;
-            _rowsUnitsButton.menu.itemArray[0].title = @"Rows";
-            _rowsUnitsButton.menu.itemArray[1].title = @"% of screen height";
+            _rowsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.rows.101f2ff3", nil, NSBundle.mainBundle, @"Rows", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _rowsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_height.1214fece", nil, NSBundle.mainBundle, @"% of screen height", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_rowsUnitsButton selectItemWithTag:rowsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _widthLabel.hidden = YES;
@@ -628,13 +628,13 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
             _percentageHeightField.enabled = YES;
 
             _columnsUnitsButton.hidden = NO;
-            _columnsUnitsButton.menu.itemArray[0].title = @"Columns";
-            _columnsUnitsButton.menu.itemArray[1].title = @"% of screen width";
+            _columnsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.columns.53aade77", nil, NSBundle.mainBundle, @"Columns", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _columnsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_width.7fc98e08", nil, NSBundle.mainBundle, @"% of screen width", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_columnsUnitsButton selectItemWithTag:columnsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _rowsUnitsButton.hidden = NO;
-            _rowsUnitsButton.menu.itemArray[0].title = @"Rows";
-            _rowsUnitsButton.menu.itemArray[1].title = @"% of screen height";
+            _rowsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.rows.101f2ff3", nil, NSBundle.mainBundle, @"Rows", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _rowsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_height.1214fece", nil, NSBundle.mainBundle, @"% of screen height", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_rowsUnitsButton selectItemWithTag:rowsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _widthLabel.hidden = YES;
@@ -656,13 +656,13 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
             _percentageHeightField.enabled = YES;
 
             _columnsUnitsButton.hidden = NO;
-            _columnsUnitsButton.menu.itemArray[0].title = @"Columns";
-            _columnsUnitsButton.menu.itemArray[1].title = @"% of screen width";
+            _columnsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.columns.53aade77", nil, NSBundle.mainBundle, @"Columns", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _columnsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_width.7fc98e08", nil, NSBundle.mainBundle, @"% of screen width", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_columnsUnitsButton selectItemWithTag:columnsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _rowsUnitsButton.hidden = NO;
-            _rowsUnitsButton.menu.itemArray[0].title = @"Rows";
-            _rowsUnitsButton.menu.itemArray[1].title = @"% of screen height";
+            _rowsUnitsButton.menu.itemArray[0].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.rows.101f2ff3", nil, NSBundle.mainBundle, @"Rows", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _rowsUnitsButton.menu.itemArray[1].title = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.of_screen_height.1214fece", nil, NSBundle.mainBundle, @"% of screen height", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
             [_rowsUnitsButton selectItemWithTag:rowsIsCells ? iTermWindowUnitsTagCells : iTermWindowUnitsTagScreenPercentage];
 
             _widthLabel.hidden = YES;
@@ -689,8 +689,8 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
             _widthLabel.hidden = NO;
             _heightLabel.hidden = NO;
 
-            _widthLabel.stringValue = @"columns by";
-            _heightLabel.stringValue = @"rows";
+            _widthLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.columns_by.14b82ebb", nil, NSBundle.mainBundle, @"columns by", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
+            _heightLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.rows.bc51e9e6", nil, NSBundle.mainBundle, @"rows", @"User-facing text in ProfilesWindowPreferencesViewController (updateWindowTypeControlFromSettings).");
 
             _byLabel.hidden = YES;
             break;
@@ -819,7 +819,7 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
     panel.canChooseFiles = YES;
     panel.allowsMultipleSelection = NO;
     panel.treatsFilePackagesAsDirectories = NO;
-    panel.message = @"Choose an image for the background, or a folder to rotate through its images.";
+    panel.message = NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.choose_an_image_for_the_background_or_a.c7d99196", nil, NSBundle.mainBundle, @"Choose an image for the background, or a folder to rotate through its images.", @"User-facing text in ProfilesWindowPreferencesViewController (openBackgroundPathPicker).");
     // Image-only filter dims non-image files. Folders stay selectable because
     // canChooseDirectories=YES treats them as containers, not content.
     panel.allowedContentTypes = [NSImage.imageTypes mapWithBlock:^id _Nullable(NSString *ext) {
@@ -854,12 +854,12 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
             return;
         }
         if ([iTermBackgroundImageRotationManager firstImagePathInFolder:path] == nil) {
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"The folder “%@” contains no images, so no background image will be shown.", path.lastPathComponent]
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.the_folder_contains_no_images_so_no_background.5bf24cfc", nil, NSBundle.mainBundle, @"The folder “%@” contains no images, so no background image will be shown.", @"User-facing text in ProfilesWindowPreferencesViewController (showWarningWithTitle)."), path.lastPathComponent]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesWindowPreferencesViewController (actions).") ]
                                      accessory:nil
                                     identifier:@"BackgroundFolderEmpty"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Empty Folder"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.empty_folder.f503ef8e", nil, NSBundle.mainBundle, @"Empty Folder", @"User-facing text in ProfilesWindowPreferencesViewController (heading).")
                                         window:self.view.window];
             [self setString:nil forKey:KEY_BACKGROUND_IMAGE_FOLDER_LOCATION];
             [self updateControlForKey:KEY_BACKGROUND_IMAGE_FOLDER_LOCATION];
@@ -910,7 +910,7 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
 
 - (void)updateBackgroundImageUI {
     const BOOL usesFolderRotation = [self backgroundImageUsesFolderRotation];
-    _backgroundImageLabel.stringValue = usesFolderRotation ? @"Folder:" : @"Image:";
+    _backgroundImageLabel.stringValue = usesFolderRotation ? NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.folder.a6b3283e", nil, NSBundle.mainBundle, @"Folder:", @"User-facing text in ProfilesWindowPreferencesViewController (updateBackgroundImageUI).") : NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.image.8eafb034", nil, NSBundle.mainBundle, @"Image:", @"User-facing text in ProfilesWindowPreferencesViewController (updateBackgroundImageUI).");
     // The image and folder text fields share the same xib rect, so hide the
     // inactive one. Disabled NSControls still consume hit-testing and would
     // block clicks to the field underneath.
@@ -964,31 +964,31 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
     NSData *data = [NSData dataWithContentsOfFile:filename options:0 error:&error];
     if (!data) {
         [iTermWarning showWarningWithTitle:error.localizedDescription
-                                   actions:@[ @"OK" ]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesWindowPreferencesViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"BackgroundImageUnreadable"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Problem Loading Image"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.problem_loading_image.5764f046", nil, NSBundle.mainBundle, @"Problem Loading Image", @"User-facing text in ProfilesWindowPreferencesViewController (heading).")
                                     window:self.view.window];
         return NO;
     }
     if (data.length == 0) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"The image “%@” could not be loaded because the file is empty.", filename.lastPathComponent]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.the_image_could_not_be_loaded_because_the.9d0f0219", nil, NSBundle.mainBundle, @"The image “%@” could not be loaded because the file is empty.", @"User-facing text in ProfilesWindowPreferencesViewController (showWarningWithTitle)."), filename.lastPathComponent]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesWindowPreferencesViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"BackgroundImageUnreadable"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Problem Loading Image"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.problem_loading_image.5764f046", nil, NSBundle.mainBundle, @"Problem Loading Image", @"User-facing text in ProfilesWindowPreferencesViewController (heading).")
                                     window:self.view.window];
         return NO;
     }
     if (![[NSImage alloc] initWithData:data]) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"The image “%@” could not be loaded because it is corrupt or not a supported format.", filename.lastPathComponent]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.the_image_could_not_be_loaded_because_it.43ec18e4", nil, NSBundle.mainBundle, @"The image “%@” could not be loaded because it is corrupt or not a supported format.", @"User-facing text in ProfilesWindowPreferencesViewController (showWarningWithTitle)."), filename.lastPathComponent]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesWindowPreferencesViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"BackgroundImageUnreadable"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Problem Loading Image"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.problem_loading_image.5764f046", nil, NSBundle.mainBundle, @"Problem Loading Image", @"User-facing text in ProfilesWindowPreferencesViewController (heading).")
                                     window:self.view.window];
         return NO;
     }
@@ -998,12 +998,12 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
 - (BOOL)checkFolder:(NSString *)filename {
     BOOL isDirectory = NO;
     if (![[NSFileManager defaultManager] fileExistsAtPath:filename isDirectory:&isDirectory] || !isDirectory) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"The folder “%@” could not be used because it does not exist or is not a directory.", filename.lastPathComponent]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.the_folder_could_not_be_used_because_it.3831d955", nil, NSBundle.mainBundle, @"The folder “%@” could not be used because it does not exist or is not a directory.", @"User-facing text in ProfilesWindowPreferencesViewController (showWarningWithTitle)."), filename.lastPathComponent]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesWindowPreferencesViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"BackgroundFolderUnreadable"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Problem Loading Folder"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.problem_loading_folder.0be63330", nil, NSBundle.mainBundle, @"Problem Loading Folder", @"User-facing text in ProfilesWindowPreferencesViewController (heading).")
                                     window:self.view.window];
         return NO;
     }
@@ -1012,12 +1012,12 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
                                                                                   options:NSDirectoryEnumerationSkipsHiddenFiles
                                                                                     error:nil];
     if (!contents) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"The folder “%@” could not be read.", filename.lastPathComponent]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.the_folder_could_not_be_read.2cd88499", nil, NSBundle.mainBundle, @"The folder “%@” could not be read.", @"User-facing text in ProfilesWindowPreferencesViewController (showWarningWithTitle)."), filename.lastPathComponent]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesWindowPreferencesViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"BackgroundFolderUnreadable"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Problem Loading Folder"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.problem_loading_folder.0be63330", nil, NSBundle.mainBundle, @"Problem Loading Folder", @"User-facing text in ProfilesWindowPreferencesViewController (heading).")
                                     window:self.view.window];
         return NO;
     }
@@ -1036,9 +1036,9 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
     int selectedTag = [_screen selectedTag];
     [_screen removeAllItems];
     int i = 0;
-    [_screen addItemWithTitle:@"No Preference"];
+    [_screen addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.no_preference.5205fbdb", nil, NSBundle.mainBundle, @"No Preference", @"User-facing text in ProfilesWindowPreferencesViewController (repopulateScreen).")];
     [[_screen lastItem] setTag:-1];
-    [_screen addItemWithTitle:@"Screen with Cursor"];
+    [_screen addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.screen_with_cursor.5012e093", nil, NSBundle.mainBundle, @"Screen with Cursor", @"User-facing text in ProfilesWindowPreferencesViewController (repopulateScreen).")];
     [[_screen lastItem] setTag:-2];
     NSArray<NSScreen *> *screens = [NSScreen screens];
     [_screen.menu addItem:[NSMenuItem separatorItem]];
@@ -1071,11 +1071,8 @@ typedef NS_ENUM(NSUInteger, iTermWindowUnitsTag) {
 
 - (void)maybeWarnAboutSpaces
 {
-    [iTermWarning showWarningWithTitle:@"To have a new window open in a specific space, "
-                                       @"make sure that Spaces is enabled in System "
-                                       @"Preferences and that it is configured to switch directly "
-                                       @"to a space with ^ Number Keys."
-                               actions:@[ @"OK" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.to_have_a_new_window_open_in_a.c6088f53", nil, NSBundle.mainBundle, @"To have a new window open in a specific space, make sure that Spaces is enabled in System Preferences and that it is configured to switch directly to a space with ^ Number Keys.", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileswindowpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesWindowPreferencesViewController (actions).") ]
                             identifier:@"NeverWarnAboutSpaces"
                            silenceable:kiTermWarningTypePermanentlySilenceable
                                 window:self.view.window];

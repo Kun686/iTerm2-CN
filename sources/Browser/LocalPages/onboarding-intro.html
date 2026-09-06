@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to iTerm2 Browser</title>
+    <title>{{PAGE_TITLE}}</title>
     <style>
         {{COMMON_CSS}}
 
@@ -157,27 +157,18 @@
     <div class="onboarding-container">
         <div class="onboarding-header">
             <span class="onboarding-icon">🌐</span>
-            <h1 class="onboarding-title">Meet the iTerm2 Browser</h1>
-            <p class="onboarding-subtitle">Terminal + Browser = Trowser</p>
+            <h1 class="onboarding-title">{{TITLE}}</h1>
+            <p class="onboarding-subtitle">{{SUBTITLE}}</p>
         </div>
 
         <div class="concept-card">
-            <h2 class="concept-title">What is a Browser Profile?</h2>
-            <p class="concept-description">
-                In iTerm2, profiles define how sessions look and behave.
-                Terminal profiles open a shell.
-                Browser profiles are different: they open a web browser instead.
-            </p>
+            <h2 class="concept-title">{{PROFILE_TITLE}}</h2>
+            <p class="concept-description">{{PROFILE_DESCRIPTION}}</p>
         </div>
 
         <div class="concept-card">
-            <h2 class="concept-title">How It Works</h2>
-            <p class="concept-description">
-                When you create a new tab or split pane using a browser profile,
-                you get a fully-featured web browser instead of a terminal.
-                Mix and match browser and terminal panes however you like: they’re
-                all part of the same iTerm2 experience.
-            </p>
+            <h2 class="concept-title">{{HOW_IT_WORKS_TITLE}}</h2>
+            <p class="concept-description">{{HOW_IT_WORKS_DESCRIPTION}}</p>
         </div>
 
         <div class="navigation-footer">
@@ -188,7 +179,7 @@
                 <div class="progress-dot"></div>
             </div>
             <a href="iterm2-about:onboarding-features" class="nav-button">
-                Learn What’s Possible
+                {{LEARN_MORE}}
                 <span>→</span>
             </a>
         </div>

@@ -151,7 +151,7 @@ static NSError *SCPFileError(NSString *description) {
 }
 
 - (NSString *)displayName {
-    return [NSString stringWithFormat:@"Secure copy\nUser name: %@\nHost: %@\nFile: %@", _path.username, _path.hostname, _path.path];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.secure_copy_user_name_host_file.0cd9e555", nil, NSBundle.mainBundle, @"Secure copy\nUser name: %@\nHost: %@\nFile: %@", @"User-facing secure-copy summary; preserve the user name, host, and file path."), _path.username, _path.hostname, _path.path];
 }
 
 - (NSString *)shortName {
@@ -175,7 +175,7 @@ static NSError *SCPFileError(NSString *description) {
 }
 
 - (NSString *)protocolName {
-    return @"secure copy";
+    return NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.secure_copy.0f152877", nil, NSBundle.mainBundle, @"secure copy", @"Protocol name in a user-facing authentication prompt.");
 }
 
 // This runs in a thread.
@@ -375,10 +375,10 @@ static NSError *SCPFileError(NSString *description) {
     RLog(@"performTransfer download=%@ agentAllowed=%@ path=%@ baseName=%@",
          @(isDownload), @(agentAllowed), self.path, baseName);
     if (!baseName) {
-        self.error = [NSString stringWithFormat:@"Invalid path: %@", self.path.path];
+        self.error = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.invalid_path.ca7b1914", nil, NSBundle.mainBundle, @"Invalid path: %@", @"User-facing secure-copy error; preserve the path."), self.path.path];
         [self performOnMainThread:^{
             [[FileTransferManager sharedInstance] transferrableFile:self
-                                     didFinishTransmissionWithError:SCPFileError(@"Invalid filename")];
+                                     didFinishTransmissionWithError:SCPFileError(NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.invalid_filename.0af3e691", nil, NSBundle.mainBundle, @"Invalid filename", @"User-facing secure-copy error."))];
         }];
         return;
     }
@@ -414,22 +414,22 @@ static NSError *SCPFileError(NSString *description) {
             // error. Should that ever change, this clause will not execute.
             theError = [NSError errorWithDomain:@"com.googlecode.iterm2"
                                            code:-1
-                                       userInfo:@{ NSLocalizedDescriptionKey: @"Could not connect." }];
+                                       userInfo:@{ NSLocalizedDescriptionKey: NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.could_not_connect.63306d94", nil, NSBundle.mainBundle, @"Could not connect.", @"User-facing secure-copy connection error.") }];
         }
-        self.error = [NSString stringWithFormat:@"Connection failed: %@",
+        self.error = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.connection_failed.12bfdd05", nil, NSBundle.mainBundle, @"Connection failed: %@", @"User-facing secure-copy error; preserve the underlying error."),
                          theError.localizedDescription];
         [self performOnMainThread:^{
             [[FileTransferManager sharedInstance] transferrableFile:self
                                      didFinishTransmissionWithError:theError];
             iTermWarningSelection selection =
-                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Failed to connect to %@:%d. Double-check that the host name is correct.", self.hostname, effectivePort]
-                                           actions:@[ @"Ok", @"Help" ]
+                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.failed_to_connect_to_d_double_check_that.c4022ebf", nil, NSBundle.mainBundle, @"Failed to connect to %@:%d. Double-check that the host name is correct.", @"User-facing secure-copy connection warning; preserve the host and port."), self.hostname, effectivePort]
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.ok.843ac011", nil, NSBundle.mainBundle, @"Ok", @"User-facing action label in SCPFile (actions)."), NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.help.b79cac92", nil, NSBundle.mainBundle, @"Help", @"User-facing action label in SCPFile (actions).") ]
                                      actionMapping:nil
                                          accessory:nil
                                         identifier:kSecureCopyConnectionFailedWarning
                                        silenceable:kiTermWarningTypePermanentlySilenceable
-                                           heading:@"Connection Failed"
-                                       cancelLabel:@"Help"
+                                           heading:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.connection_failed.42aa4e7b", nil, NSBundle.mainBundle, @"Connection Failed", @"User-facing text in SCPFile (heading).")
+                                       cancelLabel:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.help.b79cac92", nil, NSBundle.mainBundle, @"Help", @"User-facing action label in SCPFile (cancelLabel).")
                                             window:nil];
             if (selection == kiTermWarningSelection1) {
                 [[NSWorkspace sharedWorkspace] it_openURL:[NSURL URLWithString:@"https://iterm2.com/troubleshoot-hostname"]
@@ -468,7 +468,7 @@ static NSError *SCPFileError(NSString *description) {
                 break;
             }
             if ([authType isEqualToString:@"password"]) {
-                NSString *password = [self keyboardInteractiveRequest:@"password"];
+                NSString *password = [self keyboardInteractiveRequest:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.password.5e884898", nil, NSBundle.mainBundle, @"password", @"Credential name in a user-facing authentication prompt.")];
                 if (self.stopped || !password) {
                     break;
                 }
@@ -513,10 +513,10 @@ static NSError *SCPFileError(NSString *description) {
                         if (keyIsEncrypted) {
                             NSString *prompt;
                             if (firstAttempt) {
-                                prompt = [NSString stringWithFormat:@"passphrase for private key “%@”:",
+                                prompt = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.passphrase_for_private_key.5e3d5c1c", nil, NSBundle.mainBundle, @"passphrase for private key “%@”:", @"User-facing private-key passphrase prompt; preserve the key path."),
                                           keyPath];
                             } else {
-                                prompt = [NSString stringWithFormat:@"correct passphrase for “%@”:",
+                                prompt = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.correct_passphrase_for.4ca59a64", nil, NSBundle.mainBundle, @"correct passphrase for “%@”:", @"User-facing private-key passphrase retry prompt; preserve the key path."),
                                           keyPath];
                             }
                             password = [self keyboardInteractiveRequest:prompt];
@@ -584,9 +584,9 @@ static NSError *SCPFileError(NSString *description) {
             if (!error) {
                 error = [NSError errorWithDomain:@"com.googlecode.iterm2.SCPFile"
                                             code:0
-                                        userInfo:@{ NSLocalizedDescriptionKey: @"Authentication failed." }];
+                                        userInfo:@{ NSLocalizedDescriptionKey: NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.authentication_failed.0ddedf90", nil, NSBundle.mainBundle, @"Authentication failed.", @"User-facing secure-copy authentication error.") }];
             }
-            self.error = @"Authentication error.";
+            self.error = NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.authentication_error.eb67cd65", nil, NSBundle.mainBundle, @"Authentication error.", @"User-facing secure-copy authentication error.");
             [[FileTransferManager sharedInstance] transferrableFile:self
                                      didFinishTransmissionWithError:error];
         }];
@@ -610,11 +610,11 @@ static NSError *SCPFileError(NSString *description) {
             tempfile = [downloadDirectory stringByAppendingPathComponent:tempFileName];
         }
         if (!tempfile) {
-            self.error = [NSString stringWithFormat:@"Downloads folder not writable. Tried %@",
+            self.error = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.downloads_folder_not_writable_tried.8ed9925a", nil, NSBundle.mainBundle, @"Downloads folder not writable. Tried %@", @"User-facing secure-copy error; preserve the attempted path."),
                           downloadDirectory];
             [self performOnMainThread:^{
                 [[FileTransferManager sharedInstance] transferrableFile:self
-                                         didFinishTransmissionWithError:SCPFileError(@"Downloads folder not writable")];
+                                         didFinishTransmissionWithError:SCPFileError(NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.downloads_folder_not_writable.977a12af", nil, NSBundle.mainBundle, @"Downloads folder not writable", @"User-facing secure-copy error."))];
             }];
             return;
         }
@@ -702,16 +702,16 @@ static NSError *SCPFileError(NSString *description) {
                 return;
             } else {
                 if (quarantineError) {
-                    self.error = @"Quarantine Error";
+                    self.error = NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.quarantine_error.381f2424", nil, NSBundle.mainBundle, @"Quarantine Error", @"User-facing secure-copy security error.");
                 } else {
                     NSString *errorDescription = [[self lastError] localizedDescription];
                     if (errorDescription.length) {
                         self.error = errorDescription;
                     } else {
-                        self.error = @"Download failed";
+                        self.error = NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.download_failed.eae34ccb", nil, NSBundle.mainBundle, @"Download failed", @"User-facing secure-copy download error.");
                     }
                 }
-                error = SCPFileError(@"Download failed");
+                error = SCPFileError(NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.download_failed.eae34ccb", nil, NSBundle.mainBundle, @"Download failed", @"User-facing secure-copy download error."));
             }
         }
         [self performOnMainThread:^{
@@ -760,9 +760,9 @@ static NSError *SCPFileError(NSString *description) {
                 if (errorDescription.length) {
                     self.error = errorDescription;
                 } else {
-                    self.error = @"Upload failed";
+                    self.error = NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.upload_failed.6efc5d27", nil, NSBundle.mainBundle, @"Upload failed", @"User-facing secure-copy upload error.");
                 }
-                error = SCPFileError(@"Upload failed");
+                error = SCPFileError(NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.upload_failed.6efc5d27", nil, NSBundle.mainBundle, @"Upload failed", @"User-facing secure-copy upload error."));
             }
         }
         [self performOnMainThread:^{
@@ -810,12 +810,12 @@ static NSString *const SCPFileKnownHostsUserDefaultsKey = @"NoSyncKnownHosts";
 
 - (BOOL)shouldConnectToNewHostname {
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Connect to %@?", self.userHostPort]
-                               actions:@[ @"OK", @"Cancel" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.connect_to.7490478a", nil, NSBundle.mainBundle, @"Connect to %@?", @"User-facing new-host connection warning; preserve the remote account and port."), self.userHostPort]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in SCPFile (actions)."), NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in SCPFile (actions).") ]
                              accessory:nil
                             identifier:[@"NoSyncConnectTo_" stringByAppendingString:self.userHostPort]
                            silenceable:kiTermWarningTypePermanentlySilenceable
-                               heading:@"Connect to New Host?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.connect_to_new_host.4f3187da", nil, NSBundle.mainBundle, @"Connect to New Host?", @"User-facing text in SCPFile (heading).")
                                 window:nil];
     return selection == kiTermWarningSelection0;
 }
@@ -835,9 +835,9 @@ static NSString *const SCPFileKnownHostsUserDefaultsKey = @"NoSyncKnownHosts";
     if (!self.hasPredecessor) {
         if (![self hostnameIsKnown]) {
             if (![self shouldConnectToNewHostname]) {
-                self.error = @"Canceled by user";
+                self.error = NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.canceled_by_user.def50520", nil, NSBundle.mainBundle, @"Canceled by user", @"User-facing secure-copy cancellation error.");
                 [[FileTransferManager sharedInstance] transferrableFile:self
-                                         didFinishTransmissionWithError:SCPFileError(@"Canceled by user")];
+                                         didFinishTransmissionWithError:SCPFileError(NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.canceled_by_user.def50520", nil, NSBundle.mainBundle, @"Canceled by user", @"User-facing secure-copy cancellation error."))];
                 return;
             }
             [self addKnownHost];
@@ -884,7 +884,7 @@ static NSString *const SCPFileKnownHostsUserDefaultsKey = @"NoSyncKnownHosts";
     NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:self.localPath error:&attributesError];
     if (attributesError) {
         RLog(@"Failed to get attributes for %@: %@", self.localPath, attributesError);
-        self.error = [NSString stringWithFormat:@"Cannot read file: %@", attributesError.localizedDescription];
+        self.error = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.cannot_read_file.0b6d2744", nil, NSBundle.mainBundle, @"Cannot read file: %@", @"User-facing secure-copy upload error; preserve the underlying error."), attributesError.localizedDescription];
         [[FileTransferManager sharedInstance] transferrableFile:self
                                  didFinishTransmissionWithError:attributesError];
         return;
@@ -905,9 +905,9 @@ static NSString *const SCPFileKnownHostsUserDefaultsKey = @"NoSyncKnownHosts";
     if (!self.hasPredecessor) {
         if (![self hostnameIsKnown]) {
             if (![self shouldConnectToNewHostname]) {
-                self.error = @"Canceled by user";
+                self.error = NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.canceled_by_user.def50520", nil, NSBundle.mainBundle, @"Canceled by user", @"User-facing secure-copy cancellation error.");
                 [[FileTransferManager sharedInstance] transferrableFile:self
-                                         didFinishTransmissionWithError:SCPFileError(@"Canceled by user")];
+                                         didFinishTransmissionWithError:SCPFileError(NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.canceled_by_user.def50520", nil, NSBundle.mainBundle, @"Canceled by user", @"User-facing secure-copy cancellation error."))];
                 return;
             }
             [self addKnownHost];
@@ -943,13 +943,13 @@ static NSString *const SCPFileKnownHostsUserDefaultsKey = @"NoSyncKnownHosts";
     [self performOnMainThread:^{
         _okToAdd = NO;
         NSString *message = nil;
-        NSString *title = @"Notice";  // The default value should never be used.
+        NSString *title = NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.notice.65659145", nil, NSBundle.mainBundle, @"Notice", @"User-facing alert title.");  // The default value should never be used.
         switch (status) {
             case NMSSHKnownHostStatusFailure:
-                title = [NSString stringWithFormat:@"Problem connecting to %@", host];
-                message = [NSString stringWithFormat:@"Could not read the known_hosts file.\n"
+                title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.problem_connecting_to.636c12f4", nil, NSBundle.mainBundle, @"Problem connecting to %@", @"User-facing host-key alert title; preserve the host."), host];
+                message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.could_not_read_the_known_hosts_file_as.4c58ed71", nil, NSBundle.mainBundle, @"Could not read the known_hosts file.\n"
                                                      @"As a result, the authenticity of host '%@' can't be established."
-                                                     @"%@ key fingerprint is %@. Connect anyway?",
+                                                     @"%@ key fingerprint is %@. Connect anyway?", @"User-facing host-key verification warning; preserve the host, hash name, and fingerprint."),
                            host, hashName, fingerprint];
                 break;
 
@@ -959,20 +959,21 @@ static NSString *const SCPFileKnownHostsUserDefaultsKey = @"NoSyncKnownHosts";
                 break;
 
             case NMSSHKnownHostStatusMismatch:
-                title = @"Warning!";
+                title = NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.warning.6a7d6a38", nil, NSBundle.mainBundle, @"Warning!", @"User-facing alert title.");
                 message =
-                    [NSString stringWithFormat:@"REMOTE HOST IDENTIFICATION HAS CHANGED!\n\n"
+                    [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.remote_host_identification_has_changed_the_key_fingerprint.a23031e7", nil, NSBundle.mainBundle, @"REMOTE HOST IDENTIFICATION HAS CHANGED!\n\n"
                                                @"The %@ key fingerprint of host '%@' has changed. It is %@.\n\n"
                                                @"Someone could be eavesdropping on you right now (man-in-the-middle attack)!\n"
-                                               @"It is also possible that a host key has just been changed.\nConnect anyway?",
+                                               @"It is also possible that a host key has just been changed.\nConnect anyway?", @"User-facing host-key mismatch security warning; preserve the host, hash name, and fingerprint."),
                      host, hashName, fingerprint];
                 break;
 
             case NMSSHKnownHostStatusNotFound:
-                title = [NSString stringWithFormat:@"First time connecting to %@", host];
+                title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.first_time_connecting_to.124c79ef", nil, NSBundle.mainBundle, @"First time connecting to %@", @"User-facing first-connection alert title; preserve the host."), host];
                 message =
-                    [NSString stringWithFormat:@"The authenticity of host '%@' can't be established.\n\n"
+                    [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.scpfile.the_authenticity_of_host_can_t_be_established.498df94a", nil, NSBundle.mainBundle, @"The authenticity of host '%@' can't be established.\n\n"
                                                @"%@ key fingerprint is %@.\n\nConnect anyway?",
+                                               @"User-facing first-connection host-key warning; preserve the host, hash name, and fingerprint."),
                      host, hashName, fingerprint];
                 _okToAdd = YES;
                 break;

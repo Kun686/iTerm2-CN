@@ -159,7 +159,7 @@ enum OrchestrationMentionRenderer {
         // Keep the bracketed wording the phone renderers use so the same
         // mention reads consistently across Mac and phone; only the styling
         // (glyph, gray, non-clickable) is Mac-specific.
-        result.append(NSAttributedString(string: "[defunct session]", attributes: attributes))
+        result.append(NSAttributedString(string: String(localized: "ui.swift.claudecode.orchestration.orchestrationmentionrenderer.defunct_session.73376f80", defaultValue: "[defunct session]", bundle: .main, comment: "User-facing text in OrchestrationMentionRenderer."), attributes: attributes))
         return result
     }
 
@@ -171,7 +171,7 @@ enum OrchestrationMentionRenderer {
                                    tint: NSColor,
                                    action: ((NSPoint) -> ())?) -> NSAttributedString? {
         guard let symbol = NSImage(systemSymbolName: "terminal",
-                                   accessibilityDescription: "iTerm2 session") else {
+                                   accessibilityDescription: String(localized: "ui.swift.claudecode.orchestration.orchestrationmentionrenderer.iterm2_session.0895478c", defaultValue: "iTerm2 session", bundle: .main, comment: "User-facing text in OrchestrationMentionRenderer.")) else {
             return nil
         }
         let dynamicImage = DynamicImage(image: symbol,
@@ -261,7 +261,7 @@ enum OrchestrationMentionRenderer {
             return nil
         }
         let raw = instance.workgroup.name
-        let name = raw.isEmpty ? "Untitled workgroup" : raw
+        let name = raw.isEmpty ? String(localized: "ui.swift.claudecode.orchestration.orchestrationmentionrenderer.untitled_workgroup.3173f388", defaultValue: "Untitled workgroup", bundle: .main, comment: "User-facing text in OrchestrationMentionRenderer.") : raw
         return Resolved(displayName: name,
                         revealGuid: leader.stableID,
                         workgroupID: instanceID)

@@ -155,10 +155,10 @@ iTermCommandInfoViewControllerDelegate>
     if (item.action == @selector(sshDisconnect:)) {
         NSString *name = [self.delegate textViewCurrentSSHSessionName];
         if (name) {
-            item.title = [NSString stringWithFormat:@"Disconnect from %@", name];
+            item.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.disconnect_from.84b1b47a", nil, NSBundle.mainBundle, @"Disconnect from %@", @"User-facing text in PTYTextView+ARC (title)."), name];
             return YES;
         } else {
-            item.title = @"Disconnect";
+            item.title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.disconnect.acfc5be7", nil, NSBundle.mainBundle, @"Disconnect", @"User-facing text in PTYTextView+ARC (arcValidateMenuItem:).");
         }
     }
     if (item.action == @selector(toggleRemoteHostCanControlIterm2:)) {
@@ -177,13 +177,13 @@ iTermCommandInfoViewControllerDelegate>
             return NO;
         }
         if (!self.selection.hasSelection && !self.selection.live) {
-            item.title = @"Fold/Unfold";
+            item.title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.fold_unfold.b7b3e414", nil, NSBundle.mainBundle, @"Fold/Unfold", @"User-facing text in PTYTextView+ARC (arcValidateMenuItem:).");
             return NO;
         }
         if ([self selectionContainsFold]) {
-            item.title = @"Unfold in Selection";
+            item.title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.unfold_in_selection.4a0eed89", nil, NSBundle.mainBundle, @"Unfold in Selection", @"User-facing text in PTYTextView+ARC (arcValidateMenuItem:).");
         } else {
-            item.title = @"Fold Selected Lines";
+            item.title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.fold_selected_lines.1dafd69a", nil, NSBundle.mainBundle, @"Fold Selected Lines", @"User-facing text in PTYTextView+ARC (arcValidateMenuItem:).");
         }
         return YES;
     }
@@ -828,10 +828,10 @@ iTermCommandInfoViewControllerDelegate>
                         mouseLocation:(NSPoint)mouseLocation {
     iTermSimpleContextMenu *menu = [[iTermSimpleContextMenu alloc] init];
     __weak __typeof(self) weakSelf = self;
-    [menu addItemWithTitle:@"Look Up in Dictionary" action:^{
+    [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.look_up_in_dictionary.b140687b", nil, NSBundle.mainBundle, @"Look Up in Dictionary", @"Text view context menu item.") action:^{
         [weakSelf showDefinitionForWordAt:clickPoint];
     }];
-    [menu addItemWithTitle:@"Quick Look" action:^{
+    [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.quick_look.371e3428", nil, NSBundle.mainBundle, @"Quick Look", @"Text view context menu item.") action:^{
         [weakSelf openQuickLookForURL:url
                             urlAction:urlAction
                             withEvent:event];
@@ -1983,7 +1983,7 @@ copyRangeAccordingToUserPreferences:(VT100GridWindowedRange)range {
         }
     }
     if (copied) {
-        [ToastWindowController showToastWithMessage:@"Copied"
+        [ToastWindowController showToastWithMessage:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.copied.8d525e5f", nil, NSBundle.mainBundle, @"Copied", @"Confirmation toast after copying text.")
                                            duration:1.5
                                    screenCoordinate:[NSEvent mouseLocation]
                                           pointSize:12];
@@ -2072,8 +2072,8 @@ runCommandInBackground:(NSString *)command {
     iTermBackgroundCommandRunner *runner =
         [[iTermBackgroundCommandRunner alloc] initWithCommand:command
                                                         shell:self.delegate.textViewShell
-                                                        title:@"Smart Selection Action"];
-    runner.notificationTitle = @"Smart Selection Action Failed";
+                                                        title:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.smart_selection_action.7f4c7022", nil, NSBundle.mainBundle, @"Smart Selection Action", @"User-facing text in PTYTextView+ARC (title).")];
+    runner.notificationTitle = NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.smart_selection_action_failed_notification_title", nil, NSBundle.mainBundle, @"Smart Selection Action Failed", @"Notification title when a Smart Selection background command fails.");
     [runner run];
 }
 
@@ -2151,15 +2151,19 @@ toggleTerminalStateForMenuItem:(nonnull NSMenuItem *)item {
        inspectImage:(id<iTermImageInfoReading>)imageInfo {
     if (imageInfo) {
         NSString *text = [NSString stringWithFormat:
-                          @"Filename: %@\n"
-                          @"Dimensions: %d x %d",
+                          NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.image_info",
+                                                            nil,
+                                                            NSBundle.mainBundle,
+                                                            @"Filename: %1$@\n"
+                                                            @"Dimensions: %2$d x %3$d",
+                                                            @"Image filename and dimensions shown by Inspect Image."),
                           imageInfo.filename,
                           (int)imageInfo.image.size.width,
                           (int)imageInfo.image.size.height];
 
         NSAlert *alert = [[NSAlert alloc] init];
         alert.messageText = text;
-        [alert addButtonWithTitle:@"OK"];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in PTYTextView+ARC (contextMenu:inspectImage:).")];
         [alert layout];
         [alert runModal];
     }
@@ -3050,7 +3054,7 @@ toggleAnimationOfImage:(id<iTermImageInfoReading>)imageInfo {
     [self copyString:content];
     const NSPoint p = view.centerScreenCoordinate;
     if (p.x == p.x) {
-        [ToastWindowController showToastWithMessage:@"Copied"
+        [ToastWindowController showToastWithMessage:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.copied.8d525e5f", nil, NSBundle.mainBundle, @"Copied", @"Confirmation toast after copying text.")
                                            duration:1
                                    screenCoordinate:p
                                           pointSize:12];

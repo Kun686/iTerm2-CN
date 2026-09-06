@@ -30,19 +30,43 @@ class iTermBrowserHistoryViewHandler: NSObject, iTermBrowserPageHandler {
     // MARK: - Public Interface
     
     func generateHistoryHTML() -> String {
+        let scriptSubstitutions = [
+            "DELETE_ENTRY_PROMPT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.confirm.delete", defaultValue: "Delete this history entry?"),
+            "CLEAR_ALL_PROMPT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.confirm.clear_all", defaultValue: "This will delete all browsing history. This action cannot be undone. Continue?"),
+            "ENTRY_DELETED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.status.deleted", defaultValue: "History entry deleted"),
+            "ALL_CLEARED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.status.cleared", defaultValue: "All history cleared"),
+            "UNTITLED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.untitled", defaultValue: "Untitled"),
+            "NAVIGATE_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.navigate_tooltip", defaultValue: "Click to navigate to this URL"),
+            "DELETE_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.delete_tooltip", defaultValue: "Delete this entry"),
+            "TODAY_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.common.today", defaultValue: "Today"),
+            "YESTERDAY_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.common.yesterday", defaultValue: "Yesterday"),
+            "EMPTY_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.empty.title", defaultValue: "No browsing history"),
+            "EMPTY_DESCRIPTION_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.empty.description", defaultValue: "Your browsing history will appear here as you visit websites."),
+            "PAGE_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.history.title", defaultValue: "Browsing History")
+        ]
         let script = iTermBrowserTemplateLoader.loadTemplate(named: "history-page",
                                                              type: "js",
-                                                             substitutions: [:])
+                                                             substitutions: scriptSubstitutions)
         return iTermBrowserTemplateLoader.loadTemplate(named: "history-page",
                                                        type: "html",
-                                                       substitutions: ["HISTORY_SCRIPT": script])
+                                                       substitutions: [
+                                                           "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+                                                           "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.history.title", defaultValue: "Browsing History"),
+                                                           "PAGE_SUBTITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.history.subtitle", defaultValue: "View and manage your browsing history"),
+                                                           "CLEAR_ALL": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.history.clear_all", defaultValue: "Clear All History"),
+                                                           "SEARCH_PLACEHOLDER": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.history.search_placeholder", defaultValue: "Search your browsing history…"),
+                                                           "CLEAR_SEARCH_TOOLTIP": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.clear_search", defaultValue: "Clear search"),
+                                                           "LOADING": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.history.loading", defaultValue: "Loading history..."),
+                                                           "LOAD_MORE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.load_more", defaultValue: "Load More"),
+                                                           "HISTORY_SCRIPT": script
+                                                       ])
     }
     
     func start(urlSchemeTask: WKURLSchemeTask, url: URL) {
         let htmlToServe = generateHistoryHTML()
         
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserHistoryViewHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserHistoryViewHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.history.itermbrowserhistoryviewhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "Error shown when the browser history page cannot be encoded.")]))
             return
         }
         

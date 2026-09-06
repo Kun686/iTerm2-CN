@@ -179,11 +179,26 @@
 
 - (void)reallyReportError:(NSString *)error file:(NSString *)file {
     NSString *message =
-    [NSString stringWithFormat:@"There was a problem with one of your Dynamic Profiles:\n\n%@", error];
+    [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermdynamicprofilemanager.profile_error",
+                                                                 nil,
+                                                                 NSBundle.mainBundle,
+                                                                 @"There was a problem with one of your Dynamic Profiles:\n\n%@",
+                                                                 @"Introduces an error reported by a dynamic profile."),
+     error];
     if (_pendingErrors > 1) {
         const NSInteger count = _pendingErrors - 1;
-        message = [message stringByAppendingFormat:@"\n\n%@ additional error%@ may be seen in the log.",
-                   @(count), count == 1 ? @"" : @"s"];
+        NSString *format = count == 1
+            ? NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermdynamicprofilemanager.one_additional_error",
+                                                nil,
+                                                NSBundle.mainBundle,
+                                                @"\n\n%@ additional error may be seen in the log.",
+                                                @"One additional dynamic-profile error was logged.")
+            : NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermdynamicprofilemanager.additional_errors",
+                                                nil,
+                                                NSBundle.mainBundle,
+                                                @"\n\n%@ additional errors may be seen in the log.",
+                                                @"Multiple additional dynamic-profile errors were logged.");
+        message = [message stringByAppendingFormat:format, @(count)];
     }
     _pendingErrors = 0;
     iTermAlertAccessoryButtonUnfucker *container = nil;
@@ -191,7 +206,7 @@
         NSButton *button = [[NSButton alloc] init];
         button.buttonType = NSButtonTypeMomentaryPushIn;
         button.bezelStyle = NSBezelStyleRounded;
-        button.title = @"Reveal in Finder";
+        button.title = NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermdynamicprofilemanager.reveal_in_finder.cc849385", nil, NSBundle.mainBundle, @"Reveal in Finder", @"User-facing text in iTermDynamicProfileManager (reallyReportError:file:).");
         [button setAction:@selector(reveal:)];
         [button setTarget:self];
         [button setIdentifier:file];
@@ -202,12 +217,12 @@
     // "View Log" is a one-time navigation action and shouldn't be remembered.
     iTermWarning *warning = [[iTermWarning alloc] init];
     warning.title = message;
-    warning.actionLabels = @[ @"OK", @"View Log" ];
+    warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermdynamicprofilemanager.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermDynamicProfileManager (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermdynamicprofilemanager.view_log.a76646e2", nil, NSBundle.mainBundle, @"View Log", @"User-facing action label in iTermDynamicProfileManager (actionLabels).") ];
     warning.accessory = container;
     warning.identifier = @"NoSyncDynamicProfilesWarning";
     warning.warningType = kiTermWarningTypeTemporarilySilenceable;
-    warning.heading = @"Dynamic Profiles Error";
-    warning.doNotRememberLabels = @[ @"View Log" ];
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermdynamicprofilemanager.dynamic_profiles_error.5aba939f", nil, NSBundle.mainBundle, @"Dynamic Profiles Error", @"User-facing text in iTermDynamicProfileManager (heading).");
+    warning.doNotRememberLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermdynamicprofilemanager.view_log.a76646e2", nil, NSBundle.mainBundle, @"View Log", @"User-facing action label in iTermDynamicProfileManager (doNotRememberLabels).") ];
     const iTermWarningSelection selection = [warning runModal];
     if (selection == 1) {
         [[iTermScriptConsole sharedInstance] revealTailOfHistoryEntry:[iTermScriptHistoryEntry dynamicProfilesEntry]];

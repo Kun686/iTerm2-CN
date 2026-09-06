@@ -45,11 +45,11 @@ final class WorkgroupNavigationToolbarItem: SessionToolbarGenericView {
         forwardButton = Self.makeButton(symbol: .chevronRight)
         reloadButton = Self.makeButton(symbol: .arrowClockwise)
         progressLabel = Self.makeProgressLabel()
-        backButton.toolTip = Self.tooltip(action: "Previous file",
+        backButton.toolTip = Self.tooltip(action: String(localized: "ui.swift.workgroups.workgroupnavigationtoolbaritem.previous_file.1db0d01f", defaultValue: "Previous file", bundle: .main, comment: "User-facing text in WorkgroupNavigationToolbarItem."),
                                           shortcut: shortcuts.back)
-        forwardButton.toolTip = Self.tooltip(action: "Next file",
+        forwardButton.toolTip = Self.tooltip(action: String(localized: "ui.swift.workgroups.workgroupnavigationtoolbaritem.next_file.96a7485b", defaultValue: "Next file", bundle: .main, comment: "User-facing text in WorkgroupNavigationToolbarItem."),
                                              shortcut: shortcuts.forward)
-        reloadButton.toolTip = Self.tooltip(action: "Reload",
+        reloadButton.toolTip = Self.tooltip(action: String(localized: "ui.swift.workgroups.workgroupnavigationtoolbaritem.reload.bdc090ec", defaultValue: "Reload", bundle: .main, comment: "User-facing text in WorkgroupNavigationToolbarItem."),
                                             shortcut: shortcuts.reload)
 
         // Plain NSView container, no auto layout — terminal-window
@@ -219,7 +219,7 @@ final class WorkgroupReloadToolbarItem: SessionToolbarGenericView {
          shortcut: WorkgroupToolbarShortcut? = nil) {
         reloadButton = WorkgroupNavigationToolbarItem.makeReloadButton()
         reloadButton.toolTip = WorkgroupNavigationToolbarItem.tooltip(
-            action: "Reload", shortcut: shortcut)
+            action: String(localized: "ui.swift.workgroups.workgroupnavigationtoolbaritem.reload.bdc090ec", defaultValue: "Reload", bundle: .main, comment: "User-facing text in WorkgroupNavigationToolbarItem."), shortcut: shortcut)
         let container = NSView(frame: .zero)
         container.addSubview(reloadButton)
         super.init(identifier: identifier, priority: priority, view: container)

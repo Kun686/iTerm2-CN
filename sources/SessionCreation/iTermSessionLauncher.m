@@ -35,12 +35,12 @@
                                  ligaturesEnabled:[iTermProfilePreferences boolForKey:KEY_ASCII_LIGATURES
                                                                             inProfile:profile]];
     if (!font) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Couldn’t find the specified font “%@” or the fallback standard fixed-pitch font, Menlo. Please ensure at least one of these is installed.", profile[KEY_NORMAL_FONT]]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.sessioncreation.itermsessionlauncher.couldn_t_find_the_specified_font_or_the.a12e7633", nil, NSBundle.mainBundle, @"Couldn’t find the specified font “%@” or the fallback standard fixed-pitch font, Menlo. Please ensure at least one of these is installed.", @"User-facing text in iTermSessionLauncher (showWarningWithTitle)."), profile[KEY_NORMAL_FONT]]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.sessioncreation.itermsessionlauncher.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSessionLauncher (actions).") ]
                                  accessory:nil
                                 identifier:nil
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Invalid Profile"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.sessioncreation.itermsessionlauncher.invalid_profile.cb2a119d", nil, NSBundle.mainBundle, @"Invalid Profile", @"User-facing text in iTermSessionLauncher (heading).")
                                     window:nil];
         return NO;
     }
@@ -584,14 +584,14 @@
     if (username) {
         NSString *part = [self validatedAndShellEscapedUsername:username];
         if (!part) {
-            NSString *message = [NSString stringWithFormat:@"The SSH user name “%@” contained a disallowed character. The set of allowed characters is limited for security reasons. You can modify it in Settings > Advanced > Valid characters in SSH user names.",
+            NSString *message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.sessioncreation.itermsessionlauncher.the_ssh_user_name_contained_a_disallowed_character_the_set_of_allowed_ch.47674fb7", nil, NSBundle.mainBundle, @"The SSH user name “%@” contained a disallowed character. The set of allowed characters is limited for security reasons. You can modify it in Settings > Advanced > Valid characters in SSH user names.", @"User-facing text in iTermSessionLauncher (indirect UI)."),
                                  username];
             [iTermWarning showWarningWithTitle:message
-                                       actions:@[ @"OK" ]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.sessioncreation.itermsessionlauncher.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSessionLauncher (actions).") ]
                                      accessory:nil
                                     identifier:nil
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Illegal Username"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.sessioncreation.itermsessionlauncher.illegal_username.067c71af", nil, NSBundle.mainBundle, @"Illegal Username", @"User-facing text in iTermSessionLauncher (heading).")
                                         window:nil];
             RLog(@"bad username");
             return nil;

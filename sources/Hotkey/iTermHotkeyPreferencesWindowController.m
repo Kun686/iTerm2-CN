@@ -45,7 +45,7 @@
 
 - (void)awakeFromNib {
     _hotKey.leaderAllowed = NO;
-    _hotKey.purpose = @"as a hotkey";
+    _hotKey.purpose = NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeypreferenceswindowcontroller.as_a_hotkey.44b9579e", nil, NSBundle.mainBundle, @"as a hotkey", @"User-facing text in iTermHotkeyPreferencesWindowController (purpose).");
     if (_pendingExplanation) {
         _explanation.stringValue = _pendingExplanation;
         self.pendingExplanation = nil;

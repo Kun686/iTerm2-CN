@@ -94,7 +94,7 @@ static NSString *iTermPasteViewControllerNibName(BOOL mini) {
 
 - (void)awakeFromNib {
     if (pasteContext_.isUpload) {
-        _label.stringValue = @"Sending…";
+        _label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.pasting.pasteviewcontroller.sending.b8ed5279", nil, NSBundle.mainBundle, @"Sending…", @"User-facing text in PasteViewController (awakeFromNib).");
     }
     [self createKeystrokePassthroughButton];
 }
@@ -136,12 +136,12 @@ static NSString *iTermPasteViewControllerNibName(BOOL mini) {
     button.imageScaling = NSImageScaleProportionallyDown;
     [button setButtonType:NSButtonTypePushOnPushOff];
     button.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolKeyboard)
-                             accessibilityDescription:@"Send keystrokes to terminal"];
+                             accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.pasting.pasteviewcontroller.send_keystrokes_to_terminal.b5a35752", nil, NSBundle.mainBundle, @"Send keystrokes to terminal", @"Accessibility description for the keystroke passthrough button.")];
     button.target = self;
     button.action = @selector(toggleKeystrokePassthrough:);
     button.toolTip =
-        @"Type directly to the terminal (for example to answer a password prompt) "
-        @"instead of queueing your keystrokes until the paste finishes.";
+        NSLocalizedStringWithDefaultValue(@"ui.pasting.pasteviewcontroller.type_directly_to_the_terminal_for_example_to.7dcc2b6f", nil, NSBundle.mainBundle, @"Type directly to the terminal (for example to answer a password prompt) "
+        @"instead of queueing your keystrokes until the paste finishes.", @"User-facing text in PasteViewController (createKeystrokePassthroughButton).");
     button.hidden = YES;
     [self.view addSubview:button];
     _keystrokePassthroughButton = button;
@@ -215,7 +215,7 @@ static NSString *iTermPasteViewControllerNibName(BOOL mini) {
     }
     if (!_queuedHintView) {
         _queuedHintView = [[iTermPasteQueuedHintView alloc] initWithFrame:NSZeroRect];
-        _queuedHintView.message = @"Typing is queued while pasting. Click the keyboard to toggle queueing.";
+        _queuedHintView.message = NSLocalizedStringWithDefaultValue(@"ui.pasting.pasteviewcontroller.typing_is_queued_while_pasting_click_the_keyboard.b4804b65", nil, NSBundle.mainBundle, @"Typing is queued while pasting. Click the keyboard to toggle queueing.", @"User-facing paste queue hint.");
     }
     const NSRect buttonFrame = [_keystrokePassthroughButton convertRect:_keystrokePassthroughButton.bounds
                                                                  toView:content];

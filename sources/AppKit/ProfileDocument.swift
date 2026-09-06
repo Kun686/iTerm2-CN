@@ -40,12 +40,12 @@ class ProfileDocument: NSObject {
                 newName != name,
                 let profileWithName = ProfileModel.sharedInstance().bookmark(withName: name) {
                 let selection = iTermWarning.show(
-                    withTitle: "Would you like to open the profile formerly named \(name) that is now called \(newName) (which this shortcut refers to), or the profile that currently has the name \(name)?",
-                    actions: [ "Open \(name)", "Open \(newName)", "Cancel"],
+                    withTitle: String(localized: "ui.swift.appkit.profiledocument.would_you_like_to_open_the_profile_formerly.e11a5b90", defaultValue: "Would you like to open the profile formerly named \(name) that is now called \(newName) (which this shortcut refers to), or the profile that currently has the name \(name)?", bundle: .main, comment: "User-facing text in ProfileDocument."),
+                    actions: [ String(localized: "ui.swift.appkit.profiledocument.open_0.e71b4013", defaultValue: "Open \(name)", bundle: .main, comment: "User-facing text in ProfileDocument."), String(localized: "ui.swift.appkit.profiledocument.open_0.e71b4013", defaultValue: "Open \(newName)", bundle: .main, comment: "User-facing text in ProfileDocument."), String(localized: "ui.swift.appkit.profiledocument.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ProfileDocument.")],
                     accessory: nil,
                     identifier: "NoSyncOpenRenamedProfile",
                     silenceable: .kiTermWarningTypePermanentlySilenceable,
-                    heading: "Profile Renamed",
+                    heading: String(localized: "ui.swift.appkit.profiledocument.profile_renamed.e38163ca", defaultValue: "Profile Renamed", bundle: .main, comment: "User-facing text in ProfileDocument."),
                     window: controller.currentTerminal?.window())
                 switch selection {
                 case .kiTermWarningSelection0:

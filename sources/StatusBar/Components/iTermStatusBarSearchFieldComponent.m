@@ -44,16 +44,16 @@ NSString *iTermStatusBarSearchComponentIsTemporaryKey = @"search: temporary";
 #pragma mark - iTermStatusBarComponent
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Search Tool";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsearchfieldcomponent.search_tool.b81782a8", nil, NSBundle.mainBundle, @"Search Tool", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Search tool to find text in the terminal window.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsearchfieldcomponent.search_tool_to_find_text_in_the_terminal_window.071104a3", nil, NSBundle.mainBundle, @"Search tool to find text in the terminal window.", @"Status bar component description.");
 }
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {
     return @[
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Color"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsearchfieldcomponent.color.6b73191a", nil, NSBundle.mainBundle, @"Color", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
@@ -63,7 +63,7 @@ NSString *iTermStatusBarSearchComponentIsTemporaryKey = @"search: temporary";
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor
                                           textColor:(NSColor *)textColor {
-    return @"🔎 Search";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsearchfieldcomponent.search.f7cba4a8", nil, NSBundle.mainBundle, @"🔎 Search", @"Status bar component preview.");
 }
 
 - (NSView *)statusBarComponentView {

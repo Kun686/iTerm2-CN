@@ -17,11 +17,11 @@
 @implementation iTermHighlightLineTrigger
 
 + (NSString *)title {
-    return @"Highlight Line…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhighlightlinetrigger.highlight_line.4793c0c9", nil, NSBundle.mainBundle, @"Highlight Line…", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Highlight Line with %@ over %@", self.textColor.humanReadableDescription ?: @"(no color)", self.backgroundColor.humanReadableDescription ?: @"(no color)"];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhighlightlinetrigger.highlight_line_with_over.d096425f", nil, NSBundle.mainBundle, @"Highlight Line with %@ over %@", @"Trigger action summary. Preserve both placeholders."), self.textColor.humanReadableDescription ?: NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhighlightlinetrigger.no_color.3627f837", nil, NSBundle.mainBundle, @"(no color)", @"Fallback shown when no text color is selected."), self.backgroundColor.humanReadableDescription ?: NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhighlightlinetrigger.no_color.3627f837", nil, NSBundle.mainBundle, @"(no color)", @"Fallback shown when no background color is selected.")];
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
@@ -174,7 +174,7 @@
 - (NSAttributedString *)paramAttributedString {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
 
-    [result appendAttributedString:[[NSAttributedString alloc] initWithString:@"Text: "]];
+    [result appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhighlightlinetrigger.text.21784f40", nil, NSBundle.mainBundle, @"Text: ", @"User-facing text in iTermHighlightLineTrigger (paramAttributedString).")]];
 
     NSTextAttachment *textColorAttachment = [[NSTextAttachment alloc] init];
     textColorAttachment.image = [self imageForColor:self.textColor];
@@ -184,7 +184,7 @@
     [mutableTextAttachmentString addAttribute:NSBaselineOffsetAttributeName value:@(-2) range:NSMakeRange(0, mutableTextAttachmentString.length)];
     [result appendAttributedString:mutableTextAttachmentString];
 
-    [result appendAttributedString:[[NSAttributedString alloc] initWithString:@" Background: "]];
+    [result appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhighlightlinetrigger.background.effa332c", nil, NSBundle.mainBundle, @" Background: ", @"User-facing text in iTermHighlightLineTrigger (paramAttributedString).")]];
 
     NSTextAttachment *backgroundColorAttachment = [[NSTextAttachment alloc] init];
     backgroundColorAttachment.image = [self imageForColor:self.backgroundColor];

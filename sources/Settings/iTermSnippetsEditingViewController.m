@@ -53,19 +53,19 @@ static NSString *const iTermSnippetsEditingPasteboardType = @"com.googlecode.ite
     [super awakeFromNib];
     NSMenu *menu = [[NSMenu alloc] init];
     menu.delegate = self;
-    [menu addItem:[[NSMenuItem alloc] initWithTitle:@"Duplicate"
+    [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.duplicate.02cdaabf", nil, NSBundle.mainBundle, @"Duplicate", @"User-facing text in iTermSnippetsEditingViewController (awakeFromNib).")
                                              action:@selector(duplicateSnippets:)
                                       keyEquivalent:@""]];
-    [menu addItem:[[NSMenuItem alloc] initWithTitle:@"Delete"
+    [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.delete.e2d0a549", nil, NSBundle.mainBundle, @"Delete", @"User-facing text in iTermSnippetsEditingViewController (awakeFromNib).")
                                              action:@selector(deleteSnippets:)
                                       keyEquivalent:@""]];
-    [menu addItem:[[NSMenuItem alloc] initWithTitle:@"Add Above"
+    [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.add_above.2216cae2", nil, NSBundle.mainBundle, @"Add Above", @"User-facing text in iTermSnippetsEditingViewController (awakeFromNib).")
                                              action:@selector(addSnippetAbove:)
                                       keyEquivalent:@""]];
-    [menu addItem:[[NSMenuItem alloc] initWithTitle:@"Add Below"
+    [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.add_below.da0bb1ba", nil, NSBundle.mainBundle, @"Add Below", @"User-facing text in iTermSnippetsEditingViewController (awakeFromNib).")
                                              action:@selector(addSnippetBelow:)
                                       keyEquivalent:@""]];
-    [menu addItem:[[NSMenuItem alloc] initWithTitle:@"Edit"
+    [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.edit.464c4ffd", nil, NSBundle.mainBundle, @"Edit", @"User-facing text in iTermSnippetsEditingViewController (awakeFromNib).")
                                              action:@selector(editClickedSnippet:)
                                       keyEquivalent:@""]];
     _tableView.menu = menu;
@@ -435,24 +435,24 @@ static NSString *const iTermSnippetsEditingPasteboardType = @"com.googlecode.ite
                                                   encoding:NSUTF8StringEncoding
                                                      error:&error];
     if (!content || error) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"While loading %@: %@", url.path, error.localizedDescription]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.while_loading.6d2b4144", nil, NSBundle.mainBundle, @"While loading %@: %@", @"User-facing text in iTermSnippetsEditingViewController (showWarningWithTitle)."), url.path, error.localizedDescription]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSnippetsEditingViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncImportSnippetsFailed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:[NSString stringWithFormat:@"Import Failed"]
+                                   heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in iTermSnippetsEditingViewController (heading).")]
                                     window:self.view.window];
         return;
     }
 
     id root = [NSJSONSerialization it_objectForJsonString:content error:&error];
     if (!root) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"While parsing %@: %@", url.path, error.localizedDescription]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.while_parsing.e18bb6fb", nil, NSBundle.mainBundle, @"While parsing %@: %@", @"User-facing text in iTermSnippetsEditingViewController (showWarningWithTitle)."), url.path, error.localizedDescription]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSnippetsEditingViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncImportSnippetsFailed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:[NSString stringWithFormat:@"Import Failed"]
+                                   heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in iTermSnippetsEditingViewController (heading).")]
                                     window:self.view.window];
         return;
     }
@@ -480,12 +480,12 @@ static NSString *const iTermSnippetsEditingPasteboardType = @"com.googlecode.ite
 }
 
 - (void)showEncodingErrorForURL:(NSURL *)url {
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Malformed file at %@", url.path]
-                               actions:@[ @"OK" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.malformed_file_at.7dee9e42", nil, NSBundle.mainBundle, @"Malformed file at %@", @"User-facing text in iTermSnippetsEditingViewController (showWarningWithTitle)."), url.path]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSnippetsEditingViewController (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncSnippetEncodingError"
                            silenceable:kiTermWarningTypePersistent
-                               heading:[NSString stringWithFormat:@"Import Failed"]
+                               heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in iTermSnippetsEditingViewController (heading).")]
                                 window:self.view.window];
 }
 
@@ -501,13 +501,13 @@ static NSString *const iTermSnippetsEditingPasteboardType = @"com.googlecode.ite
     NSString *json = [NSJSONSerialization it_jsonStringForObject:array];
     [json writeToSaveItem:item completionHandler:^(NSError *error) {
         if (error) {
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Error saving to %@: %@",
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.error_saving_to.9c1965ed", nil, NSBundle.mainBundle, @"Error saving to %@: %@", @"User-facing text in iTermSnippetsEditingViewController (showWarningWithTitle)."),
                                                 item.displayName, error.localizedDescription]
-                                       actions:@[ @"OK" ]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSnippetsEditingViewController (actions).") ]
                                      accessory:nil
                                     identifier:@"NoSyncSnippetWritingError"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:[NSString stringWithFormat:@"Export Failed"]
+                                       heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsnippetseditingviewcontroller.export_failed.9a5e4d95", nil, NSBundle.mainBundle, @"Export Failed", @"User-facing text in iTermSnippetsEditingViewController (heading).")]
                                         window:self.view.window];
         } else {
             [item revealInFinderIfLocal];

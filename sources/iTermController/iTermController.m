@@ -31,6 +31,7 @@
 #import "FutureMethods.h"
 #import "ITAddressBookMgr.h"
 #import "NSArray+iTerm.h"
+#import "NSBundle+iTerm.h"
 #import "NSFileManager+iTerm.h"
 #import "NSStringITerm.h"
 #import "NSURL+iTerm.h"
@@ -81,7 +82,6 @@ NSString *const iTermSnippetsTagsDidChange = @"iTermSnippetsTagsDidChange";
 @interface NSApplication (Undocumented)
 - (void)_cycleWindowsReversed:(BOOL)back;
 @end
-
 extern NSString *const iTermProcessTypeDidChangeNotification;
 
 // Pref keys
@@ -858,7 +858,7 @@ replaceInitialDirectoryForSessionWithGUID:(NSString *)guid
     }
     if ([[ProfileModel sharedInstance] numberOfBookmarks] > MAX_MENU_ITEMS) {
         int overflow = [[ProfileModel sharedInstance] numberOfBookmarks] - MAX_MENU_ITEMS;
-        NSMenuItem* overflowItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"[%d profiles not shown]", overflow]
+        NSMenuItem* overflowItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermcontroller.itermcontroller.d_profiles_not_shown.7a33ac4a", nil, NSBundle.mainBundle, @"[%d profiles not shown]", @"User-facing text in iTermController (initWithTitle)."), overflow]
                                                            action:nil
                                                     keyEquivalent:@""];
         [subMenu addItem:overflowItem];
@@ -869,7 +869,7 @@ replaceInitialDirectoryForSessionWithGUID:(NSString *)guid
 
     if (openAllSelector && count > 1) {
         [subMenu addItem:[NSMenuItem separatorItem]];
-        aMenuItem = [[NSMenuItem alloc] initWithTitle:@"Open All"
+        aMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.itermcontroller.itermcontroller.open_all.d2043613", nil, NSBundle.mainBundle, @"Open All", @"User-facing text in iTermController (_addBookmarksForTag:toMenu:target:withShortcuts:selector:alternateSelector:openAllSelector:).")
                                                action:openAllSelector
                                         keyEquivalent:@""];
         if (@available(macOS 26, *)) {
@@ -890,7 +890,7 @@ replaceInitialDirectoryForSessionWithGUID:(NSString *)guid
         [subMenu addItem:aMenuItem];
 
         // Add alternate -------------------------------------------------------
-        aMenuItem = [[NSMenuItem alloc] initWithTitle:@"Open All in New Window"
+        aMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.itermcontroller.itermcontroller.open_all_in_new_window.8127e3e0", nil, NSBundle.mainBundle, @"Open All in New Window", @"User-facing text in iTermController (_addBookmarksForTag:toMenu:target:withShortcuts:selector:alternateSelector:openAllSelector:).")
                                                action:openAllSelector
                                         keyEquivalent:@""];
         modifierMask = NSEventModifierFlagCommand | NSEventModifierFlagControl;
@@ -926,10 +926,10 @@ replaceInitialDirectoryForSessionWithGUID:(NSString *)guid
 }
 
 - (BOOL)shouldOpenManyProfiles:(int)count {
-    NSString *theTitle = [NSString stringWithFormat:@"You are about to open %d profiles.", count];
+    NSString *theTitle = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermcontroller.itermcontroller.you_are_about_to_open_d_profiles.e85a340f", nil, NSBundle.mainBundle, @"You are about to open %d profiles.", @"User-facing text in iTermController (indirect UI)."), count];
     iTermWarningSelection selection =
         [iTermWarning showWarningWithTitle:theTitle
-                                   actions:@[ @"OK", @"Cancel" ]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.itermcontroller.itermcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.itermcontroller.itermcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermController (actions).") ]
                                 identifier:@"AboutToOpenManyProfiles"
                                silenceable:kiTermWarningTypePermanentlySilenceable
                                     window:nil];
@@ -1349,6 +1349,10 @@ replaceInitialDirectoryForSessionWithGUID:(NSString *)guid
 }
 
 - (void)refreshSoftwareUpdateUserDefaults {
+    if ([NSBundle it_isCNCommunityBuild]) {
+        [NSBundle it_applyCNUpdatePolicyToUserDefaults:[iTermUserDefaults userDefaults]];
+        return;
+    }
     BOOL checkForTestReleases = [iTermPreferences boolForKey:kPreferenceKeyCheckForTestReleases];
     NSString *appCast = checkForTestReleases ?
         [[NSBundle mainBundle] objectForInfoDictionaryKey:@"SUFeedURLForTesting"] :
@@ -2247,4 +2251,3 @@ replaceInitialDirectoryForSessionWithGUID:(NSString *)guid
 }
 
 @end
-

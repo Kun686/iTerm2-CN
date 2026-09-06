@@ -7,8 +7,14 @@
       "localizations": {
         "en": {
           "stringUnit": {
-            "state": "new",
-            "value": "iTerm2"
+            "state": "translated",
+            "value": "iTerm2-CN"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2-CN"
           }
         }
       }
@@ -21,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "By George Nachman and Contributors"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由 George Nachman 及贡献者开发"
           }
         }
       }

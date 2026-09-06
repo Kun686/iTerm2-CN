@@ -181,7 +181,7 @@ const CGFloat kDefaultTagsWidth = 80;
 
         [tableView_ setDoubleAction:@selector(onDoubleClick:)];
 
-        tableColumn_.title = @"Profile Name";
+        tableColumn_.title = NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.profilelistview.profile_name.a423b477", nil, NSBundle.mainBundle, @"Profile Name", @"User-facing text in ProfileListView (initWithFrame:model:font:profileTypes:).");
 
         [tableView_ sizeLastColumnToFit];
 
@@ -395,11 +395,11 @@ const CGFloat kDefaultTagsWidth = 80;
 
 - (void)_addTags:(NSArray*)tags toSearchField:(NSSearchField*)searchField
 {
-    NSMenu *cellMenu = [[[NSMenu alloc] initWithTitle:@"Search Menu"]
+    NSMenu *cellMenu = [[[NSMenu alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.profilelistview.search_menu.b2490918", nil, NSBundle.mainBundle, @"Search Menu", @"User-facing text in ProfileListView (_addTags:toSearchField:).")]
                         autorelease];
     NSMenuItem *item;
 
-    item = [[[NSMenuItem alloc] initWithTitle:@"Tags"
+    item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.profilelistview.tags.1331275b", nil, NSBundle.mainBundle, @"Tags", @"User-facing text in ProfileListView (_addTags:toSearchField:).")
                                        action:nil
                                 keyEquivalent:@""] autorelease];
     [item setTarget:self];
@@ -417,7 +417,7 @@ const CGFloat kDefaultTagsWidth = 80;
     }
 
     [cellMenu insertItem:[NSMenuItem separatorItem] atIndex:cellMenu.numberOfItems];
-    [cellMenu addItemWithTitle:@"Search Syntax Help" action:@selector(openHowToSearchHelp:) keyEquivalent:@""];
+    [cellMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.profilelistview.search_syntax_help.74514d89", nil, NSBundle.mainBundle, @"Search Syntax Help", @"User-facing text in ProfileListView (_addTags:toSearchField:).") action:@selector(openHowToSearchHelp:) keyEquivalent:@""];
 
     id searchCell = [searchField cell];
     [searchCell setSearchMenuTemplate:cellMenu];
@@ -1017,8 +1017,8 @@ const CGFloat kDefaultTagsWidth = 80;
 
     [tableColumn_ setWidth:250];
 
-    shortcutColumn_.title = @"Shortcut";
-    commandColumn_.title = @"Command";
+    shortcutColumn_.title = NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.profilelistview.shortcut.5753ea37", nil, NSBundle.mainBundle, @"Shortcut", @"User-facing text in ProfileListView (multiColumns).");
+    commandColumn_.title = NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.profilelistview.command.71316697", nil, NSBundle.mainBundle, @"Command", @"User-facing text in ProfileListView (multiColumns).");
     [tableView_ sizeLastColumnToFit];
 }
 

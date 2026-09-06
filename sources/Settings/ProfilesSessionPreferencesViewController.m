@@ -259,10 +259,8 @@ static NSString *const ProfilesSessionPreferencesViewControllerPhonyShortLivedSe
             // Host *
             //   ServerAliveInterval 60
             iTermWarningSelection selection =
-                [iTermWarning showWarningWithTitle:@"You probably don’t want to turn this on. "
-                                                   @"It's not suitable for keeping ssh sessions alive, "
-                                                   @"even with a code of “0”. Are you sure you want this?"
-                                           actions:@[ @"Enable Send Code", @"Cancel" ]
+                [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilessessionpreferencesviewcontroller.you_probably_don_t_want_to_turn_this.992b6258", nil, NSBundle.mainBundle, @"You probably don’t want to turn this on. It's not suitable for keeping ssh sessions alive, even with a code of “0”. Are you sure you want this?", @"User-facing warning message.")
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilessessionpreferencesviewcontroller.enable_send_code.08be4b87", nil, NSBundle.mainBundle, @"Enable Send Code", @"User-facing action label in ProfilesSessionPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profilessessionpreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in ProfilesSessionPreferencesViewController (actions).") ]
                                         identifier:kWarnAboutSendCodeWhenIdle
                                        silenceable:kiTermWarningTypePermanentlySilenceable
                                             window:weakSelf.view.window];
@@ -470,17 +468,17 @@ static NSString *const ProfilesSessionPreferencesViewControllerPhonyShortLivedSe
     const NSInteger requesting = coordinator.numberOfSessionsRequestingPreventSleep;
     NSString *text;
     if (requesting == 0) {
-        text = @"No sessions are currently preventing sleep.";
+        text = NSLocalizedStringWithDefaultValue(@"ui.settings.profilessessionpreferencesviewcontroller.no_sessions_are_currently_preventing_sleep.5aee7dc8", nil, NSBundle.mainBundle, @"No sessions are currently preventing sleep.", @"User-facing text in ProfilesSessionPreferencesViewController (updateSleepStatus).");
     } else if (holding > 0) {
         // Gate is open (on power, or the battery override is enabled): holding == requesting.
         text = (holding == 1)
-            ? @"1 session is currently preventing sleep."
-            : [NSString stringWithFormat:@"%@ sessions are currently preventing sleep.", @(holding)];
+            ? NSLocalizedStringWithDefaultValue(@"ui.settings.profilessessionpreferencesviewcontroller.one_session_is_currently_preventing_sleep.e7a2be66", nil, NSBundle.mainBundle, @"1 session is currently preventing sleep.", @"User-facing sleep prevention status.")
+            : [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilessessionpreferencesviewcontroller.sessions_are_currently_preventing_sleep.e2db1688", nil, NSBundle.mainBundle, @"%@ sessions are currently preventing sleep.", @"User-facing sleep prevention status."), @(holding)];
     } else {
         // Sessions want to prevent sleep but are gated off on battery.
         text = (requesting == 1)
-            ? @"1 session would prevent sleep, but it is disabled while on battery."
-            : [NSString stringWithFormat:@"%@ sessions would prevent sleep, but it is disabled while on battery.", @(requesting)];
+            ? NSLocalizedStringWithDefaultValue(@"ui.settings.profilessessionpreferencesviewcontroller.one_session_would_prevent_sleep_but_it_is_disabled.fe903ad8", nil, NSBundle.mainBundle, @"1 session would prevent sleep, but it is disabled while on battery.", @"User-facing text in ProfilesSessionPreferencesViewController (updateSleepStatus).")
+            : [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilessessionpreferencesviewcontroller.sessions_would_prevent_sleep_but_it_is_disabled_while.2ddc9d3d", nil, NSBundle.mainBundle, @"%@ sessions would prevent sleep, but it is disabled while on battery.", @"User-facing sleep prevention status."), @(requesting)];
     }
     _sleepStatus.stringValue = text;
 }

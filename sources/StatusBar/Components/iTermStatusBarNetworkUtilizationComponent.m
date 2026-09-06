@@ -44,27 +44,27 @@ NS_ASSUME_NONNULL_BEGIN
     NSArray<iTermStatusBarComponentKnob *> *knobs = [super statusBarComponentKnobs];
 
     iTermStatusBarComponentKnob *downloadColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Download Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarnetworkutilizationcomponent.download_color.35c70452", nil, NSBundle.mainBundle, @"Download Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
                                                            key:iTermStatusBarNetworkUtilizationComponentKnobKeyDownloadColor];
 
     iTermStatusBarComponentKnob *downloadTextColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Download Text Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarnetworkutilizationcomponent.download_text_color.c8cbc7c9", nil, NSBundle.mainBundle, @"Download Text Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
                                                            key:iTermStatusBarNetworkUtilizationComponentKnobKeyDownloadTextColor];
     iTermStatusBarComponentKnob *uploadColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Upload Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarnetworkutilizationcomponent.upload_color.3f6f9415", nil, NSBundle.mainBundle, @"Upload Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
                                                            key:iTermStatusBarNetworkUtilizationComponentKnobKeyUploadColor];
 
     iTermStatusBarComponentKnob *uploadTextColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Upload Text Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarnetworkutilizationcomponent.upload_text_color.e5655d75", nil, NSBundle.mainBundle, @"Upload Text Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
@@ -78,11 +78,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Network Throughput";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarnetworkutilizationcomponent.network_throughput.68b6bac3", nil, NSBundle.mainBundle, @"Network Throughput", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Shows current network throughput.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarnetworkutilizationcomponent.shows_current_network_throughput.773df2e6", nil, NSBundle.mainBundle, @"Shows current network throughput.", @"Status bar component description.");
 }
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor

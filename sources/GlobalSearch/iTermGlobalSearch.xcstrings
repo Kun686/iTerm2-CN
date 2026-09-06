@@ -2,12 +2,19 @@
   "sourceLanguage": "en",
   "strings": {
     "BPF-Ns-hhl.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"HEADER CELL\"; ObjectID = \"BPF-Ns-hhl\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "HEADER CELL"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "HEADER CELL"
           }
         }
@@ -22,16 +29,29 @@
             "state": "new",
             "value": "Find Globally"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全局查找"
+          }
         }
       }
     },
     "IUo-u2-OSE.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"IUo-u2-OSE\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -46,6 +66,12 @@
             "state": "new",
             "value": "Regex — Case Insensitive"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正则表达式 — 不区分大小写"
+          }
         }
       }
     },
@@ -57,6 +83,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Find"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找"
           }
         }
       }
@@ -70,6 +102,12 @@
             "state": "new",
             "value": "Substring — Case Insensitive"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "子字符串 — 不区分大小写"
+          }
         }
       }
     },
@@ -81,6 +119,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Substring — Case Sensitive"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "子字符串 — 区分大小写"
           }
         }
       }
@@ -94,6 +138,12 @@
             "state": "new",
             "value": "Substring — Automatic"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "子字符串 — 自动"
+          }
         }
       }
     },
@@ -106,16 +156,29 @@
             "state": "new",
             "value": "Regex — Case Sensitive"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正则表达式 — 区分大小写"
+          }
         }
       }
     },
     "wfz-nT-tKQ.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"wfz-nT-tKQ\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Table View Cell"
           }
         }

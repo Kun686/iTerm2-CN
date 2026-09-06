@@ -31,7 +31,10 @@ class iTermBrowserPasswordManagerHandler {
     var javascript: String {
         return iTermBrowserTemplateLoader.loadTemplate(named: "password-button",
                                                        type: "js",
-                                                       substitutions: [ "SECRET": secret ])
+                                                       substitutions: [
+                                                        "SECRET": secret,
+                                                        "OPEN_PASSWORD_MANAGER_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.password_manager.open", defaultValue: "Open Password Manager")
+                                                       ])
 
     }
 

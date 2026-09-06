@@ -215,8 +215,8 @@ NSString *const iTermBroadcastDomainsDidChangeNotification = @"iTermBroadcastDom
             DLog(@"off -> !off");
             NSWindow *window = [self.delegate broadcastInputHelperWindowForWarnings:self];
             DLog(@"Warn…");
-            if ([iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Keyboard input will be sent to %@.", [self formatDestinationsForMode:mode]]
-                                           actions:@[ @"OK", @"Cancel" ]
+            if ([iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.keyboard_input_will_be_sent_to.d2a8e136", nil, NSBundle.mainBundle, @"Keyboard input will be sent to %@.", @"User-facing text in iTermBroadcastInputHelper (showWarningWithTitle)."), [self formatDestinationsForMode:mode]]
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermBroadcastInputHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermBroadcastInputHelper (actions).") ]
                                         identifier:@"NoSyncSuppressBroadcastInputWarning"
                                        silenceable:kiTermWarningTypePermanentlySilenceable
                                             window:window] == kiTermWarningSelection1) {
@@ -243,27 +243,27 @@ NSString *const iTermBroadcastDomainsDidChangeNotification = @"iTermBroadcastDom
 - (NSString *)formatDestinationsForMode:(BroadcastMode)mode {
     switch (mode) {
         case BROADCAST_OFF:
-            return @"no sessions";
+            return NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.no_sessions.2e94a473", nil, NSBundle.mainBundle, @"no sessions", @"User-facing phrase fragment in iTermBroadcastInputHelper.");
         case BROADCAST_TO_ALL_TABS: {
             const NSInteger count = [[self allSessions] count];
             if (count < 2) {
-                return @"all panes in all tabs in this window";
+                return NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.all_panes_in_all_tabs_in_this_window.920207fc", nil, NSBundle.mainBundle, @"all panes in all tabs in this window", @"User-facing phrase fragment in iTermBroadcastInputHelper.");
             }
-            return [NSString stringWithFormat:@"%@ panes across all tabs in this window", @(count)];
+            return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.panes_across_all_tabs_in_this_window.e3619662", nil, NSBundle.mainBundle, @"%@ panes across all tabs in this window", @"User-facing phrase fragment in iTermBroadcastInputHelper."), @(count)];
         }
             break;
         case BROADCAST_TO_ALL_PANES: {
             // Just this tab
             const NSInteger count = [[self.delegate broadcastInputHelperSessionsInCurrentTab:self includeExited:NO] count];
             if (count < 2) {
-                return @"all panes in the current tab";
+                return NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.all_panes_in_the_current_tab.4f073e40", nil, NSBundle.mainBundle, @"all panes in the current tab", @"User-facing phrase fragment in iTermBroadcastInputHelper.");
             } else {
-                return [NSString stringWithFormat:@"%@ panes in the current tab", @(count)];
+                return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.panes_in_the_current_tab.849a0087", nil, NSBundle.mainBundle, @"%@ panes in the current tab", @"User-facing phrase fragment in iTermBroadcastInputHelper."), @(count)];
             }
         }
             break;
         case BROADCAST_CUSTOM:
-            return @"multiple sessions";
+            return NSLocalizedStringWithDefaultValue(@"ui.inputbroadcasting.itermbroadcastinputhelper.multiple_sessions.51aece53", nil, NSBundle.mainBundle, @"multiple sessions", @"User-facing phrase fragment in iTermBroadcastInputHelper.");
     }
 }
 

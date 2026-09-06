@@ -46,7 +46,7 @@ static NSString *const iTermStatusBarActionKey = @"action";
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {
     iTermStatusBarComponentKnob *actionKnob =
-    [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Action"
+    [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.action.64cff131", nil, NSBundle.mainBundle, @"Action", @"Status bar component setting label.")
                                                       type:iTermStatusBarComponentKnobTypeAction
                                                placeholder:nil
                                               defaultValue:nil
@@ -84,7 +84,7 @@ static NSString *const iTermStatusBarActionKey = @"action";
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Custom Action";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.custom_action.a06fc9bb", nil, NSBundle.mainBundle, @"Custom Action", @"Status bar component name.");
 }
 
 - (BOOL)statusBarComponentCanStretch {
@@ -92,7 +92,7 @@ static NSString *const iTermStatusBarActionKey = @"action";
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Adds a button that performs a user-configurable action, similar to a key binding.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.adds_a_button_that_performs_a_user_configurable_action_similar_to_a_key_binding.5ef98261", nil, NSBundle.mainBundle, @"Adds a button that performs a user-configurable action, similar to a key binding.", @"Status bar component description.");
 }
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor
@@ -101,7 +101,7 @@ static NSString *const iTermStatusBarActionKey = @"action";
     if (dict.count) {
         return self.action.title;
     } else {
-        return @"Custom Action";
+        return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.custom_action.a06fc9bb", nil, NSBundle.mainBundle, @"Custom Action", @"Status bar component preview.");
     }
 }
 
@@ -145,16 +145,16 @@ static NSString *const iTermStatusBarActionKey = @"action";
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Actions Menu";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.actions_menu.8e1d66d2", nil, NSBundle.mainBundle, @"Actions Menu", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"When clicked, opens a menu of actions. Actions are like custom key bindings, but without a keystroke attached.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.when_clicked_opens_a_menu_of_actions_actions_are_like_custom_key_bindings_but_without_a_keystroke_attached.dcaac577", nil, NSBundle.mainBundle, @"When clicked, opens a menu of actions. Actions are like custom key bindings, but without a keystroke attached.", @"Status bar component description.");
 }
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor
                                           textColor:(NSColor *)textColor {
-    return @"Action…";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.action.71b8442b", nil, NSBundle.mainBundle, @"Action…", @"Status bar component preview.");
 }
 
 - (BOOL)statusBarComponentCanStretch {
@@ -162,7 +162,7 @@ static NSString *const iTermStatusBarActionKey = @"action";
 }
 
 - (nullable NSString *)stringValue {
-    return @"Perform Action…";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.perform_action.2f012ea3", nil, NSBundle.mainBundle, @"Perform Action…", @"Status bar component label.");
 }
 
 - (nullable NSString *)stringValueForCurrentWidth {
@@ -206,7 +206,7 @@ static NSString *const iTermStatusBarActionKey = @"action";
 
     [menu addItem:[NSMenuItem separatorItem]];
 
-    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Edit Actions…" action:@selector(editActions:) keyEquivalent:@""];
+    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbaractioncomponent.edit_actions.3b800c60", nil, NSBundle.mainBundle, @"Edit Actions…", @"User-facing text in iTermStatusBarActionComponent (openMenuWithView:).") action:@selector(editActions:) keyEquivalent:@""];
     item.target = self;
     [menu addItem:item];
 

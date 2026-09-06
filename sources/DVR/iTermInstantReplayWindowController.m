@@ -235,26 +235,26 @@ typedef NS_ENUM(NSUInteger, iTermInstantReplayState) {
     _state = destinationState;
     switch (_state) {
         case iTermInstantReplayStateNormal:
-            _firstButton.title = @"Export…";
+            _firstButton.title = NSLocalizedStringWithDefaultValue(@"ui.dvr.iterminstantreplaywindowcontroller.export.4a4c59c5", nil, NSBundle.mainBundle, @"Export…", @"User-facing text in iTermInstantReplayWindowController (setState:byCancelling:).");
             _eventsView.startFraction = 0;
             _eventsView.endFraction = 0;
             [_eventsView setNeedsDisplay:YES];
             _secondButton.hidden = YES;
             break;
         case iTermInstantReplayStateSetStart:
-            _firstButton.title = @"Set Start";
+            _firstButton.title = NSLocalizedStringWithDefaultValue(@"ui.dvr.iterminstantreplaywindowcontroller.set_start.04c13e94", nil, NSBundle.mainBundle, @"Set Start", @"User-facing text in iTermInstantReplayWindowController (setState:byCancelling:).");
             _slider.floatValue = 0;
             [_delegate instantReplaySeekTo:0];
             [self updateInstantReplayView];
-            _secondButton.title = @"Cancel";
+            _secondButton.title = NSLocalizedStringWithDefaultValue(@"ui.dvr.iterminstantreplaywindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermInstantReplayWindowController (setState:byCancelling:).");
             _secondButton.hidden = NO;
             break;
         case iTermInstantReplayStateSetEnd:
-            _firstButton.title = @"Set End";
+            _firstButton.title = NSLocalizedStringWithDefaultValue(@"ui.dvr.iterminstantreplaywindowcontroller.set_end.6360052b", nil, NSBundle.mainBundle, @"Set End", @"User-facing text in iTermInstantReplayWindowController (setState:byCancelling:).");
             _slider.floatValue = 1;
             [_delegate instantReplaySeekTo:1];
             [self updateInstantReplayView];
-            _secondButton.title = @"Cancel";
+            _secondButton.title = NSLocalizedStringWithDefaultValue(@"ui.dvr.iterminstantreplaywindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermInstantReplayWindowController (setState:byCancelling:).");
             _secondButton.hidden = NO;
     }
 }
@@ -317,11 +317,11 @@ typedef NS_ENUM(NSUInteger, iTermInstantReplayState) {
     } else {
         // Live view
         [_slider setFloatValue:1.0];
-        [_currentTimeLabel setStringValue:@"Live View"];
+        [_currentTimeLabel setStringValue:NSLocalizedStringWithDefaultValue(@"ui.dvr.iterminstantreplaywindowcontroller.live_view.dc6ca57a", nil, NSBundle.mainBundle, @"Live View", @"User-facing text in iTermInstantReplayWindowController (updateInstantReplayView).")];
         [_currentTimeLabel sizeToFit];
     }
     [_earliestTimeLabel setStringValue:[self stringForTimestamp:firstTimestamp]];
-    [_latestTimeLabel setStringValue:@"Now"];
+    [_latestTimeLabel setStringValue:NSLocalizedStringWithDefaultValue(@"ui.dvr.iterminstantreplaywindowcontroller.now.fe18013d", nil, NSBundle.mainBundle, @"Now", @"User-facing text in iTermInstantReplayWindowController (updateInstantReplayView).")];
 
     // Adjust the width of the "earliest time" label, and keep the margin between it and the
     // slider the same.

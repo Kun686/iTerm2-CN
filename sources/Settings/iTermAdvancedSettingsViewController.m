@@ -284,8 +284,8 @@ static NSDictionary *gIntrospection;
     [button setAction:@selector(toggleOnOff:)];
     button.identifier = @"onoff";
     [button.menu removeAllItems];
-    [button.menu addItemWithTitle:@"No" action:nil keyEquivalent:@""];
-    [button.menu addItemWithTitle:@"Yes" action:nil keyEquivalent:@""];
+    [button.menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermadvancedsettingsviewcontroller.no.1ea442a1", nil, NSBundle.mainBundle, @"No", @"User-facing text in iTermAdvancedSettingsViewController (onOffViewWithValue:row:).") action:nil keyEquivalent:@""];
+    [button.menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermadvancedsettingsviewcontroller.yes.85a39ab3", nil, NSBundle.mainBundle, @"Yes", @"User-facing text in iTermAdvancedSettingsViewController (onOffViewWithValue:row:).") action:nil keyEquivalent:@""];
     [button selectItemAtIndex:on ? 1 : 0];
     return button;
 }
@@ -324,9 +324,9 @@ static NSDictionary *gIntrospection;
     [button setAction:@selector(toggleTristate:)];
     button.identifier = @"tristate";
     [button.menu removeAllItems];
-    [button.menu addItemWithTitle:@"Unspecified" action:nil keyEquivalent:@""];
-    [button.menu addItemWithTitle:@"No" action:nil keyEquivalent:@""];
-    [button.menu addItemWithTitle:@"Yes" action:nil keyEquivalent:@""];
+    [button.menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermadvancedsettingsviewcontroller.unspecified.5b8aa0bf", nil, NSBundle.mainBundle, @"Unspecified", @"User-facing text in iTermAdvancedSettingsViewController (tristateViewWithValue:row:).") action:nil keyEquivalent:@""];
+    [button.menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermadvancedsettingsviewcontroller.no.1ea442a1", nil, NSBundle.mainBundle, @"No", @"User-facing text in iTermAdvancedSettingsViewController (tristateViewWithValue:row:).") action:nil keyEquivalent:@""];
+    [button.menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermadvancedsettingsviewcontroller.yes.85a39ab3", nil, NSBundle.mainBundle, @"Yes", @"User-facing text in iTermAdvancedSettingsViewController (tristateViewWithValue:row:).") action:nil keyEquivalent:@""];
 
     NSNumber *value = [self objectForRow:row];
     if (!value) {

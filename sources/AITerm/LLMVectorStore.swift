@@ -198,4 +198,3 @@ struct LLMVectorStoreCreator {
         return try JSONDecoder().decode(VectorStoreResponse.self, from: response).id
     }
 }
-

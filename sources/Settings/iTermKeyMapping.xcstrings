@@ -1,0 +1,281 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "0rv-a0-ans.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Presets…\"; ObjectID = \"0rv-a0-ans\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Presets…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "预设…"
+          }
+        }
+      }
+    },
+    "2Vc-Od-Zym.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Add Touch Bar Item\"; ObjectID = \"2Vc-Od-Zym\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Add Touch Bar Item"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加 Touch Bar 项"
+          }
+        }
+      }
+    },
+    "6LM-vc-lR6.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSMenu\"; title = \"OtherViews\"; ObjectID = \"6LM-vc-lR6\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "OtherViews"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OtherViews"
+          }
+        }
+      }
+    },
+    "8iu-ei-TS7.headerCell.title": {
+      "comment": "Class = \"NSTableColumn\"; headerCell.title = \"Action\"; ObjectID = \"8iu-ei-TS7\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Action"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "动作"
+          }
+        }
+      }
+    },
+    "BSk-yF-7rT.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"BSk-yF-7rT\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
+        }
+      }
+    },
+    "QdI-wp-Xjq.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"QdI-wp-Xjq\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table View Cell"
+          }
+        }
+      }
+    },
+    "Qlz-bw-G7W.headerCell.title": {
+      "comment": "Class = \"NSTableColumn\"; headerCell.title = \"Key Combination\"; ObjectID = \"Qlz-bw-G7W\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Key Combination"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按键组合"
+          }
+        }
+      }
+    },
+    "RRF-Iu-wyY.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"RRF-Iu-wyY\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table View Cell"
+          }
+        }
+      }
+    },
+    "T2e-te-qXU.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Haptic feedback when pressing esc\"; ObjectID = \"T2e-te-qXU\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Haptic feedback when pressing esc"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按下 esc 键时触觉反馈"
+          }
+        }
+      }
+    },
+    "fqZ-QL-pty.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"fqZ-QL-pty\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
+        }
+      }
+    },
+    "hXF-74-1ll.title": {
+      "comment": "Class = \"NSWindow\"; title = \"Window\"; ObjectID = \"hXF-74-1ll\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
+        }
+      }
+    },
+    "j1Y-sT-5wz.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Touch Bar Mitigations\"; ObjectID = \"j1Y-sT-5wz\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Touch Bar Mitigations"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touch Bar 缓解措施"
+          }
+        }
+      }
+    },
+    "jDm-YT-6t1.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Visual esc key indicator\"; ObjectID = \"jDm-YT-6t1\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Visual esc key indicator"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "esc 键视觉指示器"
+          }
+        }
+      }
+    },
+    "vfN-hY-QgP.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"OK\"; ObjectID = \"vfN-hY-QgP\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "OK"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
+          }
+        }
+      }
+    },
+    "ziz-Lx-Vmu.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Key click for esc key\"; ObjectID = \"ziz-Lx-Vmu\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Key click for esc key"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "esc 键按键音效"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

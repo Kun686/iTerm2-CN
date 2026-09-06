@@ -306,11 +306,11 @@
             [weakSelf.textView.window makeFirstResponder:weakSelf.textView];
         } second:^(NSError *error) {
             [iTermWarning showWarningWithTitle:error.localizedDescription
-                                       actions:@[ @"OK" ]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarlargecomposerviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermStatusBarLargeComposerViewController (actions).") ]
                                      accessory:nil
                                     identifier:nil
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"AI Error"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarlargecomposerviewcontroller.ai_error.4539653d", nil, NSBundle.mainBundle, @"AI Error", @"User-facing text in iTermStatusBarLargeComposerViewController (heading).")
                                         window:weakSelf.view.window];
         }];
     }];

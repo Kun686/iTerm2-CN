@@ -145,11 +145,11 @@
         __block BOOL result = NO;
         dispatch_sync(dispatch_get_main_queue(), ^{
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Still restoring your windows…";
-            alert.informativeText = @"iTerm2 is taking longer than usual to verify your saved windows and tabs. This usually means the system is busy and it’s safe to keep waiting, but a damaged state restoration database could also cause it. You can discard the saved windows instead if you’d rather not wait.";
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermrestorablestatesqlite.still_restoring_your_windows.39b1910d", nil, NSBundle.mainBundle, @"Still restoring your windows…", @"User-facing text in iTermRestorableStateSQLite (source UI).");
+            alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermrestorablestatesqlite.iterm2_is_taking_longer_than_usual_to_verify.2ca2ee5a", nil, NSBundle.mainBundle, @"iTerm2 is taking longer than usual to verify your saved windows and tabs. This usually means the system is busy and it’s safe to keep waiting, but a damaged state restoration database could also cause it. You can discard the saved windows instead if you’d rather not wait.", @"User-facing text in iTermRestorableStateSQLite (source UI).");
             // Keep Waiting is added first so it is the default action (triggered by Return).
-            [alert addButtonWithTitle:@"Keep Waiting"];
-            [alert addButtonWithTitle:@"Discard Saved Windows"];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermrestorablestatesqlite.keep_waiting.c743a694", nil, NSBundle.mainBundle, @"Keep Waiting", @"User-facing text in iTermRestorableStateSQLite (source UI).")];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermrestorablestatesqlite.discard_saved_windows.9d7a0de0", nil, NSBundle.mainBundle, @"Discard Saved Windows", @"User-facing text in iTermRestorableStateSQLite (source UI).")];
             result = ([alert runModal] == NSAlertSecondButtonReturn);
         });
         return result;

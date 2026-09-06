@@ -142,22 +142,18 @@ final class ClaudeIntegrationHealthMonitor: NSObject {
         }
         RLog("Health: integration completed but hook is missing on disk — prompting")
         let warning = iTermWarning()
-        warning.heading = "Claude Code Integration Looks Broken"
-        warning.title = "iTerm2\u{2019}s cc-status hook is no longer in "
-            + "~/.claude/settings.json. This usually means Claude Code "
-            + "rewrote that file. Reinstall the hook so per-tab status "
-            + "indicators (\u{201C}Working\u{2026},\u{201D} "
-            + "\u{201C}Waiting\u{2026}\u{201D}) work again?"
+        warning.heading = String(localized: "ui.swift.claudecode.claudeintegrationhealthmonitor.claude_code_integration_looks_broken.d327a03d", defaultValue: "Claude Code Integration Looks Broken", bundle: .main, comment: "User-facing text in ClaudeIntegrationHealthMonitor.")
+        warning.title = String(localized: "ui.swift.claudecode.claudeintegrationhealthmonitor.iterm2_s_cc_status_hook_is_no_longer.a77562d9", defaultValue: "iTerm2’s cc-status hook is no longer in ~/.claude/settings.json. This usually means Claude Code rewrote that file. Reinstall the hook so per-tab status indicators (“Working…,” “Waiting…”) work again?", bundle: .main, comment: "User-facing text in ClaudeIntegrationHealthMonitor.")
         warning.warningType = .kiTermWarningTypePermanentlySilenceable
         warning.identifier = Self.warningIdentifier
-        warning.actionLabels = ["Reinstall", "Not Now"]
+        warning.actionLabels = [String(localized: "ui.swift.claudecode.claudeintegrationhealthmonitor.reinstall.c630a782", defaultValue: "Reinstall", bundle: .main, comment: "User-facing text in ClaudeIntegrationHealthMonitor."), String(localized: "ui.swift.claudecode.claudeintegrationhealthmonitor.not_now.ccb4c324", defaultValue: "Not Now", bundle: .main, comment: "User-facing text in ClaudeIntegrationHealthMonitor.")]
         // Without this, "Reinstall + Remember My Choice" would
         // preempt the dialog on every future broken-state launch
         // and silently open the onboarding window — almost
         // certainly not what a user means by "remember." Only the
         // dismiss path is rememberable; "Reinstall" always
         // requires a fresh click.
-        warning.doNotRememberLabels = ["Reinstall"]
+        warning.doNotRememberLabels = [String(localized: "ui.swift.claudecode.claudeintegrationhealthmonitor.reinstall.c630a782", defaultValue: "Reinstall", bundle: .main, comment: "User-facing text in ClaudeIntegrationHealthMonitor.")]
         warning.runModalAsync { [weak self] selection, _ in
             self?.alertInFlight = false
             if selection == .kiTermWarningSelection0 {

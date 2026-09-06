@@ -1644,13 +1644,13 @@ extension Conductor {
             // Only "View" should be remembered. Remembering "Download" could cause
             // repeated download prompts if the download fails or isn't handled.
             let warning = iTermWarning()
-            warning.title = "Download \(path.path.lastPathComponent) or view in browser?"
-            warning.actionLabels = ["Download", "View", "Cancel"]
+            warning.title = String(localized: "ui.swift.ssh.conductor.download_0_or_view_in_browser.4b7e4f54", defaultValue: "Download \(path.path.lastPathComponent) or view in browser?", bundle: .main, comment: "User-facing text in Conductor.")
+            warning.actionLabels = [String(localized: "ui.swift.ssh.conductor.download.d6eafe82", defaultValue: "Download", bundle: .main, comment: "User-facing text in Conductor."), String(localized: "ui.swift.ssh.conductor.view.dcc839a4", defaultValue: "View", bundle: .main, comment: "User-facing text in Conductor."), String(localized: "ui.swift.ssh.conductor.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in Conductor.")]
             warning.identifier = "DownloadOrViewInBrowser_" + mimeType + " " + path.usernameHostnameString
             warning.warningType = .kiTermWarningTypePermanentlySilenceable
-            warning.heading = "Download or View File?"
+            warning.heading = String(localized: "ui.swift.ssh.conductor.download_or_view_file.93933ce9", defaultValue: "Download or View File?", bundle: .main, comment: "Heading for the SSH file download-or-view warning.")
             warning.window = window
-            warning.doNotRememberLabels = ["Download", "Cancel"]
+            warning.doNotRememberLabels = [String(localized: "ui.swift.ssh.conductor.download.d6eafe82", defaultValue: "Download", bundle: .main, comment: "User-facing text in Conductor."), String(localized: "ui.swift.ssh.conductor.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in Conductor.")]
             switch warning.runModal() {
             case .kiTermWarningSelection0:  // Download
                 download(path: path)

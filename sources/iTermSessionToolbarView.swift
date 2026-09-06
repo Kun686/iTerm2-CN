@@ -51,7 +51,6 @@ class SessionToolbarGenericView: NSObject {
         "<\(identifier): priority=\(priority) desiredWidthRange=\(desiredWidthRange)>"
     }
 }
-
 @objc
 class SessionToolbarControl: SessionToolbarGenericView {
     init(identifier: String,
@@ -457,9 +456,10 @@ class CCDiffSelectorItem: SessionToolbarControl {
         let uniqueChangedFileCount = Set(staged.map { $0.path })
             .union(unstaged.map { $0.path })
             .count
+        let uniqueChangedFileCountText = String(uniqueChangedFileCount)
         let allFilesTitle = hasChanges
-            ? "All Files (\(uniqueChangedFileCount))"
-            : "Empty Diff"
+            ? String(localized: "ui.swift.itermsessiontoolbarview.all_files_0.4520721b", defaultValue: "All Files (\(uniqueChangedFileCountText))", bundle: .main, comment: "Catch-all diff selector item with the number of changed files.")
+            : String(localized: "ui.swift.itermsessiontoolbarview.empty_diff.9a81a696", defaultValue: "Empty Diff", bundle: .main, comment: "Diff selector empty-state title.")
         let allFilesItem = NSMenuItem(title: allFilesTitle,
                                       action: nil,
                                       keyEquivalent: "")
@@ -467,13 +467,13 @@ class CCDiffSelectorItem: SessionToolbarControl {
         button.menu?.addItem(allFilesItem)
 
         var ordered: [String] = []
-        addGroup(title: "Staged",
+        addGroup(title: String(localized: "ui.swift.itermsessiontoolbarview.staged.daec459a", defaultValue: "Staged", bundle: .main, comment: "User-facing text in iTermSessionToolbarView."),
                  entries: staged,
                  prefixLength: prefixLength,
                  column: \.indexStatus,
                  letterColor: .systemGreen,
                  ordered: &ordered)
-        addGroup(title: "Unstaged",
+        addGroup(title: String(localized: "ui.swift.itermsessiontoolbarview.unstaged.06b7bae0", defaultValue: "Unstaged", bundle: .main, comment: "User-facing text in iTermSessionToolbarView."),
                  entries: unstaged,
                  prefixLength: prefixLength,
                  column: \.workdirStatus,
@@ -891,4 +891,3 @@ extension CCGitSessionToolbarItem: iTermGitStringMakerDelegate {
         NSColor.labelColor
     }
 }
-

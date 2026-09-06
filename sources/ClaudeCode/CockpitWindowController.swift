@@ -60,7 +60,7 @@ class CockpitWindowController: NSWindowController {
     // status (in place of a screen-center toast).
     private var composerTipLabel: NSTextField!
     private var tipResetItem: DispatchWorkItem?
-    private static let defaultCockpitTip = "Type @ to choose sessions to write to"
+    private static let defaultCockpitTip = String(localized: "ui.swift.claudecode.cockpitwindowcontroller.type_to_choose_sessions_to_write_to.8e737874", defaultValue: "Type @ to choose sessions to write to", bundle: .main, comment: "User-facing text in CockpitWindowController.")
     // Local (NoSync) autosave for the list/composer divider position.
     private static let splitAutosaveName = "NoSyncCockpitSplit"
     // The document range of the @-run the picker is currently editing,
@@ -366,8 +366,8 @@ class CockpitWindowController: NSWindowController {
         if let statusFilter, !statuses.contains(statusFilter) {
             self.statusFilter = nil
         }
-        statusFilterItems = [(title: "All (\(total))", status: nil)]
-            + statuses.map { (title: "\($0) (\(statusCounts[$0] ?? 0))", status: $0) }
+        statusFilterItems = [(title: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.all_0.37d129e3", defaultValue: "All (\(total))", bundle: .main, comment: "User-facing text in CockpitWindowController."), status: nil)]
+            + statuses.map { (title: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.0_1.fa1e7180", defaultValue: "\($0) (\(statusCounts[$0] ?? 0))", bundle: .main, comment: "User-facing text in CockpitWindowController."), status: $0) }
 
         let selectedIndex = statusFilterItems.firstIndex { $0.status == statusFilter } ?? 0
 
@@ -480,7 +480,7 @@ class CockpitWindowController: NSWindowController {
         // Let @-mention chips (NSTextAttachments) survive editing; the
         // composer is plain-text by default and would strip them.
         composerVC.setComposerRichTextEnabled(true)
-        composerVC.setComposerPlaceholder("Type here to write to selected sessions…")
+        composerVC.setComposerPlaceholder(String(localized: "ui.swift.claudecode.cockpitwindowcontroller.type_here_to_write_to_selected_sessions.027a463a", defaultValue: "Type here to write to selected sessions…", bundle: .main, comment: "User-facing text in CockpitWindowController."))
         // No host/scope: the cockpit has no shell, and suggestions are
         // suppressed (see minimalComposerShouldFetchSuggestions), so the
         // shell-completion path that would use them is never reached.
@@ -562,7 +562,7 @@ class CockpitWindowController: NSWindowController {
         button.bezelStyle = .texturedRounded
         button.isBordered = true
         button.image = NSImage(systemSymbolName: SFSymbol.gearshape.rawValue,
-                               accessibilityDescription: "Settings")
+                               accessibilityDescription: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.settings.74a883a0", defaultValue: "Settings", bundle: .main, comment: "User-facing text in CockpitWindowController."))
         button.imagePosition = .imageOnly
         button.target = self
         button.action = #selector(showSettings(_:))
@@ -643,11 +643,11 @@ class CockpitWindowController: NSWindowController {
         }
         let symbol: SFSymbol = armed ? .bellBadge : .bell
         notifyToolbarItem.image = NSImage(systemSymbolName: symbol.rawValue,
-                                          accessibilityDescription: "Notify on status change")
+                                          accessibilityDescription: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.notify_on_status_change.526146c2", defaultValue: "Notify on status change", bundle: .main, comment: "User-facing text in CockpitWindowController."))
         notifyToolbarItem.isEnabled = enabled
         notifyToolbarItem.toolTip = armed
-            ? "Watching for a status change on the selected item. An alert will appear on the next change, then turn this off."
-            : "Notify with an alert when the selected window or session’s status changes."
+            ? String(localized: "ui.swift.claudecode.cockpitwindowcontroller.watching_for_a_status_change_on_the_selected.e91c170a", defaultValue: "Watching for a status change on the selected item. An alert will appear on the next change, then turn this off.", bundle: .main, comment: "User-facing text in CockpitWindowController.")
+            : String(localized: "ui.swift.claudecode.cockpitwindowcontroller.notify_with_an_alert_when_the_selected_window.b8656680", defaultValue: "Notify with an alert when the selected window or session’s status changes.", bundle: .main, comment: "User-facing text in CockpitWindowController.")
     }
 
     @objc private func notifyArmedDidChange(_ notification: Notification) {
@@ -912,21 +912,21 @@ class CockpitWindowController: NSWindowController {
             guard !command.isEmpty else { return }
             sessions = selectedRowSessions()
             guard !sessions.isEmpty else {
-                setCockpitStatus("Type @ to pick a session, or select rows first", isError: true)
+                setCockpitStatus(String(localized: "ui.swift.claudecode.cockpitwindowcontroller.type_to_pick_a_session_or_select_rows.eb05d6bb", defaultValue: "Type @ to pick a session, or select rows first", bundle: .main, comment: "User-facing text in CockpitWindowController."), isError: true)
                 return
             }
         } else {
             let (resolved, unknown) = resolveTargets(chipTokens)
             guard unknown.isEmpty else {
-                setCockpitStatus("Unknown target \(unknown.joined(separator: " "))", isError: true)
+                setCockpitStatus(String(localized: "ui.swift.claudecode.cockpitwindowcontroller.unknown_target_0.2076a0e8", defaultValue: "Unknown target \(unknown.joined(separator: " "))", bundle: .main, comment: "User-facing text in CockpitWindowController."), isError: true)
                 return
             }
             guard !command.isEmpty else {
-                setCockpitStatus("Add a command after the @mention", isError: true)
+                setCockpitStatus(String(localized: "ui.swift.claudecode.cockpitwindowcontroller.add_a_command_after_the_mention.ffd13190", defaultValue: "Add a command after the @mention", bundle: .main, comment: "User-facing text in CockpitWindowController."), isError: true)
                 return
             }
             guard !resolved.isEmpty else {
-                setCockpitStatus("No matching sessions", isError: true)
+                setCockpitStatus(String(localized: "ui.swift.claudecode.cockpitwindowcontroller.no_matching_sessions.2732406e", defaultValue: "No matching sessions", bundle: .main, comment: "User-facing text in CockpitWindowController."), isError: true)
                 return
             }
             sessions = resolved
@@ -939,12 +939,13 @@ class CockpitWindowController: NSWindowController {
             sent += 1
         }
         guard sent > 0 else {
-            setCockpitStatus("No running sessions to send to", isError: true)
+            setCockpitStatus(String(localized: "ui.swift.claudecode.cockpitwindowcontroller.no_running_sessions_to_send_to.d5901208", defaultValue: "No running sessions to send to", bundle: .main, comment: "User-facing text in CockpitWindowController."), isError: true)
             return
         }
         DLog("Cockpit sent command to \(sent) session(s)")
         clearCommandView()
-        setCockpitStatus("Sent to \(sent) session\(sent == 1 ? "" : "s")", isError: false)
+        let successMessage = sent == 1 ? String(localized: "ui.swift.claudecode.cockpitwindowcontroller.sent_to_1_session.d2997b4c", defaultValue: "Sent to 1 session", bundle: .main, comment: "User-facing text in CockpitWindowController.") : String(localized: "ui.swift.claudecode.cockpitwindowcontroller.sent_to_0_sessions.0993a33d", defaultValue: "Sent to \(sent) sessions", bundle: .main, comment: "User-facing text in CockpitWindowController.")
+        setCockpitStatus(successMessage, isError: false)
     }
 
     // After a send, drop the command text but keep the mention chips
@@ -1263,20 +1264,20 @@ fileprivate final class CockpitRow {
 
     var shortLabel: String {
         switch self {
-        case .byStatus: return "Status"
-        case .byWindow: return "Window"
-        case .byWorkgroup: return "Workgroup"
+        case .byStatus: return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.status.920e413c", defaultValue: "Status", bundle: .main, comment: "User-facing text in CockpitWindowController.")
+        case .byWindow: return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.window.19734a1b", defaultValue: "Window", bundle: .main, comment: "User-facing text in CockpitWindowController.")
+        case .byWorkgroup: return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.workgroup.a6d32d72", defaultValue: "Workgroup", bundle: .main, comment: "User-facing text in CockpitWindowController.")
         }
     }
 
     var tooltip: String {
         switch self {
         case .byStatus:
-            return "Group sessions by status (Waiting / Working / Idle), within each window."
+            return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.group_sessions_by_status_waiting_working_idle_within.3fb4cbd0", defaultValue: "Group sessions by status (Waiting / Working / Idle), within each window.", bundle: .main, comment: "User-facing text in CockpitWindowController.")
         case .byWindow:
-            return "Group sessions by window, then by tab and split pane."
+            return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.group_sessions_by_window_then_by_tab_and.ef2b9939", defaultValue: "Group sessions by window, then by tab and split pane.", bundle: .main, comment: "User-facing text in CockpitWindowController.")
         case .byWorkgroup:
-            return "Show only sessions in a workgroup, grouped by workgroup."
+            return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.show_only_sessions_in_a_workgroup_grouped_by.e14b5b09", defaultValue: "Show only sessions in a workgroup, grouped by workgroup.", bundle: .main, comment: "User-facing text in CockpitWindowController.")
         }
     }
 
@@ -1521,7 +1522,7 @@ fileprivate final class CockpitTableCellView: NSTableCellView {
         let bell = CockpitPassthroughImageView()
         let config = NSImage.SymbolConfiguration(pointSize: 11, weight: .regular)
         bell.image = NSImage(systemSymbolName: SFSymbol.bellBadge.rawValue,
-                             accessibilityDescription: "Notify on status change armed")?
+                             accessibilityDescription: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.notify_on_status_change_armed.7256c785", defaultValue: "Notify on status change armed", bundle: .main, comment: "User-facing text in CockpitWindowController."))?
             .withSymbolConfiguration(config)
         bell.imageScaling = .scaleProportionallyDown
         bell.isHidden = true
@@ -2059,8 +2060,8 @@ extension CockpitWindowController {
             let buriedRow = rowCache[identity]
                 ?? CockpitRow(identity: identity,
                               kind: .buriedRoot,
-                              title: "Buried Sessions")
-            buriedRow.title = "Buried Sessions"
+                              title: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.buried_sessions.3bc1ad71", defaultValue: "Buried Sessions", bundle: .main, comment: "User-facing text in CockpitWindowController."))
+            buriedRow.title = String(localized: "ui.swift.claudecode.cockpitwindowcontroller.buried_sessions.3bc1ad71", defaultValue: "Buried Sessions", bundle: .main, comment: "User-facing text in CockpitWindowController.")
             buriedRow.armed = false
             freshCache[identity] = buriedRow
             buriedRow.children = bucketSessionsByStatus(
@@ -2127,8 +2128,8 @@ extension CockpitWindowController {
             let buriedRow = rowCache[identity]
                 ?? CockpitRow(identity: identity,
                               kind: .buriedRoot,
-                              title: "Buried Sessions")
-            buriedRow.title = "Buried Sessions"
+                              title: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.buried_sessions.3bc1ad71", defaultValue: "Buried Sessions", bundle: .main, comment: "User-facing text in CockpitWindowController."))
+            buriedRow.title = String(localized: "ui.swift.claudecode.cockpitwindowcontroller.buried_sessions.3bc1ad71", defaultValue: "Buried Sessions", bundle: .main, comment: "User-facing text in CockpitWindowController.")
             buriedRow.armed = false
             freshCache[identity] = buriedRow
             buriedRow.children = sessionRows(for: buriedExpanded,
@@ -2289,7 +2290,7 @@ extension CockpitWindowController {
             let members = bucketed[status] ?? []
             if members.isEmpty { continue }
             let identity = CockpitRow.Identity.group(scope, status)
-            let label = "\(status) · \(members.count)"
+            let label = String(localized: "ui.swift.claudecode.cockpitwindowcontroller.0_1.cd55a9d9", defaultValue: "\(status) · \(members.count)", bundle: .main, comment: "User-facing text in CockpitWindowController.")
             let groupRow = rowCache[identity]
                 ?? CockpitRow(identity: identity,
                               kind: .group(scope: scope, status: status),
@@ -2599,7 +2600,7 @@ extension CockpitWindowController {
     }
 
     // Sentinel bucket/filter key for sessions that report no status.
-    static let noStatusLabel = "No status"
+    static let noStatusLabel = String(localized: "ui.swift.claudecode.cockpitwindowcontroller.no_status.eace244c", defaultValue: "No status", bundle: .main, comment: "User-facing text in CockpitWindowController.")
 
     // The session's live, arbitrary status text and its color, straight
     // from the tab status (the same source the Session Status tool uses).
@@ -2722,11 +2723,11 @@ extension CockpitWindowController {
         if let title = tab.title, !title.isEmpty {
             return title
         }
-        return "Tab \(positionInWindow)"
+        return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.tab_0.675919b9", defaultValue: "Tab \(positionInWindow)", bundle: .main, comment: "User-facing text in CockpitWindowController.")
     }
 
     private func cockpitWindowTitlePrefix(for terminal: PseudoTerminal) -> String {
-        return "Window \(terminal.number)"
+        return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.window_0.38ae7a46", defaultValue: "Window \(terminal.number)", bundle: .main, comment: "User-facing text in CockpitWindowController.")
     }
 
     private func cockpitWorkgroupTitle(for instance: iTermWorkgroupInstance) -> String {
@@ -2889,4 +2890,3 @@ extension CockpitWindowController: iTermMinimalComposerViewControllerDelegate {
 private final class CockpitNoopSyntaxHighlighter: NSObject, SyntaxHighlighting {
     func highlight(range: NSRange) {}
 }
-

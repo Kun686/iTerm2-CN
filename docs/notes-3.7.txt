@@ -1,5 +1,22 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
+iTerm2-CN community localization:
+- This is an unofficial community localization
+  and is not affiliated with the official iTerm2
+  project.
+- Adds complete Simplified Chinese resources for
+  app-owned user interface text.
+- Adds Simplified Chinese, English, and Follow
+  System choices in General settings.
+- Language changes take effect after relaunch.
+- CN builds disable Sparkle automatic updates.
+  Check for Updates opens the fork's GitHub
+  Releases page for manual updates.
+- Adds localization lint and language/update
+  policy tests.
+- Terminal emulation and terminal I/O behavior
+  are unchanged.
+
 A note to beta users:
 An awful lot of features have been piling up here
 since the last release off the main branch was

@@ -40,7 +40,6 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
 
 @interface iTermTextViewContextMenuHelper()<NSMenuItemValidation>
 @end
-
 @implementation iTermTextViewContextMenuHelper
 
 - (instancetype)initWithURLActionHelper:(iTermURLActionHelper *)urlActionHelper {
@@ -137,10 +136,10 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
 - (NSMenu *)timestampContextMenuWithEvent:(NSEvent *)event
                                  baseline:(NSTimeInterval)baseline
                               clickedTime:(NSTimeInterval)clickedTime {
-    NSMenu *menu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.contextual_menu.3db60c37", nil, NSBundle.mainBundle, @"Contextual Menu", @"User-facing text in iTermTextViewContextMenuHelper (timestampContextMenuWithEvent:baseline:clickedTime:).")];
 
     if (baseline != clickedTime) {
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Set Baseline for Relative Timestamps"
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.set_baseline_for_relative_timestamps.47b7b001", nil, NSBundle.mainBundle, @"Set Baseline for Relative Timestamps", @"User-facing text in iTermTextViewContextMenuHelper (timestampContextMenuWithEvent:baseline:clickedTime:).")
                                                       action:@selector(setTimestampBaseline:)
                                                keyEquivalent:@""];
         item.target = self;
@@ -148,7 +147,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
         [menu addItem:item];
     }
     if (baseline != 0) {
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Disable Relative Timestamps"
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.disable_relative_timestamps.dd2d457e", nil, NSBundle.mainBundle, @"Disable Relative Timestamps", @"User-facing text in iTermTextViewContextMenuHelper (timestampContextMenuWithEvent:baseline:clickedTime:).")
                                                       action:@selector(setTimestampBaseline:)
                                                keyEquivalent:@""];
         item.target = self;
@@ -214,7 +213,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     if (mark.name) {
         NSMenuItem *nameItem = [[NSMenuItem alloc] initWithTitle:mark.name action:nil keyEquivalent:@""];
 
-        NSMenuItem *removeItem = [[NSMenuItem alloc] initWithTitle:@"Remove Named Mark" action:@selector(removeNamedMark:) keyEquivalent:@""];
+        NSMenuItem *removeItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.remove_named_mark.ec1bc64e", nil, NSBundle.mainBundle, @"Remove Named Mark", @"User-facing text in iTermTextViewContextMenuHelper (contextMenuWithEvent:).") action:@selector(removeNamedMark:) keyEquivalent:@""];
         removeItem.target = self;
         removeItem.representedObject = mark;
 
@@ -223,7 +222,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
         [contextMenu insertItem:[NSMenuItem separatorItem] atIndex:2];
     }
     if (mark && mark.hasNonEmptyCommand) {
-        NSMenuItem *markItem = [[NSMenuItem alloc] initWithTitle:@"Command Info"
+        NSMenuItem *markItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.command_info.34a20e57", nil, NSBundle.mainBundle, @"Command Info", @"User-facing text in iTermTextViewContextMenuHelper (contextMenuWithEvent:).")
                                                           action:@selector(revealCommandInfo:)
                                                    keyEquivalent:@""];
         markItem.target = self;
@@ -231,7 +230,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
         [contextMenu insertItem:markItem atIndex:0];
         NSInteger nextIndex = 1;
 #if DEBUG
-        NSMenuItem *aidItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"aid: %@ (parent: %@)",
+        NSMenuItem *aidItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.aid_parent.a8ef37d8", nil, NSBundle.mainBundle, @"aid: %@ (parent: %@)", @"User-facing text in iTermTextViewContextMenuHelper (initWithTitle)."),
                                                                  mark.aid ?: @"(none)",
                                                                  mark.parentAid ?: @"(none)"]
                                                          action:nil
@@ -249,7 +248,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     id<VT100ScreenMarkReading> mark = [self.delegate contextMenuCommandWithOutputAtLine:y];
 
     if (foldMark) {
-        NSMenuItem *markItem = [[NSMenuItem alloc] initWithTitle:@"Unfold"
+        NSMenuItem *markItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.unfold.ae11429c", nil, NSBundle.mainBundle, @"Unfold", @"User-facing text in iTermTextViewContextMenuHelper (addFoldUnfoldMenuItemForLine:contextMenu:).")
                                                           action:@selector(unfoldMark:)
                                                    keyEquivalent:@""];
         markItem.target = self;
@@ -257,7 +256,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
         [contextMenu insertItem:markItem atIndex:0];
         [contextMenu insertItem:[NSMenuItem separatorItem] atIndex:1];
     } else if (mark && mark.hasNonEmptyCommand && [self.delegate contextMenu:self markShouldBeFoldable:mark]) {
-        NSMenuItem *markItem = [[NSMenuItem alloc] initWithTitle:@"Fold"
+        NSMenuItem *markItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.fold.92c122b5", nil, NSBundle.mainBundle, @"Fold", @"User-facing text in iTermTextViewContextMenuHelper (addFoldUnfoldMenuItemForLine:contextMenu:).")
                                                           action:@selector(foldCommandMark:)
                                                    keyEquivalent:@""];
         markItem.target = self;
@@ -382,7 +381,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     NSMenu *theMenu;
 
     // Allocate a menu
-    theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    theMenu = [[NSMenu alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.contextual_menu.3db60c37", nil, NSBundle.mainBundle, @"Contextual Menu", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).")];
     id<iTermImageInfoReading> imageInfo = [self.delegate contextMenu:self imageInfoAtCoord:coord];
     if (imageInfo) {
         // Show context menu for an image.
@@ -483,17 +482,17 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
 
                 switch (replacement.kind) {
                     case iTermSelectionReplacementKindJson:
-                        item.title = @"Replace with Pretty-Printed JSON";
+                        item.title = NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.replace_with_pretty_printed_json.8c2a8480", nil, NSBundle.mainBundle, @"Replace with Pretty-Printed JSON", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).");
                         item.action = @selector(replaceWithPrettyJSON:);
                         break;
 
                     case iTermSelectionReplacementKindBase64Decode:
-                        item.title = @"Replace with Base64-Decoded Value";
+                        item.title = NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.replace_with_base64_decoded_value.e1eb2c47", nil, NSBundle.mainBundle, @"Replace with Base64-Decoded Value", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).");
                         item.action = @selector(replaceWithBase64Decoded:);
                         break;
 
                     case iTermSelectionReplacementKindBase64Encode:
-                        item.title = @"Replace with Base64-Encoded Value";
+                        item.title = NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.replace_with_base64_encoded_value.c55f5c61", nil, NSBundle.mainBundle, @"Replace with Base64-Encoded Value", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).");
                         item.action = @selector(replaceWithBase64Encoded:);
                         break;
                 }
@@ -525,13 +524,13 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     // Menu items for acting on text selections
     const BOOL sshIntegrationDownload = [self.delegate contextMenuWillDownloadWithSSHIntegrationOnAbsLine:selection.lastAbsRange.coordRange.start.y];
 
-    __block NSString *scpTitle = sshIntegrationDownload ? @"Download using SSH Integration" : @"Download with scp";
+    __block NSString *scpTitle = sshIntegrationDownload ? NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.download_using_ssh_integration.7694fa3e", nil, NSBundle.mainBundle, @"Download using SSH Integration", @"User-facing text in iTermTextViewContextMenuHelper (source UI).") : NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.download_with_scp.81fd4e9c", nil, NSBundle.mainBundle, @"Download with scp", @"User-facing text in iTermTextViewContextMenuHelper (source UI).");
     if (haveShortSelection) {
         [self.delegate contextMenu:self withRelativeCoord:selection.lastAbsRange.coordRange.start block:^(VT100GridCoord coord) {
             SCPPath *scpPath = [self.delegate contextMenu:self scpPathForFile:shortSelectedText onLine:coord.y];
             if (scpPath) {
-                scpTitle = [NSString stringWithFormat:@"Download %@ from %@",
-                            sshIntegrationDownload ? @"using SSH Integration" : @"with scp",
+                scpTitle = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.download_from.c5d90404", nil, NSBundle.mainBundle, @"Download %@ from %@", @"User-facing context menu item with download method and host."),
+                            sshIntegrationDownload ? NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.using_ssh_integration.483a4c6a", nil, NSBundle.mainBundle, @"using SSH Integration", @"Download method shown in a context menu item.") : NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.with_scp.f1fba50c", nil, NSBundle.mainBundle, @"with scp", @"Download method shown in a context menu item."),
                             scpPath.hostname];
             }
         }];
@@ -545,20 +544,20 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     };
     add(scpTitle, @selector(downloadWithSCP:));
     if (shortSelectedText) {
-        add(@"Open Selection as URL", @selector(browse:));
+        add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.open_selection_as_url.5f192591", nil, NSBundle.mainBundle, @"Open Selection as URL", @"User-facing context menu item."), @selector(browse:));
         if ([[NSWorkspace sharedWorkspace] it_urlIsConditionallyLocallyOpenable:[NSURL URLWithString:shortSelectedText]]) {
-            add(@"Open URL in Vertical Split Pane", @selector(openURLInVerticalSplitPane:));
-            add(@"Open URL in Horizontal Split Pane", @selector(openURLInHorizontalSplitPane:));
+            add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.open_url_in_vertical_split_pane.c9610769", nil, NSBundle.mainBundle, @"Open URL in Vertical Split Pane", @"User-facing context menu item."), @selector(openURLInVerticalSplitPane:));
+            add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.open_url_in_horizontal_split_pane.519c1047", nil, NSBundle.mainBundle, @"Open URL in Horizontal Split Pane", @"User-facing context menu item."), @selector(openURLInHorizontalSplitPane:));
             [theMenu addItem:[NSMenuItem separatorItem]];
         }
     }
     if (shortSelectedText && [self.delegate contextMenu:self canQuickLookURL:[NSURL URLWithUserSuppliedString:shortSelectedText]]) {
-        add(@"Quick Look Link", @selector(quickLook:));
+        add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.quick_look_link.0fe62800", nil, NSBundle.mainBundle, @"Quick Look Link", @"User-facing context menu item."), @selector(quickLook:));
     }
-    add(@"Search the Web for Selection", @selector(searchInBrowser:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.search_the_web_for_selection.6ddad810", nil, NSBundle.mainBundle, @"Search the Web for Selection", @"User-facing context menu item."), @selector(searchInBrowser:));
 
-    add(@"Send Email to Selected Address", @selector(mail:));
-    add(@"Add Trigger…", @selector(addTrigger:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.send_email_to_selected_address.a26f27a1", nil, NSBundle.mainBundle, @"Send Email to Selected Address", @"User-facing context menu item."), @selector(mail:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.add_trigger.f2bbdcd6", nil, NSBundle.mainBundle, @"Add Trigger…", @"User-facing context menu item."), @selector(addTrigger:));
 
     // Separator
     [theMenu addItem:[NSMenuItem separatorItem]];
@@ -578,8 +577,8 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     }
 
     // Split pane options
-    add(@"Split Pane Vertically", @selector(splitTextViewVertically:));
-    add(@"Split Pane Horizontally", @selector(splitTextViewHorizontally:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.split_pane_vertically.d35bb6bf", nil, NSBundle.mainBundle, @"Split Pane Vertically", @"User-facing context menu item."), @selector(splitTextViewVertically:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.split_pane_horizontally.764a93a1", nil, NSBundle.mainBundle, @"Split Pane Horizontally", @"User-facing context menu item."), @selector(splitTextViewHorizontally:));
     if ([iTermPreferences boolForKey:kPreferenceKeyMenuActionImages]) {
         NSInteger n = theMenu.numberOfItems;
         theMenu.itemArray[n - 2].image = [NSImage imageWithSystemSymbolName:@"square.split.2x1.fill"
@@ -591,26 +590,27 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     // Separator
     [theMenu addItem:[NSMenuItem separatorItem]];
 
-    add(@"Move Session to Split Pane", @selector(movePane:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.move_session_to_split_pane.3b6be9b4", nil, NSBundle.mainBundle, @"Move Session to Split Pane", @"User-facing context menu item."), @selector(movePane:));
     if ([self.delegate contextMenuCurrentTabHasMultipleSessions:self]) {
-        NSMenuItem *item = [theMenu addItemWithTitle:@"Move Session to Tab"
+        NSMenuItem *item = [theMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.move_session_to_tab.9a738481", nil, NSBundle.mainBundle, @"Move Session to Tab", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).")
                                               action:@selector(moveSessionToTab:)
                                        keyEquivalent:@""];
         item.representedObject = [self.delegate contextMenuSessionScope:self].ID;
     }
-    [theMenu addItemWithTitle:@"Move Session to Window"
+    [theMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.move_session_to_window.15636019", nil, NSBundle.mainBundle, @"Move Session to Window", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).")
                      action:@selector(moveSessionToWindow:)
                 keyEquivalent:@""];
-    add(@"Swap With Session…", @selector(swapSessions:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.swap_with_session.642b9b09", nil, NSBundle.mainBundle, @"Swap With Session…", @"User-facing context menu item."), @selector(swapSessions:));
 
     // Separator
     [theMenu addItem:[NSMenuItem separatorItem]];
 
     // Copy,  paste, and save
-    [theMenu addItemWithTitle:NSLocalizedStringFromTableInBundle(@"Copy",
-                                                                 @"iTerm",
-                                                                 [NSBundle bundleForClass: [self class]],
-                                                                 @"Context menu")
+    [theMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.copy",
+                                                                nil,
+                                                                [NSBundle bundleForClass:[self class]],
+                                                                @"Copy",
+                                                                @"Context menu item")
                      action:@selector(copy:) keyEquivalent:@""];
 
     // Don't attempt to extract a URL from invalid coordinates (-1,-1) if opened from the session titlebar
@@ -619,7 +619,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
         NSString *urlID;
         NSURL *url = [extractor urlOfHypertextLinkAt:coord urlId:&urlID target:nil];
         if (url) {
-            NSMenuItem *item = [theMenu addItemWithTitle:@"Copy Link Address" action:@selector(copyLinkAddress:) keyEquivalent:@""];
+            NSMenuItem *item = [theMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.copy_link_address.c8270401", nil, NSBundle.mainBundle, @"Copy Link Address", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).") action:@selector(copyLinkAddress:) keyEquivalent:@""];
             item.target = self;
             item.representedObject = url;
         } else {
@@ -628,59 +628,62 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
             // when there's genuinely a URL under the cursor.
             NSURL *detectedURL = [_urlActionHelper urlForCopyAtCoord:coord];
             if (detectedURL) {
-                NSMenuItem *item = [theMenu addItemWithTitle:@"Copy URL" action:@selector(copyDetectedURL:) keyEquivalent:@""];
+                NSMenuItem *item = [theMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.copy_url.b26d1037", nil, NSBundle.mainBundle, @"Copy URL", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).") action:@selector(copyDetectedURL:) keyEquivalent:@""];
                 item.target = self;
                 item.representedObject = detectedURL;
             }
         }
     }
     
-    [theMenu addItemWithTitle:NSLocalizedStringFromTableInBundle(@"Paste",
-                                                                 @"iTerm",
-                                                                 [NSBundle bundleForClass: [self class]],
-                                                                 @"Context menu")
+    [theMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.paste",
+                                                                nil,
+                                                                [NSBundle bundleForClass:[self class]],
+                                                                @"Paste",
+                                                                @"Context menu item")
                      action:@selector(paste:) keyEquivalent:@""];
-    [theMenu addItemWithTitle:NSLocalizedStringFromTableInBundle(@"Save",
-                                                                 @"iTerm",
-                                                                 [NSBundle bundleForClass: [self class]],
-                                                                 @"Context menu")
+    [theMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.save",
+                                                                nil,
+                                                                [NSBundle bundleForClass:[self class]],
+                                                                @"Save",
+                                                                @"Context menu item")
                      action:@selector(saveDocumentAs:) keyEquivalent:@""];
 
     // Separator
     [theMenu addItem:[NSMenuItem separatorItem]];
 
     // Select all
-    [theMenu addItemWithTitle:NSLocalizedStringFromTableInBundle(@"Select All",
-                                                                 @"iTerm",
-                                                                 [NSBundle bundleForClass: [self class]],
-                                                                 @"Context menu")
+    [theMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.select_all",
+                                                                nil,
+                                                                [NSBundle bundleForClass:[self class]],
+                                                                @"Select All",
+                                                                @"Context menu item")
                      action:@selector(selectAll:) keyEquivalent:@""];
 
-    add(@"Send Selection", @selector(sendSelection:));
-    add(@"Save Selection as Snippet", @selector(saveSelectionAsSnippet:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.send_selection.910776d4", nil, NSBundle.mainBundle, @"Send Selection", @"User-facing context menu item."), @selector(sendSelection:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.save_selection_as_snippet.59ffe6d6", nil, NSBundle.mainBundle, @"Save Selection as Snippet", @"User-facing context menu item."), @selector(saveSelectionAsSnippet:));
 
     // Clear buffer
-    add(@"Clear Buffer", @selector(clearTextViewBuffer:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.clear_buffer.5a559eb3", nil, NSBundle.mainBundle, @"Clear Buffer", @"User-facing context menu item."), @selector(clearTextViewBuffer:));
 
     // Make note
-    add(@"Annotate Selection", @selector(addNote:));
-    add(@"Reveal Annotation", @selector(showNotes:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.annotate_selection.7b9215ff", nil, NSBundle.mainBundle, @"Annotate Selection", @"User-facing context menu item."), @selector(addNote:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.reveal_annotation.60ea3d0f", nil, NSBundle.mainBundle, @"Reveal Annotation", @"User-facing context menu item."), @selector(showNotes:));
 
     // Separator
     [theMenu addItem:[NSMenuItem separatorItem]];
 
     // Edit Session
-    add(@"Edit Session...", @selector(editTextViewSession:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.edit_session.0f315055", nil, NSBundle.mainBundle, @"Edit Session...", @"User-facing context menu item."), @selector(editTextViewSession:));
 
     // Separator
     [theMenu addItem:[NSMenuItem separatorItem]];
 
     // Toggle broadcast
-    add(@"Toggle Broadcasting Input", @selector(toggleBroadcastingInput:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.toggle_broadcasting_input.0afbc39e", nil, NSBundle.mainBundle, @"Toggle Broadcasting Input", @"User-facing context menu item."), @selector(toggleBroadcastingInput:));
 
     // Lock pane
     {
-        NSMenuItem *lockItem = [[NSMenuItem alloc] initWithTitle:@"Lock Pane"
+        NSMenuItem *lockItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.lock_pane.16012f00", nil, NSBundle.mainBundle, @"Lock Pane", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).")
                                                           action:@selector(toggleLock:)
                                                    keyEquivalent:@""];
         lockItem.target = self;
@@ -698,14 +701,14 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
         if (allLocked) {
             // Primary: Unlock (since all are locked)
             // No alternate needed - Lock All would be a no-op
-            NSMenuItem *unlockItem = [[NSMenuItem alloc] initWithTitle:@"Unlock All Panes in Tab"
+            NSMenuItem *unlockItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.unlock_all_panes_in_tab.f7aa3ccd", nil, NSBundle.mainBundle, @"Unlock All Panes in Tab", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).")
                                                                 action:@selector(unlockAllInTab:)
                                                          keyEquivalent:@""];
             unlockItem.target = self;
             [theMenu addItem:unlockItem];
         } else {
             // Primary: Lock (since not all are locked)
-            NSMenuItem *lockItem = [[NSMenuItem alloc] initWithTitle:@"Lock All Panes in Tab"
+            NSMenuItem *lockItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.lock_all_panes_in_tab.ff6b4847", nil, NSBundle.mainBundle, @"Lock All Panes in Tab", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).")
                                                               action:@selector(lockAllInTab:)
                                                        keyEquivalent:@""];
             lockItem.target = self;
@@ -713,7 +716,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
 
             // Alternate: Unlock (Option-key) - only if at least one pane is locked
             if (anyLocked) {
-                NSMenuItem *unlockItem = [[NSMenuItem alloc] initWithTitle:@"Unlock All Panes in Tab"
+                NSMenuItem *unlockItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.unlock_all_panes_in_tab.f7aa3ccd", nil, NSBundle.mainBundle, @"Unlock All Panes in Tab", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).")
                                                                     action:@selector(unlockAllInTab:)
                                                              keyEquivalent:@""];
                 unlockItem.target = self;
@@ -725,55 +728,55 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     }
 
     if ([self.delegate contextMenuHasCoprocess:self]) {
-        add(@"Stop Coprocess", @selector(stopCoprocess:));
+        add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.stop_coprocess.6b7307c1", nil, NSBundle.mainBundle, @"Stop Coprocess", @"User-facing context menu item."), @selector(stopCoprocess:));
     }
 
     // Separator
     [theMenu addItem:[NSMenuItem separatorItem]];
 
     // Close current pane
-    add(@"Close", @selector(closeTextViewSession:));
-    add(@"Restart", @selector(restartSession:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.close.7d9eb7ac", nil, NSBundle.mainBundle, @"Close", @"User-facing context menu item."), @selector(closeTextViewSession:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.restart.6b983a81", nil, NSBundle.mainBundle, @"Restart", @"User-facing context menu item."), @selector(restartSession:));
 
     [self.delegate contextMenu:self amend:theMenu];
 
     // Separator
     [theMenu addItem:[NSMenuItem separatorItem]];
-    add(@"Bury", @selector(bury:));
+    add(NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.bury.ab00d5f0", nil, NSBundle.mainBundle, @"Bury", @"User-facing context menu item."), @selector(bury:));
 
     // Terminal State
     [theMenu addItem:[NSMenuItem separatorItem]];
-    NSMenuItem *terminalState = [[NSMenuItem alloc] initWithTitle:@"Terminal State" action:nil keyEquivalent:@""];
-    terminalState.submenu = [[NSMenu alloc] initWithTitle:@"Terminal State"];
+    NSMenuItem *terminalState = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.terminal_state.c4006156", nil, NSBundle.mainBundle, @"Terminal State", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).") action:nil keyEquivalent:@""];
+    terminalState.submenu = [[NSMenu alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.terminal_state.c4006156", nil, NSBundle.mainBundle, @"Terminal State", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:).")];
 
     struct {
         NSString *title;
         SEL action;
     } terminalStateDecls[] = {
-        { @"Alternate Screen", @selector(terminalStateToggleAlternateScreen:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.alternate_screen.6c52306f", nil, NSBundle.mainBundle, @"Alternate Screen", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:)."), @selector(terminalStateToggleAlternateScreen:) },
         { nil, nil },
-        { @"Focus Reporting", @selector(terminalStateToggleFocusReporting:) },
-        { @"Mouse Reporting", @selector(terminalStateToggleMouseReporting:) },
-        { @"Paste Bracketing", @selector(terminalStateTogglePasteBracketing:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.focus_reporting.934f30cc", nil, NSBundle.mainBundle, @"Focus Reporting", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:)."), @selector(terminalStateToggleFocusReporting:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.mouse_reporting.d4d68999", nil, NSBundle.mainBundle, @"Mouse Reporting", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:)."), @selector(terminalStateToggleMouseReporting:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.paste_bracketing.bd0f74ae", nil, NSBundle.mainBundle, @"Paste Bracketing", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:)."), @selector(terminalStateTogglePasteBracketing:) },
         { nil, nil },
-        { @"Application Cursor", @selector(terminalStateToggleApplicationCursor:) },
-        { @"Application Keypad", @selector(terminalStateToggleApplicationKeypad:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.application_cursor.d4e748b9", nil, NSBundle.mainBundle, @"Application Cursor", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:)."), @selector(terminalStateToggleApplicationCursor:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.application_keypad.5aeb4e2a", nil, NSBundle.mainBundle, @"Application Keypad", @"User-facing text in iTermTextViewContextMenuHelper (menuAtCoord:)."), @selector(terminalStateToggleApplicationKeypad:) },
         { nil, nil },
-        { @"Standard Key Reporting Mode", @selector(terminalToggleKeyboardMode:) },
-        { @"modifyOtherKeys Mode 1", @selector(terminalToggleKeyboardMode:) },
-        { @"modifyOtherKeys Mode 2", @selector(terminalToggleKeyboardMode:) },
-        { @"CSI u Mode", @selector(terminalToggleKeyboardMode:) },
-        { @"Raw Key Reporting Mode", @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.standard_key_reporting_mode.c25f37b7", nil, NSBundle.mainBundle, @"Standard Key Reporting Mode", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.modifyotherkeys_mode_1.15d924fc", nil, NSBundle.mainBundle, @"modifyOtherKeys Mode 1", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.modifyotherkeys_mode_2.ff775042", nil, NSBundle.mainBundle, @"modifyOtherKeys Mode 2", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.csi_u_mode.21647084", nil, NSBundle.mainBundle, @"CSI u Mode", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.raw_key_reporting_mode.b6cc843f", nil, NSBundle.mainBundle, @"Raw Key Reporting Mode", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
         { nil, nil },
-        { @"Disambiguate Escape", @selector(terminalToggleKeyboardMode:) },
-        { @"Report All Event Types", @selector(terminalToggleKeyboardMode:) },
-        { @"Report Alternate Keys", @selector(terminalToggleKeyboardMode:) },
-        { @"Report All Keys as Escape Codes", @selector(terminalToggleKeyboardMode:) },
-        { @"Report Associated Text", @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.disambiguate_escape.f6c03214", nil, NSBundle.mainBundle, @"Disambiguate Escape", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.report_all_event_types.221f4bb4", nil, NSBundle.mainBundle, @"Report All Event Types", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.report_alternate_keys.1ea57b35", nil, NSBundle.mainBundle, @"Report Alternate Keys", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.report_all_keys_as_escape_codes.b9ccb6fd", nil, NSBundle.mainBundle, @"Report All Keys as Escape Codes", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.report_associated_text.65fc5867", nil, NSBundle.mainBundle, @"Report Associated Text", @"User-facing terminal state menu item."), @selector(terminalToggleKeyboardMode:) },
         { nil, nil },
-        { @"Literal Controls", @selector(terminalStateToggleLiteralMode:)},
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.literal_controls.888eb5d8", nil, NSBundle.mainBundle, @"Literal Controls", @"User-facing terminal state menu item."), @selector(terminalStateToggleLiteralMode:)},
         { nil, nil },
-        { @"Emulation Level", nil }
+        { NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.emulation_level.d9a6557c", nil, NSBundle.mainBundle, @"Emulation Level", @"User-facing terminal state menu item."), nil }
     };
     NSInteger j = 1;
     for (size_t i = 0; i < sizeof(terminalStateDecls) / sizeof(*terminalStateDecls); i++) {
@@ -830,7 +833,7 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     if (![[iTermApplication sharedApplication] isUIElement]) {
         return;
     }
-    NSMenuItem *mainMenuItem = [[NSMenuItem alloc] initWithTitle:@"Main Menu" action:nil keyEquivalent:@""];
+    NSMenuItem *mainMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.main_menu.35f9896e", nil, NSBundle.mainBundle, @"Main Menu", @"User-facing text in iTermTextViewContextMenuHelper (addMainMenuIfNeededTo:).") action:nil keyEquivalent:@""];
     NSMenu *copyOfMainMenu = [[NSMenu alloc] init];
     for (NSMenuItem *mainMenuItem in NSApp.mainMenu.itemArray) {
         [self addCopyOfItem:mainMenuItem to:copyOfMainMenu];
@@ -926,20 +929,20 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
     NSMenu *theMenu;
 
     // Allocate a menu
-    theMenu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    theMenu = [[NSMenu alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.contextual_menu.3db60c37", nil, NSBundle.mainBundle, @"Contextual Menu", @"User-facing text in iTermTextViewContextMenuHelper (menuForMark:directory:).")];
 
     NSMenuItem *theItem = [[NSMenuItem alloc] init];
-    theItem.title = [NSString stringWithFormat:@"Command: %@", mark.firstLineOfCommand];
+    theItem.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.command.7c488a07", nil, NSBundle.mainBundle, @"Command: %@", @"User-facing text in iTermTextViewContextMenuHelper (title)."), mark.firstLineOfCommand];
     [theMenu addItem:theItem];
 
     if (directory) {
         theItem = [[NSMenuItem alloc] init];
-        theItem.title = [NSString stringWithFormat:@"Directory: %@", directory];
+        theItem.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.directory.48014040", nil, NSBundle.mainBundle, @"Directory: %@", @"User-facing text in iTermTextViewContextMenuHelper (title)."), directory];
         [theMenu addItem:theItem];
     }
 
     theItem = [[NSMenuItem alloc] init];
-    theItem.title = [NSString stringWithFormat:@"Return code: %d", mark.code];
+    theItem.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.return_code_d.f6a6dd27", nil, NSBundle.mainBundle, @"Return code: %d", @"User-facing text in iTermTextViewContextMenuHelper (title)."), mark.code];
     [theMenu addItem:theItem];
 
     if (mark.startDate) {
@@ -955,10 +958,10 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
         int seconds = (int)runningTime % 60;
         int millis = (int) ((runningTime - floor(runningTime)) * 1000);
         if (hours > 0) {
-            theItem.title = [NSString stringWithFormat:@"Running time: %d:%02d:%02d",
+            theItem.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.running_time_d_02d_02d.5215a41a", nil, NSBundle.mainBundle, @"Running time: %d:%02d:%02d", @"User-facing text in iTermTextViewContextMenuHelper (title)."),
                              hours, minutes, seconds];
         } else {
-            theItem.title = [NSString stringWithFormat:@"Running time: %d:%02d.%03d",
+            theItem.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.running_time_d_02d_03d.7cc27a08", nil, NSBundle.mainBundle, @"Running time: %d:%02d.%03d", @"User-facing text in iTermTextViewContextMenuHelper (title)."),
                              minutes, seconds, millis];
         }
         [theMenu addItem:theItem];
@@ -966,14 +969,14 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
 
     [theMenu addItem:[NSMenuItem separatorItem]];
 
-    theItem = [[NSMenuItem alloc] initWithTitle:@"Re-run Command"
+    theItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.re_run_command.cf5733c2", nil, NSBundle.mainBundle, @"Re-run Command", @"User-facing text in iTermTextViewContextMenuHelper (menuForMark:directory:).")
                                          action:@selector(reRunCommand:)
                                   keyEquivalent:@""];
     theItem.target = self;
     [theItem setRepresentedObject:mark.fullCommand];
     [theMenu addItem:theItem];
 
-    theItem = [[NSMenuItem alloc] initWithTitle:@"Select Command Output"
+    theItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.contextmenu.itermtextviewcontextmenuhelper.select_command_output.f98ec114", nil, NSBundle.mainBundle, @"Select Command Output", @"User-facing text in iTermTextViewContextMenuHelper (menuForMark:directory:).")
                                          action:@selector(selectCommandOutput:)
                                   keyEquivalent:@""];
     theItem.target = self;
@@ -1430,4 +1433,3 @@ const int kMaxSelectedTextLengthForCustomActions = 400;
 }
 
 @end
-

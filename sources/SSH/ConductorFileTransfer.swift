@@ -43,12 +43,13 @@ class ConductorFileTransfer: TransferrableFile {
     }
 
     override func displayName() -> String? {
-        return """
+        let username = path.username ?? String(localized: "ui.swift.ssh.conductorfiletransfer.unknown.8fe7794d", defaultValue: "(unknown)", bundle: .main, comment: "Fallback user name in the file-transfer summary.")
+        return String(localized: "ui.swift.ssh.conductorfiletransfer.iterm2_ssh_integration_protocol_user_name_0_host.169107a6", defaultValue: """
         iTerm2 SSH Integration Protocol
-        User name: \(path.username ?? "(unknown)")")
+        User name: \(username)")
         Host: \(path.hostname!)
         File: \(path.path!)"
-        """
+        """, bundle: .main, comment: "User-facing SSH Integration file-transfer summary.")
     }
 
     override func shortName() -> String? {
@@ -56,7 +57,7 @@ class ConductorFileTransfer: TransferrableFile {
     }
 
     override func subheading() -> String? {
-        path.hostname! + " via SSH Integration"
+        String(localized: "ui.swift.ssh.conductorfiletransfer.0_via_ssh_integration.8acd2af9", defaultValue: "\(path.hostname!) via SSH Integration", bundle: .main, comment: "User-facing file-transfer subheading.")
     }
 
     override func authRequestor() -> String? {
@@ -67,7 +68,7 @@ class ConductorFileTransfer: TransferrableFile {
     }
 
     override func protocolName() -> String? {
-        return "SSH Integration"
+        return String(localized: "ui.swift.ssh.conductorfiletransfer.ssh_integration.2de7a54f", defaultValue: "SSH Integration", bundle: .main, comment: "User-facing text in ConductorFileTransfer.")
     }
 
     private var chunked = false
@@ -96,7 +97,7 @@ class ConductorFileTransfer: TransferrableFile {
 
     private func temporaryFilePath() throws -> String {
         guard let downloads = FileManager.default.downloadsDirectory() else {
-            throw ConductorFileTransferError("Unable to find Downloads folder")
+            throw ConductorFileTransferError(String(localized: "ui.swift.ssh.conductorfiletransfer.unable_to_find_downloads_folder.dd7d6558", defaultValue: "Unable to find Downloads folder", bundle: .main, comment: "User-facing file-transfer error."))
         }
         let tempFileName = ".iTerm2.\(UUID().uuidString)"
         return downloads.appendingPathComponent(tempFileName)
@@ -151,12 +152,12 @@ class ConductorFileTransfer: TransferrableFile {
     func didFinishSuccessfully() {
         if state == .downloading {
             if !quarantine(_localPath, sourceURL: url) {
-                _error = "Failed to quarantine"
+                _error = String(localized: "ui.swift.ssh.conductorfiletransfer.failed_to_quarantine.0bbc1c5a", defaultValue: "Failed to quarantine", bundle: .main, comment: "User-facing file-transfer error.")
                 FileTransferManager.sharedInstance().transferrableFile(self, didFinishTransmissionWithError: ConductorFileTransferError(_error))
                 return
             }
             guard let attributes = try? FileManager.default.attributesOfItem(atPath: _localPath!) else {
-                _error = "Could not get attributes of \(_localPath!)"
+                _error = String(localized: "ui.swift.ssh.conductorfiletransfer.could_not_get_attributes_of_0.f8f6dbb3", defaultValue: "Could not get attributes of \(_localPath!)", bundle: .main, comment: "User-facing file-transfer error.")
                 FileTransferManager.sharedInstance().transferrableFile(self, didFinishTransmissionWithError: ConductorFileTransferError(_error))
                 return
             }
@@ -216,14 +217,14 @@ class ConductorFileTransfer: TransferrableFile {
         do {
             let attrs = try FileManager.default.attributesOfItem(atPath: path)
             guard let size = attrs[FileAttributeKey.size] as? Int else {
-                _error = "Could not get size of file: \(path)"
+                _error = String(localized: "ui.swift.ssh.conductorfiletransfer.could_not_get_size_of_file_0.0888025e", defaultValue: "Could not get size of file: \(path)", bundle: .main, comment: "User-facing file-transfer error.")
                 state = .failed
                 FileTransferManager.sharedInstance().transferrableFile(self, didFinishTransmissionWithError: ConductorFileTransferError(_error))
                 return nil
             }
             return size
         } catch {
-            _error = "No such file: \(path)"
+            _error = String(localized: "ui.swift.ssh.conductorfiletransfer.no_such_file_0.db9e73ae", defaultValue: "No such file: \(path)", bundle: .main, comment: "User-facing file-transfer error.")
             FileTransferManager.sharedInstance().transferrableFile(self, didFinishTransmissionWithError: error)
             state = .failed
             return nil
@@ -268,7 +269,7 @@ class ConductorFileTransfer: TransferrableFile {
 
     override func localPath() -> String? {
         if data != nil {
-            return "(In memory)"
+            return String(localized: "ui.swift.ssh.conductorfiletransfer.in_memory.cdebbb4e", defaultValue: "(In memory)", bundle: .main, comment: "File-transfer source shown when upload data is held in memory.")
         }
         return _localPath
     }

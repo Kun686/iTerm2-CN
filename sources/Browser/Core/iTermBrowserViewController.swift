@@ -275,12 +275,12 @@ extension iTermBrowserViewController {
                 } catch {
                     videoWindowController?.close()
                     videoWindowController = nil
-                    iTermWarning.show(withTitle: "Could not create movie: \(error.localizedDescription)",
-                                      actions: ["OK"],
+                    iTermWarning.show(withTitle: String(localized: "ui.swift.browser.core.itermbrowserviewcontroller.could_not_create_movie_0.0acdb99b", defaultValue: "Could not create movie: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in iTermBrowserViewController."),
+                                      actions: [String(localized: "ui.swift.browser.core.itermbrowserviewcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermBrowserViewController.")],
                                       accessory: nil,
                                       identifier: nil,
                                       silenceable: .kiTermWarningTypePersistent,
-                                      heading: "Problem saving instant replay movie",
+                                      heading: String(localized: "ui.swift.browser.core.itermbrowserviewcontroller.problem_saving_instant_replay_movie.71e983bd", defaultValue: "Problem saving instant replay movie", bundle: .main, comment: "User-facing text in iTermBrowserViewController."),
                                       window: view.window)
                 }
             }
@@ -984,7 +984,7 @@ extension iTermBrowserViewController: iTermBrowserToolbarDelegate {
             // Remove bookmark
             let success = await database.removeBookmark(url: currentURL)
             if success {
-                ToastWindowController.showToast(withMessage: "Bookmark Removed")
+                ToastWindowController.showToast(withMessage: String(localized: "ui.swift.browser.core.itermbrowserviewcontroller.bookmark_removed.0dbfdec6", defaultValue: "Bookmark Removed", bundle: .main, comment: "User-facing text in iTermBrowserViewController."))
             }
         } else {
             // Add bookmark first, then show tag editor

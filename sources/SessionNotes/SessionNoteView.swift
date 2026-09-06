@@ -118,7 +118,7 @@ class SessionNoteView: NSView, NSTextViewDelegate {
         titleBar.wantsLayer = true
         titleBar.autoresizingMask = []
 
-        titleLabel = NSTextField(labelWithString: "Session Note")
+        titleLabel = NSTextField(labelWithString: String(localized: "ui.swift.sessionnotes.sessionnoteview.session_note.92b3980a", defaultValue: "Session Note", bundle: .main, comment: "User-facing text in SessionNoteView."))
         titleLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         titleLabel.textColor = .secondaryLabelColor
         titleLabel.lineBreakMode = .byTruncatingTail
@@ -130,7 +130,7 @@ class SessionNoteView: NSView, NSTextViewDelegate {
         collapseButton.bezelStyle = .inline
         collapseButton.isBordered = false
         collapseButton.image = NSImage(systemSymbolName: "chevron.down",
-                                       accessibilityDescription: "Collapse")
+                                       accessibilityDescription: String(localized: "ui.swift.sessionnotes.sessionnoteview.collapse.be6eb1fc", defaultValue: "Collapse", bundle: .main, comment: "User-facing text in SessionNoteView."))
         collapseButton.imagePosition = .imageOnly
         collapseButton.setButtonType(.momentaryPushIn)
 
@@ -319,7 +319,7 @@ class SessionNoteView: NSView, NSTextViewDelegate {
         if model.isCollapsed, let firstLine = model.text.components(separatedBy: .newlines).first, !firstLine.isEmpty {
             titleLabel.stringValue = firstLine
         } else {
-            titleLabel.stringValue = "Session Note"
+            titleLabel.stringValue = String(localized: "ui.swift.sessionnotes.sessionnoteview.session_note.92b3980a", defaultValue: "Session Note", bundle: .main, comment: "User-facing text in SessionNoteView.")
         }
     }
 
@@ -399,7 +399,7 @@ class SessionNoteView: NSView, NSTextViewDelegate {
     private func updateCollapseButtonImage() {
         let name = model.isCollapsed ? "chevron.right" : "chevron.down"
         collapseButton.image = NSImage(systemSymbolName: name,
-                                       accessibilityDescription: model.isCollapsed ? "Expand" : "Collapse")
+                                       accessibilityDescription: model.isCollapsed ? String(localized: "ui.swift.sessionnotes.sessionnoteview.expand.07548c2c", defaultValue: "Expand", bundle: .main, comment: "User-facing text in SessionNoteView.") : String(localized: "ui.swift.sessionnotes.sessionnoteview.collapse.be6eb1fc", defaultValue: "Collapse", bundle: .main, comment: "User-facing text in SessionNoteView."))
     }
 
     // MARK: - Drag (Title Bar) and Resize

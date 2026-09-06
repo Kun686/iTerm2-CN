@@ -9,6 +9,13 @@ import AppKit
 import SwiftyMarkdown
 import UniformTypeIdentifiers
 
+private func localizedChatSessionKind(terminal: Bool) -> String {
+    if terminal {
+        return String(localized: "ui.swift.aiterm.chatviewcontroller.terminal.4e686af7", defaultValue: "terminal", bundle: .main, comment: "User-facing text in ChatViewController.")
+    }
+    return String(localized: "ui.swift.aiterm.chatviewcontroller.web_browser.7e16b4a1", defaultValue: "web browser", bundle: .main, comment: "User-facing text in ChatViewController.")
+}
+
 protocol ChatViewControllerDelegate: AnyObject {
     func chatViewController(_ controller: ChatViewController, revealSessionWithGuid guid: String) -> Bool
     func chatViewControllerDeleteSession(_ controller: ChatViewController)
@@ -795,7 +802,7 @@ extension ChatViewController {
            let chat = listModel.chat(id: chatID) {
             return chat.title
         }
-        return "AI Chat"
+        return String(localized: "ui.swift.aiterm.chatviewcontroller.ai_chat.fe98f42c", defaultValue: "AI Chat", bundle: .main, comment: "User-facing text in ChatViewController.")
     }
 
     func offerLink(to guid: String, terminal: Bool, name: String?) {
@@ -880,12 +887,12 @@ extension ChatViewController {
         // window, and clobbering its title with the chat title would be
         // wrong.
         if let windowController = view.window?.windowController as? ChatWindowController {
-            windowController.updateTitle(chat?.title ?? "AI Chat")
+            windowController.updateTitle(chat?.title ?? String(localized: "ui.swift.aiterm.chatviewcontroller.ai_chat.fe98f42c", defaultValue: "AI Chat", bundle: .main, comment: "User-facing text in ChatViewController."))
         } else if isInlinePanel {
             updateInlineToolbarTitle()
         } else {
             // Fallback for compatibility
-            view.window?.title = chat?.title ?? "AI Chat"
+            view.window?.title = chat?.title ?? String(localized: "ui.swift.aiterm.chatviewcontroller.ai_chat.fe98f42c", defaultValue: "AI Chat", bundle: .main, comment: "User-facing text in ChatViewController.")
         }
         tableView.reloadData()
         brokerSubscription?.unsubscribe()
@@ -1144,11 +1151,11 @@ extension ChatViewController {
         if newPermission == .always,
            let autopopulationWarningText = category.autopopulationWarningText {
             let sel = iTermWarning.show(withTitle: autopopulationWarningText,
-                                        actions: ["Send Automatically", "Ask Each Time", "Never Allow"],
+                                        actions: [String(localized: "ui.swift.aiterm.chatviewcontroller.send_automatically.ad124756", defaultValue: "Send Automatically", bundle: .main, comment: "User-facing text in ChatViewController."), String(localized: "ui.swift.aiterm.chatviewcontroller.ask_each_time.34d2f064", defaultValue: "Ask Each Time", bundle: .main, comment: "User-facing text in ChatViewController."), String(localized: "ui.swift.aiterm.chatviewcontroller.never_allow.0bb84364", defaultValue: "Never Allow", bundle: .main, comment: "User-facing text in ChatViewController.")],
                                         accessory: nil,
                                         identifier: nil,
                                         silenceable: .kiTermWarningTypePersistent,
-                                        heading: "Confirm Change",
+                                        heading: String(localized: "ui.swift.aiterm.chatviewcontroller.confirm_change.3a8db975", defaultValue: "Confirm Change", bundle: .main, comment: "User-facing text in ChatViewController."),
                                         window: view.window)
             switch sel {
             case .kiTermWarningSelection0:
@@ -1209,7 +1216,7 @@ extension ChatViewController {
             completion(nil)
             return
         }
-        pickSessionPromise = SessionSelector.select(terminal: terminal, reason: "Link this session to AI chat?")
+        pickSessionPromise = SessionSelector.select(terminal: terminal, reason: String(localized: "ui.swift.aiterm.chatviewcontroller.link_this_session_to_ai_chat.cefc592e", defaultValue: "Link this session to AI chat?", bundle: .main, comment: "User-facing text in ChatViewController."))
         let waitingMessage = Message(chatID: chatID,
                                      author: .agent,
                                      content: .clientLocal(ClientLocal(action: .pickingSession)),
@@ -1261,9 +1268,11 @@ extension ChatViewController {
         } else {
             try model.setBrowserSessionGuid(reference)
         }
+        let sessionKind = localizedChatSessionKind(terminal: terminal)
+        let sessionName = name?.escapedForMarkdownCode ?? String(localized: "ui.swift.aiterm.chatviewcontroller.unnamed_session.2bfc3707", defaultValue: "(Unnamed session)", bundle: .main, comment: "User-facing text in ChatViewController.")
         try client.publishNotice(
             chatID: chatID,
-            notice: "This chat has been linked to \(terminal ? "terminal" : "web browser") session “\(name?.escapedForMarkdownCode ?? "(Unnamed session)")”")
+            notice: String(localized: "ui.swift.aiterm.chatviewcontroller.this_chat_has_been_linked_to_0_session.26007f0d", defaultValue: "This chat has been linked to \(sessionKind) session “\(sessionName)”", bundle: .main, comment: "User-facing text in ChatViewController."))
         // Carry the reference (stableID), NOT the raw guid: the toggle handler
         // and the button-label renderer both key permissions off
         // model.terminalSessionGuid/browserSessionGuid, which store `reference`.
@@ -1311,12 +1320,12 @@ extension ChatViewController {
             stopStreaming()
             return
         }
-        let selection = iTermWarning.show(withTitle: "All terminal content will be sent to AI, which may go to a third party. Ensure this is safe to do before proceeding.",
-                                          actions: ["OK", "Cancel"],
+        let selection = iTermWarning.show(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.all_terminal_content_will_be_sent_to_ai.7d802d8e", defaultValue: "All terminal content will be sent to AI, which may go to a third party. Ensure this is safe to do before proceeding.", bundle: .main, comment: "User-facing text in ChatViewController."),
+                                          actions: [String(localized: "ui.swift.aiterm.chatviewcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in ChatViewController."), String(localized: "ui.swift.aiterm.chatviewcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ChatViewController.")],
                                           accessory: nil,
                                           identifier: nil,
                                           silenceable: .kiTermWarningTypePersistent,
-                                          heading: "Privacy Warning",
+                                          heading: String(localized: "ui.swift.aiterm.chatviewcontroller.privacy_warning.4555da28", defaultValue: "Privacy Warning", bundle: .main, comment: "User-facing text in ChatViewController."),
                                           window: nil)
         if selection == .kiTermWarningSelection0 {
             streaming = true
@@ -1328,7 +1337,7 @@ extension ChatViewController {
     }
 
     @objc private func showLinkedSessionHelp(_ sender: Any) {
-        chatToolbar.sessionButton.it_showWarning(withMarkdown: "When a terminal session is linked to this chat, the AI may view terminal contents and run commands in that session. You will be prompted to grant permission before it is able to view, type to, or modify a terminal session.")
+        chatToolbar.sessionButton.it_showWarning(withMarkdown: String(localized: "ui.swift.aiterm.chatviewcontroller.when_a_terminal_session_is_linked_to_this.51cfe336", defaultValue: "When a terminal session is linked to this chat, the AI may view terminal contents and run commands in that session. You will be prompted to grant permission before it is able to view, type to, or modify a terminal session.", bundle: .main, comment: "User-facing text in ChatViewController."))
     }
 
     @objc private func deleteChat(_ sender: Any) {
@@ -1383,7 +1392,7 @@ extension ChatViewController {
                 OrchestratorClient.instance?.cancelWatchers(forChatID: chatID)
                 try? client.publishNotice(
                     chatID: chatID,
-                    notice: "This chat is no longer linked to a terminal session.")
+                    notice: String(localized: "ui.swift.aiterm.chatviewcontroller.this_chat_is_no_longer_linked_to_a.01480b8b", defaultValue: "This chat is no longer linked to a terminal session.", bundle: .main, comment: "User-facing text in ChatViewController."))
                 try publishUpdatedPermissions()
             } catch {
                 DLog("\(error)")
@@ -1397,7 +1406,7 @@ extension ChatViewController {
                 try listModel.setBrowserGuid(for: chatID, to: nil)
                 try? client.publishNotice(
                     chatID: chatID,
-                    notice: "This chat is no longer linked to a web browser session.")
+                    notice: String(localized: "ui.swift.aiterm.chatviewcontroller.this_chat_is_no_longer_linked_to_a.a7eeb0ec", defaultValue: "This chat is no longer linked to a web browser session.", bundle: .main, comment: "User-facing text in ChatViewController."))
                 try publishUpdatedPermissions()
             } catch {
                 DLog("\(error)")
@@ -1803,14 +1812,15 @@ extension ChatViewController: NSTableViewDataSource, NSTableViewDelegate {
                 }
                 guard let guid,
                       let session = iTermController.sharedInstance().anySession(forReference: guid) else {
-                    try? client.publishNotice(chatID: chatID, notice: "This chat is not linked to any \(browser ? "web browser" : "terminal") session.")
+                    let sessionKind = localizedChatSessionKind(terminal: !browser)
+                    try? client.publishNotice(chatID: chatID, notice: String(localized: "ui.swift.aiterm.chatviewcontroller.this_chat_is_not_linked_to_any_0.c63fd27d", defaultValue: "This chat is not linked to any \(sessionKind) session.", bundle: .main, comment: "User-facing text in ChatViewController."))
                     try? client.respondSuccessfullyToRemoteCommandRequest(
                         inChat: chatID,
                         requestUUID: messageID,
                         message: "The user did not link a \(browser ? "web browser" : "terminal") session to chat, so the function could not be run.",
                         functionCallName: functionCallName,
                         functionCallID: functionCallID,
-                        userNotice: "AI attempted to perform an action, but no \(browser ? "web browser" : "terminal") session is linked to this chat so it failed.")
+                        userNotice: String(localized: "ui.swift.aiterm.chatviewcontroller.ai_attempted_to_perform_an_action_but_no.3bbb3899", defaultValue: "AI attempted to perform an action, but no \(sessionKind) session is linked to this chat so it failed.", bundle: .main, comment: "User-facing text in ChatViewController."))
                     return
                 }
                 let allowed: Bool
@@ -2521,7 +2531,7 @@ extension Message.Content {
                 .paragraphStyle: paragraphStyle,
                 .font: NSFont.systemFont(ofSize: NSFont.systemFontSize)
             ]
-            return NSAttributedString(string: "A vector store was created", attributes: attributes)
+            return NSAttributedString(string: String(localized: "ui.swift.aiterm.chatviewcontroller.a_vector_store_was_created.0b695c3d", defaultValue: "A vector store was created", bundle: .main, comment: "User-facing text in ChatViewController."), attributes: attributes)
         case .watcherEvent(let payload):
             // Render with the system-message styling so the user
             // sees it's not their own message. Symbol prefix marks
@@ -2530,7 +2540,7 @@ extension Message.Content {
         case .unsupported:
             // A message a newer iTerm2 sent that this build can't decode.
             return AttributedStringForSystemMessageMarkdown(
-                "This message requires a newer version of iTerm2 to view.") {}
+                String(localized: "ui.swift.aiterm.chatviewcontroller.this_message_requires_a_newer_version_of_iterm2.a11639c4", defaultValue: "This message requires a newer version of iTerm2 to view.", bundle: .main, comment: "User-facing text in ChatViewController.")) {}
         case .plainText(let string, context: _):
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineBreakMode = .byWordWrapping
@@ -2567,12 +2577,12 @@ extension Message.Content {
         case .explanationRequest(request: let request):
             let string =
             if let url = request.url {
-                "Explain the output of \(request.subjectMatter) based on [attached terminal content](\(url))."
+                String(localized: "ui.swift.aiterm.chatviewcontroller.explain_the_output_of_0_based_on_attached.89ab877e", defaultValue: "Explain the output of \(request.subjectMatter) based on [attached terminal content](\(String(describing: url))).", bundle: .main, comment: "User-facing text in ChatViewController.")
             } else {
-                "Explain the output of \(request.subjectMatter) based on some no-longer-available content."
+                String(localized: "ui.swift.aiterm.chatviewcontroller.explain_the_output_of_0_based_on_some.d950c9d2", defaultValue: "Explain the output of \(request.subjectMatter) based on some no-longer-available content.", bundle: .main, comment: "User-facing text in ChatViewController.")
             }
             let epilogue = if request.truncated {
-                "\n*Note: The command output was truncated because it exceeded the maximum number of lines supported by AI Chat*"
+                String(localized: "ui.swift.aiterm.chatviewcontroller.note_the_command_output_was_truncated_because_it.11a02429", defaultValue: "\n*Note: The command output was truncated because it exceeded the maximum number of lines supported by AI Chat*", bundle: .main, comment: "User-facing text in ChatViewController.")
             } else {
                 ""
             }
@@ -2584,16 +2594,16 @@ extension Message.Content {
             case .classic(let request):
                 let specific = request.permissionDescription + "."
                 let warning = if safe == false {
-                    "⚠️ **The AI safety check flagged this command as potentially dangerous. Review it with care.**\n\n"
+                    String(localized: "ui.swift.aiterm.chatviewcontroller.the_ai_safety_check_flagged_this_command_as.a94a4179", defaultValue: "⚠️ **The AI safety check flagged this command as potentially dangerous. Review it with care.**\n\n", bundle: .main, comment: "User-facing text in ChatViewController.")
                 } else {
                     ""
                 }
-                let general =  "Would you like to grant AI **\(request.content.permissionCategory.rawValue)** permission?"
-                let info = "*If you grant or deny permission, it affects only this chat conversation while linked to this particular terminal session. You can change permissions in the chat Info menu.*"
+                let general =  String(localized: "ui.swift.aiterm.chatviewcontroller.would_you_like_to_grant_ai_0_permission.2f98c5a2", defaultValue: "Would you like to grant AI **\(request.content.permissionCategory.localizedDisplayName)** permission?", bundle: .main, comment: "User-facing text in ChatViewController.")
+                let info = String(localized: "ui.swift.aiterm.chatviewcontroller.if_you_grant_or_deny_permission_it_affects.46602f89", defaultValue: "*If you grant or deny permission, it affects only this chat conversation while linked to this particular terminal session. You can change permissions in the chat Info menu.*", bundle: .main, comment: "User-facing text in ChatViewController.")
                 return AttributedStringForGPTMarkdown(warning + specific + " " + general + "\n\n" + info,
                                                       linkColor: linkColor,
                                                       textColor: textColor) {}
-            case .external(let ext):
+            case .external:
                 // External payloads (from orchestration mode) render as
                 // a system-message bubble showing what the agent did.
                 // No Approve / Deny buttons, because the orchestrator's
@@ -2602,7 +2612,7 @@ extension Message.Content {
                 // @<guid> session/workgroup targets the activity line
                 // carries become clickable links (or "[defunct session]"
                 // once the target is gone).
-                let rendered = AttributedStringForSystemMessageMarkdown(ext.markdownDescription) {}
+                let rendered = AttributedStringForSystemMessageMarkdown(payload.markdownDescription) {}
                 return OrchestrationMentionRenderer.link(rendered, linkColor: linkColor, atSignOptional: atSignOptional)
             }
         case .remoteCommandResponse(let response, _, _, _):
@@ -2617,7 +2627,7 @@ extension Message.Content {
         case .clientLocal(let clientLocal):
             switch clientLocal.action {
             case .pickingSession:
-                return AttributedStringForSystemMessageMarkdown("Waiting for a session to be selected…") { }
+                return AttributedStringForSystemMessageMarkdown(String(localized: "ui.swift.aiterm.chatviewcontroller.waiting_for_a_session_to_be_selected.54585b98", defaultValue: "Waiting for a session to be selected…", bundle: .main, comment: "User-facing text in ChatViewController.")) { }
             case .executingCommand(let command):
                 return AttributedStringForSystemMessageMarkdown(command.markdownDescription) { }
             case .notice(let message):
@@ -2625,35 +2635,22 @@ extension Message.Content {
             case .streamingChanged(let state):
                 return switch state {
                 case .stopped:
-                    AttributedStringForSystemMessageMarkdown("Terminal commands will no longer be sent to AI automatically.") {}
+                    AttributedStringForSystemMessageMarkdown(String(localized: "ui.swift.aiterm.chatviewcontroller.terminal_commands_will_no_longer_be_sent_to.7fab6e7e", defaultValue: "Terminal commands will no longer be sent to AI automatically.", bundle: .main, comment: "User-facing text in ChatViewController.")) {}
                 case .active:
-                    AttributedStringForSystemMessageMarkdown("All terminal commands in the linked session will be sent to AI automatically.") {}
+                    AttributedStringForSystemMessageMarkdown(String(localized: "ui.swift.aiterm.chatviewcontroller.all_terminal_commands_in_the_linked_session_will.d0ed9a85", defaultValue: "All terminal commands in the linked session will be sent to AI automatically.", bundle: .main, comment: "User-facing text in ChatViewController.")) {}
                 case .stoppedAutomatically:
-                    AttributedStringForSystemMessageMarkdown("Terminal commands will no longer be sent to AI automatically. Automatic sending always terminates when iTerm2 restarts or the current chat changes.") {}
+                    AttributedStringForSystemMessageMarkdown(String(localized: "ui.swift.aiterm.chatviewcontroller.terminal_commands_will_no_longer_be_sent_to.8ae75c32", defaultValue: "Terminal commands will no longer be sent to AI automatically. Automatic sending always terminates when iTerm2 restarts or the current chat changes.", bundle: .main, comment: "User-facing text in ChatViewController.")) {}
                 }
             case let .offerLink(terminal: terminal, guid: _, name: name):
-                let displayName = name ?? "Unnamed session"
-                let kind = terminal ? "terminal" : "browser"
-                let body = "**Link this chat to \(kind) session \u{201C}\(displayName)\u{201D}, "
-                    + "or enable orchestration?**\n\n"
-                    + "Linking gives the AI access to this \(kind) session subject to "
-                    + "your per-call permission. **Orchestration** is an alternative "
-                    + "mode where the AI can coordinate multiple sessions. "
-                    + "It uses automatic safety checking and one-time per-session approval instead of "
-                    + "fine-grained permissions."
+                let displayName = name ?? String(localized: "ui.swift.aiterm.chatviewcontroller.unnamed_session.f1ff2801", defaultValue: "Unnamed session", bundle: .main, comment: "User-facing text in ChatViewController.")
+                let kind = terminal ? String(localized: "ui.swift.aiterm.chatviewcontroller.terminal.4e686af7", defaultValue: "terminal", bundle: .main, comment: "User-facing text in ChatViewController.") : String(localized: "ui.swift.aiterm.chatviewcontroller.browser.d4c3e8a1", defaultValue: "browser", bundle: .main, comment: "User-facing text in ChatViewController.")
+                let body = String(localized: "ui.swift.aiterm.chatviewcontroller.link_this_chat_to_0_session_1_or.673a85d3", defaultValue: "**Link this chat to \(kind) session \u{201C}\(displayName)\u{201D}, or enable orchestration?**\n\nLinking gives the AI access to this \(kind) session subject to your per-call permission. **Orchestration** is an alternative mode where the AI can coordinate multiple sessions. It uses automatic safety checking and one-time per-session approval instead of fine-grained permissions.", bundle: .main, comment: "User-facing text in ChatViewController.")
                 return AttributedStringForSystemMessageMarkdown(body) {}
             case .offerOrchestration:
-                let body = "**Enable orchestration for this chat?**\n\n"
-                    + "**Orchestration** lets the AI coordinate across "
-                    + "multiple terminal sessions. It can read the contents "
-                    + "of any session, and you grant a one-time approval "
-                    + "before it controls a session instead of approving "
-                    + "every call. It also runs in **auto mode**: each "
-                    + "command the AI proposes is checked for safety by your "
-                    + "AI provider, and anything risky is held for your review."
+                let body = String(localized: "ui.swift.aiterm.chatviewcontroller.enable_orchestration_for_this_chat_orchestration_lets_the.fd7dbe1d", defaultValue: "**Enable orchestration for this chat?**\n\n**Orchestration** lets the AI coordinate across multiple terminal sessions. It can read the contents of any session, and you grant a one-time approval before it controls a session instead of approving every call. It also runs in **auto mode**: each command the AI proposes is checked for safety by your AI provider, and anything risky is held for your review.", bundle: .main, comment: "User-facing text in ChatViewController.")
                 return AttributedStringForSystemMessageMarkdown(body) {}
             case .permissions:
-                return AttributedStringForSystemMessageMarkdown("You can use these buttons or the info button menu at the top of the chat window to control AI permissions for this chat.") {}
+                return AttributedStringForSystemMessageMarkdown(String(localized: "ui.swift.aiterm.chatviewcontroller.you_can_use_these_buttons_or_the_info.9c48bdfc", defaultValue: "You can use these buttons or the info button menu at the top of the chat window to control AI permissions for this chat.", bundle: .main, comment: "User-facing text in ChatViewController.")) {}
             case let .workgroupPermissionRequest(_, workgroupID, workgroupName, summary):
                 // Three distinct prompt shapes share this content type:
                 //   - "spawn": the orchestrator wants to open a brand-new
@@ -2670,27 +2667,27 @@ extension Message.Content {
                 //   - real workgroup_id: workgroup phrasing.
                 let body: String
                 if workgroupID == WorkgroupIntrospection.spawnWorkgroupID {
-                    body = "**Open a new session?**\n\n\(summary)"
+                    body = String(localized: "ui.swift.aiterm.chatviewcontroller.open_a_new_session_0.fa187ac2", defaultValue: "**Open a new session?**\n\n\(summary)", bundle: .main, comment: "User-facing text in ChatViewController.")
                 } else if workgroupID == WorkgroupIntrospection.commandApprovalWorkgroupID {
                     // Per-command safety approval: the orchestrator's safety
                     // gate flagged a command (or file write) and is asking the
                     // user to approve it before it runs. The specifics live in
                     // the summary the dispatcher built.
-                    body = "**Run this command?**\n\n\(summary)"
+                    body = String(localized: "ui.swift.aiterm.chatviewcontroller.run_this_command_0.f4e5cd9b", defaultValue: "**Run this command?**\n\n\(summary)", bundle: .main, comment: "User-facing text in ChatViewController.")
                 } else if workgroupID == WorkgroupIntrospection.watchApprovalWorkgroupID {
                     // One-time consent for a session-bound watch to read the
                     // screen repeatedly when View Contents is set to Ask. Details
                     // (which session, what it watches for) live in the summary.
-                    body = "**Allow repeated screen reads?**\n\n\(summary)"
+                    body = String(localized: "ui.swift.aiterm.chatviewcontroller.allow_repeated_screen_reads_0.3572ad6c", defaultValue: "**Allow repeated screen reads?**\n\n\(summary)", bundle: .main, comment: "User-facing text in ChatViewController.")
                 } else {
                     let kind = workgroupID.hasPrefix(WorkgroupIntrospection.syntheticWorkgroupIDPrefix)
-                        ? "session"
-                        : "workgroup"
-                    body = "**Allow agent to control \(kind) \u{201C}\(workgroupName)\u{201D}?**\n\n\(summary)"
+                        ? String(localized: "ui.swift.aiterm.chatviewcontroller.session.3f3af1ec", defaultValue: "session", bundle: .main, comment: "User-facing text in ChatViewController.")
+                        : String(localized: "ui.swift.aiterm.chatviewcontroller.workgroup.27dd7346", defaultValue: "workgroup", bundle: .main, comment: "User-facing text in ChatViewController.")
+                    body = String(localized: "ui.swift.aiterm.chatviewcontroller.allow_agent_to_control_0_1_2.06358b2b", defaultValue: "**Allow agent to control \(kind) \u{201C}\(workgroupName)\u{201D}?**\n\n\(summary)", bundle: .main, comment: "User-facing text in ChatViewController.")
                 }
                 return AttributedStringForSystemMessageMarkdown(body) {}
             case .enableOrchestrationRequest:
-                let body = """
+                let body = String(localized: "ui.swift.aiterm.chatviewcontroller.enable_orchestration_orchestration_mode_lets_the_agent_read.ddac18ba", defaultValue: """
                 **Enable orchestration?**
 
                 Orchestration mode lets the agent read screen contents from any session. To type \
@@ -2701,19 +2698,16 @@ extension Message.Content {
 
                 Enabling will detach any linked terminal or browser session and switch \
                 the chat to Orchestration mode.
-                """
+                """, bundle: .main, comment: "User-facing text in ChatViewController.")
                 return AttributedStringForSystemMessageMarkdown(body) {}
             case let .orchestrationPermissionGranted(_, name):
-                let body = "**Granted this chat permission to control "
-                    + "\u{201C}\(name)\u{201D}.**\n\n"
-                    + "You @-mentioned it, so the agent can act there "
-                    + "without asking. Revoke to require approval again."
+                let body = String(localized: "ui.swift.aiterm.chatviewcontroller.granted_this_chat_permission_to_control_0_you.f76ffede", defaultValue: "**Granted this chat permission to control \u{201C}\(name)\u{201D}.**\n\nYou @-mentioned it, so the agent can act there without asking. Revoke to require approval again.", bundle: .main, comment: "User-facing text in ChatViewController.")
                 return AttributedStringForSystemMessageMarkdown(body) {}
             }
 
         case .selectSessionRequest(_, terminal: let terminal):
             return AttributedStringForGPTMarkdown(
-                "The AI agent needs to run commands in a live \(terminal ? "terminal" : "web browser") session, but none is attached to this chat.",
+                String(localized: "ui.swift.aiterm.chatviewcontroller.the_ai_agent_needs_to_run_commands_in.160d18b2", defaultValue: "The AI agent needs to run commands in a live \(localizedChatSessionKind(terminal: terminal)) session, but none is attached to this chat.", bundle: .main, comment: "User-facing text in ChatViewController."),
                 linkColor: linkColor,
                 textColor: textColor,
                 didCopy: {})
@@ -2751,12 +2745,12 @@ extension Message {
         case .clientLocal(let clientLocal):
             switch clientLocal.action {
             case .pickingSession, .executingCommand:
-                return [.init(title: "Cancel", destructive: true, identifier: "")]
+                return [.init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: true, identifier: "")]
             case .notice: return []
             case .streamingChanged(let state):
                 switch state {
                 case .active:
-                    return [.init(title: "Stop", destructive: true, identifier: "")]
+                    return [.init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.stop.cae7d57b", defaultValue: "Stop", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: true, identifier: "")]
                 case .stopped, .stoppedAutomatically:
                     return []
                 }
@@ -2765,12 +2759,12 @@ extension Message {
                 // handler in configure(cell:RegularMessageCellView,...);
                 // empty-string ids would conflict with the
                 // single-button cases above.
-                return [.init(title: "Link", destructive: false, identifier: "link"),
-                        .init(title: "Enable Orchestration", destructive: false, identifier: "orchestrate")]
+                return [.init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.link.a6a32dbc", defaultValue: "Link", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: false, identifier: "link"),
+                        .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.enable_orchestration.2de3a21a", defaultValue: "Enable Orchestration", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: false, identifier: "orchestrate")]
             case .offerOrchestration:
                 // Identifier matches the offerOrchestration buttonClicked
                 // handler in configure(cell:RegularMessageCellView,...).
-                return [.init(title: "Enable Orchestration", destructive: false, identifier: "orchestrate")]
+                return [.init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.enable_orchestration.2de3a21a", defaultValue: "Enable Orchestration", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: false, identifier: "orchestrate")]
             case let .permissions(terminal: terminal, guid: guid):
                 let rce = RemoteCommandExecutor.instance
                 var buttons = [MessageRendition.Regular.Button]()
@@ -2784,16 +2778,16 @@ extension Message {
                     let state = switch rce.permission(chatID: chatID, inSessionGuid: guid, category: category) {
                     case .always:
                         if category.autopopulatedWhenAlways {
-                            "Provided automatically"
+                            String(localized: "ui.swift.aiterm.chatviewcontroller.provided_automatically.b4e4645d", defaultValue: "Provided automatically", bundle: .main, comment: "User-facing text in ChatViewController.")
                         } else {
-                            "Always"
+                            String(localized: "ui.swift.aiterm.chatviewcontroller.always.de9f057a", defaultValue: "Always", bundle: .main, comment: "User-facing text in ChatViewController.")
                         }
                     case .never:
-                        "Never"
+                        String(localized: "ui.swift.aiterm.chatviewcontroller.never.6300ef80", defaultValue: "Never", bundle: .main, comment: "User-facing text in ChatViewController.")
                     case .ask:
-                        "Ask"
+                        String(localized: "ui.swift.aiterm.chatviewcontroller.ask.b8c209cd", defaultValue: "Ask", bundle: .main, comment: "User-facing text in ChatViewController.")
                     }
-                    buttons.append(.init(title: category.rawValue + ": " + state,
+                    buttons.append(.init(title: category.localizedDisplayName + ": " + state,
                                          destructive: false,
                                          identifier: category.rawValue))
                 }
@@ -2804,19 +2798,19 @@ extension Message {
                 // wires the buttonClicked handler that parses them and
                 // publishes the matching workgroupPermissionResponse.
                 return [
-                    .init(title: "Approve",
+                    .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.approve.6007acbe", defaultValue: "Approve", bundle: .main, comment: "User-facing text in ChatViewController."),
                           destructive: false,
                           identifier: "workgroupPermission:\(ApprovalChoice.approve.rawValue):\(requestID)"),
-                    .init(title: "Deny",
+                    .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.deny.05a2d733", defaultValue: "Deny", bundle: .main, comment: "User-facing text in ChatViewController."),
                           destructive: true,
                           identifier: "workgroupPermission:\(ApprovalChoice.deny.rawValue):\(requestID)"),
                 ]
             case let .enableOrchestrationRequest(requestID):
                 return [
-                    .init(title: "Enable Orchestration",
+                    .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.enable_orchestration.2de3a21a", defaultValue: "Enable Orchestration", bundle: .main, comment: "User-facing text in ChatViewController."),
                           destructive: false,
                           identifier: "enableOrchestration:\(ApprovalChoice.approve.rawValue):\(requestID)"),
-                    .init(title: "Not Now",
+                    .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.not_now.ccb4c324", defaultValue: "Not Now", bundle: .main, comment: "User-facing text in ChatViewController."),
                           destructive: true,
                           identifier: "enableOrchestration:\(ApprovalChoice.deny.rawValue):\(requestID)"),
                 ]
@@ -2826,21 +2820,21 @@ extension Message {
                 // so handleRevokeOrchestrationPermissionButton splits with
                 // maxSplits 1 and keeps everything after it verbatim.
                 return [
-                    .init(title: "Revoke",
+                    .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.revoke.87e6d00b", defaultValue: "Revoke", bundle: .main, comment: "User-facing text in ChatViewController."),
                           destructive: true,
                           identifier: "revokeOrchestrationPermission:\(scope)"),
                 ]
             }
         case .selectSessionRequest:
-            return [.init(title: "Select a Session", destructive: false, identifier: PickSessionButtonIdentifier.pickSession.rawValue),
-                    .init(title: "Cancel", destructive: true, identifier: PickSessionButtonIdentifier.cancel.rawValue)]
+            return [.init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.select_a_session.869da394", defaultValue: "Select a Session", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: false, identifier: PickSessionButtonIdentifier.pickSession.rawValue),
+                    .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: true, identifier: PickSessionButtonIdentifier.cancel.rawValue)]
         case .remoteCommandRequest(let payload, safe: _):
             switch payload {
             case .classic:
-                return [.init(title: "Allow Once", destructive: false, identifier: RemoteCommandButtonIdentifier.allowOnce.rawValue),
-                        .init(title: "Always Allow", destructive: false, identifier: RemoteCommandButtonIdentifier.allowAlways.rawValue),
-                        .init(title: "Deny this Time", destructive: true, identifier: RemoteCommandButtonIdentifier.denyOnce.rawValue),
-                        .init(title: "Always Deny", destructive: true, identifier: RemoteCommandButtonIdentifier.denyAlways.rawValue)]
+                return [.init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.allow_once.18e34d7e", defaultValue: "Allow Once", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: false, identifier: RemoteCommandButtonIdentifier.allowOnce.rawValue),
+                        .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.always_allow.80584802", defaultValue: "Always Allow", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: false, identifier: RemoteCommandButtonIdentifier.allowAlways.rawValue),
+                        .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.deny_this_time.678b0b05", defaultValue: "Deny this Time", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: true, identifier: RemoteCommandButtonIdentifier.denyOnce.rawValue),
+                        .init(title: String(localized: "ui.swift.aiterm.chatviewcontroller.always_deny.f9fd413a", defaultValue: "Always Deny", bundle: .main, comment: "User-facing text in ChatViewController."), destructive: true, identifier: RemoteCommandButtonIdentifier.denyAlways.rawValue)]
             case .external:
                 // Orchestration tool calls aren't per-call gated; no buttons.
                 return []
@@ -2864,7 +2858,7 @@ extension ChatViewController: NSMenuItemValidation {
             if menuItem.state == .on {
                 menuItem.title = autoTitle
             } else {
-                menuItem.title = "AI can \(category.rawValue)"
+                menuItem.title = category.regularTitle
             }
         }
         if let action = menuItem.action, isFindAction(action) {
@@ -3339,11 +3333,11 @@ extension ChatViewController: ChatToolbarDataSource {
         // disabled (see ChatListModel.setOrchestrationEnabled).
         let orchestrationOn = listModel.chat(id: chatID)?.orchestrationEnabled ?? false
         if orchestrationOn {
-            menu.addItem(withTitle: "Disable Orchestration",
+            menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.disable_orchestration.d7c121e1", defaultValue: "Disable Orchestration", bundle: .main, comment: "User-facing text in ChatViewController."),
                          action: #selector(disableOrchestration(_:)),
                          target: self)
         } else {
-            menu.addItem(withTitle: "Enable Orchestration",
+            menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.enable_orchestration.2de3a21a", defaultValue: "Enable Orchestration", bundle: .main, comment: "User-facing text in ChatViewController."),
                          action: #selector(enableOrchestration(_:)),
                          target: self)
         }
@@ -3361,12 +3355,12 @@ extension ChatViewController: ChatToolbarDataSource {
             if let guid = model?.terminalSessionGuid,
                iTermController.sharedInstance().anySession(forReference: guid) != nil {
 
-                menu.addItem(withTitle: "Reveal Linked Terminal Session", action: #selector(revealLinkedTerminalSession(_:)), target: self)
-                menu.addItem(withTitle: "Unlink Terminal Session", action: #selector(unlinkTerminalSession(_:)), target: self)
+                menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.reveal_linked_terminal_session.83bf85e6", defaultValue: "Reveal Linked Terminal Session", bundle: .main, comment: "User-facing text in ChatViewController."), action: #selector(revealLinkedTerminalSession(_:)), target: self)
+                menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.unlink_terminal_session.f8a3b2c2", defaultValue: "Unlink Terminal Session", bundle: .main, comment: "User-facing text in ChatViewController."), action: #selector(unlinkTerminalSession(_:)), target: self)
                 // Inline-panel CVCs are already hosted in their session — no
                 // need to offer to put themselves there.
                 if !isInlinePanel {
-                    menu.addItem(withTitle: "Put Chat in Linked Terminal Session",
+                    menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.put_chat_in_linked_terminal_session.fc059bc0", defaultValue: "Put Chat in Linked Terminal Session", bundle: .main, comment: "User-facing text in ChatViewController."),
                                  action: #selector(putChatInLinkedTerminalSession(_:)),
                                  target: self)
                 }
@@ -3389,7 +3383,7 @@ extension ChatViewController: ChatToolbarDataSource {
                 menu.addItem(NSMenuItem.separator())
 
                 if haveLinkedTerminalSession {
-                    menu.addItem(withTitle: "Send Commands & Output to AI Automatically",
+                    menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.send_commands_output_to_ai_automatically.fba8dea5", defaultValue: "Send Commands & Output to AI Automatically", bundle: .main, comment: "User-facing text in ChatViewController."),
                                  action: #selector(toggleStream(_:)),
                                  target: self,
                                  state: streaming ? .on : .off,
@@ -3397,7 +3391,7 @@ extension ChatViewController: ChatToolbarDataSource {
                     menu.addItem(NSMenuItem.separator())
                 }
             } else {
-                menu.addItem(withTitle: "Link Terminal Session", action: #selector(objcLinkTerminalSession(_:)), target: self)
+                menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.link_terminal_session.1f7d11da", defaultValue: "Link Terminal Session", bundle: .main, comment: "User-facing text in ChatViewController."), action: #selector(objcLinkTerminalSession(_:)), target: self)
                 menu.addItem(NSMenuItem.separator())
             }
 
@@ -3405,10 +3399,10 @@ extension ChatViewController: ChatToolbarDataSource {
             if let guid = model?.browserSessionGuid,
                iTermController.sharedInstance().anySession(forReference: guid) != nil {
 
-                menu.addItem(withTitle: "Reveal Linked Web Browser Session", action: #selector(revealLinkedBrowserSession(_:)), target: self)
-                menu.addItem(withTitle: "Unlink Web Browser Session", action: #selector(unlinkBrowserSession(_:)), target: self)
+                menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.reveal_linked_web_browser_session.b40eecf0", defaultValue: "Reveal Linked Web Browser Session", bundle: .main, comment: "User-facing text in ChatViewController."), action: #selector(revealLinkedBrowserSession(_:)), target: self)
+                menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.unlink_web_browser_session.e48325ce", defaultValue: "Unlink Web Browser Session", bundle: .main, comment: "User-facing text in ChatViewController."), action: #selector(unlinkBrowserSession(_:)), target: self)
                 if !isInlinePanel {
-                    menu.addItem(withTitle: "Put Chat in Linked Browser Session",
+                    menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.put_chat_in_linked_browser_session.ae06da7c", defaultValue: "Put Chat in Linked Browser Session", bundle: .main, comment: "User-facing text in ChatViewController."),
                                  action: #selector(putChatInLinkedBrowserSession(_:)),
                                  target: self)
                 }
@@ -3419,7 +3413,7 @@ extension ChatViewController: ChatToolbarDataSource {
                     if !category.isBrowserSpecific {
                         continue
                     }
-                    menu.addItem(withTitle: "AI can \(category.rawValue)",
+                    menu.addItem(withTitle: category.regularTitle,
                                  action: #selector(toggleAlwaysAllow(_:)),
                                  target: self,
                                  state: rce.controlState(chatID: chatID,
@@ -3430,13 +3424,13 @@ extension ChatViewController: ChatToolbarDataSource {
                 }
                 menu.addItem(NSMenuItem.separator())
             } else {
-                menu.addItem(withTitle: "Link Browser Session", action: #selector(objcLinkBrowserSession(_:)), target: self)
+                menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.link_browser_session.211d5e08", defaultValue: "Link Browser Session", bundle: .main, comment: "User-facing text in ChatViewController."), action: #selector(objcLinkBrowserSession(_:)), target: self)
                 menu.addItem(NSMenuItem.separator())
             }
         }
 
 
-        menu.addItem(withTitle: "Help", action: #selector(showLinkedSessionHelp(_:)), target: self)
+        menu.addItem(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.help.b79cac92", defaultValue: "Help", bundle: .main, comment: "User-facing text in ChatViewController."), action: #selector(showLinkedSessionHelp(_:)), target: self)
 
         // Position the menu just below the button
         let location = NSPoint(x: 0, y: sender.bounds.height)
@@ -3686,7 +3680,7 @@ extension ChatViewController: InlineChatToolbarViewDelegate {
         // chatStorage is kept most-recent-first (see ChatListModel).
         for i in 0..<listModel.count {
             let chat = listModel.chat(at: i)
-            let title = chat.title.isEmpty ? "Untitled Chat" : chat.title
+            let title = chat.title.isEmpty ? String(localized: "ui.swift.aiterm.chatviewcontroller.untitled_chat.84f4df45", defaultValue: "Untitled Chat", bundle: .main, comment: "User-facing text in ChatViewController.") : chat.title
             let item = NSMenuItem(title: title,
                                   action: #selector(switchToChatFromMenu(_:)),
                                   keyEquivalent: "")
@@ -3718,7 +3712,7 @@ extension ChatViewController: InlineChatToolbarViewDelegate {
             menu.addItem(item)
         }
         if menu.items.isEmpty {
-            let item = NSMenuItem(title: "No Chats", action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: String(localized: "ui.swift.aiterm.chatviewcontroller.no_chats.8fe13081", defaultValue: "No Chats", bundle: .main, comment: "User-facing text in ChatViewController."), action: nil, keyEquivalent: "")
             item.isEnabled = false
             menu.addItem(item)
         }
@@ -3790,9 +3784,9 @@ class InlinePanelCoordinator: NSObject, ChatViewControllerDelegate {
     func chatViewControllerDeleteSession(_ controller: ChatViewController) {
         guard let chatID = controller.chatID else { return }
         let warning = iTermWarning()
-        warning.title = "Are you sure you want to delete this chat? This action cannot be undone."
-        warning.heading = "Delete Chat?"
-        let action = iTermWarningAction(label: "Delete") { [weak self] _ in
+        warning.title = String(localized: "ui.swift.aiterm.chatviewcontroller.are_you_sure_you_want_to_delete_this.43560a32", defaultValue: "Are you sure you want to delete this chat? This action cannot be undone.", bundle: .main, comment: "User-facing text in ChatViewController.")
+        warning.heading = String(localized: "ui.swift.aiterm.chatviewcontroller.delete_chat.b4973d03", defaultValue: "Delete Chat?", bundle: .main, comment: "User-facing text in ChatViewController.")
+        let action = iTermWarningAction(label: String(localized: "ui.swift.aiterm.chatviewcontroller.delete.e2d0a549", defaultValue: "Delete", bundle: .main, comment: "User-facing text in ChatViewController.")) { [weak self] _ in
             // Runs from iTermWarning.runModal() on the main thread.
             MainActor.assumeIsolated {
                 do {
@@ -3811,7 +3805,7 @@ class InlinePanelCoordinator: NSObject, ChatViewControllerDelegate {
             }
         }
         action.destructive = true
-        warning.warningActions = [iTermWarningAction(label: "Cancel"), action]
+        warning.warningActions = [iTermWarningAction(label: String(localized: "ui.swift.aiterm.chatviewcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ChatViewController.")), action]
         warning.warningType = .kiTermWarningTypePersistent
         warning.runModal()
     }
@@ -3974,8 +3968,8 @@ extension ChatViewController {
         // stick for the rest of the chat. Users coming from the
         // menu-driven toggle won't know that without being told.
         let alert = NSAlert()
-        alert.messageText = "Enable orchestration mode?"
-        alert.informativeText = """
+        alert.messageText = String(localized: "ui.swift.aiterm.chatviewcontroller.enable_orchestration_mode.afb95915", defaultValue: "Enable orchestration mode?", bundle: .main, comment: "User-facing text in ChatViewController.")
+        alert.informativeText = String(localized: "ui.swift.aiterm.chatviewcontroller.orchestration_mode_lets_the_agent_coordinate_across_any.aaafcbf7", defaultValue: """
             Orchestration mode lets the agent coordinate across any iTerm2 sessions. \
             It can read screen contents from any session, but to type into a session requires \
             your permission. This is a more permissive model than when an agent is linked to \
@@ -3983,10 +3977,10 @@ extension ChatViewController {
 
             Enabling will detach any linked terminal or browser session and switch \
             the chat to Orchestration mode.
-            """
+            """, bundle: .main, comment: "User-facing text in ChatViewController.")
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "Enable Orchestration")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.enable_orchestration.2de3a21a", defaultValue: "Enable Orchestration", bundle: .main, comment: "User-facing text in ChatViewController."))
+        alert.addButton(withTitle: String(localized: "ui.swift.aiterm.chatviewcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ChatViewController."))
         guard alert.runModal() == .alertFirstButtonReturn else { return }
         setOrchestrationEnabled(true)
     }
@@ -4043,8 +4037,8 @@ extension ChatViewController {
         }
         inputView.refreshPlaceholder()
         let notice = enabled
-            ? "Orchestration enabled. Agent can see content of all sessions."
-            : "Orchestration disabled."
+            ? String(localized: "ui.swift.aiterm.chatviewcontroller.orchestration_enabled_agent_can_see_content_of_all.e909a078", defaultValue: "Orchestration enabled. Agent can see content of all sessions.", bundle: .main, comment: "User-facing text in ChatViewController.")
+            : String(localized: "ui.swift.aiterm.chatviewcontroller.orchestration_disabled.8f1c03d4", defaultValue: "Orchestration disabled.", bundle: .main, comment: "User-facing text in ChatViewController.")
         try? client.publishNotice(chatID: chatID, notice: notice)
     }
 

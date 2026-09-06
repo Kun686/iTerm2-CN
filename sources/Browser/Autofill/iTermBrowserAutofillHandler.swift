@@ -29,7 +29,23 @@ class iTermBrowserAutofillHandler {
         return iTermBrowserTemplateLoader.loadTemplate(
             named: "autofill-detector",
             type: "js",
-            substitutions: ["SECRET": sessionSecret])
+            substitutions: [
+                "SECRET": sessionSecret,
+                "AUTOFILL_ACTION_FORMAT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.action_format", defaultValue: "Autofill %1$@"),
+                "AUTOFILL_FIELD_GENERIC_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.generic", defaultValue: "field"),
+                "AUTOFILL_FIELD_FIRST_NAME_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.first_name", defaultValue: "first name"),
+                "AUTOFILL_FIELD_LAST_NAME_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.last_name", defaultValue: "last name"),
+                "AUTOFILL_FIELD_FULL_NAME_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.full_name", defaultValue: "full name"),
+                "AUTOFILL_FIELD_EMAIL_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.email", defaultValue: "email address"),
+                "AUTOFILL_FIELD_PHONE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.phone", defaultValue: "phone number"),
+                "AUTOFILL_FIELD_ADDRESS1_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.address1", defaultValue: "street address"),
+                "AUTOFILL_FIELD_ADDRESS2_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.address2", defaultValue: "address line 2"),
+                "AUTOFILL_FIELD_CITY_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.city", defaultValue: "city"),
+                "AUTOFILL_FIELD_STATE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.state", defaultValue: "state or province"),
+                "AUTOFILL_FIELD_ZIP_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.zip", defaultValue: "postal code"),
+                "AUTOFILL_FIELD_COUNTRY_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.country", defaultValue: "country or region"),
+                "AUTOFILL_FIELD_COMPANY_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.autofill.field.company", defaultValue: "company")
+            ])
     }
     
     enum AutofillAction: String {

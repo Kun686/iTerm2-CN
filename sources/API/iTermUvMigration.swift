@@ -103,6 +103,19 @@ class iTermUvMigration: NSObject {
         guard !remaps.isEmpty else {
             return ""
         }
+        if remaps.count == 1, let only = remaps.first {
+            return String(localized: "ui.swift.api.itermuvmigration.the_script_0_was_written_for_python_1_which.8b88ba0f", defaultValue: "The script “\(only.scriptName)” was written for Python \(only.fromVersion), which is no longer available, so it now uses Python \(only.toVersion). Python versions are not always compatible across releases, so a bumped script may need small changes.", bundle: .main, comment: "Warning shown when one script must use a newer Python version. Preserve the script name and both version placeholders.")
+        }
+        let lines = remaps.map { "• “\($0.scriptName)”: \($0.fromVersion) → \($0.toVersion)" }
+        return String(localized: "ui.swift.api.itermuvmigration.some_scripts_were_written_for_python_versions_that.2cbe8ecc", defaultValue: "Some scripts were written for Python versions that are no longer available and now use newer ones. Python versions are not always compatible across releases, so a bumped script may need small changes.\n\n\(lines.joined(separator: "\n"))", bundle: .main, comment: "Warning shown when multiple scripts must use newer Python versions. Preserve the formatted bullet-list placeholder.")
+    }
+
+    // Stable English copy for diagnostic logs. User-facing callers use the localized
+    // variant above, but logs must remain searchable across application languages.
+    static func consolidatedWarningDiagnosticText(remaps: [iTermUvPythonRemap]) -> String {
+        guard !remaps.isEmpty else {
+            return ""
+        }
         let caveat = "Python versions are not always compatible across releases, so a bumped script may need small changes."
         if remaps.count == 1, let only = remaps.first {
             return "The script “\(only.scriptName)” was written for Python \(only.fromVersion), "

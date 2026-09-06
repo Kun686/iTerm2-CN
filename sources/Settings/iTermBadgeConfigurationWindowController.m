@@ -64,7 +64,7 @@ typedef struct {
         _badge.delegate = self;
         _badge.fillColor = [NSColor blackColor];
         _badge.backgroundColor = [NSColor redColor];
-        _badge.stringValue = @"Lorem ipsum dolor sit amet";
+        _badge.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermbadgeconfigurationwindowcontroller.lorem_ipsum_dolor_sit_amet.16aba539", nil, NSBundle.mainBundle, @"Lorem ipsum dolor sit amet", @"User-facing text in iTermBadgeConfigurationWindowController (stringValue).");
     }
     return self;
 }

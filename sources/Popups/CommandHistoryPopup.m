@@ -156,7 +156,7 @@
     if (!_autocomplete) {
         return nil;
     }
-    return @"Press ⇧⏎ or ⌥⏎ to send command.";
+    return NSLocalizedStringWithDefaultValue(@"ui.popups.commandhistorypopup.press_or_to_send_command.44fef720", nil, NSBundle.mainBundle, @"Press ⇧⏎ or ⌥⏎ to send command.", @"Footer explaining command-history keyboard shortcuts.");
 }
 
 - (void)moveLeft:(id)sender {

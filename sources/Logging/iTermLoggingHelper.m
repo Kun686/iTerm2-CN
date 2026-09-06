@@ -102,7 +102,7 @@ asciicastMetadata:(iTermAsciicastMetadata *)asciicastMetadata
          window:(nullable NSWindow *)window {
     if (path) {
         const BOOL ok = [[NSFileManager defaultManager] it_promptToCreateEnclosingDirectoryFor:path
-                                                                                         title:@"Logging Folder Not Found"
+                                                                                         title:NSLocalizedStringWithDefaultValue(@"ui.logging.itermlogginghelper.logging_folder_not_found.9c7765d9", nil, NSBundle.mainBundle, @"Logging Folder Not Found", @"User-facing text in iTermLoggingHelper (title).")
                                                                                     identifier:@"LoggingFolder"
                                                                                         window:window];
         if (!ok) {

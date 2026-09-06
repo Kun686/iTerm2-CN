@@ -37,15 +37,15 @@ class StatusBarTriggersComponent: iTermStatusBarTextComponent {
     }
 
     override func statusBarComponentShortDescription() -> String {
-        return "Triggers Menu"
+        return String(localized: "ui.swift.statusbar.components.itermstatusbartriggerscomponent.triggers_menu.36a7eb58", defaultValue: "Triggers Menu", bundle: .main, comment: "User-facing text in iTermStatusBarTriggersComponent.")
     }
 
     override func statusBarComponentDetailedDescription() -> String {
-        return "When clicked, opens a menu of triggers. You can use it to enable or disable triggers."
+        return String(localized: "ui.swift.statusbar.components.itermstatusbartriggerscomponent.when_clicked_opens_a_menu_of_triggers_you.41431412", defaultValue: "When clicked, opens a menu of triggers. You can use it to enable or disable triggers.", bundle: .main, comment: "User-facing text in iTermStatusBarTriggersComponent.")
     }
 
     override func statusBarComponentExemplar(withBackgroundColor backgroundColor: NSColor, textColor: NSColor) -> Any {
-        return "Triggers…"
+        return String(localized: "ui.swift.statusbar.components.itermstatusbartriggerscomponent.triggers.e5ace1dc", defaultValue: "Triggers…", bundle: .main, comment: "User-facing text in iTermStatusBarTriggersComponent.")
     }
 
     override func statusBarComponentCanStretch() -> Bool {
@@ -53,7 +53,7 @@ class StatusBarTriggersComponent: iTermStatusBarTextComponent {
     }
 
     private var stringValue: String {
-        return "Triggers…"
+        return String(localized: "ui.swift.statusbar.components.itermstatusbartriggerscomponent.triggers.e5ace1dc", defaultValue: "Triggers…", bundle: .main, comment: "User-facing text in iTermStatusBarTriggersComponent.")
     }
 
     override func stringValueForCurrentWidth() -> String? {
@@ -102,8 +102,8 @@ class StatusBarTriggersComponent: iTermStatusBarTextComponent {
             menu.addItem(item)
         }
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Add Trigger…", action: #selector(addTrigger(_:)), keyEquivalent: ""))
-        menu.addItem(NSMenuItem(title: "Edit Triggers…", action: #selector(editTriggers(_:)), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: String(localized: "ui.swift.statusbar.components.itermstatusbartriggerscomponent.add_trigger.f2bbdcd6", defaultValue: "Add Trigger…", bundle: .main, comment: "User-facing text in iTermStatusBarTriggersComponent."), action: #selector(addTrigger(_:)), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: String(localized: "ui.swift.statusbar.components.itermstatusbartriggerscomponent.edit_triggers.094b1ca3", defaultValue: "Edit Triggers…", bundle: .main, comment: "User-facing text in iTermStatusBarTriggersComponent."), action: #selector(editTriggers(_:)), keyEquivalent: ""))
 
         menu.popUp(positioning: menu.items.first!, at: NSPoint.zero, in: containingView)
     }

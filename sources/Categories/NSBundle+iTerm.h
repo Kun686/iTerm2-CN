@@ -12,6 +12,8 @@
 
 + (BOOL)it_isNightlyBuild;
 + (BOOL)it_isEarlyAdopter;
++ (BOOL)it_isCNCommunityBuild;
++ (void)it_applyCNUpdatePolicyToUserDefaults:(NSUserDefaults *)userDefaults;
 + (NSDate *)it_buildDate;
 
 @end

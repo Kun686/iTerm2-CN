@@ -32,11 +32,11 @@
 }
 
 + (NSString *)title {
-    return @"Post Notification…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermusernotificationtrigger.post_notification.c79f0744", nil, NSBundle.mainBundle, @"Post Notification…", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Post Notification “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermusernotificationtrigger.post_notification.11924d40", nil, NSBundle.mainBundle, @"Post Notification “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (BOOL)takesParameter {
@@ -44,7 +44,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter Message";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermusernotificationtrigger.enter_message.d23ff7d9", nil, NSBundle.mainBundle, @"Enter Message", @"Trigger parameter placeholder.");
 }
 
 - (NSSet<NSNumber *> *)allowedMatchTypes {

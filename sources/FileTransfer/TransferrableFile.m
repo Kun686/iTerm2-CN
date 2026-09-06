@@ -130,13 +130,13 @@ static NSMutableSet<NSString *> *iTermTransferrableFileLockedFileNames(void) {
     if (retries == 1 || !prompt) {
         return finalDestination;
     }
-    NSString *message = [NSString stringWithFormat:@"A file named %@ already exists. Keep both files or replace the existing file?", baseName];
+    NSString *message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.a_file_named_already_exists_keep_both_files.bc569339", nil, NSBundle.mainBundle, @"A file named %@ already exists. Keep both files or replace the existing file?", @"User-facing overwrite warning; preserve the file name."), baseName];
     const iTermWarningSelection selection = [iTermWarning showWarningWithTitle:message
-                                                                       actions:@[ @"Keep Both", @"Replace" ]
+                                                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.keep_both.38b99fe6", nil, NSBundle.mainBundle, @"Keep Both", @"User-facing action label in TransferrableFile (actions)."), NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.replace.95e15439", nil, NSBundle.mainBundle, @"Replace", @"User-facing action label in TransferrableFile (actions).") ]
                                                                      accessory:nil
                                                                     identifier:@"NoSyncOverwriteOrReplaceFile"
                                                                    silenceable:kiTermWarningTypePermanentlySilenceable
-                                                                       heading:@"Overwrite existing file?"
+                                                                       heading:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.overwrite_existing_file.fd5136b3", nil, NSBundle.mainBundle, @"Overwrite existing file?", @"User-facing text in TransferrableFile (heading).")
                                                                         window:nil];
     if (selection == kiTermWarningSelection1) {
         return [destinationDirectory stringByAppendingPathComponent:baseName];
@@ -189,14 +189,14 @@ static NSMutableSet<NSString *> *iTermTransferrableFileLockedFileNames(void) {
 
                 case kTransferrableFileStatusFinishedSuccessfully:
                     [[iTermNotificationController sharedInstance] notify:
-                        [NSString stringWithFormat:@"%@ finished for “%@”.",
-                            self.isDownloading ? @"Download" : @"Upload", [self shortName]]];
+                        [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.finished_for.82a08d9c", nil, NSBundle.mainBundle, @"%@ finished for “%@”.", @"User-facing successful-transfer notification; preserve the transfer type and file name."),
+                            self.isDownloading ? NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.download.d6eafe82", nil, NSBundle.mainBundle, @"Download", @"Transfer type in a user-facing notification.") : NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.upload.865e89de", nil, NSBundle.mainBundle, @"Upload", @"Transfer type in a user-facing notification."), [self shortName]]];
                     break;
 
                 case kTransferrableFileStatusFinishedWithError:
                     [[iTermNotificationController sharedInstance] notify:
-                     [NSString stringWithFormat:@"%@ failed for “%@”.",
-                      self.isDownloading ? @"Download" : @"Upload", [self shortName]]];
+                     [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.failed_for.1fdaa5c1", nil, NSBundle.mainBundle, @"%@ failed for “%@”.", @"User-facing failed-transfer notification; preserve the transfer type and file name."),
+                      self.isDownloading ? NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.download.d6eafe82", nil, NSBundle.mainBundle, @"Download", @"Transfer type in a user-facing notification.") : NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.upload.865e89de", nil, NSBundle.mainBundle, @"Upload", @"Transfer type in a user-facing notification."), [self shortName]]];
             }
         }
     }
@@ -213,12 +213,12 @@ static NSMutableSet<NSString *> *iTermTransferrableFileLockedFileNames(void) {
 }
 
 - (void)failedToRemoveUnquarantinedFileAt:(NSString *)path {
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"The file at “%@” could not be quarantined or deleted! It is dangerous and should be removed.", path]
-                               actions:@[ @"OK" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.the_file_at_could_not_be_quarantined_or.12810c3b", nil, NSBundle.mainBundle, @"The file at “%@” could not be quarantined or deleted! It is dangerous and should be removed.", @"User-facing security warning; preserve the file path."), path]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in TransferrableFile (actions).") ]
                              accessory:nil
                             identifier:nil
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Danger!"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.transferrablefile.danger.849ca3bd", nil, NSBundle.mainBundle, @"Danger!", @"User-facing text in TransferrableFile (heading).")
                                 window:nil];
 }
 
@@ -271,4 +271,3 @@ static NSMutableSet<NSString *> *iTermTransferrableFileLockedFileNames(void) {
 }
 
 @end
-

@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Requires Shell Integration for prompt detection"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要 Shell Integration 来检测提示符"
+          }
         }
       }
     },
@@ -21,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Replace"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "替换"
           }
         }
       }
@@ -34,6 +46,12 @@
             "state": "new",
             "value": "Escape tabs with ^V"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用 ^V 转义制表符"
+          }
         }
       }
     },
@@ -45,6 +63,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Paste with tabs"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "带制表符粘贴"
           }
         }
       }
@@ -58,6 +82,12 @@
             "state": "new",
             "value": "1 ms"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 毫秒"
+          }
         }
       }
     },
@@ -69,6 +99,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Convert tabs to spaces:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将制表符转换为空格："
           }
         }
       }
@@ -82,6 +118,12 @@
             "state": "new",
             "value": "Transforms"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "变换"
+          }
         }
       }
     },
@@ -93,6 +135,12 @@
           "stringUnit": {
             "state": "new",
             "value": "ICU regular expression syntax"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ICU 正则表达式语法"
           }
         }
       }
@@ -106,6 +154,12 @@
             "state": "new",
             "value": "100 ms"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100 毫秒"
+          }
         }
       }
     },
@@ -117,6 +171,12 @@
           "stringUnit": {
             "state": "new",
             "value": "with"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "替换为"
           }
         }
       }
@@ -130,16 +190,29 @@
             "state": "new",
             "value": "Remove unsafe control codes"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除不安全的控制码"
+          }
         }
       }
     },
     "RNM-1C-IVn.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"1.2 kB\"; ObjectID = \"RNM-1C-IVn\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "1.2 kB"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "1.2 kB"
           }
         }
@@ -154,16 +227,29 @@
             "state": "new",
             "value": "150 ms"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "150 毫秒"
+          }
         }
       }
     },
     "T6S-me-J0t.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSButtonCell\"; title = \"Radio\"; ObjectID = \"T6S-me-J0t\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Radio"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Radio"
           }
         }
@@ -178,16 +264,29 @@
             "state": "new",
             "value": "Remove newlines"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除换行符"
+          }
         }
       }
     },
     "WDY-mt-Qhp.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"1 MB\"; ObjectID = \"WDY-mt-Qhp\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "1 MB"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "1 MB"
           }
         }
@@ -202,6 +301,12 @@
             "state": "new",
             "value": "Convert CRLF and LF to CR"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将 CRLF 和 LF 转换为 CR"
+          }
         }
       }
     },
@@ -213,6 +318,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Base-64 encode"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Base-64 编码"
           }
         }
       }
@@ -226,6 +337,12 @@
             "state": "new",
             "value": "Convert Unicode punctuation"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "转换 Unicode 标点符号"
+          }
         }
       }
     },
@@ -237,6 +354,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Respects vim escape sequences"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支持 vim 转义序列"
           }
         }
       }
@@ -250,6 +373,12 @@
             "state": "new",
             "value": "Escape shell characters with \\\\"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用 \\\\ 转义 Shell 字符"
+          }
         }
       }
     },
@@ -262,16 +391,29 @@
             "state": "new",
             "value": "Chunk Size:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "块大小："
+          }
         }
       }
     },
     "lBa-zz-w0b.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"1 kB\"; ObjectID = \"lBa-zz-w0b\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "1 kB"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "1 kB"
           }
         }
@@ -286,6 +428,12 @@
             "state": "new",
             "value": "Speed"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "速度"
+          }
         }
       }
     },
@@ -297,6 +445,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Wait for shell prompt before pasting each line"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴每行前等待 Shell 提示符"
           }
         }
       }
@@ -310,6 +464,12 @@
             "state": "new",
             "value": "Interchunk Delay:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "块间延迟："
+          }
         }
       }
     },
@@ -322,16 +482,29 @@
             "state": "new",
             "value": "1 byte"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 字节"
+          }
         }
       }
     },
     "sRn-9b-46B.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"100\"; ObjectID = \"sRn-9b-46B\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "100"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "100"
           }
         }
@@ -346,6 +519,12 @@
             "state": "new",
             "value": "Use $1, $2, etc. for capture groups"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用 $1、$2 等表示捕获组"
+          }
         }
       }
     },
@@ -358,6 +537,12 @@
             "state": "new",
             "value": "Bracketed paste mode"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "括号粘贴模式"
+          }
         }
       }
     },
@@ -369,6 +554,12 @@
           "stringUnit": {
             "state": "new",
             "value": "10 sec"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 秒"
           }
         }
       }

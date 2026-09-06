@@ -8,11 +8,11 @@
 @objc(ReloadBrowserTrigger)
 class ReloadBrowserTrigger: Trigger {
     override var description: String {
-        return "Reload After Delay)"
+        return String(localized: "ui.swift.triggers.reloadbrowsertrigger.reload_after_delay.21a3e325", defaultValue: "Reload After Delay)", bundle: .main, comment: "User-facing text in ReloadBrowserTrigger.")
     }
 
     override static var title: String {
-        return "Reload After Delay"
+        return String(localized: "ui.swift.triggers.reloadbrowsertrigger.reload_after_delay.ebfbd53b", defaultValue: "Reload After Delay", bundle: .main, comment: "User-facing text in ReloadBrowserTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -22,7 +22,7 @@ class ReloadBrowserTrigger: Trigger {
         false
     }
     override func triggerOptionalParameterPlaceholder(withInterpolation interpolation: Bool) -> String? {
-        return "Delay in seconds"
+        return String(localized: "ui.swift.triggers.reloadbrowsertrigger.delay_in_seconds.595d446f", defaultValue: "Delay in seconds", bundle: .main, comment: "User-facing text in ReloadBrowserTrigger.")
     }
     override func triggerOptionalDefaultParameterValue(withInterpolation interpolation: Bool) -> String? {
         "60"

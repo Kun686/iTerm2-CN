@@ -80,7 +80,7 @@ static NSString *const iTermCapturedOutputToolTableViewCellIdentifier = @"ToolCa
         [_clearButton setAutoresizingMask:NSViewMinYMargin];
         _clearButton.bezelStyle = NSBezelStyleRegularSquare;
         _clearButton.bordered = NO;
-        _clearButton.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolTrash) accessibilityDescription:@"Clear"];
+        _clearButton.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolTrash) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.capturedoutput.toolcapturedoutputview.clear.83b12c22", nil, NSBundle.mainBundle, @"Clear", @"Accessibility description for the clear button.")];
         _clearButton.imagePosition = NSImageOnly;
         _clearButton.frame = NSMakeRect(0, 0, 22, 22);
         [self addSubview:_clearButton];
@@ -106,7 +106,7 @@ static NSString *const iTermCapturedOutputToolTableViewCellIdentifier = @"ToolCa
         tableView_.menu.delegate = self;
         tableView_.intercellSpacing = NSMakeSize(0, 2);
         NSMenuItem *item;
-        item = [[NSMenuItem alloc] initWithTitle:@"Toggle Checkmark"
+        item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.capturedoutput.toolcapturedoutputview.toggle_checkmark.0282e453", nil, NSBundle.mainBundle, @"Toggle Checkmark", @"User-facing text in ToolCapturedOutputView (initWithFrame:).")
                                           action:@selector(toggleCheckmark:)
                                    keyEquivalent:@""];
         [tableView_.menu addItem:item];

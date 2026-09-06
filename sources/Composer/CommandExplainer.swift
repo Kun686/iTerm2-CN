@@ -72,12 +72,12 @@ class CommandExplainer: NSObject {
         guard let url = components.url else {
             return
         }
-        let selection = iTermWarning.show(withTitle: "This will open \(url.absoluteString) in \(browserName).",
-                                          actions: ["OK", "Cancel"],
+        let selection = iTermWarning.show(withTitle: String(localized: "ui.swift.composer.commandexplainer.this_will_open_0_in_1.7f493732", defaultValue: "This will open \(url.absoluteString) in \(browserName).", bundle: .main, comment: "User-facing text in CommandExplainer."),
+                                          actions: [String(localized: "ui.swift.composer.commandexplainer.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in CommandExplainer."), String(localized: "ui.swift.composer.commandexplainer.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in CommandExplainer.")],
                                           accessory: nil,
                                           identifier: "NoSyncExplainShell",
                                           silenceable: .kiTermWarningTypePermanentlySilenceable,
-                                          heading: "Open ExplainShell?",
+                                          heading: String(localized: "ui.swift.composer.commandexplainer.open_explainshell.2ecf0e98", defaultValue: "Open ExplainShell?", bundle: .main, comment: "User-facing text in CommandExplainer."),
                                           window: window)
         if selection == .kiTermWarningSelection0 {
             NSWorkspace.shared.open(url)

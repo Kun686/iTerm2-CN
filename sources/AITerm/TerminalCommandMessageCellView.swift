@@ -18,7 +18,7 @@ class TerminalCommandMessageCellView: MessageCellView, ChatFindableCellView {
     private let icon: NSImageView = {
         let image: NSImage = {
             let image = NSImage(systemSymbolName: SFSymbol.desktopcomputer.rawValue,
-                                accessibilityDescription: "Command icon")!
+                                accessibilityDescription: String(localized: "ui.swift.aiterm.terminalcommandmessagecellview.command_icon.0d8b3f07", defaultValue: "Command icon", bundle: .main, comment: "User-facing text in TerminalCommandMessageCellView."))!
             if #available(macOS 12, *) {
                 return image.withSymbolConfiguration(.init(paletteColors: [.white, .clear, .black]))!
             }

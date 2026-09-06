@@ -53,19 +53,19 @@ class ToolNamedMarks: NSView, ToolbeltTool, NSTableViewDelegate, NSTableViewData
         _tableView!.backgroundColor = .clear
 
         addButton = makeToolbeltButton(imageName: SFSymbol.plus.rawValue,
-                                       title: "Add",
+                                       title: String(localized: "ui.swift.toolbelt.toolnamedmarks.add.9fd728c6", defaultValue: "Add", bundle: .main, comment: "User-facing text in ToolNamedMarks."),
                                        target: self,
                                        selector: #selector(add(_:)),
                                        frame: frameRect)
         addSubview(addButton!)
         removeButton = makeToolbeltButton(imageName: SFSymbol.minus.rawValue,
-                                          title: "Remove",
+                                          title: String(localized: "ui.swift.toolbelt.toolnamedmarks.remove.c3812fc4", defaultValue: "Remove", bundle: .main, comment: "User-facing text in ToolNamedMarks."),
                                           target: self,
                                           selector: #selector(remove(_:)),
                                           frame: frameRect)
         addSubview(removeButton!)
         editButton = makeToolbeltButton(imageName: SFSymbol.pencil.rawValue,
-                                        title: "Edit",
+                                        title: String(localized: "ui.swift.toolbelt.toolnamedmarks.edit.464c4ffd", defaultValue: "Edit", bundle: .main, comment: "User-facing text in ToolNamedMarks."),
                                         target: self,
                                         selector: #selector(edit(_:)),
                                         frame: frameRect)
@@ -161,7 +161,7 @@ class ToolNamedMarks: NSView, ToolbeltTool, NSTableViewDelegate, NSTableViewData
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.newTableCellViewWithTextField(usingIdentifier: "ToolNamedMarks",
                                                            font: NSFont.it_toolbelt(),
-                                                           string: marks[row].name ?? "(Unnamed)")
+                                                           string: marks[row].name ?? String(localized: "ui.swift.toolbelt.toolnamedmarks.unnamed.13662c69", defaultValue: "(Unnamed)", bundle: .main, comment: "User-facing text in ToolNamedMarks."))
         cell.textField?.isEditable = true
         cell.textField?.delegate = self
         return cell

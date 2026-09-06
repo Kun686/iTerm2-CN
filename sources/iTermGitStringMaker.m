@@ -43,17 +43,17 @@
         case iTermGitRepoStateNone:
             break;
         case iTermGitRepoStateMerge:
-            return [self attributedStringWithString:@"Merging"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.merging.a975de4f", nil, NSBundle.mainBundle, @"Merging", @"User-facing Git repository state.")];
         case iTermGitRepoStateRevert:
-            return [self attributedStringWithString:@"Reverting"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.reverting.f2441a6c", nil, NSBundle.mainBundle, @"Reverting", @"User-facing Git repository state.")];
         case iTermGitRepoStateCherrypick:
-            return [self attributedStringWithString:@"Cherrypicking"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.cherrypicking.ea14391c", nil, NSBundle.mainBundle, @"Cherrypicking", @"User-facing Git repository state.")];
         case iTermGitRepoStateBisect:
-            return [self attributedStringWithString:@"Bisecting"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.bisecting.675fd45e", nil, NSBundle.mainBundle, @"Bisecting", @"User-facing Git repository state.")];
         case iTermGitRepoStateRebase:
-            return [self attributedStringWithString:@"Rebasing"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.rebasing.276cd31a", nil, NSBundle.mainBundle, @"Rebasing", @"User-facing text in iTermGitStringMaker (attributedStringWithString:).")];
         case iTermGitRepoStateApply:
-            return [self attributedStringWithString:@"Applying"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.applying.8a9bd1be", nil, NSBundle.mainBundle, @"Applying", @"User-facing text in iTermGitStringMaker (attributedStringWithString:).")];
     }
     static NSAttributedString *upImage;
     static NSAttributedString *downImage;

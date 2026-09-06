@@ -88,12 +88,12 @@ static NSString *const iTermRestorableStateControllerUserDefaultsKeyCount = @"No
     const NSInteger count = [[iTermUserDefaults userDefaults] integerForKey:iTermRestorableStateControllerUserDefaultsKeyCount];
     if (count > 1) {
         const iTermWarningSelection selection =
-        [iTermWarning showWarningWithTitle:@"Some windows had trouble restoring last time iTerm2 launched. Try again?"
-                                   actions:@[ @"OK", @"Cancel" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermrestorablestatedriver.some_windows_had_trouble_restoring_last_time_iterm2.7073a952", nil, NSBundle.mainBundle, @"Some windows had trouble restoring last time iTerm2 launched. Try again?", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermrestorablestatedriver.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRestorableStateDriver (actions)."), NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermrestorablestatedriver.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermRestorableStateDriver (actions).") ]
                                  accessory:nil
                                 identifier:@"RestoreWindows"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Restore Windows?"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermrestorablestatedriver.restore_windows.d38d4e43", nil, NSBundle.mainBundle, @"Restore Windows?", @"User-facing text in iTermRestorableStateDriver (heading).")
                                     window:nil];
         if (selection == kiTermWarningSelection1) {
             [index restorableStateIndexUnlink];

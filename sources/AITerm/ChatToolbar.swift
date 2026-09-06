@@ -63,11 +63,11 @@ struct ChatProviderOption: Equatable {
         case .deepSeek:
             return "DeepSeek"
         case .llama:
-            return "Llama (Local)"
+            return String(localized: "ui.swift.aiterm.chattoolbar.llama_local.2933c0ec", defaultValue: "Llama (Local)", bundle: .main, comment: "User-facing text in ChatToolbar.")
         case .apple:
             return "Apple"
         @unknown default:
-            return "Provider"
+            return String(localized: "ui.swift.aiterm.chattoolbar.provider.472590ae", defaultValue: "Provider", bundle: .main, comment: "User-facing text in ChatToolbar.")
         }
     }
 }
@@ -112,7 +112,7 @@ class ChatToolbar {
     init(dataSource: ChatToolbarDataSource) {
         self.dataSource = dataSource
 
-        let label = NSTextField(labelWithString: "AI Chat")
+        let label = NSTextField(labelWithString: String(localized: "ui.swift.aiterm.chattoolbar.ai_chat.fe98f42c", defaultValue: "AI Chat", bundle: .main, comment: "User-facing text in ChatToolbar."))
         label.font = NSFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = NSColor.labelColor
         label.alignment = .center
@@ -128,7 +128,7 @@ class ChatToolbar {
 
         do {
             let webSearchButton = WebSearchButton(image: NSImage.it_image(forSymbolName: SFSymbol.globe.rawValue,
-                                                                          accessibilityDescription: "Web search image",
+                                                                          accessibilityDescription: String(localized: "ui.swift.aiterm.chattoolbar.web_search_image.40377dd4", defaultValue: "Web search image", bundle: .main, comment: "User-facing text in ChatToolbar."),
                                                                           fallbackImageName: "globe",
                                                                           for: Self.self)!,
                                                   target: nil,
@@ -142,7 +142,7 @@ class ChatToolbar {
             webSearchButton.target = self
             webSearchButton.action = #selector(toggleWebSearch(_:))
             webSearchButton.sizeToFit()
-            webSearchButton.toolTip = "Allow AI to perform web search?"
+            webSearchButton.toolTip = String(localized: "ui.swift.aiterm.chattoolbar.allow_ai_to_perform_web_search.a202d37f", defaultValue: "Allow AI to perform web search?", bundle: .main, comment: "User-facing text in ChatToolbar.")
             self.webSearchButton = webSearchButton
             webSearchButton.isEnabled = (dataSource.provider?.supportsHostedWebSearch == true)
         }
@@ -152,7 +152,7 @@ class ChatToolbar {
 
             let image = NSImage(
                 systemSymbolName: SFSymbol.lightbulb.rawValue,
-                accessibilityDescription: "Enable high-effort reasoning?")?.withSymbolConfiguration(smallerConfig)
+                accessibilityDescription: String(localized: "ui.swift.aiterm.chattoolbar.enable_high_effort_reasoning.b3166298", defaultValue: "Enable high-effort reasoning?", bundle: .main, comment: "User-facing text in ChatToolbar."))?.withSymbolConfiguration(smallerConfig)
             let thinkingButton = ThinkingButton(image: image!,
                                                   target: nil,
                                                 action: nil)
@@ -165,7 +165,7 @@ class ChatToolbar {
             thinkingButton.target = self
             thinkingButton.action = #selector(toggleThinking(_:))
             thinkingButton.sizeToFit()
-            thinkingButton.toolTip = "Enable high-effort reasoning? Slower but may produce better results."
+            thinkingButton.toolTip = String(localized: "ui.swift.aiterm.chattoolbar.enable_high_effort_reasoning_slower_but_may_produce.f727d05f", defaultValue: "Enable high-effort reasoning? Slower but may produce better results.", bundle: .main, comment: "User-facing text in ChatToolbar.")
             self.thinkingButton = thinkingButton
             thinkingButton.isEnabled = (dataSource.provider?.model.features.contains(.configurableThinking) == true)
         }
@@ -412,8 +412,8 @@ extension ChatToolbar {
         selector.isHidden = selectableCount <= 1
         selector.isEnabled = !options.isEmpty && (dataSource?.canChangeProvider == true)
         selector.toolTip = selector.isEnabled
-            ? "Select the AI provider for this chat before sending the first message."
-            : "The provider is fixed after the first real message in a chat."
+            ? String(localized: "ui.swift.aiterm.chattoolbar.select_the_ai_provider_for_this_chat_before.3d2d7349", defaultValue: "Select the AI provider for this chat before sending the first message.", bundle: .main, comment: "User-facing text in ChatToolbar.")
+            : String(localized: "ui.swift.aiterm.chattoolbar.the_provider_is_fixed_after_the_first_real.dfb1dccf", defaultValue: "The provider is fixed after the first real message in a chat.", bundle: .main, comment: "User-facing text in ChatToolbar.")
         if let selectedIdentifier = dataSource?.effectiveProviderIdentifier {
             select(selector, representedObject: selectedIdentifier)
         } else if !options.isEmpty {
@@ -429,7 +429,7 @@ extension ChatToolbar {
         modelSelectorButton = modelSelector
         modelSelector.target = self
         modelSelector.action = #selector(selectModel(_:))
-        modelSelector.toolTip = "Select a model for this chat. The provider is fixed after the chat is created."
+        modelSelector.toolTip = String(localized: "ui.swift.aiterm.chattoolbar.select_a_model_for_this_chat_the_provider.1f104d49", defaultValue: "Select a model for this chat. The provider is fixed after the chat is created.", bundle: .main, comment: "User-facing text in ChatToolbar.")
 
         modelSelector.isBordered = false
         modelSelector.bezelStyle = .inline
@@ -446,11 +446,11 @@ extension ChatToolbar {
         // popup would just show a fixed, grayed-out title, so hide it entirely.
         modelSelector.isHidden = availableModels.count <= 1
         if !canChangeModel {
-            modelSelector.toolTip = "The model is fixed after the chat starts."
+            modelSelector.toolTip = String(localized: "ui.swift.aiterm.chattoolbar.the_model_is_fixed_after_the_chat_starts.06ea7078", defaultValue: "The model is fixed after the chat starts.", bundle: .main, comment: "User-facing text in ChatToolbar.")
         } else if availableModels.count > 1 {
-            modelSelector.toolTip = "Select a model for this chat."
+            modelSelector.toolTip = String(localized: "ui.swift.aiterm.chattoolbar.select_a_model_for_this_chat.d19285c6", defaultValue: "Select a model for this chat.", bundle: .main, comment: "User-facing text in ChatToolbar.")
         } else {
-            modelSelector.toolTip = "Only one model is available for this chat."
+            modelSelector.toolTip = String(localized: "ui.swift.aiterm.chattoolbar.only_one_model_is_available_for_this_chat.f1d8eb69", defaultValue: "Only one model is available for this chat.", bundle: .main, comment: "User-facing text in ChatToolbar.")
         }
         if let selectedModel = dataSource?.effectiveModel {
             modelSelector.selectItem(withTitle: selectedModel)
@@ -468,7 +468,7 @@ extension ChatToolbar {
         selector.isBordered = false
         selector.bezelStyle = .inline
         selector.font = NSFont.systemFont(ofSize: 13)
-        selector.toolTip = "Select reasoning effort for models that support it"
+        selector.toolTip = String(localized: "ui.swift.aiterm.chattoolbar.select_reasoning_effort_for_models_that_support_it.4d6280cd", defaultValue: "Select reasoning effort for models that support it", bundle: .main, comment: "User-facing text in ChatToolbar.")
 
         let efforts = dataSource?.provider?.model.reasoningEfforts ?? []
         for effort in efforts {
@@ -494,7 +494,7 @@ extension ChatToolbar {
         selector.isBordered = false
         selector.bezelStyle = .inline
         selector.font = NSFont.systemFont(ofSize: 13)
-        selector.toolTip = "Select OpenAI service tier. Priority is faster; Flex is lower-cost and slower."
+        selector.toolTip = String(localized: "ui.swift.aiterm.chattoolbar.select_openai_service_tier_priority_is_faster_flex.3840cf4e", defaultValue: "Select OpenAI service tier. Priority is faster; Flex is lower-cost and slower.", bundle: .main, comment: "User-facing text in ChatToolbar.")
 
         let tiers = dataSource?.provider?.model.serviceTiers ?? []
         for tier in tiers {
@@ -575,23 +575,23 @@ extension ChatToolbar {
 
     private static func reasoningEffortTitle(_ effort: ResponsesRequestBody.ReasoningOptions.Effort) -> String {
         let value = switch effort {
-        case .none: "None"
-        case .minimal: "Minimal"
-        case .low: "Low"
-        case .medium: "Medium"
-        case .high: "High"
-        case .xhigh: "XHigh"
+        case .none: String(localized: "ui.swift.aiterm.chattoolbar.none.dc937b59", defaultValue: "None", bundle: .main, comment: "User-facing text in ChatToolbar.")
+        case .minimal: String(localized: "ui.swift.aiterm.chattoolbar.minimal.057b5de4", defaultValue: "Minimal", bundle: .main, comment: "User-facing text in ChatToolbar.")
+        case .low: String(localized: "ui.swift.aiterm.chattoolbar.low.f793de20", defaultValue: "Low", bundle: .main, comment: "User-facing text in ChatToolbar.")
+        case .medium: String(localized: "ui.swift.aiterm.chattoolbar.medium.8e588cd1", defaultValue: "Medium", bundle: .main, comment: "User-facing text in ChatToolbar.")
+        case .high: String(localized: "ui.swift.aiterm.chattoolbar.high.c4ebc6d4", defaultValue: "High", bundle: .main, comment: "User-facing text in ChatToolbar.")
+        case .xhigh: String(localized: "ui.swift.aiterm.chattoolbar.xhigh.0704c8f3", defaultValue: "XHigh", bundle: .main, comment: "User-facing text in ChatToolbar.")
         }
-        return "Effort: \(value)"
+        return String(localized: "ui.swift.aiterm.chattoolbar.effort_0.f683123a", defaultValue: "Effort: \(value)", bundle: .main, comment: "User-facing text in ChatToolbar.")
     }
 
     private static func serviceTierTitle(_ tier: ResponsesRequestBody.ServiceTier) -> String {
         let value = switch tier {
-        case .auto: "Auto"
-        case .default: "Standard"
-        case .priority: "Priority (Fast)"
-        case .flex: "Flex (Slow)"
+        case .auto: String(localized: "ui.swift.aiterm.chattoolbar.auto.02862497", defaultValue: "Auto", bundle: .main, comment: "User-facing text in ChatToolbar.")
+        case .default: String(localized: "ui.swift.aiterm.chattoolbar.standard.ef669154", defaultValue: "Standard", bundle: .main, comment: "User-facing text in ChatToolbar.")
+        case .priority: String(localized: "ui.swift.aiterm.chattoolbar.priority_fast.d263dd37", defaultValue: "Priority (Fast)", bundle: .main, comment: "User-facing text in ChatToolbar.")
+        case .flex: String(localized: "ui.swift.aiterm.chattoolbar.flex_slow.56d9fb37", defaultValue: "Flex (Slow)", bundle: .main, comment: "User-facing text in ChatToolbar.")
         }
-        return "Tier: \(value)"
+        return String(localized: "ui.swift.aiterm.chattoolbar.tier_0.cce1cfac", defaultValue: "Tier: \(value)", bundle: .main, comment: "User-facing text in ChatToolbar.")
     }
 }

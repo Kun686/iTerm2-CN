@@ -119,16 +119,16 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
     __weak __typeof(self) weakSelf = self;
 
     _leader.leaderAllowed = NO;
-    _leader.purpose = @"as the leader";
+    _leader.purpose = NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.as_the_leader.f44e2814", nil, NSBundle.mainBundle, @"as the leader", @"User-facing text in KeysPreferencesViewController (purpose).");
     iTermKeystroke *leaderKeystroke = [iTermKeyMappings leader];
     _leader.stringValue = leaderKeystroke ? [iTermKeystrokeFormatter stringForKeystroke:leaderKeystroke] : @"";
     [self updatePrivateNonDefaultInicators];
 
     _hotkeyField.leaderAllowed = NO;
-    _hotkeyField.purpose = @"as a hotkey";
+    _hotkeyField.purpose = NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.as_a_hotkey.44b9579e", nil, NSBundle.mainBundle, @"as a hotkey", @"User-facing text in KeysPreferencesViewController (purpose).");
 
     _openQuicklyHotkeyField.leaderAllowed = NO;
-    _openQuicklyHotkeyField.purpose = @"as the Open Quickly hotkey";
+    _openQuicklyHotkeyField.purpose = NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.as_the_open_quickly_hotkey.ad5bfc40", nil, NSBundle.mainBundle, @"as the Open Quickly hotkey", @"User-facing text in KeysPreferencesViewController (purpose).");
     [self updateOpenQuicklyHotkeyField];
 
     [_keyMappingViewController addViewsToSearchIndex:self];
@@ -389,18 +389,18 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
         }];
         NSString *joinedNames = [names componentsJoinedWithOxfordComma];
         NSString *namesSentence = nil;
-        NSArray *actions = @[ @"OK", @"Cancel"];
+        NSArray *actions = @[ NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in KeysPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in KeysPreferencesViewController (actions).")];
 
         iTermWarningSelection cancel = kiTermWarningSelection1;
         iTermWarningSelection edit = kItermWarningSelectionError;
 
         if (profileHotKeys.count == 1) {
-            namesSentence = [NSString stringWithFormat:@"You already have a Profile with a Hotkey Window named %@", joinedNames];
-            actions = @[ @"OK", @"Configure Existing Profile", @"Cancel"];
+            namesSentence = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.you_already_have_a_profile_with_a_hotkey_window_named.e68d0676", nil, NSBundle.mainBundle, @"You already have a Profile with a Hotkey Window named %@", @"Warning text for a single existing Hotkey Window profile."), joinedNames];
+            actions = @[ NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in KeysPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.configure_existing_profile.e0e4f694", nil, NSBundle.mainBundle, @"Configure Existing Profile", @"User-facing action label in KeysPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in KeysPreferencesViewController (actions).")];
             edit = kiTermWarningSelection1;
             cancel = kiTermWarningSelection2;
         } else {
-            namesSentence = [NSString stringWithFormat:@"You already have Profiles with Hotkey Windows named %@", joinedNames];
+            namesSentence = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.you_already_have_profiles_with_hotkey_windows_named.6ab01080", nil, NSBundle.mainBundle, @"You already have Profiles with Hotkey Windows named %@", @"Warning text for multiple existing Hotkey Window profiles."), joinedNames];
         }
         namesSentence = [namesSentence stringByInsertingTerminalPunctuation:@"."];
 
@@ -409,7 +409,7 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
                                                                    accessory:nil
                                                                   identifier:@"NoSyncSuppressAddAnotherHotkeyProfileWarning"
                                                                  silenceable:kiTermWarningTypePersistent
-                                                                     heading:@"Add Another Hotkey Window Profile?"
+                                                                     heading:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.add_another_hotkey_window_profile.95f77f30", nil, NSBundle.mainBundle, @"Add Another Hotkey Window Profile?", @"User-facing text in KeysPreferencesViewController (heading).")
                                                                       window:self.view.window];
         if (selection == cancel) {
             return;
@@ -419,7 +419,7 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
     }
     iTermHotkeyPreferencesModel *model = [[iTermHotkeyPreferencesModel alloc] init];
     _hotkeyPanel = [[iTermHotkeyPreferencesWindowController alloc] init];
-    [_hotkeyPanel setExplanation:@"This panel helps you configure a new profile that will be bound to a keystroke you assign. Pressing the hotkey (even when iTerm2 is not active) will toggle a special window."];
+    [_hotkeyPanel setExplanation:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.this_panel_helps_you_configure_a_new_profile.62422e9f", nil, NSBundle.mainBundle, @"This panel helps you configure a new profile that will be bound to a keystroke you assign. Pressing the hotkey (even when iTerm2 is not active) will toggle a special window.", @"Explanation shown while creating a Hotkey Window profile.")];
     _hotkeyPanel.descriptorsInUseByOtherProfiles = [[iTermHotKeyController sharedInstance] descriptorsForProfileHotKeysExcept:nil];
     _hotkeyPanel.model = model;
 
@@ -475,11 +475,11 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
                                                                 object:nil
                                                               userInfo:nil];
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Hotkey Window Successfully Configured";
-            alert.informativeText = [NSString stringWithFormat:@"A new profile called “%@” was created for you. It is tuned to work well "
-                                     @"for the Hotkey Window feature and it can be customized in the Profiles tab.",
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.hotkey_window_successfully_configured.e6584f90", nil, NSBundle.mainBundle, @"Hotkey Window Successfully Configured", @"User-facing text in KeysPreferencesViewController (source UI).");
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.a_new_profile_called_was_created_for_you.30f7e1bd", nil, NSBundle.mainBundle, @"A new profile called “%@” was created for you. It is tuned to work well "
+                                     @"for the Hotkey Window feature and it can be customized in the Profiles tab.", @"User-facing text in KeysPreferencesViewController (informativeText)."),
                                      newProfileName];
-            [alert addButtonWithTitle:@"OK"];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in KeysPreferencesViewController (source UI).")];
             [alert runModal];
         }
     }];
@@ -626,8 +626,8 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
 
 - (IBAction)emulateUsKeyboardHelp:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Emulate US Keyboard";
-    alert.informativeText = @"Some keyboard layouts (such as AZERTY) require a modifier to press a number key. This causes problems for switching to a window, tab, or split pane by pressing modifier+number: you might need other modifiers or conflicting modifiers. When “Emulate US Keyboard” is enabled, you can press the configured modifier plus the key on the top row that corresponds to a number key on a US keyboard. For example, on AZERTY, the & key would act as the 1 key.";
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.emulate_us_keyboard.3a1c6328", nil, NSBundle.mainBundle, @"Emulate US Keyboard", @"User-facing text in KeysPreferencesViewController (emulateUsKeyboardHelp:).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.some_keyboard_layouts_such_as_azerty_require_a.26948394", nil, NSBundle.mainBundle, @"Some keyboard layouts (such as AZERTY) require a modifier to press a number key. This causes problems for switching to a window, tab, or split pane by pressing modifier+number: you might need other modifiers or conflicting modifiers. When “Emulate US Keyboard” is enabled, you can press the configured modifier plus the key on the top row that corresponds to a number key on a US keyboard. For example, on AZERTY, the & key would act as the 1 key.", @"User-facing text in KeysPreferencesViewController (emulateUsKeyboardHelp:).");
     [alert runModal];
 }
 
@@ -701,9 +701,8 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
 }
 
 - (BOOL)warnAboutPossibleOverride {
-    switch ([iTermWarning showWarningWithTitle:@"The global keyboard shortcut you have set is overridden by at least one profile. "
-                                               @"Check your profiles’ keyboard settings if it doesn't work as expected."
-                                       actions:@[ @"OK", @"Cancel" ]
+    switch ([iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.the_global_keyboard_shortcut_you_have_set_is.5211d434", nil, NSBundle.mainBundle, @"The global keyboard shortcut you have set is overridden by at least one profile. Check your profiles’ keyboard settings if it doesn't work as expected.", @"User-facing warning message.")
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in KeysPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in KeysPreferencesViewController (actions).") ]
                                     identifier:@"NeverWarnAboutPossibleOverrides"
                                    silenceable:kiTermWarningTypePermanentlySilenceable
                                         window:self.view.window]) {
@@ -796,8 +795,17 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
     if ([[iTermTouchbarMappings globalTouchBarMap] count] != 1) {
         return;
     }
-    [[iTermNotificationController sharedInstance] notify:@"Touch Bar Item Added"
-                                         withDescription:@"Select View > Customize Touch Bar to enable your new touch bar item."];
+    [[iTermNotificationController sharedInstance]
+        notify:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.touch_bar_item_added_notification_title",
+                                                  nil,
+                                                  NSBundle.mainBundle,
+                                                  @"Touch Bar Item Added",
+                                                  @"Notification title after adding a Touch Bar item.")
+        withDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.touch_bar_item_added_notification_body",
+                                                           nil,
+                                                           NSBundle.mainBundle,
+                                                           @"Select View > Customize Touch Bar to enable your new touch bar item.",
+                                                           @"Instructions for enabling a newly added Touch Bar item.")];
     [iTermUserDefaults setHaveExplainedHowToAddTouchbarControls:YES];
 }
 
@@ -850,12 +858,12 @@ static NSString *const kKeyCode0MitigationSuffixGlobal = @"Global";
 
 - (NSNumber *)removeBeforeLoading:(NSString *)thing {
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Remove all key mappings before loading %@?", thing]
-                               actions:@[ @"Keep", @"Remove", @"Cancel" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.remove_all_key_mappings_before_loading.65c3e549", nil, NSBundle.mainBundle, @"Remove all key mappings before loading %@?", @"User-facing text in KeysPreferencesViewController (showWarningWithTitle)."), thing]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.keep.183f00f4", nil, NSBundle.mainBundle, @"Keep", @"User-facing action label in KeysPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.remove.c3812fc4", nil, NSBundle.mainBundle, @"Remove", @"User-facing action label in KeysPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in KeysPreferencesViewController (actions).") ]
                              accessory:nil
                             identifier:@"RemoveExistingGlobalKeyMappingsBeforeLoading"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Load Preset"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.settings.keyspreferencesviewcontroller.load_preset.1a121983", nil, NSBundle.mainBundle, @"Load Preset", @"User-facing text in KeysPreferencesViewController (heading).")
                                 window:self.view.window];
     switch (selection) {
         case kiTermWarningSelection0:

@@ -109,17 +109,15 @@ final class CompanionPairingController: NSObject {
         alert.alertStyle = .warning
         switch verdict {
         case .peerMustUpgrade:
-            alert.messageText = "Companion Device Needs an Update"
-            alert.informativeText = "The iTerm2 Buddy app on your phone is too old to connect to "
-                + "this version of iTerm2. Update the iPhone app to continue."
+            alert.messageText = String(localized: "ui.swift.companion.companionpairingcontroller.companion_device_needs_an_update.5b2088d6", defaultValue: "Companion Device Needs an Update", bundle: .main, comment: "User-facing text in CompanionPairingController.")
+            alert.informativeText = String(localized: "ui.swift.companion.companionpairingcontroller.the_iterm2_buddy_app_on_your_phone_is.0a2ef18c", defaultValue: "The iTerm2 Buddy app on your phone is too old to connect to this version of iTerm2. Update the iPhone app to continue.", bundle: .main, comment: "User-facing text in CompanionPairingController.")
         case .selfMustUpgrade:
-            alert.messageText = "iTerm2 Needs an Update"
-            alert.informativeText = "This version of iTerm2 is too old to connect to the iTerm2 "
-                + "Buddy app on your phone. Update iTerm2 to continue."
+            alert.messageText = String(localized: "ui.swift.companion.companionpairingcontroller.iterm2_needs_an_update.63b20457", defaultValue: "iTerm2 Needs an Update", bundle: .main, comment: "User-facing text in CompanionPairingController.")
+            alert.informativeText = String(localized: "ui.swift.companion.companionpairingcontroller.this_version_of_iterm2_is_too_old_to.a65c832d", defaultValue: "This version of iTerm2 is too old to connect to the iTerm2 Buddy app on your phone. Update iTerm2 to continue.", bundle: .main, comment: "User-facing text in CompanionPairingController.")
         case .compatible:
             return
         }
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.companion.companionpairingcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in CompanionPairingController."))
         alert.runModal()
     }
 
@@ -180,14 +178,11 @@ final class CompanionPairingController: NSObject {
                 return
             }
             let alert = NSAlert()
-            alert.messageText = "Re-pair Your Companion Device"
+            alert.messageText = String(localized: "ui.swift.companion.companionpairingcontroller.re_pair_your_companion_device.66fce6d3", defaultValue: "Re-pair Your Companion Device", bundle: .main, comment: "User-facing text in CompanionPairingController.")
             alert.informativeText =
-                "The iTerm2 server has moved to a new address. Your paired "
-                + "iPhone is still registered with the old server. The old "
-                + "server will go away soon. You should re-pair to avoid "
-                + "problems when that happens."
-            alert.addButton(withTitle: "OK")
-            alert.addButton(withTitle: "Later")
+                String(localized: "ui.swift.companion.companionpairingcontroller.the_iterm2_server_has_moved_to_a_new.327c95a4", defaultValue: "The iTerm2 server has moved to a new address. Your paired iPhone is still registered with the old server. The old server will go away soon. You should re-pair to avoid problems when that happens.", bundle: .main, comment: "User-facing text in CompanionPairingController.")
+            alert.addButton(withTitle: String(localized: "ui.swift.companion.companionpairingcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in CompanionPairingController."))
+            alert.addButton(withTitle: String(localized: "ui.swift.companion.companionpairingcontroller.later.73b6e48a", defaultValue: "Later", bundle: .main, comment: "User-facing text in CompanionPairingController."))
             if alert.runModal() == .alertFirstButtonReturn {
                 CompanionOnboardingRouter.openSettingsOrWizard()
             }
@@ -226,6 +221,26 @@ final class CompanionPairingController: NSObject {
         return missing.isEmpty ? .complete : .incomplete(missing: missing)
     }
 
+    /// Maps stable diagnostic names to localized presentation names. The
+    /// diagnostic values are intentionally English because callers also write
+    /// them to logs; localization belongs only at the user-facing boundary.
+    nonisolated static func localizedPairingItemNames(
+        _ missing: [String],
+        macIdentityKey: String,
+        pairedPhoneKey: String
+    ) -> [String] {
+        return missing.map { item in
+            switch item {
+            case "the Mac identity key":
+                return macIdentityKey
+            case "the paired phone key":
+                return pairedPhoneKey
+            default:
+                return item
+            }
+        }
+    }
+
     /// Log exactly which pairing pieces are present vs absent, so a half-paired
     /// state is diagnosable at a glance (pid in UserDefaults; the rest in keychain).
     func logPairingState(context: String) {
@@ -245,15 +260,17 @@ final class CompanionPairingController: NSObject {
                 return
             }
             RLog("Companion pairing incomplete at launch (missing: \(missing.joined(separator: ", "))); prompting to re-pair")
+            let localizedMissing = Self.localizedPairingItemNames(
+                missing,
+                macIdentityKey: String(localized: "ui.swift.companion.companionpairingcontroller.the_mac_identity_key.079903c3", defaultValue: "the Mac identity key", bundle: .main, comment: "User-facing text in CompanionPairingController."),
+                pairedPhoneKey: String(localized: "ui.swift.companion.companionpairingcontroller.the_paired_phone_key.740632a7", defaultValue: "the paired phone key", bundle: .main, comment: "User-facing text in CompanionPairingController.")
+            ).joined(separator: ", ")
             let alert = NSAlert()
-            alert.messageText = "Re-pair Your Companion Device"
+            alert.messageText = String(localized: "ui.swift.companion.companionpairingcontroller.re_pair_your_companion_device.66fce6d3", defaultValue: "Re-pair Your Companion Device", bundle: .main, comment: "User-facing text in CompanionPairingController.")
             alert.informativeText =
-                "Your paired iPhone can’t connect because some pairing information "
-                + "stored on this Mac is missing (\(missing.joined(separator: ", "))). "
-                + "This can happen after reinstalling or rebuilding iTerm2, or after a "
-                + "keychain reset. Re-pair to fix it."
-            alert.addButton(withTitle: "Re-pair…")
-            alert.addButton(withTitle: "Later")
+                String(localized: "ui.swift.companion.companionpairingcontroller.your_paired_iphone_can_t_connect_because_some.2f420cf8", defaultValue: "Your paired iPhone can’t connect because some pairing information stored on this Mac is missing (\(localizedMissing)). This can happen after reinstalling or rebuilding iTerm2, or after a keychain reset. Re-pair to fix it.", bundle: .main, comment: "User-facing text in CompanionPairingController.")
+            alert.addButton(withTitle: String(localized: "ui.swift.companion.companionpairingcontroller.re_pair.64484c76", defaultValue: "Re-pair…", bundle: .main, comment: "User-facing text in CompanionPairingController."))
+            alert.addButton(withTitle: String(localized: "ui.swift.companion.companionpairingcontroller.later.73b6e48a", defaultValue: "Later", bundle: .main, comment: "User-facing text in CompanionPairingController."))
             if alert.runModal() == .alertFirstButtonReturn {
                 CompanionOnboardingRouter.openSettingsOrWizard()
             }
@@ -652,10 +669,9 @@ final class CompanionPairingController: NSObject {
         relayLog("Relay migration: presenting the update-your-iPhone alert")
         DispatchQueue.main.async {
             let alert = NSAlert()
-            alert.messageText = "Update iTerm2 Buddy on your iPhone"
-            alert.informativeText = "iTerm2 has moved to the new relay. For your Mac and iPhone to keep connecting, "
-                + "update the iTerm2 Buddy app on your iPhone to the latest version."
-            alert.addButton(withTitle: "OK")
+            alert.messageText = String(localized: "ui.swift.companion.companionpairingcontroller.update_iterm2_buddy_on_your_iphone.79cb77e3", defaultValue: "Update iTerm2 Buddy on your iPhone", bundle: .main, comment: "User-facing text in CompanionPairingController.")
+            alert.informativeText = String(localized: "ui.swift.companion.companionpairingcontroller.iterm2_has_moved_to_the_new_relay_for.891a6d97", defaultValue: "iTerm2 has moved to the new relay. For your Mac and iPhone to keep connecting, update the iTerm2 Buddy app on your iPhone to the latest version.", bundle: .main, comment: "User-facing text in CompanionPairingController.")
+            alert.addButton(withTitle: String(localized: "ui.swift.companion.companionpairingcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in CompanionPairingController."))
             alert.runModal()
         }
     }
@@ -831,7 +847,7 @@ final class CompanionPairingController: NSObject {
         }
         return await withCheckedContinuation { continuation in
             context.evaluatePolicy(.deviceOwnerAuthentication,
-                                   localizedReason: "pair a companion device with this Mac") { success, authError in
+                                   localizedReason: String(localized: "ui.swift.companion.companionpairingcontroller.pair_a_companion_device_with_this_mac.f3cc1101", defaultValue: "pair a companion device with this Mac", bundle: .main, comment: "User-facing text in CompanionPairingController.")) { success, authError in
                 if let authError {
                     RLog("Companion: pairing authentication failed: \(authError.localizedDescription)")
                 }
@@ -1128,7 +1144,7 @@ final class CompanionPairingController: NSObject {
     /// attacker never sees the victim's mac, so the victim has no code to type.
     private func runSASConfirmation(expected: String) async -> Bool {
         relayLog("SAS: awaiting code entry")
-        onStatus?("Enter the code shown on your iPhone.")
+        onStatus?(String(localized: "ui.swift.companion.companionpairingcontroller.enter_the_code_shown_on_your_iphone.39f4b30d", defaultValue: "Enter the code shown on your iPhone.", bundle: .main, comment: "User-facing text in CompanionPairingController."))
         onSASEntryNeeded?()
         for attempt in 1...3 {
             let typed = await withCheckedContinuation { (continuation: CheckedContinuation<String?, Never>) in
@@ -1143,7 +1159,7 @@ final class CompanionPairingController: NSObject {
                 return true
             }
             relayLog("SAS: mismatch (attempt \(attempt))")
-            onStatus?("That code doesn’t match. Check your iPhone and try again.")
+            onStatus?(String(localized: "ui.swift.companion.companionpairingcontroller.that_code_doesn_t_match_check_your_iphone.deb54dc5", defaultValue: "That code doesn’t match. Check your iPhone and try again.", bundle: .main, comment: "User-facing text in CompanionPairingController."))
         }
         return false
     }
@@ -1292,7 +1308,7 @@ final class CompanionPairingController: NSObject {
                         // The park succeeded, so any prior quota teardown is behind us:
                         // clear the backoff marker so the UI leaves the quota state.
                         self.relayQuotaBackoffUntil = nil
-                        self.onStatus?("Waiting for your iPhone…")
+                        self.onStatus?(String(localized: "ui.swift.companion.companionpairingcontroller.waiting_for_your_iphone.cc26edb8", defaultValue: "Waiting for your iPhone…", bundle: .main, comment: "User-facing text in CompanionPairingController."))
                         guard self.relayConnectedSince == nil else { return }
                         self.relayConnectedSince = Date()
                         self.notifyPresenceChanged()
@@ -1464,7 +1480,7 @@ final class CompanionPairingController: NSObject {
                         // The displayed QR is dead until the regeneration
                         // fires; say so instead of leaving the stale
                         // "Waiting for your iPhone…" up.
-                        onStatus?("Reconnecting to the relay…")
+                        onStatus?(String(localized: "ui.swift.companion.companionpairingcontroller.reconnecting_to_the_relay.a5da61c3", defaultValue: "Reconnecting to the relay…", bundle: .main, comment: "User-facing text in CompanionPairingController."))
                     } else {
                         onFailed?(Self.userFacingDescription(of: error))
                     }
@@ -1529,7 +1545,7 @@ final class CompanionPairingController: NSObject {
                 defer { confirmationInProgress = false }
                 RLog("Companion pairing: connection accepted; starting Noise handshake")
                 relayLog("acceptLoop: connection ACCEPTED (peer joined); starting Noise handshake")
-                onStatus?("Phone connected. Securing the connection…")
+                onStatus?(String(localized: "ui.swift.companion.companionpairingcontroller.phone_connected_securing_the_connection.ada2fb97", defaultValue: "Phone connected. Securing the connection…", bundle: .main, comment: "User-facing text in CompanionPairingController."))
                 let channel = try await NoiseHandshake.perform(
                     role: .responder,
                     transport: transport,
@@ -1567,7 +1583,7 @@ final class CompanionPairingController: NSObject {
                         // photographed QR is invalidated and they must start over.
                         RLog("Companion pairing: SAS not confirmed; regenerating pid")
                         relayLog("acceptLoop: SAS REJECTED; closing and regenerating pid")
-                        onStatus?("Pairing declined.")
+                        onStatus?(String(localized: "ui.swift.companion.companionpairingcontroller.pairing_declined.7c0529c9", defaultValue: "Pairing declined.", bundle: .main, comment: "User-facing text in CompanionPairingController."))
                         await channel.close()
                         regenerateFreshPairing(reason: "sas-rejected")
                         return
@@ -1702,7 +1718,7 @@ final class CompanionPairingController: NSObject {
             } catch {
                 RLog("Companion pairing: handshake failed: \(error); still listening")
                 relayLog("acceptLoop: handshake FAILED (\(error)); closing socket and re-accepting")
-                onStatus?("Waiting for your iPhone…")
+                onStatus?(String(localized: "ui.swift.companion.companionpairingcontroller.waiting_for_your_iphone.cc26edb8", defaultValue: "Waiting for your iPhone…", bundle: .main, comment: "User-facing text in CompanionPairingController."))
                 // The parked socket was consumed by the failed handshake; close
                 // it so the next accept() can park a fresh one (and the relay
                 // listener's wait-for-close serialization is released).
@@ -1724,9 +1740,11 @@ final class CompanionPairingController: NSObject {
                     return String(cString: cString)
                 }
             case .dns(let code):
-                return "Bonjour/DNS error \(code)"
+                let codeText = String(describing: code)
+                return String(localized: "ui.swift.companion.companionpairingcontroller.bonjour_dns_error_0.2e53115e", defaultValue: "Bonjour/DNS error \(codeText)", bundle: .main, comment: "User-facing Companion pairing error.")
             case .tls(let status):
-                return "TLS error \(status)"
+                let statusText = String(describing: status)
+                return String(localized: "ui.swift.companion.companionpairingcontroller.tls_error_0.c1e46a70", defaultValue: "TLS error \(statusText)", bundle: .main, comment: "User-facing Companion pairing error.")
             default:
                 // A plain default (not @unknown): NWError has availability-gated
                 // cases (e.g. .wifiAware on macOS 26+) that cannot be named on

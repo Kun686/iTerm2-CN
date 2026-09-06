@@ -15,7 +15,7 @@ import AppKit
         var localizedDescription: String {
             switch self {
             case .chatNotFound:
-                "The messages for this chat could not be loaded."
+                String(localized: "ui.swift.aiterm.chatwindowcontroller.the_messages_for_this_chat_could_not_be.ca4268c5", defaultValue: "The messages for this chat could not be loaded.", bundle: .main, comment: "User-facing text in ChatWindowController.")
             }
         }
 
@@ -95,12 +95,12 @@ final class ChatWindowController: NSWindowController, DictionaryCodable {
             _instance = ChatWindowController(model: model,
                                              client: client)
         } else if showErrors && _instance == nil {
-            iTermWarning.show(withTitle: "AI Chat could not open because of a problem loading the database. Verify there is only one instance of iTerm2 running.",
-                              actions: ["OK"],
+            iTermWarning.show(withTitle: String(localized: "ui.swift.aiterm.chatwindowcontroller.ai_chat_could_not_open_because_of_a.af23f2cb", defaultValue: "AI Chat could not open because of a problem loading the database. Verify there is only one instance of iTerm2 running.", bundle: .main, comment: "User-facing text in ChatWindowController."),
+                              actions: [String(localized: "ui.swift.aiterm.chatwindowcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in ChatWindowController.")],
                               accessory: nil,
                               identifier: nil,
                               silenceable: .kiTermWarningTypePersistent,
-                              heading: "Error",
+                              heading: String(localized: "ui.swift.aiterm.chatwindowcontroller.error.54a0e8c1", defaultValue: "Error", bundle: .main, comment: "User-facing text in ChatWindowController."),
                               window: nil)
         }
         return _instance
@@ -151,7 +151,7 @@ final class ChatWindowController: NSWindowController, DictionaryCodable {
         let chatID = try container.decode(String.self, forKey: .chatID)
         guard let model = ChatListModel.instance,
               let client = ChatClient.instance else {
-            throw AIError("There was a problem initializing the database")
+            throw AIError(String(localized: "ui.swift.aiterm.chatwindowcontroller.there_was_a_problem_initializing_the_database.b88f9a54", defaultValue: "There was a problem initializing the database", bundle: .main, comment: "User-facing text in ChatWindowController."))
         }
         self.init(model: model, client: client)
 
@@ -279,7 +279,7 @@ final class ChatWindowController: NSWindowController, DictionaryCodable {
            let model = model.chat(id: chatID) {
             window.title = model.title
         } else {
-            window.title = "AI Chat"
+            window.title = String(localized: "ui.swift.aiterm.chatwindowcontroller.ai_chat.fe98f42c", defaultValue: "AI Chat", bundle: .main, comment: "User-facing text in ChatWindowController.")
         }
 
         // Hide the native title
@@ -336,7 +336,7 @@ final class ChatWindowController: NSWindowController, DictionaryCodable {
 
     private func createNewChat(offerGuid guid: String?, enableOrchestration: Bool = false) {
         do {
-            let chatID = try client.create(chatWithTitle: "New Chat",
+            let chatID = try client.create(chatWithTitle: String(localized: "ui.swift.aiterm.chatwindowcontroller.new_chat.0d332351", defaultValue: "New Chat", bundle: .main, comment: "User-facing text in ChatWindowController."),
                                            terminalSessionGuid: nil,
                                            browserSessionGuid: nil,
                                            initialMessages: [],
@@ -450,11 +450,11 @@ extension ChatWindowController: NSToolbarDelegate {
         switch itemIdentifier {
         case .toggleChatList:
             let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-            item.label = "Toggle Chat List"
-            item.paletteLabel = "Toggle Chat List"
-            item.toolTip = "Show or hide the chat list"
+            item.label = String(localized: "ui.swift.aiterm.chatwindowcontroller.toggle_chat_list.1b57d229", defaultValue: "Toggle Chat List", bundle: .main, comment: "User-facing text in ChatWindowController.")
+            item.paletteLabel = String(localized: "ui.swift.aiterm.chatwindowcontroller.toggle_chat_list.1b57d229", defaultValue: "Toggle Chat List", bundle: .main, comment: "User-facing text in ChatWindowController.")
+            item.toolTip = String(localized: "ui.swift.aiterm.chatwindowcontroller.show_or_hide_the_chat_list.2f53dce5", defaultValue: "Show or hide the chat list", bundle: .main, comment: "User-facing text in ChatWindowController.")
             item.image = NSImage(systemSymbolName: SFSymbol.sidebarLeft.rawValue,
-                                 accessibilityDescription: "Toggle Chat List")
+                                 accessibilityDescription: String(localized: "ui.swift.aiterm.chatwindowcontroller.toggle_chat_list.1b57d229", defaultValue: "Toggle Chat List", bundle: .main, comment: "User-facing text in ChatWindowController."))
             item.target = self
             item.action = #selector(toggleChatList)
             // Standard toolbar buttons get automatic glass backing on macOS 26
@@ -469,9 +469,9 @@ extension ChatWindowController: NSToolbarDelegate {
             if let providerSelector = chatViewController.chatToolbar.providerSelectorButton,
                !providerSelector.isHidden {
                 let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-                item.label = "Provider"
-                item.paletteLabel = "AI Provider"
-                item.toolTip = "Select AI provider for new chats"
+                item.label = String(localized: "ui.swift.aiterm.chatwindowcontroller.provider.472590ae", defaultValue: "Provider", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.paletteLabel = String(localized: "ui.swift.aiterm.chatwindowcontroller.ai_provider.84e1ec2c", defaultValue: "AI Provider", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.toolTip = String(localized: "ui.swift.aiterm.chatwindowcontroller.select_ai_provider_for_new_chats.934d3a2f", defaultValue: "Select AI provider for new chats", bundle: .main, comment: "User-facing text in ChatWindowController.")
                 item.view = providerSelector
                 return item
             }
@@ -481,9 +481,9 @@ extension ChatWindowController: NSToolbarDelegate {
             // Only create if we have multiple models
             if let modelSelector = chatViewController.chatToolbar.modelSelectorButton {
                 let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-                item.label = "Model"
-                item.paletteLabel = "AI Model"
-                item.toolTip = "Select AI model"
+                item.label = String(localized: "ui.swift.aiterm.chatwindowcontroller.model.5e2c614c", defaultValue: "Model", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.paletteLabel = String(localized: "ui.swift.aiterm.chatwindowcontroller.ai_model.160ed06f", defaultValue: "AI Model", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.toolTip = String(localized: "ui.swift.aiterm.chatwindowcontroller.select_ai_model.5f1bd2d0", defaultValue: "Select AI model", bundle: .main, comment: "User-facing text in ChatWindowController.")
                 item.view = modelSelector
                 return item
             }
@@ -492,9 +492,9 @@ extension ChatWindowController: NSToolbarDelegate {
         case .thinkingToggle:
             if let button = chatViewController.chatToolbar.thinkingButton {
                 let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-                item.label = "Thinking"
-                item.paletteLabel = "Toggle Thinking"
-                item.toolTip = "Enable or disable thinking/reasoning mode"
+                item.label = String(localized: "ui.swift.aiterm.chatwindowcontroller.thinking.a20d12c5", defaultValue: "Thinking", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.paletteLabel = String(localized: "ui.swift.aiterm.chatwindowcontroller.toggle_thinking.6de16e19", defaultValue: "Toggle Thinking", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.toolTip = String(localized: "ui.swift.aiterm.chatwindowcontroller.enable_or_disable_thinking_reasoning_mode.10b53e9e", defaultValue: "Enable or disable thinking/reasoning mode", bundle: .main, comment: "User-facing text in ChatWindowController.")
                 item.view = button
                 return item
             }
@@ -504,9 +504,9 @@ extension ChatWindowController: NSToolbarDelegate {
             if let selector = chatViewController.chatToolbar.reasoningEffortButton,
                !selector.isHidden {
                 let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-                item.label = "Effort"
-                item.paletteLabel = "Reasoning Effort"
-                item.toolTip = "Select reasoning effort"
+                item.label = String(localized: "ui.swift.aiterm.chatwindowcontroller.effort.4387e5d3", defaultValue: "Effort", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.paletteLabel = String(localized: "ui.swift.aiterm.chatwindowcontroller.reasoning_effort.6f71800c", defaultValue: "Reasoning Effort", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.toolTip = String(localized: "ui.swift.aiterm.chatwindowcontroller.select_reasoning_effort.0fe66e8c", defaultValue: "Select reasoning effort", bundle: .main, comment: "User-facing text in ChatWindowController.")
                 item.view = selector
                 return item
             }
@@ -516,9 +516,9 @@ extension ChatWindowController: NSToolbarDelegate {
             if let selector = chatViewController.chatToolbar.serviceTierButton,
                !selector.isHidden {
                 let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-                item.label = "Speed"
-                item.paletteLabel = "AI Speed"
-                item.toolTip = "Select AI service tier"
+                item.label = String(localized: "ui.swift.aiterm.chatwindowcontroller.speed.c372fee9", defaultValue: "Speed", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.paletteLabel = String(localized: "ui.swift.aiterm.chatwindowcontroller.ai_speed.855afa00", defaultValue: "AI Speed", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.toolTip = String(localized: "ui.swift.aiterm.chatwindowcontroller.select_ai_service_tier.97ddf1f1", defaultValue: "Select AI service tier", bundle: .main, comment: "User-facing text in ChatWindowController.")
                 item.view = selector
                 return item
             }
@@ -527,9 +527,9 @@ extension ChatWindowController: NSToolbarDelegate {
         case .webSearchToggle:
             if let button = chatViewController.chatToolbar.webSearchButton {
                 let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-                item.label = "Web Search"
-                item.paletteLabel = "Toggle Web Search"
-                item.toolTip = "Enable or disable web search"
+                item.label = String(localized: "ui.swift.aiterm.chatwindowcontroller.web_search.d04fc7d7", defaultValue: "Web Search", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.paletteLabel = String(localized: "ui.swift.aiterm.chatwindowcontroller.toggle_web_search.10289a0d", defaultValue: "Toggle Web Search", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.toolTip = String(localized: "ui.swift.aiterm.chatwindowcontroller.enable_or_disable_web_search.7661c544", defaultValue: "Enable or disable web search", bundle: .main, comment: "User-facing text in ChatWindowController.")
                 item.view = button
                 return item
             }
@@ -538,9 +538,9 @@ extension ChatWindowController: NSToolbarDelegate {
         case .sessionButton:
             if let button = chatViewController.chatToolbar.sessionButton {
                 let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-                item.label = "Session"
-                item.paletteLabel = "Link Session"
-                item.toolTip = "Link or unlink terminal/browser session"
+                item.label = String(localized: "ui.swift.aiterm.chatwindowcontroller.session.6959b415", defaultValue: "Session", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.paletteLabel = String(localized: "ui.swift.aiterm.chatwindowcontroller.link_session.8ff6f7ae", defaultValue: "Link Session", bundle: .main, comment: "User-facing text in ChatWindowController.")
+                item.toolTip = String(localized: "ui.swift.aiterm.chatwindowcontroller.link_or_unlink_terminal_browser_session.0e447b2d", defaultValue: "Link or unlink terminal/browser session", bundle: .main, comment: "User-facing text in ChatWindowController.")
                 item.view = button
                 return item
             }
@@ -571,7 +571,7 @@ extension ChatWindowController: NSToolbarDelegate {
             chatListViewController.select(chatID: chat.id)
         } else {
             do {
-                let chatID = try client.create(chatWithTitle: "Chat about \(name)",
+                let chatID = try client.create(chatWithTitle: String(localized: "ui.swift.aiterm.chatwindowcontroller.chat_about_0.713b508a", defaultValue: "Chat about \(name)", bundle: .main, comment: "User-facing text in ChatWindowController."),
                                                terminalSessionGuid: terminal ? guid : nil,
                                                browserSessionGuid: terminal ? nil : guid,
                                                initialMessages: [],
@@ -703,10 +703,10 @@ extension ChatWindowController: ChatListViewControllerDelegate {
             return
         }
         let alert = NSAlert()
-        alert.messageText = "Rename Chat"
-        alert.informativeText = "Choose a new name for this chat."
-        alert.addButton(withTitle: "Rename")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.aiterm.chatwindowcontroller.rename_chat.a257dec8", defaultValue: "Rename Chat", bundle: .main, comment: "User-facing text in ChatWindowController.")
+        alert.informativeText = String(localized: "ui.swift.aiterm.chatwindowcontroller.choose_a_new_name_for_this_chat.a5b8a805", defaultValue: "Choose a new name for this chat.", bundle: .main, comment: "User-facing text in ChatWindowController.")
+        alert.addButton(withTitle: String(localized: "ui.swift.aiterm.chatwindowcontroller.rename.3064d79a", defaultValue: "Rename", bundle: .main, comment: "User-facing text in ChatWindowController."))
+        alert.addButton(withTitle: String(localized: "ui.swift.aiterm.chatwindowcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ChatWindowController."))
 
         let field = NSTextField(frame: NSRect(x: 0, y: 0, width: 320, height: 24))
         field.stringValue = chat.title
@@ -730,12 +730,12 @@ extension ChatWindowController: ChatListViewControllerDelegate {
             }
         } catch {
             DLog("Failed to rename chat \(chatID): \(error)")
-            iTermWarning.show(withTitle: "The chat could not be renamed.",
-                              actions: ["OK"],
+            iTermWarning.show(withTitle: String(localized: "ui.swift.aiterm.chatwindowcontroller.the_chat_could_not_be_renamed.f5548bc0", defaultValue: "The chat could not be renamed.", bundle: .main, comment: "User-facing text in ChatWindowController."),
+                              actions: [String(localized: "ui.swift.aiterm.chatwindowcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in ChatWindowController.")],
                               accessory: nil,
                               identifier: nil,
                               silenceable: .kiTermWarningTypePersistent,
-                              heading: "Rename Failed",
+                              heading: String(localized: "ui.swift.aiterm.chatwindowcontroller.rename_failed.b89e58be", defaultValue: "Rename Failed", bundle: .main, comment: "User-facing text in ChatWindowController."),
                               window: window)
         }
     }
@@ -774,11 +774,11 @@ extension ChatWindowController: ChatViewControllerDelegate {
         let warning = iTermWarning()
         let count = uniqueChatIDs.count
         warning.title = count == 1
-            ? "Are you sure you want to delete this chat? This action cannot be undone."
-            : "Are you sure you want to delete \(count) chats? This action cannot be undone."
-        warning.heading = count == 1 ? "Delete Chat?" : "Delete \(count) Chats?"
+            ? String(localized: "ui.swift.aiterm.chatwindowcontroller.are_you_sure_you_want_to_delete_this.43560a32", defaultValue: "Are you sure you want to delete this chat? This action cannot be undone.", bundle: .main, comment: "User-facing text in ChatWindowController.")
+            : String(localized: "ui.swift.aiterm.chatwindowcontroller.are_you_sure_you_want_to_delete_0.bf23d5ee", defaultValue: "Are you sure you want to delete \(count) chats? This action cannot be undone.", bundle: .main, comment: "User-facing text in ChatWindowController.")
+        warning.heading = count == 1 ? String(localized: "ui.swift.aiterm.chatwindowcontroller.delete_chat.b4973d03", defaultValue: "Delete Chat?", bundle: .main, comment: "User-facing text in ChatWindowController.") : String(localized: "ui.swift.aiterm.chatwindowcontroller.delete_0_chats.09c1b26b", defaultValue: "Delete \(count) Chats?", bundle: .main, comment: "User-facing text in ChatWindowController.")
 
-        let action = iTermWarningAction(label: "Delete") { [weak self] _ in
+        let action = iTermWarningAction(label: String(localized: "ui.swift.aiterm.chatwindowcontroller.delete.e2d0a549", defaultValue: "Delete", bundle: .main, comment: "User-facing text in ChatWindowController.")) { [weak self] _ in
             guard let self else {
                 return
             }
@@ -792,7 +792,7 @@ extension ChatWindowController: ChatViewControllerDelegate {
             completion?()
         }
         action.destructive = true
-        warning.warningActions = [ iTermWarningAction(label: "Cancel"), action ]
+        warning.warningActions = [ iTermWarningAction(label: String(localized: "ui.swift.aiterm.chatwindowcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ChatWindowController.")), action ]
         warning.warningType = .kiTermWarningTypePersistent
         warning.runModal()
     }
@@ -845,7 +845,7 @@ extension ChatWindowController: ChatViewControllerDelegate {
             let nowString = formatter.string(from: now)
 
             var title = originalTitle
-            let forkedAt = "(Forked at "
+            let forkedAt = String(localized: "ui.swift.aiterm.chatwindowcontroller.forked_at.079deb8e", defaultValue: "(Forked at ", bundle: .main, comment: "User-facing text in ChatWindowController.")
             let desiredSuffix = forkedAt + nowString + ")"
             if let range = title.range(of: forkedAt) {
                 title = originalTitle[..<range.lowerBound] + desiredSuffix

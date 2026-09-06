@@ -158,18 +158,18 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     // MARK: - UI Construction
 
     private func addExitCodeFilterUI() {
-        let row = createRow(label: "Exit Code:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.exit_code.115a0020", defaultValue: "Exit Code:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let popup = NSPopUpButton()
         popup.translatesAutoresizingMaskIntoConstraints = false
-        popup.addItems(withTitles: ["Any", "Zero (Success)", "Non-Zero (Failure)", "Specific Value…"])
+        popup.addItems(withTitles: [String(localized: "ui.swift.triggers.itermeventtriggerparameterview.any.2b505597", defaultValue: "Any", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."), String(localized: "ui.swift.triggers.itermeventtriggerparameterview.zero_success.b3562491", defaultValue: "Zero (Success)", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."), String(localized: "ui.swift.triggers.itermeventtriggerparameterview.non_zero_failure.10dd442f", defaultValue: "Non-Zero (Failure)", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."), String(localized: "ui.swift.triggers.itermeventtriggerparameterview.specific_value.50cd3ec5", defaultValue: "Specific Value…", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")])
         popup.target = self
         popup.action = #selector(exitCodeFilterChanged(_:))
         exitCodeFilterPopup = popup
 
         let textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholderString = "Exit code"
+        textField.placeholderString = String(localized: "ui.swift.triggers.itermeventtriggerparameterview.exit_code.ccc6eb1c", defaultValue: "Exit code", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         textField.isHidden = true
         textField.widthAnchor.constraint(equalToConstant: 60).isActive = true
         textField.delegate = self
@@ -182,7 +182,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addJobNameUI() {
-        let row = createRow(label: "Job:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.job.34b0e24b", defaultValue: "Job:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -194,7 +194,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         row.addArrangedSubview(textField)
         stackView.addArrangedSubview(row)
 
-        let helpLabel = NSTextField(labelWithString: "Process name to match in the foreground-job ancestry chain (case-insensitive)")
+        let helpLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.process_name_to_match_in_the_foreground_job.32753a43", defaultValue: "Process name to match in the foreground-job ancestry chain (case-insensitive)", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         helpLabel.translatesAutoresizingMaskIntoConstraints = false
         helpLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         helpLabel.textColor = .secondaryLabelColor
@@ -203,7 +203,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
 
     private func addVariableChangedUI() {
         // Variable name row (with completion).
-        let nameRow = createRow(label: "Variable:")
+        let nameRow = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.variable.d61edd88", defaultValue: "Variable:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let nameField = NSTextField()
         nameField.translatesAutoresizingMaskIntoConstraints = false
@@ -215,14 +215,14 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         nameRow.addArrangedSubview(nameField)
         stackView.addArrangedSubview(nameRow)
 
-        let nameHelp = NSTextField(labelWithString: "Name of the session variable to watch")
+        let nameHelp = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.name_of_the_session_variable_to_watch.e897d8f2", defaultValue: "Name of the session variable to watch", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         nameHelp.translatesAutoresizingMaskIntoConstraints = false
         nameHelp.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         nameHelp.textColor = .secondaryLabelColor
         stackView.addArrangedSubview(nameHelp)
 
         // Value regex row.
-        let valueRow = createRow(label: "Value:")
+        let valueRow = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.value.224a3369", defaultValue: "Value:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let valueField = NSTextField()
         valueField.translatesAutoresizingMaskIntoConstraints = false
@@ -234,7 +234,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         valueRow.addArrangedSubview(valueField)
         stackView.addArrangedSubview(valueRow)
 
-        let valueHelp = NSTextField(labelWithString: "Regular expression the new value must match (leave blank to match any change)")
+        let valueHelp = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.regular_expression_the_new_value_must_match_leave.8dec65a7", defaultValue: "Regular expression the new value must match (leave blank to match any change)", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         valueHelp.translatesAutoresizingMaskIntoConstraints = false
         valueHelp.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         valueHelp.textColor = .secondaryLabelColor
@@ -242,7 +242,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addDirectoryRegexUI() {
-        let row = createRow(label: "Directory:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.directory.8b948460", defaultValue: "Directory:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -254,7 +254,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         row.addArrangedSubview(textField)
         stackView.addArrangedSubview(row)
 
-        let helpLabel = NSTextField(labelWithString: "Regular expression to match the directory path")
+        let helpLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.regular_expression_to_match_the_directory_path.32b3ad05", defaultValue: "Regular expression to match the directory path", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         helpLabel.translatesAutoresizingMaskIntoConstraints = false
         helpLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         helpLabel.textColor = .secondaryLabelColor
@@ -262,7 +262,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addTimeoutUI() {
-        let row = createRow(label: "Timeout:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.timeout.3cfe9e96", defaultValue: "Timeout:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -272,7 +272,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         textField.formatter = iTermSaneNumberFormatter()
         timeoutTextField = textField
 
-        let unitsLabel = NSTextField(labelWithString: "seconds")
+        let unitsLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.seconds.59f006d6", defaultValue: "seconds", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         unitsLabel.translatesAutoresizingMaskIntoConstraints = false
 
         row.addArrangedSubview(textField)
@@ -281,7 +281,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addSequenceIdUI() {
-        let row = createRow(label: "Sequence ID:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.sequence_id.e89d2160", defaultValue: "Sequence ID:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -293,7 +293,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         row.addArrangedSubview(textField)
         stackView.addArrangedSubview(row)
 
-        let helpLabel = NSTextField(labelWithString: "Regular expression to match the sequence identifier")
+        let helpLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.regular_expression_to_match_the_sequence_identifier.84f8cf6e", defaultValue: "Regular expression to match the sequence identifier", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         helpLabel.translatesAutoresizingMaskIntoConstraints = false
         helpLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         helpLabel.textColor = .secondaryLabelColor
@@ -301,7 +301,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addNotificationMessageRegexUI() {
-        let row = createRow(label: "Message:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.message.f5394f72", defaultValue: "Message:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -313,7 +313,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         row.addArrangedSubview(textField)
         stackView.addArrangedSubview(row)
 
-        let helpLabel = NSTextField(labelWithString: "Regular expression to match the notification message")
+        let helpLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.regular_expression_to_match_the_notification_message.1c9554a2", defaultValue: "Regular expression to match the notification message", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         helpLabel.translatesAutoresizingMaskIntoConstraints = false
         helpLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         helpLabel.textColor = .secondaryLabelColor
@@ -321,7 +321,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addHostRegexUI() {
-        let row = createRow(label: "Host:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.host.95695f07", defaultValue: "Host:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -333,7 +333,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         row.addArrangedSubview(textField)
         stackView.addArrangedSubview(row)
 
-        let helpLabel = NSTextField(labelWithString: "Regular expression to match the hostname")
+        let helpLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.regular_expression_to_match_the_hostname.87317704", defaultValue: "Regular expression to match the hostname", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         helpLabel.translatesAutoresizingMaskIntoConstraints = false
         helpLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         helpLabel.textColor = .secondaryLabelColor
@@ -341,7 +341,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addUserRegexUI() {
-        let row = createRow(label: "User:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.user.93d6b3e9", defaultValue: "User:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -353,7 +353,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         row.addArrangedSubview(textField)
         stackView.addArrangedSubview(row)
 
-        let helpLabel = NSTextField(labelWithString: "Regular expression to match the username")
+        let helpLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.regular_expression_to_match_the_username.4bede70c", defaultValue: "Regular expression to match the username", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         helpLabel.translatesAutoresizingMaskIntoConstraints = false
         helpLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         helpLabel.textColor = .secondaryLabelColor
@@ -362,7 +362,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
 
     private func addLongRunningCommandUI() {
         // Threshold row
-        let thresholdRow = createRow(label: "Threshold:")
+        let thresholdRow = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.threshold.fdc8fae6", defaultValue: "Threshold:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let thresholdField = NSTextField()
         thresholdField.translatesAutoresizingMaskIntoConstraints = false
@@ -372,7 +372,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         thresholdField.formatter = iTermSaneNumberFormatter()
         thresholdTextField = thresholdField
 
-        let unitsLabel = NSTextField(labelWithString: "seconds")
+        let unitsLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.seconds.59f006d6", defaultValue: "seconds", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         unitsLabel.translatesAutoresizingMaskIntoConstraints = false
 
         thresholdRow.addArrangedSubview(thresholdField)
@@ -380,7 +380,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         stackView.addArrangedSubview(thresholdRow)
 
         // Command regex row
-        let commandRow = createRow(label: "Command:")
+        let commandRow = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.command.a7a9c915", defaultValue: "Command:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let commandField = NSTextField()
         commandField.translatesAutoresizingMaskIntoConstraints = false
@@ -392,7 +392,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
         commandRow.addArrangedSubview(commandField)
         stackView.addArrangedSubview(commandRow)
 
-        let helpLabel = NSTextField(labelWithString: "Regular expression to match the command line")
+        let helpLabel = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.regular_expression_to_match_the_command_line.5ce3c752", defaultValue: "Regular expression to match the command line", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         helpLabel.translatesAutoresizingMaskIntoConstraints = false
         helpLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         helpLabel.textColor = .secondaryLabelColor
@@ -400,11 +400,11 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addProgressBarFilterUI() {
-        let row = createRow(label: "Fire When:")
+        let row = createRow(label: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fire_when.27d787ae", defaultValue: "Fire When:", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
 
         let popup = NSPopUpButton()
         popup.translatesAutoresizingMaskIntoConstraints = false
-        popup.addItems(withTitles: ["Appears or Disappears", "Appears", "Disappears"])
+        popup.addItems(withTitles: [String(localized: "ui.swift.triggers.itermeventtriggerparameterview.appears_or_disappears.a2b9cf44", defaultValue: "Appears or Disappears", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."), String(localized: "ui.swift.triggers.itermeventtriggerparameterview.appears.6fdf019c", defaultValue: "Appears", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."), String(localized: "ui.swift.triggers.itermeventtriggerparameterview.disappears.72d4b91c", defaultValue: "Disappears", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")])
         popup.target = self
         popup.action = #selector(progressBarFilterChanged(_:))
         progressBarFilterPopup = popup
@@ -414,7 +414,7 @@ class EventTriggerParameterView: NSView, NSTextFieldDelegate {
     }
 
     private func addNoParametersLabel() {
-        let label = NSTextField(labelWithString: "No additional parameters required.")
+        let label = NSTextField(labelWithString: String(localized: "ui.swift.triggers.itermeventtriggerparameterview.no_additional_parameters_required.23b42202", defaultValue: "No additional parameters required.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView."))
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .secondaryLabelColor
         stackView.addArrangedSubview(label)
@@ -721,39 +721,39 @@ class EventTriggerMatchTypeHelper: NSObject {
     @objc static func displayName(for matchType: iTermTriggerMatchType) -> String {
         switch matchType {
         case .eventPromptDetected:
-            return "Prompt Detected"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.prompt_detected.138fc2a1", defaultValue: "Prompt Detected", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventCommandFinished:
-            return "Command Finished"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.command_finished.ec70c38b", defaultValue: "Command Finished", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventDirectoryChanged:
-            return "Directory Changed"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.directory_changed.dde8d641", defaultValue: "Directory Changed", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventHostChanged:
-            return "Host Changed"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.host_changed.904360b2", defaultValue: "Host Changed", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventUserChanged:
-            return "User Changed"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.user_changed.00481517", defaultValue: "User Changed", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventIdle:
-            return "Idle (Silence)"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.idle_silence.50ca45f7", defaultValue: "Idle (Silence)", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventActivityAfterIdle:
-            return "Activity After Idle"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.activity_after_idle.285e5198", defaultValue: "Activity After Idle", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventSessionEnded:
-            return "Session Ended"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.session_ended.3387d3e8", defaultValue: "Session Ended", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventBellReceived:
-            return "Bell Received"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.bell_received.bb3440c2", defaultValue: "Bell Received", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventLongRunningCommand:
-            return "Long-Running Command"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.long_running_command.b943caf4", defaultValue: "Long-Running Command", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventCustomEscapeSequence:
-            return "Custom Escape Sequence"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.custom_escape_sequence.07884d74", defaultValue: "Custom Escape Sequence", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventNotificationPosted:
-            return "Notification Posted"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.notification_posted.594c15bc", defaultValue: "Notification Posted", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventProgressBarChanged:
-            return "Progress Bar Changed"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.progress_bar_changed.467f513d", defaultValue: "Progress Bar Changed", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventJobStarted:
-            return "Job Started"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.job_started.8d5b30de", defaultValue: "Job Started", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventJobEnded:
-            return "Job Ended"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.job_ended.0fb54d33", defaultValue: "Job Ended", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventVariableChanged:
-            return "Variable Changed"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.variable_changed.951f8324", defaultValue: "Variable Changed", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         default:
-            return "Unknown Event"
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.unknown_event.2078f36c", defaultValue: "Unknown Event", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         }
     }
 
@@ -761,37 +761,37 @@ class EventTriggerMatchTypeHelper: NSObject {
     @objc static func helpText(for matchType: iTermTriggerMatchType) -> String {
         switch matchType {
         case .eventPromptDetected:
-            return "Fires when shell integration detects a new prompt."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_shell_integration_detects_a_new_prompt.d5c88fa8", defaultValue: "Fires when shell integration detects a new prompt.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventCommandFinished:
-            return "Fires when a command exits. Requires shell integration."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_command_exits_requires_shell_integration.5038c8ac", defaultValue: "Fires when a command exits. Requires shell integration.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventDirectoryChanged:
-            return "Fires when the working directory changes."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_the_working_directory_changes.13587c9e", defaultValue: "Fires when the working directory changes.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventHostChanged:
-            return "Fires when connecting to a different host via SSH."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_connecting_to_a_different_host_via.77af4932", defaultValue: "Fires when connecting to a different host via SSH.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventUserChanged:
-            return "Fires when the current user changes (su/sudo)."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_the_current_user_changes_su_sudo.e69b83a4", defaultValue: "Fires when the current user changes (su/sudo).", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventIdle:
-            return "Fires when no output is received for the specified duration."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_no_output_is_received_for_the.64d92d1b", defaultValue: "Fires when no output is received for the specified duration.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventActivityAfterIdle:
-            return "Fires when output resumes after being idle."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_output_resumes_after_being_idle.3be03ffc", defaultValue: "Fires when output resumes after being idle.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventSessionEnded:
-            return "Fires when the session terminates."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_the_session_terminates.7f06f1a7", defaultValue: "Fires when the session terminates.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventBellReceived:
-            return "Fires when a terminal bell (\\a) is received."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_terminal_bell_a_is_received.1ba063a4", defaultValue: "Fires when a terminal bell (\\a) is received.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventLongRunningCommand:
-            return "Fires when a command runs longer than the threshold."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_command_runs_longer_than_the.1012696d", defaultValue: "Fires when a command runs longer than the threshold.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventCustomEscapeSequence:
-            return "Fires when a specific OSC escape sequence is received."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_specific_osc_escape_sequence_is.3f7a9dcb", defaultValue: "Fires when a specific OSC escape sequence is received.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventNotificationPosted:
-            return "Fires when a notification is posted by a control sequence (OSC 9)."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_notification_is_posted_by_a.1f02e308", defaultValue: "Fires when a notification is posted by a control sequence (OSC 9).", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventProgressBarChanged:
-            return "Fires when a progress bar appears or disappears."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_progress_bar_appears_or_disappears.ce9a2f74", defaultValue: "Fires when a progress bar appears or disappears.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventJobStarted:
-            return "Fires when a process matching the job filter enters the foreground-job ancestry chain."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_process_matching_the_job_filter.940f387c", defaultValue: "Fires when a process matching the job filter enters the foreground-job ancestry chain.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventJobEnded:
-            return "Fires when a process matching the job filter leaves the foreground-job ancestry chain."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_process_matching_the_job_filter.e2f9508c", defaultValue: "Fires when a process matching the job filter leaves the foreground-job ancestry chain.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         case .eventVariableChanged:
-            return "Fires when a session variable changes to a value matching the regex."
+            return String(localized: "ui.swift.triggers.itermeventtriggerparameterview.fires_when_a_session_variable_changes_to_a.6759573b", defaultValue: "Fires when a session variable changes to a value matching the regex.", bundle: .main, comment: "User-facing text in iTermEventTriggerParameterView.")
         default:
             return ""
         }

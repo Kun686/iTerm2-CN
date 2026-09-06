@@ -1198,21 +1198,21 @@ extension iTermBrowserManager {
 extension iTermBrowserManager {
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         guard let url = urlSchemeTask.request.url else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.core.itermbrowsermanager.invalid_url.82e45382", defaultValue: "Invalid URL", bundle: .main, comment: "Error shown when an internal browser request has no valid URL.")]))
             return
         }
 
         switch url.scheme {
         case iTermBrowserSchemes.about, iTermBrowserSchemes.file:
             if !localPageManager.handleURLSchemeTask(urlSchemeTask, url: url) {
-                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown URL scheme"]))
+                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.core.itermbrowsermanager.unknown_url_scheme.f542e0b2", defaultValue: "Unknown URL scheme", bundle: .main, comment: "Error shown when an internal browser URL scheme is not recognized.")]))
             }
         case iTermBrowserSchemes.ssh:
             if !sshPageManager.handleURLSchemeTask(urlSchemeTask, url: url) {
-                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown URL scheme"]))
+                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.core.itermbrowsermanager.unknown_url_scheme.f542e0b2", defaultValue: "Unknown URL scheme", bundle: .main, comment: "Error shown when an internal browser URL scheme is not recognized.")]))
             }
         default:
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown URL scheme"]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.core.itermbrowsermanager.unknown_url_scheme.f542e0b2", defaultValue: "Unknown URL scheme", bundle: .main, comment: "Error shown when an internal browser URL scheme is not recognized.")]))
         }
     }
     
@@ -1607,9 +1607,9 @@ extension iTermBrowserManager: WKUIDelegate {
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         // Handle JavaScript alerts
         let alert = NSAlert()
-        alert.messageText = "Web Page Alert"
+        alert.messageText = String(localized: "ui.swift.browser.core.itermbrowsermanager.web_page_alert.809721e0", defaultValue: "Web Page Alert", bundle: .main, comment: "User-facing text in iTermBrowserManager.")
         alert.informativeText = message
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.core.itermbrowsermanager.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermBrowserManager."))
         alert.runModal()
         completionHandler()
     }
@@ -1617,10 +1617,10 @@ extension iTermBrowserManager: WKUIDelegate {
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         // Handle JavaScript confirmations
         let alert = NSAlert()
-        alert.messageText = "Web Page Confirmation"
+        alert.messageText = String(localized: "ui.swift.browser.core.itermbrowsermanager.web_page_confirmation.8039bc7f", defaultValue: "Web Page Confirmation", bundle: .main, comment: "User-facing text in iTermBrowserManager.")
         alert.informativeText = message
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.core.itermbrowsermanager.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermBrowserManager."))
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.core.itermbrowsermanager.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermBrowserManager."))
         let response = alert.runModal()
         completionHandler(response == .alertFirstButtonReturn)
     }
@@ -2086,12 +2086,12 @@ extension iTermBrowserManager: iTermBrowserAudioHandlerDelegate {
                     case denyAlways
                 }
                 let announcement = BrowserAnnouncement(
-                    message: "Audio was muted. Allow playback by \(origin)?",
+                    message: String(localized: "ui.swift.browser.core.itermbrowsermanager.audio_was_muted_allow_playback_by_0.5f6adbe0", defaultValue: "Audio was muted. Allow playback by \(origin)?", bundle: .main, comment: "User-facing text in iTermBrowserManager."),
                     style: .kiTermAnnouncementViewStyleQuestion,
-                    options: [.init(title: "Allow _Once", identifier: Action.allowOnce),
-                              .init(title: "Allow _Always", identifier: Action.allowAlways),
-                              .init(title: "_Deny Once", identifier: Action.denyOnce),
-                              .init(title: "De_ny Always", identifier: Action.denyAlways) ],
+                    options: [.init(title: String(localized: "ui.swift.browser.core.itermbrowsermanager.allow_once.9013a356", defaultValue: "Allow _Once", bundle: .main, comment: "User-facing text in iTermBrowserManager."), identifier: Action.allowOnce),
+                              .init(title: String(localized: "ui.swift.browser.core.itermbrowsermanager.allow_always.7b52fc23", defaultValue: "Allow _Always", bundle: .main, comment: "User-facing text in iTermBrowserManager."), identifier: Action.allowAlways),
+                              .init(title: String(localized: "ui.swift.browser.core.itermbrowsermanager.deny_once.92e73763", defaultValue: "_Deny Once", bundle: .main, comment: "User-facing text in iTermBrowserManager."), identifier: Action.denyOnce),
+                              .init(title: String(localized: "ui.swift.browser.core.itermbrowsermanager.de_ny_always.6181d799", defaultValue: "De_ny Always", bundle: .main, comment: "User-facing text in iTermBrowserManager."), identifier: Action.denyAlways) ],
                     identifier: "NoSyncMuteAudio_\(origin)")
                 switch await delegate?.browserManager(self, announce: announcement) {
                 case .allowOnce:

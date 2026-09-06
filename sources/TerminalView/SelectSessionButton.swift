@@ -1,11 +1,11 @@
 @objc(iTermSelectSessionButton)
 class SelectSessionButton: NSView {
-    private let button = NSButton(title: "Select this Session", target: nil, action: nil)
+    private let button = NSButton(title: String(localized: "ui.swift.terminalview.selectsessionbutton.select_this_session.4385e575", defaultValue: "Select this Session", bundle: .main, comment: "User-facing text in SelectSessionButton."), target: nil, action: nil)
     private let effectView = NSVisualEffectView()
 
     // New title label (using NSTextField configured for display only)
     private let titleLabel: NSTextField = {
-        let label = NSTextField(labelWithString: "Title")
+        let label = NSTextField(labelWithString: String(localized: "ui.swift.terminalview.selectsessionbutton.title.7e8cd205", defaultValue: "Title", bundle: .main, comment: "User-facing text in SelectSessionButton."))
         label.alignment = .center
         label.font = NSFont.boldSystemFont(ofSize: 14)
         return label

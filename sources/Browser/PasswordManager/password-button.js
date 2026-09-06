@@ -2,6 +2,7 @@
     'use strict';
     const handlerName   = 'iTermOpenPasswordManager';
     const sessionSecret = "{{SECRET}}";
+    const openPasswordManagerLabel = {{OPEN_PASSWORD_MANAGER_JSON}};
     let activeField = null;
     let activeType  = null; // 'password' or 'username'
 
@@ -14,7 +15,7 @@
         btn = document.createElement('button');
         btn.type            = 'button';
         btn.tabIndex        = -1;
-        btn.setAttribute('aria-label', 'Open Password Manager');
+        btn.setAttribute('aria-label', openPasswordManagerLabel);
         Object.assign(btn.style, {
             position:    'absolute',
             display:     'none',
@@ -124,7 +125,7 @@
         // choose emoji based on field type
         const emoji     = activeType === 'username' ? '🎫' : '🔑';
         btn.textContent = emoji;
-        btn.title       = 'Open Password Manager';
+        btn.title       = openPasswordManagerLabel;
 
         btn.setAttribute('aria-label', btn.title);
 

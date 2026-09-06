@@ -29,11 +29,11 @@
 
 + (NSString *)title
 {
-    return @"Run Command…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.scripttrigger.run_command.91eb0214", nil, NSBundle.mainBundle, @"Run Command…", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Run Command “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.scripttrigger.run_command.e3dfeb70", nil, NSBundle.mainBundle, @"Run Command “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (BOOL)takesParameter
@@ -42,7 +42,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter command to run";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.scripttrigger.enter_command_to_run.3fcf9c3a", nil, NSBundle.mainBundle, @"Enter command to run", @"Trigger parameter placeholder.");
 }
 
 - (NSSet<NSNumber *> *)allowedMatchTypes {

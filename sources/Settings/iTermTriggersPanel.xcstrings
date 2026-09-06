@@ -1,0 +1,151 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "88E-ST-PKZ.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Use interpolated strings for parameters\"; ObjectID = \"88E-ST-PKZ\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Use interpolated strings for parameters"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "对参数使用插值字符串"
+          }
+        }
+      }
+    },
+    "AEX-CI-4kN.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Copy to Profile\"; ObjectID = \"AEX-CI-4kN\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Copy to Profile"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝到配置文件"
+          }
+        }
+      }
+    },
+    "BxO-lA-ml2.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"BxO-lA-ml2\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
+        }
+      }
+    },
+    "c0p-Xj-FkC.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Close\"; ObjectID = \"c0p-Xj-FkC\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Close"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
+          }
+        }
+      }
+    },
+    "gWO-i1-Pad.title": {
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Triggers\"; ObjectID = \"gWO-i1-Pad\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Triggers"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "触发器"
+          }
+        }
+      }
+    },
+    "hKE-xP-l4d.headerCell.title": {
+      "comment": "Class = \"NSTableColumn\"; headerCell.title = \"Regular Expression\"; ObjectID = \"hKE-xP-l4d\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Regular Expression"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正则表达式"
+          }
+        }
+      }
+    },
+    "oHh-pq-MkT.title": {
+      "comment": "Class = \"NSWindow\"; title = \"Window\"; ObjectID = \"oHh-pq-MkT\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
+        }
+      }
+    },
+    "zb2-dV-MBm.title": {
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Select one trigger to view or edit\"; ObjectID = \"zb2-dV-MBm\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Select one trigger to view or edit"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择一个触发器以查看或编辑"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

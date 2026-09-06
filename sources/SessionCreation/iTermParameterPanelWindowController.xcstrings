@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Enter the value for "
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请输入以下参数的值："
+          }
         }
       }
     },
@@ -21,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "OK"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
           }
         }
       }
@@ -34,6 +46,12 @@
             "state": "new",
             "value": "Session Parameter"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话参数"
+          }
         }
       }
     },
@@ -46,6 +64,12 @@
             "state": "new",
             "value": "Cancel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
         }
       }
     },
@@ -57,6 +81,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Name"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名称"
           }
         }
       }

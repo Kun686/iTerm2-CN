@@ -58,7 +58,7 @@
             
             // Set the reader content
             readerContent.innerHTML = `
-                <h1>${article.title || 'Article'}</h1>
+                <h1>${article.title || {{ARTICLE_FALLBACK_JSON}}}</h1>
                 ${article.content}
             `;
             

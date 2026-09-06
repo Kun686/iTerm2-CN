@@ -70,12 +70,12 @@ class AttributedStringSaver: NSObject {
                 try await rtfData.writeTo(saveItem: item)
             }
         } catch {
-            _ = iTermWarning.show(withTitle: "There was a problem saving the file: \(error.localizedDescription)",
-                                  actions: ["OK"],
+            _ = iTermWarning.show(withTitle: String(localized: "ui.swift.attributedstrings.attributedstringsaver.there_was_a_problem_saving_the_file_0.cb5303f5", defaultValue: "There was a problem saving the file: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in AttributedStringSaver."),
+                                  actions: [String(localized: "ui.swift.attributedstrings.attributedstringsaver.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in AttributedStringSaver.")],
                                   accessory: nil,
                                   identifier: nil,
                                   silenceable: .kiTermWarningTypePersistent,
-                                  heading: "Could Not Save File",
+                                  heading: String(localized: "ui.swift.attributedstrings.attributedstringsaver.could_not_save_file.59a46d40", defaultValue: "Could Not Save File", bundle: .main, comment: "User-facing text in AttributedStringSaver."),
                                   window: window)
         }
     }

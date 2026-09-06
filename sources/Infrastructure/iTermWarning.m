@@ -322,12 +322,12 @@ BOOL gShowRememberedAlerts = NO;
 
 - (NSAlert *)makeAlert {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = _heading ?: @"Warning";
+    alert.messageText = _heading ?: NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.warning.e981ddae", nil, NSBundle.mainBundle, @"Warning", @"User-facing text in iTermWarning (makeAlert).");
 
     // If this warning is being shown due to the "always show alerts with remembered
     // selections" mode, prepend explanatory text.
     if (_shownDueToRememberedAlertsMode && _savedSelectionLabel) {
-        alert.informativeText = [NSString stringWithFormat:@"%@\n\nThis alert had a saved selection of “%@”. It is being shown because “Always show alerts with remembered selections” is turned on in iTerm2 > Suppressed Alerts.", _title, _savedSelectionLabel];
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.this_alert_had_a_saved_selection_of_it.8a074a31", nil, NSBundle.mainBundle, @"%@\n\nThis alert had a saved selection of “%@”. It is being shown because “Always show alerts with remembered selections” is turned on in iTerm2 > Suppressed Alerts.", @"User-facing text in iTermWarning (informativeText)."), _title, _savedSelectionLabel];
     } else {
         alert.informativeText = _title;
     }
@@ -362,7 +362,7 @@ BOOL gShowRememberedAlerts = NO;
 
     // Add "Permanently Forget Saved Selection" button when in remembered alerts mode.
     if (_shownDueToRememberedAlertsMode && _identifier) {
-        [alert addButtonWithTitle:@"Permanently Forget Saved Selection"];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.permanently_forget_saved_selection.fcf82656", nil, NSBundle.mainBundle, @"Permanently Forget Saved Selection", @"User-facing text in iTermWarning (makeAlert).")];
     }
 
     int numNonCancelActions = [_warningActions count];
@@ -376,25 +376,25 @@ BOOL gShowRememberedAlerts = NO;
     if (_warningType == kiTermWarningTypeTemporarilySilenceable) {
         assert(_identifier);
         if (numNonCancelActions == 1) {
-            alert.suppressionButton.title = @"Suppress this message for ten minutes";
+            alert.suppressionButton.title = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.suppress_this_message_for_ten_minutes.9e0287d9", nil, NSBundle.mainBundle, @"Suppress this message for ten minutes", @"User-facing text in iTermWarning (makeAlert).");
         } else if (numNonCancelActions > 1) {
-            alert.suppressionButton.title = @"Remember my choice for ten minutes";
+            alert.suppressionButton.title = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.remember_my_choice_for_ten_minutes.f704d835", nil, NSBundle.mainBundle, @"Remember my choice for ten minutes", @"User-facing text in iTermWarning (makeAlert).");
         }
         alert.showsSuppressionButton = YES;
     } else if (_warningType == kiTermWarningTypeSilenceableForOneMonth) {
         assert(_identifier);
         if (numNonCancelActions == 1) {
-            alert.suppressionButton.title = @"Suppress this message for 30 days";
+            alert.suppressionButton.title = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.suppress_this_message_for_30_days.c3899e08", nil, NSBundle.mainBundle, @"Suppress this message for 30 days", @"User-facing text in iTermWarning (makeAlert).");
         } else if (numNonCancelActions > 1) {
-            alert.suppressionButton.title = @"Remember my choice for 30 days";
+            alert.suppressionButton.title = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.remember_my_choice_for_30_days.bbdcad3b", nil, NSBundle.mainBundle, @"Remember my choice for 30 days", @"User-facing text in iTermWarning (makeAlert).");
         }
         alert.showsSuppressionButton = YES;
     } else if (_warningType == kiTermWarningTypePermanentlySilenceable) {
         assert(_identifier);
         if (numNonCancelActions == 1) {
-            alert.suppressionButton.title = @"Suppress this message permanently";
+            alert.suppressionButton.title = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.suppress_this_message_permanently.d1b05480", nil, NSBundle.mainBundle, @"Suppress this message permanently", @"User-facing text in iTermWarning (makeAlert).");
         } else if (numNonCancelActions > 1) {
-            alert.suppressionButton.title = @"Remember my choice";
+            alert.suppressionButton.title = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.remember_my_choice.974bad03", nil, NSBundle.mainBundle, @"Remember my choice", @"User-facing text in iTermWarning (makeAlert).");
         }
         alert.showsSuppressionButton = YES;
     }

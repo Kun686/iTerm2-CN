@@ -52,11 +52,11 @@ class iTermBrowserDownload: TransferrableFile {
     // MARK: - TransferrableFile Overrides
     
     override func displayName() -> String? {
-        return """
+        return String(localized: "ui.browser.download.summary", defaultValue: """
         Browser Download
         Source: \(sourceURL.absoluteString)
         File: \(suggestedFilename)
-        """
+        """, bundle: .main, comment: "Summary shown for a built-in browser download in the file-transfer inspector.")
     }
     
     override func shortName() -> String? {
@@ -68,11 +68,11 @@ class iTermBrowserDownload: TransferrableFile {
     }
     
     override func authRequestor() -> String? {
-        return sourceURL.host ?? "Browser"
+        return sourceURL.host ?? String(localized: "ui.browser.download.requestor", defaultValue: "Browser", bundle: .main, comment: "Fallback requestor name shown for a built-in browser download.")
     }
     
     override func protocolName() -> String? {
-        return "Browser Download"
+        return String(localized: "ui.browser.download.name", defaultValue: "Browser Download", bundle: .main, comment: "Protocol name shown for a built-in browser download.")
     }
     
     override func download() {

@@ -2,12 +2,19 @@
   "sourceLanguage": "en",
   "strings": {
     "2dW-g3-Ja6.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"2dW-g3-Ja6\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -22,16 +29,29 @@
             "state": "new",
             "value": "Open Quickly"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速打开"
+          }
         }
       }
     },
     "LTe-QL-Nlc.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"LTe-QL-Nlc\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Table View Cell"
           }
         }
@@ -45,6 +65,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Detail"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "详细信息"
           }
         }
       }

@@ -183,7 +183,7 @@ class CompletionsWindow: NSWindow, NSTableViewDataSource, NSTableViewDelegate {
     // MARK: - Initializer
 
     // location is in screen coordinates and gives the location of the text field this is attached to.
-    init(parent: NSWindow, location: NSRect, mode: Mode, placeholder: String = "Thinking…", allowKey: Bool = false) {
+    init(parent: NSWindow, location: NSRect, mode: Mode, placeholder: String = String(localized: "ui.swift.completionsui.completionswindow.thinking.a02f1cea", defaultValue: "Thinking…", bundle: .main, comment: "User-facing text in CompletionsWindow."), allowKey: Bool = false) {
         self.allowKeyWindow = allowKey
         self.placeholder = placeholder
         self.mode = mode
@@ -413,7 +413,7 @@ class CompletionsWindow: NSWindow, NSTableViewDataSource, NSTableViewDelegate {
         if searchField == nil {
             let searchField = NSSearchField(frame: .zero)
             searchField.focusRingType = .none
-            searchField.placeholderString = "Search"
+            searchField.placeholderString = String(localized: "ui.swift.completionsui.completionswindow.search.49c266ba", defaultValue: "Search", bundle: .main, comment: "User-facing text in CompletionsWindow.")
             searchField.delegate = self
             self.searchField = searchField
             contentView?.addSubview(searchField)
@@ -570,48 +570,48 @@ class CompletionsWindow: NSWindow, NSTableViewDataSource, NSTableViewDelegate {
         case .file:
             if #available(macOS 15, *) {
                 return NSImage.it_image(forSymbolName: SFSymbol.document.rawValue,
-                                        accessibilityDescription: "File",
+                                        accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.file.50009ce1", defaultValue: "File", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                         fallbackImageName: "document",
                                         for: CompletionsWindow.self)!
             } else {
                 return NSImage.it_image(forSymbolName: SFSymbol.doc.rawValue,
-                                        accessibilityDescription: "File",
+                                        accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.file.50009ce1", defaultValue: "File", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                         fallbackImageName: "document",
                                         for: CompletionsWindow.self)!
             }
         case .aiSuggestion, .aiReplacement:
             return NSImage.it_image(forSymbolName: SFSymbol.sparkles.rawValue,
-                                    accessibilityDescription: "AI",
+                                    accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.ai.11fb682b", defaultValue: "AI", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                     fallbackImageName: "sparkles",
                                     for: CompletionsWindow.self)!
         case .history:
             return NSImage.it_image(forSymbolName: SFSymbol.clock.rawValue,
-                                    accessibilityDescription: "History",
+                                    accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.history.0e769600", defaultValue: "History", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                     fallbackImageName: "clock",
                                     for: CompletionsWindow.self)!
         case .command:
             return NSImage.it_image(forSymbolName: SFSymbol.command.rawValue,
-                                    accessibilityDescription: "Command",
+                                    accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.command.71316697", defaultValue: "Command", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                     fallbackImageName: "command",
                                     for: CompletionsWindow.self)!
         case .folder:
             return NSImage.it_image(forSymbolName: SFSymbol.folder.rawValue,
-                                    accessibilityDescription: "Folder",
+                                    accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.folder.74ccd433", defaultValue: "Folder", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                     fallbackImageName: "folder",
                                     for: CompletionsWindow.self)!
         case .webSearch:
             return NSImage.it_image(forSymbolName: SFSymbol.magnifyingglass.rawValue,
-                                    accessibilityDescription: "Web Search",
+                                    accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.web_search.d04fc7d7", defaultValue: "Web Search", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                     fallbackImageName: "magnifyingglass",
                                     for: CompletionsWindow.self)!
         case .navigation:
             return NSImage.it_image(forSymbolName: SFSymbol.safari.rawValue,
-                                    accessibilityDescription: "Navigate",
+                                    accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.navigate.5ea5fbe8", defaultValue: "Navigate", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                     fallbackImageName: "safari",
                                     for: CompletionsWindow.self)!
         case .bookmark:
             return NSImage.it_image(forSymbolName: SFSymbol.bookmark.rawValue,
-                                    accessibilityDescription: "Bookmark",
+                                    accessibilityDescription: String(localized: "ui.swift.completionsui.completionswindow.bookmark.1bac4007", defaultValue: "Bookmark", bundle: .main, comment: "User-facing text in CompletionsWindow."),
                                     fallbackImageName: "bookmark",
                                     for: CompletionsWindow.self)!
         }

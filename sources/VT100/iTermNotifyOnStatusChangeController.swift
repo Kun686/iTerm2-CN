@@ -233,24 +233,24 @@ class NotifyOnStatusChangeController: NSObject {
                               from: String?,
                               to: String?,
                               window: NSWindow?) {
-        let name = sessionName ?? "A session"
-        let fromText = from ?? "none"
-        let toText = to ?? "none"
+        let name = sessionName ?? String(localized: "ui.swift.vt100.itermnotifyonstatuschangecontroller.a_session.3905816b", defaultValue: "A session", bundle: .main, comment: "User-facing text in iTermNotifyOnStatusChangeController.")
+        let fromText = from ?? String(localized: "ui.swift.vt100.itermnotifyonstatuschangecontroller.none.140bedbf", defaultValue: "none", bundle: .main, comment: "User-facing text in iTermNotifyOnStatusChangeController.")
+        let toText = to ?? String(localized: "ui.swift.vt100.itermnotifyonstatuschangecontroller.none.140bedbf", defaultValue: "none", bundle: .main, comment: "User-facing text in iTermNotifyOnStatusChangeController.")
         // Present asynchronously so the modal alert doesn't run
         // reentrantly while the status-change notification is still
         // being dispatched.
         DispatchQueue.main.async {
             let alert = NSAlert()
-            alert.messageText = "Session status changed"
-            alert.informativeText = "\(name) changed from “\(fromText)” to “\(toText)”."
-            alert.addButton(withTitle: "OK")
+            alert.messageText = String(localized: "ui.swift.vt100.itermnotifyonstatuschangecontroller.session_status_changed.ee33317a", defaultValue: "Session status changed", bundle: .main, comment: "User-facing text in iTermNotifyOnStatusChangeController.")
+            alert.informativeText = String(localized: "ui.swift.vt100.itermnotifyonstatuschangecontroller.0_changed_from_1_to_2.962b985f", defaultValue: "\(name) changed from “\(fromText)” to “\(toText)”.", bundle: .main, comment: "User-facing text in iTermNotifyOnStatusChangeController.")
+            alert.addButton(withTitle: String(localized: "ui.swift.vt100.itermnotifyonstatuschangecontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermNotifyOnStatusChangeController."))
             // Offer Reveal only when the session can still be resolved; it may
             // have gone away between the change and the alert being shown.
             let canReveal = sessionGuid.flatMap {
                 iTermController.sharedInstance()?.anySession(withGUID: $0)
             } != nil
             if canReveal {
-                alert.addButton(withTitle: "Reveal")
+                alert.addButton(withTitle: String(localized: "ui.swift.vt100.itermnotifyonstatuschangecontroller.reveal.36b830bd", defaultValue: "Reveal", bundle: .main, comment: "User-facing text in iTermNotifyOnStatusChangeController."))
             }
             let reveal: () -> Void = {
                 if let sessionGuid {

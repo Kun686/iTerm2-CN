@@ -142,7 +142,7 @@
 
 - (NSImage *)icon {
     NSImageSymbolConfiguration *config = [NSImageSymbolConfiguration configurationWithPointSize:32 weight:NSFontWeightRegular];
-    NSImage *image = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolBookmark) accessibilityDescription:@"globe"];
+        NSImage *image = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolBookmark) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.openquickly.itermopenquicklyitem.globe.d2a1fc04", nil, NSBundle.mainBundle, @"globe", @"Accessibility description for a bookmark or globe icon.")];
     image = [image imageWithSymbolConfiguration:config];
     image.size = NSMakeSize(32, 32);
     return image;
@@ -154,11 +154,10 @@
 
 - (NSImage *)icon {
     NSImageSymbolConfiguration *config = [NSImageSymbolConfiguration configurationWithPointSize:32 weight:NSFontWeightRegular];
-    NSImage *image = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolGlobe) accessibilityDescription:@"globe"];
+        NSImage *image = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolGlobe) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.openquickly.itermopenquicklyitem.globe.d2a1fc04", nil, NSBundle.mainBundle, @"globe", @"Accessibility description for a bookmark or globe icon.")];
     image = [image imageWithSymbolConfiguration:config];
     image.size = NSMakeSize(32, 32);
     return image;
 }
 
 @end
-

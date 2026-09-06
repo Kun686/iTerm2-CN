@@ -22,15 +22,15 @@ static NSString *const iTermRPCTriggerPathLineNumber = @"trigger.line_number";
 @implementation iTermRPCTrigger
 
 + (NSString *)title {
-    return @"Invoke Script Function";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermrpctrigger.invoke_script_function.44cc0874", nil, NSBundle.mainBundle, @"Invoke Script Function", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Invoke Script Function “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermrpctrigger.invoke_script_function.6609ad2a", nil, NSBundle.mainBundle, @"Invoke Script Function “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Function call";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermrpctrigger.function_call.4d6ea58d", nil, NSBundle.mainBundle, @"Function call", @"Trigger parameter placeholder.");
 }
 
 - (BOOL)takesParameter {

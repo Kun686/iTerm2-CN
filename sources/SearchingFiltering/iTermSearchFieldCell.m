@@ -47,7 +47,7 @@ const CGFloat kEdgeWidth = 3;
 
     if (_loupeColor) {
         NSImage *originalImage = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolMagnifyingglass)
-                                          accessibilityDescription:@"Search"];
+                                                accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.searchingfiltering.itermsearchfieldcell.search.49c266ba", nil, NSBundle.mainBundle, @"Search", @"Accessibility description for a search icon.")];
 
         if (originalImage) {
             NSImage *tintedImage = [originalImage it_imageWithTintColor:_loupeColor];
@@ -358,4 +358,3 @@ const CGFloat kEdgeWidth = 3;
 }
 
 @end
-

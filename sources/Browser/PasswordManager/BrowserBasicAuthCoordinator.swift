@@ -355,7 +355,7 @@ final class BrowserBasicAuthCoordinator {
                 spaces[space, default: .init()].savedRejectedThisSession = false
                 return []
             }
-            return [.toast("Could not save the password for \(host)")]
+            return [.toast(String(localized: "ui.browser.basic_auth.save_failed", defaultValue: "Could not save the password for \(host)", bundle: .main, comment: "Toast shown when the built-in browser cannot save a website password."))]
         }
     }
 

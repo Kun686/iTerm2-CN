@@ -217,12 +217,12 @@ NSString *const iTermDidToggleSecureInputNotification = @"iTermDidToggleSecureIn
     }
     _warningShown = YES;
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:@"Secure keyboard entry is enabled.\n\nIn macOS 12 and later, enabling Secure Keyboard Entry prevents other programs from being activated. This affects the `open` command as well as the panel shown when using Touch ID for sudo."
-                               actions:@[ @"OK", @"Cancel" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermsecurekeyboardentrycontroller.secure_keyboard_entry_is_enabled_in_macos_12.535e58a4", nil, NSBundle.mainBundle, @"Secure keyboard entry is enabled.\n\nIn macOS 12 and later, enabling Secure Keyboard Entry prevents other programs from being activated. This affects the `open` command as well as the panel shown when using Touch ID for sudo.", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermsecurekeyboardentrycontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSecureKeyboardEntryController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermsecurekeyboardentrycontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermSecureKeyboardEntryController (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncMontereySecureKeyboardEntryWarning"
                            silenceable:kiTermWarningTypePermanentlySilenceable
-                               heading:@"Secure Keyboard Entry Enabled"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermsecurekeyboardentrycontroller.secure_keyboard_entry_enabled.2ac1f6f9", nil, NSBundle.mainBundle, @"Secure Keyboard Entry Enabled", @"User-facing text in iTermSecureKeyboardEntryController (heading).")
                                 window:[NSApp keyWindow]];
     if (selection == kiTermWarningSelection0) {
         return;

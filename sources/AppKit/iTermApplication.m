@@ -1210,7 +1210,7 @@ static void iTermUncaughtExceptionHandler(NSException *exception) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSImage *image = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolSparkles)
-                                   accessibilityDescription:@"Leader pending"];
+                                                          accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplication.leader_pending.a6450a0e", nil, NSBundle.mainBundle, @"Leader pending", @"Accessibility description for the pending leader-key indicator.")];
         NSImage *black = [image it_imageWithTintColor:[NSColor blackColor]];
         NSImage *white = [image it_imageWithTintColor:[NSColor whiteColor]];
         NSSize size = image.size;
@@ -1296,4 +1296,3 @@ static void iTermUncaughtExceptionHandler(NSException *exception) {
 }
 
 @end
-

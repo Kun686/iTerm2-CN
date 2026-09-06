@@ -110,17 +110,17 @@ extension LLM.Message.StatusUpdate {
     var displayMarkdownString: String {
         switch self {
         case .webSearchStarted:
-            "Searching the web…"
+            String(localized: "ui.swift.aiterm.markdownhelpers.searching_the_web.f1acf3c9", defaultValue: "Searching the web…", bundle: .main, comment: "User-facing text in MarkdownHelpers.")
         case .webSearchFinished(let query):
             if let query {
-                "Finished searching the web for **\(query.escapedForMarkdown)**."
+                String(localized: "ui.swift.aiterm.markdownhelpers.finished_searching_the_web_for_0.8fb9c1c7", defaultValue: "Finished searching the web for **\(query.escapedForMarkdown)**.", bundle: .main, comment: "User-facing text in MarkdownHelpers.")
             } else {
-                "Finished searching the web."
+                String(localized: "ui.swift.aiterm.markdownhelpers.finished_searching_the_web.4a14a066", defaultValue: "Finished searching the web.", bundle: .main, comment: "User-facing text in MarkdownHelpers.")
             }
         case .codeInterpreterStarted:
-            "Executing code…"
+            String(localized: "ui.swift.aiterm.markdownhelpers.executing_code.b7a07877", defaultValue: "Executing code…", bundle: .main, comment: "User-facing text in MarkdownHelpers.")
         case .codeInterpreterFinished:
-            "Finished executing code"
+            String(localized: "ui.swift.aiterm.markdownhelpers.finished_executing_code.cef8e474", defaultValue: "Finished executing code", bundle: .main, comment: "User-facing text in MarkdownHelpers.")
         case .reasoningSummaryUpdate(let text): text
         case .multipart(let subparts):
             Self.subpartsForDisplay(subparts).map { $0.displayMarkdownString }.joined(separator: "\n")
@@ -156,7 +156,7 @@ func AttributedStringForGPTMarkdown(_ unsafeString: String,
 private func AttributedStringForMessage(_ md: SwiftyMarkdown,
                                         didCopy: (() -> ())?) -> NSAttributedString {
     let attributedString = md.attributedString()
-    let image = NSImage(systemSymbolName: SFSymbol.docOnDoc.rawValue, accessibilityDescription: "Copy")!
+    let image = NSImage(systemSymbolName: SFSymbol.docOnDoc.rawValue, accessibilityDescription: String(localized: "ui.swift.aiterm.markdownhelpers.copy.e21f935f", defaultValue: "Copy", bundle: .main, comment: "User-facing text in MarkdownHelpers."))!
     let modified = attributedString.mutableCopy() as! NSMutableAttributedString
     var ranges = [NSRange]()
     let utf16String = attributedString.string.utf16
@@ -186,7 +186,7 @@ private func AttributedStringForMessage(_ md: SwiftyMarkdown,
             modified.insertButton(withImage: DynamicImage(image: image, dark: .white, light: .black), at: range.location) { point in
                 NSPasteboard.general.declareTypes([.string], owner: NSApp)
                 NSPasteboard.general.setString(attributedString.string.substring(nsrange: range), forType: .string)
-                ToastWindowController.showToast(withMessage: "Copied", duration: 1, screenCoordinate: point, pointSize: 12)
+                ToastWindowController.showToast(withMessage: String(localized: "ui.swift.aiterm.markdownhelpers.copied.8d525e5f", defaultValue: "Copied", bundle: .main, comment: "User-facing text in MarkdownHelpers."), duration: 1, screenCoordinate: point, pointSize: 12)
                 didCopy()
             }
             modified.insert(

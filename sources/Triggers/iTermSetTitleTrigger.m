@@ -15,15 +15,15 @@
 
 + (NSString *)title
 {
-    return @"Set Title…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermsettitletrigger.set_title.da667022", nil, NSBundle.mainBundle, @"Set Title…", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Set Title to “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermsettitletrigger.set_title_to.a6fdf598", nil, NSBundle.mainBundle, @"Set Title to “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter new title";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermsettitletrigger.enter_new_title.02a2d812", nil, NSBundle.mainBundle, @"Enter new title", @"Trigger parameter placeholder.");
 }
 
 - (BOOL)isIdempotent {

@@ -58,8 +58,8 @@
 
 - (void)showNotSupported
 {
-    [label_ setStringValue:@"You can't customize that button"];
-    [label_ performSelector:@selector(setStringValue:) withObject:@"Click or Tap Here to Set Input Fields" afterDelay:1];
+    [label_ setStringValue:NSLocalizedStringWithDefaultValue(@"ui.settings.eventmonitorview.you_can_t_customize_that_button.3a653f97", nil, NSBundle.mainBundle, @"You can't customize that button", @"User-facing text in EventMonitorView (showNotSupported).")];
+    [label_ performSelector:@selector(setStringValue:) withObject:NSLocalizedStringWithDefaultValue(@"ui.settings.eventmonitorview.click_or_tap_here_to_set_input_fields.433cf1a1", nil, NSBundle.mainBundle, @"Click or Tap Here to Set Input Fields", @"Prompt shown in the key or touch input field editor.") afterDelay:1];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {

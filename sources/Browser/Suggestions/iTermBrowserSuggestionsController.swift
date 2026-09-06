@@ -90,8 +90,8 @@ class iTermBrowserSuggestionsController {
 
             let searchSuggestion = URLSuggestion(
                 url: url,
-                displayText: NSAttributedString(string: "Search for \"\(actualQuery)\"", attributes: midTruncatingAttributes),
-                detail: "Web Search",
+                displayText: NSAttributedString(string: String(localized: "ui.swift.browser.suggestions.itermbrowsersuggestionscontroller.search_for_0.4a929a38", defaultValue: "Search for \"\(actualQuery)\"", bundle: .main, comment: "User-facing text in iTermBrowserSuggestionsController."), attributes: midTruncatingAttributes),
+                detail: String(localized: "ui.swift.browser.suggestions.itermbrowsersuggestionscontroller.web_search.d04fc7d7", defaultValue: "Web Search", bundle: .main, comment: "User-facing text in iTermBrowserSuggestionsController."),
                 type: .webSearch
             )
 
@@ -101,7 +101,7 @@ class iTermBrowserSuggestionsController {
         if let normal = normalizeURL(query) {
             let suggestion = URLSuggestion(
                 url: normal.absoluteString,
-                displayText: NSAttributedString(string: "Navigate to \"\(normal.absoluteString)\"",
+                displayText: NSAttributedString(string: String(localized: "ui.swift.browser.suggestions.itermbrowsersuggestionscontroller.navigate_to_0.8cb85b33", defaultValue: "Navigate to \"\(normal.absoluteString)\"", bundle: .main, comment: "User-facing text in iTermBrowserSuggestionsController."),
                                                 attributes: midTruncatingAttributes),
                 detail: "URL",
                 type: .navigation
@@ -201,7 +201,7 @@ class iTermBrowserSuggestionsController {
             let suggestion = URLSuggestion(
                 url: bookmark.url,
                 displayText: displayText,
-                detail: "Bookmark",
+                detail: String(localized: "ui.swift.browser.suggestions.itermbrowsersuggestionscontroller.bookmark.1bac4007", defaultValue: "Bookmark", bundle: .main, comment: "User-facing text in iTermBrowserSuggestionsController."),
                 type: .bookmark
             )
             

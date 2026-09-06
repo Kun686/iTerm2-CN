@@ -22,16 +22,16 @@
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Snippets Menu";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsnippetcomponent.snippets_menu.58565b69", nil, NSBundle.mainBundle, @"Snippets Menu", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"When clicked, opens a menu of snippets. Snippets are saved text strings that can be pasted quickly.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsnippetcomponent.when_clicked_opens_a_menu_of_snippets_snippets_are_saved_text_strings_that_can_be_pasted_quickly.33960824", nil, NSBundle.mainBundle, @"When clicked, opens a menu of snippets. Snippets are saved text strings that can be pasted quickly.", @"Status bar component description.");
 }
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor
                                           textColor:(NSColor *)textColor {
-    return @"Snippet…";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsnippetcomponent.snippet.d5c0d6cd", nil, NSBundle.mainBundle, @"Snippet…", @"Status bar component preview.");
 }
 
 - (BOOL)statusBarComponentCanStretch {
@@ -39,7 +39,7 @@
 }
 
 - (nullable NSString *)stringValue {
-    return @"Send Snippet…";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsnippetcomponent.send_snippet.fec5a180", nil, NSBundle.mainBundle, @"Send Snippet…", @"Status bar component label.");
 }
 
 - (nullable NSString *)stringValueForCurrentWidth {
@@ -83,7 +83,7 @@
 
     [menu addItem:[NSMenuItem separatorItem]];
 
-    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Edit Snippets…" action:@selector(editSnippets:) keyEquivalent:@""];
+    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarsnippetcomponent.edit_snippets.dec476c7", nil, NSBundle.mainBundle, @"Edit Snippets…", @"User-facing text in iTermStatusBarSnippetComponent (openMenuWithView:).") action:@selector(editSnippets:) keyEquivalent:@""];
     item.target = self;
     [menu addItem:item];
 

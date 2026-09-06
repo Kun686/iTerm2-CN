@@ -105,7 +105,7 @@ extension NSPopUpButton {
             }
         }
         menu?.addItem(.separator())
-        menu?.addItem(withTitle: "Locales with wrong encoding", action: #selector(Placeholder.placeholder(_:)), keyEquivalent: "")
+        menu?.addItem(withTitle: String(localized: "ui.swift.locale.itermlocaleprompt.locales_with_wrong_encoding.739c272c", defaultValue: "Locales with wrong encoding", bundle: .main, comment: "User-facing text in iTermLocalePrompt."), action: #selector(Placeholder.placeholder(_:)), keyEquivalent: "")
         menu?.items.last?.target = Placeholder.instance
         for components in bad {
             if let quality = index[components.languageCode], quality < defaultIndexQuality {
@@ -124,7 +124,7 @@ extension NSPopUpButton {
 class iTermLocalePromptAlert {
     private let languages: [String]
     private var popup = NSPopUpButton(frame: .zero, pullsDown: false)
-    var message = "No valid UNIX locale exists for your computer’s current language and country. This may cause command-line apps to misbehave. Please select one from the list below."
+    var message = String(localized: "ui.swift.locale.itermlocaleprompt.no_valid_unix_locale_exists_for_your_computer.1267ccab", defaultValue: "No valid UNIX locale exists for your computer’s current language and country. This may cause command-line apps to misbehave. Please select one from the list below.", bundle: .main, comment: "User-facing text in iTermLocalePrompt.")
     @objc var allowRemember = true
     private let profileName: String?
     var arrangementName: String?
@@ -145,8 +145,8 @@ class iTermLocalePromptAlert {
     func run(window: NSWindow?, cancelUsesC: Bool) -> (String?, Bool, String?) {
         let alert = NSAlert()
         alert.messageText = message
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: cancelUsesC ? "Use Minimal POSIX Locale" : "Cancel")
+        alert.addButton(withTitle: String(localized: "ui.swift.locale.itermlocaleprompt.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermLocalePrompt."))
+        alert.addButton(withTitle: cancelUsesC ? String(localized: "ui.swift.locale.itermlocaleprompt.use_minimal_posix_locale.f476488c", defaultValue: "Use Minimal POSIX Locale", bundle: .main, comment: "User-facing text in iTermLocalePrompt.") : String(localized: "ui.swift.locale.itermlocaleprompt.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermLocalePrompt."))
 
         let wrapper = NSStackView()
         wrapper.orientation = .vertical
@@ -166,9 +166,9 @@ class iTermLocalePromptAlert {
         alert.showsSuppressionButton = allowRemember
         if allowRemember, let profileName {
             if let arrangementName {
-                alert.suppressionButton?.title = "Save selection to arrangement \(arrangementName)"
+                alert.suppressionButton?.title = String(localized: "ui.swift.locale.itermlocaleprompt.save_selection_to_arrangement_0.be556a78", defaultValue: "Save selection to arrangement \(arrangementName)", bundle: .main, comment: "User-facing text in iTermLocalePrompt.")
             } else {
-                alert.suppressionButton?.title = "Save selection to profile \(profileName)"
+                alert.suppressionButton?.title = String(localized: "ui.swift.locale.itermlocaleprompt.save_selection_to_profile_0.138d124d", defaultValue: "Save selection to profile \(profileName)", bundle: .main, comment: "User-facing text in iTermLocalePrompt.")
             }
         }
         let popup = self.popup

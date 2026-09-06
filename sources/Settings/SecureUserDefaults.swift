@@ -245,6 +245,59 @@ fileprivate var secureUserDefaultsFolderIsOnUnixFilesystem: (String, Bool)?
 // (path, supports ownserhip)
 fileprivate var secureUserDefaultsFolderIsOnOwnershipSupportingFilesystem: (String, Bool)?
 
+// Returns a quoted AppleScript string literal. Localized authorization prompts
+// are embedded in generated AppleScript source, so quotes, backslashes, and
+// control characters must not be allowed to terminate that literal.
+func iTermAppleScriptStringLiteral(_ value: String) -> String {
+    let escaped = value
+        .replacingOccurrences(of: "\\", with: "\\\\")
+        .replacingOccurrences(of: "\"", with: "\\\"")
+        .replacingOccurrences(of: "\r", with: "\\r")
+        .replacingOccurrences(of: "\n", with: "\\n")
+        .replacingOccurrences(of: "\t", with: "\\t")
+    return "\"\(escaped)\""
+}
+
+func iTermPrivilegedAppleScriptSourcePair(
+    body: String,
+    userFacingPrompt: String,
+    diagnosticPrompt: String
+) -> (executable: String, diagnostic: String) {
+    func source(prompt: String) -> String {
+        return "do shell script \"\n\(body)\n\" with prompt \(iTermAppleScriptStringLiteral(prompt)) with administrator privileges"
+    }
+    return (executable: source(prompt: userFacingPrompt),
+            diagnostic: source(prompt: diagnosticPrompt))
+}
+
+private protocol iTermStableDiagnosticError {
+    var stableDiagnosticDescription: String { get }
+}
+
+// Error.localizedDescription is for UI and can vary with the selected app
+// language. Keep ring/debug diagnostics language-independent and avoid copying
+// arbitrary external error text into them.
+func iTermSecureUserDefaultsDiagnosticDescription(for error: Error) -> String {
+    if let stableError = error as? iTermStableDiagnosticError {
+        return stableError.stableDiagnosticDescription
+    }
+    let nsError = error as NSError
+    return "error domain=\(nsError.domain) code=\(nsError.code)"
+}
+
+// NSAppleScript's message fields can be localized by macOS. The numeric code is
+// sufficient for a stable diagnostic while the original dictionary remains
+// available to construct the user-facing error.
+func iTermAppleScriptDiagnostic(_ error: NSDictionary?) -> String {
+    guard let error else {
+        return "AppleScript error=none"
+    }
+    guard let number = error[NSAppleScript.errorNumber] as? NSNumber else {
+        return "AppleScript error number=unknown"
+    }
+    return "AppleScript error number=\(number.intValue)"
+}
+
 // Secure user defaults are a way of saving user preferences that are hard to tamper with.
 // Like UserDefaults, it is a database of key-value pairs.
 // Unlike UserDefaults, the user must authenticate to set a value.
@@ -261,7 +314,7 @@ class SecureUserDefault<T: SecureUserDefaultStringTranscodable & Codable & Equat
     let defaultValue: T
     private var cached: T?
 
-    enum SecureUserDefaultError: LocalizedError {
+    enum SecureUserDefaultError: LocalizedError, iTermStableDiagnosticError {
         case usrLocalIsFile
         case failedToCreateUsrLocal
         case badMagic
@@ -271,15 +324,30 @@ class SecureUserDefault<T: SecureUserDefaultStringTranscodable & Codable & Equat
         var errorDescription: String? {
             switch self {
             case .usrLocalIsFile:
-                "\(FallbackFolder) is a file, not a directory. Please remove it and try again."
+                String(localized: "ui.swift.settings.secureuserdefaults.0_is_a_file_not_a_directory_please.503d44d0", defaultValue: "\(FallbackFolder) is a file, not a directory. Please remove it and try again.", bundle: .main, comment: "User-facing text in SecureUserDefaults.")
             case .failedToCreateUsrLocal:
-                "Failed to create \(FallbackFolder). Please manually create this folder."
+                String(localized: "ui.swift.settings.secureuserdefaults.failed_to_create_0_please_manually_create_this.1ff40f1e", defaultValue: "Failed to create \(FallbackFolder). Please manually create this folder.", bundle: .main, comment: "User-facing text in SecureUserDefaults.")
             case .badMagic:
-                "The secure user default is corrupted."
+                String(localized: "ui.swift.settings.secureuserdefaults.the_secure_user_default_is_corrupted.105bc6a2", defaultValue: "The secure user default is corrupted.", bundle: .main, comment: "User-facing text in SecureUserDefaults.")
             case .scriptError(let message):
                 message
             case .directoryDoesNotExist:
-                "The containing directory for secure user defaults does not exist"
+                String(localized: "ui.swift.settings.secureuserdefaults.the_containing_directory_for_secure_user_defaults_does.2d549377", defaultValue: "The containing directory for secure user defaults does not exist", bundle: .main, comment: "User-facing text in SecureUserDefaults.")
+            }
+        }
+
+        var stableDiagnosticDescription: String {
+            switch self {
+            case .usrLocalIsFile:
+                "Secure user defaults fallback path is a file."
+            case .failedToCreateUsrLocal:
+                "Failed to create the secure user defaults fallback directory."
+            case .badMagic:
+                "Secure user default failed integrity validation."
+            case .scriptError:
+                "Secure user defaults AppleScript failed."
+            case .directoryDoesNotExist:
+                "Secure user defaults containing directory does not exist."
             }
         }
     }
@@ -328,13 +396,13 @@ class SecureUserDefault<T: SecureUserDefaultStringTranscodable & Codable & Equat
                 try Self.delete(key)
             }
         } catch {
-            RLog("Fail: \(error)")
+            RLog("Fail: \(iTermSecureUserDefaultsDiagnosticDescription(for: error))")
             iTermWarning.show(withTitle: error.localizedDescription,
-                              actions: ["OK"],
+                              actions: [String(localized: "ui.swift.settings.secureuserdefaults.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in SecureUserDefaults.")],
                               accessory: nil,
                               identifier: "NoSyncSecureUserDefaultsSetFailed",
                               silenceable: .kiTermWarningTypeTemporarilySilenceable,
-                              heading: "Failed to Save Secure Setting",
+                              heading: String(localized: "ui.swift.settings.secureuserdefaults.failed_to_save_secure_setting.66147c80", defaultValue: "Failed to Save Secure Setting", bundle: .main, comment: "User-facing text in SecureUserDefaults."),
                               window: nil)
             throw error
         }
@@ -383,7 +451,8 @@ class SecureUserDefault<T: SecureUserDefaultStringTranscodable & Codable & Equat
         // notifications for keys that were never written.
         try runPrivilegedWrites(statements: statements,
                                 keys: writes.map { $0.key },
-                                prompt: "iTerm2 needs to modify secure settings.")
+                                prompt: String(localized: "ui.swift.settings.secureuserdefaults.iterm2_needs_to_modify_secure_settings.e69fc2b8", defaultValue: "iTerm2 needs to modify secure settings.", bundle: .main, comment: "User-facing text in SecureUserDefaults."),
+                                diagnosticPrompt: "iTerm2 needs to modify secure settings.")
     }
 
     private static func fallbackBaseDirectory(create: Bool) throws -> String {
@@ -416,20 +485,26 @@ class SecureUserDefault<T: SecureUserDefaultStringTranscodable & Codable & Equat
         // Folder is owned by root without sticky bit so user can delete files without permission (that enables the delete() method).
         // If the user rewrites a file the ownership changes, which we can check for.
         // I'm not worried about TOCTOU because the threat model is concerned with accidental changes rather than an active attacker.
-        let code =
+        let prompt = String(localized: "ui.settings.secure_user_defaults.create_folder_prompt",
+                            defaultValue: "iTerm2 needs to create \(path) to store secure settings because your home directory is on a network file system.",
+                            bundle: .main,
+                            comment: "Administrator authorization prompt for creating the secure settings folder.")
+        let body =
         """
-        do shell script "
             umask 000
             /bin/mkdir -m 777 -p \(path)
-        " with prompt "iTerm2 needs to create \(path) to store secure settings because your home directory is on a network file system." with administrator privileges
         """
-        DLog("Will execute:\n\(code)")
-        let script = NSAppleScript(source: code)
+        let sources = iTermPrivilegedAppleScriptSourcePair(
+            body: body,
+            userFacingPrompt: prompt,
+            diagnosticPrompt: "iTerm2 needs to create \(path) to store secure settings because your home directory is on a network file system.")
+        DLog("Will execute:\n\(sources.diagnostic)")
+        let script = NSAppleScript(source: sources.executable)
         var error: NSDictionary? = nil
         script?.executeAndReturnError(&error)
         DLog("Execution complete")
         if let error {
-            RLog("Error \(error)")
+            RLog("\(iTermAppleScriptDiagnostic(error))")
             throw SecureUserDefaultError.failedToCreateUsrLocal
         }
         DLog("Success, return \(path)")
@@ -589,7 +664,8 @@ class SecureUserDefault<T: SecureUserDefaultStringTranscodable & Codable & Equat
         let statement = try writeStatement(key: key, encodedValue: SecureUserDefaultValue<U>(value: value).encodedString)
         try runPrivilegedWrites(statements: [statement],
                                 keys: [key],
-                                prompt: "iTerm2 needs to modify a secure setting.")
+                                prompt: String(localized: "ui.swift.settings.secureuserdefaults.iterm2_needs_to_modify_a_secure_setting.81b07576", defaultValue: "iTerm2 needs to modify a secure setting.", bundle: .main, comment: "User-facing text in SecureUserDefaults."),
+                                diagnosticPrompt: "iTerm2 needs to modify a secure setting.")
     }
 
     /// The double-backslash/double-quote escaping for a path embedded in the
@@ -623,17 +699,21 @@ class SecureUserDefault<T: SecureUserDefaultStringTranscodable & Codable & Equat
     /// notifications posted, one per key.
     private static func runPrivilegedWrites(statements: [String],
                                             keys: [String],
-                                            prompt: String) throws {
+                                            prompt: String,
+                                            diagnosticPrompt: String) throws {
         let body = (["umask 077"] + statements).joined(separator: "\n")
-        let code = "do shell script \"\n\(body)\n\" with prompt \"\(prompt)\" with administrator privileges"
-        let script = NSAppleScript(source: code)
+        let sources = iTermPrivilegedAppleScriptSourcePair(
+            body: body,
+            userFacingPrompt: prompt,
+            diagnosticPrompt: diagnosticPrompt)
+        let script = NSAppleScript(source: sources.executable)
         var error: NSDictionary? = nil
-        DLog("Will execute \(code)")
+        DLog("Will execute \(sources.diagnostic)")
         script?.executeAndReturnError(&error)
-        DLog("Execution complete. Error is \(error.d)")
+        DLog("Execution complete. \(iTermAppleScriptDiagnostic(error))")
         guard error == nil else {
             let maybeReason = error?[NSAppleScript.errorBriefMessage] as? String
-            RLog("reason=\(maybeReason.d)")
+            RLog("\(iTermAppleScriptDiagnostic(error))")
             throw SecureUserDefaultError.scriptError(maybeReason)
         }
         for key in keys {

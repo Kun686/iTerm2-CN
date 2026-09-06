@@ -10,11 +10,11 @@ import Foundation
 @objc(iTermInjectTrigger)
 class InjectTrigger: Trigger {
     override var description: String {
-        return "Inject Data “\(self.param ?? "")”"
+        return String(localized: "ui.swift.triggers.injecttrigger.inject_data_0.93f402b9", defaultValue: "Inject Data “\(String(describing: self.param ?? ""))”", bundle: .main, comment: "User-facing text in InjectTrigger.")
     }
 
     override static var title: String {
-        return "Inject Data…"
+        return String(localized: "ui.swift.triggers.injecttrigger.inject_data.d0cb440a", defaultValue: "Inject Data…", bundle: .main, comment: "User-facing text in InjectTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -29,7 +29,7 @@ class InjectTrigger: Trigger {
     }
 
     override func triggerOptionalParameterPlaceholder(withInterpolation interpolation: Bool) -> String? {
-        return "Use \\e for esc, \\a for ^G."
+        return String(localized: "ui.swift.triggers.injecttrigger.use_e_for_esc_a_for_g.ce3aeb9f", defaultValue: "Use \\e for esc, \\a for ^G.", bundle: .main, comment: "User-facing text in InjectTrigger.")
     }
 
     override func performAction(withCapturedStrings strings: [String],

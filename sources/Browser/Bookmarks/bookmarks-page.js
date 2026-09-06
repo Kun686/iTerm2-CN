@@ -9,6 +9,28 @@ let activeTags = [];
 let previousActiveTags = [];
 let allTags = [];
 
+const localized = {
+    deleteBookmarkPrompt: {{DELETE_BOOKMARK_PROMPT_JSON}},
+    clearAllPrompt: {{CLEAR_ALL_PROMPT_JSON}},
+    untitled: {{UNTITLED_JSON}},
+    addedFormat: {{ADDED_FORMAT_JSON}},
+    navigateTitle: {{NAVIGATE_TITLE_JSON}},
+    deleteTitle: {{DELETE_TITLE_JSON}},
+    noBookmarks: {{NO_BOOKMARKS_JSON}},
+    emptyDescription: {{EMPTY_DESCRIPTION_JSON}},
+    bookmarkDeleted: {{BOOKMARK_DELETED_JSON}},
+    allBookmarksCleared: {{ALL_BOOKMARKS_CLEARED_JSON}},
+    pageTitle: {{PAGE_TITLE_JSON}}
+};
+
+function formatLocalized(format, values) {
+    values.forEach((value, index) => {
+        format = format.split(`%${index + 1}$@`).join(value);
+        format = format.split(`%${index + 1}$lld`).join(value);
+    });
+    return format;
+}
+
 console.debug("Bookmarks page loading");
 
 // Initialize bookmarks page
@@ -47,7 +69,7 @@ window.loadBookmarks = function(offset = 0, limit = 50, searchQuery = '', sortBy
 };
 
 window.deleteBookmark = function(url) {
-    if (confirm('Delete this bookmark?')) {
+    if (confirm(localized.deleteBookmarkPrompt)) {
         window.webkit.messageHandlers['iterm2-about:bookmarks'].postMessage({
             action: 'deleteBookmark',
             url: url
@@ -63,7 +85,7 @@ window.navigateToURL = function(url) {
 };
 
 window.clearAllBookmarks = function() {
-    if (confirm('This will delete all bookmarks. This action cannot be undone. Continue?')) {
+    if (confirm(localized.clearAllPrompt)) {
         window.webkit.messageHandlers['iterm2-about:bookmarks'].postMessage({
             action: 'clearAllBookmarks'
         });
@@ -114,7 +136,7 @@ function createBookmarkElement(bookmark) {
     bookmarkDiv.className = 'bookmark-entry';
     bookmarkDiv.setAttribute('data-bookmark-url', bookmark.url);
     
-    const title = bookmark.title || 'Untitled';
+    const title = bookmark.title || localized.untitled;
     const url = bookmark.url;
     const dateAdded = new Date(bookmark.dateAdded * 1000);
     const formattedDate = dateAdded.toLocaleDateString([], { 
@@ -130,16 +152,16 @@ function createBookmarkElement(bookmark) {
     bookmarkDiv.innerHTML = `
         <div class="entry-content">
             <div class="entry-header">
-                <span class="entry-date">Added ${formattedDate}</span>
+                <span class="entry-date">${escapeHtml(formatLocalized(localized.addedFormat, [formattedDate]))}</span>
                 <div class="entry-title">${escapeHtml(title)}</div>
             </div>
-            <div class="entry-url" onclick="navigateToURL('${escapeAttribute(url)}')" title="Click to navigate to this URL">
+            <div class="entry-url" onclick="navigateToURL('${escapeAttribute(url)}')" title="${escapeAttribute(localized.navigateTitle)}">
                 ${escapeHtml(url)}
             </div>
             ${tagsHtml ? `<div class="bookmark-meta"><div class="bookmark-tags">${tagsHtml}</div></div>` : ''}
         </div>
         <div class="entry-actions">
-            <button class="delete-button" onclick="deleteBookmark('${escapeAttribute(url)}')" title="Delete this bookmark">
+            <button class="delete-button" onclick="deleteBookmark('${escapeAttribute(url)}')" title="${escapeAttribute(localized.deleteTitle)}">
                 <span class="delete-icon">×</span>
             </button>
         </div>
@@ -199,8 +221,8 @@ function showEmptyState() {
     container.innerHTML = `
         <div class="empty-state">
             <div class="empty-icon">📚</div>
-            <h3>No bookmarks found</h3>
-            <p>Start bookmarking your favorite websites to see them here.</p>
+            <h3>${escapeHtml(localized.noBookmarks)}</h3>
+            <p>${escapeHtml(localized.emptyDescription)}</p>
         </div>
     `;
 }
@@ -347,7 +369,7 @@ window.onBookmarkDeleted = function(url) {
         }
     }
     
-    showStatus('Bookmark deleted', 'success');
+    showStatus(localized.bookmarkDeleted, 'success');
 };
 
 window.onBookmarksCleared = function() {
@@ -357,14 +379,14 @@ window.onBookmarksCleared = function() {
     activeTags = [];
     previousActiveTags = [];
     updateTagFilters();
-    showStatus('All bookmarks cleared', 'success');
+    showStatus(localized.allBookmarksCleared, 'success');
     showEmptyState();
 };
 
 // Initialize page when loaded
 window.addEventListener('load', function() {
     // Set document title explicitly for custom URL scheme
-    document.title = 'Bookmarks';
+    document.title = localized.pageTitle;
     // Setup search input
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {

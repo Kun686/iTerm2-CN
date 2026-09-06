@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookmarks</title>
+    <title>{{PAGE_TITLE}}</title>
     <style>
         {{COMMON_CSS}}
         
@@ -116,31 +116,31 @@
     <div class="container">
         <div class="header">
             <div class="header-content">
-                <h1>📑 <span class="title-text">Bookmarks</span></h1>
-                <p>Manage and organize your saved websites</p>
+                <h1>📑 <span class="title-text">{{PAGE_TITLE}}</span></h1>
+                <p>{{PAGE_SUBTITLE}}</p>
             </div>
             <div class="header-actions">
-                <button id="clearAllButton" class="button danger small">Clear All</button>
+                <button id="clearAllButton" class="button danger small">{{CLEAR_ALL}}</button>
             </div>
         </div>
 
         <div class="search-container">
             <div class="search-input-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search bookmarks...">
+                <input type="text" id="searchInput" class="search-input" placeholder="{{SEARCH_PLACEHOLDER}}">
             </div>
             <div class="controls-row">
                 <div class="sort-container">
-                    <label for="sortSelect">Sort by:</label>
+                    <label for="sortSelect">{{SORT_BY}}</label>
                     <select id="sortSelect" class="sort-select">
-                        <option value="dateAdded">Date Added</option>
-                        <option value="title">Title</option>
-                        <option value="url">URL</option>
+                        <option value="dateAdded">{{SORT_DATE_ADDED}}</option>
+                        <option value="title">{{SORT_TITLE}}</option>
+                        <option value="url">{{SORT_URL}}</option>
                     </select>
                 </div>
             </div>
             <div class="tags-container">
-                <div class="tags-label">Filter by tags:</div>
+                <div class="tags-label">{{FILTER_BY_TAGS}}</div>
                 <div id="tagsList" class="tags-list">
                     <!-- Tags will be populated here -->
                 </div>
@@ -149,7 +149,7 @@
 
         <div id="loadingIndicator" class="loading-indicator">
             <div class="loading-spinner"></div>
-            <div>Loading bookmarks...</div>
+            <div>{{LOADING}}</div>
         </div>
 
         <div id="bookmarksContainer" class="content">
@@ -157,7 +157,7 @@
         </div>
 
         <div id="loadMoreContainer" class="load-more-container" style="display: none;">
-            <button id="loadMoreButton" class="load-more-button">Load More</button>
+            <button id="loadMoreButton" class="load-more-button">{{LOAD_MORE}}</button>
         </div>
     </div>
 

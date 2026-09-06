@@ -13,11 +13,11 @@
 
 + (NSString *)title
 {
-    return @"Annotate…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.annotatetrigger.annotate.340ab6de", nil, NSBundle.mainBundle, @"Annotate…", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Annotate as as “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.annotatetrigger.annotate_as_as.86ebc993", nil, NSBundle.mainBundle, @"Annotate as as “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (BOOL)takesParameter
@@ -26,7 +26,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter annotation";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.annotatetrigger.enter_annotation.6bb93a2f", nil, NSBundle.mainBundle, @"Enter annotation", @"Trigger parameter placeholder.");
 }
 
 // Annotations require captured text ranges, so not compatible with event triggers

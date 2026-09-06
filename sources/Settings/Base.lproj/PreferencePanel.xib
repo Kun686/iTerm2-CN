@@ -1291,6 +1291,7 @@ CA
                 <outlet property="_adjustWindowForFontSizeChange" destination="6377" id="8Ci-Ia-xoQ"/>
                 <outlet property="_advancedGPU" destination="2nT-Ny-kwd" id="0Md-l7-fQI"/>
                 <outlet property="_advancedGPUPrefsButton" destination="2nT-Ny-kwd" id="O9q-ng-5kk"/>
+                <outlet property="_applicationLanguage" destination="cnL-ng-Pop" id="cnL-ng-Out"/>
                 <outlet property="_aiCompletions" destination="ont-f3-jdH" id="GsL-FZ-Ddx"/>
                 <outlet property="_aiPluginLabel" destination="jc2-ao-oIw" id="gIa-Ux-eQS"/>
                 <outlet property="_aiPrompt" destination="pSg-z3-7LN" id="dJI-ai-ROw"/>
@@ -8458,6 +8459,34 @@ You can choose to define the characters considered part of a word with a regular
                                                     <action selector="eraseAllSettingsAndData:" target="9Se-ld-UJa" id="BMM-Ug-n8P"/>
                                                 </connections>
                                             </button>
+                                        </subviews>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnL-ng-Box" customClass="iTermPreferencesInnerTabContainerView">
+                                        <rect key="frame" x="27" y="218" width="701" height="62"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnL-ng-Lbl">
+                                                <rect key="frame" x="18" y="24" width="138" height="16"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Language:" id="cnL-ng-Lbc">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnL-ng-Pop">
+                                                <rect key="frame" x="160" y="17" width="300" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="cnL-ng-Ppc">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="message"/>
+                                                    <menu key="menu" id="cnL-ng-Men"/>
+                                                </popUpButtonCell>
+                                                <accessibility description="Application language"/>
+                                                <connections>
+                                                    <action selector="applicationLanguageDidChange:" target="9Se-ld-UJa" id="cnL-ng-Act"/>
+                                                </connections>
+                                            </popUpButton>
                                         </subviews>
                                     </customView>
                                 </subviews>

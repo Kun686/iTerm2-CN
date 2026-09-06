@@ -4,10 +4,17 @@
     "5Nk-zE-G82.title": {
       "comment": "Class = \"NSTextFieldCell\"; title = \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla\"; ObjectID = \"5Nk-zE-G82\";",
       "extractionState": "extracted_with_value",
+      "shouldTranslate": false,
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla"
           }
         }
@@ -21,6 +28,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Shell Integration"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shell 集成"
           }
         }
       }

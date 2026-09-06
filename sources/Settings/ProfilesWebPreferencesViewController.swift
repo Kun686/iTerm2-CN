@@ -23,7 +23,7 @@ class ProfilesWebPreferencesViewController: iTermProfilePreferencesBaseViewContr
         do {
             let _ = defineControl(browserPageZoom,
                                   key: KEY_BROWSER_ZOOM,
-                                  displayName: "Browser page zoom",
+                                  displayName: String(localized: "ui.swift.settings.profileswebpreferencesviewcontroller.browser_page_zoom.1cdce23b", defaultValue: "Browser page zoom", bundle: .main, comment: "Searchable name of the browser page zoom profile setting."),
                                   type: .slider)
         }
         do {

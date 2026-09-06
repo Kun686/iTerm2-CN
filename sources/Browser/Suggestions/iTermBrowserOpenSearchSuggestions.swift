@@ -100,7 +100,7 @@ class iTermBrowserOpenSearchSuggestions {
             let urlSuggestion = URLSuggestion(
                 url: searchURL,
                 displayText: displayText,
-                detail: "Search Suggestion",
+                detail: String(localized: "ui.swift.browser.suggestions.itermbrowseropensearchsuggestions.search_suggestion.c9187cc8", defaultValue: "Search Suggestion", bundle: .main, comment: "User-facing text in iTermBrowserOpenSearchSuggestions."),
                 type: .webSearch
             )
             

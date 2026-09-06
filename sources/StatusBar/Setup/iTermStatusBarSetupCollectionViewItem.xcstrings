@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Label"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标签"
+          }
         }
       }
     },
@@ -22,16 +28,29 @@
             "state": "new",
             "value": "Label"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标签"
+          }
         }
       }
     },
     "vOr-3g-4Df.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSBox\"; title = \"Box\"; ObjectID = \"vOr-3g-4Df\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Box"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Box"
           }
         }

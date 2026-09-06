@@ -117,24 +117,24 @@ class iTermBrowserContextMenuHelper: NSObject {
             menu.insertItem(item, at: i)
             i += 1
         }
-        add(title: "Split Pane Vertically",
+        add(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.split_pane_vertically.d35bb6bf", defaultValue: "Split Pane Vertically", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."),
             selector: #selector(splitPaneVertically(_:)),
             i: &i)
-        add(title: "Split Pane Horizontally",
+        add(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.split_pane_horizontally.764a93a1", defaultValue: "Split Pane Horizontally", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."),
             selector: #selector(splitPaneHorizontally(_:)),
             i: &i)
-        add(title: "Move Browser to Split Pane",
+        add(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.move_browser_to_split_pane.b84b1f17", defaultValue: "Move Browser to Split Pane", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."),
             selector: #selector(movePane(_:)),
             i: &i)
         if delegate?.contextMenuCurrentTabHasMultipleSessions() ?? false {
-            add(title: "Move Browser to Tab",
+            add(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.move_browser_to_tab.9760d110", defaultValue: "Move Browser to Tab", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."),
                 selector: #selector(moveBrowserToTab(_:)),
                 i: &i)
-            add(title: "Move Browser to Window",
+            add(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.move_browser_to_window.0cd5f46a", defaultValue: "Move Browser to Window", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."),
                 selector: #selector(moveBrowserToWindow(_:)),
                 i: &i)
         }
-        add(title: "Swap With Session…",
+        add(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.swap_with_session.642b9b09", defaultValue: "Swap With Session…", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."),
             selector: #selector(swapSessions(_:)),
             i: &i)
 
@@ -146,7 +146,7 @@ class iTermBrowserContextMenuHelper: NSObject {
         if let searchEngineName = delegate?.contextMenuSearchEngineName(),
            let i = menu.items.firstIndex(where: { $0.identifier == NSUserInterfaceItemIdentifier(rawValue: "WKMenuItemIdentifierSearchWeb") }) {
             menu.removeItem(at: i)
-            let item = NSMenuItem(title: "Search with \(searchEngineName)",
+            let item = NSMenuItem(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.search_with_0.bd92d41e", defaultValue: "Search with \(searchEngineName)", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."),
                                   action: #selector(search(_:)),
                                   keyEquivalent: "")
             item.target = self
@@ -157,35 +157,35 @@ class iTermBrowserContextMenuHelper: NSObject {
 
 
         // Add Named Mark menu item
-        let addMarkItem = NSMenuItem(title: "Add Named Mark…", action: #selector(addNamedMarkMenuClicked), keyEquivalent: "")
+        let addMarkItem = NSMenuItem(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.add_named_mark.b233ba2d", defaultValue: "Add Named Mark…", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."), action: #selector(addNamedMarkMenuClicked), keyEquivalent: "")
         addMarkItem.target = self
         menu.addItem(addMarkItem)
 
         menu.addItem(NSMenuItem.separator())
 
         // Add Save Page As menu item
-        let savePageItem = NSMenuItem(title: "Save Page As…", action: #selector(savePageAsMenuClicked), keyEquivalent: "")
+        let savePageItem = NSMenuItem(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.save_page_as.1acb00a7", defaultValue: "Save Page As…", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."), action: #selector(savePageAsMenuClicked), keyEquivalent: "")
         savePageItem.target = self
         menu.addItem(savePageItem)
 
         // Add Print Page menu item
-        let printPageItem = NSMenuItem(title: "Print…", action: #selector(printMenuClicked), keyEquivalent: "")
+        let printPageItem = NSMenuItem(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.print.07c37125", defaultValue: "Print…", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."), action: #selector(printMenuClicked), keyEquivalent: "")
         printPageItem.target = self
         menu.addItem(printPageItem)
 
         // Add Copy Page Title menu item
-        let copyTitleItem = NSMenuItem(title: "Copy Page Title", action: #selector(copyPageTitleMenuClicked), keyEquivalent: "")
+        let copyTitleItem = NSMenuItem(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.copy_page_title.54cecaf7", defaultValue: "Copy Page Title", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."), action: #selector(copyPageTitleMenuClicked), keyEquivalent: "")
         copyTitleItem.target = self
         menu.addItem(copyTitleItem)
 
         menu.addItem(NSMenuItem.separator())
 
         // Add View Source menu item
-        let viewSourceItem = NSMenuItem(title: "View Source", action: #selector(viewSourceMenuClicked), keyEquivalent: "")
+        let viewSourceItem = NSMenuItem(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.view_source.73f201c2", defaultValue: "View Source", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."), action: #selector(viewSourceMenuClicked), keyEquivalent: "")
         viewSourceItem.target = self
         menu.addItem(viewSourceItem)
 
-        let removeElement = NSMenuItem(title: "Remove Element", action: #selector(removeElementMenuClicked), keyEquivalent: "")
+        let removeElement = NSMenuItem(title: String(localized: "ui.swift.browser.core.itermbrowsercontextmenuhelper.remove_element.75200f5d", defaultValue: "Remove Element", bundle: .main, comment: "User-facing text in iTermBrowserContextMenuHelper."), action: #selector(removeElementMenuClicked), keyEquivalent: "")
         removeElement.target = self
         menu.addItem(removeElement)
 

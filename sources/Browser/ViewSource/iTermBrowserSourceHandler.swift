@@ -27,8 +27,8 @@ class iTermBrowserSourceHandler: NSObject, iTermBrowserPageHandler {
         // Load template and substitute source
         return iTermBrowserTemplateLoader.loadTemplate(named: "view-source",
                                                        type: "html",
-                                                      substitutions: ["SOURCE": escapedSource,
-                                                                      "URL": url.absoluteString.escapedForHTML])
+                                                       substitutions: pageSubstitutions(source: escapedSource,
+                                                                                     url: url.absoluteString.escapedForHTML))
     }
     
     func setPendingSourceHTML(_ html: String) {
@@ -41,7 +41,7 @@ class iTermBrowserSourceHandler: NSObject, iTermBrowserPageHandler {
     
     func start(urlSchemeTask: WKURLSchemeTask, url: URL) {
         guard url == Self.sourceURL else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserSourceHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid source URL"]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserSourceHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.viewsource.itermbrowsersourcehandler.invalid_source_url.ccc170be", defaultValue: "Invalid source URL", bundle: .main, comment: "Error shown when the internal view-source URL is invalid.")]))
             return
         }
         
@@ -53,7 +53,9 @@ class iTermBrowserSourceHandler: NSObject, iTermBrowserPageHandler {
             // Fallback content if no source is pending
             htmlContent = iTermBrowserTemplateLoader.loadTemplate(named: "view-source",
                                                                   type: "html",
-                                                                  substitutions: ["SOURCE": "No source available"])
+                                                                  substitutions: pageSubstitutions(
+                                                                    source: iTermBrowserTemplateLoader.localizedHTML("ui.swift.browser.viewsource.itermbrowsersourcehandler.no_source_available.53d64b2b", defaultValue: "No source available"),
+                                                                    url: ""))
         }
         
         let data = htmlContent.data(using: .utf8) ?? Data()
@@ -72,5 +74,15 @@ class iTermBrowserSourceHandler: NSObject, iTermBrowserPageHandler {
     
     func resetState() {
         clearPendingSource()
+    }
+
+    private func pageSubstitutions(source: String, url: String) -> [String: String] {
+        return [
+            "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+            "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.view_source.page_title", defaultValue: "View Source"),
+            "HEADING": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.view_source.heading", defaultValue: "Page Source"),
+            "SOURCE": source,
+            "URL": url
+        ]
     }
 }

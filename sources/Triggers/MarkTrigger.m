@@ -20,11 +20,14 @@ typedef enum {
 @implementation MarkTrigger
 
 + (NSString *)title {
-    return @"Set Mark";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.set_mark.ae11f7ac", nil, NSBundle.mainBundle, @"Set Mark", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Set Mark and %@ scrolling", [self shouldStopScrolling] ? @"stop" : @"continue"];
+    NSString *scrollingAction = [self shouldStopScrolling]
+        ? NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.stop.6c45cb72", nil, NSBundle.mainBundle, @"stop", @"Verb in a trigger summary.")
+        : NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.continue.e256ee8e", nil, NSBundle.mainBundle, @"continue", @"Verb in a trigger summary.");
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.set_mark_and_scrolling.9c1046cc", nil, NSBundle.mainBundle, @"Set Mark and %@ scrolling", @"Trigger action summary. Preserve the placeholder."), scrollingAction];
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
@@ -74,8 +77,8 @@ typedef enum {
 
 - (NSDictionary *)menuItemsForPoupupButton
 {
-    return @{ @(kMarkTriggerParamTagKeepScrolling): @"Keep Scrolling",
-              @(kMarkTriggerParamTagStopScrolling): @"Stop Scrolling" };
+    return @{ @(kMarkTriggerParamTagKeepScrolling): NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.keep_scrolling.4e9a386c", nil, NSBundle.mainBundle, @"Keep Scrolling", @"Trigger popup option."),
+              @(kMarkTriggerParamTagStopScrolling): NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.stop_scrolling.1c1df101", nil, NSBundle.mainBundle, @"Stop Scrolling", @"Trigger popup option.") };
 }
 
 - (BOOL)shouldStopScrolling {
@@ -98,7 +101,7 @@ typedef enum {
 }
 
 - (NSAttributedString *)paramAttributedString {
-    NSString *message = self.shouldStopScrolling ? @"and stop scrolling" : @"";
+    NSString *message = self.shouldStopScrolling ? NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.and_stop_scrolling.bc5c3332", nil, NSBundle.mainBundle, @"and stop scrolling", @"User-facing text in MarkTrigger (paramAttributedString).") : @"";
     return [[NSAttributedString alloc] initWithString:message attributes:self.regularAttributes];
 }
 

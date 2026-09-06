@@ -47,7 +47,7 @@ class LastPassDataSource: CommandLinePasswordDataSource {
                 return nil
             }
             requestedAuthentication = true
-            guard let password = ModalPasswordAlert("Enter your LastPass master password:").run(window: nil) else {
+            guard let password = ModalPasswordAlert(String(localized: "ui.swift.passwordmanager.lastpassdatasource.enter_your_lastpass_master_password.1ee10bf2", defaultValue: "Enter your LastPass master password:", bundle: .main, comment: "User-facing text in LastPassDataSource.")).run(window: nil) else {
                 throw LPError.canceledByUser
             }
             return (password + "\n").data(using: .utf8)
@@ -174,7 +174,7 @@ class LastPassDataSource: CommandLinePasswordDataSource {
                                sendOTP: false)
             }
         }
-        return wrap("The account list could not be fetched.", AnyRecipe(recipe))
+        return wrap(String(localized: "ui.swift.passwordmanager.lastpassdatasource.the_account_list_could_not_be_fetched.391ab746", defaultValue: "The account list could not be fetched.", bundle: .main, comment: "User-facing text in LastPassDataSource."), AnyRecipe(recipe))
     }
 
     private var getPasswordRecipe: AnyRecipe<AccountIdentifier, Password> {
@@ -192,7 +192,7 @@ class LastPassDataSource: CommandLinePasswordDataSource {
             }
             return Password(password: string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))
         }
-        return wrap("The password could not be fetched.", AnyRecipe(recipe))
+        return wrap(String(localized: "ui.swift.passwordmanager.lastpassdatasource.the_password_could_not_be_fetched.ce5e634b", defaultValue: "The password could not be fetched.", bundle: .main, comment: "User-facing text in LastPassDataSource."), AnyRecipe(recipe))
     }
 
     private var setPasswordRecipe: AnyRecipe<SetPasswordRequest, Void> {
@@ -226,7 +226,7 @@ class LastPassDataSource: CommandLinePasswordDataSource {
                 throw LPError.runtime
             }
         }
-        return wrap("The password could not be set.", AnyRecipe(recipe))
+        return wrap(String(localized: "ui.swift.passwordmanager.lastpassdatasource.the_password_could_not_be_set.92809956", defaultValue: "The password could not be set.", bundle: .main, comment: "User-facing text in LastPassDataSource."), AnyRecipe(recipe))
     }
 
     private var deleteRecipe: AnyRecipe<AccountIdentifier, Void> {
@@ -241,7 +241,7 @@ class LastPassDataSource: CommandLinePasswordDataSource {
                 throw LPError.runtime
             }
         }
-        return wrap("The account could not be deleted", AnyRecipe(recipe))
+        return wrap(String(localized: "ui.swift.passwordmanager.lastpassdatasource.the_account_could_not_be_deleted.44536996", defaultValue: "The account could not be deleted", bundle: .main, comment: "User-facing text in LastPassDataSource."), AnyRecipe(recipe))
     }
 
     private var addAccountRecipe: AnyRecipe<AddRequest, AccountIdentifier> {
@@ -302,16 +302,16 @@ class LastPassDataSource: CommandLinePasswordDataSource {
             LastPassDynamicCommandRecipe<AddRequest, Void>,
                 LastPassBasicCommandRecipe<(AddRequest, Void), Void>> = SequenceRecipe(addRecipe, syncRecipe)
         let sequence = SequenceRecipe(addSyncSequence, showRecipe)
-        return wrap("The account could not be added.", AnyRecipe(sequence))
+        return wrap(String(localized: "ui.swift.passwordmanager.lastpassdatasource.the_account_could_not_be_added.e4dbedd6", defaultValue: "The account could not be added.", bundle: .main, comment: "User-facing text in LastPassDataSource."), AnyRecipe(sequence))
     }
 
     func wrap<Inputs, Outputs>(_ message: String, _ recipe: AnyRecipe<Inputs, Outputs>) -> AnyRecipe<Inputs, Outputs> {
         return AnyRecipe(CatchRecipe(recipe, errorHandler: { (inputs, error) in
             if error as? LPError == LPError.timedOut {
                 let alert = NSAlert()
-                alert.messageText = "Timeout"
-                alert.informativeText = "The LastPass service took too long to respond. \(message)"
-                alert.addButton(withTitle: "OK")
+                alert.messageText = String(localized: "ui.swift.passwordmanager.lastpassdatasource.timeout.70594d93", defaultValue: "Timeout", bundle: .main, comment: "User-facing text in LastPassDataSource.")
+                alert.informativeText = String(localized: "ui.swift.passwordmanager.lastpassdatasource.the_lastpass_service_took_too_long_to_respond.bf2f9c55", defaultValue: "The LastPass service took too long to respond. \(message)", bundle: .main, comment: "User-facing text in LastPassDataSource.")
+                alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.lastpassdatasource.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in LastPassDataSource."))
                 alert.runModal()
                 return
             } else if error as? LPError == LPError.needsLogin {
@@ -502,7 +502,7 @@ class LastPassUtils {
     private static let usernameUserDefaultsKey = "LastPassUserName"
 
     static func showLoginUI() throws {
-        let alert = ModalPasswordAlert("Please log in to LastPass")
+        let alert = ModalPasswordAlert(String(localized: "ui.swift.passwordmanager.lastpassdatasource.please_log_in_to_lastpass.ad381002", defaultValue: "Please log in to LastPass", bundle: .main, comment: "User-facing text in LastPassDataSource."))
         alert.username = iTermUserDefaults.userDefaults().string(forKey: usernameUserDefaultsKey) ?? ""
         if let password = alert.run(window: nil), let username = alert.username {
             iTermUserDefaults.userDefaults().set(alert.username, forKey: usernameUserDefaultsKey)
@@ -532,11 +532,11 @@ class LastPassUtils {
     static func showNotLoggedInMessage() {
         let alert = NSAlert()
         let email = iTermUserDefaults.userDefaults().string(forKey: usernameUserDefaultsKey) ?? "your@email.address"
-        alert.messageText = "Authentication Failed"
-        alert.informativeText = "You can also try opening a terminal window and running `lpass login \(email)`."
-        alert.addButton(withTitle: "Open Terminal Window")
-        alert.addButton(withTitle: "Copy Command")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.passwordmanager.lastpassdatasource.authentication_failed.1a195253", defaultValue: "Authentication Failed", bundle: .main, comment: "User-facing text in LastPassDataSource.")
+        alert.informativeText = String(localized: "ui.swift.passwordmanager.lastpassdatasource.you_can_also_try_opening_a_terminal_window.53766ee2", defaultValue: "You can also try opening a terminal window and running `lpass login \(email)`.", bundle: .main, comment: "User-facing text in LastPassDataSource.")
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.lastpassdatasource.open_terminal_window.cf871ed5", defaultValue: "Open Terminal Window", bundle: .main, comment: "User-facing text in LastPassDataSource."))
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.lastpassdatasource.copy_command.3bdd0fd9", defaultValue: "Copy Command", bundle: .main, comment: "User-facing text in LastPassDataSource."))
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.lastpassdatasource.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in LastPassDataSource."))
         switch alert.runModal() {
         case .alertFirstButtonReturn:
             let window = iTermController.sharedInstance().openSingleUseLoginWindowAndWrite("lpass login \(email)".data(using: .utf8)!) { session in
@@ -545,9 +545,9 @@ class LastPassUtils {
                                         deadline: nil,
                                         willExpect: nil) { _ in
                     let alert = NSAlert()
-                    alert.messageText = "Login Successful"
-                    alert.informativeText = "Please retry your action in the password manager."
-                    alert.addButton(withTitle: "OK")
+                    alert.messageText = String(localized: "ui.swift.passwordmanager.lastpassdatasource.login_successful.5c7b7f11", defaultValue: "Login Successful", bundle: .main, comment: "User-facing text in LastPassDataSource.")
+                    alert.informativeText = String(localized: "ui.swift.passwordmanager.lastpassdatasource.please_retry_your_action_in_the_password_manager.edb778a7", defaultValue: "Please retry your action in the password manager.", bundle: .main, comment: "User-facing text in LastPassDataSource.")
+                    alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.lastpassdatasource.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in LastPassDataSource."))
                     alert.runModal()
                     session?.close()
                 }
@@ -566,11 +566,11 @@ class LastPassUtils {
     // Returns true to show an open panel to locate it.
     private static func showCannotFindCLIMessage() -> Bool {
         let alert = NSAlert()
-        alert.messageText = "Can’t Find LastPass CLI"
-        alert.informativeText = "In order to use the LastPass integration, iTerm2 needs to know where to find the CLI app named “lpass”. Select Locate to provide its location."
-        alert.addButton(withTitle: "Locate")
-        alert.addButton(withTitle: "Cancel")
-        alert.addButton(withTitle: "Help")
+        alert.messageText = String(localized: "ui.swift.passwordmanager.lastpassdatasource.can_t_find_lastpass_cli.dd5b75de", defaultValue: "Can’t Find LastPass CLI", bundle: .main, comment: "User-facing text in LastPassDataSource.")
+        alert.informativeText = String(localized: "ui.swift.passwordmanager.lastpassdatasource.in_order_to_use_the_lastpass_integration_iterm2.4872659e", defaultValue: "In order to use the LastPass integration, iTerm2 needs to know where to find the CLI app named “lpass”. Select Locate to provide its location.", bundle: .main, comment: "User-facing text in LastPassDataSource.")
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.lastpassdatasource.locate.ee867dc4", defaultValue: "Locate", bundle: .main, comment: "User-facing text in LastPassDataSource."))
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.lastpassdatasource.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in LastPassDataSource."))
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.lastpassdatasource.help.b79cac92", defaultValue: "Help", bundle: .main, comment: "User-facing text in LastPassDataSource."))
         switch alert.runModal() {
         case .alertFirstButtonReturn:
             return true

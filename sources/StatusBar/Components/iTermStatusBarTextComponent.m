@@ -26,19 +26,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {
     iTermStatusBarComponentKnob *textColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Text Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbartextcomponent.text_color.87715c40", nil, NSBundle.mainBundle, @"Text Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
                                                            key:iTermStatusBarSharedTextColorKey];
     iTermStatusBarComponentKnob *backgroundColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Background Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbartextcomponent.background_color.2f484fe0", nil, NSBundle.mainBundle, @"Background Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
                                                            key:iTermStatusBarSharedBackgroundColorKey];
     iTermStatusBarComponentKnob *fontKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Custom Font"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbartextcomponent.custom_font.f1b538dd", nil, NSBundle.mainBundle, @"Custom Font", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeFont
                                                    placeholder:nil
                                                   defaultValue:nil

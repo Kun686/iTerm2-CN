@@ -59,14 +59,14 @@ class SetUserVariableTrigger: Trigger {
 
     override var description: String {
         if let string = param as? String, let (name, value) = variableNameAndValue(string) {
-            return "Set User Variable “\(name)” to “\(value)”"
+            return String(localized: "ui.swift.triggers.setuservariabletrigger.set_user_variable_0_to_1.a0bd67c1", defaultValue: "Set User Variable “\(name)” to “\(value)”", bundle: .main, comment: "User-facing text in SetUserVariableTrigger.")
         } else {
-            return "Set User Variable “\(param ?? "")”"
+            return String(localized: "ui.swift.triggers.setuservariabletrigger.set_user_variable_0.b65b9aa7", defaultValue: "Set User Variable “\(String(describing: param ?? ""))”", bundle: .main, comment: "User-facing text in SetUserVariableTrigger.")
         }
     }
 
     override static var title: String {
-        return "Set User Variable…"
+        return String(localized: "ui.swift.triggers.setuservariabletrigger.set_user_variable.a2599294", defaultValue: "Set User Variable…", bundle: .main, comment: "User-facing text in SetUserVariableTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -80,7 +80,7 @@ class SetUserVariableTrigger: Trigger {
     }
 
     override func triggerOptionalParameterPlaceholder(withInterpolation interpolation: Bool) -> String? {
-        return "Value for variable"
+        return String(localized: "ui.swift.triggers.setuservariabletrigger.value_for_variable.62b2a848", defaultValue: "Value for variable", bundle: .main, comment: "User-facing text in SetUserVariableTrigger.")
     }
 
     override func performAction(withCapturedStrings strings: [String],

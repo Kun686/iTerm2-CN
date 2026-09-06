@@ -52,12 +52,12 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
     func start(urlSchemeTask: WKURLSchemeTask, url: URL) {
         // Serve our error page HTML
         let htmlToServe = consumePendingErrorHTML() ?? generateErrorPageHTML(
-            for: NSError(domain: NSURLErrorDomain, code: NSURLErrorResourceUnavailable, userInfo: [NSLocalizedDescriptionKey: "Page Not Available"]),
+            for: NSError(domain: NSURLErrorDomain, code: NSURLErrorResourceUnavailable, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.page_not_available.7bc21700", defaultValue: "Page Not Available", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")]),
             failedURL: nil
         )
 
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")]))
             return
         }
 
@@ -74,10 +74,13 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
         let urlDisplayHTML = urlDisplay.isEmpty ? "" : "<div class=\"error-url\">\(urlDisplay)</div>"
         
         let substitutions = [
-            "TITLE": title,
+            "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+            "TITLE": title.escapedForHTML,
             "MESSAGE": message,
             "URL_DISPLAY": urlDisplayHTML,
-            "ORIGINAL_URL": originalURL ?? ""
+            "ORIGINAL_URL": originalURL ?? "",
+            "TRY_AGAIN": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.try_again", defaultValue: "Try Again"),
+            "DETAILS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.error.connection_hint", defaultValue: "Check your internet connection and try reloading the page.")
         ]
         
         return iTermBrowserTemplateLoader.loadTemplate(named: "error-page",
@@ -91,44 +94,44 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
         let tuple: (String, String, String?) = {
             switch nsError.code {
             case NSURLErrorNotConnectedToInternet:
-                return ("No Internet Connection", "Your computer appears to be offline. Check your internet connection and try again.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.no_internet_connection.13a21216", defaultValue: "No Internet Connection", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.your_computer_appears_to_be_offline_check_your.92a063e9", defaultValue: "Your computer appears to be offline. Check your internet connection and try again.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorCannotFindHost:
-                return ("Server Not Found", "iTerm2 can’t find the server. Check that the web address is correct and try again.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.server_not_found.5320e6c0", defaultValue: "Server Not Found", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.iterm2_can_t_find_the_server_check_that.0a56d308", defaultValue: "iTerm2 can’t find the server. Check that the web address is correct and try again.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorTimedOut:
-                return ("The Connection Timed Out", "The server didn’t respond in time. The site may be temporarily unavailable or overloaded.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_connection_timed_out.759738c1", defaultValue: "The Connection Timed Out", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_server_didn_t_respond_in_time_the.be947565", defaultValue: "The server didn’t respond in time. The site may be temporarily unavailable or overloaded.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorCannotConnectToHost:
-                return ("Can’t Connect to Server", "iTerm2 can’t establish a secure connection to the server. The server may be down or unreachable.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.can_t_connect_to_server.3149cd61", defaultValue: "Can’t Connect to Server", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.iterm2_can_t_establish_a_secure_connection_to.cd016daa", defaultValue: "iTerm2 can’t establish a secure connection to the server. The server may be down or unreachable.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorNetworkConnectionLost:
-                return ("Network Connection Lost", "The network connection was lost. Check your internet connection and try again.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.network_connection_lost.1e335937", defaultValue: "Network Connection Lost", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_network_connection_was_lost_check_your_internet.84bef13f", defaultValue: "The network connection was lost. Check your internet connection and try again.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorDNSLookupFailed:
-                return ("Server Not Found", "The server’s DNS address could not be found. Check that the web address is correct.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.server_not_found.5320e6c0", defaultValue: "Server Not Found", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_server_s_dns_address_could_not_be.2ccd5dbe", defaultValue: "The server’s DNS address could not be found. Check that the web address is correct.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorHTTPTooManyRedirects:
-                return ("Too Many Redirects", "iTerm2 can’t open the page because the server redirected too many times.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.too_many_redirects.531d3bd3", defaultValue: "Too Many Redirects", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.iterm2_can_t_open_the_page_because_the.1a57da18", defaultValue: "iTerm2 can’t open the page because the server redirected too many times.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorResourceUnavailable:
-                return ("Page Unavailable", "The requested page is currently unavailable. Try again later.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.page_unavailable.fcc759f1", defaultValue: "Page Unavailable", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_requested_page_is_currently_unavailable_try_again.09e4bb38", defaultValue: "The requested page is currently unavailable. Try again later.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorNotConnectedToInternet:
-                return ("No Internet Connection", "Your computer is not connected to the internet. Check your connection and try again.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.no_internet_connection.13a21216", defaultValue: "No Internet Connection", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.your_computer_is_not_connected_to_the_internet.8dcbdb32", defaultValue: "Your computer is not connected to the internet. Check your connection and try again.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             case NSURLErrorServerCertificateUntrusted, NSURLErrorSecureConnectionFailed:
-                return ("Secure Connection Failed", "iTerm2 can’t verify the identity of the website. The connection may not be secure.", sslErrorDetails(from: error))
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.secure_connection_failed.55c71f44", defaultValue: "Secure Connection Failed", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.iterm2_can_t_verify_the_identity_of_the.b0042f3a", defaultValue: "iTerm2 can’t verify the identity of the website. The connection may not be secure.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), sslErrorDetails(from: error))
 
             case NSURLErrorFileDoesNotExist:
-                return ("File Not Found", "The requested file does not exist.", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.file_not_found.bf599881", defaultValue: "File Not Found", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_requested_file_does_not_exist.02da121e", defaultValue: "The requested file does not exist.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             default:
-                return ("Page Can’t Be Loaded", "An error occurred while loading this page. \(error.localizedDescription)", nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.page_can_t_be_loaded.e6b913ac", defaultValue: "Page Can’t Be Loaded", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.an_error_occurred_while_loading_this_page_0.dc88eff8", defaultValue: "An error occurred while loading this page. \(error.localizedDescription)", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
             }
         }()
         return (title: tuple.0,
-                message: "<strong>" + tuple.1 + "</strong><br/><br/>" + (tuple.2 ?? error.localizedDescription))
+                message: "<strong>" + tuple.1.escapedForHTML + "</strong><br/><br/>" + (tuple.2 ?? error.localizedDescription))
     }
 }
 
@@ -163,7 +166,7 @@ func sslErrorDetails(from error: Error) -> String? {
         // Certificate chain subjects
         let subjects = certificateSubjects(from: trust)
         if !subjects.isEmpty {
-            lines.append("Certificate chain:")
+            lines.append(String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.certificate_chain.d35d94bd", defaultValue: "Certificate chain:", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.").escapedForHTML)
             for (idx, s) in subjects.enumerated() {
                 lines.append("  [\(idx)] \(s.escapedForHTML)")
             }
@@ -190,13 +193,13 @@ private func secTrust(fromUserInfo ui: [String: Any]) -> SecTrust? {
 private func sslErrorDescription(for status: Int) -> String? {
     // Subset of the most useful SSL codes you’ll actually see.
     switch OSStatus(status) {
-    case errSSLXCertChainInvalid:        return "The presented chain is not valid (e.g., self-signed without trust)."
-    case errSSLUnknownRootCert:          return "The root CA is unknown (not in trust store)."
-    case errSSLNoRootCert:               return "No root certificate found to anchor the chain."
-    case errSSLBadCert:                  return "The certificate is malformed or otherwise bad."
-    case errSSLCertExpired:              return "The certificate is expired."
-    case errSSLCertNotYetValid:          return "The certificate is not yet valid."
-    case errSSLHostNameMismatch:         return "The hostname does not match the certificate."
+    case errSSLXCertChainInvalid:        return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_presented_chain_is_not_valid_e_g.f551a1b4", defaultValue: "The presented chain is not valid (e.g., self-signed without trust).", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
+    case errSSLUnknownRootCert:          return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_root_ca_is_unknown_not_in_trust.3f8a2430", defaultValue: "The root CA is unknown (not in trust store).", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
+    case errSSLNoRootCert:               return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.no_root_certificate_found_to_anchor_the_chain.19b9f6f5", defaultValue: "No root certificate found to anchor the chain.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
+    case errSSLBadCert:                  return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_certificate_is_malformed_or_otherwise_bad.44944bed", defaultValue: "The certificate is malformed or otherwise bad.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
+    case errSSLCertExpired:              return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_certificate_is_expired.abb335c1", defaultValue: "The certificate is expired.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
+    case errSSLCertNotYetValid:          return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_certificate_is_not_yet_valid.51a73ea8", defaultValue: "The certificate is not yet valid.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
+    case errSSLHostNameMismatch:         return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_hostname_does_not_match_the_certificate.31da68f2", defaultValue: "The hostname does not match the certificate.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
     default:                             return SecCopyErrorMessageString(OSStatus(status), nil) as? String
     }
 }

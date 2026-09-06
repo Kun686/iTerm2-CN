@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Black and white"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "黑白"
+          }
         }
       }
     }

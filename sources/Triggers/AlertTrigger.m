@@ -20,15 +20,15 @@
 
 + (NSString *)title
 {
-    return @"Show Alert…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.alerttrigger.show_alert.04011c3d", nil, NSBundle.mainBundle, @"Show Alert…", @"Trigger action title.");
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter text to show in alert";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.alerttrigger.enter_text_to_show_in_alert.734ab54a", nil, NSBundle.mainBundle, @"Enter text to show in alert", @"Trigger parameter placeholder.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Show alert “%@”", self.param];
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.alerttrigger.show_alert.e1f95ce4", nil, NSBundle.mainBundle, @"Show alert “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
 }
 
 - (BOOL)takesParameter

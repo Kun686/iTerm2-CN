@@ -9,6 +9,31 @@ import Foundation
 
 @objc(iTermBrowserTemplateLoader)
 class iTermBrowserTemplateLoader: NSObject {
+    static func localizedHTML(_ key: String, defaultValue: String) -> String {
+        return Bundle.main.localizedString(forKey: key,
+                                           value: defaultValue,
+                                           table: nil).escapedForHTML
+    }
+
+    static func localizedJavaScriptStringLiteral(_ key: String, defaultValue: String) -> String {
+        return javaScriptStringLiteral(Bundle.main.localizedString(forKey: key,
+                                                                   value: defaultValue,
+                                                                   table: nil))
+    }
+
+    static func javaScriptStringLiteral(_ string: String) -> String {
+        guard let data = try? JSONEncoder().encode(string),
+              var literal = String(data: data, encoding: .utf8) else {
+            return "\"\""
+        }
+        literal = literal.replacingOccurrences(of: "<", with: "\\u003C")
+        literal = literal.replacingOccurrences(of: ">", with: "\\u003E")
+        literal = literal.replacingOccurrences(of: "&", with: "\\u0026")
+        literal = literal.replacingOccurrences(of: "\u{2028}", with: "\\u2028")
+        literal = literal.replacingOccurrences(of: "\u{2029}", with: "\\u2029")
+        return literal
+    }
+
     static func load(template templateName: String, substitutions: [String: String] = [:]) -> String {
         let base = templateName.deletingPathExtension
         let ext = templateName.pathExtension

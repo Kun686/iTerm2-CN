@@ -25,6 +25,31 @@
     return [testingFeed containsString:@"testing3.xml"];
 }
 
++ (BOOL)it_isCNCommunityBuild {
+    return [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"iTermCNCommunityBuild"] boolValue];
+}
+
++ (void)it_applyCNUpdatePolicyToUserDefaults:(NSUserDefaults *)userDefaults
+                           isCNCommunityBuild:(BOOL)isCNCommunityBuild {
+    if (!isCNCommunityBuild) {
+        return;
+    }
+    NSMutableDictionary<NSString *, id> *argumentDomain =
+        [[userDefaults volatileDomainForName:NSArgumentDomain] mutableCopy];
+    if (!argumentDomain) {
+        argumentDomain = [NSMutableDictionary dictionary];
+    }
+    argumentDomain[@"SUEnableAutomaticChecks"] = @NO;
+    argumentDomain[@"SUAutomaticallyUpdate"] = @NO;
+    argumentDomain[@"SUFeedURL"] = @"";
+    [userDefaults setVolatileDomain:argumentDomain forName:NSArgumentDomain];
+}
+
++ (void)it_applyCNUpdatePolicyToUserDefaults:(NSUserDefaults *)userDefaults {
+    [self it_applyCNUpdatePolicyToUserDefaults:userDefaults
+                           isCNCommunityBuild:[self it_isCNCommunityBuild]];
+}
+
 + (NSDate *)it_buildDate {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US"]];

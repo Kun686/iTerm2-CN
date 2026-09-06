@@ -85,7 +85,7 @@ static const CGFloat kLockButtonSize = 14;
 
         // Create lock button - positioned to the left of menu button, hidden by default
         NSImage *lockImage = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolLockFill)
-                                         accessibilityDescription:@"Pane is locked"];
+                                                          accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.terminalview.sessiontitleview.pane_is_locked.c5f09f64", nil, NSBundle.mainBundle, @"Pane is locked", @"Accessibility description for a locked pane.")];
         NSImageSymbolConfiguration *config = [NSImageSymbolConfiguration configurationWithPointSize:11 weight:NSFontWeightMedium];
         lockImage = [lockImage imageWithSymbolConfiguration:config];
 
@@ -96,7 +96,7 @@ static const CGFloat kLockButtonSize = 14;
         [lockButton_ setAction:@selector(toggleLock:)];
         [lockButton_ setBordered:NO];
         [lockButton_ setTitle:@""];
-        [lockButton_ setToolTip:@"This pane is locked. It cannot be moved, swapped, or dragged, and closing it requires confirmation. Right-click to unlock."];
+        [lockButton_ setToolTip:NSLocalizedStringWithDefaultValue(@"ui.terminalview.sessiontitleview.this_pane_is_locked_it_cannot_be_moved.d49594a6", nil, NSBundle.mainBundle, @"This pane is locked. It cannot be moved, swapped, or dragged, and closing it requires confirmation. Right-click to unlock.", @"User-facing text in SessionTitleView (initWithFrame:).")];
         [[lockButton_ cell] setHighlightsBy:NSContentsCellMask];
         [lockButton_ setHidden:YES]; // Hidden by default until delegate says it's locked
         [self addSubview:lockButton_];

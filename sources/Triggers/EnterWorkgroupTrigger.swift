@@ -16,11 +16,11 @@ import Foundation
 @objc(iTermEnterWorkgroupTrigger)
 class EnterWorkgroupTrigger: Trigger {
     override static var title: String {
-        return "Enter Workgroup…"
+        return String(localized: "ui.swift.triggers.enterworkgrouptrigger.enter_workgroup.c0c5d9bc", defaultValue: "Enter Workgroup…", bundle: .main, comment: "User-facing text in EnterWorkgroupTrigger.")
     }
 
     override var description: String {
-        return "Enter Workgroup “\(displayLabel(forID: effectiveID))”"
+        return String(localized: "ui.swift.triggers.enterworkgrouptrigger.enter_workgroup_0.30052a49", defaultValue: "Enter Workgroup “\(displayLabel(forID: effectiveID))”", bundle: .main, comment: "User-facing text in EnterWorkgroupTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -74,17 +74,17 @@ class EnterWorkgroupTrigger: Trigger {
     }
 
     private func displayLabel(forID id: String?) -> String {
-        guard let id, !id.isEmpty else { return "(unset)" }
+        guard let id, !id.isEmpty else { return String(localized: "ui.swift.triggers.enterworkgrouptrigger.unset.4d993827", defaultValue: "(unset)", bundle: .main, comment: "User-facing text in EnterWorkgroupTrigger.") }
         if let wg = availableWorkgroups.first(where: { $0.uniqueIdentifier == id }) {
-            return wg.name.isEmpty ? "Untitled" : wg.name
+            return wg.name.isEmpty ? String(localized: "ui.swift.triggers.enterworkgrouptrigger.untitled.f59ab8d1", defaultValue: "Untitled", bundle: .main, comment: "User-facing text in EnterWorkgroupTrigger.") : wg.name
         }
-        return "(missing)"
+        return String(localized: "ui.swift.triggers.enterworkgrouptrigger.missing.12954e60", defaultValue: "(missing)", bundle: .main, comment: "User-facing text in EnterWorkgroupTrigger.")
     }
 
     override func menuItemsForPoupupButton() -> [AnyHashable: Any]? {
         var dict: [AnyHashable: Any] = [:]
         for wg in availableWorkgroups {
-            let label = wg.name.isEmpty ? "Untitled" : wg.name
+            let label = wg.name.isEmpty ? String(localized: "ui.swift.triggers.enterworkgrouptrigger.untitled.f59ab8d1", defaultValue: "Untitled", bundle: .main, comment: "User-facing text in EnterWorkgroupTrigger.") : wg.name
             dict[wg.uniqueIdentifier] = label
         }
         return dict

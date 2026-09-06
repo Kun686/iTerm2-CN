@@ -46,7 +46,7 @@
         [_signButton setAction:@selector(didToggleSignButton:)];
         _signButton.translatesAutoresizingMaskIntoConstraints = NO;
         _signButton.buttonType = NSButtonTypeSwitch;
-        _signButton.title = @"Code-sign exported script using identity: ";
+        _signButton.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptchooser.code_sign_exported_script_using_identity.927f9686", nil, NSBundle.mainBundle, @"Code-sign exported script using identity: ", @"User-facing text in iTermScriptChooser (init).");
         [_signButton sizeToFit];
         [self addSubview:_signButton];
 
@@ -60,7 +60,7 @@
                                                                     locale:[NSLocale currentLocale]];
         [_identities enumerateObjectsUsingBlock:^(SIGIdentity * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSString *formattedDate = [dateFormatter stringFromDate:obj.signingCertificate.expirationDate];
-            NSString *title = [NSString stringWithFormat:@"%@, expires %@",
+            NSString *title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptchooser.identity_expiration.29dbd292", nil, NSBundle.mainBundle, @"%@, expires %@", @"Code-signing identity description followed by its expiration date."),
                                obj.signingCertificate.longDescription, formattedDate];
             NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:title
                                                               action:nil
@@ -74,7 +74,7 @@
         _launchButton.action = @selector(toggleAutoLaunch:);
         _launchButton.translatesAutoresizingMaskIntoConstraints = NO;
         _launchButton.buttonType = NSButtonTypeSwitch;
-        _launchButton.title = @"Offer to launch automatically during installation";
+        _launchButton.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptchooser.offer_to_launch_automatically_during_installation.2bdfde9c", nil, NSBundle.mainBundle, @"Offer to launch automatically during installation", @"User-facing text in iTermScriptChooser (init).");
         _launchButton.state = NSControlStateValueOff;
         _launchButton.enabled = NO;
         [_launchButton sizeToFit];

@@ -158,7 +158,7 @@ class ChatClient {
                 message: "The user denied permission to use function calling in this terminal session. Do not try again.",
                 functionCallName: message.functionCallName ?? "Unknown function call name",
                 functionCallID: message.functionCallID,
-                userNotice: "AI will not execute this command.")
+                userNotice: String(localized: "ui.swift.aiterm.chatclient.ai_will_not_execute_this_command.5976ab5a", defaultValue: "AI will not execute this command.", bundle: .main, comment: "User-facing text in ChatClient."))
             return nil
         case .always, .ask:
             // Park on the user's Allow/Deny when the shared predicate says so (ask
@@ -454,7 +454,7 @@ class ChatClient {
             guard let url else {
                 continue
             }
-            bullets.append("I [annotated](\(url.absoluteString)) “\(annotation.annotatedText)”: \(annotation.note)")
+            bullets.append(String(localized: "ui.swift.aiterm.chatclient.i_annotated_0_1_2.fa9b7ea6", defaultValue: "I [annotated](\(url.absoluteString)) “\(annotation.annotatedText)”: \(annotation.note)", bundle: .main, comment: "User-facing text in ChatClient."))
         }
         var result = ""
         result += bullets.map { "  * " + $0 }.joined(separator: "\n")
@@ -462,7 +462,7 @@ class ChatClient {
             result += "\n"
         }
         if value.final && !response.annotations.isEmpty {
-            result += "\nYou can click on a link in this message or on a yellow underline in the terminal to reveal an annotation."
+            result += String(localized: "ui.swift.aiterm.chatclient.you_can_click_on_a_link_in_this.63a2e7e2", defaultValue: "\nYou can click on a link in this message or on a yellow underline in the terminal to reveal an annotation.", bundle: .main, comment: "User-facing text in ChatClient.")
         }
         if let mainResponse = value.mainResponse {
             if !result.isEmpty {

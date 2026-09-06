@@ -9,14 +9,14 @@ extension iTermHistogram {
     @objc
     static var tabularFormatterTime: TabularFormatter {
         let formatter = TabularFormatter()
-        formatter.defineColumn(label: "Min Time", leftAligned: false)
-        formatter.defineColumn(label: "Distribution", leftAligned: true)
-        formatter.defineColumn(label: "Max Time", leftAligned: false)
-        formatter.defineColumn(label: "# Samples", leftAligned: false)
-        formatter.defineColumn(label: "Mean Time", leftAligned: false)
-        formatter.defineColumn(label: "P50", leftAligned: false)
-        formatter.defineColumn(label: "P95", leftAligned: false)
-        formatter.defineColumn(label: "Total Time", leftAligned: false)
+        formatter.defineColumn(label: String(localized: "ui.swift.metrology.itermhistogram.min_time.9daac556", defaultValue: "Min Time", bundle: .main, comment: "User-facing text in iTermHistogram."), leftAligned: false)
+        formatter.defineColumn(label: String(localized: "ui.swift.metrology.itermhistogram.distribution.72a23e54", defaultValue: "Distribution", bundle: .main, comment: "User-facing text in iTermHistogram."), leftAligned: true)
+        formatter.defineColumn(label: String(localized: "ui.swift.metrology.itermhistogram.max_time.e1b91340", defaultValue: "Max Time", bundle: .main, comment: "User-facing text in iTermHistogram."), leftAligned: false)
+        formatter.defineColumn(label: String(localized: "ui.swift.metrology.itermhistogram.samples.9336a289", defaultValue: "# Samples", bundle: .main, comment: "User-facing text in iTermHistogram."), leftAligned: false)
+        formatter.defineColumn(label: String(localized: "ui.swift.metrology.itermhistogram.mean_time.16e1fc38", defaultValue: "Mean Time", bundle: .main, comment: "User-facing text in iTermHistogram."), leftAligned: false)
+        formatter.defineColumn(label: String(localized: "ui.swift.metrology.itermhistogram.p50.fa4cedf3", defaultValue: "P50", bundle: .main, comment: "User-facing text in iTermHistogram."), leftAligned: false)
+        formatter.defineColumn(label: String(localized: "ui.swift.metrology.itermhistogram.p95.aebf8ec1", defaultValue: "P95", bundle: .main, comment: "User-facing text in iTermHistogram."), leftAligned: false)
+        formatter.defineColumn(label: String(localized: "ui.swift.metrology.itermhistogram.total_time.893bd4a5", defaultValue: "Total Time", bundle: .main, comment: "User-facing text in iTermHistogram."), leftAligned: false)
         formatter.defineColumn(label: "", leftAligned: true)
         return formatter
     }

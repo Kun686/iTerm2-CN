@@ -1,0 +1,136 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "0Np-Qf-kVH.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Edit\"; ObjectID = \"0Np-Qf-kVH\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Edit"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑"
+          }
+        }
+      }
+    },
+    "6pA-fv-f64.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"6pA-fv-f64\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table View Cell"
+          }
+        }
+      }
+    },
+    "LNz-uY-GTV.headerCell.title": {
+      "comment": "Class = \"NSTableColumn\"; headerCell.title = \"Title\"; ObjectID = \"LNz-uY-GTV\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Title"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标题"
+          }
+        }
+      }
+    },
+    "olW-AG-GO6.headerCell.title": {
+      "comment": "Class = \"NSTableColumn\"; headerCell.title = \"Text\"; ObjectID = \"olW-AG-GO6\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Text"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文本"
+          }
+        }
+      }
+    },
+    "sV2-W1-Fsm.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"sV2-W1-Fsm\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
+        }
+      }
+    },
+    "uai-V2-7c2.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"uai-V2-7c2\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
+        }
+      }
+    },
+    "vsF-qn-e2J.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"vsF-qn-e2J\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table View Cell"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

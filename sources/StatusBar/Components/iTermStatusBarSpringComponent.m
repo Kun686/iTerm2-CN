@@ -42,18 +42,18 @@ static NSString *const iTermStatusBarSpringComponentSizeMultipleKey = @"iTermSta
 - (NSString *)statusBarComponentShortDescription {
     switch (self.advancedConfiguration.layoutAlgorithm) {
         case iTermStatusBarLayoutAlgorithmSettingStable:
-            return @"Empty Space";
+            return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarspringcomponent.empty_space.65263a12", nil, NSBundle.mainBundle, @"Empty Space", @"Status bar component name.");
         case iTermStatusBarLayoutAlgorithmSettingTightlyPacked:
-            return @"Spring";
+            return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarspringcomponent.spring.db29e82a", nil, NSBundle.mainBundle, @"Spring", @"Status bar component name.");
     }
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
     switch (self.advancedConfiguration.layoutAlgorithm) {
         case iTermStatusBarLayoutAlgorithmSettingStable:
-            return @"Empty space that draws only a background color.";
+            return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarspringcomponent.empty_space_that_draws_only_a_background_color.ef612e88", nil, NSBundle.mainBundle, @"Empty space that draws only a background color.", @"Status bar component description.");
         case iTermStatusBarLayoutAlgorithmSettingTightlyPacked:
-            return @"Pushes items apart. Use one spring to right-align status bar elements that follow it. Use two to center those inbetween.";
+            return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarspringcomponent.pushes_items_apart_use_one_spring_to_right_align_status_bar_elements_that_follow_it_use_two_to_center_those_inbetween.7b4ff689", nil, NSBundle.mainBundle, @"Pushes items apart. Use one spring to right-align status bar elements that follow it. Use two to center those inbetween.", @"Status bar component description.");
     }
 }
 
@@ -88,7 +88,7 @@ static NSString *const iTermStatusBarSpringComponentSizeMultipleKey = @"iTermSta
     switch (self.advancedConfiguration.layoutAlgorithm) {
         case iTermStatusBarLayoutAlgorithmSettingTightlyPacked:
             springConstantKnob =
-            [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Compression Resistance:"
+            [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarbasecomponent.compression_resistance.86c8b1c0", nil, NSBundle.mainBundle, @"Compression Resistance:", @"Status bar advanced setting label.")
                                                               type:iTermStatusBarComponentKnobTypeDouble
                                                        placeholder:@""
                                                       defaultValue:@0.01
@@ -96,7 +96,7 @@ static NSString *const iTermStatusBarSpringComponentSizeMultipleKey = @"iTermSta
             break;
         case iTermStatusBarLayoutAlgorithmSettingStable:
             springConstantKnob =
-            [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Size Multiple:"
+            [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarbasecomponent.size_multiple.343d39f5", nil, NSBundle.mainBundle, @"Size Multiple:", @"Status bar advanced setting label.")
                                                               type:iTermStatusBarComponentKnobTypeDouble
                                                        placeholder:@""
                                                       defaultValue:@1
@@ -104,7 +104,7 @@ static NSString *const iTermStatusBarSpringComponentSizeMultipleKey = @"iTermSta
             break;
     }
     iTermStatusBarComponentKnob *backgroundColorKnob =
-    [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Color"
+    [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarspringcomponent.color.6b73191a", nil, NSBundle.mainBundle, @"Color", @"Status bar component setting label.")
                                                       type:iTermStatusBarComponentKnobTypeColor
                                                placeholder:nil
                                               defaultValue:nil

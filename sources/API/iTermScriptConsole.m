@@ -155,10 +155,10 @@ typedef NS_ENUM(NSInteger, iTermScriptFilterControlTag) {
     [self makeTextViewHorizontallyScrollable:_logsView];
     [self makeTextViewHorizontallyScrollable:_callsView];
 
-    [self setSymbol:SFSymbolGetString(SFSymbolScope) tooltip:@"Inspector" onButton:_inspectorButton];
-    [self setSymbol:SFSymbolGetString(SFSymbolStopCircle) tooltip:@"Terminate" onButton:_terminateButton];
-    [self setSymbol:SFSymbolGetString(SFSymbolArrowClockwise) tooltip:@"Restart" onButton:_startButton];
-    [self setSymbol:SFSymbolGetString(SFSymbolTrash) tooltip:@"Clear Terminated" onButton:_clearTerminatedButton];
+    [self setSymbol:SFSymbolGetString(SFSymbolScope) tooltip:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptconsole.inspector.da188e3b", nil, NSBundle.mainBundle, @"Inspector", @"User-facing text in iTermScriptConsole (setSymbol:tooltip:onButton:).") onButton:_inspectorButton];
+    [self setSymbol:SFSymbolGetString(SFSymbolStopCircle) tooltip:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptconsole.terminate.f913f092", nil, NSBundle.mainBundle, @"Terminate", @"User-facing text in iTermScriptConsole (setSymbol:tooltip:onButton:).") onButton:_terminateButton];
+    [self setSymbol:SFSymbolGetString(SFSymbolArrowClockwise) tooltip:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptconsole.restart.6b983a81", nil, NSBundle.mainBundle, @"Restart", @"User-facing text in iTermScriptConsole (setSymbol:tooltip:onButton:).") onButton:_startButton];
+    [self setSymbol:SFSymbolGetString(SFSymbolTrash) tooltip:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptconsole.clear_terminated.a95f545b", nil, NSBundle.mainBundle, @"Clear Terminated", @"User-facing text in iTermScriptConsole (setSymbol:tooltip:onButton:).") onButton:_clearTerminatedButton];
 
     [self reloadTableFully];
 }

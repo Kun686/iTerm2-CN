@@ -330,7 +330,7 @@ static const CGFloat kWindowTopMargin = 8;
 
     self.window.level = NSModalPanelWindowLevel;
     self.window.accessibilityElement = YES;
-    self.window.accessibilityLabel = @"iTerm2 Tip of the Day";
+    self.window.accessibilityLabel = NSLocalizedStringWithDefaultValue(@"ui.tips.itermtipwindowcontroller.iterm2_tip_of_the_day.3d5fffb6", nil, NSBundle.mainBundle, @"iTerm2 Tip of the Day", @"User-facing text in iTermTipWindowController (showTipWindow).");
     self.window.opaque = NO;
     self.window.alphaValue = 0;
 

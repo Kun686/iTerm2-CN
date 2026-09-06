@@ -284,7 +284,7 @@ final class ChatMentionPickerController: NSObject, NSOutlineViewDataSource, NSOu
                 }
             }
             if !tabNodes.isEmpty {
-                let base = (term.window?.title.isEmpty == false) ? term.window!.title : "Window \(term.number + 1)"
+                let base = (term.window?.title.isEmpty == false) ? term.window!.title : String(localized: "ui.swift.aiterm.chatmentionpickercontroller.window_0.38ae7a46", defaultValue: "Window \(term.number + 1)", bundle: .main, comment: "User-facing text in ChatMentionPickerController.")
                 let shortcut = windowShortcut(number: Int(term.number), glyphs: windowGlyphs)
                 let windowToken = term.terminalGuid.map { "win:\($0)" }
                 windowNodes.append(Node(kind: .window,
@@ -362,7 +362,7 @@ final class ChatMentionPickerController: NSObject, NSOutlineViewDataSource, NSOu
                     // workgroup, not any one peer.
                     let groupTitle = ChatMentionDisplay.context(for: session)?.workgroup ?? session.name
                     result.append(Node(kind: .tab,
-                                       title: groupTitle.isEmpty ? "Workgroup" : groupTitle,
+                                       title: groupTitle.isEmpty ? String(localized: "ui.swift.aiterm.chatmentionpickercontroller.workgroup.a6d32d72", defaultValue: "Workgroup", bundle: .main, comment: "User-facing text in ChatMentionPickerController.") : groupTitle,
                                        session: nil,
                                        children: peerNodes))
                 }
@@ -464,9 +464,9 @@ final class ChatMentionPickerController: NSObject, NSOutlineViewDataSource, NSOu
         guard let tab = session.delegate as? PTYTab else { return "" }
         let windowTitle = tab.realParentWindow()?.window?.title ?? ""
         if windowTitle.isEmpty {
-            return "Tab \(tab.objectCount)"
+            return String(localized: "ui.swift.aiterm.chatmentionpickercontroller.tab_0.675919b9", defaultValue: "Tab \(tab.objectCount)", bundle: .main, comment: "User-facing text in ChatMentionPickerController.")
         }
-        return "Tab \(tab.objectCount) · \(windowTitle)"
+        return String(localized: "ui.swift.aiterm.chatmentionpickercontroller.tab_0_1.fe0680b5", defaultValue: "Tab \(tab.objectCount) · \(windowTitle)", bundle: .main, comment: "User-facing text in ChatMentionPickerController.")
     }
 
     // MARK: - Actions

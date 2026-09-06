@@ -11,9 +11,12 @@
 #import <Cocoa/Cocoa.h>
 #import <signal.h>
 
+#import "DebugLogging.h"
 #import "FutureMethods.h"
+#import "NSBundle+iTerm.h"
 #import "iTermFileDescriptorSocketPath.h"
 #import "PreferencePanel.h"
+#import "iTermApplicationLanguageController.h"
 #import "iTermResourceLimitsHelper.h"
 #import "iTermUserDefaults.h"
 #import "legacy_server.h"
@@ -53,6 +56,18 @@ int main(int argc, const char *argv[]) {
             iTermFileDescriptorSetSocketNamePrefix(prefix.UTF8String);
             break;
         }
+    }
+    if ([NSBundle it_isCNCommunityBuild]) {
+        NSError *languageError = nil;
+        if (![iTermApplicationLanguageController applySavedLanguagePreferenceWithError:&languageError]) {
+            NSString *diagnostic = languageError.userInfo[NSDebugDescriptionErrorKey] ?:
+                @"Unknown application-language error";
+            DLog(@"Could not apply the iTerm2-CN application language (%@/%ld): %@",
+                 languageError.domain,
+                 (long)languageError.code,
+                 diagnostic);
+        }
+        [NSBundle it_applyCNUpdatePolicyToUserDefaults:[iTermUserDefaults userDefaults]];
     }
     if ([[iTermUserDefaults userDefaults] boolForKey:@"MetalCaptureEnabled"]) {
         setenv("MTL_CAPTURE_ENABLED", "1", 1);

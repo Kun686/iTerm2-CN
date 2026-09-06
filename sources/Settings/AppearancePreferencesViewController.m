@@ -252,11 +252,8 @@ NSString *const iTermProcessTypeDidChangeNotification = @"iTermProcessTypeDidCha
         BOOL didChange = NO;
         if (isOn) {
             iTermWarningSelection selection =
-                [iTermWarning showWarningWithTitle:@"When iTerm2 is excluded from the dock, you can "
-                                                   @"always get back to Preferences using the status "
-                                                   @"bar item. Look for an iTerm2 icon on the right "
-                                                   @"side of your menu bar."
-                                           actions:@[ @"Exclude From Dock and App Switcher", @"Cancel" ]
+                [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.appearancepreferencesviewcontroller.when_iterm2_is_excluded_from_the_dock_you.b9f726d6", nil, NSBundle.mainBundle, @"When iTerm2 is excluded from the dock, you can always get back to Preferences using the status bar item. Look for an iTerm2 icon on the right side of your menu bar.", @"User-facing warning message.")
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.appearancepreferencesviewcontroller.exclude_from_dock_and_app_switcher.445513b2", nil, NSBundle.mainBundle, @"Exclude From Dock and App Switcher", @"User-facing action label in AppearancePreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.appearancepreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in AppearancePreferencesViewController (actions).") ]
                                         identifier:nil
                                        silenceable:kiTermWarningTypePersistent
                                             window:weakSelf.view.window];

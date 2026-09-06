@@ -189,10 +189,10 @@ private class PriorityDataProvider: CRUDDataProvider {
             return
         }
         let alert = NSAlert()
-        alert.messageText = "New Priority Pattern"
-        alert.informativeText = "Enter a substring to match against status text (case-insensitive)."
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.toolbelt.statusprioritysettings.new_priority_pattern.f8964690", defaultValue: "New Priority Pattern", bundle: .main, comment: "User-facing text in StatusPrioritySettings.")
+        alert.informativeText = String(localized: "ui.swift.toolbelt.statusprioritysettings.enter_a_substring_to_match_against_status_text.0ca2c0b5", defaultValue: "Enter a substring to match against status text (case-insensitive).", bundle: .main, comment: "User-facing text in StatusPrioritySettings.")
+        alert.addButton(withTitle: String(localized: "ui.swift.toolbelt.statusprioritysettings.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in StatusPrioritySettings."))
+        alert.addButton(withTitle: String(localized: "ui.swift.toolbelt.statusprioritysettings.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in StatusPrioritySettings."))
 
         let textField = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
         alert.accessoryView = textField
@@ -265,7 +265,7 @@ private final class StatusPriorityViewController: NSViewController, CRUDTableVie
         let container = NSView(frame: NSRect(x: 0, y: 0, width: width, height: height))
 
         // Instructional label at top
-        let label = NSTextField(wrappingLabelWithString: "Statuses are sorted by priority. Items near the top have higher priority. Drag to reorder. Click to edit.")
+        let label = NSTextField(wrappingLabelWithString: String(localized: "ui.swift.toolbelt.statusprioritysettings.statuses_are_sorted_by_priority_items_near_the.5ccb2bb5", defaultValue: "Statuses are sorted by priority. Items near the top have higher priority. Drag to reorder. Click to edit.", bundle: .main, comment: "User-facing text in StatusPrioritySettings."))
         label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
         label.textColor = .secondaryLabelColor
         label.frame = NSRect(x: margin,
@@ -279,7 +279,7 @@ private final class StatusPriorityViewController: NSViewController, CRUDTableVie
         // affecting the colored dot or this priority list’s meaning.
         // Pinned to the bottom with the other per-popover switch.
         let toggleY = margin
-        let toggle = NSButton(checkboxWithTitle: "Show status in tab subtitle",
+        let toggle = NSButton(checkboxWithTitle: String(localized: "ui.swift.toolbelt.statusprioritysettings.show_status_in_tab_subtitle.cdf26017", defaultValue: "Show status in tab subtitle", bundle: .main, comment: "User-facing text in StatusPrioritySettings."),
                               target: self,
                               action: #selector(showSubtitleToggleChanged(_:)))
         toggle.state = iTermUserDefaults.showSessionStatusInTabSubtitle ? .on : .off
@@ -294,11 +294,11 @@ private final class StatusPriorityViewController: NSViewController, CRUDTableVie
         // directly above the subtitle toggle so both per-popover switches are
         // grouped together.
         let mergeToggleY = toggleY + toggleHeight + toggleGap
-        let mergeToggle = NSButton(checkboxWithTitle: "Merge workgroup statuses",
+        let mergeToggle = NSButton(checkboxWithTitle: String(localized: "ui.swift.toolbelt.statusprioritysettings.merge_workgroup_statuses.1041c4ab", defaultValue: "Merge workgroup statuses", bundle: .main, comment: "User-facing text in StatusPrioritySettings."),
                                    target: self,
                                    action: #selector(mergeWorkgroupsToggleChanged(_:)))
         mergeToggle.state = StatusPrioritySettings.shared.mergeWorkgroups ? .on : .off
-        mergeToggle.toolTip = "When enabled, only the most recent status from each workgroup is shown."
+        mergeToggle.toolTip = String(localized: "ui.swift.toolbelt.statusprioritysettings.when_enabled_only_the_most_recent_status_from.44ce516f", defaultValue: "When enabled, only the most recent status from each workgroup is shown.", bundle: .main, comment: "User-facing text in StatusPrioritySettings.")
         mergeToggle.frame = NSRect(x: margin,
                                    y: mergeToggleY,
                                    width: width - 2 * margin,
@@ -309,8 +309,8 @@ private final class StatusPriorityViewController: NSViewController, CRUDTableVie
         // +/- segmented control, above the checkboxes and below the table.
         let segmentY = mergeToggleY + toggleHeight + toggleGap
         let addRemove = NSSegmentedControl(images: [
-            NSImage(systemSymbolName: "plus", accessibilityDescription: "Add")!,
-            NSImage(systemSymbolName: "minus", accessibilityDescription: "Remove")!
+            NSImage(systemSymbolName: "plus", accessibilityDescription: String(localized: "ui.swift.toolbelt.statusprioritysettings.add.9fd728c6", defaultValue: "Add", bundle: .main, comment: "User-facing text in StatusPrioritySettings."))!,
+            NSImage(systemSymbolName: "minus", accessibilityDescription: String(localized: "ui.swift.toolbelt.statusprioritysettings.remove.c3812fc4", defaultValue: "Remove", bundle: .main, comment: "User-facing text in StatusPrioritySettings."))!
         ], trackingMode: .momentary, target: nil, action: nil)
         addRemove.frame = NSRect(x: margin, y: segmentY, width: 60, height: segmentHeight)
         addRemove.autoresizingMask = [.maxXMargin, .maxYMargin]
@@ -330,12 +330,12 @@ private final class StatusPriorityViewController: NSViewController, CRUDTableVie
         tv.columnAutoresizingStyle = .noColumnAutoresizing
 
         let patternColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Pattern"))
-        patternColumn.title = "Pattern"
+        patternColumn.title = String(localized: "ui.swift.toolbelt.statusprioritysettings.pattern.4288ade7", defaultValue: "Pattern", bundle: .main, comment: "User-facing text in StatusPrioritySettings.")
         patternColumn.isEditable = true
         tv.addTableColumn(patternColumn)
 
         let notifyColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Notify"))
-        notifyColumn.title = "Notify"
+        notifyColumn.title = String(localized: "ui.swift.toolbelt.statusprioritysettings.notify.f4e2b773", defaultValue: "Notify", bundle: .main, comment: "User-facing text in StatusPrioritySettings.")
         notifyColumn.width = StatusPriorityViewController.notifyColumnWidth
         notifyColumn.minWidth = StatusPriorityViewController.notifyColumnWidth
         notifyColumn.maxWidth = StatusPriorityViewController.notifyColumnWidth

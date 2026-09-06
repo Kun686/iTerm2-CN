@@ -823,11 +823,25 @@ static void HandleSigChld(int n) {
 
         case iTermJobManagerForkAndExecStatusFailedToFork: {
             RLog(@"Unable to fork %@: %s", progpath, strerror(optionalErrorCode.intValue));
-            NSString *error = @"Unable to fork child process: you may have too many processes already running.";
+            NSString *error = NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.unable_to_fork_child_process",
+                                                                  nil,
+                                                                  NSBundle.mainBundle,
+                                                                  @"Unable to fork child process: you may have too many processes already running.",
+                                                                  @"Error shown when iTerm2 cannot create a child process.");
             if (optionalErrorCode) {
-                error = [NSString stringWithFormat:@"%@ The system error was: %s", error, strerror(optionalErrorCode.intValue)];
+                error = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.system_error_suffix",
+                                                                                      nil,
+                                                                                      NSBundle.mainBundle,
+                                                                                      @"%1$@ The system error was: %2$s",
+                                                                                      @"Adds the system error to a child-process launch error."),
+                         error,
+                         strerror(optionalErrorCode.intValue)];
             }
-            [[iTermNotificationController sharedInstance] notify:@"Unable to fork!"
+            [[iTermNotificationController sharedInstance] notify:NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.unable_to_fork_notification_title",
+                                                                                                    nil,
+                                                                                                    NSBundle.mainBundle,
+                                                                                                    @"Unable to fork!",
+                                                                                                    @"Notification title when iTerm2 cannot create a child process.")
                                                  withDescription:error];
             [self.delegate taskDiedWithError:error];
             break;
@@ -844,9 +858,9 @@ static void HandleSigChld(int n) {
 
 - (void)showFailedToCreateTempSocketError {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Error";
-    alert.informativeText = [NSString stringWithFormat:@"An error was encountered while creating a temporary file with mkstemps. Verify that %@ exists and is writable.", NSTemporaryDirectory()];
-    [alert addButtonWithTitle:@"OK"];
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.error.54a0e8c1", nil, NSBundle.mainBundle, @"Error", @"User-facing text in PTYTask (showFailedToCreateTempSocketError).");
+    alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.an_error_was_encountered_while_creating_a_temporary.321d719b", nil, NSBundle.mainBundle, @"An error was encountered while creating a temporary file with mkstemps. Verify that %@ exists and is writable.", @"User-facing text in PTYTask (informativeText)."), NSTemporaryDirectory()];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in PTYTask (showFailedToCreateTempSocketError).")];
     [alert runModal];
 }
 

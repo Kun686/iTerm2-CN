@@ -123,7 +123,7 @@ static NSString *kCommandTimestamp = @"timestamp";
 
 - (void)abortWithErrorMessage:(NSString *)message {
     [self abortWithErrorMessage:[NSString stringWithFormat:@"%@", message]
-                          title:@"tmux Reported a Problem"];
+                          title:NSLocalizedStringWithDefaultValue(@"ui.tmux.tmuxgateway.tmux_reported_a_problem.e5dfba5f", nil, NSBundle.mainBundle, @"tmux Reported a Problem", @"User-facing text in TmuxGateway (title).")];
 }
 
 // TODO: be more forgiving of errors.
@@ -133,7 +133,7 @@ static NSString *kCommandTimestamp = @"timestamp";
         NSAlert *alert = [[NSAlert alloc] init];
         alert.messageText = title;
         alert.informativeText = message;
-        [alert addButtonWithTitle:@"OK"];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.tmux.tmuxgateway.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in TmuxGateway (source UI).")];
         [alert runModal];
     });
     [self detach];

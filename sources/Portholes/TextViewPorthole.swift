@@ -475,22 +475,22 @@ extension TextViewPorthole: NSTextViewDelegate {
             return false
         }
         if url.scheme == "file" {
-            if iTermWarning.show(withTitle: "Open file at \(url.path)?",
-                                 actions: ["OK", "Cancel"],
+            if iTermWarning.show(withTitle: String(localized: "ui.swift.portholes.textviewporthole.open_file_at_0.8b556d05", defaultValue: "Open file at \(url.path)?", bundle: .main, comment: "User-facing text in TextViewPorthole."),
+                                 actions: [String(localized: "ui.swift.portholes.textviewporthole.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in TextViewPorthole."), String(localized: "ui.swift.portholes.textviewporthole.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in TextViewPorthole.")],
                                  accessory: nil,
                                  identifier: "NoSyncOpenFileFromMarkdownLink",
                                  silenceable: .kiTermWarningTypePermanentlySilenceable,
-                                 heading: "Confirm",
+                                 heading: String(localized: "ui.swift.portholes.textviewporthole.confirm.eebdd24a", defaultValue: "Confirm", bundle: .main, comment: "User-facing text in TextViewPorthole."),
                                  window: textView.window) == .kiTermWarningSelection0 {
                 NSWorkspace.shared.open(url)
             }
         } else {
-            if iTermWarning.show(withTitle: "Open URL \(url.absoluteString)?",
-                                 actions: ["OK", "Cancel"],
+            if iTermWarning.show(withTitle: String(localized: "ui.swift.portholes.textviewporthole.open_url_0.bb647e90", defaultValue: "Open URL \(url.absoluteString)?", bundle: .main, comment: "User-facing text in TextViewPorthole."),
+                                 actions: [String(localized: "ui.swift.portholes.textviewporthole.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in TextViewPorthole."), String(localized: "ui.swift.portholes.textviewporthole.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in TextViewPorthole.")],
                                  accessory: nil,
                                  identifier: "NoSyncOpenURLFromMarkdownLink",
                                  silenceable: .kiTermWarningTypePermanentlySilenceable,
-                                 heading: "Confirm",
+                                 heading: String(localized: "ui.swift.portholes.textviewporthole.confirm.eebdd24a", defaultValue: "Confirm", bundle: .main, comment: "User-facing text in TextViewPorthole."),
                                  window: textView.window) == .kiTermWarningSelection0 {
                 NSWorkspace.shared.open(url)
             }

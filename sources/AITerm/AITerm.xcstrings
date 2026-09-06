@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Set Up Artificial Intelligence"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置人工智能"
+          }
         }
       }
     },
@@ -21,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "You may be charged by your AI provider for each token sent or received."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "您的 AI 提供商可能会对每个发送或接收的 token 收费。"
           }
         }
       }
@@ -34,6 +46,12 @@
             "state": "new",
             "value": "Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
         }
       }
     },
@@ -46,6 +64,12 @@
             "state": "new",
             "value": "Cancel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
         }
       }
     },
@@ -57,6 +81,12 @@
           "stringUnit": {
             "state": "new",
             "value": "OK"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
           }
         }
       }

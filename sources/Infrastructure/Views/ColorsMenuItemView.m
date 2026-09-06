@@ -326,7 +326,7 @@ const CGFloat iTermColorsMenuItemViewDisabledAlpha = 0.3;
         const CGFloat alpha = self.effectiveAppearance.it_isDark ? 0.30 : 0.25;
         attributes[NSForegroundColorAttributeName] = [attributes[NSForegroundColorAttributeName] colorWithAlphaComponent:alpha];
     }
-    NSString *labelTitle = @"Tab Color:";
+    NSString *labelTitle = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.colorsmenuitemview.tab_color.f8b6f704", nil, NSBundle.mainBundle, @"Tab Color:", @"User-facing text in ColorsMenuItemView (drawRect:).");
     const CGFloat x = [self colorXOffset];
     [labelTitle drawAtPoint:NSMakePoint(x, [ColorsMenuItemView preferredSize].height - kMenuLabelOffsetY) withAttributes:attributes];
     [NSBezierPath setDefaultLineWidth:savedWidth];
@@ -388,7 +388,7 @@ const CGFloat iTermColorsMenuItemViewDisabledAlpha = 0.3;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         cachedEyedropper = [NSImage imageWithSystemSymbolName:@"eyedropper"
-                                     accessibilityDescription:@"Color Picker"];
+                                                                 accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.colorsmenuitemview.color_picker.ba42602c", nil, NSBundle.mainBundle, @"Color Picker", @"Accessibility description for the color picker.")];
         if (!cachedEyedropper) {
             cachedEyedropper = [NSImage imageNamed:NSImageNameColorPanel];
         }

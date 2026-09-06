@@ -105,7 +105,7 @@ struct LLMProvider {
             return "Llama"
         }
 
-        return "Unknown Platform"
+        return String(localized: "ui.swift.aiterm.llmprovider.unknown_platform.9c60e933", defaultValue: "Unknown Platform", bundle: .main, comment: "User-facing text in LLMProvider.")
     }
 
     var dynamicModelsSupported: Bool {

@@ -1,0 +1,281 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "5Ya-mQ-QY5.title": {
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Path to SSH:\"; ObjectID = \"5Ya-mQ-QY5\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Path to SSH:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SSH 路径："
+          }
+        }
+      }
+    },
+    "BeO-Rn-T4R.title": {
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Files to Copy to Remote Host:\"; ObjectID = \"BeO-Rn-T4R\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Files to Copy to Remote Host:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要复制到远程主机的文件："
+          }
+        }
+      }
+    },
+    "D3c-WR-X8U.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"D3c-WR-X8U\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table View Cell"
+          }
+        }
+      }
+    },
+    "Fmg-GQ-fHY.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"OK\"; ObjectID = \"Fmg-GQ-fHY\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "OK"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
+          }
+        }
+      }
+    },
+    "IPF-xv-FWE.placeholderString": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; placeholderString = \"/usr/bin/ssh\"; ObjectID = \"IPF-xv-FWE\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "/usr/bin/ssh"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/usr/bin/ssh"
+          }
+        }
+      }
+    },
+    "N76-mg-r19.headerCell.title": {
+      "comment": "Class = \"NSTableColumn\"; headerCell.title = \"File or Folder\"; ObjectID = \"N76-mg-r19\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "File or Folder"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文件或文件夹"
+          }
+        }
+      }
+    },
+    "QvC-M9-y7g.title": {
+      "comment": "Class = \"NSWindow\"; title = \"Window\"; ObjectID = \"QvC-M9-y7g\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
+        }
+      }
+    },
+    "SOh-zL-23F.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"SSH Integration\"; ObjectID = \"SOh-zL-23F\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "SSH Integration"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SSH 集成"
+          }
+        }
+      }
+    },
+    "UXs-4L-PQD.title": {
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Environment Variables to Copy to Remote Host:\"; ObjectID = \"UXs-4L-PQD\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Environment Variables to Copy to Remote Host:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要复制到远程主机的环境变量："
+          }
+        }
+      }
+    },
+    "cb2-6S-OCc.headerCell.title": {
+      "comment": "Class = \"NSTableColumn\"; headerCell.title = \"Destination\"; ObjectID = \"cb2-6S-OCc\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Destination"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目标位置"
+          }
+        }
+      }
+    },
+    "f6s-hL-IhT.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"f6s-hL-IhT\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
+        }
+      }
+    },
+    "iuf-2U-R7w.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"iuf-2U-R7w\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
+        }
+      }
+    },
+    "ium-gO-F7S.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Browse\"; ObjectID = \"ium-gO-F7S\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Browse"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浏览"
+          }
+        }
+      }
+    },
+    "l94-S7-arn.title": {
+      "comment": "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"l94-S7-arn\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Cancel"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        }
+      }
+    },
+    "nyT-vq-R0T.title": {
+      "shouldTranslate": false,
+      "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"nyT-vq-R0T\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table View Cell"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

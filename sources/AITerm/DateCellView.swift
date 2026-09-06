@@ -92,7 +92,7 @@ class DateCellView: NSView {
     private static func humanReadableDate(from components: DateComponents) -> String {
         let calendar = Calendar.current
         guard let date = calendar.date(from: components) else {
-            return "Invalid date"
+            return String(localized: "ui.swift.aiterm.datecellview.invalid_date.cd63c7df", defaultValue: "Invalid date", bundle: .main, comment: "User-facing text in DateCellView.")
         }
 
         let now = Date()
@@ -105,9 +105,9 @@ class DateCellView: NSView {
         let daysDifference = calendar.dateComponents([.day], from: dateStart, to: today).day ?? 0
 
         if daysDifference == 0 {
-            return "Today"
+            return String(localized: "ui.swift.aiterm.datecellview.today.2b065c7c", defaultValue: "Today", bundle: .main, comment: "User-facing text in DateCellView.")
         } else if daysDifference == 1 {
-            return "Yesterday"
+            return String(localized: "ui.swift.aiterm.datecellview.yesterday.56618125", defaultValue: "Yesterday", bundle: .main, comment: "User-facing text in DateCellView.")
         } else if daysDifference > 1 && daysDifference < 7 {
             formatter.dateFormat = "EEEE" // Full weekday name
         } else if daysDifference >= 7 && calendar.component(.year, from: date) == calendar.component(.year, from: now) {

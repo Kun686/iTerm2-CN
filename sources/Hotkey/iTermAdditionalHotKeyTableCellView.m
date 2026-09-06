@@ -17,7 +17,7 @@
 }
 
 - (void)awakeFromNib {
-    _shortcut.purpose = @"as a hotkey";
+    _shortcut.purpose = NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermadditionalhotkeytablecellview.as_a_hotkey.44b9579e", nil, NSBundle.mainBundle, @"as a hotkey", @"User-facing text in iTermAdditionalHotKeyTableCellView (purpose).");
     _shortcut.shortcutDelegate = self;
 }
 

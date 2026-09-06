@@ -75,10 +75,10 @@
 
 - (void)updateOverlayText {
     if (self.image == nil) {
-        _overlayLabel.stringValue = @"No Image Selected\u2009—\u2009Click to set";
+        _overlayLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermimagewell.no_image_selected_click_to_set.712154a5", nil, NSBundle.mainBundle, @"No Image Selected\u2009—\u2009Click to set", @"User-facing text in iTermImageWell (updateOverlayText).");
     }
     else {
-        _overlayLabel.stringValue = @"Click to change";
+        _overlayLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermimagewell.click_to_change.0d0829d7", nil, NSBundle.mainBundle, @"Click to change", @"User-facing text in iTermImageWell (updateOverlayText).");
     }
     [self setNeedsLayout:YES];
 }

@@ -663,9 +663,9 @@ NSString *const kSemanticHistoryColumnNumberKey = @"semanticHistory.columnNumber
         return;
     }
     iTermWarning *warning = [[iTermWarning alloc] init];
-    warning.title = [NSString stringWithFormat:@"The following command returned a non-zero exit code:\n\n“%@”",
+    warning.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermsemantichistorycontroller.the_following_command_returned_a_non_zero_exit.49c04afe", nil, NSBundle.mainBundle, @"The following command returned a non-zero exit code:\n\n“%@”", @"User-facing text in iTermSemanticHistoryController (title)."),
                      [parts componentsJoinedByString:@" "]];
-    warning.heading = @"Semantic History Command Failed";
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermsemantichistorycontroller.semantic_history_command_failed.dfd7a61b", nil, NSBundle.mainBundle, @"Semantic History Command Failed", @"User-facing text in iTermSemanticHistoryController (heading).");
     static const iTermSingleUseWindowOptions options = iTermSingleUseWindowOptionsShortLived;
     NSMutableData *inject = [runner.output mutableCopy];
     NSString *truncationWarning = [NSString stringWithFormat:@"\n%c[m;[output truncated]\n", 27];
@@ -674,8 +674,8 @@ NSString *const kSemanticHistoryColumnNumberKey = @"semanticHistory.columnNumber
     }
     [inject it_replaceOccurrencesOfData:[NSData dataWithBytes:"\n" length:1]
                                withData:[NSData dataWithBytes:"\r\n" length:2]];
-    warning.warningActions = @[ [iTermWarningAction warningActionWithLabel:@"OK" block:nil],
-                                [iTermWarningAction warningActionWithLabel:@"View" block:^(iTermWarningSelection selection) {
+    warning.warningActions = @[ [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermsemantichistorycontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSemanticHistoryController (warningActionWithLabel).") block:nil],
+                                [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermsemantichistorycontroller.view.dcc839a4", nil, NSBundle.mainBundle, @"View", @"User-facing action label in iTermSemanticHistoryController (warningActionWithLabel).") block:^(iTermWarningSelection selection) {
                                     [[iTermController sharedInstance] openSingleUseWindowWithCommand:@"/usr/bin/true"
                                                                                            arguments:nil
                                                                                               inject:inject

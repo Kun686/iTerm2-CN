@@ -60,12 +60,12 @@
         return;
     }
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:@"Move OpenAI API key into the keychain? It is currently stored in User Defaults, which is not as secure."
-                               actions:@[ @"OK", @"Erase from Settings" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.move_openai_api_key_into_the_keychain_it.df37bd2e", nil, NSBundle.mainBundle, @"Move OpenAI API key into the keychain? It is currently stored in User Defaults, which is not as secure.", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermMigrationHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.erase_from_settings.6858a10b", nil, NSBundle.mainBundle, @"Erase from Settings", @"User-facing action label in iTermMigrationHelper (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncMoveOpenAIAPIKeyIntoKeychain"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Move Key" 
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.move_key.f8501fd2", nil, NSBundle.mainBundle, @"Move Key", @"User-facing text in iTermMigrationHelper (heading).")
                                 window:nil];
     if (selection == kiTermWarningSelection0) {
         [self addOpenAIKeyToKeychain:key];
@@ -110,10 +110,10 @@
         }
 
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Manual Update Needed";
-        alert.informativeText = @"iTerm2's Application Support directory has changed.\n\n"
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.manual_update_needed.ad739221", nil, NSBundle.mainBundle, @"Manual Update Needed", @"User-facing text in iTermMigrationHelper (migrateApplicationSupportDirectoryIfNeeded).");
+        alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.iterm2_s_application_support_directory_has_changed_previously.b7440e52", nil, NSBundle.mainBundle, @"iTerm2's Application Support directory has changed.\n\n"
         @"Previously, both these directories were supported:\n~/Library/Application Support/iTerm\n~/Library/Application Support/iTerm2.\n\n"
-            @"Now, only the iTerm2 version is supported. But you have files in both so please move everything from iTerm to iTerm2.";
+            @"Now, only the iTerm2 version is supported. But you have files in both so please move everything from iTerm to iTerm2.", @"User-facing text in iTermMigrationHelper (informativeText).");
 
         NSMutableArray<NSString *> *files = [NSMutableArray array];
         int over = 0;
@@ -146,9 +146,9 @@
         [unfucker layout];
         alert.accessoryView = unfucker;
 
-        [alert addButtonWithTitle:@"Open in Finder"];
-        [alert addButtonWithTitle:@"I Fixed It"];
-        [alert addButtonWithTitle:@"Not Now"];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.open_in_finder.91fd498d", nil, NSBundle.mainBundle, @"Open in Finder", @"User-facing text in iTermMigrationHelper (migrateApplicationSupportDirectoryIfNeeded).")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.i_fixed_it.34c8878f", nil, NSBundle.mainBundle, @"I Fixed It", @"User-facing text in iTermMigrationHelper (migrateApplicationSupportDirectoryIfNeeded).")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.not_now.ccb4c324", nil, NSBundle.mainBundle, @"Not Now", @"User-facing text in iTermMigrationHelper (migrateApplicationSupportDirectoryIfNeeded).")];
         switch ([alert runModal]) {
             case NSAlertFirstButtonReturn:
                 [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[ [NSURL fileURLWithPath:legacy],
@@ -291,16 +291,16 @@ static NSString *const iTermMigrationHelperRemoveDeprecatedKeyMappingsUserDefaul
 }
 
 + (BOOL)askToRemoveDeprecatedKeyMappings:(NSString *)specialReason NS_AVAILABLE_MAC(15) {
-    NSString *message = specialReason ?: @"Some profiles have unnecessary key mappings which may interfere with window tiling shortcuts added in macOS Sequoia. These were in the default profile for many years but are no longer needed. Remove the key mappings? It shouldn’t break anything, and it won’t modify the on-disk copy of the dynamic profile.";
+    NSString *message = specialReason ?: NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.some_profiles_have_unnecessary_key_mappings_which_may_interfere_with_win.b7520728", nil, NSBundle.mainBundle, @"Some profiles have unnecessary key mappings which may interfere with window tiling shortcuts added in macOS Sequoia. These were in the default profile for many years but are no longer needed. Remove the key mappings? It shouldn’t break anything, and it won’t modify the on-disk copy of the dynamic profile.", @"User-facing text in iTermMigrationHelper (indirect UI).");
 
 
     const iTermWarningSelection selection =
     [iTermWarning showWarningWithTitle:message
-                               actions:@[ @"OK", @"Learn More", @"Cancel" ]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermMigrationHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.learn_more.8d8cd546", nil, NSBundle.mainBundle, @"Learn More", @"User-facing action label in iTermMigrationHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermMigrationHelper (actions).") ]
                              accessory:nil
                             identifier:nil
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Remove Deprecated Key Mappings?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermmigrationhelper.remove_deprecated_key_mappings.657de5e2", nil, NSBundle.mainBundle, @"Remove Deprecated Key Mappings?", @"User-facing text in iTermMigrationHelper (heading).")
                                 window:nil];
     switch (selection) {
         case kiTermWarningSelection0:  // ok
@@ -571,4 +571,3 @@ static NSString *const iTermMigrationHelperRemoveDeprecatedKeyMappingsUserDefaul
 }
 
 @end
-

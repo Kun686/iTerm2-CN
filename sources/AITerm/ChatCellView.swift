@@ -87,7 +87,7 @@ class ChatCellView: NSTableCellView {
 
     func load(chat: Chat, dataSource: ChatListDataSource) {
         if TypingStatusModel.instance.isTyping(participant: .agent, chatID: chat.id) {
-            snippet = "AI is typing…"
+            snippet = String(localized: "ui.swift.aiterm.chatcellview.ai_is_typing.b9adb12b", defaultValue: "AI is typing…", bundle: .main, comment: "User-facing text in ChatCellView.")
         } else {
             self.snippet = dataSource.snippet(forChatID: chat.id)
         }
@@ -118,7 +118,7 @@ class ChatCellView: NSTableCellView {
                 if typing {
                     self.typing = true
                     DLog("set typing=true in \(chatID)")
-                    snippet = "AI is typing…"
+                    snippet = String(localized: "ui.swift.aiterm.chatcellview.ai_is_typing.b9adb12b", defaultValue: "AI is typing…", bundle: .main, comment: "User-facing text in ChatCellView.")
                 } else {
                     self.typing = false
                     DLog("set typing=false in \(chatID)")
@@ -214,7 +214,7 @@ class ChatCellView: NSTableCellView {
             let configuration = NSImage.SymbolConfiguration(pointSize: iconDiameter * 0.45,
                                                             weight: .medium)
             if let symbol = NSImage(systemSymbolName: SFSymbol.message.rawValue,
-                                    accessibilityDescription: "Chat")?
+                                    accessibilityDescription: String(localized: "ui.swift.aiterm.chatcellview.chat.460b3a7d", defaultValue: "Chat", bundle: .main, comment: "User-facing text in ChatCellView."))?
                 .withSymbolConfiguration(configuration)?
                 .it_image(withTintColor: .white) {
                 let symbolSize = symbol.size

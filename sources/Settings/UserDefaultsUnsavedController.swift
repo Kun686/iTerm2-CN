@@ -133,17 +133,17 @@ class UserDefaultsUnsavedController: NSTitlebarAccessoryViewController {
         }
         let menu = SimpleContextMenu()
         if iTermRemotePreferences.sharedInstance().remoteLocationIsURL {
-            menu.addItem(title: "Disable Loading Settings from URL") { [weak self] in
+            menu.addItem(title: String(localized: "ui.swift.settings.userdefaultsunsavedcontroller.disable_loading_settings_from_url.74c84aba", defaultValue: "Disable Loading Settings from URL", bundle: .main, comment: "User-facing text in UserDefaultsUnsavedController.")) { [weak self] in
                 self?.disableRemotePrefs()
             }
         } else {
-            menu.addItem(title: "Save Settings") { [weak self] in
+            menu.addItem(title: String(localized: "ui.swift.settings.userdefaultsunsavedcontroller.save_settings.ec92e1dc", defaultValue: "Save Settings", bundle: .main, comment: "User-facing text in UserDefaultsUnsavedController.")) { [weak self] in
                 self?.save()
             }
-            menu.addItem(title: "Save Settings Automatically") { [weak self] in
+            menu.addItem(title: String(localized: "ui.swift.settings.userdefaultsunsavedcontroller.save_settings_automatically.b3a0bc97", defaultValue: "Save Settings Automatically", bundle: .main, comment: "User-facing text in UserDefaultsUnsavedController.")) { [weak self] in
                 self?.enableAutosave()
             }
-            menu.addItem(title: "Hide Unsaved Changes Notification") { [weak self] in
+            menu.addItem(title: String(localized: "ui.swift.settings.userdefaultsunsavedcontroller.hide_unsaved_changes_notification.f023f5f9", defaultValue: "Hide Unsaved Changes Notification", bundle: .main, comment: "User-facing text in UserDefaultsUnsavedController.")) { [weak self] in
                 self?.hideNotification()
             }
         }

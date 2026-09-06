@@ -2,12 +2,19 @@
   "sourceLanguage": "en",
   "strings": {
     "2Tz-89-YHl.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"⌥ Option\"; ObjectID = \"2Tz-89-YHl\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "⌥ Option"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "⌥ Option"
           }
         }
@@ -22,6 +29,12 @@
             "state": "new",
             "value": "Pin hotkey window (stays open on loss of keyboard focus)"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "固定热键窗口（失去键盘焦点时保持打开）"
+          }
         }
       }
     },
@@ -33,6 +46,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Hotkey:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "热键："
           }
         }
       }
@@ -46,16 +65,29 @@
             "state": "new",
             "value": "Don’t do anything special"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不执行任何特殊操作"
+          }
         }
       }
     },
     "FSQ-IF-ujS.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"⚠️\"; ObjectID = \"FSQ-IF-ujS\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "⚠️"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "⚠️"
           }
         }
@@ -70,6 +102,12 @@
             "state": "new",
             "value": "Show this Hotkey Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示此热键窗口"
+          }
         }
       }
     },
@@ -82,16 +120,29 @@
             "state": "new",
             "value": "HotKey Window Preferences"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "热键窗口偏好设置"
+          }
         }
       }
     },
     "Jg9-HV-xDm.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"⌘ Command\"; ObjectID = \"Jg9-HV-xDm\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "⌘ Command"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "⌘ Command"
           }
         }
@@ -106,6 +157,12 @@
             "state": "new",
             "value": "Floating windows overlap other windows and the dock, and other apps’ Full Screen windows (if the Hotkey Window’s Space is set to All Spaces)."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浮动窗口会覆盖在其他窗口和 Dock 之上，以及其他应用的全屏窗口之上（如果热键窗口的空间设置为“所有空间”）。"
+          }
         }
       }
     },
@@ -117,6 +174,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Show this Hotkey Window if no other window is open"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "如果没有其他窗口打开则显示此热键窗口"
           }
         }
       }
@@ -130,6 +193,12 @@
             "state": "new",
             "value": "Cancel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
         }
       }
     },
@@ -141,6 +210,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Animate showing and hiding"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以动画方式显示和隐藏"
           }
         }
       }
@@ -154,6 +229,12 @@
             "state": "new",
             "value": "OK"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
+          }
         }
       }
     },
@@ -165,6 +246,12 @@
           "stringUnit": {
             "state": "new",
             "value": "OK"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
           }
         }
       }
@@ -178,6 +265,12 @@
             "state": "new",
             "value": "Additional Hotkeys"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "其他热键"
+          }
         }
       }
     },
@@ -189,6 +282,12 @@
           "stringUnit": {
             "state": "new",
             "value": "When you press the hotkey bound to this profile a dedicated window will show or hide. Each profile with a hotkey controls its own Hotkey Window."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按下绑定到此配置文件的热键时，将显示或隐藏一个专用窗口。每个带有热键的配置文件控制其自己的热键窗口。"
           }
         }
       }
@@ -202,16 +301,29 @@
             "state": "new",
             "value": "⚠️ Another profile uses this shortcut"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⚠️ 另一个配置文件使用了此快捷键"
+          }
         }
       }
     },
     "l57-vU-TNJ.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"⇧ Shift\"; ObjectID = \"l57-vU-TNJ\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "⇧ Shift"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "⇧ Shift"
           }
         }
@@ -226,6 +338,12 @@
             "state": "new",
             "value": "Double-tap key:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "双击按键："
+          }
         }
       }
     },
@@ -237,6 +355,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Automatically reopen on app reactivation"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用重新激活时自动重新打开"
           }
         }
       }
@@ -250,6 +374,12 @@
             "state": "new",
             "value": "⚠️ Another profile uses this double-tap"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⚠️ 另一个配置文件使用了此双击操作"
+          }
         }
       }
     },
@@ -261,6 +391,12 @@
           "stringUnit": {
             "state": "new",
             "value": "On Dock icon click:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点击 Dock 图标时："
           }
         }
       }
@@ -274,16 +410,29 @@
             "state": "new",
             "value": "Floating window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浮动窗口"
+          }
         }
       }
     },
     "wp1-Sh-ht3.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"^ Control\"; ObjectID = \"wp1-Sh-ht3\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "^ Control"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "^ Control"
           }
         }
@@ -298,16 +447,29 @@
             "state": "new",
             "value": "Additional Hotkeys…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "其他热键…"
+          }
         }
       }
     },
     "yak-rb-en2.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"yak-rb-en2\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }

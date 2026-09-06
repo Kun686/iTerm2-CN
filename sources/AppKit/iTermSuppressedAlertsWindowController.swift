@@ -30,7 +30,7 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
                             styleMask: [.titled, .closable, .resizable, .utilityWindow],
                             backing: .buffered,
                             defer: true)
-        panel.title = "Suppressed Alerts"
+        panel.title = String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.suppressed_alerts.b90033d7", defaultValue: "Suppressed Alerts", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController.")
         panel.hidesOnDeactivate = false
         panel.minSize = NSSize(width: 480, height: 260)
         // This is a reused singleton window; without this, a programmatic NSWindow
@@ -72,9 +72,12 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
         let bounds = content.bounds
 
         // Explanatory text at the top.
-        let explanation = label(withText: "These alerts are being answered automatically because you " +
-                                          "chose to remember your response. Select one and click " +
-                                          "Un-suppress to be asked again.")
+        let explanation = label(withText: String(
+            localized: "ui.appkit.suppressed_alerts.explanation",
+            defaultValue: "These alerts are being answered automatically because you chose to remember your response. Select one and click Un-suppress to be asked again.",
+            bundle: .main,
+            comment: "Explains why alerts are suppressed and how to make one appear again."
+        ))
         explanation.frame = NSRect(x: margin,
                                    y: bounds.maxY - margin - 40,
                                    width: bounds.width - margin * 2,
@@ -105,17 +108,17 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
         table.columnAutoresizingStyle = .noColumnAutoresizing
 
         let whenColumn = NSTableColumn(identifier: Column.when)
-        whenColumn.title = "Last Suppressed"
+        whenColumn.title = String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.last_suppressed.130b02e8", defaultValue: "Last Suppressed", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController.")
         whenColumn.width = 130
         whenColumn.minWidth = 100
 
         let responseColumn = NSTableColumn(identifier: Column.response)
-        responseColumn.title = "Automatic Response"
+        responseColumn.title = String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.automatic_response.ff2ec0d5", defaultValue: "Automatic Response", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController.")
         responseColumn.width = 150
         responseColumn.minWidth = 100
 
         let alertColumn = NSTableColumn(identifier: Column.alert)
-        alertColumn.title = "Alert"
+        alertColumn.title = String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.alert.44a57b22", defaultValue: "Alert", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController.")
         alertColumn.width = 260
         // Kept small enough that alertMin + the two fixed columns + intercell gaps
         // fit within the panel's minimum content width, so no column is ever clipped.
@@ -138,7 +141,7 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
         tableView = table
 
         // Empty-state label centered over the table area.
-        let empty = label(withText: "No alerts are currently being suppressed.")
+        let empty = label(withText: String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.no_alerts_are_currently_being_suppressed.472b057f", defaultValue: "No alerts are currently being suppressed.", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController."))
         empty.alignment = .center
         empty.textColor = .secondaryLabelColor
         empty.frame = NSRect(x: margin,
@@ -151,7 +154,7 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
         emptyLabel = empty
 
         // Bottom buttons.
-        let doneButton = NSButton(title: "Done", target: self, action: #selector(done(_:)))
+        let doneButton = NSButton(title: String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.done.11a6767d", defaultValue: "Done", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController."), target: self, action: #selector(done(_:)))
         doneButton.bezelStyle = .rounded
         doneButton.keyEquivalent = "\r"
         doneButton.sizeToFit()
@@ -164,7 +167,7 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
         doneButton.autoresizingMask = [.minXMargin, .maxYMargin]
         content.addSubview(doneButton)
 
-        let unsuppress = NSButton(title: "Un-suppress", target: self, action: #selector(unsuppress(_:)))
+        let unsuppress = NSButton(title: String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.un_suppress.b5f0d794", defaultValue: "Un-suppress", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController."), target: self, action: #selector(unsuppress(_:)))
         unsuppress.bezelStyle = .rounded
         unsuppress.sizeToFit()
         var unsuppressFrame = unsuppress.frame
@@ -177,7 +180,7 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
         content.addSubview(unsuppress)
         unsuppressButton = unsuppress
 
-        let unsuppressAll = NSButton(title: "Un-suppress All", target: self, action: #selector(unsuppressAll(_:)))
+        let unsuppressAll = NSButton(title: String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.un_suppress_all.401cf23c", defaultValue: "Un-suppress All", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController."), target: self, action: #selector(unsuppressAll(_:)))
         unsuppressAll.bezelStyle = .rounded
         unsuppressAll.sizeToFit()
         var allFrame = unsuppressAll.frame
@@ -194,7 +197,7 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
         // the buttons. This is the transient mode that used to live in the View
         // menu: when on, remembered alerts are shown again so you can change your
         // response.
-        let checkbox = NSButton(checkboxWithTitle: "Always show alerts with remembered selections",
+        let checkbox = NSButton(checkboxWithTitle: String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.always_show_alerts_with_remembered_selections.a634cabb", defaultValue: "Always show alerts with remembered selections", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController."),
                                 target: self,
                                 action: #selector(toggleShowRemembered(_:)))
         checkbox.sizeToFit()
@@ -204,10 +207,7 @@ class iTermSuppressedAlertsWindowController: NSWindowController {
         checkFrame.origin.y = margin + buttonHeight + checkboxGap
         checkbox.frame = checkFrame
         checkbox.autoresizingMask = [.maxXMargin, .maxYMargin]
-        checkbox.toolTip = "When you check “Remember my choice” or “Suppress this message " +
-                           "permanently” in an alert, iTerm2 stops showing it and reuses your " +
-                           "saved response. Turn this on to show those alerts again so you can " +
-                           "see them or choose differently. It stays on until you turn it off."
+        checkbox.toolTip = String(localized: "ui.swift.appkit.itermsuppressedalertswindowcontroller.when_you_check_remember_my_choice_or_suppress.9516ec79", defaultValue: "When you check “Remember my choice” or “Suppress this message permanently” in an alert, iTerm2 stops showing it and reuses your saved response. Turn this on to show those alerts again so you can see them or choose differently. It stays on until you turn it off.", bundle: .main, comment: "User-facing text in iTermSuppressedAlertsWindowController.")
         content.addSubview(checkbox)
         showRememberedCheckbox = checkbox
     }

@@ -335,7 +335,7 @@ class AITermControllerObjC: NSObject, AITermControllerDelegate, iTermObject {
          window: NSWindow,
          handler: @escaping (iTermOr<NSString, NSError>) -> ()) {
         let pleaseWait = PleaseWaitWindow(owningWindow: window,
-                                          message: "Thinking…",
+                                          message: String(localized: "ui.swift.aiterm.aitermcontrollerobjc.thinking.a02f1cea", defaultValue: "Thinking…", bundle: .main, comment: "User-facing text in AITermControllerObjC."),
                                           image: NSImage.it_imageNamed("aiterm", for: AITermControllerObjC.self)!)
         self.pleaseWait = pleaseWait
         var cancel: (() -> ())?
@@ -472,7 +472,7 @@ class AITermControllerObjC: NSObject, AITermControllerDelegate, iTermObject {
             if let registration {
                 completion(registration)
             } else {
-                handler?(.failure(AIError("AI features are not enabled or the API key is missing.")))
+                handler?(.failure(AIError(String(localized: "ui.swift.aiterm.aitermcontrollerobjc.ai_features_are_not_enabled_or_the_api.923854a1", defaultValue: "AI features are not enabled or the API key is missing.", bundle: .main, comment: "User-facing AI registration error."))))
             }
         }
     }

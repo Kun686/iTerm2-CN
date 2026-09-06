@@ -34,9 +34,9 @@ NSString *const kRebuildColorPresetsMenuNotification = @"kRebuildColorPresetsMen
     if (!aDict) {
         RLog(@"Failed to parse dictionary");
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Import Failed.";
-        alert.informativeText = @"The selected file could not be read or did not contain a valid color scheme.";
-        [alert addButtonWithTitle:@"OK"];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.itermcolorpresets.import_failed.a9da6cb3", nil, NSBundle.mainBundle, @"Import Failed.", @"User-facing text in iTermColorPresets (importColorPresetFromFile:).");
+        alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.settings.itermcolorpresets.the_selected_file_could_not_be_read_or.b44c56dd", nil, NSBundle.mainBundle, @"The selected file could not be read or did not contain a valid color scheme.", @"User-facing text in iTermColorPresets (importColorPresetFromFile:).");
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcolorpresets.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermColorPresets (importColorPresetFromFile:).")];
         [alert runModal];
         return NO;
     } else {
@@ -45,10 +45,10 @@ NSString *const kRebuildColorPresetsMenuNotification = @"kRebuildColorPresetsMen
         if (dup) {
             DLog(@"Is a duplicate preset");
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Add duplicate color preset?";
-            alert.informativeText = [NSString stringWithFormat:@"The color preset “%@” is the same as the preset you're trying to add. Really add it?", dup];
-            [alert addButtonWithTitle:@"Cancel"];
-            [alert addButtonWithTitle:@"Add it anyway"];
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.itermcolorpresets.add_duplicate_color_preset.4fdefd2b", nil, NSBundle.mainBundle, @"Add duplicate color preset?", @"User-facing text in iTermColorPresets (importColorPresetFromFile:).");
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcolorpresets.the_color_preset_is_the_same_as_the.7b2e6f35", nil, NSBundle.mainBundle, @"The color preset “%@” is the same as the preset you're trying to add. Really add it?", @"User-facing text in iTermColorPresets (informativeText)."), dup];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcolorpresets.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermColorPresets (importColorPresetFromFile:).")];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcolorpresets.add_it_anyway.46e98368", nil, NSBundle.mainBundle, @"Add it anyway", @"User-facing text in iTermColorPresets (importColorPresetFromFile:).")];
             if ([alert runModal] == NSAlertFirstButtonReturn) {
                 DLog(@"User declined to install dup");
                 return NO;

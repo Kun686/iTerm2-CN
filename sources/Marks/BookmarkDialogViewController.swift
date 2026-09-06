@@ -13,9 +13,9 @@ class BookmarkDialogViewController: NSObject {
     static func show(window: NSWindow, defaultName: String, completion: @escaping (String) -> ()) {
         // Create the modal dialog
         let alert = NSAlert()
-        alert.messageText = "Enter Mark Name"
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.marks.bookmarkdialogviewcontroller.enter_mark_name.d336bce7", defaultValue: "Enter Mark Name", bundle: .main, comment: "User-facing text in BookmarkDialogViewController.")
+        alert.addButton(withTitle: String(localized: "ui.swift.marks.bookmarkdialogviewcontroller.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in BookmarkDialogViewController."))
+        alert.addButton(withTitle: String(localized: "ui.swift.marks.bookmarkdialogviewcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in BookmarkDialogViewController."))
 
         // Create the text field
         let textField = NSTextField(frame: NSRect(x: 0, y: 0, width: 300, height: 24))

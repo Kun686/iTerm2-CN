@@ -472,7 +472,7 @@ class ChatAgent {
             argsData = Data("{}".utf8)
         }
         let argsString = String(decoding: argsData, as: UTF8.self)
-        let markdown = OrchestrationToolProvider.humanDescription(
+        let markdown = OrchestrationToolProvider.stableEnglishDescription(
             forToolName: name, args: args)
         let payload = RemoteCommandPayload.external(ExternalRemoteCommand(
             llmMessage: llmMessage,
@@ -1128,12 +1128,12 @@ class ChatAgent {
             // resolved consent while this was queued.
             guard iTermUserDefaults.autoProvideConsent == .unknown else { return }
             let selection = iTermWarning.show(
-                withTitle: "iTerm2 can include this session’s visible screen and terminal state with every message you send in AI chats where you’ve allowed it, so the assistant sees what you see. You can turn this off any time from a chat’s permission settings.",
-                actions: ["Turn On", "Not Now"],
+                withTitle: String(localized: "ui.swift.aiterm.chatagent.iterm2_can_include_this_session_s_visible_screen.3108a4f7", defaultValue: "iTerm2 can include this session’s visible screen and terminal state with every message you send in AI chats where you’ve allowed it, so the assistant sees what you see. You can turn this off any time from a chat’s permission settings.", bundle: .main, comment: "User-facing text in ChatAgent."),
+                actions: [String(localized: "ui.swift.aiterm.chatagent.turn_on.1154e7fb", defaultValue: "Turn On", bundle: .main, comment: "User-facing text in ChatAgent."), String(localized: "ui.swift.aiterm.chatagent.not_now.ccb4c324", defaultValue: "Not Now", bundle: .main, comment: "User-facing text in ChatAgent.")],
                 accessory: nil,
                 identifier: nil,
                 silenceable: .kiTermWarningTypePersistent,
-                heading: "Share Terminal Contents Automatically?",
+                heading: String(localized: "ui.swift.aiterm.chatagent.share_terminal_contents_automatically.9f66d372", defaultValue: "Share Terminal Contents Automatically?", bundle: .main, comment: "User-facing text in ChatAgent."),
                 window: nil)
             iTermUserDefaults.autoProvideConsent = (selection == .kiTermWarningSelection0) ? .granted : .denied
         }

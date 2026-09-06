@@ -10,6 +10,12 @@
             "state": "new",
             "value": "AI completion enabled: all text sent to AI"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 补全已启用：所有文本将发送至 AI"
+          }
         }
       }
     },
@@ -22,16 +28,29 @@
             "state": "new",
             "value": "Press ⇧↩ to send."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按 ⇧↩ 发送。"
+          }
         }
       }
     },
     "zb3-gB-4Zi.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSButtonCell\"; title = \"AI\"; ObjectID = \"zb3-gB-4Zi\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "AI"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "AI"
           }
         }

@@ -38,11 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Fixed-size Spacer";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarfixedspacercomponent.fixed_size_spacer.b96e04d5", nil, NSBundle.mainBundle, @"Fixed-size Spacer", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Adds a fixed amount of space";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarfixedspacercomponent.adds_a_fixed_amount_of_space.7ca17be9", nil, NSBundle.mainBundle, @"Adds a fixed amount of space", @"Status bar component description.");
 }
 
 - (NSView *)statusBarComponentView {
@@ -65,13 +65,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {
     iTermStatusBarComponentKnob *backgroundColorKnob =
-    [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Color"
+    [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarfixedspacercomponent.color.6b73191a", nil, NSBundle.mainBundle, @"Color", @"Status bar component setting label.")
                                                       type:iTermStatusBarComponentKnobTypeColor
                                                placeholder:nil
                                               defaultValue:nil
                                                        key:iTermStatusBarSharedBackgroundColorKey];
     iTermStatusBarComponentKnob *widthKnob =
-    [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Width"
+    [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarfixedspacercomponent.width.3019947b", nil, NSBundle.mainBundle, @"Width", @"Status bar component setting label.")
                                                       type:iTermStatusBarComponentKnobTypeDouble
                                                placeholder:nil
                                               defaultValue:@5

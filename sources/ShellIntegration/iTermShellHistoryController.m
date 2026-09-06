@@ -363,18 +363,18 @@ static NSString *iTermShellIntegrationRemoteHostKey(id<VT100RemoteHostReading> s
         firstResponder = nil;
     }
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    alert.messageText = @"About Shell Integration";
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.shellintegration.itermshellhistorycontroller.about_shell_integration.1ccdc5f8", nil, NSBundle.mainBundle, @"About Shell Integration", @"User-facing text in iTermShellHistoryController (showInformationalMessageInWindow:).");
     alert.informativeText =
-        @"To use shell integration features such as "
+        NSLocalizedStringWithDefaultValue(@"ui.shellintegration.itermshellhistorycontroller.to_use_shell_integration_features_such_as_command.000c06cf", nil, NSBundle.mainBundle, @"To use shell integration features such as "
         @"Command History, "
         @"Recent Directories, "
         @"Select Output of Last Command, "
         @"and Automatic Profile Switching, "
-        @"your shell must be properly configured.";
-    [alert addButtonWithTitle:@"Learn More…"];
-    [alert addButtonWithTitle:@"OK"];
+        @"your shell must be properly configured.", @"User-facing text in iTermShellHistoryController (showInformationalMessageInWindow:).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.shellintegration.itermshellhistorycontroller.learn_more.c8886ff2", nil, NSBundle.mainBundle, @"Learn More…", @"User-facing text in iTermShellHistoryController (showInformationalMessageInWindow:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.shellintegration.itermshellhistorycontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermShellHistoryController (showInformationalMessageInWindow:).")];
     if (firstResponder) {
-        [alert addButtonWithTitle:@"Install Now"];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.shellintegration.itermshellhistorycontroller.install_now.b0e17c28", nil, NSBundle.mainBundle, @"Install Now", @"User-facing text in iTermShellHistoryController (showInformationalMessageInWindow:).")];
     }
     [alert beginSheetModalForWindow:window completionHandler:^(NSModalResponse returnCode) {
         switch (returnCode) {

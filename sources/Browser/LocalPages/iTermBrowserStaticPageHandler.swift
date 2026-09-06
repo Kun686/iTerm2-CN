@@ -114,7 +114,7 @@ class iTermBrowserStaticPageHandler: NSObject, iTermBrowserPageHandler {
         guard let data = htmlContent.data(using: .utf8) else {
             let error = NSError(domain: "iTermBrowserStaticPageHandler", 
                                code: -1, 
-                               userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"])
+                               userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserstaticpagehandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserStaticPageHandler.")])
             urlSchemeTask.didFailWithError(error)
             return
         }
@@ -165,8 +165,12 @@ class iTermBrowserStaticPageRegistry {
     private func setupDefaultPages() {
         // Register all static pages here
         // Note: welcome page is now handled by iTermBrowserWelcomePageHandler as it needs dynamic content
-        registerStaticPage(urlPath: "onboarding-intro", templateName: "onboarding-intro", substitutions: [:])
-        registerStaticPage(urlPath: "onboarding-features", templateName: "onboarding-features", substitutions: [:])
+        registerStaticPage(urlPath: "onboarding-intro",
+                           templateName: "onboarding-intro",
+                           substitutions: onboardingIntroSubstitutions())
+        registerStaticPage(urlPath: "onboarding-features",
+                           templateName: "onboarding-features",
+                           substitutions: onboardingFeaturesSubstitutions())
         #if ITERM_DEBUG
         let pages = [
             "dev",
@@ -185,6 +189,51 @@ class iTermBrowserStaticPageRegistry {
             registerStaticPage(urlPath: page, templateName: page, substitutions: [:])
         }
         #endif
+    }
+
+    private func onboardingIntroSubstitutions() -> [String: String] {
+        return [
+            "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+            "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.intro.page_title", defaultValue: "Welcome to iTerm2 Browser"),
+            "TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.intro.title", defaultValue: "Meet the iTerm2 Browser"),
+            "SUBTITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.intro.subtitle", defaultValue: "Terminal + Browser = Trowser"),
+            "PROFILE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.intro.profile.title", defaultValue: "What is a Browser Profile?"),
+            "PROFILE_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.intro.profile.description", defaultValue: "In iTerm2, profiles define how sessions look and behave. Terminal profiles open a shell. Browser profiles are different: they open a web browser instead."),
+            "HOW_IT_WORKS_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.intro.how_it_works.title", defaultValue: "How It Works"),
+            "HOW_IT_WORKS_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.intro.how_it_works.description", defaultValue: "When you create a new tab or split pane using a browser profile, you get a fully-featured web browser instead of a terminal. Mix and match browser and terminal panes however you like: they’re all part of the same iTerm2 experience."),
+            "LEARN_MORE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.intro.learn_more", defaultValue: "Learn What’s Possible")
+        ]
+    }
+
+    private func onboardingFeaturesSubstitutions() -> [String: String] {
+        return [
+            "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+            "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.page_title", defaultValue: "iTerm2 Browser - Features"),
+            "TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.title", defaultValue: "What Can It Do?"),
+            "SUBTITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.subtitle", defaultValue: "Power features and thoughtful limitations"),
+            "FEATURES_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.features_title", defaultValue: "Why You’ll Love It"),
+            "SSH_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.ssh.title", defaultValue: "SSH Integration Magic:"),
+            "SSH_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.ssh.description", defaultValue: "View files on remote servers in the browser when using SSH integration."),
+            "ITERM_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.iterm.title", defaultValue: "iTerm2 Superpowers:"),
+            "ITERM_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.iterm.description", defaultValue: "Hotkey windows, split panes, and custom key bindings but for the web."),
+            "ENGINEERS_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.engineers.title", defaultValue: "Built for Engineers:"),
+            "ENGINEERS_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.engineers.description", defaultValue: "Copy on select, broadcast input, advanced paste, and regex search simplify workflows."),
+            "PRODUCTIVITY_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.productivity.title", defaultValue: "Productivity Tools:"),
+            "PRODUCTIVITY_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.productivity.description", defaultValue: "Instant replay, global search, named marks, and the Composer bring iTerm2 features into the browser."),
+            "BASICS_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.basics.title", defaultValue: "Browser Basics:"),
+            "BASICS_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.basics.description", defaultValue: "Integrates with the iTerm2 password manager, Webkit adblock lists, and iTerm2’s AI chat feature."),
+            "LIMITS_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.limits_title", defaultValue: "Know the Limits"),
+            "BETA_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.beta.title", defaultValue: "Beta Alert:"),
+            "BETA_DESCRIPTION_BEFORE_LINK": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.beta.before_link", defaultValue: "This is the first release! Expect some turbulence. As always,"),
+            "FILE_AN_ISSUE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.beta.link", defaultValue: "file an issue"),
+            "BETA_DESCRIPTION_AFTER_LINK": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.beta.after_link", defaultValue: "if something goes wrong."),
+            "SECONDARY_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.secondary.title", defaultValue: "Secondary Browser:"),
+            "SECONDARY_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.secondary.description", defaultValue: "iTerm2 doesn’t expect to be your primary browser. The purpose is to complement the terminal and facilitate particular tasks that other browser can’t."),
+            "PLATFORM_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.platform.title", defaultValue: "Platform Constraints:"),
+            "PLATFORM_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.platform.description", defaultValue: "Some features like Passkeys and advanced ad blocking are unavailable due to Apple’s restrictions on web views."),
+            "BACK": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.back", defaultValue: "Back"),
+            "GET_STARTED": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.features.get_started", defaultValue: "Get Started")
+        ]
     }
     
     func registerStaticPage(urlPath: String, templateName: String, substitutions: [String: String] = [:]) {

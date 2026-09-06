@@ -10,10 +10,17 @@
             "state": "new",
             "value": "Cockpit"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工作台"
+          }
         }
       }
     },
     "oJo-mq-f5u.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"oJo-mq-f5u\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -22,16 +29,29 @@
             "state": "new",
             "value": "Text Cell"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
         }
       }
     },
     "pQf-uT-gG7.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"pQf-uT-gG7\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Table View Cell"
           }
         }

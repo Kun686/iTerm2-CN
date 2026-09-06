@@ -19,9 +19,9 @@ class iTermBrowserPluginFinder: NSObject, NSOpenSavePanelDelegate {
         panel.canChooseDirectories = true
         panel.canChooseFiles = true
         panel.allowsMultipleSelection = false
-        panel.title = "Select \(allowedBundleName)"
-        panel.prompt = "Choose"
-        panel.message = "Select \(allowedBundleName)."
+        panel.title = String(localized: "ui.swift.settings.itermbrowserpluginfinder.select_0.5d348f18", defaultValue: "Select \(allowedBundleName)", bundle: .main, comment: "User-facing text in iTermBrowserPluginFinder.")
+        panel.prompt = String(localized: "ui.swift.settings.itermbrowserpluginfinder.choose.c7f93783", defaultValue: "Choose", bundle: .main, comment: "User-facing text in iTermBrowserPluginFinder.")
+        panel.message = String(localized: "ui.swift.settings.itermbrowserpluginfinder.select_0.5fd5246b", defaultValue: "Select \(allowedBundleName).", bundle: .main, comment: "User-facing text in iTermBrowserPluginFinder.")
         panel.allowedContentTypes = [.bundle, .application, .applicationBundle]
         panel.begin { response in
             if response == .OK {
@@ -47,7 +47,7 @@ class iTermBrowserPluginFinder: NSObject, NSOpenSavePanelDelegate {
             throw NSError(domain: NSCocoaErrorDomain,
                           code: NSUserCancelledError,
                           userInfo: [NSLocalizedDescriptionKey:
-                                     "You must select \(allowedBundleName)"])
+                                     String(localized: "ui.swift.settings.itermbrowserpluginfinder.you_must_select_0.d648f864", defaultValue: "You must select \(allowedBundleName)", bundle: .main, comment: "User-facing text in iTermBrowserPluginFinder.")])
         }
     }
 }

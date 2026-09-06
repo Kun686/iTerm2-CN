@@ -2148,17 +2148,21 @@ ITERM_WEAKLY_REFERENCEABLE
     NSString *message;
     NSArray *sortedNames = [names countedInstancesStrings];
     if ([sortedNames count] == 1) {
-        message = [NSString stringWithFormat:@"%@ is running %@.", identifier, [sortedNames objectAtIndex:0]];
+        message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_running_one_job", nil, NSBundle.mainBundle, @"%1$@ is running %2$@.", @"Close confirmation with one running job."), identifier, [sortedNames objectAtIndex:0]];
     } else if ([sortedNames count] > 1 && [sortedNames count] <= 10) {
-        message = [NSString stringWithFormat:@"%@ is running the following jobs: %@.", identifier, [sortedNames componentsJoinedWithOxfordComma]];
+        message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_running_jobs", nil, NSBundle.mainBundle, @"%1$@ is running the following jobs: %2$@.", @"Close confirmation with multiple running jobs."), identifier, [sortedNames componentsJoinedWithOxfordComma]];
     } else if ([sortedNames count] > 10) {
-        message = [NSString stringWithFormat:@"%@ is running the following jobs: %@, plus %ld %@.",
+        message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_running_many_jobs",
+                                                                                nil,
+                                                                                NSBundle.mainBundle,
+                                                                                @"%1$@ is running the following jobs: %2$@, plus %3$ld %4$@.",
+                                                                                @"Close confirmation with more than ten running jobs."),
                    identifier,
                    [sortedNames componentsJoinedWithOxfordComma],
                    (long)[sortedNames count] - 10,
-                   [sortedNames count] == 11 ? @"other" : @"others"];
+                   [sortedNames count] == 11 ? NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.other_job", nil, NSBundle.mainBundle, @"other", @"Singular suffix in a running-job count.") : NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.other_jobs", nil, NSBundle.mainBundle, @"others", @"Plural suffix in a running-job count.")];
     } else {
-        message = [NSString stringWithFormat:@"%@ will be closed.", identifier];
+        message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.will_be_closed", nil, NSBundle.mainBundle, @"%@ will be closed.", @"Close confirmation with no running jobs."), identifier];
     }
     if (additionalMessage.length > 0) {
         message = [NSString stringWithFormat:@"%@\n\n%@", message, additionalMessage];
@@ -2167,10 +2171,10 @@ ITERM_WEAKLY_REFERENCEABLE
     [[self retain] autorelease];
 
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    alert.messageText = [NSString stringWithFormat:@"Close %@?", genericName];
+    alert.messageText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close.283705eb", nil, NSBundle.mainBundle, @"Close %@?", @"User-facing text in PseudoTerminal (messageText)."), genericName];
     alert.informativeText = message;
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in PseudoTerminal (confirmCloseForSessions:identifier:genericName:additionalMessage:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in PseudoTerminal (confirmCloseForSessions:identifier:genericName:additionalMessage:).")];
     return [alert runSheetModalForWindow:self.window] == NSAlertFirstButtonReturn;
 }
 
@@ -2203,7 +2207,9 @@ ITERM_WEAKLY_REFERENCEABLE
         const BOOL anyIsLocked = [sessions anyWithBlock:^BOOL(PTYSession *anObject) {
             return anObject.locked;
         }];
-        NSString *const pinnedPrefix = aTab.isPinned ? @"pinned " : @"";
+        NSString *const pinnedPrefix = aTab.isPinned
+            ? NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.pinned.d33d4eac", nil, NSBundle.mainBundle, @"pinned ", @"Adjective prefix for a pinned tab in a close-confirmation message.")
+            : @"";
         // When numClosing is 0 (e.g., closing a pinned tab whose sessions all
         // exited) fall back to the tab's pane count to pick singular vs plural
         // wording.
@@ -2211,16 +2217,16 @@ ITERM_WEAKLY_REFERENCEABLE
         NSString *identifier;
         if (singular) {
             identifier = anyIsLocked
-                ? [NSString stringWithFormat:@"This %@tab (with a locked session)", pinnedPrefix]
-                : [NSString stringWithFormat:@"This %@tab", pinnedPrefix];
+                ? [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.this_tab_with_a_locked_session.f31cb887", nil, NSBundle.mainBundle, @"This %@tab (with a locked session)", @"Close-confirmation subject for a single-pane tab containing a locked session; the placeholder is an optional pinned adjective."), pinnedPrefix]
+                : [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.this_tab.44706830", nil, NSBundle.mainBundle, @"This %@tab", @"Close-confirmation subject for a single-pane tab; the placeholder is an optional pinned adjective."), pinnedPrefix];
         } else {
             identifier = anyIsLocked
-                ? [NSString stringWithFormat:@"This %@multi-pane tab (with locked sessions)", pinnedPrefix]
-                : [NSString stringWithFormat:@"This %@multi-pane tab", pinnedPrefix];
+                ? [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.this_multi_pane_tab_with_locked_sessions.4f90337c", nil, NSBundle.mainBundle, @"This %@multi-pane tab (with locked sessions)", @"Close-confirmation subject for a multi-pane tab containing locked sessions; the placeholder is an optional pinned adjective."), pinnedPrefix]
+                : [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.this_multi_pane_tab.e485d17f", nil, NSBundle.mainBundle, @"This %@multi-pane tab", @"Close-confirmation subject for a multi-pane tab; the placeholder is an optional pinned adjective."), pinnedPrefix];
         }
         return [self confirmCloseForSessions:sessions
                                   identifier:identifier
-                                 genericName:[NSString stringWithFormat:@"tab #%d",
+                                 genericName:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.tab_d.a04aa5a4", nil, NSBundle.mainBundle, @"tab #%d", @"Generic numbered tab name in a close-confirmation message."),
                                               [aTab tabNumber]]
                            additionalMessage:[iTermWorkgroupInstance closeCascadeWarningForSessions:sessions]];
     }
@@ -2294,9 +2300,13 @@ ITERM_WEAKLY_REFERENCEABLE
 
 - (void)killOrHideTmuxTab:(PTYTab *)aTab {
     iTermWarningSelection selection =
-        [iTermWarning showWarningWithTitle:@"Kill tmux window, terminating its jobs, or hide it? "
-                                           @"Hidden windows may be restored from the tmux dashboard."
-                                   actions:@[ @"Hide", @"Cancel", @"Kill" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.kill_tmux_window_terminating_its_jobs_or_hide.b76eee75",
+                                                                            nil,
+                                                                            NSBundle.mainBundle,
+                                                                            @"Kill tmux window, terminating its jobs, or hide it? "
+                                           @"Hidden windows may be restored from the tmux dashboard.",
+                                                                            @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.hide.ac20a57b", nil, NSBundle.mainBundle, @"Hide", @"User-facing action label in PseudoTerminal (actions)."), NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in PseudoTerminal (actions)."), NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.kill.ee72959b", nil, NSBundle.mainBundle, @"Kill", @"User-facing action label in PseudoTerminal (actions).") ]
                              actionMapping:@[ @(kiTermWarningSelection0), @(kiTermWarningSelection2), @(kiTermWarningSelection1)]
                                  accessory:nil
                                 identifier:@"ClosingTmuxTabKillsTmuxWindows"
@@ -2572,8 +2582,10 @@ ITERM_WEAKLY_REFERENCEABLE
         okToClose = YES;
     } else {
       okToClose = [self confirmCloseForSessions:[NSArray arrayWithObject:aSession]
-                                     identifier:aSession.locked ? @"This locked session" : @"This session"
-                                    genericName:[NSString stringWithFormat:@"session \"%@\"",
+                                     identifier:aSession.locked
+                                         ? NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.this_locked_session.0cf035ca", nil, NSBundle.mainBundle, @"This locked session", @"Close-confirmation subject for a locked session.")
+                                         : NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.this_session.6da6530a", nil, NSBundle.mainBundle, @"This session", @"Close-confirmation subject for a session.")
+                                    genericName:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.session.af961d65", nil, NSBundle.mainBundle, @"session \"%@\"", @"Named session in a close-confirmation message."),
                                                     [[aSession name] removingHTMLFromTabTitleIfNeeded]]
                               additionalMessage:[iTermWorkgroupInstance closeCascadeWarningForSessions:@[aSession]]];
     }
@@ -2672,17 +2684,17 @@ ITERM_WEAKLY_REFERENCEABLE
     if (aSession.exited) {
         [aSession restartSession];
     } else {
-        iTermWarningAction *cancel = [iTermWarningAction warningActionWithLabel:@"Cancel" block:nil];
+        iTermWarningAction *cancel = [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in PseudoTerminal (warningActionWithLabel).") block:nil];
         iTermWarningAction *ok =
-            [iTermWarningAction warningActionWithLabel:@"OK"
+            [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in PseudoTerminal (warningActionWithLabel).")
                                                  block:^(iTermWarningSelection selection) {
                                                      if (selection == kiTermWarningSelection0) {
                                                          [aSession restartSession];
                                                      }
                                                  }];
         iTermWarning *warning = [[[iTermWarning alloc] init] autorelease];
-        warning.heading = @"Restart session?";
-        warning.title = @"Running jobs will be killed.";
+        warning.heading = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.restart_session.86e628e4", nil, NSBundle.mainBundle, @"Restart session?", @"User-facing text in PseudoTerminal (heading).");
+        warning.title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.running_jobs_will_be_killed.b3674cfe", nil, NSBundle.mainBundle, @"Running jobs will be killed.", @"User-facing text in PseudoTerminal (title).");
         warning.warningActions = @[ ok, cancel ];
         warning.identifier = @"NoSyncSuppressRestartSessionConfirmationAlert";
         warning.warningType = kiTermWarningTypePermanentlySilenceable;
@@ -3648,22 +3660,26 @@ ITERM_WEAKLY_REFERENCEABLE
 
 - (IBAction)editWindowTitle:(id)sender {
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    alert.messageText = @"Set Window Title";
-    alert.informativeText = @"If this is empty, the window takes the active session’s title. Variables and function calls enclosed in \\(…) will be replaced with their evaluation. This interpolated string is evaluated in the window’s context.";
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.set_window_title.d19c45a2", nil, NSBundle.mainBundle, @"Set Window Title", @"User-facing text in PseudoTerminal (editWindowTitle:).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.if_this_is_empty_the_window_takes_the.b0e63e62", nil, NSBundle.mainBundle, @"If this is empty, the window takes the active session’s title. Variables and function calls enclosed in \\(…) will be replaced with their evaluation. This interpolated string is evaluated in the window’s context.", @"User-facing text in PseudoTerminal (editWindowTitle:).");
     NSTextField *titleTextField = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 400, 24 * 3)] autorelease];
     iTermFunctionCallTextFieldDelegate *delegate;
     delegate = [[[iTermFunctionCallTextFieldDelegate alloc] initWithPathSource:[iTermVariableHistory pathSourceForContext:iTermVariablesSuggestionContextWindow]
                                                                    passthrough:nil
                                                                  functionsOnly:NO] autorelease];
     delegate.canWarnAboutContextMistake = YES;
-    delegate.contextMistakeText = @"This interpolated string is evaluated in the window’s context, not the session’s context. To access variables in the current session, use currentTab.currentSession.sessionVariableNameHere";
+    delegate.contextMistakeText = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.window_context_mistake_help",
+                                                                     nil,
+                                                                     NSBundle.mainBundle,
+                                                                     @"This interpolated string is evaluated in the window’s context, not the session’s context. To access variables in the current session, use currentTab.currentSession.sessionVariableNameHere",
+                                                                     @"Help shown when a session variable is used in a window title expression.");
     titleTextField.delegate = delegate;
     titleTextField.editable = YES;
     titleTextField.selectable = YES;
     titleTextField.stringValue = [self.scope valueForVariableName:iTermVariableKeyWindowTitleOverrideFormat] ?: @"";
     alert.accessoryView = titleTextField;
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in PseudoTerminal (editWindowTitle:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in PseudoTerminal (editWindowTitle:).")];
     BOOL isDark;
     if ((iTermPreferencesTabStyle)[iTermPreferences intForKey:kPreferenceKeyTabStyle] == TAB_STYLE_MINIMAL) {
         isDark = self.minimalTabStyleBackgroundColor.isDark;
@@ -4626,16 +4642,16 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     }
     NSString *title = nil;
     if (n == 1) {
-        title = @"Kill window and its jobs, hide window from view, or detach from tmux session?\n\n"
-                @"Hidden windows may be restored from the tmux dashboard.";
+        title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.kill_window_and_its_jobs_hide_window_from.e9cdba58", nil, NSBundle.mainBundle, @"Kill window and its jobs, hide window from view, or detach from tmux session?\n\n"
+                @"Hidden windows may be restored from the tmux dashboard.", @"User-facing tmux window close warning.");
     } else if (n > 1) {
-        title = @"Kill all tmux windows and their jobs, hide windows from view, or detach from tmux session?\n\n"
-                @"Hidden windows may be restored from the tmux dashboard.";
+        title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.kill_all_tmux_windows_and_their_jobs_hide.a69fad36", nil, NSBundle.mainBundle, @"Kill all tmux windows and their jobs, hide windows from view, or detach from tmux session?\n\n"
+                @"Hidden windows may be restored from the tmux dashboard.", @"User-facing tmux window close warning.");
     }
     if (title) {
         iTermWarningSelection selection =
             [iTermWarning showWarningWithTitle:title
-                                       actions:@[ @"Hide", @"Detach tmux Session", @"Kill", @"Cancel" ]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.hide.ac20a57b", nil, NSBundle.mainBundle, @"Hide", @"User-facing action label in PseudoTerminal (actions)."), NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.detach_tmux_session.5f1e6ef4", nil, NSBundle.mainBundle, @"Detach tmux Session", @"User-facing action label in PseudoTerminal (actions)."), NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.kill.ee72959b", nil, NSBundle.mainBundle, @"Kill", @"User-facing action label in PseudoTerminal (actions)."), NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in PseudoTerminal (actions).") ]
                                     identifier:@"ClosingTmuxWindowKillsTmuxWindows"
                                    silenceable:kiTermWarningTypePermanentlySilenceable
                                         window:self.window];
@@ -6976,27 +6992,30 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     }
 
     // Bookmarks
-    [theMenu insertItemWithTitle:NSLocalizedStringFromTableInBundle(@"New Window",
-                                                                    @"iTerm",
-                                                                    [NSBundle bundleForClass:[self class]],
-                                                                    @"Context menu")
+    [theMenu insertItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.new_window",
+                                                                       nil,
+                                                                       [NSBundle bundleForClass:[self class]],
+                                                                       @"New Window",
+                                                                       @"Context menu item")
                           action:nil
                    keyEquivalent:@""
                          atIndex:nextIndex++];
-    [theMenu insertItemWithTitle:NSLocalizedStringFromTableInBundle(@"New Tab",
-                                                                    @"iTerm",
-                                                                    [NSBundle bundleForClass:[self class]],
-                                                                    @"Context menu")
+    [theMenu insertItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.new_tab",
+                                                                       nil,
+                                                                       [NSBundle bundleForClass:[self class]],
+                                                                       @"New Tab",
+                                                                       @"Context menu item")
                           action:nil
                    keyEquivalent:@""
                          atIndex:nextIndex++];
 
     // Create a menu with a submenu to navigate between tabs if there are more than one
     if ([_contentView.tabView numberOfTabViewItems] > 1) {
-        [theMenu insertItemWithTitle:NSLocalizedStringFromTableInBundle(@"Select",
-                                                                        @"iTerm",
-                                                                        [NSBundle bundleForClass:[self class]],
-                                                                        @"Context menu")
+        [theMenu insertItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.select.2a78025d",
+                                                                       nil,
+                                                                       [NSBundle bundleForClass:[self class]],
+                                                                       @"Select",
+                                                                       @"Context menu item")
                               action:nil
                        keyEquivalent:@""
                              atIndex:nextIndex];
@@ -8043,7 +8062,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
             [tabMenu addItem:item];
         }
 
-        [rootMenu addItemWithTitle:@"Select"
+        [rootMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.select.2a78025d", nil, NSBundle.mainBundle, @"Select", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                             action:nil
                      keyEquivalent:@""];
         [rootMenu setSubmenu:tabMenu forItem:[rootMenu itemAtIndex:0]];
@@ -8051,19 +8070,19 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
    }
 
     // add tasks
-    item = [[[NSMenuItem alloc] initWithTitle:@"New Tab to the Right"
+    item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.new_tab_to_the_right.4fee784a", nil, NSBundle.mainBundle, @"New Tab to the Right", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                                        action:@selector(newTabToTheRight:)
                                 keyEquivalent:@""] autorelease];
     [item setRepresentedObject:tabViewItem];
     [rootMenu addItem:item];
 
-    item = [[[NSMenuItem alloc] initWithTitle:@"Edit Session…"
+    item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.edit_session.50253de7", nil, NSBundle.mainBundle, @"Edit Session…", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                                        action:@selector(editSession:)
                                 keyEquivalent:@""] autorelease];
     [item setRepresentedObject:tabViewItem];
     [rootMenu addItem:item];
 
-    item = [[[NSMenuItem alloc] initWithTitle:@"Close Tab"
+    item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_tab.f271892d", nil, NSBundle.mainBundle, @"Close Tab", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                                        action:@selector(closeTabContextualMenuAction:)
                                 keyEquivalent:@""] autorelease];
     [item setRepresentedObject:tabViewItem];
@@ -8073,21 +8092,21 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
 
     PTYTab *theTab = [tabViewItem identifier];
     if (![theTab isTmuxTab]) {
-        item = [[[NSMenuItem alloc] initWithTitle:@"Duplicate Tab"
+        item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.duplicate_tab.57d3ddba", nil, NSBundle.mainBundle, @"Duplicate Tab", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                                            action:@selector(duplicateTab:)
                                     keyEquivalent:@""] autorelease];
         [item setRepresentedObject:tabViewItem];
         [rootMenu addItem:item];
     }
 
-    item = [[[NSMenuItem alloc] initWithTitle:@"Save Tab as Window Arrangement"
+    item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.save_tab_as_window_arrangement.f0e3dcda", nil, NSBundle.mainBundle, @"Save Tab as Window Arrangement", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                                        action:@selector(saveTabAsWindowArrangement:)
                                 keyEquivalent:@""] autorelease];
     [item setRepresentedObject:tabViewItem];
     [rootMenu addItem:item];
 
     if ([_contentView.tabView numberOfTabViewItems] > 1 && !theTab.isPinned) {
-        item = [[[NSMenuItem alloc] initWithTitle:@"Move to New Window"
+        item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.move_to_new_window.2adf5c1e", nil, NSBundle.mainBundle, @"Move to New Window", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                                            action:@selector(moveTabToNewWindowContextualMenuAction:)
                                     keyEquivalent:@""] autorelease];
         [item setRepresentedObject:tabViewItem];
@@ -8113,7 +8132,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
         }
 
         if (hasUnpinnedOther) {
-            item = [[[NSMenuItem alloc] initWithTitle:@"Close Other Tabs"
+            item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_other_tabs.29c8d716", nil, NSBundle.mainBundle, @"Close Other Tabs", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                                                action:@selector(closeOtherTabs:)
                                         keyEquivalent:@""] autorelease];
             [item setRepresentedObject:tabViewItem];
@@ -8124,9 +8143,9 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
             NSString *title;
             const PSMTabPosition tabPosition = [iTermPreferences intForKey:kPreferenceKeyTabPosition];
             if (tabPosition == PSMTab_LeftTab || tabPosition == PSMTab_RightTab) {
-                title = @"Close Tabs Below";
+                title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_tabs_below.f803eb1c", nil, NSBundle.mainBundle, @"Close Tabs Below", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).");
             } else {
-                title = @"Close Tabs to the Right";
+                title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_tabs_to_the_right.dc0c3647", nil, NSBundle.mainBundle, @"Close Tabs to the Right", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).");
             }
             item = [[[NSMenuItem alloc] initWithTitle:title
                                                action:@selector(closeTabsToTheRight:)
@@ -8139,7 +8158,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     // pin/unpin tab (not available for tmux tabs)
     if (![theTab isTmuxTab]) {
         [rootMenu addItem:[NSMenuItem separatorItem]];
-        NSString *pinTitle = theTab.isPinned ? @"Unpin Tab" : @"Pin Tab";
+        NSString *pinTitle = theTab.isPinned ? NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.unpin_tab.6d391af9", nil, NSBundle.mainBundle, @"Unpin Tab", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).") : NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.pin_tab.223957f7", nil, NSBundle.mainBundle, @"Pin Tab", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).");
         item = [[[NSMenuItem alloc] initWithTitle:pinTitle
                                            action:@selector(togglePinTab:)
                                     keyEquivalent:@""] autorelease];
@@ -8155,7 +8174,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     PTYTab *tab = [tabViewItem identifier];
     labelTrackView.currentColor = tab.activeSession.tabColor;
     labelTrackView.delegate = self;
-    item = [[[NSMenuItem alloc] initWithTitle:@"Tab Color"
+    item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.tab_color.d48787aa", nil, NSBundle.mainBundle, @"Tab Color", @"User-facing text in PseudoTerminal (tabView:menuForTabViewItem:).")
                                        action:@selector(changeTabColorToMenuAction:)
                                 keyEquivalent:@""] autorelease];
     [item setView:labelTrackView];
@@ -8406,21 +8425,25 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
 
 - (void)openEditTabTitleWindow {
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    alert.messageText = @"Set Tab Title";
-    alert.informativeText = @"If this is empty, the tab takes the active session’s title. Variables and function calls enclosed in \\(…) will be replaced with their evaluation. This interpolated string is evaluated in the tab’s context.";
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.set_tab_title.82067e2f", nil, NSBundle.mainBundle, @"Set Tab Title", @"User-facing text in PseudoTerminal (openEditTabTitleWindow).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.if_this_is_empty_the_tab_takes_the.76bd0d7b", nil, NSBundle.mainBundle, @"If this is empty, the tab takes the active session’s title. Variables and function calls enclosed in \\(…) will be replaced with their evaluation. This interpolated string is evaluated in the tab’s context.", @"User-facing text in PseudoTerminal (openEditTabTitleWindow).");
     NSTextField *titleTextField = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 400, 24 * 3)] autorelease];
     _currentTabTitleTextFieldDelegate = [[iTermFunctionCallTextFieldDelegate alloc] initWithPathSource:[iTermVariableHistory pathSourceForContext:iTermVariablesSuggestionContextTab]
                                                                                            passthrough:nil
                                                                                          functionsOnly:NO];
     titleTextField.delegate = _currentTabTitleTextFieldDelegate;
     _currentTabTitleTextFieldDelegate.canWarnAboutContextMistake = YES;
-    _currentTabTitleTextFieldDelegate.contextMistakeText = @"This interpolated string is evaluated in the tab’s context, not the session’s context. To access variables in the current session, use currentSession.sessionVariableNameHere";
+    _currentTabTitleTextFieldDelegate.contextMistakeText = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.tab_context_mistake_help",
+                                                                                              nil,
+                                                                                              NSBundle.mainBundle,
+                                                                                              @"This interpolated string is evaluated in the tab’s context, not the session’s context. To access variables in the current session, use currentSession.sessionVariableNameHere",
+                                                                                              @"Help shown when a session variable is used in a tab title expression.");
     titleTextField.editable = YES;
     titleTextField.selectable = YES;
     titleTextField.stringValue = self.currentTab.variablesScope.tabTitleOverrideFormat ?: @"";
     alert.accessoryView = titleTextField;
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in PseudoTerminal (openEditTabTitleWindow).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in PseudoTerminal (openEditTabTitleWindow).")];
     BOOL isDark;
     if ((iTermPreferencesTabStyle)[iTermPreferences intForKey:kPreferenceKeyTabStyle] == TAB_STYLE_MINIMAL) {
         isDark = self.minimalTabStyleBackgroundColor.isDark;
@@ -8567,7 +8590,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     }
     NSMenu *groupMenu = [[[NSMenu alloc] initWithTitle:@""] autorelease];
 
-    NSMenuItem *newGroupItem = [[[NSMenuItem alloc] initWithTitle:@"New Group…"
+    NSMenuItem *newGroupItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.new_group.c1774a4c", nil, NSBundle.mainBundle, @"New Group…", @"User-facing text in PseudoTerminal (addTabGroupMenuItemsToMenu:forTabViewItem:).")
                                                            action:@selector(addTabToNewGroup:)
                                                     keyEquivalent:@""] autorelease];
     newGroupItem.representedObject = tabViewItem;
@@ -8578,7 +8601,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     if (groups.count > 0) {
         [groupMenu addItem:[NSMenuItem separatorItem]];
         for (iTermTabGroup *group in groups) {
-            NSString *title = group.name.length > 0 ? group.name : @"Untitled";
+            NSString *title = group.name.length > 0 ? group.name : NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.untitled.f59ab8d1", nil, NSBundle.mainBundle, @"Untitled", @"User-facing text in PseudoTerminal (addTabGroupMenuItemsToMenu:forTabViewItem:).");
             NSMenuItem *gi = [[[NSMenuItem alloc] initWithTitle:title
                                                          action:@selector(addTabToExistingGroup:)
                                                   keyEquivalent:@""] autorelease];
@@ -8590,21 +8613,21 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
         }
     }
 
-    NSMenuItem *groupRoot = [[[NSMenuItem alloc] initWithTitle:@"Add Tab to Group"
+    NSMenuItem *groupRoot = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.add_tab_to_group.0786e584", nil, NSBundle.mainBundle, @"Add Tab to Group", @"User-facing text in PseudoTerminal (addTabGroupMenuItemsToMenu:forTabViewItem:).")
                                                         action:nil
                                                  keyEquivalent:@""] autorelease];
     [rootMenu addItem:groupRoot];
     [rootMenu setSubmenu:groupMenu forItem:groupRoot];
 
     if (theTab.tabGroupID) {
-        NSMenuItem *renameItem = [[[NSMenuItem alloc] initWithTitle:@"Rename Group…"
+        NSMenuItem *renameItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.rename_group.949fe9bb", nil, NSBundle.mainBundle, @"Rename Group…", @"User-facing text in PseudoTerminal (addTabGroupMenuItemsToMenu:forTabViewItem:).")
                                                             action:@selector(renameTabGroup:)
                                                      keyEquivalent:@""] autorelease];
         renameItem.representedObject = tabViewItem;
         renameItem.target = self;
         [rootMenu addItem:renameItem];
 
-        NSMenuItem *removeItem = [[[NSMenuItem alloc] initWithTitle:@"Remove Tab from Group"
+        NSMenuItem *removeItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.remove_tab_from_group.ed919fe8", nil, NSBundle.mainBundle, @"Remove Tab from Group", @"User-facing text in PseudoTerminal (addTabGroupMenuItemsToMenu:forTabViewItem:).")
                                                              action:@selector(removeTabFromGroup:)
                                                       keyEquivalent:@""] autorelease];
         removeItem.representedObject = tabViewItem;
@@ -8622,8 +8645,8 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     if (!theTab) {
         return;
     }
-    NSString *defaultName = label.length > 0 ? label : @"Group";
-    NSString *name = [self promptForTabGroupName:defaultName title:@"New Tab Group"];
+    NSString *defaultName = label.length > 0 ? label : NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.group.34ca0e76", nil, NSBundle.mainBundle, @"Group", @"Default name for a new tab group.");
+    NSString *name = [self promptForTabGroupName:defaultName title:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.new_tab_group.06fc7c75", nil, NSBundle.mainBundle, @"New Tab Group", @"User-facing text in PseudoTerminal (title).")];
     if (!name) {
         return;  // user cancelled
     }
@@ -8661,9 +8684,9 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
 - (NSString *)promptForTabGroupName:(NSString *)initialValue title:(NSString *)title {
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     alert.messageText = title;
-    alert.informativeText = @"Enter a name for this tab group.";
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.enter_a_name_for_this_tab_group.b46a8b60", nil, NSBundle.mainBundle, @"Enter a name for this tab group.", @"User-facing text in PseudoTerminal (promptForTabGroupName:title:).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in PseudoTerminal (promptForTabGroupName:title:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in PseudoTerminal (promptForTabGroupName:title:).")];
     NSTextField *field = [[[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 240, 24)] autorelease];
     // Tab labels come with a trailing newline; trim so it doesn't seed the field
     // (or the resulting group name) with stray whitespace.
@@ -9093,22 +9116,22 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     menu.autoenablesItems = NO;  // contextual actions are always applicable
     const BOOL collapsed = [self tabsInGroup:groupID].firstObject.tabGroupCollapsed;
     NSArray<NSArray<NSString *> *> *specs = @[
-        @[@"New Tab in Group", @"newTabInGroup:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.new_tab_in_group.82c4b493", nil, NSBundle.mainBundle, @"New Tab in Group", @"User-facing tab group context menu item."), @"newTabInGroup:"],
         @[@"-", @""],
-        collapsed ? @[@"Expand Group", @"expandTabGroupFromMenu:"]
-                  : @[@"Collapse Group", @"collapseTabGroupFromMenu:"],
+        collapsed ? @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.expand_group.ed520c2c", nil, NSBundle.mainBundle, @"Expand Group", @"User-facing tab group context menu item."), @"expandTabGroupFromMenu:"]
+                  : @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.collapse_group.35044c06", nil, NSBundle.mainBundle, @"Collapse Group", @"User-facing tab group context menu item."), @"collapseTabGroupFromMenu:"],
         @[@"-", @""],
-        @[@"Rename Group…", @"renameTabGroupFromMenu:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.rename_group.949fe9bb", nil, NSBundle.mainBundle, @"Rename Group…", @"User-facing tab group context menu item."), @"renameTabGroupFromMenu:"],
         @[@"-", @""],
-        @[@"Duplicate Group", @"duplicateTabGroup:"],
-        @[@"Move Group to New Window", @"moveTabGroupToNewWindow:"],
-        @[@"Save Group as Window Arrangement…", @"saveTabGroupAsWindowArrangement:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.duplicate_group.85d2f64a", nil, NSBundle.mainBundle, @"Duplicate Group", @"User-facing tab group context menu item."), @"duplicateTabGroup:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.move_group_to_new_window.b227a3c4", nil, NSBundle.mainBundle, @"Move Group to New Window", @"User-facing tab group context menu item."), @"moveTabGroupToNewWindow:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.save_group_as_window_arrangement.3ecae0c1", nil, NSBundle.mainBundle, @"Save Group as Window Arrangement…", @"User-facing tab group context menu item."), @"saveTabGroupAsWindowArrangement:"],
         @[@"-", @""],
-        @[@"Remove All Tabs from Group", @"ungroupTabGroup:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.remove_all_tabs_from_group.7e7ddea9", nil, NSBundle.mainBundle, @"Remove All Tabs from Group", @"User-facing tab group context menu item."), @"ungroupTabGroup:"],
         @[@"-", @""],
-        @[@"Close Group", @"closeTabGroup:"],
-        @[@"Close Other Tabs", @"closeTabsOutsideGroup:"],
-        @[@"Close Tabs to the Right", @"closeTabsRightOfGroup:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_group.f0ef78be", nil, NSBundle.mainBundle, @"Close Group", @"User-facing tab group context menu item."), @"closeTabGroup:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_other_tabs.29c8d716", nil, NSBundle.mainBundle, @"Close Other Tabs", @"User-facing tab group context menu item."), @"closeTabsOutsideGroup:"],
+        @[NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_tabs_to_the_right.dc0c3647", nil, NSBundle.mainBundle, @"Close Tabs to the Right", @"User-facing tab group context menu item."), @"closeTabsRightOfGroup:"],
     ];
     for (NSArray<NSString *> *spec in specs) {
         if ([spec[0] isEqualToString:@"-"]) {
@@ -9146,7 +9169,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     // created before this fix) makes the swatch view throw in -colorSpace.
     colorView.currentColor = [members.firstObject.tabGroupColor it_colorInDefaultColorSpace];
     colorView.delegate = self;
-    NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:@"Group Color"
+    NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.group_color.baeb2e51", nil, NSBundle.mainBundle, @"Group Color", @"User-facing text in PseudoTerminal (addTabGroupColorItemToMenu:forGroupID:).")
                                                   action:@selector(changeTabGroupColorToMenuAction:)
                                            keyEquivalent:@""] autorelease];
     item.view = colorView;
@@ -9403,7 +9426,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     if (members.count == 0) {
         return;
     }
-    NSString *name = [self promptForTabGroupName:(members.firstObject.tabGroupName ?: @"") title:@"Rename Tab Group"];
+    NSString *name = [self promptForTabGroupName:(members.firstObject.tabGroupName ?: @"") title:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.rename_tab_group.da3068be", nil, NSBundle.mainBundle, @"Rename Tab Group", @"User-facing text in PseudoTerminal (promptForTabGroupName:title:).")];
     if (!name) {
         return;  // cancelled
     }
@@ -9503,7 +9526,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
 - (void)closeTabGroup:(id)sender {
     // Close every member, including pinned ones -- the pinned tabs are the group.
     [self closeTabs:[self tabsInGroup:[sender representedObject]]
-        confirmWith:@"Close this tab group?"
+        confirmWith:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_this_tab_group.f3ec000d", nil, NSBundle.mainBundle, @"Close this tab group?", @"Confirmation before closing a tab group.")
       skippingPinned:NO];
 }
 
@@ -9515,7 +9538,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
             [others addObject:aTab];
         }
     }
-    [self closeTabs:others confirmWith:@"Close all tabs outside this group?" skippingPinned:YES];
+    [self closeTabs:others confirmWith:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_all_tabs_outside_this_group.0593055e", nil, NSBundle.mainBundle, @"Close all tabs outside this group?", @"Confirmation before closing tabs outside a tab group.") skippingPinned:YES];
 }
 
 - (void)closeTabsRightOfGroup:(id)sender {
@@ -9530,7 +9553,7 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
         return;
     }
     NSArray<PTYTab *> *toRight = [tabs subarrayWithRange:NSMakeRange(lastIndex + 1, tabs.count - lastIndex - 1)];
-    [self closeTabs:toRight confirmWith:@"Close all tabs to the right of this group?" skippingPinned:YES];
+    [self closeTabs:toRight confirmWith:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_all_tabs_to_the_right_of_this_group.20e18ce7", nil, NSBundle.mainBundle, @"Close all tabs to the right of this group?", @"Confirmation before closing tabs to the right of a tab group.") skippingPinned:YES];
 }
 
 // Close a batch of tabs with a single confirmation. `skipPinned` protects
@@ -9552,15 +9575,15 @@ hidingToolbeltShouldResizeWindow:(BOOL)hidingToolbeltShouldResizeWindow
     if (closable.count == 0) {
         return;
     }
-    NSString *count = (closable.count == 1) ? @"1 tab"
-                                            : [NSString stringWithFormat:@"%lu tabs", (unsigned long)closable.count];
+    NSString *count = (closable.count == 1) ? NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.one_tab", nil, NSBundle.mainBundle, @"1 tab", @"Singular tab count in a close confirmation.")
+                                            : [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.tab_count", nil, NSBundle.mainBundle, @"%lu tabs", @"Plural tab count in a close confirmation."), (unsigned long)closable.count];
     const iTermWarningSelection selection =
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"%@ (%@)", question, count]
-                                   actions:@[ @"Close", @"Cancel" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_question_with_count", nil, NSBundle.mainBundle, @"%1$@ (%2$@)", @"Close question followed by a tab count."), question, count]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close.7d9eb7ac", nil, NSBundle.mainBundle, @"Close", @"User-facing action label in PseudoTerminal (actions)."), NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in PseudoTerminal (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncCloseTabGroup"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Close Tabs"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_tabs.51d483df", nil, NSBundle.mainBundle, @"Close Tabs", @"User-facing text in PseudoTerminal (heading).")
                                     window:self.window];
     if (selection != kiTermWarningSelection0) {
         return;
@@ -10257,8 +10280,8 @@ static CGFloat iTermDimmingAmount(PSMTabBarControl *tabView) {
 
 - (void)turnOnMetalCaptureInInfoPlist {
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:@"You must restart iTerm2 to turn on this feature."
-                               actions:@[ @"Restart Now", @"Cancel"]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.you_must_restart_iterm2_to_turn_on_this.07609e92", nil, NSBundle.mainBundle, @"You must restart iTerm2 to turn on this feature.", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.restart_now.0fe0c953", nil, NSBundle.mainBundle, @"Restart Now", @"User-facing action label in PseudoTerminal (actions)."), NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in PseudoTerminal (actions).")]
                             identifier:@"RestartAfterMetalCaptureEnabled"
                            silenceable:kiTermWarningTypePersistent
                                 window:self.window];
@@ -13329,26 +13352,29 @@ typedef NS_ENUM(NSUInteger, iTermBroadcastCommand) {
         return @[ self.currentSession ];
     }
     NSString *action;
+    NSString *localizedAction;
     switch (command) {
     case iTermBroadcastCommandClear:
         action = @"Clear";
+        localizedAction = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.clear.83b12c22", nil, NSBundle.mainBundle, @"Clear", @"User-facing broadcast command action.");
         break;
     case iTermBroadcastCommandReset:
-            action = @"Reset";
+        action = @"Reset";
+        localizedAction = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.reset.daee7606", nil, NSBundle.mainBundle, @"Reset", @"User-facing broadcast command action.");
         break;
     }
-    NSString *title = [NSString stringWithFormat:@"%@ all sessions to which input is broadcast? This will affect %@ sessions.",
-                       action,
+    NSString *title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.confirm_broadcast_command.dcb9efc7", nil, NSBundle.mainBundle, @"%@ all sessions to which input is broadcast? This will affect %@ sessions.", @"Confirmation text before clearing or resetting sessions receiving broadcast input."),
+                       localizedAction,
                        @(broadcast.count)];
     const iTermWarningSelection selection =
     [iTermWarning showWarningWithTitle:title
-                               actions:@[ [NSString stringWithFormat:@"%@ All", action],
-                                          [NSString stringWithFormat:@"%@ Current Session Only", action],
-                                          @"Cancel" ]
+                               actions:@[ [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.all.849ff49f", nil, NSBundle.mainBundle, @"%@ All", @"User-facing action label in PseudoTerminal (actions)."), localizedAction],
+                                          [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.current_session_only.9af4410e", nil, NSBundle.mainBundle, @"%@ Current Session Only", @"User-facing action label in PseudoTerminal (actions)."), localizedAction],
+                                          NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in PseudoTerminal (actions).") ]
                              accessory:nil
                             identifier:[NSString stringWithFormat:@"NoSync%@AllBroadcast", action]
                            silenceable:kiTermWarningTypePermanentlySilenceable
-                               heading:[NSString stringWithFormat:@"%@ in All Broadcasted-to Sessions?", action]
+                               heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.in_all_broadcasted_to_sessions.30175f21", nil, NSBundle.mainBundle, @"%@ in All Broadcasted-to Sessions?", @"User-facing text in PseudoTerminal (heading)."), localizedAction]
                                 window:self.window];
     if (selection == kiTermWarningSelection0) {
         return broadcast;
@@ -13714,9 +13740,9 @@ typedef NS_ENUM(NSUInteger, iTermBroadcastCommand) {
     } else if (item.action == @selector(captureNextMetalFrame:)) {
         const BOOL enabled = self.currentSession.canProduceMetalFramecap;
         if (!self.isMetalCaptureEnabled) {
-            item.title = @"Enable GPU Frame Capture";
+            item.title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.enable_gpu_frame_capture.5159bbd0", nil, NSBundle.mainBundle, @"Enable GPU Frame Capture", @"User-facing text in PseudoTerminal (validateMenuItem:).");
         } else {
-            item.title = @"Capture GPU Frame";
+            item.title = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.capture_gpu_frame.80804de0", nil, NSBundle.mainBundle, @"Capture GPU Frame", @"User-facing text in PseudoTerminal (validateMenuItem:).");
         }
         return enabled;
     } else if (item.action == @selector(exportRecording:)) {
@@ -13951,8 +13977,10 @@ typedef NS_ENUM(NSUInteger, iTermBroadcastCommand) {
         return session.locked;
     }];
     return ([self confirmCloseForSessions:[self allSessions]
-                               identifier:hasLockedSession ? @"This window (with locked sessions)" : @"This window"
-                              genericName:[NSString stringWithFormat:@"Window #%d", number_+1]]);
+                               identifier:hasLockedSession
+                                   ? NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.this_window_with_locked_sessions.944345f6", nil, NSBundle.mainBundle, @"This window (with locked sessions)", @"Close-confirmation subject for a window containing locked sessions.")
+                                   : NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.this_window.d2b3c91c", nil, NSBundle.mainBundle, @"This window", @"Close-confirmation subject for a window.")
+                              genericName:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.window_d.322dffe6", nil, NSBundle.mainBundle, @"Window #%d", @"Generic numbered window name in a close-confirmation message."), number_+1]]);
 }
 
 - (PSMTabBarControl*)tabBarControl
@@ -14990,22 +15018,22 @@ typedef NS_ENUM(NSUInteger, iTermBroadcastCommand) {
          }];
          NSString *message;
          if (names.count < 2) {
-             message = [NSString stringWithFormat:@"The session named “%@” does not appear to be at a password prompt.", names.firstObject];
+             message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.the_session_named_does_not_appear_to_be_at_a_password_prompt.c9fb37fd", nil, NSBundle.mainBundle, @"The session named “%@” does not appear to be at a password prompt.", @"User-facing text in PseudoTerminal (indirect UI)."), names.firstObject];
          } else {
-             message = [NSString stringWithFormat:@"The following sessions to which input is broadcast do not appear to be at a password prompt: %@", [names componentsJoinedWithOxfordComma]];
+             message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.the_following_sessions_to_which_input_is_broadcast_do_not_appear_to_be_a.f3d9eb99", nil, NSBundle.mainBundle, @"The following sessions to which input is broadcast do not appear to be at a password prompt: %@", @"User-facing text in PseudoTerminal (indirect UI)."), [names componentsJoinedWithOxfordComma]];
          }
          NSArray *actions;
          if (okSessions.count > 0) {
-             actions = @[ @"Cancel", @"Enter Password in Sessions at Prompt" ];
+             actions = @[ NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in PseudoTerminal (actions)."), NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.enter_password_in_sessions_at_prompt.dbf8a510", nil, NSBundle.mainBundle, @"Enter Password in Sessions at Prompt", @"User-facing action label in PseudoTerminal (actions).") ];
          } else {
-             actions = @[ @"OK" ];
+             actions = @[ NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in PseudoTerminal (actions).") ];
          }
          iTermWarningSelection selection = [iTermWarning showWarningWithTitle:message
                                                                       actions:actions
                                                                     accessory:nil
                                                                    identifier:nil
                                                                   silenceable:kiTermWarningTypePersistent
-                                                                      heading:@"Not all sessions at password prompt"
+                                                                      heading:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.not_all_sessions_at_password_prompt.0dd18b2e", nil, NSBundle.mainBundle, @"Not all sessions at password prompt", @"User-facing text in PseudoTerminal (heading).")
                                                                        window:self.window];
          switch (selection) {
              case kiTermWarningSelection0:

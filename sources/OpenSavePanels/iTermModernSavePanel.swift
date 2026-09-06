@@ -28,7 +28,7 @@ class iTermSavePanelItem: NSObject {
     }
 
     @objc var displayName: String {
-        "“\(filename.lastPathComponent)” on \(host.displayName)"
+        String(localized: "ui.swift.opensavepanels.itermmodernsavepanel.0_on_1.1d27349d", defaultValue: "“\(filename.lastPathComponent)” on \(host.displayName)", bundle: .main, comment: "User-facing text in iTermModernSavePanel.")
     }
     @objc var pathExtension: String {
         return filename.pathExtension
@@ -82,12 +82,12 @@ class iTermSavePanelItem: NSObject {
         } else if let endpoint = host.endpoint {
             _ = try await endpoint.replace(filename, content: data)
         } else {
-            iTermWarning.show(withTitle: "No ssh connection to \(host.displayName) is available to upload \(filename.lastPathComponent)",
-                              actions: ["OK"],
+            iTermWarning.show(withTitle: String(localized: "ui.swift.opensavepanels.itermmodernsavepanel.no_ssh_connection_to_0_is_available_to.d2ee7033", defaultValue: "No ssh connection to \(host.displayName) is available to upload \(filename.lastPathComponent)", bundle: .main, comment: "User-facing text in iTermModernSavePanel."),
+                              actions: [String(localized: "ui.swift.opensavepanels.itermmodernsavepanel.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermModernSavePanel.")],
                               accessory: nil,
                               identifier: nil,
                               silenceable: .kiTermWarningTypePersistent,
-                              heading: "Upload Failed",
+                              heading: String(localized: "ui.swift.opensavepanels.itermmodernsavepanel.upload_failed.16544909", defaultValue: "Upload Failed", bundle: .main, comment: "User-facing text in iTermModernSavePanel."),
                               window: nil)
         }
     }
@@ -233,7 +233,7 @@ private extension iTermModernSavePanel {
 
         // Create SSH panel button
         let sshButton = SSHPanelButton()
-        sshButton.title = "Open SSH Panel..."
+        sshButton.title = String(localized: "ui.swift.opensavepanels.itermmodernsavepanel.open_ssh_panel.3cef15c7", defaultValue: "Open SSH Panel...", bundle: .main, comment: "User-facing text in iTermModernSavePanel.")
         sshButton.target = self
         sshButton.action = #selector(openSSHPanelButtonClicked(_:))
         sshButton.bezelStyle = .rounded

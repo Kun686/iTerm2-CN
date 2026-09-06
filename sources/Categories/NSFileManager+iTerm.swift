@@ -17,8 +17,8 @@ extension FileManager {
         if fileExists(atPath: directoryPath, isDirectory: &isDir) && isDir.boolValue {
             return true
         }
-        let selection = iTermWarning.show(withTitle: "Would you like to create the directory at \(directoryPath)?",
-                                          actions: ["OK", "Cancel"],
+        let selection = iTermWarning.show(withTitle: String(localized: "ui.swift.categories.nsfilemanager_iterm.would_you_like_to_create_the_directory_at.17345ba4", defaultValue: "Would you like to create the directory at \(directoryPath)?", bundle: .main, comment: "User-facing text in NSFileManager+iTerm."),
+                                          actions: [String(localized: "ui.swift.categories.nsfilemanager_iterm.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in NSFileManager+iTerm."), String(localized: "ui.swift.categories.nsfilemanager_iterm.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in NSFileManager+iTerm.")],
                                           accessory: nil,
                                           identifier: "CreateDirectory_" + identifier,
                                           silenceable: .kiTermWarningTypePermanentlySilenceable,
@@ -32,8 +32,8 @@ extension FileManager {
                                     attributes: nil)
                 return true
             } catch {
-                let selection = iTermWarning.show(withTitle: "Failed to create \(directoryPath):\n\n\(error.localizedDescription)",
-                                                  actions: ["Try Again", "Cancel"],
+                let selection = iTermWarning.show(withTitle: String(localized: "ui.swift.categories.nsfilemanager_iterm.failed_to_create_0_1.138c7e09", defaultValue: "Failed to create \(directoryPath):\n\n\(error.localizedDescription)", bundle: .main, comment: "User-facing text in NSFileManager+iTerm."),
+                                                  actions: [String(localized: "ui.swift.categories.nsfilemanager_iterm.try_again.df0fe9e0", defaultValue: "Try Again", bundle: .main, comment: "User-facing text in NSFileManager+iTerm."), String(localized: "ui.swift.categories.nsfilemanager_iterm.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in NSFileManager+iTerm.")],
                                                   accessory: nil,
                                                   identifier: nil,
                                                   silenceable: .kiTermWarningTypePersistent,

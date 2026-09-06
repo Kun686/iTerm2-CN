@@ -118,11 +118,11 @@ static const CGFloat kMarginBetweenTitleAndBody = 8;
     _body.textColor = [iTermTipCardViewController tipTextColor];
     _title.textColor = [NSColor whiteColor];
     _title.accessibilityElement = YES;
-    _title.accessibilityLabel = @"Tip title";
+    _title.accessibilityLabel = NSLocalizedStringWithDefaultValue(@"ui.tips.itermtipcardviewcontroller.tip_title.326ec20d", nil, NSBundle.mainBundle, @"Tip title", @"User-facing text in iTermTipCardViewController (awakeFromNib).");
 
     _body.accessibilityElement = YES;
     _body.accessibilityRole = NSAccessibilityStaticTextRole;
-    _body.accessibilityLabel = @"Tip content";
+    _body.accessibilityLabel = NSLocalizedStringWithDefaultValue(@"ui.tips.itermtipcardviewcontroller.tip_content.a467cca4", nil, NSBundle.mainBundle, @"Tip content", @"User-facing text in iTermTipCardViewController (awakeFromNib).");
 
     self.view.accessibilityChildren = @[ _body ];
 }

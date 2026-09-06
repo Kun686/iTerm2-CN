@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Item 2"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 2"
+          }
         }
       }
     },
@@ -21,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "This script must be upgraded to a “full environment“ to add dependencies. Doing so makes a copy of the Python runtime but will not use any additional disk space."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此脚本必须升级为“完整环境”才能添加依赖项。此操作会拷贝一份 Python 运行时，但不会占用额外的磁盘空间。"
           }
         }
       }
@@ -34,6 +46,12 @@
             "state": "new",
             "value": "Remove"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除"
+          }
         }
       }
     },
@@ -46,16 +64,29 @@
             "state": "new",
             "value": "Item 3"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 3"
+          }
         }
       }
     },
     "E35-gf-neG.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"E35-gf-neG\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -70,6 +101,12 @@
             "state": "new",
             "value": "Script Dependency Editor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脚本依赖编辑器"
+          }
         }
       }
     },
@@ -82,16 +119,29 @@
             "state": "new",
             "value": "Item 1"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 1"
+          }
         }
       }
     },
     "MM0-kC-jit.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"MM0-kC-jit\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -106,6 +156,12 @@
             "state": "new",
             "value": "Item 3"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 3"
+          }
         }
       }
     },
@@ -117,6 +173,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Item 2"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 2"
           }
         }
       }
@@ -130,6 +192,12 @@
             "state": "new",
             "value": "Check for Update"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新"
+          }
         }
       }
     },
@@ -141,6 +209,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Item 1"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 1"
           }
         }
       }
@@ -154,6 +228,12 @@
             "state": "new",
             "value": "OK"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
+          }
         }
       }
     },
@@ -165,6 +245,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Python Version:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python 版本："
           }
         }
       }
@@ -178,6 +264,12 @@
             "state": "new",
             "value": "Upgrade"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "升级"
+          }
         }
       }
     },
@@ -189,6 +281,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Script:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脚本："
           }
         }
       }
@@ -202,6 +300,12 @@
             "state": "new",
             "value": "Package Name"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "包名称"
+          }
         }
       }
     },
@@ -214,6 +318,12 @@
             "state": "new",
             "value": "Installed Version"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安装版本"
+          }
         }
       }
     },
@@ -225,6 +335,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Add"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加"
           }
         }
       }

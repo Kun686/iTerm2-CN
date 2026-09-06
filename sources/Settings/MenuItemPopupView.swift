@@ -103,9 +103,15 @@ private extension NSMenuItem {
     func title(descendsFromProfiles: Bool) -> String {
         switch itemType(descendsFromProfiles: descendsFromProfiles) {
         case .newWindow:
-            return "\(self.title) — New Window"
+            return String(localized: "ui.swift.settings.menuitempopupview.0_new_window.83f5d25f",
+                          defaultValue: "\(self.title) — New Window",
+                          bundle: .main,
+                          comment: "Searchable menu item title for opening a profile in a new window.")
         case .newTab:
-            return "\(self.title) — New Tab"
+            return String(localized: "ui.swift.settings.menuitempopupview.0_new_tab.90b97d6d",
+                          defaultValue: "\(self.title) — New Tab",
+                          bundle: .main,
+                          comment: "Searchable menu item title for opening a profile in a new tab.")
         case .other:
             return self.title
         }
@@ -142,7 +148,10 @@ private extension SearchableComboViewItem {
 
     static private func moveToScreenItems(tagProvider: () -> (Int)) -> [SearchableComboViewItem] {
         return NSScreen.screens.map { screen in
-            return SearchableComboViewItem("Move to \(screen.it_uniqueName())",
+            return SearchableComboViewItem(String(localized: "ui.swift.settings.menuitempopupview.move_to_0.699bb2f5",
+                                                  defaultValue: "Move to \(screen.it_uniqueName())",
+                                                  bundle: .main,
+                                                  comment: "Searchable Window-menu action for moving a window to a display."),
                                            tag: tagProvider(),
                                            identifier: screen.it_uniqueKey())
         }
@@ -203,7 +212,10 @@ class MenuItemPopupView: NSView {
         let identifier = selectedIdentifier
         comboView?.removeFromSuperview()
         let newComboView = SearchableComboView(SearchableComboViewGroup.fromMainMenu(),
-                                               defaultTitle: "Select Menu Item…")
+                                               defaultTitle: String(localized: "ui.swift.settings.menuitempopupview.select_menu_item.b037b203",
+                                                                    defaultValue: "Select Menu Item…",
+                                                                    bundle: .main,
+                                                                    comment: "Placeholder title in the searchable menu-item picker."))
         newComboView.frame = self.bounds
         newComboView.delegate = comboView?.delegate
         addSubview(newComboView)
@@ -230,4 +242,3 @@ class MenuItemPopupView: NSView {
         return comboView?.selectItem(withIdentifier: NSUserInterfaceItemIdentifier(identifier)) ?? false
     }
 }
-

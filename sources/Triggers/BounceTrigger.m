@@ -18,11 +18,14 @@ typedef NS_ENUM(int, BounceTriggerParamTag) {
 
 + (NSString *)title
 {
-    return @"Bounce Dock Icon";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_dock_icon.fb1a9eef", nil, NSBundle.mainBundle, @"Bounce Dock Icon", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Bounce dock icon %@", self.bounceType == NSCriticalRequest ? @"until focused" : @"once"];
+    NSString *frequency = self.bounceType == NSCriticalRequest
+        ? NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.until_focused.e42e0059", nil, NSBundle.mainBundle, @"until focused", @"Phrase in a trigger summary.")
+        : NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.once.200651a8", nil, NSBundle.mainBundle, @"once", @"Phrase in a trigger summary.");
+    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_dock_icon.2ce912c7", nil, NSBundle.mainBundle, @"Bounce dock icon %@", @"Trigger action summary. Preserve the placeholder."), frequency];
 }
 
 - (NSString *)paramPlaceholder
@@ -76,11 +79,11 @@ typedef NS_ENUM(int, BounceTriggerParamTag) {
 + (NSString *)stringForParameter:(BounceTriggerParamTag)parameter {
     switch (parameter) {
         case kBounceTriggerParamTagBounceUntilFocus:
-            return @"Bounce Until Activated";
+            return NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_until_activated.2dd837b1", nil, NSBundle.mainBundle, @"Bounce Until Activated", @"User-facing text in BounceTrigger (stringForParameter:).");
         case kBounceTriggerParamTagBounceOnce:
-            return @"Bounce Once";
+            return NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_once.0c9c8142", nil, NSBundle.mainBundle, @"Bounce Once", @"User-facing text in BounceTrigger (paramAttributedString).");
     }
-    return @"Bounce Until Activated";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_until_activated.2dd837b1", nil, NSBundle.mainBundle, @"Bounce Until Activated", @"User-facing text in BounceTrigger (stringForParameter:).");
 }
 
 - (NSDictionary *)menuItemsForPoupupButton

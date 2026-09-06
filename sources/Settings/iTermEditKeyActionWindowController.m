@@ -28,6 +28,10 @@
 
 const CGFloat sideMarginWidth = 40;
 
+static NSString *iTermEditKeyActionLocalizedString(NSString *key, NSString *fallback) {
+    return [NSBundle.mainBundle localizedStringForKey:key value:fallback table:nil];
+}
+
 @interface iTermEditKeyActionDetailView: NSView
 @end
 
@@ -141,7 +145,7 @@ const CGFloat sideMarginWidth = 40;
                 _parameterHidden = NO;
                 _parameterPlaceholder = @"characters to send";
                 _parameterLabelHidden = NO;
-                _parameterLabel = @"Esc+";
+                _parameterLabel = NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.esc.74441038", nil, NSBundle.mainBundle, @"Esc+", @"User-facing text in iTermEditKeyActionWindowController (updateViewsAnimated:secondary:).");
                 _applyHidden = NO;
                 break;
 
@@ -358,148 +362,148 @@ const CGFloat sideMarginWidth = 40;
 
 - (NSArray<iTermSearchableComboViewGroup *> *)groupsForPrimary:(BOOL)primary {
     NSArray<iTermSearchableComboViewGroup *> *groups = @[
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"General" items:[@[
-            primary ? [[iTermSearchableComboViewItem alloc] initWithLabel:@"Ignore" tag:KEY_ACTION_IGNORE] : [NSNull null],
-            primary ? [[iTermSearchableComboViewItem alloc] initWithLabel:@"Bypass Terminal" tag:KEY_ACTION_BYPASS] : [NSNull null],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Select Menu Item..." tag:KEY_ACTION_SELECT_MENU_ITEM],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.general.c910d474", @"General") items:[@[
+            primary ? [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.ignore.fce77c34", @"Ignore") tag:KEY_ACTION_IGNORE] : [NSNull null],
+            primary ? [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.bypass_terminal.27a888be", @"Bypass Terminal") tag:KEY_ACTION_BYPASS] : [NSNull null],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.select_menu_item.4ad59c3b", @"Select Menu Item...") tag:KEY_ACTION_SELECT_MENU_ITEM],
         ] arrayByRemovingNulls]]
     ];
     if (self.mode == iTermEditKeyActionWindowControllerModeKeyboardShortcut) {
         groups = [groups arrayByAddingObjectsFromArray:[@[
-            primary ? [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Modifier Remapping" items:@[
-                [[iTermSearchableComboViewItem alloc] initWithLabel:@"Do Not Remap Modifiers" tag:KEY_ACTION_DO_NOT_REMAP_MODIFIERS],
-                [[iTermSearchableComboViewItem alloc] initWithLabel:@"Remap Modifiers in iTerm2 Only" tag:KEY_ACTION_REMAP_LOCALLY],
+            primary ? [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.modifier_remapping.0be8e046", @"Modifier Remapping") items:@[
+                [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.do_not_remap_modifiers.9756b026", @"Do Not Remap Modifiers") tag:KEY_ACTION_DO_NOT_REMAP_MODIFIERS],
+                [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.remap_modifiers_in_iterm2_only.19633a74", @"Remap Modifiers in iTerm2 Only") tag:KEY_ACTION_REMAP_LOCALLY],
             ]] : [NSNull null],
-            [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Recent Tabs" items:@[
-                [[iTermSearchableComboViewItem alloc] initWithLabel:@"Cycle Tabs Forward" tag:KEY_ACTION_NEXT_MRU_TAB],
-                [[iTermSearchableComboViewItem alloc] initWithLabel:@"Cycle Tabs Backward" tag:KEY_ACTION_PREVIOUS_MRU_TAB],
+            [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.recent_tabs.ea3eb622", @"Recent Tabs") items:@[
+                [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.cycle_tabs_forward.b32ee6f9", @"Cycle Tabs Forward") tag:KEY_ACTION_NEXT_MRU_TAB],
+                [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.cycle_tabs_backward.749377ea", @"Cycle Tabs Backward") tag:KEY_ACTION_PREVIOUS_MRU_TAB],
             ]],
         ] arrayByRemovingNulls]];
     }
 
     const BOOL hideTerminalOnlyItems = (_profileType & ProfileTypeTerminal) == 0;
     groups = [groups arrayByAddingObjectsFromArray:[@[
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Miscellaneous" items:[@[
-            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:@"Run Coprocess" tag:KEY_ACTION_RUN_COPROCESS],
-            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:@"Start Instant Replay" tag:KEY_ACTION_IR_BACKWARD],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Undo" tag:KEY_ACTION_UNDO],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send tmux Command" tag:KEY_ACTION_SEND_TMUX_COMMAND],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Alert on Next Mark" tag:KEY_ACTION_ALERT_ON_NEXT_MARK],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.miscellaneous.5cb0b426", @"Miscellaneous") items:[@[
+            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.run_coprocess.e6f8b4f5", @"Run Coprocess") tag:KEY_ACTION_RUN_COPROCESS],
+            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.start_instant_replay.6c86b391", @"Start Instant Replay") tag:KEY_ACTION_IR_BACKWARD],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.undo.a8283ade", @"Undo") tag:KEY_ACTION_UNDO],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.send_tmux_command.e1023a0c", @"Send tmux Command") tag:KEY_ACTION_SEND_TMUX_COMMAND],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.alert_on_next_mark.a46bce90", @"Alert on Next Mark") tag:KEY_ACTION_ALERT_ON_NEXT_MARK],
         ] arrayByRemovingNulls]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"New Tab or Window" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"New Window with Profile" tag:KEY_ACTION_NEW_WINDOW_WITH_PROFILE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"New Tab with Profile" tag:KEY_ACTION_NEW_TAB_WITH_PROFILE],
-        [[iTermSearchableComboViewItem alloc] initWithLabel:@"Duplicate Tab" tag:KEY_ACTION_DUPLICATE_TAB],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.new_tab_or_window.85e30380", @"New Tab or Window") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.new_window_with_profile.7dc20476", @"New Window with Profile") tag:KEY_ACTION_NEW_WINDOW_WITH_PROFILE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.new_tab_with_profile.6fed2410", @"New Tab with Profile") tag:KEY_ACTION_NEW_TAB_WITH_PROFILE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.duplicate_tab.57d3ddba", @"Duplicate Tab") tag:KEY_ACTION_DUPLICATE_TAB],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Split" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Split Horizontally with Profile" tag:KEY_ACTION_SPLIT_HORIZONTALLY_WITH_PROFILE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Split Vertically with Profile" tag:KEY_ACTION_SPLIT_VERTICALLY_WITH_PROFILE],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.split.32afaa78", @"Split") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.split_horizontally_with_profile.c80d9e4d", @"Split Horizontally with Profile") tag:KEY_ACTION_SPLIT_HORIZONTALLY_WITH_PROFILE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.split_vertically_with_profile.5f101ec2", @"Split Vertically with Profile") tag:KEY_ACTION_SPLIT_VERTICALLY_WITH_PROFILE],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Profile" items:[@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Change Profile" tag:KEY_ACTION_SET_PROFILE],
-            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:@"Load Color Preset" tag:KEY_ACTION_LOAD_COLOR_PRESET],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.profile.d696a35b", @"Profile") items:[@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.change_profile.d30d5c8c", @"Change Profile") tag:KEY_ACTION_SET_PROFILE],
+            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.load_color_preset.27aef6ea", @"Load Color Preset") tag:KEY_ACTION_LOAD_COLOR_PRESET],
         ] arrayByRemovingNulls]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Navigate Tabs" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Next Tab" tag:KEY_ACTION_NEXT_SESSION],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Previous Tab" tag:KEY_ACTION_PREVIOUS_SESSION],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.navigate_tabs.55d1e24c", @"Navigate Tabs") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.next_tab.a9426fb3", @"Next Tab") tag:KEY_ACTION_NEXT_SESSION],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.previous_tab.80f06bdc", @"Previous Tab") tag:KEY_ACTION_PREVIOUS_SESSION],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Reorder Tabs" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Move Tab Left" tag:KEY_ACTION_MOVE_TAB_LEFT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Move Tab Right" tag:KEY_ACTION_MOVE_TAB_RIGHT],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.reorder_tabs.ee7f3fff", @"Reorder Tabs") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.move_tab_left.42478433", @"Move Tab Left") tag:KEY_ACTION_MOVE_TAB_LEFT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.move_tab_right.8b396b2f", @"Move Tab Right") tag:KEY_ACTION_MOVE_TAB_RIGHT],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Navigate Windows" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Next Window" tag:KEY_ACTION_NEXT_WINDOW],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Previous Window" tag:KEY_ACTION_PREVIOUS_WINDOW],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.navigate_windows.92a0a6c7", @"Navigate Windows") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.next_window.95bf685f", @"Next Window") tag:KEY_ACTION_NEXT_WINDOW],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.previous_window.4c8b1a6d", @"Previous Window") tag:KEY_ACTION_PREVIOUS_WINDOW],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Navigate Panes" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Next Pane" tag:KEY_ACTION_NEXT_PANE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Previous Pane" tag:KEY_ACTION_PREVIOUS_PANE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Select Split Pane Above" tag:KEY_ACTION_SELECT_PANE_ABOVE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Select Split Pane Below" tag:KEY_ACTION_SELECT_PANE_BELOW],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Select Split Pane On Left" tag:KEY_ACTION_SELECT_PANE_LEFT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Select Split Pane On Right" tag:KEY_ACTION_SELECT_PANE_RIGHT],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.navigate_panes.7dfa2f22", @"Navigate Panes") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.next_pane.1dd89542", @"Next Pane") tag:KEY_ACTION_NEXT_PANE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.previous_pane.b8a94609", @"Previous Pane") tag:KEY_ACTION_PREVIOUS_PANE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.select_split_pane_above.b60f03fb", @"Select Split Pane Above") tag:KEY_ACTION_SELECT_PANE_ABOVE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.select_split_pane_below.2bd6f4a7", @"Select Split Pane Below") tag:KEY_ACTION_SELECT_PANE_BELOW],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.select_split_pane_on_left.af0703d1", @"Select Split Pane On Left") tag:KEY_ACTION_SELECT_PANE_LEFT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.select_split_pane_on_right.8668336b", @"Select Split Pane On Right") tag:KEY_ACTION_SELECT_PANE_RIGHT],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Resize Pane" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Decrease Height" tag:KEY_ACTION_DECREASE_HEIGHT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Increase Height" tag:KEY_ACTION_INCREASE_HEIGHT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Decrease Width" tag:KEY_ACTION_DECREASE_WIDTH],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Increase Width" tag:KEY_ACTION_INCREASE_WIDTH],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.resize_pane.56342e5a", @"Resize Pane") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.decrease_height.08015d85", @"Decrease Height") tag:KEY_ACTION_DECREASE_HEIGHT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.increase_height.7dfa9645", @"Increase Height") tag:KEY_ACTION_INCREASE_HEIGHT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.decrease_width.d5c88ec3", @"Decrease Width") tag:KEY_ACTION_DECREASE_WIDTH],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.increase_width.09496d0d", @"Increase Width") tag:KEY_ACTION_INCREASE_WIDTH],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Scroll" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Scroll to End" tag:KEY_ACTION_SCROLL_END],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Scroll to Top" tag:KEY_ACTION_SCROLL_HOME],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Scroll One Line Down" tag:KEY_ACTION_SCROLL_LINE_DOWN],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Scroll One Line Up" tag:KEY_ACTION_SCROLL_LINE_UP],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Scroll One Page Down" tag:KEY_ACTION_SCROLL_PAGE_DOWN],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Scroll One Page Up" tag:KEY_ACTION_SCROLL_PAGE_UP],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.scroll.291873e3", @"Scroll") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.scroll_to_end.c92e937c", @"Scroll to End") tag:KEY_ACTION_SCROLL_END],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.scroll_to_top.01004372", @"Scroll to Top") tag:KEY_ACTION_SCROLL_HOME],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.scroll_one_line_down.64145602", @"Scroll One Line Down") tag:KEY_ACTION_SCROLL_LINE_DOWN],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.scroll_one_line_up.1f23d92d", @"Scroll One Line Up") tag:KEY_ACTION_SCROLL_LINE_UP],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.scroll_one_page_down.c5172032", @"Scroll One Page Down") tag:KEY_ACTION_SCROLL_PAGE_DOWN],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.scroll_one_page_up.002851cd", @"Scroll One Page Up") tag:KEY_ACTION_SCROLL_PAGE_UP],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Split Panes" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Swap With Split Pane Above" tag:KEY_ACTION_SWAP_PANE_ABOVE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Swap With Split Pane Below" tag:KEY_ACTION_SWAP_PANE_BELOW],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Swap With Split Pane on Left" tag:KEY_ACTION_SWAP_PANE_LEFT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Swap With Split Pane on Right" tag:KEY_ACTION_SWAP_PANE_RIGHT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Swap With Next Pane" tag:KEY_ACTION_SWAP_WITH_NEXT_PANE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Swap With Previous Pane" tag:KEY_ACTION_SWAP_WITH_PREVIOUS_PANE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Move Session to Split Pane" tag:KEY_ACTION_MOVE_TO_SPLIT_PANE],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.split_panes.aaa052df", @"Split Panes") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.swap_with_split_pane_above.2449d669", @"Swap With Split Pane Above") tag:KEY_ACTION_SWAP_PANE_ABOVE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.swap_with_split_pane_below.c5868c4c", @"Swap With Split Pane Below") tag:KEY_ACTION_SWAP_PANE_BELOW],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.swap_with_split_pane_on_left.4e404f60", @"Swap With Split Pane on Left") tag:KEY_ACTION_SWAP_PANE_LEFT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.swap_with_split_pane_on_right.81e944b5", @"Swap With Split Pane on Right") tag:KEY_ACTION_SWAP_PANE_RIGHT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.swap_with_next_pane.e447408a", @"Swap With Next Pane") tag:KEY_ACTION_SWAP_WITH_NEXT_PANE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.swap_with_previous_pane.66e117f4", @"Swap With Previous Pane") tag:KEY_ACTION_SWAP_WITH_PREVIOUS_PANE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.move_session_to_split_pane.3b6be9b4", @"Move Session to Split Pane") tag:KEY_ACTION_MOVE_TO_SPLIT_PANE],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Send Keystrokes" items:[@[
-            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send ^H Backspace" tag:KEY_ACTION_SEND_C_H_BACKSPACE],
-            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send ^? Backspace" tag:KEY_ACTION_SEND_C_QM_BACKSPACE],
-            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send Escape Sequence" tag:KEY_ACTION_ESCAPE_SEQUENCE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send Hex Code" tag:KEY_ACTION_HEX_CODE],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send Text" tag:KEY_ACTION_TEXT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send Text with “vim” Special Chars" tag:KEY_ACTION_VIM_TEXT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send Text without Broadcasting" tag:KEY_ACTION_VIM_TEXT_NO_BROADCAST],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Send Snippet" tag:KEY_ACTION_SEND_SNIPPET],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Compose…" tag:KEY_ACTION_COMPOSE],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.send_keystrokes.753376a2", @"Send Keystrokes") items:[@[
+            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.send_h_backspace.7cf14960", @"Send ^H Backspace") tag:KEY_ACTION_SEND_C_H_BACKSPACE],
+            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.send_backspace.b17426b3", @"Send ^? Backspace") tag:KEY_ACTION_SEND_C_QM_BACKSPACE],
+            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.send_escape_sequence.cf8a3420", @"Send Escape Sequence") tag:KEY_ACTION_ESCAPE_SEQUENCE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.send_hex_code.e7e29904", @"Send Hex Code") tag:KEY_ACTION_HEX_CODE],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.send_text.b4e1af54", @"Send Text") tag:KEY_ACTION_TEXT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.send_text_with_vim_special_chars.fe6989e2", @"Send Text with “vim” Special Chars") tag:KEY_ACTION_VIM_TEXT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.send_text_without_broadcasting.f6e30ff3", @"Send Text without Broadcasting") tag:KEY_ACTION_VIM_TEXT_NO_BROADCAST],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.send_snippet.9edb9820", @"Send Snippet") tag:KEY_ACTION_SEND_SNIPPET],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.compose.b9b7a47d", @"Compose…") tag:KEY_ACTION_COMPOSE],
         ] arrayByRemovingNulls]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Search" items:[@[
-            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:@"Find Regular Expression…" tag:KEY_ACTION_FIND_REGEX],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Find Again Down" tag:KEY_FIND_AGAIN_DOWN],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Find Again Up" tag:KEY_FIND_AGAIN_UP],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.search.49c266ba", @"Search") items:[@[
+            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.find_regular_expression.01f50631", @"Find Regular Expression…") tag:KEY_ACTION_FIND_REGEX],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.find_again_down.98179375", @"Find Again Down") tag:KEY_FIND_AGAIN_DOWN],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.find_again_up.a4731f6f", @"Find Again Up") tag:KEY_FIND_AGAIN_UP],
         ] arrayByRemovingNulls]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Pasteboard" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Paste…" tag:KEY_ACTION_PASTE_SPECIAL],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Paste from Selection…" tag:KEY_ACTION_PASTE_SPECIAL_FROM_SELECTION],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Copy or Send ^C" tag:KEY_ACTION_COPY_OR_SEND],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Paste or Send ^V" tag:KEY_ACTION_PASTE_OR_SEND],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Copy Interpolated String" tag:KEY_ACTION_COPY_INTERPOLATED_STRING],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Copy Mode Commands" tag:KEY_ACTION_COPY_MODE],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.pasteboard.cce4bba7", @"Pasteboard") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.paste.805011e7", @"Paste…") tag:KEY_ACTION_PASTE_SPECIAL],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.paste_from_selection.496fc8aa", @"Paste from Selection…") tag:KEY_ACTION_PASTE_SPECIAL_FROM_SELECTION],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.copy_or_send_c.ecde979a", @"Copy or Send ^C") tag:KEY_ACTION_COPY_OR_SEND],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.paste_or_send_v.4aca639b", @"Paste or Send ^V") tag:KEY_ACTION_PASTE_OR_SEND],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.copy_interpolated_string.a95c2c53", @"Copy Interpolated String") tag:KEY_ACTION_COPY_INTERPOLATED_STRING],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.copy_mode_commands.a820620d", @"Copy Mode Commands") tag:KEY_ACTION_COPY_MODE],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Toggles" items:[@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Toggle Fullscreen" tag:KEY_ACTION_TOGGLE_FULLSCREEN],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Toggle Pin Hotkey Window" tag:KEY_ACTION_TOGGLE_HOTKEY_WINDOW_PINNING],
-            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:@"Toggle Mouse Reporting" tag:KEY_ACTION_TOGGLE_MOUSE_REPORTING],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Toggle Setting" tag:KEY_ACTION_TOGGLE_SETTING],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.toggles.420d9aec", @"Toggles") items:[@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.toggle_fullscreen.4fdafad2", @"Toggle Fullscreen") tag:KEY_ACTION_TOGGLE_FULLSCREEN],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.toggle_pin_hotkey_window.37c3862a", @"Toggle Pin Hotkey Window") tag:KEY_ACTION_TOGGLE_HOTKEY_WINDOW_PINNING],
+            hideTerminalOnlyItems ? [NSNull null] : [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.keyboard.itermkeybindingaction.toggle_mouse_reporting.d753135a", @"Toggle Mouse Reporting") tag:KEY_ACTION_TOGGLE_MOUSE_REPORTING],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.toggle_setting.31b25d9a", @"Toggle Setting") tag:KEY_ACTION_TOGGLE_SETTING],
         ] arrayByRemovingNulls]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Selection" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Move Start of Selection Back" tag:KEY_ACTION_MOVE_START_OF_SELECTION_LEFT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Move Start of Selection Forward" tag:KEY_ACTION_MOVE_START_OF_SELECTION_RIGHT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Move End of Selection Back" tag:KEY_ACTION_MOVE_END_OF_SELECTION_LEFT],
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Move End of Selection Forward" tag:KEY_ACTION_MOVE_END_OF_SELECTION_RIGHT],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.selection.ca406707", @"Selection") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.move_start_of_selection_back.5af02a0b", @"Move Start of Selection Back") tag:KEY_ACTION_MOVE_START_OF_SELECTION_LEFT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.move_start_of_selection_forward.060e8376", @"Move Start of Selection Forward") tag:KEY_ACTION_MOVE_START_OF_SELECTION_RIGHT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.move_end_of_selection_back.195d4fd3", @"Move End of Selection Back") tag:KEY_ACTION_MOVE_END_OF_SELECTION_LEFT],
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.move_end_of_selection_forward.b7a2b472", @"Move End of Selection Forward") tag:KEY_ACTION_MOVE_END_OF_SELECTION_RIGHT],
         ]],
 
-        [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Scripting" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Invoke Script Function…" tag:KEY_ACTION_INVOKE_SCRIPT_FUNCTION],
+        [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.scripting.01846401", @"Scripting") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.invoke_script_function.225d35cc", @"Invoke Script Function…") tag:KEY_ACTION_INVOKE_SCRIPT_FUNCTION],
         ]],
 
-        primary ? [[iTermSearchableComboViewGroup alloc] initWithLabel:@"Composition" items:@[
-            [[iTermSearchableComboViewItem alloc] initWithLabel:@"Sequence…" tag:KEY_ACTION_SEQUENCE],
+        primary ? [[iTermSearchableComboViewGroup alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.composition.47fca483", @"Composition") items:@[
+            [[iTermSearchableComboViewItem alloc] initWithLabel:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.sequence.5181d985", @"Sequence…") tag:KEY_ACTION_SEQUENCE],
         ]] : [NSNull null],
     ] arrayByRemovingNulls]];
     return groups;
@@ -517,21 +521,21 @@ const CGFloat sideMarginWidth = 40;
         case iTermEditKeyActionWindowControllerModeKeyboardShortcut:
             break;
         case iTermEditKeyActionWindowControllerModeTouchBarItem:
-            _touchBarLabel.placeholderString = @"Label to show in Touch Bar";
+            _touchBarLabel.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.label_to_show_in_touch_bar.ec1f85aa", nil, NSBundle.mainBundle, @"Label to show in Touch Bar", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).");
             break;
         case iTermEditKeyActionWindowControllerModeUnbound:
-            _touchBarLabel.placeholderString = self.titleIsInterpolated ? @"Title (Interpolated String)" : @"Title";
+            _touchBarLabel.placeholderString = self.titleIsInterpolated ? NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.title_interpolated_string.7b57f42b", nil, NSBundle.mainBundle, @"Title (Interpolated String)", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).") : NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.title.7e8cd205", nil, NSBundle.mainBundle, @"Title", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).");
             break;
     }
 
     _comboView = [[iTermSearchableComboView alloc] initWithGroups:[self groupsForPrimary:YES]
-                                                     defaultTitle:@"Select Action…"];
+                                                     defaultTitle:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.select_action.2d3a9d3a", @"Select Action…")];
     [_comboViewContainer addSubview:_comboView];
     _comboView.frame = _comboViewContainer.bounds;
     _comboView.delegate = self;
 
     _secondaryComboView = [[iTermSearchableComboView alloc] initWithGroups:[self groupsForPrimary:NO]
-                                                              defaultTitle:@"Select Action…"];
+                                                              defaultTitle:iTermEditKeyActionLocalizedString(@"ui.settings.itermeditkeyactionwindowcontroller.select_action.2d3a9d3a", @"Select Action…")];
     [_secondaryComboViewContainer addSubview:_secondaryComboView];
     _secondaryComboView.frame = _secondaryComboViewContainer.bounds;
     _secondaryComboView.delegate = self;
@@ -548,17 +552,17 @@ const CGFloat sideMarginWidth = 40;
     (void)[_comboView selectItemWithTag:self.action];
 
     _applyButton = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-    [_applyButton addItemWithTitle:@"Apply to current session"];
+    [_applyButton addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.apply_to_current_session.a4599bb4", nil, NSBundle.mainBundle, @"Apply to current session", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).")];
     _applyButton.menu.itemArray.lastObject.tag = iTermActionApplyModeCurrentSession;
-    [_applyButton addItemWithTitle:@"Apply to all sessions"];
+    [_applyButton addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.apply_to_all_sessions.4fc28dad", nil, NSBundle.mainBundle, @"Apply to all sessions", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).")];
     _applyButton.menu.itemArray.lastObject.tag = iTermActionApplyModeAllSessions;
-    [_applyButton addItemWithTitle:@"Apply to all sessions except current"];
+    [_applyButton addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.apply_to_all_sessions_except_current.82593cdf", nil, NSBundle.mainBundle, @"Apply to all sessions except current", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).")];
     _applyButton.menu.itemArray.lastObject.tag = iTermActionApplyModeUnfocusedSessions;
-    [_applyButton addItemWithTitle:@"Apply to all sessions in window"];
+    [_applyButton addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.apply_to_all_sessions_in_window.7de152f1", nil, NSBundle.mainBundle, @"Apply to all sessions in window", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).")];
     _applyButton.menu.itemArray.lastObject.tag = iTermActionApplyModeAllInWindow;
-    [_applyButton addItemWithTitle:@"Apply to all sessions in tab"];
+    [_applyButton addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.apply_to_all_sessions_in_tab.9ae7ab60", nil, NSBundle.mainBundle, @"Apply to all sessions in tab", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).")];
     _applyButton.menu.itemArray.lastObject.tag = iTermActionApplyModeAllInTab;
-    [_applyButton addItemWithTitle:@"Apply to broadcasted-to sessions"];
+    [_applyButton addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.apply_to_broadcasted_to_sessions.d60824bc", nil, NSBundle.mainBundle, @"Apply to broadcasted-to sessions", @"User-facing text in iTermEditKeyActionWindowController (windowDidLoad).")];
     _applyButton.menu.itemArray.lastObject.tag = iTermActionApplyModeBroadcasting;
 
     _applyButton.target = self;
@@ -692,7 +696,7 @@ const CGFloat sideMarginWidth = 40;
 - (void)updateViewsAnimated:(BOOL)animated secondary:(BOOL)secondary {
     switch (self.mode) {
         case iTermEditKeyActionWindowControllerModeUnbound:
-            _keyboardShortcutLabel.stringValue = @"Title";
+            _keyboardShortcutLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.title.7e8cd205", nil, NSBundle.mainBundle, @"Title", @"User-facing text in iTermEditKeyActionWindowController (updateViewsAnimated:secondary:).");
             if (self.titleIsInterpolated) {
                 if (!_labelDelegate) {
                     _labelDelegate = [[iTermFunctionCallTextFieldDelegate alloc] initWithPathSource:[iTermVariableHistory pathSourceForContext:iTermVariablesSuggestionContextSession]
@@ -707,13 +711,13 @@ const CGFloat sideMarginWidth = 40;
             _shortcutField.hidden = YES;
             break;
         case iTermEditKeyActionWindowControllerModeTouchBarItem:
-            _keyboardShortcutLabel.stringValue = @"Touch Bar Label";
+            _keyboardShortcutLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.touch_bar_label.ec9d8d97", nil, NSBundle.mainBundle, @"Touch Bar Label", @"User-facing text in iTermEditKeyActionWindowController (updateViewsAnimated:secondary:).");
             _touchBarLabel.delegate = self;
             _touchBarLabel.hidden = NO;
             _shortcutField.hidden = YES;
             break;
         case iTermEditKeyActionWindowControllerModeKeyboardShortcut:
-            _keyboardShortcutLabel.stringValue = @"Keyboard Shortcut:";
+            _keyboardShortcutLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditkeyactionwindowcontroller.keyboard_shortcut.922b8703", nil, NSBundle.mainBundle, @"Keyboard Shortcut:", @"User-facing text in iTermEditKeyActionWindowController (updateViewsAnimated:secondary:).");
             _touchBarLabel.hidden = YES;
             _shortcutField.hidden = NO;
             break;

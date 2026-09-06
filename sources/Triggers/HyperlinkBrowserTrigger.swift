@@ -7,10 +7,11 @@
 
 class HyperlinkBrowserTrigger: Trigger {
     override var description: String {
-        "Make Hyperlink with URL “\(param as? String ?? "(nil)")”"
+        let parameter = param as? String ?? String(localized: "ui.swift.triggers.hyperlinkbrowsertrigger.nil_parameter.930f8a95", defaultValue: "(nil)", bundle: .main, comment: "Fallback shown when a hyperlink trigger has no URL parameter.")
+        return String(localized: "ui.swift.triggers.hyperlinkbrowsertrigger.make_hyperlink_with_url_0.30e7c32f", defaultValue: "Make Hyperlink with URL “\(parameter)”", bundle: .main, comment: "User-facing text in HyperlinkBrowserTrigger.")
     }
     override static var title: String {
-        "Make Hyperlink…"
+        String(localized: "ui.swift.triggers.hyperlinkbrowsertrigger.make_hyperlink.0df9e2a5", defaultValue: "Make Hyperlink…", bundle: .main, comment: "User-facing text in HyperlinkBrowserTrigger.")
     }
     override func takesParameter() -> Bool {
         true

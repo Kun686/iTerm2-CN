@@ -123,23 +123,23 @@ class OnePasswordUtils {
 
     static func showUnavailableMessage(_ path: String? = nil) {
         let alert = NSAlert()
-        alert.messageText = "OnePassword Unavailable"
+        alert.messageText = String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.onepassword_unavailable.7a3b720b", defaultValue: "OnePassword Unavailable", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester.")
         if let path = path {
-            alert.informativeText = "The 1Password CLI at \(path) is too old. The iTerm2 integration requires version \(minimumSupportedVersionString) or later."
+            alert.informativeText = String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.the_1password_cli_at_0_is_too_old.61c2c41b", defaultValue: "The 1Password CLI at \(path) is too old. The iTerm2 integration requires version \(minimumSupportedVersionString) or later.", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester.")
         } else {
-            alert.informativeText = "The 1Password CLI could not be found, or is older than the required version \(minimumSupportedVersionString). Check that a current op is installed."
+            alert.informativeText = String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.the_1password_cli_could_not_be_found_or.a37dba61", defaultValue: "The 1Password CLI could not be found, or is older than the required version \(minimumSupportedVersionString). Check that a current op is installed.", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester.")
         }
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester."))
         alert.runModal()
     }
 
     // Returns true to show an open panel to locate it.
     private static func showCannotFindCLIMessage() -> Bool {
         let alert = NSAlert()
-        alert.messageText = "Can’t Find 1Password CLI"
-        alert.informativeText = "In order to use the 1Password integration, iTerm2 needs to know where to find the CLI app named “op”. It’s normally in /usr/local/bin. If you have installed it elsewhere, please select Locate to provide its location."
-        alert.addButton(withTitle: "Locate")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.can_t_find_1password_cli.b0c95038", defaultValue: "Can’t Find 1Password CLI", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester.")
+        alert.informativeText = String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.in_order_to_use_the_1password_integration_iterm2.94da63fd", defaultValue: "In order to use the 1Password integration, iTerm2 needs to know where to find the CLI app named “op”. It’s normally in /usr/local/bin. If you have installed it elsewhere, please select Locate to provide its location.", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester.")
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.locate.ee867dc4", defaultValue: "Locate", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester."))
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester."))
         return alert.runModal() == .alertFirstButtonReturn
     }
 
@@ -320,9 +320,9 @@ class OnePasswordTokenRequester {
     private var passwordPrompt: String {
         let account = iTermAdvancedSettingsModel.onePasswordAccount()!
         if account.isEmpty {
-            return "Enter your 1Password master password:"
+            return String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.enter_your_1password_master_password.faf2b9b6", defaultValue: "Enter your 1Password master password:", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester.")
         }
-        return "Enter the 1Password master password for account “\(account)”:"
+        return String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.enter_the_1password_master_password_for_account_0.b6ab27eb", defaultValue: "Enter the 1Password master password for account “\(account)”:", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester.")
     }
 
     func asyncGet(_ completion: @escaping (Result<Auth, Error>) -> ()) {
@@ -386,7 +386,7 @@ class OnePasswordTokenRequester {
             guard output.returnCode == 0 else {
                 DLog("But the return code is nonzero")
                 DLog("signin failed")
-                let reason = String(data: output.stderr, encoding: .utf8) ?? "An unknown error occurred."
+                let reason = String(data: output.stderr, encoding: .utf8) ?? String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.an_unknown_error_occurred.30aa69b2", defaultValue: "An unknown error occurred.", bundle: .main, comment: "Fallback error shown when 1Password CLI stderr cannot be decoded.")
                 RLog("Failure reason is: \(reason)")
                 if reason.contains("connecting to desktop app timed out") {
                     completion(.failure(OnePasswordDataSource.OPError.unusableCLI))
@@ -398,7 +398,7 @@ class OnePasswordTokenRequester {
             }
             guard let token = String(data: output.stdout, encoding: .utf8) else {
                 DLog("got garbage output")
-                self.showErrorMessage("The 1Password CLI app produced garbled output instead of an auth token.")
+                self.showErrorMessage(String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.the_1password_cli_app_produced_garbled_output_instead.2874821f", defaultValue: "The 1Password CLI app produced garbled output instead of an auth token.", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester."))
                 completion(.failure(OnePasswordDataSource.OPError.badOutput))
                 return
             }
@@ -409,9 +409,9 @@ class OnePasswordTokenRequester {
 
     private func showErrorMessage(_ reason: String) {
         let alert = NSAlert()
-        alert.messageText = "Authentication Error"
+        alert.messageText = String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.authentication_error.797b4f03", defaultValue: "Authentication Error", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester.")
         alert.informativeText = reason
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.onepasswordtokenrequester.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in OnePasswordTokenRequester."))
         alert.runModal()
     }
 
@@ -490,4 +490,3 @@ class OnePasswordTokenRequester {
         }
     }
 }
-

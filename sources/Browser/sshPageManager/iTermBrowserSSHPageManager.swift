@@ -49,7 +49,15 @@ class iTermBrowserSSHPageManager {
         guard let conductor = ConductorRegistry.instance.conductors(for: url).first else {
             let html = iTermBrowserTemplateLoader.load(
                 template: "ssh-page-no-conductor.html",
-                substitutions: ["HOST": url.host ?? "(nil)"]).lossyData
+                substitutions: [
+                    "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+                    "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.ssh.problem_viewing_file", defaultValue: "Problem viewing file"),
+                    "HEADING": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.ssh.could_not_display_file", defaultValue: "Could not display file"),
+                    "MESSAGE_PREFIX": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.ssh.no_connection_prefix", defaultValue: "No connection to"),
+                    "HOST": url.host ?? "(nil)",
+                    "MESSAGE_SUFFIX": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.ssh.no_connection_suffix", defaultValue: "using SSH integration could be found. Please connect to it in a terminal window and try again."),
+                    "TRY_AGAIN": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.try_again", defaultValue: "Try Again")
+                ]).lossyData
             let response = URLResponse(
                 url: url,
                 mimeType: "text/html",
