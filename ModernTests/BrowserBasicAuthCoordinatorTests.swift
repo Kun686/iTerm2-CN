@@ -365,8 +365,14 @@ final class BrowserBasicAuthCoordinatorTests: XCTestCase {
     func testSaveFailureToasts() {
         let coord = Coord()
         let space = mainSpace()
-        let e = coord.reduce(.saveResult(space: space, host: "example.com", success: false))
-        XCTAssertEqual(e, [.toast("Could not save the password for example.com")])
+        let host = "example.com"
+        let e = coord.reduce(.saveResult(space: space, host: host, success: false))
+        let expected = String(
+            localized: "ui.browser.basic_auth.save_failed",
+            defaultValue: "Could not save the password for \(host)",
+            bundle: .main,
+            comment: "Toast shown when the built-in browser cannot save a website password.")
+        XCTAssertEqual(e, [.toast(expected)])
     }
 
     func testSaveSuccessEmitsNothing() {

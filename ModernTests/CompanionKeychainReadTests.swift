@@ -15,6 +15,29 @@ import Security
 @testable import iTerm2SharedARC
 
 final class CompanionKeychainReadTests: XCTestCase {
+    func testMissingPairingNamesStayStableForDiagnosticsAndLocalizeForPresentation() {
+        let diagnosticNames = [
+            "the Mac identity key",
+            "the paired phone key",
+            "a future pairing item",
+        ]
+
+        let presentationNames = CompanionPairingController.localizedPairingItemNames(
+            diagnosticNames,
+            macIdentityKey: "localized identity key",
+            pairedPhoneKey: "localized phone key"
+        )
+
+        XCTAssertEqual(
+            diagnosticNames.joined(separator: ", "),
+            "the Mac identity key, the paired phone key, a future pairing item"
+        )
+        XCTAssertEqual(
+            presentationNames,
+            ["localized identity key", "localized phone key", "a future pairing item"]
+        )
+    }
+
     func testValidItemIsFound() {
         let data = Data(repeating: 7, count: 32)
         XCTAssertEqual(CompanionMacIdentity.interpretKeychainStatus(errSecSuccess, data: data),

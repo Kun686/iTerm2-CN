@@ -37,11 +37,14 @@ final class UvMigrationTests: XCTestCase {
         XCTAssertTrue(text.contains("Beta"))
         XCTAssertTrue(text.contains("3.7"))
         XCTAssertTrue(text.contains("3.9"))
-        // The compatibility caveat must be present so the user knows scripts may break.
-        XCTAssertTrue(text.lowercased().contains("compat"))
         // House style: no straight double quotes, no em dashes.
         XCTAssertFalse(text.contains("\""))
         XCTAssertFalse(text.contains("\u{2014}"))
+
+        let diagnosticText = iTermUvMigration.consolidatedWarningDiagnosticText(remaps: remaps)
+        XCTAssertTrue(diagnosticText.lowercased().contains("compat"))
+        XCTAssertTrue(diagnosticText.contains("Alpha"))
+        XCTAssertTrue(diagnosticText.contains("Beta"))
     }
 
     func testWarningTextForSingleScriptReadsNaturally() {

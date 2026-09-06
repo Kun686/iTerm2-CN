@@ -3,6 +3,8 @@ PATH := /opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 ITERM_PID=$(shell pgrep "iTerm2")
 APPS := /Applications
 ITERM_CONF_PLIST = $(HOME)/Library/Preferences/com.googlecode.iterm2.plist
+ITERM2_EDITION ?= upstream
+ITERM2_PLIST_VARIANT ?= release
 # Local checkout of the iterm2-website repo, where built plugins are published.
 ITERM2_WEBSITE ?= $(HOME)/iterm2-website
 SUITE ?= $(notdir $(CURDIR))
@@ -61,7 +63,7 @@ else
   RUST_NATIVE_TARGET = x86_64-apple-darwin
 endif
 
-.PHONY: clean all backup-old-iterm restart setup dangerous-setup _setup-main help doctor companion-bump-build companion-bump-build-upload
+.PHONY: clean all backup-old-iterm restart setup dangerous-setup _setup-main help doctor companion-bump-build companion-bump-build-upload cn-dev cn-beta cn-nightly cn-run cn-release cn-preview
 
 help:
 	@echo "iTerm2 — $(VERSION) ($(NATIVE_ARCH))"
@@ -91,6 +93,9 @@ help:
 	@echo "  make Beta         Build Beta configuration"
 	@echo "  make Nightly      Build Nightly configuration"
 	@echo "  make Deployment   Build Deployment configuration"
+	@echo "  make cn-dev       Build iTerm2-CN Development explicitly"
+	@echo "  make cn-run       Build and launch iTerm2-CN Development"
+	@echo "  make cn-release   Build iTerm2-CN Deployment explicitly"
 	@echo ""
 	@echo "Companion (iOS):"
 	@echo "  make companion-bump-build          Bump app + PushService build # and regenerate"
@@ -289,22 +294,19 @@ install: | Deployment backup-old-iterm
 
 Development:
 	echo "Using PATH for build: $(PATH)"
-	cp plists/dev-iTerm2.plist plists/iTerm2.plist
-	xcodebuild -scheme iTerm2 -configuration Development -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" && \
+	xcodebuild -scheme iTerm2 -configuration Development -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ITERM2_EDITION="$(ITERM2_EDITION)" && \
 	chmod -R go+rX $(BUILD_DIR)/Development
 
 Beta:
-	cp plists/beta-iTerm2.plist plists/iTerm2.plist
-	xcodebuild -scheme iTerm2 -configuration Beta -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO && \
+	xcodebuild -scheme iTerm2 -configuration Beta -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)" && \
 	chmod -R go+rX $(BUILD_DIR)/Beta
 
 Deployment:
-	xcodebuild -scheme iTerm2 -configuration Deployment -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO && \
+	xcodebuild -scheme iTerm2 -configuration Deployment -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)" ITERM2_PLIST_VARIANT="$(ITERM2_PLIST_VARIANT)" && \
 	chmod -R go+rX $(BUILD_DIR)/Deployment
 
 Nightly: force
-	cp plists/nightly-iTerm2.plist plists/iTerm2.plist
-	xcodebuild -scheme iTerm2 -configuration Nightly -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO
+	xcodebuild -scheme iTerm2 -configuration Nightly -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)"
 	chmod -R go+rX $(BUILD_DIR)/Nightly
 
 companion-iphone: force
@@ -319,6 +321,18 @@ run: Development
 	trap 'kill $$pid 2>/dev/null' INT TERM; \
 	( sleep 1 && osascript -e "tell application \"System Events\" to set frontmost of (first process whose unix id is $$pid) to true" >/dev/null 2>&1 ) & \
 	wait $$pid
+
+cn-dev:
+	$(MAKE) Development ITERM2_EDITION=cn
+
+cn-beta:
+	$(MAKE) Beta ITERM2_EDITION=cn
+
+cn-nightly:
+	$(MAKE) Nightly ITERM2_EDITION=cn
+
+cn-run:
+	$(MAKE) run ITERM2_EDITION=cn
 
 # Like `run`, but re-signs the built app with the keychain-access-groups entitlement
 # so the data-protection-keychain migration is actually exercised. Plain `make run`
@@ -395,12 +409,16 @@ restart:
 	/bin/kill -TERM $(ITERM_PID)
 
 release:
-	cp plists/release-iTerm2.plist plists/iTerm2.plist
-	make Deployment
+	$(MAKE) Deployment ITERM2_PLIST_VARIANT=release
 
 preview:
-	cp plists/preview-iTerm2.plist plists/iTerm2.plist
-	make Deployment
+	$(MAKE) Deployment ITERM2_PLIST_VARIANT=preview
+
+cn-release:
+	$(MAKE) Deployment ITERM2_EDITION=cn ITERM2_PLIST_VARIANT=release
+
+cn-preview:
+	$(MAKE) Deployment ITERM2_EDITION=cn ITERM2_PLIST_VARIANT=preview
 
 x86libsixel: force
 	mkdir -p submodules/libsixel/build-x86
