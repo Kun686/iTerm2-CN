@@ -35,6 +35,9 @@ iTerm2-CN community localization:
   Locale selection and Profile rules are unchanged.
 - Terminal emulation and terminal I/O behavior
   are unchanged.
+- Keeps shared fork-failure diagnostics in
+  English in logs, terminal output, and the
+  notification body; its title is localized.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.

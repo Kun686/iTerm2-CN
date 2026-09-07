@@ -823,19 +823,9 @@ static void HandleSigChld(int n) {
 
         case iTermJobManagerForkAndExecStatusFailedToFork: {
             RLog(@"Unable to fork %@: %s", progpath, strerror(optionalErrorCode.intValue));
-            NSString *error = NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.unable_to_fork_child_process",
-                                                                  nil,
-                                                                  NSBundle.mainBundle,
-                                                                  @"Unable to fork child process: you may have too many processes already running.",
-                                                                  @"Error shown when iTerm2 cannot create a child process.");
+            NSString *error = @"Unable to fork child process: you may have too many processes already running.";
             if (optionalErrorCode) {
-                error = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.system_error_suffix",
-                                                                                      nil,
-                                                                                      NSBundle.mainBundle,
-                                                                                      @"%1$@ The system error was: %2$s",
-                                                                                      @"Adds the system error to a child-process launch error."),
-                         error,
-                         strerror(optionalErrorCode.intValue)];
+                error = [NSString stringWithFormat:@"%@ The system error was: %s", error, strerror(optionalErrorCode.intValue)];
             }
             [[iTermNotificationController sharedInstance] notify:NSLocalizedStringWithDefaultValue(@"ui.tasks.ptytask.unable_to_fork_notification_title",
                                                                                                     nil,

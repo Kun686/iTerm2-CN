@@ -75001,42 +75001,6 @@
         }
       }
     },
-    "ui.tasks.ptytask.system_error_suffix": {
-      "comment": "Adds the system error to a child-process launch error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ The system error was: %2$s"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ 系统错误：%2$s"
-          }
-        }
-      }
-    },
-    "ui.tasks.ptytask.unable_to_fork_child_process": {
-      "comment": "Error shown when iTerm2 cannot create a child process.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unable to fork child process: you may have too many processes already running."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "无法创建子进程：可能已有过多进程正在运行。"
-          }
-        }
-      }
-    },
     "ui.tasks.ptytask.unable_to_fork_notification_title": {
       "comment": "Notification title when iTerm2 cannot create a child process.",
       "extractionState": "manual",

@@ -1457,6 +1457,57 @@ class LocalizationCheckCLITests(unittest.TestCase):
             result.stderr,
         )
 
+    def _write_shared_fork_diagnostic(self, relative="Tasks/PTYTask.m", *,
+                                      forward=True, sink="withDescription",
+                                      message=None):
+        if message is None:
+            message = "Unable to fork child process: you may have too many processes already running."
+        path = self.sources / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            '- (void)didForkAndExec:(NSString *)progpath withStatus:(int)status '
+            'optionalErrorCode:(NSNumber *)optionalErrorCode {\n'
+            '    switch (status) {\n'
+            '        case iTermJobManagerForkAndExecStatusFailedToFork: {\n'
+            f'            NSString *error = @"{message}";\n'
+            '            if (optionalErrorCode) {\n'
+            '                error = [NSString stringWithFormat:@"%@ The system error was: %s", '
+            'error, strerror(optionalErrorCode.intValue)];\n'
+            '            }\n'
+            f'            [controller notify:title {sink}:error];\n'
+            + ('            [self.delegate taskDiedWithError:error];\n' if forward else '')
+            + '            break;\n        }\n    }\n}\n', encoding="utf-8"
+        )
+
+    def test_shared_fork_diagnostic_is_not_display_only_copy(self):
+        self._write_shared_fork_diagnostic()
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_shared_fork_diagnostic_rule_does_not_cover_other_files(self):
+        self._write_shared_fork_diagnostic("Feature.m")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English text assigned to 'error'", result.stderr)
+
+    def test_shared_fork_diagnostic_rule_requires_non_ui_consumer(self):
+        self._write_shared_fork_diagnostic(forward=False)
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English text assigned to 'error'", result.stderr)
+
+    def test_shared_fork_diagnostic_rule_does_not_cover_other_ui_sinks(self):
+        self._write_shared_fork_diagnostic(sink="heading")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Objective-C UI sink 'heading'", result.stderr)
+
+    def test_shared_fork_diagnostic_rule_does_not_cover_new_text(self):
+        self._write_shared_fork_diagnostic(message="Please select a different profile.")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English text assigned to 'error'", result.stderr)
+
     def test_hard_coded_english_objective_c_direct_notification_fails(self):
         (self.sources / "Feature.m").write_text(
             '[controller notify:@"Idle" withDescription:@"Session became idle."];\n',

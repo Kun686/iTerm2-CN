@@ -1743,6 +1743,36 @@ def check_hardcoded_english_objc_ui_providers(sources):
     return errors
 
 
+def objc_literal_is_shared_fork_diagnostic(path, sources, source, method_boundaries,
+                                          sink, literal_offset, literal):
+    """Only the two original PTY diagnostics shared with logs/terminal output.
+
+    The notification reuses these verbatim. Translating them at construction
+    changes taskDiedWithError's diagnostic payload, not just display copy.
+    Keep this tied to the exact path, failure case, literals, and consumer.
+    """
+    if (path.relative_to(sources).parts != ("Tasks", "PTYTask.m")
+            or sink.group("sink") != "withDescription"
+            or sink.group("variable") != "error"
+            or literal not in {
+                "Unable to fork child process: you may have too many processes already running.",
+                "%@ The system error was: %s",
+            }):
+        return False
+    method_start = objc_method_start(method_boundaries, sink.start())
+    if not re.match(r"-\s*\(void\)\s*didForkAndExec:", source[method_start:]):
+        return False
+    case_start = source.rfind("case ", method_start, literal_offset)
+    case = re.match(r"case iTermJobManagerForkAndExecStatusFailedToFork:\s*\{", source[case_start:])
+    if case is None:
+        return False
+    case_end = objc_braced_block_end(source, case_start + case.end() - 1)
+    if case_end is None or not case_start < literal_offset < sink.start() < case_end:
+        return False
+    return re.search(r"\[self\.delegate\s+taskDiedWithError:\s*error\s*\];",
+                     source[sink.end():case_end]) is not None
+
+
 def check_hardcoded_english_objc_indirect_ui_literals(sources):
     errors = []
     paths = sorted(
@@ -1758,9 +1788,14 @@ def check_hardcoded_english_objc_indirect_ui_literals(sources):
         seen = set()
         for sink_match in OBJC_INDIRECT_UI_SINK.finditer(source):
             variable = sink_match.group("variable")
-            for absolute_offset, _ in objc_unlocalized_assignment_literals(
+            for absolute_offset, literal in objc_unlocalized_assignment_literals(
                 source, method_boundaries, sink_match.start(), variable
             ):
+                if objc_literal_is_shared_fork_diagnostic(
+                    path, sources, source, method_boundaries, sink_match,
+                    absolute_offset, literal
+                ):
+                    continue
                 identity = (path, absolute_offset)
                 if identity in seen:
                     continue

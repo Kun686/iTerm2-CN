@@ -47,6 +47,10 @@ unchanged. Select Simplified Chinese, English, or Follow System in General
 settings, then relaunch to apply the selection. CN builds disable automatic
 updates; Check for Updates opens [Fork Releases](https://github.com/Kun686/iTerm2-CN/releases).
 
+Raw diagnostics remain untranslated. In particular, the fork-failure message
+is shared by logs, terminal output, and the notification body, so it stays in
+English; the notification title is localized.
+
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to
 helpers. For a direct Xcode build, set both `ITERM2_EDITION=cn` and
