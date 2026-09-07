@@ -20,6 +20,37 @@
 
 static char iTermAdvancedSettingsTableKey;
 
+static NSString *iTermAdvancedSettingsLocalizedGroup(NSString *group) {
+    NSString *key = [NSString stringWithFormat:@"ui.advanced.group.%@", group];
+    return [NSBundle.mainBundle localizedStringForKey:key value:group table:nil];
+}
+
+static NSString *iTermAdvancedSettingsLocalizedDescription(NSDictionary *setting, NSString *fallback) {
+    NSString *key = [NSString stringWithFormat:@"ui.advanced.setting.%@.description",
+                     setting[kAdvancedSettingIdentifier]];
+    return [NSBundle.mainBundle localizedStringForKey:key value:fallback table:nil];
+}
+
+static NSString *iTermAdvancedSettingsLocalizedOption(NSString *identifier, NSUInteger index, NSString *fallback) {
+    NSString *key = [NSString stringWithFormat:@"ui.advanced.setting.%@.option.%lu",
+                     identifier, (unsigned long)index];
+    return [NSBundle.mainBundle localizedStringForKey:key value:fallback table:nil];
+}
+
+static NSString *iTermAdvancedSettingsSearchText(NSDictionary *setting) {
+    NSString *description = setting[kAdvancedSettingDescription];
+    NSRange separator = [description rangeOfString:@": "];
+    if (separator.location == NSNotFound) {
+        return description;
+    }
+    NSString *group = [description substringToIndex:separator.location];
+    NSString *remainder = [description substringFromIndex:NSMaxRange(separator)];
+    // Keep English terms and stable identifiers searchable in every language.
+    return [@[ description, setting[kAdvancedSettingIdentifier],
+               iTermAdvancedSettingsLocalizedGroup(group),
+               iTermAdvancedSettingsLocalizedDescription(setting, remainder) ] componentsJoinedByString:@" "];
+}
+
 @interface iTermTableViewTextField : NSTextField
 @property (nonatomic, strong) NSAttributedString *regularAttributedString;
 @property (nonatomic, strong) NSAttributedString *selectedAttributedString;
@@ -193,7 +224,8 @@ static NSDictionary *gIntrospection;
             [result addObject:thisCategory];
         }
         NSMutableDictionary *temp = [dict mutableCopy];
-        temp[kAdvancedSettingDescription] = remainder;
+        // Split the original English category first: translated text may contain colons.
+        temp[kAdvancedSettingDescription] = iTermAdvancedSettingsLocalizedDescription(dict, remainder);
         [result addObject:temp];
     }
     return result;
@@ -259,7 +291,8 @@ static NSDictionary *gIntrospection;
 }
 
 - (NSAttributedString *)attributedStringForGroupNamed:(NSString *)groupName {
-    return [self attributedStringForString:groupName size:20 topMargin:8 selected:NO bold:YES];
+    return [self attributedStringForString:iTermAdvancedSettingsLocalizedGroup(groupName)
+                                     size:20 topMargin:8 selected:NO bold:YES];
 }
 
 - (iTermTableViewTextField *)viewForImmutableAttributedString:(NSAttributedString *)attributedString
@@ -359,8 +392,12 @@ static NSDictionary *gIntrospection;
     [button setAction:@selector(changeEnum:)];
     button.identifier = @"enum";
     [button.menu removeAllItems];
+    NSString *identifier = [self filteredAdvancedSettings][row][kAdvancedSettingIdentifier];
+    NSUInteger index = 0;
     for (NSString *title in options) {
-        [button.menu addItemWithTitle:title action:nil keyEquivalent:@""];
+        [button.menu addItemWithTitle:iTermAdvancedSettingsLocalizedOption(identifier, index, title)
+                              action:nil keyEquivalent:@""];
+        index++;
     }
     if (value >= 0 && value < options.count) {
         [button selectItemAtIndex:value];
@@ -424,7 +461,7 @@ static NSDictionary *gIntrospection;
             NSArray *parts = [_searchField.stringValue componentsSeparatedByString:@" "];
             NSArray *sortedSettings = [[self class] sortedAdvancedSettings];
             for (NSDictionary *dict in sortedSettings) {
-                NSString *description = dict[kAdvancedSettingDescription];
+                NSString *description = iTermAdvancedSettingsSearchText(dict);
                 if ([self description:description matchesQuery:parts]) {
                     [result addObject:dict];
                 }
@@ -765,9 +802,9 @@ static void iTermAdvancedSettingsSaveSecureString(NSDictionary *dict, NSString *
 - (NSArray<iTermPreferencesSearchDocument *> *)searchableViewControllerDocuments {
     if (!_docs) {
         _docs = [[iTermAdvancedSettingsViewController sortedAdvancedSettings] mapWithBlock:^id(NSDictionary *dict) {
-            iTermPreferencesSearchDocument *doc = [iTermPreferencesSearchDocument documentWithDisplayName:@"Advanced Preferences…"  // dict[kAdvancedSettingDescription]
+            iTermPreferencesSearchDocument *doc = [iTermPreferencesSearchDocument documentWithDisplayName:NSLocalizedStringWithDefaultValue(@"settings.advanced.search_result", nil, NSBundle.mainBundle, @"Advanced Preferences…", @"Advanced settings search result title")
                                                                                                identifier:@"Advanced Preferences"  // dict[kAdvancedSettingIdentifier]
-                                                                                           keywordPhrases:@[ dict[kAdvancedSettingDescription] ]
+                                                                                           keywordPhrases:@[ iTermAdvancedSettingsSearchText(dict) ]
                                                                                              profileTypes:ProfileTypeAll];
             doc.queryIndependentScore = -1;
             doc.ownerIdentifier = self.documentOwnerIdentifier;

@@ -165,6 +165,93 @@ class LocalizationCheckCLITests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("Localization check passed", result.stdout)
 
+    def _write_advanced_settings_fixture(self):
+        (self.sources / "Settings/iTermAdvancedSettingsModel.m").write_text(
+            '#define SECTION_BADGE @"Badge: "\n'
+            'DEFINE_STRING(badgeFont, @".AppleSystemUIFont", SECTION_BADGE '
+            '@"Font to use for the badge.\\nLeave empty for the default.");\n'
+            'DEFINE_INT_ENUM(badgeMode, 1, (@[ @"Never", @"Always" ]), '
+            'SECTION_BADGE @"Badge mode.");\n', encoding="utf-8"
+        )
+
+    def test_advanced_settings_missing_dynamic_resources_fail(self):
+        self._write_advanced_settings_fixture()
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("ui.advanced.setting.BadgeFont.description", result.stderr)
+        self.assertIn("ui.advanced.group.Badge", result.stderr)
+        self.assertIn("ui.advanced.setting.BadgeMode.option.1", result.stderr)
+
+    def _write_valid_advanced_settings_resources(self):
+        self._write_advanced_settings_fixture()
+        self._write_catalog("Localizable.xcstrings", {
+            "ui.advanced.group.Badge": {"en": "Badge", "zh-Hans": "徽标"},
+            "ui.advanced.setting.BadgeFont.description": {
+                "en": "Font to use for the badge.\nLeave empty for the default.",
+                "zh-Hans": "徽标字体。\n留空使用默认值。"},
+            "ui.advanced.setting.BadgeMode.description": {"en": "Badge mode.", "zh-Hans": "徽标模式。"},
+            "ui.advanced.setting.BadgeMode.option.0": {"en": "Never", "zh-Hans": "从不"},
+            "ui.advanced.setting.BadgeMode.option.1": {"en": "Always", "zh-Hans": "始终"},
+        })
+        self._advanced_runtime = self.sources / "Settings/iTermAdvancedSettingsViewController.m"
+        self._advanced_runtime.write_text('\n'.join((
+            '@"ui.advanced.group.%@"', '@"ui.advanced.setting.%@.description"',
+            '@"ui.advanced.setting.%@.option.%lu"', 'localizedStringForKey:key',
+            'temp[kAdvancedSettingDescription] = iTermAdvancedSettingsLocalizedDescription(dict, remainder)',
+            'iTermAdvancedSettingsLocalizedGroup(groupName)',
+            'iTermAdvancedSettingsSearchText(dict)',
+            'iTermAdvancedSettingsLocalizedOption(identifier, index, title)',
+        )), encoding="utf-8")
+
+    def test_advanced_settings_valid_dynamic_resources_pass(self):
+        self._write_valid_advanced_settings_resources()
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_advanced_settings_english_source_drift_fails(self):
+        self._write_valid_advanced_settings_resources()
+        model = self.sources / "Settings/iTermAdvancedSettingsModel.m"
+        model.write_text(model.read_text().replace("Badge mode.", "New badge mode."), encoding="utf-8")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("English fallback differs", result.stderr)
+
+    def test_advanced_settings_missing_runtime_lookup_fails(self):
+        self._write_valid_advanced_settings_resources()
+        self._advanced_runtime.write_text("// iTermAdvancedSettingsLocalizedGroup(groupName)", encoding="utf-8")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("localization runtime is missing", result.stderr)
+
+    def test_advanced_settings_missing_enum_option_fails(self):
+        self._write_valid_advanced_settings_resources()
+        catalog = self.sources / "Localizable.xcstrings"
+        data = json.loads(catalog.read_text())
+        del data["strings"]["ui.advanced.setting.BadgeMode.option.1"]
+        catalog.write_text(json.dumps(data), encoding="utf-8")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("ui.advanced.setting.BadgeMode.option.1", result.stderr)
+
+    def test_advanced_settings_extracts_adjacent_literals_not_defaults_or_deprecated(self):
+        self._write_valid_advanced_settings_resources()
+        model = self.sources / "Settings/iTermAdvancedSettingsModel.m"
+        model.write_text(
+            model.read_text().replace('@"Font to use for the badge.\\nLeave empty for the default."',
+                                     '@"Font to use for the badge.\\n" @"Leave empty for the default."') +
+            '\nDEFINE_DEPRECATED_STRING(oldBadge, @"old default", SECTION_BADGE @"No longer displayed");\n' +
+            '#define DEFINE_FIXTURE(name) \\\nDEFINE_STRING(name, @"default", @"macro body");\n', encoding="utf-8")
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_advanced_settings_unparseable_display_fails_closed(self):
+        self._write_valid_advanced_settings_resources()
+        model = self.sources / "Settings/iTermAdvancedSettingsModel.m"
+        model.write_text(model.read_text().replace('SECTION_BADGE @"Badge mode."', 'makeDescription()'), encoding="utf-8")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("unknown advanced settings section", result.stderr)
+
     def test_about_product_name_must_match_cn_identity(self):
         self._write_catalog(
             "AboutWindow/AboutWindow.xcstrings",

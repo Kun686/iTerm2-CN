@@ -22,6 +22,10 @@ iTerm2-CN community localization:
   title preview samples without changing titles.
 - Pairs synthetic drag-test mouse events and
   waits for native session cleanup between tests.
+- Localizes Advanced setting descriptions,
+  categories, and enum titles without changing
+  stored values. English terms and setting keys
+  remain searchable.
 - Applies the saved language before resolving
   localized bundle metadata at startup.
 - Uses system locale inputs for CN shell locale

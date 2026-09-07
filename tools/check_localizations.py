@@ -1993,6 +1993,100 @@ def check_localization_references(sources, known_keys):
     return errors
 
 
+def advanced_settings_localization_entries(source):
+    """Extract display text, never defaults, from the model's DEFINE_* macros."""
+    source = source_without_comments(source)
+    sections = {}
+    for match in re.finditer(r'^#define\s+(SECTION_\w+)\s+(@"(?:\\.|[^"\\])*")', source, re.MULTILINE):
+        value = json.loads(match[2][1:])
+        if not value.endswith(": "):
+            raise ValueError(f"advanced settings section lacks ': ': {match[1]}")
+        sections[match[1]] = value[:-2]
+
+    def literal_value(expression):
+        literals = list(OBJC_STRING_LITERAL.finditer(expression))
+        if not literals or OBJC_STRING_LITERAL.sub("", expression).strip():
+            raise ValueError(f"unsupported advanced settings display expression: {expression}")
+        return "".join(json.loads(item[0][1:]) for item in literals)
+
+    declarations = []
+    continued_directive = False
+    for line in source.splitlines(keepends=True):
+        directive = continued_directive or line.lstrip().startswith("#")
+        continued_directive = directive and line.rstrip().endswith("\\")
+        declarations.append("\n" if directive else line)
+    source = "".join(declarations)
+    entries = {f"ui.advanced.group.{group}": group for group in sections.values()}
+    for match in re.finditer(r'^DEFINE_(\w+)\s*\(', source, re.MULTILINE):
+        end = objc_parenthesized_call_end(source, match.end() - 1)
+        if end is None:
+            raise ValueError("unterminated advanced settings definition")
+        arguments = [value.strip() for _, value in objc_top_level_array_elements(source[match.end():end - 1])]
+        if match[1].startswith("DEPRECATED_"):
+            continue  # enumerateDictionaries explicitly excludes these from the UI.
+        name = arguments[0]
+        if not re.fullmatch(r"[A-Za-z_]\w*", name):
+            raise ValueError(f"invalid advanced settings identifier: {name}")
+        identifier = name[0].upper() + name[1:]
+        section = re.match(r"(SECTION_\w+)\s+", arguments[-1])
+        if section is None or section[1] not in sections:
+            raise ValueError(f"unknown advanced settings section for {identifier}")
+        key = f"ui.advanced.setting.{identifier}.description"
+        if key in entries:
+            raise ValueError(f"duplicate advanced settings identifier: {identifier}")
+        entries[key] = literal_value(arguments[-1][section.end():])
+        if match[1] == "INT_ENUM":
+            options = arguments[-2]
+            array_start = options.find("@[")
+            array_end = objc_array_literal_end(options, array_start + 2)
+            if array_start < 0 or array_end is None:
+                raise ValueError(f"invalid advanced settings options for {identifier}")
+            for index, (_, option) in enumerate(objc_top_level_array_elements(options[array_start + 2:array_end])):
+                entries[f"ui.advanced.setting.{identifier}.option.{index}"] = literal_value(option)
+    if not any(key.endswith(".description") for key in entries):
+        raise ValueError("no advanced settings display definitions found")
+    return entries
+
+
+def check_advanced_settings_localization(sources, catalog_entries):
+    model_path = sources / "Settings/iTermAdvancedSettingsModel.m"
+    if not model_path.is_file():
+        return []
+    try:
+        entries = advanced_settings_localization_entries(model_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, ValueError) as error:
+        return [f"{model_path}: {error}"]
+    errors = []
+    for key, english in entries.items():
+        record = catalog_entries.get(key)
+        if record is None:
+            errors.append(f"{model_path}: missing advanced settings localization key {key!r}")
+            continue
+        path, entry = record
+        if entry.get("shouldTranslate") is False:
+            errors.append(f"{path}: {key}: advanced settings text must be translatable")
+        unit = entry.get("localizations", {}).get("en", {}).get("stringUnit", {})
+        if unit.get("value") != english:
+            errors.append(f"{path}: {key}: English fallback differs from advanced settings model")
+    view_path = sources / "Settings/iTermAdvancedSettingsViewController.m"
+    try:
+        view_source = source_without_comments(view_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError) as error:
+        errors.append(f"{view_path}: unable to inspect advanced settings display: {error}")
+        return errors
+    for marker in (
+        '@"ui.advanced.group.%@"', '@"ui.advanced.setting.%@.description"',
+        '@"ui.advanced.setting.%@.option.%lu"', 'localizedStringForKey:key',
+        'temp[kAdvancedSettingDescription] = iTermAdvancedSettingsLocalizedDescription(dict, remainder)',
+        'iTermAdvancedSettingsLocalizedGroup(groupName)',
+        'iTermAdvancedSettingsSearchText(dict)',
+        'iTermAdvancedSettingsLocalizedOption(identifier, index, title)',
+    ):
+        if marker not in view_source:
+            errors.append(f"{view_path}: advanced settings localization runtime is missing {marker!r}")
+    return errors
+
+
 def check_tip_data_localization(sources, catalog_entries):
     """Ensure every app-owned Tip of the Day field is localized by stable tip ID."""
     path = sources / "TIps" / "iTermTipData.m"
@@ -2418,6 +2512,7 @@ def check_project(project_root):
     errors.extend(check_hardcoded_english_objc_ui_providers(sources))
     errors.extend(check_localization_references(sources, catalog_keys))
     errors.extend(check_tip_data_localization(sources, catalog_entries))
+    errors.extend(check_advanced_settings_localization(sources, catalog_entries))
     errors.extend(check_xib_catalog_membership(project_root, catalogs))
     return errors, checked_entries
 
