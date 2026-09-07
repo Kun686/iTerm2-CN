@@ -40,6 +40,8 @@ iTerm2-CN community localization:
   notification body; its title is localized.
 - Preserves the in-memory transfer path marker
   used by file actions, independent of UI language.
+- Keeps shared SSH Integration transfer errors
+  unchanged in logs and completion callbacks.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.

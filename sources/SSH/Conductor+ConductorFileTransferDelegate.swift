@@ -10,14 +10,14 @@
 extension Conductor: ConductorFileTransferDelegate {
     func beginDownload(fileTransfer: ConductorFileTransfer) {
         guard let path = fileTransfer.localPath() else {
-            fileTransfer.fail(reason: String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.no_local_path_specified.1df83575", defaultValue: "No local path specified", bundle: .main, comment: "User-facing file-transfer error."))
+            fileTransfer.fail(reason: "No local path specified")
             return
         }
         let remotePath = fileTransfer.path.path!
 
         FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
         guard let fileHandle = FileHandle(forUpdatingAtPath: path) else {
-            fileTransfer.fail(reason: String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.could_not_open_0.623fc51f", defaultValue: "Could not open \(path)", bundle: .main, comment: "User-facing file-transfer error."))
+            fileTransfer.fail(reason: "Could not open \(path)")
             return
         }
         Task {
@@ -51,7 +51,7 @@ extension Conductor: ConductorFileTransferDelegate {
         if info.kind == .folder {
             continuation.finish(
                 throwing: ConductorFileTransfer.ConductorFileTransferError(
-                    String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.streaming_downloads_do_not_support_folders.8ae9b1d5", defaultValue: "Streaming downloads do not support folders", bundle: .main, comment: "User-facing file-transfer error.")))
+                    "Streaming downloads do not support folders"))
             return
         }
         var done = false
@@ -80,7 +80,7 @@ extension Conductor: ConductorFileTransferDelegate {
             let info = try await stat(remotePath)
             if info.kind == .folder {
                 if !allowDirectories {
-                    fileTransfer.fail(reason: String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.transfer_of_directory_at_0_not_allowed.98161b4a", defaultValue: "Transfer of directory at \(remotePath) not allowed", bundle: .main, comment: "User-facing file-transfer error."))
+                    fileTransfer.fail(reason: "Transfer of directory at \(remotePath) not allowed")
                 }
                 await reallyDownloadFolder(info: info,
                                            fileTransfer: fileTransfer,
@@ -169,7 +169,7 @@ extension Conductor: ConductorFileTransferDelegate {
         }
 
         guard remoteFile.kind.isRegularFile else {
-            throw ConductorFileTransfer.ConductorFileTransferError(String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.0_on_1_is_not_a_regular_file.bf0e14f5", defaultValue: "\(remoteFile.absolutePath) on \(sshIdentity.displayName) is not a regular file", bundle: .main, comment: "User-facing file-transfer error."))
+            throw ConductorFileTransfer.ConductorFileTransferError("\(remoteFile.absolutePath) on \(sshIdentity.displayName) is not a regular file")
         }
 
         let scpPath = SCPPath()
@@ -268,7 +268,7 @@ extension Conductor: ConductorFileTransferDelegate {
                 offset: taskOffset,
                 task: Task { @MainActor in
                     if fileTransfer.isStopped {
-                        throw ConductorFileTransfer.ConductorFileTransferError(String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.canceled.13ca2ee2", defaultValue: "Canceled", bundle: .main, comment: "User-facing file-transfer cancellation error."))
+                        throw ConductorFileTransfer.ConductorFileTransferError("Canceled")
                     }
                     let data = try await conductor.downloadOneChunk(
                         remoteFile: remoteFile,
@@ -298,13 +298,8 @@ extension Conductor: ConductorFileTransferDelegate {
                 let result = try await tasks.removeFirst().task.value
                 content.append(result)
                 if result.isEmpty && !tasks.isEmpty {
-                    let byteWord = remoteFile.size! == 1
-                        ? String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.byte.1c31626f", defaultValue: "byte", bundle: .main, comment: "Singular byte unit in a file-transfer error.")
-                        : String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.bytes.277089d9", defaultValue: "bytes", bundle: .main, comment: "Plural byte unit in a file-transfer error.")
-                    let received = String(content.count)
-                    let expected = String(remoteFile.size!)
                     throw ConductorFileTransfer.ConductorFileTransferError(
-                        String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.download_ended_prematurely_received_0_of_1_2.00ac388e", defaultValue: "Download ended prematurely (received \(received) of \(expected) \(byteWord))", bundle: .main, comment: "User-facing file-transfer error."))
+                        "Download ended prematurely (received \(content.count) of \(remoteFile.size!) byte\(remoteFile.size! == 1 ? "" : "s")")
                 }
             }
         }
@@ -358,7 +353,7 @@ extension Conductor: ConductorFileTransferDelegate {
             return
         }
         guard let path = fileTransfer.localPath() else {
-            fileTransfer.fail(reason: String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.no_local_filename_specified.f26bfa50", defaultValue: "No local filename specified", bundle: .main, comment: "User-facing file-transfer error."))
+            fileTransfer.fail(reason: "No local filename specified")
             return
         }
         Task {
@@ -406,7 +401,7 @@ extension Conductor: ConductorFileTransferDelegate {
                 proposedName = fileTransfer.path.path + " (\(i + 2))"
             }
             guard let remoteName else {
-                throw ConductorFileTransfer.ConductorFileTransferError(String(localized: "ui.swift.ssh.conductor_conductorfiletransferdelegate.too_many_iterations_to_find_a_valid_file.697a40a1", defaultValue: "Too many iterations to find a valid file name on remote host for upload", bundle: .main, comment: "User-facing file-transfer error."))
+                throw ConductorFileTransfer.ConductorFileTransferError("Too many iterations to find a valid file name on remote host for upload")
             }
             fileTransfer.remoteName = remoteName
             // Rename the tempfile to the proper name

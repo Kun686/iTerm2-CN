@@ -97,7 +97,7 @@ class ConductorFileTransfer: TransferrableFile {
 
     private func temporaryFilePath() throws -> String {
         guard let downloads = FileManager.default.downloadsDirectory() else {
-            throw ConductorFileTransferError(String(localized: "ui.swift.ssh.conductorfiletransfer.unable_to_find_downloads_folder.dd7d6558", defaultValue: "Unable to find Downloads folder", bundle: .main, comment: "User-facing file-transfer error."))
+            throw ConductorFileTransferError("Unable to find Downloads folder")
         }
         let tempFileName = ".iTerm2.\(UUID().uuidString)"
         return downloads.appendingPathComponent(tempFileName)
@@ -152,12 +152,12 @@ class ConductorFileTransfer: TransferrableFile {
     func didFinishSuccessfully() {
         if state == .downloading {
             if !quarantine(_localPath, sourceURL: url) {
-                _error = String(localized: "ui.swift.ssh.conductorfiletransfer.failed_to_quarantine.0bbc1c5a", defaultValue: "Failed to quarantine", bundle: .main, comment: "User-facing file-transfer error.")
+                _error = "Failed to quarantine"
                 FileTransferManager.sharedInstance().transferrableFile(self, didFinishTransmissionWithError: ConductorFileTransferError(_error))
                 return
             }
             guard let attributes = try? FileManager.default.attributesOfItem(atPath: _localPath!) else {
-                _error = String(localized: "ui.swift.ssh.conductorfiletransfer.could_not_get_attributes_of_0.f8f6dbb3", defaultValue: "Could not get attributes of \(_localPath!)", bundle: .main, comment: "User-facing file-transfer error.")
+                _error = "Could not get attributes of \(_localPath!)"
                 FileTransferManager.sharedInstance().transferrableFile(self, didFinishTransmissionWithError: ConductorFileTransferError(_error))
                 return
             }
@@ -217,14 +217,14 @@ class ConductorFileTransfer: TransferrableFile {
         do {
             let attrs = try FileManager.default.attributesOfItem(atPath: path)
             guard let size = attrs[FileAttributeKey.size] as? Int else {
-                _error = String(localized: "ui.swift.ssh.conductorfiletransfer.could_not_get_size_of_file_0.0888025e", defaultValue: "Could not get size of file: \(path)", bundle: .main, comment: "User-facing file-transfer error.")
+                _error = "Could not get size of file: \(path)"
                 state = .failed
                 FileTransferManager.sharedInstance().transferrableFile(self, didFinishTransmissionWithError: ConductorFileTransferError(_error))
                 return nil
             }
             return size
         } catch {
-            _error = String(localized: "ui.swift.ssh.conductorfiletransfer.no_such_file_0.db9e73ae", defaultValue: "No such file: \(path)", bundle: .main, comment: "User-facing file-transfer error.")
+            _error = "No such file: \(path)"
             FileTransferManager.sharedInstance().transferrableFile(self, didFinishTransmissionWithError: error)
             state = .failed
             return nil
