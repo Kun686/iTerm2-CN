@@ -23,9 +23,9 @@ class BufferInputTrigger: Trigger {
     }
     override var description: String {
         if shouldBuffer {
-            return String(localized: "ui.swift.triggers.bufferinputtrigger.buffer_input.aa0ad61f", defaultValue: "Buffer Input", bundle: .main, comment: "User-facing text in BufferInputTrigger.")
+            return "Buffer Input"
         } else {
-            return String(localized: "ui.swift.triggers.bufferinputtrigger.stop_buffering_input.b1c5cfdb", defaultValue: "Stop Buffering Input", bundle: .main, comment: "User-facing text in BufferInputTrigger.")
+            return "Stop Buffering Input"
         }
     }
 

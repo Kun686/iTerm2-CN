@@ -10,7 +10,7 @@ import Foundation
 @objc(iTermInjectTrigger)
 class InjectTrigger: Trigger {
     override var description: String {
-        return String(localized: "ui.swift.triggers.injecttrigger.inject_data_0.93f402b9", defaultValue: "Inject Data “\(String(describing: self.param ?? ""))”", bundle: .main, comment: "User-facing text in InjectTrigger.")
+        return "Inject Data “\(self.param ?? "")”"
     }
 
     override static var title: String {

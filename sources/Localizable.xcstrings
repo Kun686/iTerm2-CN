@@ -68395,24 +68395,6 @@
         }
       }
     },
-    "ui.swift.triggers.bufferinputtrigger.buffer_input.aa0ad61f": {
-      "comment": "User-facing text in BufferInputTrigger.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buffer Input"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "缓冲输入"
-          }
-        }
-      }
-    },
     "ui.swift.triggers.bufferinputtrigger.buffer_input.ecb7661d": {
       "comment": "User-facing text in BufferInputTrigger.",
       "extractionState": "manual",
@@ -68719,24 +68701,6 @@
         }
       }
     },
-    "ui.swift.triggers.foldtrigger.fold_to_0.a088e991": {
-      "comment": "User-facing text in FoldTrigger.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fold to %1$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "折叠到 %1$@"
-          }
-        }
-      }
-    },
     "ui.swift.triggers.foldtrigger.fold_to_named_mark.9e6ddad5": {
       "comment": "User-facing text in FoldTrigger.",
       "extractionState": "manual",
@@ -68931,24 +68895,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "注入数据…"
-          }
-        }
-      }
-    },
-    "ui.swift.triggers.injecttrigger.inject_data_0.93f402b9": {
-      "comment": "User-facing text in InjectTrigger.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Inject Data “%1$@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "注入数据“%1$@”"
           }
         }
       }
@@ -70303,24 +70249,6 @@
         }
       }
     },
-    "ui.swift.triggers.setnamedmarktrigger.set_named_mark_to_0.771373c2": {
-      "comment": "User-facing text in SetNamedMarkTrigger.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set Named Mark to %1$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "将命名标记设为 %1$@"
-          }
-        }
-      }
-    },
     "ui.swift.triggers.setprofilebooleantrigger.set_profile_setting.8630c091": {
       "comment": "User-facing text in SetProfileBooleanTrigger.",
       "extractionState": "manual",
@@ -70447,42 +70375,6 @@
         }
       }
     },
-    "ui.swift.triggers.setuservariabletrigger.set_user_variable_0.b65b9aa7": {
-      "comment": "User-facing text in SetUserVariableTrigger.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set User Variable “%1$@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "设置用户变量“%1$@”"
-          }
-        }
-      }
-    },
-    "ui.swift.triggers.setuservariabletrigger.set_user_variable_0_to_1.a0bd67c1": {
-      "comment": "User-facing text in SetUserVariableTrigger.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set User Variable “%1$@” to “%2$@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "将用户变量“%1$@”设为“%2$@”"
-          }
-        }
-      }
-    },
     "ui.swift.triggers.setuservariabletrigger.value_for_variable.62b2a848": {
       "comment": "User-facing text in SetUserVariableTrigger.",
       "extractionState": "manual",
@@ -70515,24 +70407,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "更改样式…"
-          }
-        }
-      }
-    },
-    "ui.swift.triggers.sgrtrigger.change_style_0.2a34ae64": {
-      "comment": "User-facing text in SGRTrigger.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Change Style “%1$@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "更改样式“%1$@”"
           }
         }
       }

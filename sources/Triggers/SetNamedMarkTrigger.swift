@@ -8,7 +8,7 @@
 @objc(iTermSetNamedMarkTrigger)
 class SetNamedMarkTrigger: Trigger {
     override var description: String {
-        return String(localized: "ui.swift.triggers.setnamedmarktrigger.set_named_mark_to_0.771373c2", defaultValue: "Set Named Mark to \(String(describing: self.param ?? ""))", bundle: .main, comment: "User-facing text in SetNamedMarkTrigger.")
+        return "Set Named Mark to \(self.param ?? "")"
     }
 
     override static var title: String {

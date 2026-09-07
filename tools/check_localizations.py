@@ -156,6 +156,18 @@ OBJC_LOG_CALL = re.compile(
 SWIFT_TRIGGER_PROVIDER_SELECTORS = frozenset(
     {"title", "description", "triggerOptionalParameterPlaceholder"}
 )
+SWIFT_SHARED_TRIGGER_DIAGNOSTIC_BODIES = {
+    "SGRTrigger": r'return "Change Style “\(self.param ?? "")”"',
+    "SetNamedMarkTrigger": r'return "Set Named Mark to \(self.param ?? "")"',
+    "FoldTrigger": r'return "Fold to \(self.param ?? "")"',
+    "InjectTrigger": r'return "Inject Data “\(self.param ?? "")”"',
+    "ExitWorkgroupTrigger": 'return "Exit Workgroup"',
+    "BufferInputTrigger": 'if shouldBuffer { return "Buffer Input" } else { return "Stop Buffering Input" }',
+    "SetUserVariableTrigger": (
+        'if let string = param as? String, let (name, value) = variableNameAndValue(string) {\n'
+        r'return "Set User Variable “\(name)” to “\(value)”"' '\n} else {\n'
+        r'return "Set User Variable “\(param ?? "")”"' '\n}'),
+}
 SWIFT_STATUS_BAR_PROVIDER_SELECTORS = frozenset(
     {
         "statusBarComponentShortDescription",
@@ -1121,6 +1133,21 @@ def check_hardcoded_english_swift_localized_interpolation_fallbacks(sources):
     return errors
 
 
+def swift_body_is_shared_trigger_diagnostic(path, sources, declaration, body):
+    """Classify only reviewed original instance descriptions with real log consumers."""
+    original = SWIFT_SHARED_TRIGGER_DIAGNOSTIC_BODIES.get(path.stem)
+    if (original is None
+            or path.relative_to(sources).parts != ("Triggers", path.stem + ".swift")
+            or re.fullmatch(r'\s*override\s+var\s+description\s*:\s*String\s*\{',
+                            declaration.group(0)) is None):
+        return False
+    # As with the ObjC classifier, preserve literal spaces and identifier
+    # boundaries. Interpolation text is conservatively compared as written.
+    token = SWIFT_STRING_LITERAL.pattern + r"|\w+|\S"
+    return (re.findall(token, body) == re.findall(token, original)
+            and trigger_description_has_match_log_consumers(sources))
+
+
 def check_hardcoded_english_swift_ui_providers(sources):
     errors = []
     for path in sorted(sources.rglob("*.swift")):
@@ -1149,6 +1176,8 @@ def check_hardcoded_english_swift_ui_providers(sources):
                 continue
             body_start = declaration.start("open") + 1
             body = source[body_start:block_end - 1]
+            if swift_body_is_shared_trigger_diagnostic(path, sources, declaration, body):
+                continue
             localized_ranges = swift_localization_call_ranges(body)
             for literal_match in SWIFT_STRING_LITERAL.finditer(body):
                 if any(
@@ -1785,6 +1814,10 @@ def objc_literal_is_shared_trigger_diagnostic(path, sources, declaration, body, 
         if re.fullmatch(rf'\s*return\s+{expression}\s*;',
                         body[statement_start:statement_end + 1]) is None:
             return False
+    return trigger_description_has_match_log_consumers(sources)
+
+
+def trigger_description_has_match_log_consumers(sources):
     try:
         consumer = source_without_comments(
             (sources / "Triggers/Trigger.m").read_text(encoding="utf-8"))

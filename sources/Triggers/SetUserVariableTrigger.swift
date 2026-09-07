@@ -59,9 +59,9 @@ class SetUserVariableTrigger: Trigger {
 
     override var description: String {
         if let string = param as? String, let (name, value) = variableNameAndValue(string) {
-            return String(localized: "ui.swift.triggers.setuservariabletrigger.set_user_variable_0_to_1.a0bd67c1", defaultValue: "Set User Variable “\(name)” to “\(value)”", bundle: .main, comment: "User-facing text in SetUserVariableTrigger.")
+            return "Set User Variable “\(name)” to “\(value)”"
         } else {
-            return String(localized: "ui.swift.triggers.setuservariabletrigger.set_user_variable_0.b65b9aa7", defaultValue: "Set User Variable “\(String(describing: param ?? ""))”", bundle: .main, comment: "User-facing text in SetUserVariableTrigger.")
+            return "Set User Variable “\(param ?? "")”"
         }
     }
 

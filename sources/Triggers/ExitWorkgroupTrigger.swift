@@ -22,7 +22,7 @@ class ExitWorkgroupTrigger: Trigger {
     }
 
     override var description: String {
-        return String(localized: "ui.swift.triggers.exitworkgrouptrigger.exit_workgroup.ad1c7dcb", defaultValue: "Exit Workgroup", bundle: .main, comment: "User-facing text in ExitWorkgroupTrigger.")
+        return "Exit Workgroup"
     }
 
     override func takesParameter() -> Bool {

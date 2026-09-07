@@ -10,7 +10,7 @@ import Foundation
 @objc(iTermSGRTrigger)
 class SGRTrigger: Trigger {
     override var description: String {
-        return String(localized: "ui.swift.triggers.sgrtrigger.change_style_0.2a34ae64", defaultValue: "Change Style “\(String(describing: self.param ?? ""))”", bundle: .main, comment: "User-facing text in SGRTrigger.")
+        return "Change Style “\(self.param ?? "")”"
     }
 
     override static var title: String {

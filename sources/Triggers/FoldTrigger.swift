@@ -8,7 +8,7 @@
 @objc(iTermFoldTrigger)
 class FoldTrigger: Trigger {
     override var description: String {
-        return String(localized: "ui.swift.triggers.foldtrigger.fold_to_0.a088e991", defaultValue: "Fold to \(String(describing: self.param ?? ""))", bundle: .main, comment: "User-facing text in FoldTrigger.")
+        return "Fold to \(self.param ?? "")"
     }
 
     override static var title: String {

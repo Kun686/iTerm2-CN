@@ -78,6 +78,10 @@ Workgroup trigger menus retain `Untitled` for unnamed workgroups: that label's
 sort position determines the implicit target when no workgroup ID is stored.
 Both terminal and browser triggers preserve the upstream default-selection
 algorithm and stored IDs. Their independent action titles remain localized.
+SGR-style, named-mark, fold, injected-data, user-variable, buffered-input, and
+workgroup-exit trigger descriptions also retain the original diagnostic text.
+Their action titles and independent prompts remain localized; buffered-input
+menu labels still map to the original numeric options.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to

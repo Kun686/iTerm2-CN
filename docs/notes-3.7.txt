@@ -70,6 +70,10 @@ iTerm2-CN community localization:
   Terminal and browser actions keep the original
   selection algorithm and stored workgroup IDs.
   Independent action titles remain localized.
+- Keeps SGR, named-mark, fold, injected-data,
+  user-variable, buffered-input, and workgroup-exit
+  trigger diagnostics unchanged. Independent
+  titles, prompts, and buffer menus stay localized.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.

@@ -1730,6 +1730,73 @@ class LocalizationCheckCLITests(unittest.TestCase):
             f"- (BOOL){consumer_method}:(id)line {{\n" + log * logs + "}\n",
             encoding="utf-8")
 
+    def _swift_trigger_bodies(self):
+        return {
+            "SGRTrigger": r'return "Change Style “\(self.param ?? "")”"',
+            "SetNamedMarkTrigger": r'return "Set Named Mark to \(self.param ?? "")"',
+            "FoldTrigger": r'return "Fold to \(self.param ?? "")"',
+            "InjectTrigger": r'return "Inject Data “\(self.param ?? "")”"',
+            "ExitWorkgroupTrigger": 'return "Exit Workgroup"',
+            "BufferInputTrigger": 'if shouldBuffer { return "Buffer Input" } else { return "Stop Buffering Input" }',
+            "SetUserVariableTrigger": (
+                'if let string = param as? String, let (name, value) = variableNameAndValue(string) {\n'
+                r'return "Set User Variable “\(name)” to “\(value)”"' '\n} else {\n'
+                r'return "Set User Variable “\(param ?? "")”"' '\n}'),
+        }
+
+    def _write_swift_trigger_description(self, *, name="SGRTrigger", body=None,
+                                         declaration="override var description: String",
+                                         **consumer_options):
+        self._write_shared_trigger_description(**consumer_options)
+        if body is None:
+            body = self._swift_trigger_bodies()["SGRTrigger"]
+        previous = getattr(self, "_swift_trigger_fixture", None)
+        if previous is not None:
+            previous.unlink()
+        self._swift_trigger_fixture = self.sources / "Triggers" / f"{name}.swift"
+        self._swift_trigger_fixture.write_text(
+            f"class {name}: Trigger {{\n    {declaration} {{\n{body}\n    }}\n}}\n",
+            encoding="utf-8")
+
+    def test_swift_shared_trigger_original_bodies_are_diagnostics(self):
+        for name, body in self._swift_trigger_bodies().items():
+            with self.subTest(name=name):
+                self._write_swift_trigger_description(name=name, body=body)
+                result = self._run_checker()
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_swift_shared_trigger_rule_rejects_other_paths_and_providers(self):
+        for changes in ({"name": "FeatureTrigger"},
+                        {"declaration": "override static var title: String"},
+                        {"declaration": "static var description: String"}):
+            with self.subTest(changes=changes):
+                self._write_swift_trigger_description(**changes)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Swift UI provider", result.stderr)
+
+    def test_swift_shared_trigger_rule_rejects_changed_text_operands_and_branches(self):
+        original = self._swift_trigger_bodies()["SGRTrigger"]
+        for body in (original.replace("Change Style", "Change  Style"),
+                     original.replace("self.param", "other.param"),
+                     original.replace("return", "returnOther"),
+                     original + '\nmutateState()',
+                     'if condition { ' + original + ' } else { return "Different" }'):
+            with self.subTest(body=body):
+                self._write_swift_trigger_description(body=body)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Swift UI provider 'description'", result.stderr)
+
+    def test_swift_shared_trigger_rule_requires_real_match_log_consumers(self):
+        for options in ({"logs": 1}, {"commented": True}, {"operand": "other"},
+                        {"consumer_method": "otherMethod"}):
+            with self.subTest(options=options):
+                self._write_swift_trigger_description(**options)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Swift UI provider 'description'", result.stderr)
+
     def test_shared_trigger_description_is_not_display_only_copy(self):
         self._write_shared_trigger_description()
         result = self._run_checker()
