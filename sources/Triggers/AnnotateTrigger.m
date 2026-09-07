@@ -17,7 +17,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.annotatetrigger.annotate_as_as.86ebc993", nil, NSBundle.mainBundle, @"Annotate as as “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Annotate as as “%@”", self.param];
 }
 
 - (BOOL)takesParameter

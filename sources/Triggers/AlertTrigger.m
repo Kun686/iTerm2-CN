@@ -28,7 +28,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.alerttrigger.show_alert.e1f95ce4", nil, NSBundle.mainBundle, @"Show alert “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Show alert “%@”", self.param];
 }
 
 - (BOOL)takesParameter

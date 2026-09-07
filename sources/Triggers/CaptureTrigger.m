@@ -25,9 +25,9 @@
 
 - (NSString *)description {
     if ([NSString castFrom:self.param].length > 0) {
-        return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.capturetrigger.capture_output_running_on_double_click.4e9d0f95", nil, NSBundle.mainBundle, @"Capture output, running “%@” on double-click", @"Trigger action summary. Preserve the placeholder."), self.param];
+        return [NSString stringWithFormat:@"Capture output, running “%@” on double-click", self.param];
     } else {
-        return NSLocalizedStringWithDefaultValue(@"ui.triggers.capturetrigger.capture_output.2543ca4b", nil, NSBundle.mainBundle, @"Capture Output", @"Trigger action summary.");
+        return @"Capture Output";
     }
 }
 

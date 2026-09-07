@@ -66,6 +66,10 @@ file metadata or paths.
 SSH connection-closed and file-not-found descriptions remain in English because
 remote file creation includes them in AI tool responses as well as user notices.
 Other independent endpoint error descriptions remain localized.
+Shared alert, annotation, bell, capture, command, send-text, directory, host,
+hyperlink, script-function, and title trigger descriptions retain their original
+log text, including when used in import summaries or unnamed-trigger fallbacks.
+Their independent action titles and parameter prompts remain localized.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to

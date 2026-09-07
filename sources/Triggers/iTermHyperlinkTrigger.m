@@ -19,7 +19,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermhyperlinktrigger.make_hyperlink_with_url.29ec4a5f", nil, NSBundle.mainBundle, @"Make Hyperlink with URL “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Make Hyperlink with URL “%@”", self.param];
 }
 
 - (BOOL)takesParameter {

@@ -19,7 +19,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermsettitletrigger.set_title_to.a6fdf598", nil, NSBundle.mainBundle, @"Set Title to “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Set Title to “%@”", self.param];
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {

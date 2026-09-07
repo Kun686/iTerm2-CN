@@ -14,7 +14,7 @@
 @implementation BellTrigger
 
 - (NSString *)description {
-    return NSLocalizedStringWithDefaultValue(@"ui.triggers.belltrigger.ring_bell.51710b17", nil, NSBundle.mainBundle, @"Ring Bell", @"Trigger action summary.");
+    return @"Ring Bell";
 }
 
 + (NSString *)title

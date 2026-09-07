@@ -26,7 +26,7 @@ static NSString *const iTermRPCTriggerPathLineNumber = @"trigger.line_number";
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermrpctrigger.invoke_script_function.6609ad2a", nil, NSBundle.mainBundle, @"Invoke Script Function “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Invoke Script Function “%@”", self.param];
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {

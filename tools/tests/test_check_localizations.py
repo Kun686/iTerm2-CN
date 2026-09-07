@@ -1714,6 +1714,77 @@ class LocalizationCheckCLITests(unittest.TestCase):
             result.stderr,
         )
 
+    def _write_shared_trigger_description(self, *, name="SendTextTrigger",
+                                          declaration="- (NSString *)description",
+                                          body='return [NSString stringWithFormat:@"Send text “%@”", self.param];',
+                                          consumer_method="reallyTryString", logs=2,
+                                          operand="self", commented=False):
+        triggers = self.sources / "Triggers"
+        triggers.mkdir(exist_ok=True)
+        (triggers / f"{name}.m").write_text(
+            f"{declaration} {{\n    {body}\n}}\n", encoding="utf-8")
+        log = f'DLog(@"Trigger %@ matched string %@", {operand}, s);\n'
+        if commented:
+            log = "// " + log
+        (triggers / "Trigger.m").write_text(
+            f"- (BOOL){consumer_method}:(id)line {{\n" + log * logs + "}\n",
+            encoding="utf-8")
+
+    def test_shared_trigger_description_is_not_display_only_copy(self):
+        self._write_shared_trigger_description()
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_shared_trigger_capture_description_keeps_both_branches(self):
+        self._write_shared_trigger_description(name="CaptureTrigger", body=(
+            'if ([NSString castFrom:self.param].length > 0) {\n'
+            'return [NSString stringWithFormat:@"Capture output, running “%@” on double-click", self.param];\n'
+            '} else { return @"Capture Output"; }'))
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_shared_trigger_rule_does_not_cover_other_files(self):
+        self._write_shared_trigger_description(name="FeatureTrigger")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("UI provider 'description'", result.stderr)
+
+    def test_shared_trigger_rule_does_not_cover_titles_or_class_methods(self):
+        for declaration in ("+ (NSString *)title", "+ (NSString *)description",
+                            "- (NSString *)paramPlaceholder"):
+            with self.subTest(declaration=declaration):
+                self._write_shared_trigger_description(declaration=declaration)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Objective-C UI provider", result.stderr)
+
+    def test_shared_trigger_rule_does_not_cover_new_text_or_operands(self):
+        for body in ('return @"A new description";',
+                     'return [NSString stringWithFormat:@"Send text “%@”", self.title];',
+                     'return [NSString stringWithFormat:@"Ring Bell", self.param];'):
+            with self.subTest(body=body):
+                self._write_shared_trigger_description(body=body)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("UI provider 'description'", result.stderr)
+
+    def test_shared_trigger_rule_does_not_cover_ui_side_effects(self):
+        self._write_shared_trigger_description(body=(
+            'alert.messageText = @"Send text “%@”";\n'
+            'return [NSString stringWithFormat:@"Send text “%@”", self.param];'))
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English text", result.stderr)
+
+    def test_shared_trigger_rule_requires_both_real_log_consumers(self):
+        for changes in ({"logs": 0}, {"logs": 1}, {"operand": "other"},
+                        {"consumer_method": "showTitle"}, {"commented": True}):
+            with self.subTest(changes=changes):
+                self._write_shared_trigger_description(**changes)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("UI provider 'description'", result.stderr)
+
     def test_hard_coded_english_objective_c_status_bar_provider_fails(self):
         components = self.sources / "StatusBar" / "Components"
         components.mkdir(parents=True)

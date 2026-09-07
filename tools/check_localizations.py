@@ -170,6 +170,20 @@ OBJC_TRIGGER_PROVIDER_SELECTORS = frozenset(
         "triggerOptionalParameterPlaceholderWithInterpolation",
     }
 )
+OBJC_SHARED_TRIGGER_DIAGNOSTICS = {
+    "AlertTrigger": {"Show alert “%@”"},
+    "AnnotateTrigger": {"Annotate as as “%@”"},
+    "BellTrigger": {"Ring Bell"},
+    "CaptureTrigger": {"Capture output, running “%@” on double-click", "Capture Output"},
+    "CoprocessTrigger": {"Run Coprocess “%@”"},
+    "ScriptTrigger": {"Run Command “%@”"},
+    "SendTextTrigger": {"Send text “%@”"},
+    "SetDirectoryTrigger": {"Report Directory as “%@”"},
+    "SetHostnameTrigger": {"Report User & Host as “%@”"},
+    "iTermHyperlinkTrigger": {"Make Hyperlink with URL “%@”"},
+    "iTermRPCTrigger": {"Invoke Script Function “%@”"},
+    "iTermSetTitleTrigger": {"Set Title to “%@”"},
+}
 OBJC_STATUS_BAR_PROVIDER_SELECTORS = frozenset(
     {
         "statusBarComponentShortDescription",
@@ -1728,6 +1742,44 @@ def objc_ui_provider_selectors(path, sources):
     return frozenset()
 
 
+def objc_literal_is_shared_trigger_diagnostic(path, sources, declaration, body, literal_match):
+    """Recognize reviewed original returns shared with both matched-trigger logs.
+
+    This is a narrow classification, not a dataflow or matcher correctness proof.
+    Native tests exercise the real description/title objects in both languages.
+    New text, other providers, and changed consumers remain checked.
+    """
+    literal = literal_match.group(0)
+    if (path.relative_to(sources).parts != ("Triggers", path.stem + ".m")
+            or literal[2:-1] not in OBJC_SHARED_TRIGGER_DIAGNOSTICS.get(path.stem, ())
+            or re.fullmatch(r'-\s*\(\s*NSString\s*\*\s*\)\s*description\s*\{',
+                            declaration.group(0)) is None):
+        return False
+    statement_start = max(body.rfind(delimiter, 0, literal_match.start())
+                          for delimiter in (";", "{", "}")) + 1
+    statement_end = body.find(";", literal_match.end())
+    if statement_end < 0:
+        return False
+    value = re.escape(literal)
+    expression = (rf'\[NSString\s+stringWithFormat:\s*{value}\s*,\s*self\.param\s*\]'
+                  if "%@" in literal else value)
+    if re.fullmatch(rf'\s*return\s+{expression}\s*;',
+                    body[statement_start:statement_end + 1]) is None:
+        return False
+    try:
+        consumer = source_without_comments(
+            (sources / "Triggers/Trigger.m").read_text(encoding="utf-8"))
+    except (OSError, UnicodeError):
+        return False
+    method = re.search(r'-\s*\(BOOL\)\s*reallyTryString:[^{]*\{', consumer)
+    if method is None:
+        return False
+    method_end = objc_braced_block_end(consumer, method.end() - 1)
+    return method_end is not None and len(re.findall(
+        r'\bDLog\(@"Trigger %@ matched string %@",\s*self,\s*s\);',
+        consumer[method.end():method_end])) == 2
+
+
 def check_hardcoded_english_objc_ui_providers(sources):
     errors = []
     paths = sorted(
@@ -1771,6 +1823,10 @@ def check_hardcoded_english_objc_ui_providers(sources):
                     continue
                 literal = literal_match.group(0)[2:-1]
                 if not contains_translatable_english_text(literal):
+                    continue
+                if objc_literal_is_shared_trigger_diagnostic(
+                    path, sources, declaration, body, literal_match
+                ):
                     continue
                 absolute_offset = body_start + literal_match.start()
                 line_number = source.count("\n", 0, absolute_offset) + 1

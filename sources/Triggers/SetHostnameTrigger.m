@@ -15,7 +15,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.sethostnametrigger.report_user_host_as.5ca5f16d", nil, NSBundle.mainBundle, @"Report User & Host as “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Report User & Host as “%@”", self.param];
 }
 
 - (BOOL)takesParameter{

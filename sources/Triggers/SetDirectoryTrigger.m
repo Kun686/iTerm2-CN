@@ -17,7 +17,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.setdirectorytrigger.report_directory_as.668fe98e", nil, NSBundle.mainBundle, @"Report Directory as “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Report Directory as “%@”", self.param];
 }
 
 - (BOOL)takesParameter{

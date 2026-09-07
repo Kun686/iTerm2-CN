@@ -17,7 +17,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.sendtexttrigger.send_text.6ec594c7", nil, NSBundle.mainBundle, @"Send text “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Send text “%@”", self.param];
 }
 
 - (BOOL)takesParameter

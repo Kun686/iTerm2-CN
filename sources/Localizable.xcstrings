@@ -78817,24 +78817,6 @@
         }
       }
     },
-    "ui.triggers.annotatetrigger.annotate_as_as.86ebc993": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Annotate as as “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加注释“%@”"
-          }
-        }
-      }
-    },
     "ui.triggers.annotatetrigger.enter_annotation.6bb93a2f": {
       "comment": "Trigger parameter placeholder.",
       "extractionState": "manual",
@@ -78867,24 +78849,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "调用脚本函数"
-          }
-        }
-      }
-    },
-    "ui.triggers.itermrpctrigger.invoke_script_function.6609ad2a": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Invoke Script Function “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "调用脚本函数“%@”"
           }
         }
       }
@@ -78925,24 +78889,6 @@
         }
       }
     },
-    "ui.triggers.itermhyperlinktrigger.make_hyperlink_with_url.29ec4a5f": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Make Hyperlink with URL “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "使用 URL“%@”创建超链接"
-          }
-        }
-      }
-    },
     "ui.triggers.sendtexttrigger.send_text.31619199": {
       "comment": "Trigger action title.",
       "extractionState": "manual",
@@ -78957,24 +78903,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "发送文本…"
-          }
-        }
-      }
-    },
-    "ui.triggers.sendtexttrigger.send_text.6ec594c7": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send text “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "发送文本“%@”"
           }
         }
       }
@@ -79083,24 +79011,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "运行协进程…"
-          }
-        }
-      }
-    },
-    "ui.triggers.coprocesstrigger.run_coprocess.98b997b4": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run Coprocess “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "运行协进程“%@”"
           }
         }
       }
@@ -79411,24 +79321,6 @@
         }
       }
     },
-    "ui.triggers.alerttrigger.show_alert.e1f95ce4": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show alert “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "显示提醒“%@”"
-          }
-        }
-      }
-    },
     "ui.triggers.capturetrigger.capture_output.2543ca4b": {
       "comment": "Trigger action title or summary.",
       "extractionState": "manual",
@@ -79443,24 +79335,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "捕获输出"
-          }
-        }
-      }
-    },
-    "ui.triggers.capturetrigger.capture_output_running_on_double_click.4e9d0f95": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Capture output, running “%@” on double-click"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "捕获输出，双击时运行“%@”"
           }
         }
       }
@@ -79645,24 +79519,6 @@
         }
       }
     },
-    "ui.triggers.setdirectorytrigger.report_directory_as.668fe98e": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Report Directory as “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "将目录报告为“%@”"
-          }
-        }
-      }
-    },
     "ui.triggers.setdirectorytrigger.directory.c8f84c3c": {
       "comment": "Trigger parameter placeholder.",
       "extractionState": "manual",
@@ -79695,24 +79551,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "设置标题…"
-          }
-        }
-      }
-    },
-    "ui.triggers.itermsettitletrigger.set_title_to.a6fdf598": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set Title to “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "将标题设为“%@”"
           }
         }
       }
@@ -79771,24 +79609,6 @@
         }
       }
     },
-    "ui.triggers.scripttrigger.run_command.e3dfeb70": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run Command “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "运行命令“%@”"
-          }
-        }
-      }
-    },
     "ui.triggers.scripttrigger.enter_command_to_run.3fcf9c3a": {
       "comment": "Trigger parameter placeholder.",
       "extractionState": "manual",
@@ -79821,24 +79641,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "报告用户和主机"
-          }
-        }
-      }
-    },
-    "ui.triggers.sethostnametrigger.report_user_host_as.5ca5f16d": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Report User & Host as “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "将用户和主机报告为“%@”"
           }
         }
       }
