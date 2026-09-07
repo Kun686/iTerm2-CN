@@ -45,6 +45,10 @@ iTerm2-CN community localization:
 - Preserves shared SCP/terminal-download errors
   and transfer-manager callback diagnostics.
   Independent prompts and warnings are localized.
+- Preserves the SSH panel's default folder name
+  used for filesystem creation. Prompts and file
+  kinds stay localized; kind sorting uses the
+  displayed labels without changing file metadata.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.

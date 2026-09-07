@@ -66037,24 +66037,6 @@
         }
       }
     },
-    "ui.swift.ssh.sshfilepanel.untitled_folder.addfc2c5": {
-      "comment": "User-facing text in SSHFilePanel.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "untitled folder"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "未命名文件夹"
-          }
-        }
-      }
-    },
     "ui.swift.ssh.sshfilepanel.use_system_panel.0ed61248": {
       "comment": "User-facing text in SSHFilePanel.",
       "extractionState": "manual",

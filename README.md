@@ -59,6 +59,10 @@ The same boundary applies to SCP/terminal-download NSError descriptions and the
 transfer manager's fallback and cancellation callback. Independent SCP error
 display wrappers, authentication prompts, and security warnings are localized;
 the underlying shared diagnostics are not.
+The SSH file panel keeps the original default folder name, `untitled folder`,
+because Create uses it as a filesystem path. Its prompts and file-kind labels
+remain localized; sorting by kind uses the displayed labels without changing
+file metadata or paths.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to

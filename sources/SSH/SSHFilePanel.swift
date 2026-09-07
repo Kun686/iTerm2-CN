@@ -1491,7 +1491,7 @@ extension SSHFilePanel {
         // Create text field
         newFolderNameTextField = NSTextField()
         newFolderNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        newFolderNameTextField.stringValue = String(localized: "ui.swift.ssh.sshfilepanel.untitled_folder.addfc2c5", defaultValue: "untitled folder", bundle: .main, comment: "User-facing text in SSHFilePanel.")
+        newFolderNameTextField.stringValue = "untitled folder"
         newFolderNameTextField.isEditable = true
         newFolderNameTextField.isBezeled = true
         newFolderNameTextField.bezelStyle = .roundedBezel
