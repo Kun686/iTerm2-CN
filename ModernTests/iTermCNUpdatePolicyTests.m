@@ -27,6 +27,13 @@
     self.suiteName = [@"com.iterm2.tests.cn-update-policy." stringByAppendingString:NSUUID.UUID.UUIDString];
     self.userDefaults = [[NSUserDefaults alloc] initWithSuiteName:self.suiteName];
     self.argumentDomain = [self.userDefaults volatileDomainForName:NSArgumentDomain];
+    // A CN test host already disables updates in its process argument domain.
+    // Isolate the fixture inputs; tearDown restores the host's original domain.
+    NSMutableDictionary<NSString *, id> *testArgumentDomain = [self.argumentDomain mutableCopy];
+    [testArgumentDomain removeObjectsForKeys:@[ @"SUEnableAutomaticChecks",
+                                               @"SUAutomaticallyUpdate",
+                                               @"SUFeedURL" ]];
+    [self.userDefaults setVolatileDomain:testArgumentDomain forName:NSArgumentDomain];
 }
 
 - (void)tearDown {
@@ -76,6 +83,11 @@
         [self.userDefaults persistentDomainForName:self.suiteName];
     NSDictionary *argumentDomain = [self.userDefaults volatileDomainForName:NSArgumentDomain];
 
+    XCTAssertTrue([self.userDefaults boolForKey:@"SUEnableAutomaticChecks"]);
+    XCTAssertTrue([self.userDefaults boolForKey:@"SUAutomaticallyUpdate"]);
+    XCTAssertEqualObjects([self.userDefaults stringForKey:@"SUFeedURL"],
+                          @"https://iterm2.com/appcasts/final_modern.xml");
+
     [NSBundle it_applyCNUpdatePolicyToUserDefaults:self.userDefaults
                                 isCNCommunityBuild:NO];
 
@@ -87,6 +99,33 @@
     XCTAssertTrue([self.userDefaults boolForKey:@"SUAutomaticallyUpdate"]);
     XCTAssertEqualObjects([self.userDefaults stringForKey:@"SUFeedURL"],
                           @"https://iterm2.com/appcasts/final_modern.xml");
+}
+
+- (void)testUpstreamUpdatePolicyPreservesPreexistingArgumentOverrides {
+    [self.userDefaults setBool:YES forKey:@"SUEnableAutomaticChecks"];
+    [self.userDefaults setBool:YES forKey:@"SUAutomaticallyUpdate"];
+    [self.userDefaults setObject:@"https://iterm2.com/appcasts/final_modern.xml"
+                          forKey:@"SUFeedURL"];
+    NSDictionary *persistentDomain =
+        [self.userDefaults persistentDomainForName:self.suiteName];
+    NSMutableDictionary<NSString *, id> *argumentDomain =
+        [[self.userDefaults volatileDomainForName:NSArgumentDomain] mutableCopy];
+    argumentDomain[@"SUEnableAutomaticChecks"] = @NO;
+    argumentDomain[@"SUAutomaticallyUpdate"] = @NO;
+    argumentDomain[@"SUFeedURL"] = @"";
+    argumentDomain[@"UnrelatedArgument"] = @"preserve-me";
+    [self.userDefaults setVolatileDomain:argumentDomain forName:NSArgumentDomain];
+
+    [NSBundle it_applyCNUpdatePolicyToUserDefaults:self.userDefaults
+                                isCNCommunityBuild:NO];
+
+    XCTAssertEqualObjects([self.userDefaults persistentDomainForName:self.suiteName],
+                          persistentDomain);
+    XCTAssertEqualObjects([self.userDefaults volatileDomainForName:NSArgumentDomain],
+                          argumentDomain);
+    XCTAssertFalse([self.userDefaults boolForKey:@"SUEnableAutomaticChecks"]);
+    XCTAssertFalse([self.userDefaults boolForKey:@"SUAutomaticallyUpdate"]);
+    XCTAssertEqualObjects([self.userDefaults stringForKey:@"SUFeedURL"], @"");
 }
 
 @end

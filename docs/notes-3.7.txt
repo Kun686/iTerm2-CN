@@ -14,6 +14,8 @@ iTerm2-CN community localization:
   Releases page for manual updates.
 - Adds localization lint and language/update
   policy tests.
+- Isolates update-policy tests from CN host
+  arguments and preserves existing overrides.
 - Terminal emulation and terminal I/O behavior
   are unchanged.
 - CN uses the main application Bundle ID
