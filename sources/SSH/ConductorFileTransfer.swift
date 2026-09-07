@@ -269,7 +269,7 @@ class ConductorFileTransfer: TransferrableFile {
 
     override func localPath() -> String? {
         if data != nil {
-            return String(localized: "ui.swift.ssh.conductorfiletransfer.in_memory.cdebbb4e", defaultValue: "(In memory)", bundle: .main, comment: "File-transfer source shown when upload data is held in memory.")
+            return "(In memory)"
         }
         return _localPath
     }

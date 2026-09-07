@@ -65929,24 +65929,6 @@
         }
       }
     },
-    "ui.swift.ssh.conductorfiletransfer.in_memory.cdebbb4e": {
-      "comment": "User-facing text in ConductorFileTransfer.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "(In memory)"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "（在内存中）"
-          }
-        }
-      }
-    },
     "ui.swift.ssh.conductorfiletransfer.iterm2_ssh_integration_protocol_user_name_0_host.169107a6": {
       "comment": "User-facing text in ConductorFileTransfer.",
       "extractionState": "manual",

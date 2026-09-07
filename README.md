@@ -50,6 +50,8 @@ updates; Check for Updates opens [Fork Releases](https://github.com/Kun686/iTerm
 Raw diagnostics remain untranslated. In particular, the fork-failure message
 is shared by logs, terminal output, and the notification body, so it stays in
 English; the notification title is localized.
+The in-memory transfer path marker also retains its upstream value because
+file actions consume it as a path, not just a display label.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to
