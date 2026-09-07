@@ -78943,42 +78943,6 @@
         }
       }
     },
-    "ui.triggers.passwordtrigger.open_password_manager_to.f54fc7c8": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open Password Manager to “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "打开密码管理器并定位到“%@”"
-          }
-        }
-      }
-    },
-    "ui.triggers.passwordtrigger.open_password_manager.e9334f94": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open Password Manager"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "打开密码管理器"
-          }
-        }
-      }
-    },
     "ui.triggers.passwordtrigger.open_password_manager_to_unlock.d7486d12": {
       "comment": "Password-trigger popup item.",
       "extractionState": "manual",
@@ -79069,42 +79033,6 @@
         }
       }
     },
-    "ui.triggers.itermhighlightlinetrigger.highlight_line_with_over.d096425f": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Highlight Line with %@ over %@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "使用 %@ 文本色和 %@ 背景色高亮整行"
-          }
-        }
-      }
-    },
-    "ui.triggers.itermhighlightlinetrigger.no_color.3627f837": {
-      "comment": "Missing-color fallback.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "(no color)"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "（无颜色）"
-          }
-        }
-      }
-    },
     "ui.triggers.highlighttrigger.highlight_text.b6130a2f": {
       "comment": "Trigger action title.",
       "extractionState": "manual",
@@ -79123,60 +79051,6 @@
         }
       }
     },
-    "ui.triggers.highlighttrigger.highlight_text_over.a4b5b5c1": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Highlight text %@ over %@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "使用 %@ 文本色和 %@ 背景色高亮文本"
-          }
-        }
-      }
-    },
-    "ui.triggers.highlighttrigger.no_color.3627f837": {
-      "comment": "Missing-color fallback.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "(no color)"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "（无颜色）"
-          }
-        }
-      }
-    },
-    "ui.triggers.highlighttrigger.no_color.9e015bc1": {
-      "comment": "Missing-color fallback preserving the upstream English text.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "(no color))"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "（无颜色）"
-          }
-        }
-      }
-    },
     "ui.triggers.marktrigger.set_mark.ae11f7ac": {
       "comment": "Trigger action title.",
       "extractionState": "manual",
@@ -79191,60 +79065,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "设置标记"
-          }
-        }
-      }
-    },
-    "ui.triggers.marktrigger.set_mark_and_scrolling.9c1046cc": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set Mark and %@ scrolling"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "设置标记并%@滚动"
-          }
-        }
-      }
-    },
-    "ui.triggers.marktrigger.stop.6c45cb72": {
-      "comment": "Verb in a trigger summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "stop"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "停止"
-          }
-        }
-      }
-    },
-    "ui.triggers.marktrigger.continue.e256ee8e": {
-      "comment": "Verb in a trigger summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "continue"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "继续"
           }
         }
       }
@@ -79375,24 +79195,6 @@
         }
       }
     },
-    "ui.triggers.itermusernotificationtrigger.post_notification.11924d40": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Post Notification “%@”"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "发送通知“%@”"
-          }
-        }
-      }
-    },
     "ui.triggers.itermusernotificationtrigger.enter_message.d23ff7d9": {
       "comment": "Trigger parameter placeholder.",
       "extractionState": "manual",
@@ -79443,60 +79245,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "弹跳 Dock 图标"
-          }
-        }
-      }
-    },
-    "ui.triggers.bouncetrigger.bounce_dock_icon.2ce912c7": {
-      "comment": "Trigger action summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bounce dock icon %@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "使 Dock 图标弹跳%@"
-          }
-        }
-      }
-    },
-    "ui.triggers.bouncetrigger.until_focused.e42e0059": {
-      "comment": "Phrase in a trigger summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "until focused"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "直至获得焦点"
-          }
-        }
-      }
-    },
-    "ui.triggers.bouncetrigger.once.200651a8": {
-      "comment": "Phrase in a trigger summary.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "once"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一次"
           }
         }
       }

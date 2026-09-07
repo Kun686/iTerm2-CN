@@ -183,6 +183,16 @@ OBJC_SHARED_TRIGGER_DIAGNOSTICS = {
     "iTermHyperlinkTrigger": {"Make Hyperlink with URL “%@”"},
     "iTermRPCTrigger": {"Invoke Script Function “%@”"},
     "iTermSetTitleTrigger": {"Set Title to “%@”"},
+    "PasswordTrigger": {"Open Password Manager to “%@”", "Open Password Manager"},
+    "iTermUserNotificationTrigger": {"Post Notification “%@”"},
+}
+# Compound descriptions are recognized only as complete original bodies, not
+# by permitting their individual words in arbitrary expressions or UI sinks.
+OBJC_SHARED_TRIGGER_DIAGNOSTIC_BODIES = {
+    "BounceTrigger": 'return [NSString stringWithFormat:@"Bounce dock icon %@", self.bounceType == NSCriticalRequest ? @"until focused" : @"once"];',
+    "MarkTrigger": 'return [NSString stringWithFormat:@"Set Mark and %@ scrolling", [self shouldStopScrolling] ? @"stop" : @"continue"];',
+    "HighlightTrigger": 'return [NSString stringWithFormat:@"Highlight text %@ over %@", self.textColor.humanReadableDescription ?: @"(no color)", self.backgroundColor.humanReadableDescription ?: @"(no color))"];',
+    "iTermHighlightLineTrigger": 'return [NSString stringWithFormat:@"Highlight Line with %@ over %@", self.textColor.humanReadableDescription ?: @"(no color)", self.backgroundColor.humanReadableDescription ?: @"(no color)"];',
 }
 OBJC_STATUS_BAR_PROVIDER_SELECTORS = frozenset(
     {
@@ -1751,21 +1761,30 @@ def objc_literal_is_shared_trigger_diagnostic(path, sources, declaration, body, 
     """
     literal = literal_match.group(0)
     if (path.relative_to(sources).parts != ("Triggers", path.stem + ".m")
-            or literal[2:-1] not in OBJC_SHARED_TRIGGER_DIAGNOSTICS.get(path.stem, ())
             or re.fullmatch(r'-\s*\(\s*NSString\s*\*\s*\)\s*description\s*\{',
                             declaration.group(0)) is None):
         return False
-    statement_start = max(body.rfind(delimiter, 0, literal_match.start())
-                          for delimiter in (";", "{", "}")) + 1
-    statement_end = body.find(";", literal_match.end())
-    if statement_end < 0:
-        return False
-    value = re.escape(literal)
-    expression = (rf'\[NSString\s+stringWithFormat:\s*{value}\s*,\s*self\.param\s*\]'
-                  if "%@" in literal else value)
-    if re.fullmatch(rf'\s*return\s+{expression}\s*;',
-                    body[statement_start:statement_end + 1]) is None:
-        return False
+    original_body = OBJC_SHARED_TRIGGER_DIAGNOSTIC_BODIES.get(path.stem)
+    if original_body is not None:
+        # Preserve literal whitespace and identifier boundaries while allowing
+        # formatting changes between tokens. Comments were stripped by caller.
+        token = OBJC_STRING_LITERAL.pattern + r"|\w+|\S"
+        if re.findall(token, body) != re.findall(token, original_body):
+            return False
+    else:
+        if literal[2:-1] not in OBJC_SHARED_TRIGGER_DIAGNOSTICS.get(path.stem, ()):
+            return False
+        statement_start = max(body.rfind(delimiter, 0, literal_match.start())
+                              for delimiter in (";", "{", "}")) + 1
+        statement_end = body.find(";", literal_match.end())
+        if statement_end < 0:
+            return False
+        value = re.escape(literal)
+        expression = (rf'\[NSString\s+stringWithFormat:\s*{value}\s*,\s*self\.param\s*\]'
+                      if "%@" in literal else value)
+        if re.fullmatch(rf'\s*return\s+{expression}\s*;',
+                        body[statement_start:statement_end + 1]) is None:
+            return False
     try:
         consumer = source_without_comments(
             (sources / "Triggers/Trigger.m").read_text(encoding="utf-8"))

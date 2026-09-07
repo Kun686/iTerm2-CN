@@ -68,7 +68,7 @@ enum {
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.highlight_text_over.a4b5b5c1", nil, NSBundle.mainBundle, @"Highlight text %@ over %@", @"Trigger action summary. Preserve both placeholders."), self.textColor.humanReadableDescription ?: NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.no_color.3627f837", nil, NSBundle.mainBundle, @"(no color)", @"Fallback shown when no text color is selected."), self.backgroundColor.humanReadableDescription ?: NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.no_color.9e015bc1", nil, NSBundle.mainBundle, @"(no color))", @"Fallback shown when no background color is selected.")];
+    return [NSString stringWithFormat:@"Highlight text %@ over %@", self.textColor.humanReadableDescription ?: @"(no color)", self.backgroundColor.humanReadableDescription ?: @"(no color))"];
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {

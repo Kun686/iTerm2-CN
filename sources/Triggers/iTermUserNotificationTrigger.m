@@ -36,7 +36,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.itermusernotificationtrigger.post_notification.11924d40", nil, NSBundle.mainBundle, @"Post Notification “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+    return [NSString stringWithFormat:@"Post Notification “%@”", self.param];
 }
 
 - (BOOL)takesParameter {

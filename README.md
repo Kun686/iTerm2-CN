@@ -70,6 +70,10 @@ Shared alert, annotation, bell, capture, command, send-text, directory, host,
 hyperlink, script-function, and title trigger descriptions retain their original
 log text, including when used in import summaries or unnamed-trigger fallbacks.
 Their independent action titles and parameter prompts remain localized.
+The same diagnostic boundary covers bounce, mark, color-highlight, password,
+and notification triggers, including the legacy Growl trigger name. Popup labels
+remain localized while stored numeric options, color data, and the password
+unlock sentinel retain their original meanings.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to

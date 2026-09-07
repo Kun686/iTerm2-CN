@@ -1743,6 +1743,53 @@ class LocalizationCheckCLITests(unittest.TestCase):
         result = self._run_checker()
         self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_shared_trigger_additional_direct_descriptions(self):
+        for name, body in (
+                ("PasswordTrigger", 'return @"Open Password Manager";'),
+                ("PasswordTrigger", 'return [NSString stringWithFormat:@"Open Password Manager to “%@”", self.param];'),
+                ("iTermUserNotificationTrigger", 'return [NSString stringWithFormat:@"Post Notification “%@”", self.param];')):
+            with self.subTest(name=name, body=body):
+                self._write_shared_trigger_description(name=name, body=body)
+                result = self._run_checker()
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+    def _compound_trigger_bodies(self):
+        return {
+            "BounceTrigger": 'return [NSString stringWithFormat:@"Bounce dock icon %@", self.bounceType == NSCriticalRequest ? @"until focused" : @"once"];',
+            "MarkTrigger": 'return [NSString stringWithFormat:@"Set Mark and %@ scrolling", [self shouldStopScrolling] ? @"stop" : @"continue"];',
+            "HighlightTrigger": 'return [NSString stringWithFormat:@"Highlight text %@ over %@", self.textColor.humanReadableDescription ?: @"(no color)", self.backgroundColor.humanReadableDescription ?: @"(no color))"];',
+            "iTermHighlightLineTrigger": 'return [NSString stringWithFormat:@"Highlight Line with %@ over %@", self.textColor.humanReadableDescription ?: @"(no color)", self.backgroundColor.humanReadableDescription ?: @"(no color)"];',
+        }
+
+    def test_shared_trigger_compound_descriptions_match_original_bodies(self):
+        for name, body in self._compound_trigger_bodies().items():
+            with self.subTest(name=name):
+                self._write_shared_trigger_description(name=name, body=body)
+                result = self._run_checker()
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_shared_trigger_compound_rule_preserves_literal_spacing_and_code(self):
+        original = self._compound_trigger_bodies()["BounceTrigger"]
+        for body in (original.replace("dock icon", "dock  icon"),
+                     original.replace("NSCriticalRequest", "NSInformationalRequest"),
+                     original.replace("self.bounceType", "other.bounceType"),
+                     original + ' alert.title = @"Choose something";'):
+            with self.subTest(body=body):
+                self._write_shared_trigger_description(name="BounceTrigger", body=body)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Objective-C UI provider 'description'", result.stderr)
+
+    def test_shared_trigger_compound_rule_requires_consumer_and_instance_method(self):
+        body = self._compound_trigger_bodies()["HighlightTrigger"]
+        for changes in ({"logs": 0}, {"logs": 1}, {"commented": True},
+                        {"declaration": "+ (NSString *)description"}):
+            with self.subTest(changes=changes):
+                self._write_shared_trigger_description(name="HighlightTrigger", body=body, **changes)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Objective-C UI provider 'description'", result.stderr)
+
     def test_shared_trigger_rule_does_not_cover_other_files(self):
         self._write_shared_trigger_description(name="FeatureTrigger")
         result = self._run_checker()

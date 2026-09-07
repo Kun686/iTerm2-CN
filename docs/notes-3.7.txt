@@ -61,6 +61,10 @@ iTerm2-CN community localization:
   script functions, and titles. Import summaries
   and unnamed-trigger fallbacks share that text;
   independent titles and prompts stay localized.
+- Preserves shared bounce, mark, highlight,
+  password, and notification trigger diagnostics.
+  Popup labels remain localized without changing
+  numeric options, colors, or the unlock sentinel.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.

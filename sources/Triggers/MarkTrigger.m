@@ -24,10 +24,7 @@ typedef enum {
 }
 
 - (NSString *)description {
-    NSString *scrollingAction = [self shouldStopScrolling]
-        ? NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.stop.6c45cb72", nil, NSBundle.mainBundle, @"stop", @"Verb in a trigger summary.")
-        : NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.continue.e256ee8e", nil, NSBundle.mainBundle, @"continue", @"Verb in a trigger summary.");
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.set_mark_and_scrolling.9c1046cc", nil, NSBundle.mainBundle, @"Set Mark and %@ scrolling", @"Trigger action summary. Preserve the placeholder."), scrollingAction];
+    return [NSString stringWithFormat:@"Set Mark and %@ scrolling", [self shouldStopScrolling] ? @"stop" : @"continue"];
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {

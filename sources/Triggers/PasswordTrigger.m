@@ -25,9 +25,9 @@ static NSString *PasswordTriggerPlaceholderString = @"Open Password Manager to U
 
 - (NSString *)description {
     if ([NSString castFrom:self.param].length > 0) {
-        return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.passwordtrigger.open_password_manager_to.f54fc7c8", nil, NSBundle.mainBundle, @"Open Password Manager to “%@”", @"Trigger action summary. Preserve the placeholder."), self.param];
+        return [NSString stringWithFormat:@"Open Password Manager to “%@”", self.param];
     } else {
-        return NSLocalizedStringWithDefaultValue(@"ui.triggers.passwordtrigger.open_password_manager.e9334f94", nil, NSBundle.mainBundle, @"Open Password Manager", @"Trigger action summary.");
+        return @"Open Password Manager";
     }
 }
 

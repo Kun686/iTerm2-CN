@@ -22,10 +22,7 @@ typedef NS_ENUM(int, BounceTriggerParamTag) {
 }
 
 - (NSString *)description {
-    NSString *frequency = self.bounceType == NSCriticalRequest
-        ? NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.until_focused.e42e0059", nil, NSBundle.mainBundle, @"until focused", @"Phrase in a trigger summary.")
-        : NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.once.200651a8", nil, NSBundle.mainBundle, @"once", @"Phrase in a trigger summary.");
-    return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_dock_icon.2ce912c7", nil, NSBundle.mainBundle, @"Bounce dock icon %@", @"Trigger action summary. Preserve the placeholder."), frequency];
+    return [NSString stringWithFormat:@"Bounce dock icon %@", self.bounceType == NSCriticalRequest ? @"until focused" : @"once"];
 }
 
 - (NSString *)paramPlaceholder
