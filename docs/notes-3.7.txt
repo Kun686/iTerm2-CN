@@ -20,6 +20,9 @@ iTerm2-CN community localization:
   in quit, migration, and diagnostic alerts.
 - Applies the saved language before resolving
   localized bundle metadata at startup.
+- Uses system locale inputs for CN shell locale
+  inference, independent of the UI language.
+  Locale selection and Profile rules are unchanged.
 - Terminal emulation and terminal I/O behavior
   are unchanged.
 - CN uses the main application Bundle ID
