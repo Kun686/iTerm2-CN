@@ -1472,6 +1472,23 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     if (![NSBundle it_isCNCommunityBuild]) {
         return;
     }
+    // Page sizing uses its first content view. Include the CN-only language
+    // row in that view, preserving the top-anchored controls' positions.
+    NSView *languageRow = _applicationLanguage.superview;
+    for (NSTabViewItem *item in _tabView.tabViewItems) {
+        if (languageRow.superview != item.view) {
+            continue;
+        }
+        NSView *content = item.view.subviews.firstObject;
+        if (content && content != languageRow) {
+            content.frame = NSUnionRect(content.frame, languageRow.frame);
+            NSRect frame = [content convertRect:languageRow.frame fromView:item.view];
+            [languageRow removeFromSuperview];
+            languageRow.frame = frame;
+            [content addSubview:languageRow];
+        }
+        break;
+    }
     [_applicationLanguage removeAllItems];
     for (iTermApplicationLanguageIdentifier identifier in
          iTermApplicationLanguageController.supportedLanguageIdentifiers) {

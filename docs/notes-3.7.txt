@@ -9,6 +9,8 @@ iTerm2-CN community localization:
 - Adds Simplified Chinese, English, and Follow
   System choices in General settings.
 - Language changes take effect after relaunch.
+- Keeps the CN language selector visible when
+  the Settings page resizes to its content.
 - CN builds disable Sparkle automatic updates.
   Check for Updates opens the fork's GitHub
   Releases page for manual updates.
