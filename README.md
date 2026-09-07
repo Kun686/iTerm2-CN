@@ -39,6 +39,34 @@ iTerm2 is a powerful terminal emulator for macOS that brings the terminal into t
 
 ## Installation
 
+### iTerm2-CN community fork
+
+iTerm2-CN is an unofficial Simplified Chinese localization. Its main application
+uses `com.kun686.iterm2-cn`; the executable and internal target names remain
+unchanged. Select Simplified Chinese, English, or Follow System in General
+settings, then relaunch to apply the selection. CN builds disable automatic
+updates; Check for Updates opens [Fork Releases](https://github.com/Kun686/iTerm2-CN/releases).
+
+Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
+main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to
+helpers. For a direct Xcode build, set both `ITERM2_EDITION=cn` and
+`ITERM2_MAIN_BUNDLE_IDENTIFIER=com.kun686.iterm2-cn`. Ordinary upstream builds
+keep the original identity and update policy. Builds are unsigned by default;
+building successfully does not mean an artifact has been signed or notarized.
+
+The main preferences domain changes with the Bundle ID. Back up settings and
+Profiles before using the existing import/export tools; this fork does not
+automatically copy preferences or protected Keychain items from the official
+app. Developer ID signing must use a profile matching the new App ID and the
+actual signing team's Keychain access group. A different team cannot access the
+official team's protected Keychain items merely by keeping their service names.
+
+This is not a fully isolated parallel-install edition: helper IDs, URL schemes,
+the private preferences domain, and Application Support paths remain unchanged.
+Do not run both editions concurrently or erase shared data to uninstall one.
+Keep backups when switching editions; automation that explicitly selects the
+official Bundle ID must explicitly target `com.kun686.iterm2-cn` for this fork.
+
 ### Download
 
 Get the latest version from [iterm2.com/downloads](https://iterm2.com/downloads.html)

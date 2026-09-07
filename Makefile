@@ -5,6 +5,10 @@ APPS := /Applications
 ITERM_CONF_PLIST = $(HOME)/Library/Preferences/com.googlecode.iterm2.plist
 ITERM2_EDITION ?= upstream
 ITERM2_PLIST_VARIANT ?= release
+ifeq ($(ITERM2_EDITION),cn)
+# A main-target-only setting: never give helpers the main application's ID.
+EDITION_FLAGS = ITERM2_MAIN_BUNDLE_IDENTIFIER=com.kun686.iterm2-cn
+endif
 # Local checkout of the iterm2-website repo, where built plugins are published.
 ITERM2_WEBSITE ?= $(HOME)/iterm2-website
 SUITE ?= $(notdir $(CURDIR))
@@ -294,19 +298,19 @@ install: | Deployment backup-old-iterm
 
 Development:
 	echo "Using PATH for build: $(PATH)"
-	xcodebuild -scheme iTerm2 -configuration Development -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ITERM2_EDITION="$(ITERM2_EDITION)" && \
+	xcodebuild -scheme iTerm2 -configuration Development -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) $(EDITION_FLAGS) SYMROOT="$(BUILD_DIR)" ITERM2_EDITION="$(ITERM2_EDITION)" && \
 	chmod -R go+rX $(BUILD_DIR)/Development
 
 Beta:
-	xcodebuild -scheme iTerm2 -configuration Beta -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)" && \
+	xcodebuild -scheme iTerm2 -configuration Beta -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) $(EDITION_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)" && \
 	chmod -R go+rX $(BUILD_DIR)/Beta
 
 Deployment:
-	xcodebuild -scheme iTerm2 -configuration Deployment -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)" ITERM2_PLIST_VARIANT="$(ITERM2_PLIST_VARIANT)" && \
+	xcodebuild -scheme iTerm2 -configuration Deployment -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) $(EDITION_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)" ITERM2_PLIST_VARIANT="$(ITERM2_PLIST_VARIANT)" && \
 	chmod -R go+rX $(BUILD_DIR)/Deployment
 
 Nightly: force
-	xcodebuild -scheme iTerm2 -configuration Nightly -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)"
+	xcodebuild -scheme iTerm2 -configuration Nightly -destination 'platform=macOS' -skipPackagePluginValidation $(SIGNING_FLAGS) $(ARCH_FLAGS) $(EDITION_FLAGS) SYMROOT="$(BUILD_DIR)" ENABLE_ADDRESS_SANITIZER=NO ITERM2_EDITION="$(ITERM2_EDITION)"
 	chmod -R go+rX $(BUILD_DIR)/Nightly
 
 companion-iphone: force

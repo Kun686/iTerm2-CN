@@ -20,6 +20,8 @@ DEPLOYMENT_VARIANTS = {
     "preview": "preview-iTerm2.plist",
 }
 SUPPORTED_EDITIONS = ("upstream", "cn")
+UPSTREAM_BUNDLE_IDENTIFIER = "com.googlecode.iterm2"
+CN_BUNDLE_IDENTIFIER = "com.kun686.iterm2-cn"
 FORBIDDEN_FEED_KEYS = (
     "SUFeedURL",
     "SUFeedURLForFinal",
@@ -67,6 +69,8 @@ def load_document(path):
 
 
 def validate_upstream_source(document, path):
+    if document.get("CFBundleIdentifier") != UPSTREAM_BUNDLE_IDENTIFIER:
+        raise PlistPolicyError(f"{path}: source plist must use the upstream bundle identifier")
     if "iTermCNCommunityBuild" in document:
         raise PlistPolicyError(
             f"{path}: source plists must not define iTermCNCommunityBuild"
@@ -92,6 +96,7 @@ def specialize(document, edition):
         return result
 
     result["CFBundleDisplayName"] = "iTerm2-CN"
+    result["CFBundleIdentifier"] = CN_BUNDLE_IDENTIFIER
     result["iTermCNCommunityBuild"] = True
     for key in FORBIDDEN_FEED_KEYS:
         result.pop(key, None)
@@ -101,6 +106,11 @@ def specialize(document, edition):
 
 
 def validate_output(document, path, edition):
+    expected_identifier = (
+        CN_BUNDLE_IDENTIFIER if edition == "cn" else UPSTREAM_BUNDLE_IDENTIFIER
+    )
+    if document.get("CFBundleIdentifier") != expected_identifier:
+        raise PlistPolicyError(f"{path}: CFBundleIdentifier must be {expected_identifier}")
     if edition == "upstream":
         if document.get("iTermCNCommunityBuild") is True:
             raise PlistPolicyError(f"{path}: upstream output is marked as a CN build")
@@ -184,6 +194,18 @@ def parse_args(argv):
 def main(argv=None):
     args = parse_args(argv)
     try:
+        # Xcode exports this target setting to build phases. Refuse a mixed
+        # identity before signing; standalone plist generation has no setting.
+        configured_identifier = os.environ.get("PRODUCT_BUNDLE_IDENTIFIER")
+        expected_identifier = (
+            CN_BUNDLE_IDENTIFIER if args.edition == "cn" else UPSTREAM_BUNDLE_IDENTIFIER
+        )
+        if configured_identifier and configured_identifier != expected_identifier:
+            raise PlistPolicyError(
+                "PRODUCT_BUNDLE_IDENTIFIER does not match the selected edition; "
+                "use make cn-dev/cn-release for CN builds, or set "
+                f"ITERM2_MAIN_BUNDLE_IDENTIFIER={expected_identifier} in Xcode"
+            )
         source = prepare(
             args.source_root.resolve(),
             args.configuration,

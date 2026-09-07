@@ -16,6 +16,17 @@ iTerm2-CN community localization:
   policy tests.
 - Terminal emulation and terminal I/O behavior
   are unchanged.
+- CN uses the main application Bundle ID
+  com.kun686.iterm2-cn and its signing team's
+  matching Keychain access group.
+- Main preferences use the new Bundle ID.
+  Back up settings before using the existing
+  import/export tools; settings and protected
+  passwords are not automatically migrated.
+- Helper IDs, URL schemes, private preferences,
+  and Application Support paths remain shared
+  with upstream. Parallel use is not supported.
+  A new Bundle ID is not full data isolation.
 
 A note to beta users:
 An awful lot of features have been piling up here

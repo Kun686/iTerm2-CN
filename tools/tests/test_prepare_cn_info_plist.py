@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import plistlib
 from pathlib import Path
 import subprocess
@@ -33,6 +34,9 @@ class PrepareCNInfoPlistTests(unittest.TestCase):
     def _document(self, **overrides):
         document = {
             "CFBundleName": "iTerm2",
+            "CFBundleIdentifier": "com.googlecode.iterm2",
+            "CFBundleExecutable": "iTerm2",
+            "CFBundleURLTypes": [{"CFBundleURLSchemes": ["iterm2", "ssh"]}],
             "FixtureName": "safe",
             "SUFeedURL": "https://iterm2.com/appcasts/final_modern.xml",
             "SUFeedURLForFinal": "https://iterm2.com/appcasts/final_modern.xml",
@@ -53,6 +57,7 @@ class PrepareCNInfoPlistTests(unittest.TestCase):
         temporary_directory=None,
         version=None,
         edition=None,
+        bundle_identifier=None,
     ):
         arguments = [
             sys.executable,
@@ -72,8 +77,13 @@ class PrepareCNInfoPlistTests(unittest.TestCase):
             arguments.extend(["--version", version])
         if edition is not None:
             arguments.extend(["--edition", edition])
+        environment = dict(os.environ)
+        environment.pop("PRODUCT_BUNDLE_IDENTIFIER", None)
+        if bundle_identifier is not None:
+            environment["PRODUCT_BUNDLE_IDENTIFIER"] = bundle_identifier
         return subprocess.run(
             arguments,
+            env=environment,
             capture_output=True,
             text=True,
             check=False,
@@ -142,6 +152,9 @@ class PrepareCNInfoPlistTests(unittest.TestCase):
         document = plistlib.loads(self.output.read_bytes())
         self.assertEqual(document["CFBundleDisplayName"], "iTerm2-CN")
         self.assertEqual(document["CFBundleName"], "iTerm2")
+        self.assertEqual(document["CFBundleIdentifier"], "com.kun686.iterm2-cn")
+        self.assertEqual(document["CFBundleExecutable"], "iTerm2")
+        self.assertEqual(document["CFBundleURLTypes"], self._document()["CFBundleURLTypes"])
         self.assertTrue(document["iTermCNCommunityBuild"])
         self.assertFalse(document["SUEnableAutomaticChecks"])
         self.assertFalse(document["SUAutomaticallyUpdate"])
@@ -158,6 +171,64 @@ class PrepareCNInfoPlistTests(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(plistlib.loads(self.output.read_bytes()), source_document)
+
+    def test_cn_identifier_is_used_for_every_configuration_and_preview(self):
+        for configuration in CONFIGURATION_FILES:
+            for variant in ("release", "preview"):
+                with self.subTest(configuration=configuration, variant=variant):
+                    result = self._run(configuration, variant=variant, edition="cn")
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    document = plistlib.loads(self.output.read_bytes())
+                    self.assertEqual(document["CFBundleIdentifier"], "com.kun686.iterm2-cn")
+
+    def test_mismatched_xcode_identity_fails_before_output_is_written(self):
+        result = self._run("Deployment", edition="cn", bundle_identifier="com.googlecode.iterm2")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("PRODUCT_BUNDLE_IDENTIFIER does not match", result.stderr)
+        self.assertFalse(self.output.exists())
+
+    def test_matching_xcode_identity_is_accepted(self):
+        for edition, identifier in (("cn", "com.kun686.iterm2-cn"), ("upstream", "com.googlecode.iterm2")):
+            with self.subTest(edition=edition):
+                result = self._run("Deployment", edition=edition, bundle_identifier=identifier)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(plistlib.loads(self.output.read_bytes())["CFBundleIdentifier"], identifier)
+
+    def test_shared_source_cannot_be_replaced_with_fork_identity(self):
+        self._write_plist("dev-iTerm2.plist", CFBundleIdentifier="com.kun686.iterm2-cn")
+        result = self._run("Development", edition="cn")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("source plist must use the upstream bundle identifier", result.stderr)
+
+    def test_real_source_templates_produce_the_fork_id_without_changing_sources(self):
+        source_root = SCRIPT.parents[1]
+        for configuration, variant in (
+            ("Development", "release"),
+            ("Beta", "release"),
+            ("Nightly", "release"),
+            ("Deployment", "release"),
+            ("Deployment", "preview"),
+        ):
+            with self.subTest(configuration=configuration, variant=variant):
+                filename = ("preview-iTerm2.plist" if variant == "preview"
+                            else CONFIGURATION_FILES[configuration])
+                source = source_root / "plists" / filename
+                before = source.read_bytes()
+                environment = dict(os.environ)
+                environment.pop("PRODUCT_BUNDLE_IDENTIFIER", None)
+                result = subprocess.run(
+                    [sys.executable, str(SCRIPT), "--source-root", str(source_root),
+                     "--configuration", configuration, "--variant", variant,
+                     "--edition", "cn", "--output", str(self.output)],
+                    env=environment, capture_output=True, text=True, check=False,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                document = plistlib.loads(self.output.read_bytes())
+                original = plistlib.loads(before)
+                self.assertEqual(document["CFBundleIdentifier"], "com.kun686.iterm2-cn")
+                self.assertEqual(document["CFBundleExecutable"], original["CFBundleExecutable"])
+                self.assertEqual(document["CFBundleURLTypes"], original["CFBundleURLTypes"])
+                self.assertEqual(source.read_bytes(), before)
 
     def test_rejects_cn_identity_in_shared_source_plist(self):
         self._write_plist(
