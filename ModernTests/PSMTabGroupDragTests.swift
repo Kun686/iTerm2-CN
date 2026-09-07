@@ -34,9 +34,33 @@ private final class ObservingChipCell: PSMTabBarCell {
     }
 }
 
+// Keep the real native session alive until its end callback, independently of
+// the assistant's isDragging flag (finishDrag only clears assistant state).
+private final class SessionTrackingTabBarControl: PSMTabBarControl {
+    private(set) var activeSession: NSDraggingSession?
+    var onSessionEnded: (() -> Void)?
+
+    override func beginDraggingSession(with items: [NSDraggingItem],
+                                       event: NSEvent,
+                                       source: NSDraggingSource) -> NSDraggingSession {
+        let session = super.beginDraggingSession(with: items, event: event, source: source)
+        activeSession = session
+        return session
+    }
+
+    override func draggingSession(_ session: NSDraggingSession,
+                                  endedAt screenPoint: NSPoint,
+                                  operation: NSDragOperation) {
+        super.draggingSession(session, endedAt: screenPoint, operation: operation)
+        activeSession = nil
+        onSessionEnded?()
+        onSessionEnded = nil
+    }
+}
+
 final class PSMTabGroupDragTests: XCTestCase {
     private var window: NSWindow!
-    private var control: PSMTabBarControl!
+    private var control: SessionTrackingTabBarControl!
 
     override func setUp() {
         super.setUp()
@@ -48,11 +72,35 @@ final class PSMTabGroupDragTests: XCTestCase {
         // -cacheDisplayInRect: (the group drag-image snapshot) down a different
         // path than a plain view.
         window.contentView?.wantsLayer = true
-        control = PSMTabBarControl(frame: NSRect(x: 0, y: 376, width: 600, height: 24))
+        control = SessionTrackingTabBarControl(frame: NSRect(x: 0, y: 376, width: 600, height: 24))
         window.contentView?.addSubview(control)
     }
 
     override func tearDown() {
+        if let session = control.activeSession {
+            let ended = expectation(description: "Native drag ends before releasing its fixture")
+            control.onSessionEnded = { ended.fulfill() }
+            session.animatesToStartingPositionsOnCancelOrFail = false
+            // The synthetic mouse-down must have a matching mouse-up. Escape
+            // does not release AppKit's mouse-tracking loop. Post inside this
+            // application's event queue, never into the system event stream.
+            let windowNumber = window.windowNumber
+            RunLoop.main.perform(inModes: [.common]) {
+                guard let up = NSEvent.mouseEvent(with: .leftMouseUp,
+                                                 location: .zero,
+                                                 modifierFlags: [],
+                                                 timestamp: ProcessInfo.processInfo.systemUptime,
+                                                 windowNumber: windowNumber,
+                                                 context: nil, eventNumber: 1,
+                                                 clickCount: 1, pressure: 0) else {
+                    XCTFail("Could not create the matching native mouse-up")
+                    return
+                }
+                NSApp.postEvent(up, atStart: false)
+            }
+            wait(for: [ended], timeout: 2)
+            XCTAssertNil(control.activeSession)
+        }
         // Make sure a failed/aborted drag doesn't leak assistant state into the
         // next test.
         PSMTabDragAssistant.shared().finishDrag()

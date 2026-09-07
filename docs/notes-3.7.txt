@@ -20,6 +20,8 @@ iTerm2-CN community localization:
   in quit, migration, and diagnostic alerts.
 - Fits localized Profile labels and localizes
   title preview samples without changing titles.
+- Pairs synthetic drag-test mouse events and
+  waits for native session cleanup between tests.
 - Applies the saved language before resolving
   localized bundle metadata at startup.
 - Uses system locale inputs for CN shell locale
