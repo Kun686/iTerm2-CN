@@ -74,6 +74,10 @@ The same diagnostic boundary covers bounce, mark, color-highlight, password,
 and notification triggers, including the legacy Growl trigger name. Popup labels
 remain localized while stored numeric options, color data, and the password
 unlock sentinel retain their original meanings.
+Workgroup trigger menus retain `Untitled` for unnamed workgroups: that label's
+sort position determines the implicit target when no workgroup ID is stored.
+Both terminal and browser triggers preserve the upstream default-selection
+algorithm and stored IDs. Their independent action titles remain localized.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to

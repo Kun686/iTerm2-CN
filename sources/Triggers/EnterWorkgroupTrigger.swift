@@ -84,7 +84,8 @@ class EnterWorkgroupTrigger: Trigger {
     override func menuItemsForPoupupButton() -> [AnyHashable: Any]? {
         var dict: [AnyHashable: Any] = [:]
         for wg in availableWorkgroups {
-            let label = wg.name.isEmpty ? String(localized: "ui.swift.triggers.enterworkgrouptrigger.untitled.f59ab8d1", defaultValue: "Untitled", bundle: .main, comment: "User-facing text in EnterWorkgroupTrigger.") : wg.name
+            // This label's sort position selects the implicit action target.
+            let label = wg.name.isEmpty ? "Untitled" : wg.name
             dict[wg.uniqueIdentifier] = label
         }
         return dict

@@ -65,6 +65,11 @@ iTerm2-CN community localization:
   password, and notification trigger diagnostics.
   Popup labels remain localized without changing
   numeric options, colors, or the unlock sentinel.
+- Keeps Untitled in workgroup trigger menus so
+  localization cannot change the implicit target.
+  Terminal and browser actions keep the original
+  selection algorithm and stored workgroup IDs.
+  Independent action titles remain localized.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.
