@@ -77,6 +77,8 @@ iTerm2-CN community localization:
 - Keeps terminal workgroup-entry diagnostics and
   shared parameter-row fallbacks unchanged.
   User-defined workgroup names are preserved.
+- Adds isolated browser-trigger localization checks
+  for stored parameters and terminal filtering.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.
