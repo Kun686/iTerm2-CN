@@ -21737,24 +21737,6 @@
         }
       }
     },
-    "ui.filetransfer.filetransfermanager.file_transfer_failed_with_an_unknown_error.9fa166d6": {
-      "comment": "Fallback user-facing file-transfer error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "File transfer failed with an unknown error"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "文件传输失败，发生未知错误"
-          }
-        }
-      }
-    },
     "ui.filetransfer.filetransfermanager.get_info.68910cf5": {
       "comment": "User-facing text in FileTransferManager (menuItemForTransferrableFile:).",
       "extractionState": "manual",
@@ -21899,24 +21881,6 @@
         }
       }
     },
-    "ui.filetransfer.filetransfermanager.transfer_cancelled.b6321ee9": {
-      "comment": "User-facing file-transfer cancellation error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Transfer cancelled"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "文件传输已取消"
-          }
-        }
-      }
-    },
     "ui.filetransfer.scpfile.authentication_error.eb67cd65": {
       "comment": "User-facing secure-copy authentication error.",
       "extractionState": "manual",
@@ -21931,24 +21895,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "认证错误。"
-          }
-        }
-      }
-    },
-    "ui.filetransfer.scpfile.authentication_failed.0ddedf90": {
-      "comment": "User-facing secure-copy authentication error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Authentication failed."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "认证失败。"
           }
         }
       }
@@ -22097,24 +22043,6 @@
         }
       }
     },
-    "ui.filetransfer.scpfile.could_not_connect.63306d94": {
-      "comment": "User-facing secure-copy connection error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Could not connect."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "无法连接。"
-          }
-        }
-      }
-    },
     "ui.filetransfer.scpfile.could_not_read_the_known_hosts_file_as.4c58ed71": {
       "comment": "User-facing host-key verification warning; preserve the host, hash name, and fingerprint.",
       "extractionState": "manual",
@@ -22147,24 +22075,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "下载失败"
-          }
-        }
-      }
-    },
-    "ui.filetransfer.scpfile.downloads_folder_not_writable.977a12af": {
-      "comment": "User-facing secure-copy error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Downloads folder not writable"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“下载”文件夹不可写"
           }
         }
       }
@@ -22237,24 +22147,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "帮助"
-          }
-        }
-      }
-    },
-    "ui.filetransfer.scpfile.invalid_filename.0af3e691": {
-      "comment": "User-facing secure-copy error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Invalid filename"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "文件名无效"
           }
         }
       }
@@ -22511,24 +22403,6 @@
         }
       }
     },
-    "ui.filetransfer.terminalfile.canceled.b5056801": {
-      "comment": "User-facing terminal-download error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Canceled."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已取消。"
-          }
-        }
-      }
-    },
     "ui.filetransfer.terminalfile.choose.7ca41615": {
       "comment": "User-facing action label in TerminalFile (actions).",
       "extractionState": "manual",
@@ -22543,60 +22417,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "选择…"
-          }
-        }
-      }
-    },
-    "ui.filetransfer.terminalfile.failed_to_set_quarantine.97ff34a3": {
-      "comment": "User-facing terminal-download security error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to set quarantine."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "无法设置隔离属性。"
-          }
-        }
-      }
-    },
-    "ui.filetransfer.terminalfile.file_corrupted_not_valid_base64.2a217584": {
-      "comment": "User-facing terminal-download error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "File corrupted (not valid base64)."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "文件已损坏（不是有效的 base64 数据）。"
-          }
-        }
-      }
-    },
-    "ui.filetransfer.terminalfile.no_data_received.6a3b6a4d": {
-      "comment": "User-facing terminal-download error.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No data received."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "未收到数据。"
           }
         }
       }

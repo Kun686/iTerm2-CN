@@ -1340,6 +1340,42 @@ def objc_assignment_is_used_only_by_logs(
     return saw_log_use
 
 
+def objc_fallback_is_shared_transfer_diagnostic(path, sources, source, match, statement):
+    """Recognize only the original manager fallback also consumed by RLog.
+
+    The notification shares this diagnostic; it is not display-only copy.
+    Keep other files, methods, sinks, and newly introduced fallback text checked.
+    """
+    if (path.relative_to(sources).parts != ("FileTransfer", "FileTransferManager.m")
+            or match.group("literal") != '@"File transfer failed with an unknown error"'
+            or re.fullmatch(
+                r'\s*\[transferrableFile\s+didFailWithError:error\.localizedDescription\s*\?:\s*'
+                r'@"File transfer failed with an unknown error"', statement) is None):
+        return False
+    boundaries = [item.start() for item in OBJC_METHOD_BOUNDARY.finditer(source)]
+    method_start = objc_method_start(boundaries, match.start())
+    declaration = re.match(
+        r'-\s*\(void\)\s*transferrableFile:\s*\(TransferrableFile\s*\*\)transferrableFile\s+'
+        r'didFinishTransmissionWithError:\s*\(NSError\s*\*\)error\s*\{', source[method_start:])
+    if declaration is None:
+        return False
+    method_end = objc_braced_block_end(source, method_start + declaration.end() - 1)
+    if method_end is None or match.end() >= method_end:
+        return False
+    try:
+        consumer = source_without_comments(
+            (sources / "FileTransfer/TransferrableFile.m").read_text(encoding="utf-8"))
+    except (OSError, UnicodeError):
+        return False
+    failure = re.search(r'-\s*\(void\)\s*didFailWithError:\s*\(NSString\s*\*\)error\s*\{', consumer)
+    if failure is None:
+        return False
+    failure_end = objc_braced_block_end(consumer, failure.end() - 1)
+    return failure_end is not None and re.search(
+        r'\bRLog\(@"didFailWithError:%@",\s*error\);',
+        consumer[failure.end():failure_end]) is not None
+
+
 def check_hardcoded_english_objc_localized_description_fallbacks(sources):
     errors = []
     paths = sorted(
@@ -1362,6 +1398,8 @@ def check_hardcoded_english_objc_localized_description_fallbacks(sources):
             ) + 1
             statement = source[statement_start:match.end()]
             if OBJC_LOG_CALL.search(statement):
+                continue
+            if objc_fallback_is_shared_transfer_diagnostic(path, sources, source, match, statement):
                 continue
             statement_end = source.find(";", match.end())
             if statement_end >= 0:

@@ -344,7 +344,7 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
 - (void)transferrableFile:(TransferrableFile *)transferrableFile
     didFinishTransmissionWithError:(NSError *)error {
     if (error) {
-        [transferrableFile didFailWithError:error.localizedDescription ?: NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.file_transfer_failed_with_an_unknown_error.9fa166d6", nil, NSBundle.mainBundle, @"File transfer failed with an unknown error", @"Fallback user-facing file-transfer error.")];
+        [transferrableFile didFailWithError:error.localizedDescription ?: @"File transfer failed with an unknown error"];
     } else {
         transferrableFile.status = kTransferrableFileStatusFinishedSuccessfully;
     }
@@ -377,7 +377,7 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
 
     // Call the completion block if set (transfer was cancelled)
     if (transferrableFile.completionBlock) {
-        transferrableFile.completionBlock(NO, NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.transfer_cancelled.b6321ee9", nil, NSBundle.mainBundle, @"Transfer cancelled", @"User-facing file-transfer cancellation error."));
+        transferrableFile.completionBlock(NO, @"Transfer cancelled");
         transferrableFile.completionBlock = nil;
     }
 }

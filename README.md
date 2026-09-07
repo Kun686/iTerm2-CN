@@ -55,6 +55,10 @@ file actions consume it as a path, not just a display label.
 SSH Integration transfer diagnostics shared with logs, completion handlers, and
 browser stream failures also retain their original text. Transfer summaries and
 independent UI labels remain localized.
+The same boundary applies to SCP/terminal-download NSError descriptions and the
+transfer manager's fallback and cancellation callback. Independent SCP error
+display wrappers, authentication prompts, and security warnings are localized;
+the underlying shared diagnostics are not.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to

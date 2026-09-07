@@ -1302,6 +1302,61 @@ class LocalizationCheckCLITests(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def _write_shared_transfer_fallback(self, relative="FileTransfer/FileTransferManager.m", *,
+                                        message="File transfer failed with an unknown error",
+                                        method="transferrableFile", sink="didFailWithError", log=True):
+        path = self.sources / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            f'- (void){method}:(TransferrableFile *)transferrableFile\n'
+            '    didFinishTransmissionWithError:(NSError *)error {\n'
+            '    if (error) {\n'
+            f'        [transferrableFile {sink}:error.localizedDescription ?: @"{message}"];\n'
+            '    }\n}\n', encoding="utf-8"
+        )
+        consumer = self.sources / "FileTransfer" / "TransferrableFile.m"
+        consumer.parent.mkdir(parents=True, exist_ok=True)
+        consumer.write_text(
+            '- (void)didFailWithError:(NSString *)error {\n'
+            + ('    RLog(@"didFailWithError:%@", error);\n' if log else '')
+            + '    [controller notify:error];\n}\n', encoding="utf-8"
+        )
+
+    def test_shared_transfer_fallback_is_not_display_only_copy(self):
+        self._write_shared_transfer_fallback()
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_shared_transfer_fallback_rule_does_not_cover_other_files(self):
+        self._write_shared_transfer_fallback("Feature.m")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English fallback", result.stderr)
+
+    def test_shared_transfer_fallback_rule_does_not_cover_other_methods(self):
+        self._write_shared_transfer_fallback(method="showErrorForFile")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English fallback", result.stderr)
+
+    def test_shared_transfer_fallback_rule_does_not_cover_other_sinks(self):
+        self._write_shared_transfer_fallback(sink="setTitle")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English fallback", result.stderr)
+
+    def test_shared_transfer_fallback_rule_does_not_cover_new_text(self):
+        self._write_shared_transfer_fallback(message="Please try again")
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English fallback", result.stderr)
+
+    def test_shared_transfer_fallback_rule_requires_log_consumer(self):
+        self._write_shared_transfer_fallback(log=False)
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("hard-coded English fallback", result.stderr)
+
     def test_hard_coded_english_objective_c_confirmation_argument_fails(self):
         (self.sources / "Feature.m").write_text(
             '[self closeTabs:tabs confirmWith:@"Close these tabs?" '

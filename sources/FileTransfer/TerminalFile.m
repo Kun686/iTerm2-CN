@@ -149,7 +149,7 @@ NSString *const kTerminalFileShouldStopNotification = @"kTerminalFileShouldStopN
         // cancellation and leave self.data nil so appendData: no-ops on any further chunks and
         // handleEndOfData treats the transfer as canceled instead of trying to write to nil.
         NSError *error;
-        error = [self errorWithDescription:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.canceled.b5056801", nil, NSBundle.mainBundle, @"Canceled.", @"User-facing terminal-download error.")];
+        error = [self errorWithDescription:@"Canceled."];
         self.error = [error localizedDescription];
         [[FileTransferManager sharedInstance] transferrableFile:self
                                  didFinishTransmissionWithError:error];
@@ -226,7 +226,7 @@ NSString *const kTerminalFileShouldStopNotification = @"kTerminalFileShouldStopN
     int destLength = apr_base64_decode_len(buffer);
     if (destLength < 1) {
         [[FileTransferManager sharedInstance] transferrableFile:self
-                                 didFinishTransmissionWithError:[self errorWithDescription:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.no_data_received.6a3b6a4d", nil, NSBundle.mainBundle, @"No data received.", @"User-facing terminal-download error.")]];
+                                 didFinishTransmissionWithError:[self errorWithDescription:@"No data received."]];
         return;
     }
     NSMutableData *data = [NSMutableData dataWithLength:destLength];
@@ -234,7 +234,7 @@ NSString *const kTerminalFileShouldStopNotification = @"kTerminalFileShouldStopN
     int resultLength = apr_base64_decode(decodedBuffer, buffer);
     if (resultLength < 0) {
         [[FileTransferManager sharedInstance] transferrableFile:self
-                                 didFinishTransmissionWithError:[self errorWithDescription:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.file_corrupted_not_valid_base64.2a217584", nil, NSBundle.mainBundle, @"File corrupted (not valid base64).", @"User-facing terminal-download error.")]];
+                                 didFinishTransmissionWithError:[self errorWithDescription:@"File corrupted (not valid base64)."]];
         return;
     }
     [data setLength:resultLength];
@@ -246,7 +246,7 @@ NSString *const kTerminalFileShouldStopNotification = @"kTerminalFileShouldStopN
     }
     if (![self quarantine:self.localPath sourceURL:nil]) {
         [[FileTransferManager sharedInstance] transferrableFile:self
-                                 didFinishTransmissionWithError:[self errorWithDescription:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.failed_to_set_quarantine.97ff34a3", nil, NSBundle.mainBundle, @"Failed to set quarantine.", @"User-facing terminal-download security error.")]];
+                                 didFinishTransmissionWithError:[self errorWithDescription:@"Failed to set quarantine."]];
         NSError *error = nil;
         const BOOL ok = [[NSFileManager defaultManager] removeItemAtPath:self.localPath error:&error];
         if (!ok || error) {
