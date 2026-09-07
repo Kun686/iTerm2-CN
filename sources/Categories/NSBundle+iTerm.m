@@ -26,7 +26,9 @@
 }
 
 + (BOOL)it_isCNCommunityBuild {
-    return [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"iTermCNCommunityBuild"] boolValue];
+    // This runs before the saved language is applied in main. A localized
+    // Info.plist lookup would cache the launch language before that override.
+    return [[NSBundle mainBundle].infoDictionary[@"iTermCNCommunityBuild"] boolValue];
 }
 
 + (void)it_applyCNUpdatePolicyToUserDefaults:(NSUserDefaults *)userDefaults

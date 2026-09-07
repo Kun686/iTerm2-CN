@@ -18,6 +18,8 @@ iTerm2-CN community localization:
   arguments and preserves existing overrides.
 - Localizes disclosure titles and explanations
   in quit, migration, and diagnostic alerts.
+- Applies the saved language before resolving
+  localized bundle metadata at startup.
 - Terminal emulation and terminal I/O behavior
   are unchanged.
 - CN uses the main application Bundle ID
