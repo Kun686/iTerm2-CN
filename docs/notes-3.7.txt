@@ -18,6 +18,8 @@ iTerm2-CN community localization:
   arguments and preserves existing overrides.
 - Localizes disclosure titles and explanations
   in quit, migration, and diagnostic alerts.
+- Fits localized Profile labels and localizes
+  title preview samples without changing titles.
 - Applies the saved language before resolving
   localized bundle metadata at startup.
 - Uses system locale inputs for CN shell locale

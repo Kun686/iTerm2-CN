@@ -1521,14 +1521,14 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
         }
     }
 
-    titleSettings.title = customName ?: [iTermSessionTitleBuiltInFunction titleForSessionName:@"Name"
-                                                                                  profileName:@"Profile"
-                                                                                          job:@"Job"
-                                                                                  commandLine:@"Job+Args"
+    titleSettings.title = customName ?: [iTermSessionTitleBuiltInFunction titleForSessionName:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.name", nil, NSBundle.mainBundle, @"Name", @"Sample session name in the profile title preview; not a stored session name.")
+                                                                                  profileName:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.profile", nil, NSBundle.mainBundle, @"Profile", @"Sample profile name in the profile title preview; not a stored profile name.")
+                                                                                          job:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.job", nil, NSBundle.mainBundle, @"Job", @"Sample job name in the profile title preview; not actual terminal output.")
+                                                                                  commandLine:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.job_and_arguments", nil, NSBundle.mainBundle, @"Job+Args", @"Sample command with arguments in the profile title preview; not an executable command.")
                                                                                           pwd:@"PWD"
                                                                                           tty:@"TTY"
-                                                                                         user:@"User"
-                                                                                         host:@"Host"
+                                                                                         user:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.user", nil, NSBundle.mainBundle, @"User", @"Sample user name in the profile title preview; not an account identifier.")
+                                                                                         host:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.host", nil, NSBundle.mainBundle, @"Host", @"Sample host name in the profile title preview; not a network address.")
                                                                                       aiTitle:@"AI"
                                                                                 homeDirectory:nil
                                                                                      tmuxPane:nil

@@ -27267,6 +27267,114 @@
         }
       }
     },
+    "ui.settings.profile.title_preview.host": {
+      "comment": "Sample host name in the profile title preview; not a network address.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Host"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "主机"
+          }
+        }
+      }
+    },
+    "ui.settings.profile.title_preview.job": {
+      "comment": "Sample job name in the profile title preview; not actual terminal output.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Job"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程"
+          }
+        }
+      }
+    },
+    "ui.settings.profile.title_preview.job_and_arguments": {
+      "comment": "Sample command with arguments in the profile title preview; not an executable command.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Job+Args"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "进程+参数"
+          }
+        }
+      }
+    },
+    "ui.settings.profile.title_preview.name": {
+      "comment": "Sample session name in the profile title preview; not a stored session name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "名称"
+          }
+        }
+      }
+    },
+    "ui.settings.profile.title_preview.profile": {
+      "comment": "Sample profile name in the profile title preview; not a stored profile name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profile"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配置文件"
+          }
+        }
+      }
+    },
+    "ui.settings.profile.title_preview.user": {
+      "comment": "Sample user name in the profile title preview; not an account identifier.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "User"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用户"
+          }
+        }
+      }
+    },
     "ui.settings.profilesgeneralpreferencesviewcontroller.not_available_with_browser_tabs.c9345a36": {
       "comment": "User-facing text in ProfilesGeneralPreferencesViewController (updateEnabledState).",
       "extractionState": "manual",
