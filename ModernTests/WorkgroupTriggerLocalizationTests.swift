@@ -108,6 +108,44 @@ final class WorkgroupTriggerLocalizationTests: XCTestCase {
     }
 
     @MainActor
+    func testTerminalDescriptionsKeepSharedFallbackDiagnostics() throws {
+        try withSyntheticModel { model in
+            let named = workgroup(id: "synthetic-named", name: "synthetic-中文\\1")
+            let unnamed = workgroup(id: "synthetic-unnamed", name: "")
+            let trigger = EnterWorkgroupTrigger()
+            let fixtures: [([iTermWorkgroup], Any?, String)] = [
+                ([named, unnamed], named.uniqueIdentifier, named.name),
+                ([named, unnamed], unnamed.uniqueIdentifier, "Untitled"),
+                ([named, unnamed], "synthetic-missing", "(missing)"),
+                ([], nil, "(unset)"),
+                ([], "", "(unset)"),
+                ([unnamed], nil, "Untitled"),
+                ([unnamed], "", "Untitled"),
+                ([unnamed], NSNumber(value: 17), "Untitled")
+            ]
+            for (groups, parameter, label) in fixtures {
+                model.setAll(groups)
+                let persisted = iTermUserDefaults.workgroupsData
+                trigger.param = parameter
+                let dictionary = trigger.dictionaryValue()
+                let digest = trigger.digest
+                let expected = "Enter Workgroup “\(label)”"
+                XCTAssertEqual(trigger.description, expected)
+                XCTAssertEqual(String(format: "Consider %@", trigger), "Consider " + expected)
+                XCTAssertEqual(String(format: "Trigger %@ matched string %@", trigger, "fixture"),
+                               "Trigger " + expected + " matched string fixture")
+                // The parameter row deliberately shares this helper; this is
+                // not a separate UI-only value that can safely be translated.
+                XCTAssertEqual(trigger.paramAttributedString()?.string, label)
+                XCTAssertEqual(trigger.dictionaryValue() as NSDictionary, dictionary as NSDictionary)
+                XCTAssertEqual(trigger.digest, digest)
+                XCTAssertTrue(model.workgroups == groups)
+                XCTAssertTrue(iTermUserDefaults.workgroupsData == persisted)
+            }
+        }
+    }
+
+    @MainActor
     func testExplicitIDsAndEmptyMenuAreNotRewritten() throws {
         try withSyntheticModel { model in
             let fixtures = [workgroup(id: "synthetic-unnamed", name: ""),

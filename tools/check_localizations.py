@@ -162,12 +162,19 @@ SWIFT_SHARED_TRIGGER_DIAGNOSTIC_BODIES = {
     "FoldTrigger": r'return "Fold to \(self.param ?? "")"',
     "InjectTrigger": r'return "Inject Data “\(self.param ?? "")”"',
     "ExitWorkgroupTrigger": 'return "Exit Workgroup"',
+    "EnterWorkgroupTrigger": r'return "Enter Workgroup “\(displayLabel(forID: effectiveID))”"',
     "BufferInputTrigger": 'if shouldBuffer { return "Buffer Input" } else { return "Stop Buffering Input" }',
     "SetUserVariableTrigger": (
         'if let string = param as? String, let (name, value) = variableNameAndValue(string) {\n'
         r'return "Set User Variable “\(name)” to “\(value)”"' '\n} else {\n'
         r'return "Set User Variable “\(param ?? "")”"' '\n}'),
 }
+SWIFT_WORKGROUP_DIAGNOSTIC_LABEL_BODY = (
+    'guard let id, !id.isEmpty else { return "(unset)" }\n'
+    'if let wg = availableWorkgroups.first(where: { $0.uniqueIdentifier == id }) {\n'
+    'return wg.name.isEmpty ? "Untitled" : wg.name\n'
+    '}\nreturn "(missing)"'
+)
 SWIFT_STATUS_BAR_PROVIDER_SELECTORS = frozenset(
     {
         "statusBarComponentShortDescription",
@@ -1133,7 +1140,7 @@ def check_hardcoded_english_swift_localized_interpolation_fallbacks(sources):
     return errors
 
 
-def swift_body_is_shared_trigger_diagnostic(path, sources, declaration, body):
+def swift_body_is_shared_trigger_diagnostic(path, sources, declaration, body, source):
     """Classify only reviewed original instance descriptions with real log consumers."""
     original = SWIFT_SHARED_TRIGGER_DIAGNOSTIC_BODIES.get(path.stem)
     if (original is None
@@ -1144,6 +1151,19 @@ def swift_body_is_shared_trigger_diagnostic(path, sources, declaration, body):
     # As with the ObjC classifier, preserve literal spaces and identifier
     # boundaries. Interpolation text is conservatively compared as written.
     token = SWIFT_STRING_LITERAL.pattern + r"|\w+|\S"
+    if path.stem == "EnterWorkgroupTrigger":
+        # Its parameter row shares the helper with the logged description.
+        # Restoring only the outer format must not hide translated fallbacks.
+        helper = re.search(
+            r'\bprivate\s+func\s+displayLabel\(forID\s+id:\s*String\?\)\s*->\s*String\s*\{',
+            source)
+        if helper is None:
+            return False
+        helper_end = swift_braced_block_end(source, helper.end() - 1)
+        if (helper_end is None
+                or re.findall(token, source[helper.end():helper_end - 1])
+                != re.findall(token, SWIFT_WORKGROUP_DIAGNOSTIC_LABEL_BODY)):
+            return False
     return (re.findall(token, body) == re.findall(token, original)
             and trigger_description_has_match_log_consumers(sources))
 
@@ -1176,7 +1196,7 @@ def check_hardcoded_english_swift_ui_providers(sources):
                 continue
             body_start = declaration.start("open") + 1
             body = source[body_start:block_end - 1]
-            if swift_body_is_shared_trigger_diagnostic(path, sources, declaration, body):
+            if swift_body_is_shared_trigger_diagnostic(path, sources, declaration, body, source):
                 continue
             localized_ranges = swift_localization_call_ranges(body)
             for literal_match in SWIFT_STRING_LITERAL.finditer(body):

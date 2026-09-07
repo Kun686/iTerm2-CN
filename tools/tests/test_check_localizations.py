@@ -1737,6 +1737,7 @@ class LocalizationCheckCLITests(unittest.TestCase):
             "FoldTrigger": r'return "Fold to \(self.param ?? "")"',
             "InjectTrigger": r'return "Inject Data “\(self.param ?? "")”"',
             "ExitWorkgroupTrigger": 'return "Exit Workgroup"',
+            "EnterWorkgroupTrigger": r'return "Enter Workgroup “\(displayLabel(forID: effectiveID))”"',
             "BufferInputTrigger": 'if shouldBuffer { return "Buffer Input" } else { return "Stop Buffering Input" }',
             "SetUserVariableTrigger": (
                 'if let string = param as? String, let (name, value) = variableNameAndValue(string) {\n'
@@ -1746,17 +1747,49 @@ class LocalizationCheckCLITests(unittest.TestCase):
 
     def _write_swift_trigger_description(self, *, name="SGRTrigger", body=None,
                                          declaration="override var description: String",
+                                         helpers=None,
                                          **consumer_options):
         self._write_shared_trigger_description(**consumer_options)
         if body is None:
             body = self._swift_trigger_bodies()["SGRTrigger"]
+        if helpers is None:
+            helpers = self._workgroup_display_label_helper() if name == "EnterWorkgroupTrigger" else ""
         previous = getattr(self, "_swift_trigger_fixture", None)
         if previous is not None:
             previous.unlink()
         self._swift_trigger_fixture = self.sources / "Triggers" / f"{name}.swift"
         self._swift_trigger_fixture.write_text(
-            f"class {name}: Trigger {{\n    {declaration} {{\n{body}\n    }}\n}}\n",
+            f"class {name}: Trigger {{\n    {declaration} {{\n{body}\n    }}\n{helpers}\n}}\n",
             encoding="utf-8")
+
+    def _workgroup_display_label_helper(self):
+        return ('private func displayLabel(forID id: String?) -> String {\n'
+                'guard let id, !id.isEmpty else { return "(unset)" }\n'
+                'if let wg = availableWorkgroups.first(where: { $0.uniqueIdentifier == id }) {\n'
+                'return wg.name.isEmpty ? "Untitled" : wg.name\n'
+                '}\nreturn "(missing)"\n}')
+
+    def test_workgroup_diagnostic_requires_original_shared_label_helper(self):
+        body = self._swift_trigger_bodies()["EnterWorkgroupTrigger"]
+        original = self._workgroup_display_label_helper()
+        for helpers in ("", original.replace('"Untitled"', '"Other label"'),
+                        original.replace("wg.name", "other.name"),
+                        original.replace("return \"(unset)\"", 'mutateState(); return "(unset)"')):
+            with self.subTest(helpers=helpers):
+                self._write_swift_trigger_description(name="EnterWorkgroupTrigger",
+                                                     body=body, helpers=helpers)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Swift UI provider 'description'", result.stderr)
+
+    def test_workgroup_diagnostic_does_not_exempt_browser_descriptions(self):
+        self._write_swift_trigger_description(
+            name="EnterWorkgroupBrowserTrigger",
+            body=self._swift_trigger_bodies()["EnterWorkgroupTrigger"],
+            helpers=self._workgroup_display_label_helper())
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Swift UI provider 'description'", result.stderr)
 
     def test_swift_shared_trigger_original_bodies_are_diagnostics(self):
         for name, body in self._swift_trigger_bodies().items():
