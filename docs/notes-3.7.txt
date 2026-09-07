@@ -32,14 +32,16 @@ iTerm2-CN community localization:
   localized bundle metadata at startup.
 - Uses system locale inputs for CN shell locale
   inference, independent of the UI language.
-  Locale selection and Profile rules are unchanged.
+  Locale selection and Profile rules are
+  unchanged.
 - Terminal emulation and terminal I/O behavior
   are unchanged.
 - Keeps shared fork-failure diagnostics in
   English in logs, terminal output, and the
   notification body; its title is localized.
 - Preserves the in-memory transfer path marker
-  used by file actions, independent of UI language.
+  used by file actions, independent of UI
+  language.
 - Keeps shared SSH Integration transfer errors
   unchanged in logs and completion callbacks.
 - Preserves shared SCP/terminal-download errors
@@ -49,6 +51,10 @@ iTerm2-CN community localization:
   used for filesystem creation. Prompts and file
   kinds stay localized; kind sorting uses the
   displayed labels without changing file metadata.
+- Keeps SSH connection-closed and file-not-found
+  diagnostics unchanged in AI tool responses and
+  shared user notices. Other endpoint error
+  descriptions remain localized.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.

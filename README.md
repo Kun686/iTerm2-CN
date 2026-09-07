@@ -63,6 +63,9 @@ The SSH file panel keeps the original default folder name, `untitled folder`,
 because Create uses it as a filesystem path. Its prompts and file-kind labels
 remain localized; sorting by kind uses the displayed labels without changing
 file metadata or paths.
+SSH connection-closed and file-not-found descriptions remain in English because
+remote file creation includes them in AI tool responses as well as user notices.
+Other independent endpoint error descriptions remain localized.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to

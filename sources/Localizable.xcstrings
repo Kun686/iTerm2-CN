@@ -65551,42 +65551,6 @@
         }
       }
     },
-    "ui.swift.ssh.sshendpointexception.connection_closed.fdb770cf": {
-      "comment": "User-facing text in SSHEndpointException.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connection closed"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "连接已关闭"
-          }
-        }
-      }
-    },
-    "ui.swift.ssh.sshendpointexception.file_not_found.3521021a": {
-      "comment": "User-facing text in SSHEndpointException.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "File not found"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "找不到文件"
-          }
-        }
-      }
-    },
     "ui.swift.ssh.sshendpointexception.file_transfer_canceled.699d73cf": {
       "comment": "User-facing text in SSHEndpointException.",
       "extractionState": "manual",

@@ -15,9 +15,9 @@ enum SSHEndpointException: LocalizedError {
         get {
             switch self {
             case .connectionClosed:
-                return String(localized: "ui.swift.ssh.sshendpointexception.connection_closed.fdb770cf", defaultValue: "Connection closed", bundle: .main, comment: "User-facing text in SSHEndpointException.")
+                return "Connection closed"
             case .fileNotFound:
-                return String(localized: "ui.swift.ssh.sshendpointexception.file_not_found.3521021a", defaultValue: "File not found", bundle: .main, comment: "User-facing text in SSHEndpointException.")
+                return "File not found"
             case .internalError:
                 return String(localized: "ui.swift.ssh.sshendpointexception.internal_error.1dac8dea", defaultValue: "Internal error", bundle: .main, comment: "User-facing text in SSHEndpointException.")
             case .transferCanceled:
