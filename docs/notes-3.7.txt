@@ -16,6 +16,8 @@ iTerm2-CN community localization:
   policy tests.
 - Isolates update-policy tests from CN host
   arguments and preserves existing overrides.
+- Localizes disclosure titles and explanations
+  in quit, migration, and diagnostic alerts.
 - Terminal emulation and terminal I/O behavior
   are unchanged.
 - CN uses the main application Bundle ID

@@ -98,6 +98,10 @@ OBJC_CURSOR_PRESET_NAME_SINK = re.compile(
     r"\[\[\s*iTermCursorBlinkFadePreset\s+alloc\s*\]\s*"
     r"(?P<sink>initWithName)\s*:"
 )
+OBJC_DISCLOSABLE_VIEW_INITIALIZER = re.compile(
+    r"\[\s*\[\s*iTerm(?:Scrolling)?DisclosableView\s+alloc\s*\]\s*initWithFrame\s*:"
+)
+OBJC_DISCLOSABLE_TEXT_ARGUMENT = re.compile(r"\b(?P<sink>prompt|message)\s*:")
 OBJC_LOCALIZED_DESCRIPTION_FALLBACK = re.compile(
     r"\blocalizedDescription\s*\]?\s*\?\:\s*"
     r"(?P<literal>@\"(?:\\.|[^\"\\])*\")"
@@ -1287,6 +1291,25 @@ def check_hardcoded_english_objc_special_ui_literals(sources):
                     f"{path}:{line_number}: hard-coded English text in "
                     f"Objective-C UI sink '{sink}'"
                 )
+        # Scope prompt/message to these UI views, never model or protocol prompts.
+        for initializer in OBJC_DISCLOSABLE_VIEW_INITIALIZER.finditer(source):
+            end = objc_array_literal_end(source, initializer.start() + 1)
+            if end is None:
+                continue
+            for argument in OBJC_DISCLOSABLE_TEXT_ARGUMENT.finditer(source, initializer.end(), end):
+                expression = source[argument.end():end].lstrip()
+                format_prefix = re.match(r"\[NSString\s+stringWithFormat\s*:\s*", expression)
+                if format_prefix:
+                    expression = expression[format_prefix.end():]
+                literal_match = OBJC_STRING_LITERAL.match(expression)
+                if literal_match is None:
+                    continue
+                if contains_translatable_english_text(literal_match.group(0)[2:-1]):
+                    line_number = source.count("\n", 0, argument.start()) + 1
+                    errors.append(
+                        f"{path}:{line_number}: hard-coded English text in "
+                        f"Objective-C UI sink 'disclosable {argument.group('sink')}'"
+                    )
     return errors
 
 

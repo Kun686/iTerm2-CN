@@ -956,7 +956,7 @@ static NSArray<NSString *> *iTermConvertThreePartVersionNumbersToTwoPart(NSArray
                     }
                     DLog(@"%@", messages);
                     iTermDisclosableView *accessory = [[iTermDisclosableView alloc] initWithFrame:NSZeroRect
-                                                                                           prompt:@"Output"
+                                                                                           prompt:NSLocalizedStringWithDefaultValue(@"ui.disclosure.output", nil, NSBundle.mainBundle, @"Output", @"Disclosure title for diagnostic command output; the output itself is not translated.")
                                                                                           message:[messages componentsJoinedByString:@"\n\n"]];
                     iTermAccessoryViewUnfucker *unfucker = [[iTermAccessoryViewUnfucker alloc] initWithView:accessory];
                     accessory.frame = NSMakeRect(0, 0, accessory.intrinsicContentSize.width, accessory.intrinsicContentSize.height);

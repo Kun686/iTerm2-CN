@@ -12046,6 +12046,114 @@
         }
       }
     },
+    "ui.disclosure.directory.more": {
+      "comment": "Truncated directory listing in a migration alert.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@\n…and %@ more"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@\n…另外还有 %@ 项"
+          }
+        }
+      }
+    },
+    "ui.disclosure.directory.title": {
+      "comment": "Disclosure title for a migration directory listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Directory Listing"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目录列表"
+          }
+        }
+      }
+    },
+    "ui.disclosure.key_bindings": {
+      "comment": "Disclosure title for incompatible key bindings.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show incompatible key bindings"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示不兼容的按键绑定"
+          }
+        }
+      }
+    },
+    "ui.disclosure.output": {
+      "comment": "Disclosure title for diagnostic command output; the output itself is not translated.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Output"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "输出"
+          }
+        }
+      }
+    },
+    "ui.disclosure.quit.prompt": {
+      "comment": "Disclosure title in the quit confirmation alert.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Why am I being prompted?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "为什么显示此提示？"
+          }
+        }
+      }
+    },
+    "ui.disclosure.quit.reason": {
+      "comment": "Explanation in the quit confirmation alert.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You are being prompted because:\n\n%@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示此提示的原因：\n\n%@"
+          }
+        }
+      }
+    },
     "ui.dvr.iterminstantreplaywindowcontroller.cancel.19766ed6": {
       "comment": "User-facing text in iTermInstantReplayWindowController (setState:byCancelling:).",
       "extractionState": "manual",

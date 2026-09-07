@@ -352,7 +352,7 @@ static NSString *const kDeleteKeyString = @"0x7f-0x0";
     NSString *message = [descriptions componentsJoinedByString:@"\n"];
 
     iTermScrollingDisclosableView *accessory = [[iTermScrollingDisclosableView alloc] initWithFrame:NSZeroRect
-                                                                                             prompt:@"Show incompatible key bindings"
+                                                                                             prompt:NSLocalizedStringWithDefaultValue(@"ui.disclosure.key_bindings", nil, NSBundle.mainBundle, @"Show incompatible key bindings", @"Disclosure title for incompatible key bindings.")
                                                                                             message:message
                                                                                       maximumHeight:150];
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];

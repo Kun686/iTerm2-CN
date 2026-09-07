@@ -1420,6 +1420,32 @@ class LocalizationCheckCLITests(unittest.TestCase):
                 result.stderr,
             )
 
+    def test_disclosable_view_prompt_and_formatted_message_require_localization(self):
+        (self.sources / "Feature.m").write_text(
+            "id view = [[iTermDisclosableView alloc] initWithFrame:NSZeroRect "
+            'prompt:@"Why am I being prompted?" '
+            'message:[NSString stringWithFormat:@"Reason:\\n\\n%@", reason]];\n'
+            "id scrolling = [[iTermScrollingDisclosableView alloc] initWithFrame:NSZeroRect "
+            'prompt:@"Show incompatible key bindings" message:output maximumHeight:150];\n',
+            encoding="utf-8",
+        )
+        result = self._run_checker()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Objective-C UI sink 'disclosable prompt'", result.stderr)
+        self.assertIn("Objective-C UI sink 'disclosable message'", result.stderr)
+
+    def test_disclosable_view_preserves_dynamic_output_and_non_ui_prompts(self):
+        (self.sources / "Feature.m").write_text(
+            "id view = [[iTermDisclosableView alloc] initWithFrame:NSMakeRect(0, 0, 100, 100) "
+            'prompt:NSLocalizedString(@"fixture.greeting", nil) '
+            'message:[output componentsJoinedByString:@"\\n"]];\n'
+            'id request = [[LLMRequest alloc] initWithFrame:NSZeroRect '
+            'prompt:@"Do not translate model protocol" message:@"Raw protocol output"];\n',
+            encoding="utf-8",
+        )
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_hard_coded_english_objective_c_delayed_ui_value_fails(self):
         (self.sources / "Feature.m").write_text(
             "- (void)resetLabel {\n"

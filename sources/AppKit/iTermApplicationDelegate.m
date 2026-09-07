@@ -1039,8 +1039,8 @@ static NSModalResponse iTermCompareRenderingRunModal(id self, SEL _cmd) {
         [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermApplicationDelegate (applicationShouldTerminate:).")];
         [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermApplicationDelegate (applicationShouldTerminate:).")];
         iTermDisclosableView *accessory = [[iTermDisclosableView alloc] initWithFrame:NSZeroRect
-                                                                               prompt:@"Why am I being prompted?"
-                                                                              message:[NSString stringWithFormat:@"You are being prompted because:\n\n%@",
+                                                                               prompt:NSLocalizedStringWithDefaultValue(@"ui.disclosure.quit.prompt", nil, NSBundle.mainBundle, @"Why am I being prompted?", @"Disclosure title in the quit confirmation alert.")
+                                                                              message:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.disclosure.quit.reason", nil, NSBundle.mainBundle, @"You are being prompted because:\n\n%@", @"Explanation in the quit confirmation alert."),
                                                                                        reason.message]];
         iTermAccessoryViewUnfucker *unfucker = [[iTermAccessoryViewUnfucker alloc] initWithView:accessory];
         accessory.frame = NSMakeRect(0, 0, accessory.intrinsicContentSize.width, accessory.intrinsicContentSize.height);
