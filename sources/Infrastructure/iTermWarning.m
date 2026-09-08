@@ -105,6 +105,13 @@ BOOL gShowRememberedAlerts = NO;
                                   silenceable:(iTermWarningType)warningType
                                       heading:(NSString *)heading
                                        window:(NSWindow *)window {
+    // Keep legacy English callers compatible while matching localized buttons.
+    NSString *const cancelLabel = [actions containsObject:kCancel] ? kCancel :
+        NSLocalizedStringWithDefaultValue(@"ui.infrastructure.itermwarning.cancel",
+                                           nil,
+                                           NSBundle.mainBundle,
+                                           @"Cancel",
+                                           @"Default cancel action label for localized warning buttons.");
     return [self showWarningWithTitle:title
                               actions:actions
                         actionMapping:actionToSelectionMap
@@ -112,7 +119,7 @@ BOOL gShowRememberedAlerts = NO;
                            identifier:identifier
                           silenceable:warningType
                               heading:heading
-                          cancelLabel:kCancel
+                          cancelLabel:cancelLabel
                                window:window];
 }
 

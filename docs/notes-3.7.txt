@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Keep localized Cancel actions from becoming
+  remembered warning choices.
 - Completes tab-group menu translations and
   Password Manager placeholders and help text.
 - Keep legacy menu shortcuts working across UI

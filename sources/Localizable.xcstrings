@@ -23429,6 +23429,14 @@
         }
       }
     },
+    "ui.infrastructure.itermwarning.cancel": {
+      "comment": "Default cancel action label for localized warning buttons.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Cancel" } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "取消" } }
+      }
+    },
     "ui.infrastructure.itermwarning.permanently_forget_saved_selection.fcf82656": {
       "comment": "User-facing text in iTermWarning (makeAlert).",
       "extractionState": "manual",
