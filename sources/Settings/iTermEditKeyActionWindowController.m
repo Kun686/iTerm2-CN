@@ -582,14 +582,7 @@ static NSString *iTermEditKeyActionLocalizedString(NSString *key, NSString *fall
     _parameter.stringValue = parameterValue ?: @"";
     if (action == KEY_ACTION_SELECT_MENU_ITEM) {
         [_menuToSelectPopup reloadData];
-        NSArray *parts = [parameterValue ?: @"" componentsSeparatedByString:@"\n"];
-        if (parts.count < 2) {
-            [_menuToSelectPopup selectItemWithTitle:parameterValue ?: @""];
-        } else {
-            if (![_menuToSelectPopup selectItemWithIdentifier:parts[1]]) {
-                [_menuToSelectPopup selectItemWithTitle:parts.firstObject];
-            }
-        }
+        [_menuToSelectPopup restoreParameter:parameterValue ?: @""];
     } else if (action == KEY_ACTION_TOGGLE_SETTING) {
         [_settingToTogglePopup reloadData];
         [_settingToTogglePopup selectItemWithIdentifier:parameterValue ?: @""];
@@ -1010,12 +1003,7 @@ static NSString *iTermEditKeyActionLocalizedString(NSString *key, NSString *fall
 - (NSString *)parameterValueForAction:(KEY_ACTION)action {
     switch (action) {
         case KEY_ACTION_SELECT_MENU_ITEM:
-            if (_menuToSelectPopup.selectedIdentifier.length) {
-              return [NSString stringWithFormat:@"%@\n%@",
-                      _menuToSelectPopup.selectedTitle, _menuToSelectPopup.selectedIdentifier ?: @""];
-            } else {
-                return _menuToSelectPopup.selectedTitle;
-            }
+            return _menuToSelectPopup.selectedParameter;
         case KEY_ACTION_TOGGLE_SETTING:
             return _settingToTogglePopup.selectedIdentifier;
 

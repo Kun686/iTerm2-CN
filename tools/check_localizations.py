@@ -157,6 +157,12 @@ SWIFT_TRIGGER_PROVIDER_SELECTORS = frozenset(
     {"title", "description", "triggerOptionalParameterPlaceholder"}
 )
 SWIFT_SHARED_TRIGGER_DIAGNOSTIC_BODIES = {
+    # Approved exception: the original cached setting NAME may follow UI
+    # language. Only this exact original format/operands are diagnostic text.
+    "SetProfileBooleanTrigger": (
+        'if let (key, value) = keyAndValue(param as? String) {\n'
+        r'return "Set “\(label(forKey: key))” to \(value ? "On" : "Off")"'
+        '\n}\nreturn "Set Profile Setting"'),
     "SGRTrigger": r'return "Change Style “\(self.param ?? "")”"',
     "SetNamedMarkTrigger": r'return "Set Named Mark to \(self.param ?? "")"',
     "FoldTrigger": r'return "Fold to \(self.param ?? "")"',

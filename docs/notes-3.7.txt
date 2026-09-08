@@ -1,6 +1,10 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Keep legacy menu shortcuts working across UI
+  languages without rewriting saved parameters.
+- Keep profile-setting diagnostics in English,
+  except for the cached UI setting name.
 - This is an unofficial community localization
   and is not affiliated with the official iTerm2
   project.

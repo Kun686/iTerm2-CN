@@ -1066,13 +1066,19 @@ iTermPercentage iTermPercentageFromProfile(Profile *profile, iTermWindowType win
 
 // identifier is optional. Old shortcuts only have a title.
 + (BOOL)shortcutIdentifier:(NSString *)identifier title:(NSString *)title matchesItem:(NSMenuItem *)item {
+    return [self shortcutIdentifier:identifier title:title matchesItem:item allowLegacyTitles:YES];
+}
+
++ (BOOL)shortcutIdentifier:(NSString *)identifier title:(NSString *)title matchesItem:(NSMenuItem *)item allowLegacyTitles:(BOOL)allowLegacyTitles {
     if (item.identifier && [identifier isEqualToString:item.identifier]) {
         return YES;
     }
     if (!identifier && [title isEqualToString:[item title]]) {
         return YES;
     }
-
+    if (allowLegacyTitles && !identifier && title.length) {
+        return [iTermMenuItemLegacyTitles matchesTitle:title identifier:item.identifier currentTitle:item.title];
+    }
     return NO;
 }
 

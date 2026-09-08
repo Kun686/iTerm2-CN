@@ -1798,6 +1798,24 @@ class LocalizationCheckCLITests(unittest.TestCase):
                 result = self._run_checker()
                 self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_profile_boolean_diagnostic_rule_preserves_exact_format_and_operands(self):
+        original = ('if let (key, value) = keyAndValue(param as? String) {\n'
+                    r'return "Set “\(label(forKey: key))” to \(value ? "On" : "Off")"'
+                    '\n}\nreturn "Set Profile Setting"')
+        self._write_swift_trigger_description(name="SetProfileBooleanTrigger", body=original)
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for body in (original.replace('"On"', '"Enabled"'),
+                     original.replace("label(forKey: key)", "otherLabel(key)"),
+                     original.replace("keyAndValue(param", "keyAndValue(otherParam"),
+                     original.replace("Set Profile Setting", "New fallback text"),
+                     original + "\nmutateState()"):
+            with self.subTest(body=body):
+                self._write_swift_trigger_description(name="SetProfileBooleanTrigger", body=body)
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Swift UI provider 'description'", result.stderr)
+
     def test_swift_shared_trigger_rule_rejects_other_paths_and_providers(self):
         for changes in ({"name": "FeatureTrigger"},
                         {"declaration": "override static var title: String"},

@@ -47,6 +47,11 @@ unchanged. Select Simplified Chinese, English, or Follow System in General
 settings, then relaunch to apply the selection. CN builds disable automatic
 updates; Check for Updates opens [Fork Releases](https://github.com/Kun686/iTerm2-CN/releases).
 
+Legacy title-only menu shortcuts recognize bundled menu translations. Opening
+or reloading the shortcut editor preserves the original complete parameter;
+only choosing a different action produces a new parameter. Stable menu IDs and
+action selectors are unchanged.
+
 Raw diagnostics remain untranslated. In particular, the fork-failure message
 is shared by logs, terminal output, and the notification body, so it stays in
 English; the notification title is localized.
@@ -84,6 +89,9 @@ Their action titles and independent prompts remain localized; buffered-input
 menu labels still map to the original numeric options.
 The terminal workgroup-entry description and its shared parameter-row fallbacks
 also keep their original diagnostic text; user-defined workgroup names are unchanged.
+Set Profile Setting diagnostics retain their English format and On/Off values.
+Only the setting name may follow the UI language when its existing label cache
+has been populated; the uncached background path retains the raw setting key.
 
 Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
 main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to

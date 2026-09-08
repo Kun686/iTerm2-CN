@@ -13,7 +13,24 @@
 @implementation NSMenu(iTermAdditions)
 
 - (BOOL)it_selectMenuItemWithTitle:(NSString * _Nullable)title identifier:(NSString * _Nullable)identifier {
-    [self update];
+    // Keep an exact current-title match anywhere in the tree ahead of a legacy
+    // alias. The second pass reuses the already-updated menu without side effects.
+    if ([self it_selectMenuItemWithTitle:title identifier:identifier allowLegacyTitles:NO update:YES]) {
+        return YES;
+    }
+    if (identifier || !title.length) {
+        return NO;
+    }
+    return [self it_selectMenuItemWithTitle:title identifier:identifier allowLegacyTitles:YES update:NO];
+}
+
+- (BOOL)it_selectMenuItemWithTitle:(NSString * _Nullable)title
+                      identifier:(NSString * _Nullable)identifier
+               allowLegacyTitles:(BOOL)allowLegacyTitles
+                          update:(BOOL)update {
+    if (update) {
+        [self update];
+    }
 
     if (self == [NSApp windowsMenu] &&
         [[NSApp keyWindow] respondsToSelector:@selector(_moveToScreen:)] &&
@@ -30,11 +47,11 @@
             continue;
         }
         if ([item hasSubmenu]) {
-            if ([item.submenu it_selectMenuItemWithTitle:title identifier:identifier]) {
+            if ([item.submenu it_selectMenuItemWithTitle:title identifier:identifier allowLegacyTitles:allowLegacyTitles update:update]) {
                 return YES;
             }
         }
-        if ([ITAddressBookMgr shortcutIdentifier:identifier title:title matchesItem:item]) {
+        if ([ITAddressBookMgr shortcutIdentifier:identifier title:title matchesItem:item allowLegacyTitles:allowLegacyTitles]) {
             if (item.hasSubmenu) {
                 return YES;
             }
