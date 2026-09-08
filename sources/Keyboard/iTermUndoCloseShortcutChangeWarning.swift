@@ -26,9 +26,9 @@ import AppKit
 
 @objc(iTermUndoCloseShortcutChangeWarning)
 class iTermUndoCloseShortcutChangeWarning: NSObject {
-    // Stable identifier of the Show Tabs in Fullscreen menu item in
+    // Title and identifier of the Show Tabs in Fullscreen menu item in
     // MainMenu.xib. Used to build the KEY_ACTION_SELECT_MENU_ITEM parameter
-    // (localized title\nidentifier).
+    // (title\nidentifier).
     private static let showTabsMenuItemTitle = "Show Tabs in Fullscreen"
 
     // Call right after Undo Close runs. If `event` is a ⌘⇧T key-down,
@@ -120,12 +120,7 @@ class iTermUndoCloseShortcutChangeWarning: NSObject {
     }
 
     private static func addGlobalShowTabsBinding(for keystroke: iTermKeystroke) {
-        let localizedTitle = String(localized: "1257.title",
-                                    defaultValue: "Show Tabs in Fullscreen",
-                                    table: "MainMenu",
-                                    bundle: .main,
-                                    comment: "Title of the Show Tabs in Fullscreen menu item.")
-        let parameter = "\(localizedTitle)\n\(showTabsMenuItemTitle)"
+        let parameter = "\(showTabsMenuItemTitle)\n\(showTabsMenuItemTitle)"
         guard let action = iTermKeyBindingAction.withAction(.ACTION_SELECT_MENU_ITEM,
                                                             parameter: parameter,
                                                             escaping: .none,
