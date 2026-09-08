@@ -59,6 +59,9 @@ Dynamic tool names and the Codecierge product name are not translated.
 Raw diagnostics remain untranslated. In particular, the fork-failure message
 is shared by logs, terminal output, and the notification body, so it stays in
 English; the notification title is localized.
+The installer's two built-in plugin names remain English in its diagnostic logs
+and verification-error arguments. Error descriptions translate their display
+copies; download addresses, bundle identities and installation are unchanged.
 Close-confirmation job lists localize their conjunction and duplicate-count
 description without translating process names or changing job grouping, sorting,
 or closing decisions. The generic list joiner used by diagnostics stays unchanged.

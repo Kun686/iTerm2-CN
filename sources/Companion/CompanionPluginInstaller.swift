@@ -37,7 +37,18 @@ enum CompanionPluginInstallerError: LocalizedError {
         case .bundleNotFound:
             return String(localized: "ui.swift.companion.companionplugininstaller.the_downloaded_archive_did_not_contain_a_plugin.cf2b08e2", defaultValue: "The downloaded archive did not contain a plugin.", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
         case .verificationFailed(let name):
-            return String(localized: "ui.swift.companion.companionplugininstaller.the_0_did_not_load_after_installation.8d90e8e2", defaultValue: "The \(name) did not load after installation.", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
+            // Specs and error arguments also carry diagnostic names. Translate
+            // only their presentation copy, leaving unknown names untouched.
+            let displayName: String
+            switch name {
+            case "AI plugin":
+                displayName = String(localized: "ui.swift.companion.companionplugininstaller.ai_plugin.9412826a", defaultValue: "AI plugin", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
+            case "companion plugin":
+                displayName = String(localized: "ui.swift.companion.companionplugininstaller.companion_plugin.56041357", defaultValue: "companion plugin", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
+            default:
+                displayName = name
+            }
+            return String(localized: "ui.swift.companion.companionplugininstaller.the_0_did_not_load_after_installation.8d90e8e2", defaultValue: "The \(displayName) did not load after installation.", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
         }
     }
 }
@@ -50,12 +61,12 @@ enum CompanionPluginInstaller {
     }
 
     private static let aiSpec = Spec(
-        name: String(localized: "ui.swift.companion.companionplugininstaller.ai_plugin.9412826a", defaultValue: "AI plugin", bundle: .main, comment: "User-facing text in CompanionPluginInstaller."),
+        name: "AI plugin",
         zipURL: URL(string: "https://iterm2.com/downloads/ai-plugin/iTermAI-1.1.zip")!,
         bundleID: "com.googlecode.iterm2.iTermAI")
 
     private static let companionSpec = Spec(
-        name: String(localized: "ui.swift.companion.companionplugininstaller.companion_plugin.56041357", defaultValue: "companion plugin", bundle: .main, comment: "User-facing text in CompanionPluginInstaller."),
+        name: "companion plugin",
         zipURL: URL(string: "https://iterm2.com/downloads/companion-plugin/iTermCompanion-1.0.zip")!,
         bundleID: "com.googlecode.iterm2.iTermCompanion")
 
