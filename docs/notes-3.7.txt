@@ -1,6 +1,10 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Localize close-confirmation job lists without
+  changing process names or closing decisions.
+- Document the third-party Close Tab AX label
+  as a known untranslated accessibility name.
 - Keep download-finished diagnostics untranslated.
 - Localize Intel-only script errors at display
   time while preserving Script Console history.

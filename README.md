@@ -55,6 +55,13 @@ action selectors are unchanged.
 Raw diagnostics remain untranslated. In particular, the fork-failure message
 is shared by logs, terminal output, and the notification body, so it stays in
 English; the notification title is localized.
+Close-confirmation job lists localize their conjunction and duplicate-count
+description without translating process names or changing job grouping, sorting,
+or closing decisions. The generic list joiner used by diagnostics stays unchanged.
+The third-party tab bar's close-button accessibility name remains `Close Tab`:
+its private getter is hard-coded and does not honor the inherited label setter.
+This is a known third-party translation limitation, not a completed VoiceOver
+or close-button interaction acceptance check.
 The in-memory transfer path marker also retains its upstream value because
 file actions consume it as a path, not just a display label.
 The background Run Command Trigger, Smart Selection Action, and URL Handler

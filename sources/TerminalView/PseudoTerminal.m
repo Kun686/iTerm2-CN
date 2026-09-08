@@ -2147,10 +2147,11 @@ ITERM_WEAKLY_REFERENCEABLE
     }
     NSString *message;
     NSArray *sortedNames = [names countedInstancesStrings];
+    NSString * const conjunction = NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_job_conjunction", nil, NSBundle.mainBundle, @"and", @"Conjunction between job names in a close confirmation.");
     if ([sortedNames count] == 1) {
         message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_running_one_job", nil, NSBundle.mainBundle, @"%1$@ is running %2$@.", @"Close confirmation with one running job."), identifier, [sortedNames objectAtIndex:0]];
     } else if ([sortedNames count] > 1 && [sortedNames count] <= 10) {
-        message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_running_jobs", nil, NSBundle.mainBundle, @"%1$@ is running the following jobs: %2$@.", @"Close confirmation with multiple running jobs."), identifier, [sortedNames componentsJoinedWithOxfordComma]];
+        message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_running_jobs", nil, NSBundle.mainBundle, @"%1$@ is running the following jobs: %2$@.", @"Close confirmation with multiple running jobs."), identifier, [sortedNames componentsJoinedWithOxfordCommaAndConjunction:conjunction]];
     } else if ([sortedNames count] > 10) {
         message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_running_many_jobs",
                                                                                 nil,
@@ -2158,7 +2159,7 @@ ITERM_WEAKLY_REFERENCEABLE
                                                                                 @"%1$@ is running the following jobs: %2$@, plus %3$ld %4$@.",
                                                                                 @"Close confirmation with more than ten running jobs."),
                    identifier,
-                   [sortedNames componentsJoinedWithOxfordComma],
+                   [sortedNames componentsJoinedWithOxfordCommaAndConjunction:conjunction],
                    (long)[sortedNames count] - 10,
                    [sortedNames count] == 11 ? NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.other_job", nil, NSBundle.mainBundle, @"other", @"Singular suffix in a running-job count.") : NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.other_jobs", nil, NSBundle.mainBundle, @"others", @"Plural suffix in a running-job count.")];
     } else {

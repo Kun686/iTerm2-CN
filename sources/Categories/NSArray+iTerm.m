@@ -590,7 +590,7 @@
         NSArray *values = classified[key];
         const NSInteger count = values.count;
         if (count > 1) {
-            return [NSString stringWithFormat:@"%@ instances of \"%@\"", @(count), key];
+            return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.nsarray_iterm.counted_instances", nil, NSBundle.mainBundle, @"%@ instances of \"%@\"", @"Repeated job name in a close confirmation. Preserve the count and process name."), @(count), key];
         } else {
             return values.firstObject;
         }

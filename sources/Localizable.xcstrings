@@ -19450,6 +19450,24 @@
         }
       }
     },
+    "ui.categories.nsarray_iterm.counted_instances": {
+      "comment": "Repeated job name in a close confirmation. Preserve the count and process name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ instances of \"%@\""
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 个“%@”实例"
+          }
+        }
+      }
+    },
     "ui.categories.nsfilemanager_iterm.ok.565339bc": {
       "comment": "User-facing action label in NSFileManager+iTerm (actions).",
       "extractionState": "manual",
@@ -74345,6 +74363,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@（%2$@ 行）"
+          }
+        }
+      }
+    },
+    "ui.terminalview.pseudoterminal.close_job_conjunction": {
+      "comment": "Conjunction between job names in a close confirmation.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "and"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "和"
           }
         }
       }
