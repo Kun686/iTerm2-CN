@@ -46,6 +46,52 @@ class LocalizationCheckCLITests(unittest.TestCase):
                 finally:
                     path.unlink()
 
+    def _background_initializer_fixture(self, lane):
+        if lane == "smart":
+            path = self.sources / "TerminalView/PTYTextView+ARC.m"
+            signature = ("- (void)contextMenu:(iTermTextViewContextMenuHelper *)contextMenu\n"
+                         "runCommandInBackground:(NSString *)command")
+            shell = "self.delegate.textViewShell"
+            title = "Smart Selection Action"
+        else:
+            path = self.sources / "SemanticHistory/iTermURLActionHelper.m"
+            signature = "- (void)launchURLHandlerCommand:(NSString *)command"
+            shell = "[self.delegate urlActionHelperShell:self]"
+            title = "URL Handler"
+        body = (signature + " {\n"
+                "    iTermBackgroundCommandRunner *runner =\n"
+                "        [[iTermBackgroundCommandRunner alloc] initWithCommand:command\n"
+                f'                                                        shell:{shell} title:@"{title}"];\n'
+                "    [runner run];\n}\n")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        return path, body
+
+    def test_accepts_exact_shared_background_initializer_titles(self):
+        for lane in ("smart", "url"):
+            with self.subTest(lane=lane):
+                path, body = self._background_initializer_fixture(lane)
+                path.write_text(body, encoding="utf-8")
+                result = self._run_checker()
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_shared_background_initializer_exceptions_are_narrow(self):
+        for lane in ("smart", "url"):
+            path, body = self._background_initializer_fixture(lane)
+            for variant in (
+                body.replace("iTermBackgroundCommandRunner alloc", "NSAlert alloc"),
+                body.replace("shell:", "wrongArgument:"),
+                body.replace("title:@\"", "title:@\"Other English "),
+                body.replace("runCommandInBackground:", "unrelatedAction:").replace(
+                    "launchURLHandlerCommand:", "unrelatedAction:"),
+                body.replace("[runner run];", 'alert.title = @"Other English Title";'),
+            ):
+                with self.subTest(lane=lane, variant=variant):
+                    path.write_text(variant, encoding="utf-8")
+                    result = self._run_checker()
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("Objective-C UI sink 'title'", result.stdout + result.stderr)
+            path.unlink()
+
     def setUp(self):
         self._temporary_directory = tempfile.TemporaryDirectory()
         self.project_root = Path(self._temporary_directory.name)

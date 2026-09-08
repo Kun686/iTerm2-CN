@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve Smart Selection and URL Handler log
+  titles while localizing failure notifications.
 - Preserve background-trigger diagnostic titles.
 - Keep localized Cancel actions from becoming
   remembered warning choices.

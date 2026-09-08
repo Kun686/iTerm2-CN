@@ -382,7 +382,7 @@ workingDirectory:(NSString *)workingDirectory
     iTermBackgroundCommandRunner *runner =
         [[iTermBackgroundCommandRunner alloc] initWithCommand:command
                                                         shell:[self.delegate urlActionHelperShell:self]
-                                                        title:NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermurlactionhelper.url_handler.f3a83da0", nil, NSBundle.mainBundle, @"URL Handler", @"User-facing text in iTermURLActionHelper (title).")];
+                                                        title:@"URL Handler"];
     runner.notificationTitle = NSLocalizedStringWithDefaultValue(@"ui.semantichistory.itermurlactionhelper.url_handler_command_failed_notification_title", nil, NSBundle.mainBundle, @"URL Handler Command Failed", @"Notification title when a URL handler background command fails.");
     [runner run];
 }

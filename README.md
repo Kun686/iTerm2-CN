@@ -57,9 +57,10 @@ is shared by logs, terminal output, and the notification body, so it stays in
 English; the notification title is localized.
 The in-memory transfer path marker also retains its upstream value because
 file actions consume it as a path, not just a display label.
-The background Run Command Trigger title remains in English because the runner
-shares it with diagnostic descriptions and script history. Its independent
-failure-notification title remains localized.
+The background Run Command Trigger, Smart Selection Action, and URL Handler
+titles remain in English because the runner shares them with diagnostic
+descriptions and script history. Their independent failure-notification titles
+remain localized.
 SSH Integration transfer diagnostics shared with logs, completion handlers, and
 browser stream failures also retain their original text. Transfer summaries and
 independent UI labels remain localized.

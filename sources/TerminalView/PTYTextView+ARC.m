@@ -2072,7 +2072,7 @@ runCommandInBackground:(NSString *)command {
     iTermBackgroundCommandRunner *runner =
         [[iTermBackgroundCommandRunner alloc] initWithCommand:command
                                                         shell:self.delegate.textViewShell
-                                                        title:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.smart_selection_action.7f4c7022", nil, NSBundle.mainBundle, @"Smart Selection Action", @"User-facing text in PTYTextView+ARC (title).")];
+                                                        title:@"Smart Selection Action"];
     runner.notificationTitle = NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytextview_arc.smart_selection_action_failed_notification_title", nil, NSBundle.mainBundle, @"Smart Selection Action Failed", @"Notification title when a Smart Selection background command fails.");
     [runner run];
 }

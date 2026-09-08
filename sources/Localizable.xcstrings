@@ -30302,7 +30302,8 @@
       }
     },
     "ui.semantichistory.itermurlactionhelper.url_handler.f3a83da0": {
-      "comment": "User-facing text in iTermURLActionHelper (title).",
+      "shouldTranslate": false,
+      "comment": "Shared background runner title used by diagnostic descriptions and script history; retain upstream text.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -30314,7 +30315,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "URL 处理程序"
+            "value": "URL Handler"
           }
         }
       }
@@ -76487,7 +76488,8 @@
       }
     },
     "ui.terminalview.ptytextview_arc.smart_selection_action.7f4c7022": {
-      "comment": "User-facing text in PTYTextView+ARC (title).",
+      "shouldTranslate": false,
+      "comment": "Shared background runner title used by diagnostic descriptions and script history; retain upstream text.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -76499,7 +76501,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "智能选择操作"
+            "value": "Smart Selection Action"
           }
         }
       }

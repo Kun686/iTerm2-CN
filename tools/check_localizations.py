@@ -1313,6 +1313,36 @@ def objc_sink_is_background_trigger_diagnostic(path, sources, source, sink_match
         source[line_start:statement_end + 1]) is not None
 
 
+def objc_sink_is_background_initializer_diagnostic(path, sources, source, sink_match):
+    # These two call sites share the same diagnostic/history consumer as the
+    # trigger path. Match the exact initializer, not arbitrary title arguments.
+    sites = {
+        "TerminalView/PTYTextView+ARC.m": (
+            r'contextMenu:\s*\(iTermTextViewContextMenuHelper\s*\*\)\s*contextMenu\s+'
+            r'runCommandInBackground:\s*\(NSString\s*\*\)\s*command',
+            r'self\.delegate\.textViewShell', "Smart Selection Action"),
+        "SemanticHistory/iTermURLActionHelper.m": (
+            r'launchURLHandlerCommand:\s*\(NSString\s*\*\)\s*command',
+            r'\[self\.delegate\s+urlActionHelperShell:\s*self\]', "URL Handler"),
+    }
+    site = sites.get(path.relative_to(sources).as_posix())
+    if site is None:
+        return False
+    signature, shell, title = site
+    method = re.search(r'-\s*\(void\)\s*' + signature + r'\s*\{', source)
+    if method is None:
+        return False
+    end = objc_braced_block_end(source, method.end() - 1)
+    if end is None or not method.end() <= sink_match.start() < end:
+        return False
+    initializer = re.search(
+        r'iTermBackgroundCommandRunner\s*\*\s*runner\s*=\s*'
+        r'\[\[iTermBackgroundCommandRunner\s+alloc\]\s+initWithCommand:\s*command\s+'
+        r'shell:\s*' + shell + r'\s+(?P<title>title):\s*@"' + re.escape(title) + r'"\s*\];',
+        source[method.end():end])
+    return initializer is not None and method.end() + initializer.start("title") == sink_match.start()
+
+
 def check_hardcoded_english_objc_ui_literals(sources):
     errors = []
     paths = sorted(
@@ -1326,6 +1356,8 @@ def check_hardcoded_english_objc_ui_literals(sources):
             continue
         for sink_match in OBJC_UI_STRING_SINK.finditer(source):
             if objc_sink_is_background_trigger_diagnostic(path, sources, source, sink_match):
+                continue
+            if objc_sink_is_background_initializer_diagnostic(path, sources, source, sink_match):
                 continue
             value_expression = source[sink_match.end():].lstrip()
             if value_expression.startswith("NSLocalizedString"):
