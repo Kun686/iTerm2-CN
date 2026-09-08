@@ -970,6 +970,54 @@ class LocalizationCheckCLITests(unittest.TestCase):
             result.stderr,
         )
 
+    def _delayed_terminal_tooltip_fixture(self):
+        path = self.sources / "TerminalView/TerminalButton.swift"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        body = '''class TerminalCopyCommandButton: TerminalMarkButton {
+    init?(mark: Mark, dx: Int32) {
+        super.init(mark: mark, dx: dx, tooltip: "Copy command to clipboard")
+    }
+}
+extension TerminalButton: NSViewToolTipOwner {
+    func view(_ view: NSView, stringForToolTip tag: NSView.ToolTipTag,
+              point: NSPoint, userData data: UnsafeMutableRawPointer?) -> String {
+        DLog("Returning \\(tooltip) for \\(self)")
+        return TerminalButtonTooltip.localized(tooltip)
+    }
+}
+'''
+        return path, body
+
+    def test_accepts_exact_terminal_tooltip_delayed_localization(self):
+        path, body = self._delayed_terminal_tooltip_fixture()
+        path.write_text(body, encoding="utf-8")
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_terminal_tooltip_delayed_localization_exception_is_narrow(self):
+        path, body = self._delayed_terminal_tooltip_fixture()
+        variants = (
+            body.replace("TerminalCopyCommandButton:", "OtherButton:"),
+            body.replace("super.init", "OtherButton.init"),
+            body.replace("init?(mark", "func other(mark"),
+            body.replace("Copy command to clipboard", "Other English Title"),
+            body.replace("return TerminalButtonTooltip.localized(tooltip)", "return tooltip"),
+            body.replace('tooltip: "Copy', 'toolTip: "Copy'),
+            body + '\nlet label = Button(tooltip: "Other English Title")\n',
+        )
+        for body_variant in variants:
+            with self.subTest(variant=body_variant):
+                path.write_text(body_variant, encoding="utf-8")
+                result = self._run_checker()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Swift UI sink", result.stdout + result.stderr)
+        path.unlink()
+        with self.subTest(path="Feature.swift"):
+            (self.sources / "Feature.swift").write_text(body, encoding="utf-8")
+            result = self._run_checker()
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("Swift UI sink", result.stdout + result.stderr)
+
     def test_hard_coded_english_swift_mixed_action_labels_fail(self):
         (self.sources / "Feature.swift").write_text(
             'warning.actionLabels = [String(localized: "fixture.greeting"), "Cancel"]\n',

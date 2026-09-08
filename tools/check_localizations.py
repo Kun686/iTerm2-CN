@@ -1223,6 +1223,59 @@ def check_hardcoded_english_swift_ui_providers(sources):
     return errors
 
 
+def swift_terminal_tooltip_display_lookup_sinks(path, sources, source):
+    # These exact constructor arguments are shared with diagnostics; AppKit
+    # localizes their display copy. Never exempt arbitrary tooltip assignments.
+    if path.relative_to(sources).as_posix() != "TerminalView/TerminalButton.swift":
+        return set()
+    owner = re.search(r'extension\s+TerminalButton\s*:\s*NSViewToolTipOwner\s*\{', source)
+    if owner is None:
+        return set()
+    owner_end = swift_braced_block_end(source, owner.end() - 1)
+    if owner_end is None or not re.search(
+            r'\breturn\s+TerminalButtonTooltip\.localized\(tooltip\)', source[owner.end():owner_end]):
+        return set()
+    sites = {
+        "TerminalRevealChannelButton": ("TerminalButton", '"Reveal embedded command"'),
+        "TerminalFoldBlockButton": ("GenericBlockButton", 'currentlyFolded ? "Unfold block" : "Fold block"'),
+        "TerminalCopyCommandButton": ("TerminalMarkButton", '"Copy command to clipboard"'),
+        "TerminalBookmarkButton": ("TerminalMarkButton", '"Toggle named mark"'),
+        "TerminalShareButton": ("TerminalMarkButton", '"Share command…"'),
+        "TerminalCommandInfoButton": ("TerminalMarkButton", '"Open Command Info…"'),
+        "TerminalFoldButton": ("TerminalMarkButton", '"Fold command"'),
+        "TerminalUnfoldButton": ("TerminalMarkButton", '"Unfold command"'),
+        "TerminalSettingsButton": ("TerminalMarkButton", '"Command Settings…"'),
+    }
+    matched_sinks = set()
+    for name, (parent, expression) in sites.items():
+        declaration = re.search(r'\bclass\s+' + name + r'\s*:\s*' + parent + r'\s*\{', source)
+        if declaration is None:
+            continue
+        class_end = swift_braced_block_end(source, declaration.end() - 1)
+        if class_end is None:
+            continue
+        initializer = re.search(r'\binit\?\s*\(', source[declaration.end():class_end])
+        if initializer is None:
+            continue
+        open_brace = source.find('{', declaration.end() + initializer.end(), class_end)
+        if open_brace < 0:
+            continue
+        initializer_end = swift_braced_block_end(source, open_brace)
+        if initializer_end is None:
+            continue
+        call = re.search(r'\bsuper\.init\(', source[open_brace:initializer_end])
+        if call is None:
+            continue
+        call_start = open_brace + call.start()
+        call_end = swift_delimited_expression_end(source, open_brace + call.end() - 1, '(', ')')
+        if call_end is None or call_end > initializer_end:
+            continue
+        argument = re.search(r'\btooltip\s*:\s*', source[call_start:call_end])
+        if argument is not None and source[call_start + argument.end():call_end - 1].strip() == expression:
+            matched_sinks.add(call_start + argument.start())
+    return matched_sinks
+
+
 def check_hardcoded_english_swift_ui_literals(sources):
     errors = []
     for path in sorted(sources.rglob("*.swift")):
@@ -1231,8 +1284,12 @@ def check_hardcoded_english_swift_ui_literals(sources):
         except (OSError, UnicodeError) as error:
             errors.append(f"{path}: unable to scan source text: {error}")
             continue
-        for line_number, line in enumerate(source.splitlines(), 1):
+        display_lookup_sinks = swift_terminal_tooltip_display_lookup_sinks(path, sources, source)
+        line_start = 0
+        for line_number, line in enumerate(source.splitlines(keepends=True), 1):
             for sink_match in SWIFT_UI_STRING_SINK.finditer(line):
+                if line_start + sink_match.start() in display_lookup_sinks:
+                    continue
                 value_expression = line[sink_match.end():]
                 if "String(localized:" in value_expression:
                     continue
@@ -1243,6 +1300,7 @@ def check_hardcoded_english_swift_ui_literals(sources):
                             f"{path}:{line_number}: hard-coded English text in "
                             f"Swift UI sink '{sink_match.group('sink')}'"
                         )
+            line_start += len(line)
     return errors
 
 

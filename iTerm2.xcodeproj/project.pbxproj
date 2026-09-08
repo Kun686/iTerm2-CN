@@ -58,6 +58,7 @@
 		1881D17778BB7FDB35B6E26A /* iTermCursorBlinkFadeAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3FEA75E047934A369B50AA /* iTermCursorBlinkFadeAnimator.m */; };
 		189D0DB85DE81235D7E2194E /* iTermProvisioningProgressWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F4E17ADA3A5F9B20391BAF /* iTermProvisioningProgressWindowController.swift */; };
 		197645E877F9CFD188A98B42 /* iTermGitStringMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 60884ED8C599CCA130F47597 /* iTermGitStringMaker.m */; };
+		19E6003DBFC01352D776A9D3 /* TerminalButtonTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7FDB3AC4DDAD72BAE77143 /* TerminalButtonTooltip.swift */; };
 		1A6094C6046B518FC3BF6FCA /* SessionView+DiffWaitingPromptOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CF70AC7768A565D0C687C0 /* SessionView+DiffWaitingPromptOverlay.swift */; };
 		1BFBB3321CE135F38982FE4C /* BrowserBasicAuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA27E15A56D5394054C3AF3 /* BrowserBasicAuthCoordinator.swift */; };
 		1C5952B8EE10C4F56EDE22CF /* iTermColorScopeVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1228010A8F684D7D8946B /* iTermColorScopeVariables.swift */; };
@@ -6693,6 +6694,7 @@
 		3BF2267B1164F44724EB0853 /* LLM+Mac.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "LLM+Mac.swift"; sourceTree = "<group>"; };
 		3C05599DA2E4F97B75124672 /* iTermOpenDirectory+MainApp.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "iTermOpenDirectory+MainApp.m"; sourceTree = "<group>"; };
 		3C2A1099DFA4459A4A485034 /* ConfigCommand.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConfigCommand.swift; path = it2cli/Sources/it2core/Commands/ConfigCommand.swift; sourceTree = "<group>"; };
+		3C7FDB3AC4DDAD72BAE77143 /* TerminalButtonTooltip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TerminalButtonTooltip.swift; sourceTree = "<group>"; };
 		3CF396D2ACA2917EB5113F35 /* KittyDnDSSHEndpointAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KittyDnDSSHEndpointAdapter.swift; sourceTree = "<group>"; };
 		3E6892F33EA732E982A1991D /* AICustomHeaders.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AICustomHeaders.swift; sourceTree = "<group>"; };
 		3EBF93C36BBE5709BAA52E61 /* CompanionHistoryWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompanionHistoryWindow.swift; sourceTree = "<group>"; };
@@ -14779,6 +14781,7 @@
 				F98ADE6D889E9911953ECB78 /* iTermGutterPanelWidths.swift */,
 				4E5E0855E825C32733BCA843 /* iTermWindowTitleLabelInputs.swift */,
 				C25F46F9F3BA829BDB185B38 /* iTermHDREngager.swift */,
+				3C7FDB3AC4DDAD72BAE77143 /* TerminalButtonTooltip.swift */,
 			);
 			path = TerminalView;
 			sourceTree = "<group>";
@@ -22900,6 +22903,7 @@
 				FB47A51FE147AA2BDA2FFFD4 /* SendCompanionNotificationBuiltInFunction.swift in Sources */,
 				62C33B872E3FE9FFC31D4A2C /* iTermApplicationLanguageController.m in Sources */,
 				60968B9C16B4406E8F3224B7 /* MenuItemLegacyTitles.swift in Sources */,
+				19E6003DBFC01352D776A9D3 /* TerminalButtonTooltip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

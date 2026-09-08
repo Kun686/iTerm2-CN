@@ -61,6 +61,9 @@ The background Run Command Trigger, Smart Selection Action, and URL Handler
 titles remain in English because the runner shares them with diagnostic
 descriptions and script history. Their independent failure-notification titles
 remain localized.
+Terminal button tooltips retain their original stored and diagnostic values;
+their AppKit display copy is localized. Unknown tooltip values pass through
+unchanged, without altering button actions or rendering state.
 SSH Integration transfer diagnostics shared with logs, completion handlers, and
 browser stream failures also retain their original text. Transfer summaries and
 independent UI labels remain localized.
