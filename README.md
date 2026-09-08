@@ -71,6 +71,9 @@ The uv runtime also preserves original shared NSError descriptions, fields,
 and background-upgrade diagnostics. Manual upgrade results also stay in English
 because their callback writes script history. Shared callback text remains in
 English when shown in alerts; download labels and independent prompts are localized.
+Intel-only script launch errors retain their original Script Console history.
+Their alert body and recovery hints are translated only for display, leaving
+unknown recovery hints, script names, and launch decisions unchanged.
 SSH Integration transfer diagnostics shared with logs, completion handlers, and
 browser stream failures also retain their original text. Transfer summaries and
 independent UI labels remain localized.

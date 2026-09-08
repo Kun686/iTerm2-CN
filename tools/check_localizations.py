@@ -1464,6 +1464,17 @@ def objc_shared_import_diagnostic_offsets(path, sources, source):
 
 
 def objc_download_diagnostic_title_offsets(path, sources, source):
+    if path.relative_to(sources).parts == ("API", "iTermPythonRuntimeDownloader.m"):
+        # The original installing-phase title shares phase storage/description;
+        # its existing download-controller display consumer translates the copy.
+        method = re.search(r'-\s*\(void\)\s*checkForNewerVersionThan:[^{]+\{', source)
+        if method is None:
+            return set()
+        end = objc_braced_block_end(source, method.end() - 1)
+        if end is None or '[_downloadController beginPhase:manifestPhase];' not in source[method.end():end]:
+            return set()
+        statement = 'return [[iTermInstallingPhase alloc] initWithURL:nil title:@"Download Finished" nextPhaseFactory:nil];'
+        return objc_reviewed_statement_literal_offsets(source, method.end(), end, (statement,))
     if path.relative_to(sources).parts != ("API", "iTermOptionalComponentDownloadWindowController.m"):
         return set()
     if ("_titleLabel.stringValue = iTermLocalizedPythonDownloadDisplayString(phase.title);" not in source
@@ -1487,6 +1498,47 @@ def objc_download_diagnostic_title_offsets(path, sources, source):
     return offsets
 
 
+def objc_launcher_shared_recovery_offsets(path, sources, source):
+    # Original recovery parameters enter script history before a translated alert.
+    # Match only these exact call sites with both consumers still present.
+    if path.relative_to(sources).parts != ("API", "iTermAPIScriptLauncher.m"):
+        return set()
+    display = re.search(r'\+\s*\(void\)\s*showIntelOnlyUnrunnableErrorForScript:[^{]+\{', source)
+    helper = re.search(r'static\s+NSString\s*\*iTermLocalizedScriptRecoveryDisplayString\(NSString\s*\*diagnostic\)\s*\{', source)
+    if display is None or helper is None:
+        return set()
+    display_end = objc_braced_block_end(source, display.end() - 1)
+    helper_end = objc_braced_block_end(source, helper.end() - 1)
+    if display_end is None or helper_end is None:
+        return set()
+    body = source[display.end():display_end]
+    history = '[[iTermScriptHistoryEntry globalEntry] addOutput:[NSString stringWithFormat:@"%@ %@\\n", base, recovery] completion:^{}];'
+    if (not objc_reviewed_statement_literal_offsets(source, display.end(), display_end, (history,))
+            or 'iTermLocalizedScriptRecoveryDisplayString(recovery)' not in body
+            or 'alert.informativeText = [NSString stringWithFormat:' not in body
+            or 'return diagnostic;' not in source[helper.end():helper_end]):
+        return set()
+    statements = {
+        "reallyUpgradeFullEnvironmentScriptAt": (
+            '[self showIntelOnlyUnrunnableErrorForScript:fullPath recovery:@"The Apple Silicon runtime could not be downloaded. Check your network connection and try again."];',
+        ),
+        "upgradeIfNeededFullEnvironmentScriptAt": (
+            '[self handleIntelOnlyUnrunnableLegacyInterpreter:originalVirtualenv forScript:fullPath recovery:@"Its setup.cfg could not be read, so it cannot be rebuilt automatically."]',
+            '[self handleIntelOnlyUnrunnableLegacyInterpreter:restored forScript:fullPath recovery:@"Its environment is intact; turn off the uv advanced setting to rebuild it for Apple Silicon."]',
+        ),
+        "refetchArm64StandardRuntimeThenLaunch": (
+            '[self showIntelOnlyUnrunnableErrorForScript:fullPath recovery:@"The Apple Silicon runtime could not be downloaded. Check your network connection and try again."];',
+        ),
+    }
+    offsets = set()
+    for selector, calls in statements.items():
+        for method in re.finditer(r'\+\s*\(void\)\s*' + selector + r':[^{]+\{', source):
+            end = objc_braced_block_end(source, method.end() - 1)
+            if end is not None:
+                offsets.update(objc_reviewed_statement_literal_offsets(source, method.end(), end, calls))
+    return offsets
+
+
 def check_hardcoded_english_objc_ui_literals(sources):
     errors = []
     paths = sorted(
@@ -1499,6 +1551,7 @@ def check_hardcoded_english_objc_ui_literals(sources):
             errors.append(f"{path}: unable to scan source text: {error}")
             continue
         download_titles = objc_download_diagnostic_title_offsets(path, sources, source)
+        launcher_recoveries = objc_launcher_shared_recovery_offsets(path, sources, source)
         for sink_match in OBJC_UI_STRING_SINK.finditer(source):
             if objc_sink_is_background_trigger_diagnostic(path, sources, source, sink_match):
                 continue
@@ -1506,7 +1559,7 @@ def check_hardcoded_english_objc_ui_literals(sources):
                 continue
             value_expression = source[sink_match.end():].lstrip()
             value_start = len(source) - len(value_expression)
-            if value_start in download_titles:
+            if value_start in download_titles or value_start in launcher_recoveries:
                 continue
             if value_expression.startswith("NSLocalizedString"):
                 continue

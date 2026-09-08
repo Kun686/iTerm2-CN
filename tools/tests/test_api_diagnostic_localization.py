@@ -44,6 +44,7 @@ class APIDiagnosticLocalizationTests(unittest.TestCase):
         cls.importer = (ROOT / "sources/API/iTermScriptImporter.m").read_text()
         cls.download = (ROOT / "sources/API/iTermOptionalComponentDownloadWindowController.m").read_text()
         runtime = (ROOT / "sources/API/iTermPythonRuntimeDownloader.m").read_text()
+        cls.runtime = runtime
         calls = []
         for start in re.finditer(r"\bcompletion\(", cls.importer):
             end = checker.swift_delimited_expression_end(cls.importer, start.end() - 1, "(", ")")
@@ -86,6 +87,10 @@ class APIDiagnosticLocalizationTests(unittest.TestCase):
         if uv_title is None or "title: title," not in uv:
             raise AssertionError("Expected original uv title forwarded to the download phase")
         titles.append("@" + uv_title[1])
+        installing_title = re.search(r'return \[\[iTermInstallingPhase alloc\] initWithURL:nil title:(.+) nextPhaseFactory:nil\];', runtime)
+        if installing_title is None:
+            raise AssertionError("Expected the original installing-phase initializer")
+        titles.append(installing_title[1])
         display = re.search(r'_titleLabel\.stringValue = [^;]*phase\.title[^;]*;', cls.download)
         status = re.search(r'\[_downloadController showMessage:(.+)\];', runtime)
         if display is None or status is None:
@@ -141,7 +146,7 @@ class APIDiagnosticLocalizationTests(unittest.TestCase):
 
     def check_download(self, language):
         result = self.run_probe(language)
-        originals = ("Finding latest version…", "Downloading Python runtime…", "Downloading uv…")
+        originals = ("Finding latest version…", "Downloading Python runtime…", "Downloading uv…", "Download Finished")
         self.assertEqual(len(result["phases"]), len(originals))
         for row, expected in zip(result["phases"], originals):
             with self.subTest(title=expected):
@@ -200,6 +205,25 @@ class APIDiagnosticLocalizationTests(unittest.TestCase):
 
     def test_checker_accepts_delayed_download_display(self):
         self.assertEqual(self.check_source("iTermOptionalComponentDownloadWindowController.m", self.download), [])
+
+    def test_checker_accepts_installing_phase_diagnostic_title(self):
+        self.assertEqual(self.check_source("iTermPythonRuntimeDownloader.m", self.runtime), [])
+
+    def test_checker_rejects_other_installing_titles(self):
+        variants = (
+            self.runtime.replace("- (void)checkForNewerVersionThan:", "- (void)otherCheck:"),
+            self.runtime.replace("[[iTermInstallingPhase alloc] initWithURL:nil title:",
+                                 "[[OtherPhase alloc] initWithURL:nil title:"),
+            self.runtime.replace('title:@"Download Finished" nextPhaseFactory:nil',
+                                 'title:@"Download Finished" nextPhaseFactory:other'),
+            self.runtime.replace('title:@"Download Finished"', 'title:@"Different title"'),
+            self.runtime.replace('[_downloadController beginPhase:manifestPhase];', ''),
+            self.runtime + '\n- (void)other { label.title = @"Download Finished"; }\n',
+        )
+        for index, variant in enumerate(variants):
+            with self.subTest(variant=index):
+                self.assertTrue(self.check_source("iTermPythonRuntimeDownloader.m", variant))
+        self.assertTrue(self.check_source("OtherDownloader.m", self.runtime))
 
     def test_checker_rejects_other_download_titles(self):
         variants = (

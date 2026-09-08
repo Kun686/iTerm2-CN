@@ -32,6 +32,20 @@
 
 static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallbackNotification = @"iTermAPIScriptLauncherScriptDidFailUserNotificationCallbackNotification";
 
+// Recovery hints also enter Script Console history. Translate only the alert copy.
+static NSString *iTermLocalizedScriptRecoveryDisplayString(NSString *diagnostic) {
+    if ([diagnostic isEqualToString:@"The Apple Silicon runtime could not be downloaded. Check your network connection and try again."]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.apple_silicon_runtime_download_failed.e4c30da1", nil, NSBundle.mainBundle, @"The Apple Silicon runtime could not be downloaded. Check your network connection and try again.", @"Recovery suggestion when the Apple Silicon Python runtime download fails.");
+    }
+    if ([diagnostic isEqualToString:@"Its setup.cfg could not be read, so it cannot be rebuilt automatically."]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.setup_cfg_could_not_be_read.037b527a", nil, NSBundle.mainBundle, @"Its setup.cfg could not be read, so it cannot be rebuilt automatically.", @"Recovery explanation when a script environment cannot be rebuilt because setup.cfg is unreadable.");
+    }
+    if ([diagnostic isEqualToString:@"Its environment is intact; turn off the uv advanced setting to rebuild it for Apple Silicon."]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.environment_intact_disable_uv_for_apple_silicon.47b5cbaf", nil, NSBundle.mainBundle, @"Its environment is intact; turn off the uv advanced setting to rebuild it for Apple Silicon.", @"Recovery suggestion for rebuilding an intact legacy script environment for Apple Silicon.");
+    }
+    return diagnostic;
+}
+
 @interface iTermAPIScriptLauncher ()
 + (NSString *)uvCertifiPathInVenv:(NSString *)venvDirectory;
 @end
@@ -144,7 +158,7 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
         // so shouldAlert is NO and we stay silent to avoid stacking a second.
         if (shouldAlert) {
             [self showIntelOnlyUnrunnableErrorForScript:fullPath
-                                               recovery:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.apple_silicon_runtime_download_failed.e4c30da1", nil, NSBundle.mainBundle, @"The Apple Silicon runtime could not be downloaded. Check your network connection and try again.", @"Recovery suggestion when the Apple Silicon Python runtime download fails.")];
+                                               recovery:@"The Apple Silicon runtime could not be downloaded. Check your network connection and try again."];
         }
     }];
 }
@@ -233,7 +247,7 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
             // exec-fail with a cryptic bad-CPU-type error.
             if ([self handleIntelOnlyUnrunnableLegacyInterpreter:originalVirtualenv
                                                        forScript:fullPath
-                                                        recovery:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.setup_cfg_could_not_be_read.037b527a", nil, NSBundle.mainBundle, @"Its setup.cfg could not be read, so it cannot be rebuilt automatically.", @"Recovery explanation when a script environment cannot be rebuilt because setup.cfg is unreadable.")]) {
+                                                        recovery:@"Its setup.cfg could not be read, so it cannot be rebuilt automatically."]) {
                 return;
             }
             completion(originalVirtualenv);
@@ -279,7 +293,7 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
                 // macOS. Show a clear error rather than exec-failing cryptically.
                 if ([self handleIntelOnlyUnrunnableLegacyInterpreter:restored
                                                            forScript:fullPath
-                                                            recovery:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.environment_intact_disable_uv_for_apple_silicon.47b5cbaf", nil, NSBundle.mainBundle, @"Its environment is intact; turn off the uv advanced setting to rebuild it for Apple Silicon.", @"Recovery suggestion for rebuilding an intact legacy script environment for Apple Silicon.")]) {
+                                                            recovery:@"Its environment is intact; turn off the uv advanced setting to rebuild it for Apple Silicon."]) {
                     return;
                 }
                 // Enforce the same minimum-environment-version security gate the gate-off
@@ -519,12 +533,12 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
 // caller-specific hint for what the user can do about it.
 + (void)showIntelOnlyUnrunnableErrorForScript:(NSString *)fullPath recovery:(NSString *)recovery {
     NSString *name = [[fullPath pathComponents] lastObject] ?: fullPath;
-    NSString *base = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.intel_only_python_environment_unavailable.b7ae1806", nil, NSBundle.mainBundle, @"“%@” uses an Intel-only Python environment, which cannot run on this version of macOS because Rosetta is not available.", @"Explanation shown when a legacy script cannot run without Rosetta. Preserve the script-name placeholder."), name];
+    NSString *base = [NSString stringWithFormat:@"“%@” uses an Intel-only Python environment, which cannot run on this version of macOS because Rosetta is not available.", name];
     [[iTermScriptHistoryEntry globalEntry] addOutput:[NSString stringWithFormat:@"%@ %@\n", base, recovery] completion:^{}];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSAlert *alert = [[NSAlert alloc] init];
         alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.script_cannot_run.9bb4684c", nil, NSBundle.mainBundle, @"Script Cannot Run", @"User-facing text in iTermAPIScriptLauncher (source UI).");
-        alert.informativeText = [NSString stringWithFormat:@"%@ %@", base, recovery];
+        alert.informativeText = [NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.intel_only_python_environment_unavailable.b7ae1806", nil, NSBundle.mainBundle, @"“%@” uses an Intel-only Python environment, which cannot run on this version of macOS because Rosetta is not available.", @"Explanation shown when a legacy script cannot run without Rosetta. Preserve the script-name placeholder."), name], iTermLocalizedScriptRecoveryDisplayString(recovery)];
         [alert runModal];
     });
 }
@@ -652,7 +666,7 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
         // download failure or user cancel the downloader already showed its own modal.
         if ([self runtimeDownloadSucceeded:status]) {
             [self showIntelOnlyUnrunnableErrorForScript:fullPath
-                                               recovery:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.apple_silicon_runtime_download_failed.e4c30da1", nil, NSBundle.mainBundle, @"The Apple Silicon runtime could not be downloaded. Check your network connection and try again.", @"Recovery suggestion when the Apple Silicon Python runtime download fails.")];
+                                               recovery:@"The Apple Silicon runtime could not be downloaded. Check your network connection and try again."];
         }
     }];
 }

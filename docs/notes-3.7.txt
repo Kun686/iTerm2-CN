@@ -1,6 +1,9 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Keep download-finished diagnostics untranslated.
+- Localize Intel-only script errors at display
+  time while preserving Script Console history.
 - Preserve shared uv error fields and log text.
 - Localize uv download titles at display time.
 - Preserve script-import diagnostic messages.

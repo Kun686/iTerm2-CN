@@ -26,6 +26,9 @@ static NSString *iTermLocalizedPythonDownloadDisplayString(NSString *diagnostic)
     if ([diagnostic isEqualToString:@"Downloading uv…"]) {
         return NSLocalizedStringWithDefaultValue(@"ui.swift.api.itermuvprovisioner.downloading_uv.cc5d76da", nil, NSBundle.mainBundle, @"Downloading uv…", @"User-facing uv download title.");
     }
+    if ([diagnostic isEqualToString:@"Download Finished"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermpythonruntimedownloader.download_finished.04bd45b4", nil, NSBundle.mainBundle, @"Download Finished", @"User-facing text in iTermPythonRuntimeDownloader (title).");
+    }
     if ([diagnostic isEqualToString:@"✅ The Python runtime is up to date."]) {
         return NSLocalizedStringWithDefaultValue(@"ui.api.itermpythonruntimedownloader.the_python_runtime_is_up_to_date.94dca225", nil, NSBundle.mainBundle, @"✅ The Python runtime is up to date.", @"User-facing Python runtime status message.");
     }

@@ -376,7 +376,7 @@ NSString *const iTermPythonRuntimeDownloaderDidInstallRuntimeNotification = @"iT
             if (!shouldContinue) {
                 return nil;
             }
-            return [[iTermInstallingPhase alloc] initWithURL:nil title:NSLocalizedStringWithDefaultValue(@"ui.api.itermpythonruntimedownloader.download_finished.04bd45b4", nil, NSBundle.mainBundle, @"Download Finished", @"User-facing text in iTermPythonRuntimeDownloader (title).") nextPhaseFactory:nil];
+            return [[iTermInstallingPhase alloc] initWithURL:nil title:@"Download Finished" nextPhaseFactory:nil];
         }];
     }];
     _downloadController.completion = ^(iTermOptionalComponentDownloadPhase *lastPhase) {
