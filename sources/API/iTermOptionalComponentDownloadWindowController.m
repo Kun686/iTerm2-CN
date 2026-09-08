@@ -14,6 +14,21 @@
 
 @import Sparkle;
 
+// These values also appear in diagnostic descriptions and logs. Keep their
+// stored form unchanged and translate only the independent AppKit display copy.
+static NSString *iTermLocalizedPythonDownloadDisplayString(NSString *diagnostic) {
+    if ([diagnostic isEqualToString:@"Finding latest version…"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.finding_latest_version.5a55d9a0", nil, NSBundle.mainBundle, @"Finding latest version…", @"User-facing text in iTermOptionalComponentDownloadWindowController (title).");
+    }
+    if ([diagnostic isEqualToString:@"Downloading Python runtime…"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.downloading_python_runtime.e8cebee4", nil, NSBundle.mainBundle, @"Downloading Python runtime…", @"User-facing text in iTermOptionalComponentDownloadWindowController (title).");
+    }
+    if ([diagnostic isEqualToString:@"✅ The Python runtime is up to date."]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermpythonruntimedownloader.the_python_runtime_is_up_to_date.94dca225", nil, NSBundle.mainBundle, @"✅ The Python runtime is up to date.", @"User-facing Python runtime status message.");
+    }
+    return diagnostic;
+}
+
 // SEE ALSO iTermWebSocketConnectionMinimumPythonLibraryVersion
 // NOTE: This forces upgrades of full-environment scripts.
 // Increasing this makes everyone download a new version.
@@ -203,7 +218,7 @@ didCompleteWithError:(nullable NSError *)error {
 - (instancetype)initWithURL:(NSURL *)url
      requestedPythonVersion:(NSString *)requestedPythonVersion
            nextPhaseFactory:(iTermOptionalComponentDownloadPhase *(^)(iTermOptionalComponentDownloadPhase *))nextPhaseFactory {
-    self = [super initWithURL:url title:NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.finding_latest_version.5a55d9a0", nil, NSBundle.mainBundle, @"Finding latest version…", @"User-facing text in iTermOptionalComponentDownloadWindowController (title).") nextPhaseFactory:nextPhaseFactory];
+    self = [super initWithURL:url title:@"Finding latest version…" nextPhaseFactory:nextPhaseFactory];
     if (self) {
         _requestedPythonVersion = [requestedPythonVersion copy];
     }
@@ -360,7 +375,7 @@ didCompleteWithError:(nullable NSError *)error {
      requestedPythonVersion:(NSString *)requestedPythonVersion
            expectedVersions:(NSArray<NSString *> *)expectedVersions
            nextPhaseFactory:(iTermOptionalComponentDownloadPhase *(^)(iTermOptionalComponentDownloadPhase *))nextPhaseFactory {
-    self = [super initWithURL:url title:NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.downloading_python_runtime.e8cebee4", nil, NSBundle.mainBundle, @"Downloading Python runtime…", @"User-facing text in iTermOptionalComponentDownloadWindowController (title).") nextPhaseFactory:nextPhaseFactory];
+    self = [super initWithURL:url title:@"Downloading Python runtime…" nextPhaseFactory:nextPhaseFactory];
     if (self) {
         _version = version;
         _expectedSignature = [expectedSignature copy];
@@ -438,7 +453,7 @@ didCompleteWithError:(nullable NSError *)error {
         _firstPhase = phase;
     }
     _currentPhase = phase;
-    _titleLabel.stringValue = phase.title;
+    _titleLabel.stringValue = iTermLocalizedPythonDownloadDisplayString(phase.title);
     phase.delegate = self;
     [phase download];
     _progressLabel.stringValue = phase.progressString;
@@ -449,7 +464,7 @@ didCompleteWithError:(nullable NSError *)error {
 - (void)showMessage:(NSString *)message {
     DLog(@"message=%@", message);
     _showingMessage = YES;
-    _titleLabel.stringValue = message;
+    _titleLabel.stringValue = iTermLocalizedPythonDownloadDisplayString(message);
     _progressLabel.stringValue = @"";
     _button.enabled = YES;
     _button.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermOptionalComponentDownloadWindowController (showMessage:).");

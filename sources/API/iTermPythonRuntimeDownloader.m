@@ -417,7 +417,7 @@ NSString *const iTermPythonRuntimeDownloaderDidInstallRuntimeNotification = @"iT
         // for example if the requested version was not available.
         _status = iTermPythonRuntimeDownloaderStatusNotNeeded;
     }
-    [_downloadController showMessage:NSLocalizedStringWithDefaultValue(@"ui.api.itermpythonruntimedownloader.the_python_runtime_is_up_to_date.94dca225", nil, NSBundle.mainBundle, @"✅ The Python runtime is up to date.", @"User-facing Python runtime status message.")];
+    [_downloadController showMessage:@"✅ The Python runtime is up to date."];
     if (raiseOnCompletion) {
         [_downloadController.window makeKeyAndOrderFront:nil];
     }

@@ -64,6 +64,9 @@ remain localized.
 Terminal button tooltips retain their original stored and diagnostic values;
 their AppKit display copy is localized. Unknown tooltip values pass through
 unchanged, without altering button actions or rendering state.
+Python download phase titles and status messages are also localized only at
+their display boundary. Shared script-import error callbacks remain in English
+because they also feed diagnostic logs; independent prompts remain localized.
 SSH Integration transfer diagnostics shared with logs, completion handlers, and
 browser stream failures also retain their original text. Transfer summaries and
 independent UI labels remain localized.

@@ -1401,6 +1401,92 @@ def objc_sink_is_background_initializer_diagnostic(path, sources, source, sink_m
     return initializer is not None and method.end() + initializer.start("title") == sink_match.start()
 
 
+def objc_reviewed_statement_literal_offsets(source, start, end, statements):
+    """Match complete reviewed statements, preserving literal contents."""
+    offsets = set()
+    for statement in statements:
+        tokens = re.findall(OBJC_STRING_LITERAL.pattern + r"|\w+|\S", statement)
+        pattern = r"(?<![A-Za-z0-9_])" + r"\s*".join(re.escape(token) for token in tokens)
+        for match in re.finditer(pattern, source[start:end]):
+            offsets.update(start + match.start() + literal.start()
+                           for literal in OBJC_STRING_LITERAL.finditer(match[0]))
+    return offsets
+
+
+def objc_shared_import_diagnostic_offsets(path, sources, source):
+    # Only the exact original callback expressions, in their original methods,
+    # with the original shared log consumer. Other UI/callback text stays checked.
+    if path.relative_to(sources).parts != ("API", "iTermScriptImporter.m"):
+        return set()
+    wrapper = re.search(r'\+\s*\(void\)\s*importScriptFromURL:[^{]+\{', source)
+    if wrapper is None:
+        return set()
+    wrapper_end = objc_braced_block_end(source, wrapper.end() - 1)
+    if wrapper_end is None or not re.search(
+            r'DLog\(@"errorMessage=%@ quiet=%@ location=%@",\s*errorMessage,\s*@\(quiet\),\s*location\);',
+            source[wrapper.end():wrapper_end]):
+        return set()
+    statements = {
+        "reallyImportScriptFromURL": (
+            'completion(@"Another import is in progress. Please try again after it completes.", NO, nil);',
+            'completion([NSString stringWithFormat:@"Could not unzip archive: %@", error.localizedDescription], NO, nil);',
+        ),
+        "verifyAndUnwrapArchive": (
+            'completion(nil, @"This script archive is corrupt and cannot be installed.", NO, NO, NO);',
+            'completion(nil, @"This is not a valid iTerm2 script archive.", NO, NO, NO);',
+        ),
+        "verifierDidComplete": (
+            'completion(nil, error.localizedDescription ?: @"Unknown error", NO, NO, NO);',
+            'completion(nil, @"Could not find certificate after verficiation (nil data)", NO, NO, NO);',
+            'completion(nil, @"Could not find certificate after verficiation (bad data)", NO, NO, NO);',
+            'completion(nil, @"Installation canceled by user request.", NO, NO, YES);',
+        ),
+        "copyPayloadFromVerifier": (
+            'completion(nil, innerError.localizedDescription ?: @"Unknown error");',
+        ),
+        "didUnzipSuccessfullyTo": (
+            'completion(@"This archive was created by an older version of iTerm2. This kind of archive is no longer supported and cannot be installed.", NO, nil);',
+            'completion(@"Archive does not contain a valid iTerm2 script", NO, nil);',
+            'completion([NSString stringWithFormat:@"Could not replace “%@”: the existing script could not be moved aside, so it was left unchanged.", archive.name], NO, nil);',
+            'NSString *message = canceled ? [NSString stringWithFormat:@"Replacing “%@” was canceled. The existing script was kept.", archive.name] : (error.localizedDescription ?: @"The script could not be installed."); completion(message, NO, nil);',
+        ),
+    }
+    offsets = set()
+    for selector, calls in statements.items():
+        for method in re.finditer(r'\+\s*\(void\)\s*' + selector + r':[^{]+\{', source):
+            if selector == "didUnzipSuccessfullyTo" and not re.search(
+                    r'replacedScriptBackup:\s*\(NSString\s*\*\)replacedScriptBackup', method[0]):
+                continue
+            end = objc_braced_block_end(source, method.end() - 1)
+            if end is not None:
+                offsets.update(objc_reviewed_statement_literal_offsets(source, method.end(), end, calls))
+    return offsets
+
+
+def objc_download_diagnostic_title_offsets(path, sources, source):
+    if path.relative_to(sources).parts != ("API", "iTermOptionalComponentDownloadWindowController.m"):
+        return set()
+    if ("_titleLabel.stringValue = iTermLocalizedPythonDownloadDisplayString(phase.title);" not in source
+            or "_url, _title, _nextPhaseFactory" not in source):
+        return set()
+    offsets = set()
+    for name, title in (("iTermManifestDownloadPhase", "Finding latest version…"),
+                        ("iTermPayloadDownloadPhase", "Downloading Python runtime…")):
+        implementation = re.search(r'@implementation\s+' + name + r'\b', source)
+        if implementation is None:
+            continue
+        end = source.find("@end", implementation.end())
+        method = re.search(r'-\s*\(instancetype\)\s*initWithURL:[^{]+\{', source[implementation.end():end])
+        if end < 0 or method is None:
+            continue
+        start = implementation.end() + method.end()
+        method_end = objc_braced_block_end(source, start - 1)
+        if method_end is not None and method_end < end:
+            statement = 'self = [super initWithURL:url title:@"' + title + '" nextPhaseFactory:nextPhaseFactory];'
+            offsets.update(objc_reviewed_statement_literal_offsets(source, start, method_end, (statement,)))
+    return offsets
+
+
 def check_hardcoded_english_objc_ui_literals(sources):
     errors = []
     paths = sorted(
@@ -1412,12 +1498,16 @@ def check_hardcoded_english_objc_ui_literals(sources):
         except (OSError, UnicodeError) as error:
             errors.append(f"{path}: unable to scan source text: {error}")
             continue
+        download_titles = objc_download_diagnostic_title_offsets(path, sources, source)
         for sink_match in OBJC_UI_STRING_SINK.finditer(source):
             if objc_sink_is_background_trigger_diagnostic(path, sources, source, sink_match):
                 continue
             if objc_sink_is_background_initializer_diagnostic(path, sources, source, sink_match):
                 continue
             value_expression = source[sink_match.end():].lstrip()
+            value_start = len(source) - len(value_expression)
+            if value_start in download_titles:
+                continue
             if value_expression.startswith("NSLocalizedString"):
                 continue
             literal_match = OBJC_STRING_LITERAL.match(value_expression)
@@ -1582,7 +1672,10 @@ def check_hardcoded_english_objc_localized_description_fallbacks(sources):
         except (OSError, UnicodeError) as error:
             errors.append(f"{path}: unable to scan source text: {error}")
             continue
+        shared_imports = objc_shared_import_diagnostic_offsets(path, sources, source)
         for match in OBJC_LOCALIZED_DESCRIPTION_FALLBACK.finditer(source):
+            if match.start("literal") in shared_imports:
+                continue
             literal = match.group("literal")[2:-1]
             if not contains_translatable_english_text(literal):
                 continue
@@ -1634,6 +1727,7 @@ def check_hardcoded_english_objc_script_completion_messages(sources):
             match.start() for match in OBJC_METHOD_BOUNDARY.finditer(source)
         ]
         seen = set()
+        shared_imports = objc_shared_import_diagnostic_offsets(path, sources, source)
         for call_match in OBJC_COMPLETION_CALL.finditer(source):
             call_end = objc_parenthesized_call_end(
                 source, call_match.start("open")
@@ -1652,6 +1746,8 @@ def check_hardcoded_english_objc_script_completion_messages(sources):
                 if not contains_translatable_english_text(literal):
                     continue
                 absolute_offset = call_match.start() + literal_match.start()
+                if absolute_offset in shared_imports:
+                    continue
                 seen.add(absolute_offset)
                 line_number = source.count("\n", 0, absolute_offset) + 1
                 errors.append(
@@ -1677,7 +1773,7 @@ def check_hardcoded_english_objc_script_completion_messages(sources):
                 for absolute_offset, _ in objc_unlocalized_assignment_literals(
                     source, method_boundaries, call_match.start(), variable
                 ):
-                    if absolute_offset in seen:
+                    if absolute_offset in seen or absolute_offset in shared_imports:
                         continue
                     seen.add(absolute_offset)
                     line_number = source.count("\n", 0, absolute_offset) + 1

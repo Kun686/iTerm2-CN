@@ -86605,7 +86605,8 @@
       }
     },
     "ui.api.itermscriptimporter.unknown_error.27c2ccd9": {
-      "comment": "Fallback error shown while importing a script.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -86617,13 +86618,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "未知错误"
+            "value": "Unknown error"
           }
         }
       }
     },
     "ui.api.itermscriptimporter.the_script_could_not_be_installed.aa4e1cd0": {
-      "comment": "Fallback error shown when a script installation fails.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -86635,7 +86637,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法安装脚本。"
+            "value": "The script could not be installed."
           }
         }
       }
@@ -87019,7 +87021,8 @@
       }
     },
     "ui.api.itermscriptimporter.another_import_in_progress.7339fd5a": {
-      "comment": "Error shown when another script import is already running.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87031,13 +87034,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "另一个导入正在进行。请在其完成后重试。"
+            "value": "Another import is in progress. Please try again after it completes."
           }
         }
       }
     },
     "ui.api.itermscriptimporter.could_not_unzip_archive.10d8a12a": {
-      "comment": "Error shown when a script archive cannot be unzipped. Preserve the error placeholder.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87049,13 +87053,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法解压归档：%@"
+            "value": "Could not unzip archive: %@"
           }
         }
       }
     },
     "ui.api.itermscriptimporter.script_archive_corrupt.9e4b2526": {
-      "comment": "Error shown when a script archive is corrupt.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87067,13 +87072,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此脚本归档已损坏，无法安装。"
+            "value": "This script archive is corrupt and cannot be installed."
           }
         }
       }
     },
     "ui.api.itermscriptimporter.invalid_iterm2_script_archive.b144e1a0": {
-      "comment": "Error shown when a required signed script archive is invalid.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87085,13 +87091,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "这不是有效的 iTerm2 脚本归档。"
+            "value": "This is not a valid iTerm2 script archive."
           }
         }
       }
     },
     "ui.api.itermscriptimporter.certificate_missing_nil_data.e22b867e": {
-      "comment": "Error shown when script archive verification returns no certificate data.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87103,13 +87110,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "验证后未找到证书（数据为空）"
+            "value": "Could not find certificate after verficiation (nil data)"
           }
         }
       }
     },
     "ui.api.itermscriptimporter.certificate_missing_bad_data.6a233ca0": {
-      "comment": "Error shown when script archive verification returns invalid certificate data.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87121,13 +87129,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "验证后未找到证书（数据无效）"
+            "value": "Could not find certificate after verficiation (bad data)"
           }
         }
       }
     },
     "ui.api.itermscriptimporter.installation_canceled.1125e313": {
-      "comment": "Outcome message when the user cancels script installation.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87139,13 +87148,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "已按用户请求取消安装。"
+            "value": "Installation canceled by user request."
           }
         }
       }
     },
     "ui.api.itermscriptimporter.archive_from_older_iterm2_unsupported.a8b19949": {
-      "comment": "Error shown when importing an unsupported script archive made by an older iTerm2 version.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87157,13 +87167,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此归档由旧版 iTerm2 创建。这种归档已不受支持，无法安装。"
+            "value": "This archive was created by an older version of iTerm2. This kind of archive is no longer supported and cannot be installed."
           }
         }
       }
     },
     "ui.api.itermscriptimporter.archive_missing_valid_script.7d8307d5": {
-      "comment": "Error shown when an archive does not contain a valid iTerm2 script.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87175,13 +87186,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "归档中不包含有效的 iTerm2 脚本"
+            "value": "Archive does not contain a valid iTerm2 script"
           }
         }
       }
     },
     "ui.api.itermscriptimporter.could_not_replace_existing_script.27aec263": {
-      "comment": "Error shown when an existing script cannot be moved aside for replacement. Preserve the script-name placeholder.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87193,13 +87205,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法替换“%@”：无法移开现有脚本，因此未对其进行更改。"
+            "value": "Could not replace “%@”: the existing script could not be moved aside, so it was left unchanged."
           }
         }
       }
     },
     "ui.api.itermscriptimporter.replacement_canceled_existing_script_kept.3db71812": {
-      "comment": "Outcome shown when replacing a script is canceled and the existing script is restored. Preserve the script-name placeholder.",
+      "shouldTranslate": false,
+      "comment": "Shared script-import callback diagnostic consumed by DLog and RLog; retain upstream text. Independent confirmation UI remains localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -87211,7 +87224,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "已取消替换“%@”。现有脚本已保留。"
+            "value": "Replacing “%@” was canceled. The existing script was kept."
           }
         }
       }
