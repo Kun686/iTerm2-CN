@@ -32,7 +32,7 @@
         [self update];
     }
 
-    if (self == [NSApp windowsMenu] &&
+    if (identifier && self == [NSApp windowsMenu] &&
         [[NSApp keyWindow] respondsToSelector:@selector(_moveToScreen:)] &&
         [NSScreen it_stringLooksLikeUniqueKey:identifier]) {
         NSScreen *screen = [NSScreen it_screenWithUniqueKey:identifier];
