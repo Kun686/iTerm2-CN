@@ -28915,7 +28915,8 @@
       }
     },
     "ui.ptysession.ptysession.run_command_trigger.ecb3b2b4": {
-      "comment": "User-facing text in PTYSession (title).",
+      "shouldTranslate": false,
+      "comment": "Shared background runner title used by diagnostic descriptions and script history; retain upstream text.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -28927,7 +28928,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "运行命令触发器"
+            "value": "Run Command Trigger"
           }
         }
       }

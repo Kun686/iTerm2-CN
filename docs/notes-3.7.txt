@@ -1,6 +1,7 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve background-trigger diagnostic titles.
 - Keep localized Cancel actions from becoming
   remembered warning choices.
 - Completes tab-group menu translations and

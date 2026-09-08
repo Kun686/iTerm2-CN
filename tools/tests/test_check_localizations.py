@@ -13,6 +13,39 @@ SCRIPT = Path(__file__).resolve().parents[1] / "check_localizations.py"
 
 
 class LocalizationCheckCLITests(unittest.TestCase):
+    def _write_background_trigger_title(self, *, filename="PTYSession/PTYSession.m",
+                                        method="triggerSideEffectRunBackgroundCommand",
+                                        receiver="runner", title="Run Command Trigger"):
+        path = self.sources / filename
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            f"- (void){method}:(NSString *)command pool:(iTermBackgroundCommandRunnerPool *)pool {{\n"
+            "    iTermBackgroundCommandRunner *runner = [pool requestBackgroundCommandRunnerWithTerminationBlock:nil];\n"
+            "    runner.command = command;\n"
+            f'    {receiver}.title = @"{title}";\n'
+            "    runner.shell = self.userShell;\n"
+            "    [runner run];\n}\n", encoding="utf-8")
+        return path
+
+    def test_accepts_exact_shared_background_trigger_diagnostic_title(self):
+        self._write_background_trigger_title()
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_shared_background_trigger_title_exception_is_narrow(self):
+        for change in ({"filename": "Other/PTYSession.m"},
+                       {"method": "showDifferentWarning"},
+                       {"receiver": "alert"},
+                       {"title": "Different English Title"}):
+            with self.subTest(change=change):
+                path = self._write_background_trigger_title(**change)
+                try:
+                    result = self._run_checker()
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("Objective-C UI sink 'title'", result.stdout + result.stderr)
+                finally:
+                    path.unlink()
+
     def setUp(self):
         self._temporary_directory = tempfile.TemporaryDirectory()
         self.project_root = Path(self._temporary_directory.name)

@@ -25120,7 +25120,7 @@ getOptionKeyBehaviorLeft:(iTermOptionKeyBehavior *)left
     [iTermGCD assertMainQueueSafe];
     iTermBackgroundCommandRunner *runner = [pool requestBackgroundCommandRunnerWithTerminationBlock:nil];
     runner.command = command;
-    runner.title = NSLocalizedStringWithDefaultValue(@"ui.ptysession.ptysession.run_command_trigger.ecb3b2b4", nil, NSBundle.mainBundle, @"Run Command Trigger", @"User-facing text in PTYSession (title).");
+    runner.title = @"Run Command Trigger";
     runner.notificationTitle = NSLocalizedStringWithDefaultValue(@"ui.ptysession.ptysession.run_command_trigger_failed_notification_title", nil, NSBundle.mainBundle, @"Run Command Trigger Failed", @"Notification title when a Run Command trigger background command fails.");
     runner.shell = self.userShell;
     [runner run];

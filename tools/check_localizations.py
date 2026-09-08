@@ -1289,6 +1289,30 @@ def check_hardcoded_english_swift_action_labels(sources):
     return errors
 
 
+def objc_sink_is_background_trigger_diagnostic(path, sources, source, sink_match):
+    # This exact title also feeds the runner's description/redactedDescription
+    # and script history. The native excerpt regression covers those consumers.
+    if path.relative_to(sources).as_posix() != "PTYSession/PTYSession.m":
+        return False
+    method = re.search(
+        r'-\s*\(void\)\s*triggerSideEffectRunBackgroundCommand:\s*\(NSString\s*\*\)\s*command'
+        r'\s+pool:\s*\(iTermBackgroundCommandRunnerPool\s*\*\)\s*pool\s*\{', source)
+    if method is None:
+        return False
+    end = objc_braced_block_end(source, method.end() - 1)
+    if end is None or not method.end() <= sink_match.start() < end:
+        return False
+    body = source[method.end():end]
+    if re.search(r'iTermBackgroundCommandRunner\s*\*\s*runner\s*=\s*'
+                 r'\[pool\s+requestBackgroundCommandRunnerWithTerminationBlock:\s*nil\s*\]\s*;', body) is None:
+        return False
+    line_start = source.rfind("\n", method.end(), sink_match.start()) + 1
+    statement_end = source.find(";", sink_match.end(), end)
+    return statement_end >= 0 and re.fullmatch(
+        r'\s*runner\.title\s*=\s*@"Run Command Trigger"\s*;',
+        source[line_start:statement_end + 1]) is not None
+
+
 def check_hardcoded_english_objc_ui_literals(sources):
     errors = []
     paths = sorted(
@@ -1301,6 +1325,8 @@ def check_hardcoded_english_objc_ui_literals(sources):
             errors.append(f"{path}: unable to scan source text: {error}")
             continue
         for sink_match in OBJC_UI_STRING_SINK.finditer(source):
+            if objc_sink_is_background_trigger_diagnostic(path, sources, source, sink_match):
+                continue
             value_expression = source[sink_match.end():].lstrip()
             if value_expression.startswith("NSLocalizedString"):
                 continue
