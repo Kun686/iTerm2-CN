@@ -46043,7 +46043,8 @@
       }
     },
     "ui.swift.api.itermuvprovisioner.could_not_check_for_a_uv_update_0.926e2e7e": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46055,13 +46056,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法检查 uv 更新：%1$@"
+            "value": "Could not check for a uv update: %1$@"
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.could_not_download_the_uv_manifest_from_0.6c2f5f2b": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46073,13 +46075,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法从 %1$@ 下载 uv 清单。"
+            "value": "Could not download the uv manifest from %1$@."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.could_not_download_the_uv_update.5cadbd8c": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46091,13 +46094,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法下载 uv 更新。"
+            "value": "Could not download the uv update."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.could_not_install_the_rebuilt_python_environment_at.f115d5e8": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46109,13 +46113,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法在 %1$@ 安装重新构建的 Python 环境（errno %2$d）。"
+            "value": "Could not install the rebuilt Python environment at %1$@ (errno %2$d)."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.could_not_load_the_uv_signature_public_key.407a9797": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46127,7 +46132,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法加载 uv 签名公钥。"
+            "value": "Could not load the uv signature public key."
           }
         }
       }
@@ -46169,7 +46174,8 @@
       }
     },
     "ui.swift.api.itermuvprovisioner.failed_to_extract_uv_tar_exited_with_status.25149d5e": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46181,7 +46187,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法解压 uv（tar 退出状态：%1$d）。"
+            "value": "Failed to extract uv (tar exited with status %1$d)."
           }
         }
       }
@@ -46205,7 +46211,8 @@
       }
     },
     "ui.swift.api.itermuvprovisioner.the_download_was_canceled.9f82c467": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46217,13 +46224,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "下载已取消。"
+            "value": "The download was canceled."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_offered_uv_version_0_is_older_than.269a5e9e": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46235,13 +46243,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "提供的 uv 版本（%1$@）低于最低要求（%2$@）。"
+            "value": "The offered uv version (%1$@) is older than the minimum required (%2$@)."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_uv_download_did_not_contain_a_uv.fc68384e": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46253,13 +46262,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "下载的 uv 中不包含 uv 二进制文件。"
+            "value": "The uv download did not contain a uv binary."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_uv_download_produced_no_data.bc098493": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46271,13 +46281,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv 下载未返回任何数据。"
+            "value": "The uv download produced no data."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_uv_download_url_is_not_valid.354a7e7b": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46289,13 +46300,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv 下载 URL 无效。"
+            "value": "The uv download URL is not valid."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_uv_download_was_larger_than_expected_and.e591323b": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46307,13 +46319,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv 下载内容大于预期，已被拒绝。"
+            "value": "The uv download was larger than expected and was rejected."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_uv_manifest_declares_an_implausible_download_size.e624828c": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46325,13 +46338,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv 清单声明的下载大小不合理（%1$lld 字节）。"
+            "value": "The uv manifest declares an implausible download size (%1$lld bytes)."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_uv_manifest_is_not_valid_json_a.dc868f10": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46343,13 +46357,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv 清单不是有效的 JSON（这是托管问题，并非 macOS 版本问题）。"
+            "value": "The uv manifest is not valid JSON (a hosting problem, not a macOS-version problem)."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_uv_manifest_lists_no_usable_entries_a.976cc533": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46361,13 +46376,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv 清单中没有可用条目（托管或清单存在问题）。"
+            "value": "The uv manifest lists no usable entries (a hosting or manifest problem)."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.the_uv_manifest_url_is_not_valid.9a2158ef": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46379,7 +46395,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv 清单 URL 无效。"
+            "value": "The uv manifest URL is not valid."
           }
         }
       }
@@ -46403,7 +46419,8 @@
       }
     },
     "ui.swift.api.itermuvprovisioner.unknown_error.3e4443e5": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46415,13 +46432,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "未知错误"
+            "value": "unknown error"
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.upgraded_uv_0_to_1_updated_the_python.dcf5c72d": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46433,13 +46451,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "已将 uv 从 %1$@ 升级到 %2$@，并更新共享环境中的 Python 模块。"
+            "value": "Upgraded uv %1$@ to %2$@. Updated the Python modules in shared environments."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.uv_0_failed_with_status_1_2.f14a8777": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46451,13 +46470,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv %1$@ 失败，退出状态为 %2$d。%3$@"
+            "value": "uv %1$@ failed with status %2$d.%3$@"
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.uv_0_is_up_to_date.239fac69": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46469,13 +46489,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv %1$@ 已是最新版本。"
+            "value": "uv %1$@ is up to date."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.uv_is_not_available_for_macos_0.f327a0dc": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46487,13 +46508,14 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "uv 不适用于 macOS %1$@。"
+            "value": "uv is not available for macOS %1$@."
           }
         }
       }
     },
     "ui.swift.api.itermuvprovisioner.uv_is_not_installed.2d636c3d": {
-      "comment": "User-facing text in iTermUvProvisioner.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -46505,7 +46527,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "尚未安装 uv。"
+            "value": "uv is not installed."
           }
         }
       }
@@ -86425,7 +86447,8 @@
       }
     },
     "ui.swift.api.itermuvprovisioner.command.5d347fd9": {
-      "comment": "Fallback command name in a user-facing uv error.",
+      "shouldTranslate": false,
+      "comment": "Shared uv runtime error or background-upgrade diagnostic; preserve the original NSError/callback/log text and structure. Independent prompts and download display remain localized.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -86437,7 +86460,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "命令"
+            "value": "command"
           }
         }
       }

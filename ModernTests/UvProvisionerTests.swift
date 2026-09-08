@@ -155,36 +155,28 @@ final class UvProvisionerTests: XCTestCase {
         }
     }
 
-    func testSelectedEntryRetainsStableEnglishDiagnosticDescription() {
+    func testSelectedEntryRetainsOriginalSharedError() {
         switch iTermUvProvisioner.selectedEntry(fromManifestData: Data("not json".utf8),
                                                 runningMacOSVersion: "14.0.0") {
         case .success:
             XCTFail("must fail to parse")
         case .failure(let error):
-            XCTAssertEqual(
-                (error as NSError).userInfo[NSDebugDescriptionErrorKey] as? String,
-                "The uv manifest is not valid JSON (a hosting problem, not a macOS-version problem).")
+            let error = error as NSError
+            XCTAssertEqual(error.domain, "com.googlecode.iterm2.uv")
+            XCTAssertEqual(error.code, -1)
+            XCTAssertEqual(Set(error.userInfo.keys), [NSLocalizedDescriptionKey])
+            XCTAssertEqual(error.localizedDescription,
+                           "The uv manifest is not valid JSON (a hosting problem, not a macOS-version problem).")
         }
     }
 
-    func testDiagnosticDescriptionUsesStableTextAndPreservesExternalErrors() {
-        switch iTermUvProvisioner.selectedEntry(fromManifestData: Data("not json".utf8),
-                                                runningMacOSVersion: "14.0.0") {
-        case .success:
-            XCTFail("must fail to parse")
-        case .failure(let error):
-            XCTAssertEqual(
-                iTermUvProvisioner.diagnosticDescription(for: error),
-                "The uv manifest is not valid JSON (a hosting problem, not a macOS-version problem).")
-        }
-
-        let externalError = NSError(
-            domain: "example.external",
-            code: 1,
-            userInfo: [NSLocalizedDescriptionKey: "External detail"])
-        XCTAssertEqual(
-            iTermUvProvisioner.diagnosticDescription(for: externalError),
-            "External detail")
+    func testCancelErrorRetainsOriginalSharedError() {
+        let error = iTermUvProvisioner.cancelError()
+        XCTAssertEqual(error.domain, "com.googlecode.iterm2.uv")
+        XCTAssertEqual(error.code, -2)
+        XCTAssertEqual(Set(error.userInfo.keys), [NSLocalizedDescriptionKey])
+        XCTAssertEqual(error.localizedDescription, "The download was canceled.")
+        XCTAssertTrue(iTermUvProvisioner.isCancelationError(error))
     }
 
     func testShouldUpgradeUvOnlyWhenStrictlyNewer() {

@@ -67,6 +67,10 @@ unchanged, without altering button actions or rendering state.
 Python download phase titles and status messages are also localized only at
 their display boundary. Shared script-import error callbacks remain in English
 because they also feed diagnostic logs; independent prompts remain localized.
+The uv runtime also preserves original shared NSError descriptions, fields,
+and background-upgrade diagnostics. Manual upgrade results also stay in English
+because their callback writes script history. Shared callback text remains in
+English when shown in alerts; download labels and independent prompts are localized.
 SSH Integration transfer diagnostics shared with logs, completion handlers, and
 browser stream failures also retain their original text. Transfer summaries and
 independent UI labels remain localized.

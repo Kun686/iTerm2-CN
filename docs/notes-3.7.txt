@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve shared uv error fields and log text.
+- Localize uv download titles at display time.
 - Preserve script-import diagnostic messages.
 - Translate Python download status at display time.
 - Localize terminal tooltips at display time,

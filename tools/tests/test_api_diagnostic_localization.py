@@ -81,6 +81,11 @@ class APIDiagnosticLocalizationTests(unittest.TestCase):
         titles = re.findall(r'super initWithURL:url title:(.+) nextPhaseFactory:nextPhaseFactory', cls.download)
         if len(titles) != 2:
             raise AssertionError("Expected two phase title sources")
+        uv = (ROOT / "sources/API/iTermUvProvisioner.swift").read_text()
+        uv_title = re.search(r'self\.fetcher\.fetch\(url: url, title: ("[^"\n]+"), byteCount: entry.size\)', uv)
+        if uv_title is None or "title: title," not in uv:
+            raise AssertionError("Expected original uv title forwarded to the download phase")
+        titles.append("@" + uv_title[1])
         display = re.search(r'_titleLabel\.stringValue = [^;]*phase\.title[^;]*;', cls.download)
         status = re.search(r'\[_downloadController showMessage:(.+)\];', runtime)
         if display is None or status is None:
@@ -114,7 +119,7 @@ class APIDiagnosticLocalizationTests(unittest.TestCase):
             values = {key: entry["localizations"][language]["stringUnit"]["value"]
                       for key, entry in catalog.items() if key.startswith((
                           "ui.api.itermscriptimporter.", "ui.api.itermoptionalcomponentdownloadwindowcontroller.",
-                          "ui.api.itermpythonruntimedownloader."))}
+                          "ui.api.itermpythonruntimedownloader.", "ui.swift.api.itermuvprovisioner.downloading_uv."))}
             (resources / "Localizable.strings").write_bytes(plistlib.dumps(values))
             cls.translations[language] = {
                 entry["localizations"]["en"]["stringUnit"]["value"]: values[key]
@@ -136,7 +141,7 @@ class APIDiagnosticLocalizationTests(unittest.TestCase):
 
     def check_download(self, language):
         result = self.run_probe(language)
-        originals = ("Finding latest version…", "Downloading Python runtime…")
+        originals = ("Finding latest version…", "Downloading Python runtime…", "Downloading uv…")
         self.assertEqual(len(result["phases"]), len(originals))
         for row, expected in zip(result["phases"], originals):
             with self.subTest(title=expected):
