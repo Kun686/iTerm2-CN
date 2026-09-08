@@ -59,6 +59,28 @@ private extension SearchableComboViewGroup {
 
 @objc(iTermSettingPopupView)
 class SettingPopupView: NSView {
+    private struct SettingIdentity: Equatable {
+        let key: String
+        let isProfile: Bool
+
+        init?(identifier: String) {
+            guard let data = identifier.data(using: .utf8),
+                  let dictionary = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any],
+                  let key = dictionary["key"] as? String,
+                  !key.isEmpty,
+                  let isProfile = dictionary["isProfile"] as? Bool,
+                  dictionary["label"] is String else {
+                return nil
+            }
+            self.key = key
+            self.isProfile = isProfile
+        }
+    }
+
+    private var items: [SearchableComboViewItem] = []
+    // An existing binding may contain a label in another UI language. Keep its
+    // original bytes while the corresponding current-language item is selected.
+    private var restoredSelection: (tag: Int, identifier: String)?
     @objc private(set) var comboView: SearchableComboView? = nil
     @IBOutlet var delegate: SearchableComboViewDelegate? {
         set {
@@ -90,8 +112,11 @@ class SettingPopupView: NSView {
 
     @objc func reloadData() {
         let identifier = selectedIdentifier
+        restoredSelection = nil
         comboView?.removeFromSuperview()
-        let newComboView = SearchableComboView(SearchableComboViewGroup.fromSettings(),
+        let groups = SearchableComboViewGroup.fromSettings()
+        items = groups.flatMap { $0.items }
+        let newComboView = SearchableComboView(groups,
                                                defaultTitle: "Select Setting…")
         newComboView.frame = self.bounds
         newComboView.delegate = comboView?.delegate
@@ -107,15 +132,33 @@ class SettingPopupView: NSView {
     }
 
     @objc var selectedIdentifier: String? {
+        if let restored = restoredSelection, comboView?.selectedTag() == restored.tag {
+            return restored.identifier
+        }
         return comboView?.selectedItem?.identifier.map { $0 as NSString as String }
     }
 
     @objc(selectItemWithTitle:) func select(title: String) {
+        restoredSelection = nil
         _ = comboView?.selectItem(withTitle: title)
     }
 
     @discardableResult
     @objc(selectItemWithIdentifier:) func select(identifier: String) -> Bool {
-        return comboView?.selectItem(withIdentifier: NSUserInterfaceItemIdentifier(identifier)) ?? false
+        restoredSelection = nil
+        if comboView?.selectItem(withIdentifier: NSUserInterfaceItemIdentifier(identifier)) == true {
+            return true
+        }
+        guard let identity = SettingIdentity(identifier: identifier),
+              let item = items.first(where: { item in
+                  guard let current = item.identifier else { return false }
+                  return SettingIdentity(identifier: current) == identity
+              }),
+              let current = item.identifier,
+              comboView?.selectItem(withIdentifier: NSUserInterfaceItemIdentifier(current)) == true else {
+            return false
+        }
+        restoredSelection = (item.tag, identifier)
+        return true
     }
 }

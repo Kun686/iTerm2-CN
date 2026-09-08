@@ -81,6 +81,9 @@ iTerm2-CN community localization:
   for stored parameters and terminal filtering.
 - Restoring the Show Tabs shortcut keeps its saved
   menu parameter unchanged in either UI language.
+- Restores Toggle Setting selections after a UI
+  language change without rewriting saved
+  parameters.
 - CN uses the main application Bundle ID
   com.kun686.iterm2-cn and its signing team's
   matching Keychain access group.
