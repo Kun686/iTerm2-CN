@@ -5811,6 +5811,24 @@
         }
       }
     },
+    "nTg-01-nxt.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Select Next Tab Group\"; ObjectID = \"nTg-01-nxt\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Select Next Tab Group"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择下一个标签组"
+          }
+        }
+      }
+    },
     "nnc-o3-t2j.title": {
       "comment": "Class = \"NSMenu\"; title = \"Resize Split Pane\"; ObjectID = \"nnc-o3-t2j\";",
       "extractionState": "extracted_with_value",
@@ -5951,6 +5969,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "显示注释"
+          }
+        }
+      }
+    },
+    "pTg-01-prv.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Select Previous Tab Group\"; ObjectID = \"pTg-01-prv\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Select Previous Tab Group"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择上一个标签组"
           }
         }
       }
@@ -6222,6 +6258,42 @@
           "stringUnit": {
             "state": "translated",
             "value": "向右移动分隔条"
+          }
+        }
+      }
+    },
+    "tgA-01-new.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Add Tab to New Group…\"; ObjectID = \"tgA-01-new\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Add Tab to New Group…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将标签页添加到新标签组…"
+          }
+        }
+      }
+    },
+    "tgR-01-rem.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Remove Tab from Group\"; ObjectID = \"tgR-01-rem\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Remove Tab from Group"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将标签页移出标签组"
           }
         }
       }
