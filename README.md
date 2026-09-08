@@ -51,6 +51,10 @@ Legacy title-only menu shortcuts recognize bundled menu translations. Opening
 or reloading the shortcut editor preserves the original complete parameter;
 only choosing a different action produces a new parameter. Stable menu IDs and
 action selectors are unchanged.
+Built-in Toolbelt menu and panel headings are translated only for display.
+Their original English titles remain the names used by existing actions,
+title-only shortcuts, automation, notifications, and saved configuration.
+Dynamic tool names and the Codecierge product name are not translated.
 
 Raw diagnostics remain untranslated. In particular, the fork-failure message
 is shared by logs, terminal output, and the notification body, so it stays in

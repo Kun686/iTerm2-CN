@@ -152,6 +152,26 @@ static NSString *const kDynamicToolURL = @"URL";
     return [gRegisteredTools allKeys];
 }
 
++ (NSString *)displayNameForToolName:(NSString *)name {
+    if (!name.length || !gRegisteredTools[name] || gRegisteredTools[name] == [ToolWebView class]) {
+        return name ?: @"";
+    }
+    NSDictionary<NSString *, NSString *> *names = @{
+        kActionsToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.actions", nil, NSBundle.mainBundle, @"Actions", @"Built-in tool display name; never use as a registry key."),
+        kCapturedOutputToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.captured_output", nil, NSBundle.mainBundle, @"Captured Output", @"Built-in tool display name; never use as a registry key."),
+        kCommandHistoryToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.command_history", nil, NSBundle.mainBundle, @"Command History", @"Built-in tool display name; never use as a registry key."),
+        kRecentDirectoriesToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.recent_directories", nil, NSBundle.mainBundle, @"Recent Directories", @"Built-in tool display name; never use as a registry key."),
+        kJobsToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.jobs", nil, NSBundle.mainBundle, @"Jobs", @"Built-in tool display name; never use as a registry key."),
+        kNotesToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.notes", nil, NSBundle.mainBundle, @"Notes", @"Built-in tool display name; never use as a registry key."),
+        kPasteHistoryToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.paste_history", nil, NSBundle.mainBundle, @"Paste History", @"Built-in tool display name; never use as a registry key."),
+        kProfilesToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.profiles", nil, NSBundle.mainBundle, @"Profiles", @"Built-in tool display name; never use as a registry key."),
+        kSnippetsToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.snippets", nil, NSBundle.mainBundle, @"Snippets", @"Built-in tool display name; never use as a registry key."),
+        kNamedMarksToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.named_marks", nil, NSBundle.mainBundle, @"Named Marks", @"Built-in tool display name; never use as a registry key."),
+        kStatusToolName: NSLocalizedStringWithDefaultValue(@"ui.toolbelt.tool_name.session_status", nil, NSBundle.mainBundle, @"Session Status", @"Built-in tool display name; never use as a registry key.")
+    };
+    return names[name] ?: name;
+}
+
 + (NSArray *)configuredTools {
     NSArray *tools = [[iTermUserDefaults userDefaults] objectForKey:kToolbeltPrefKey];
     if (!tools) {
@@ -196,6 +216,16 @@ static NSString *const kDynamicToolURL = @"URL";
         i.tag = (ProfileType)[gRegisteredTools[theName] supportedProfileTypes];
         [i setState:[[iTermToolbeltView configuredTools] containsObject:theName] ? NSControlStateValueOn : NSControlStateValueOff];
         i.identifier = [@"Toolbelt." stringByAppendingString:theName];
+        NSString *displayName = [self displayNameForToolName:theName];
+        if (![displayName isEqualToString:theName]) {
+            i.attributedTitle = [[NSAttributedString alloc] initWithString:displayName
+                                                              attributes:@{ NSFontAttributeName: [NSFont menuFontOfSize:0] }];
+            // attributedTitle also sets title. Restore the raw title for existing
+            // actions, title-only shortcuts and notification-driven item lookup.
+            i.title = theName;
+            i.accessibilityTitle = displayName;
+            i.accessibilityLabel = displayName;
+        }
         [menu addItem:i];
     }
 }

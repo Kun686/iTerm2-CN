@@ -42,6 +42,9 @@ extern NSString *const kToolbeltShouldHide;
 // Returns an array of tool keys.
 + (NSArray *)allTools;
 
+// Display text only. Registry, configuration and notification names stay unchanged.
++ (NSString *)displayNameForToolName:(NSString *)name;
+
 // Returns an array of tool keys for tools to show ignoring profile type.
 + (NSArray *)configuredTools;
 

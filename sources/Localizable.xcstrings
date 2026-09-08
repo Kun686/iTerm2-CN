@@ -1,6 +1,17 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "ui.toolbelt.tool_name.actions": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Actions"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"操作"}}}},
+    "ui.toolbelt.tool_name.captured_output": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Captured Output"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"捕获输出"}}}},
+    "ui.toolbelt.tool_name.command_history": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Command History"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"命令历史"}}}},
+    "ui.toolbelt.tool_name.recent_directories": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Recent Directories"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"最近目录"}}}},
+    "ui.toolbelt.tool_name.jobs": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Jobs"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"作业"}}}},
+    "ui.toolbelt.tool_name.notes": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Notes"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"笔记"}}}},
+    "ui.toolbelt.tool_name.paste_history": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Paste History"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"粘贴历史"}}}},
+    "ui.toolbelt.tool_name.profiles": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Profiles"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"配置文件"}}}},
+    "ui.toolbelt.tool_name.snippets": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Snippets"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"代码片段"}}}},
+    "ui.toolbelt.tool_name.named_marks": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Named Marks"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"命名标记"}}}},
+    "ui.toolbelt.tool_name.session_status": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Session Status"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"会话状态"}}}},
     "settings.advanced.search_result": {
       "extractionState": "manual",
       "localizations": {
