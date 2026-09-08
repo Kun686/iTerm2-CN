@@ -42,6 +42,17 @@ class XibVisibleLocalizationTests(unittest.TestCase):
                     self.assert_catalog_field(catalog, item.attrib["id"] + suffix,
                                               item.attrib[attribute])
 
+    def test_password_manager_button_titles_match_base_xib(self):
+        directory = ROOT / "sources/PasswordManager"
+        catalog = json.loads((directory / "iTermPasswordManager.xcstrings").read_text())["strings"]
+        xib = ET.parse(directory / "Base.lproj/iTermPasswordManager.xib")
+        for item in xib.iter("buttonCell"):
+            if not item.get("title"):
+                continue
+            with self.subTest(item=item.get("id")):
+                self.assert_catalog_field(catalog, item.attrib["id"] + ".title",
+                                          item.attrib["title"])
+
 
 if __name__ == "__main__":
     unittest.main()
