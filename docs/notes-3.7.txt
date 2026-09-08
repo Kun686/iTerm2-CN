@@ -1,6 +1,10 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve trigger-editor input bindings while
+  translating regex, name, and job labels.
+- Localize Status Bar Advanced help text without
+  changing the original options or tooltip meaning.
 - Localize close-confirmation job lists without
   changing process names or closing decisions.
 - Document the third-party Close Tab AX label

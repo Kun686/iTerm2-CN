@@ -338,7 +338,7 @@ static const CGFloat kLabelWidth = 124;
     [stackView addArrangedSubview:matchTypeRow];
 
     // Regular Expression row
-    _regexRow = [self createRowWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.regular_expression.8182fd85", nil, NSBundle.mainBundle, @"Regular Expression:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).") hasVisualizationButton:YES];
+    _regexRow = [self createRowWithLabelText:@"Regular Expression:" hasVisualizationButton:YES];
     [stackView addArrangedSubview:_regexRow];
 
     // Event parameter row (hidden by default)
@@ -353,11 +353,11 @@ static const CGFloat kLabelWidth = 124;
     }
     
     // Name row
-    NSView *nameRow = [self createRowWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.name.2683cad4", nil, NSBundle.mainBundle, @"Name:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).") hasVisualizationButton:NO];
+    NSView *nameRow = [self createRowWithLabelText:@"Name:" hasVisualizationButton:NO];
     [stackView addArrangedSubview:nameRow];
 
     // Job row
-    NSView *jobRow = [self createRowWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.job.34b0e24b", nil, NSBundle.mainBundle, @"Job:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).") hasVisualizationButton:NO];
+    NSView *jobRow = [self createRowWithLabelText:@"Job:" hasVisualizationButton:NO];
     [stackView addArrangedSubview:jobRow];
 
     // Buttons row
@@ -597,13 +597,17 @@ static const CGFloat kLabelWidth = 124;
     textField.delegate = self;
     [row addSubview:textField];
     
+    // The original labels identify the input fields; translate only their display.
     if ([labelText isEqualToString:@"Regular Expression:"]) {
         _regexTextField = textField;
         _regexLabel = label;
+        label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.regular_expression.8182fd85", nil, NSBundle.mainBundle, @"Regular Expression:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).");
     } else if ([labelText isEqualToString:@"Name:"]) {
         _nameTextField = textField;
+        label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.name.2683cad4", nil, NSBundle.mainBundle, @"Name:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).");
     } else if ([labelText isEqualToString:@"Job:"]) {
         _jobTextField = textField;
+        label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.job.34b0e24b", nil, NSBundle.mainBundle, @"Job:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).");
         _jobTextField.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.trigger_enabled_only_for_this_job_e_g.4303877d", nil, NSBundle.mainBundle, @"Trigger enabled only for this job (e.g., emacs)", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).");
     }
     

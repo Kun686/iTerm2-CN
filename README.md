@@ -62,6 +62,12 @@ The third-party tab bar's close-button accessibility name remains `Close Tab`:
 its private getter is hard-coded and does not honor the inherited label setter.
 This is a known third-party translation limitation, not a completed VoiceOver
 or close-button interaction acceptance check.
+Status Bar Advanced help text is localized from the existing XIB tooltips.
+The upstream reuse of tight-packing help on the empty-component option is
+preserved; localization does not change either setting's behavior.
+Trigger-editor row identifiers retain their original values. Only the visible
+labels are translated, preserving regex, name, and job input bindings and the
+existing save expressions in both UI languages.
 The in-memory transfer path marker also retains its upstream value because
 file actions consume it as a path, not just a display label.
 The background Run Command Trigger, Smart Selection Action, and URL Handler
