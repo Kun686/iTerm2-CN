@@ -55,6 +55,9 @@ Built-in Toolbelt menu and panel headings are translated only for display.
 Their original English titles remain the names used by existing actions,
 title-only shortcuts, automation, notifications, and saved configuration.
 Dynamic tool names and the Codecierge product name are not translated.
+Cockpit keeps its original no-status grouping/filter key in both languages.
+Only its fallback display name is translated; session-reported status text is
+preserved, including text identical to that legacy key.
 
 Raw diagnostics remain untranslated. In particular, the fork-failure message
 is shared by logs, terminal output, and the notification body, so it stays in

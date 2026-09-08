@@ -1,6 +1,9 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve Cockpit status grouping and filter keys.
+  Translate only the missing-status display name,
+  never the status text reported by a session.
 - Keep plugin installer diagnostic names raw;
   localize names only in error display text.
 - Localize built-in Toolbelt display names while

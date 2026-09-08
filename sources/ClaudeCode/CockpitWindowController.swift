@@ -114,6 +114,9 @@ class CockpitWindowController: NSWindowController {
     private var stateFilterBarHeight: CGFloat = 0
     // Session counts per status text (pre-filter), for the filter labels.
     private var statusCounts: [String: Int] = [:]
+    // Display-only: do not translate text actually reported by a session,
+    // including text that happens to equal the legacy no-status sentinel.
+    private var reportedStatuses = Set<String>()
 
     // Live tree built from iTermController + session state. Rebuilt
     // by refresh(); the cache below keeps CockpitRow instances stable
@@ -367,7 +370,10 @@ class CockpitWindowController: NSWindowController {
             self.statusFilter = nil
         }
         statusFilterItems = [(title: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.all_0.37d129e3", defaultValue: "All (\(total))", bundle: .main, comment: "User-facing text in CockpitWindowController."), status: nil)]
-            + statuses.map { (title: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.0_1.fa1e7180", defaultValue: "\($0) (\(statusCounts[$0] ?? 0))", bundle: .main, comment: "User-facing text in CockpitWindowController."), status: $0) }
+            + statuses.map {
+                let displayStatus = Self.statusDisplayName($0, reportedStatuses: reportedStatuses)
+                return (title: String(localized: "ui.swift.claudecode.cockpitwindowcontroller.0_1.fa1e7180", defaultValue: "\(displayStatus) (\(statusCounts[$0] ?? 0))", bundle: .main, comment: "User-facing text in CockpitWindowController."), status: $0)
+            }
 
         let selectedIndex = statusFilterItems.firstIndex { $0.status == statusFilter } ?? 0
 
@@ -1947,6 +1953,7 @@ extension CockpitWindowController {
             rebuiltRoots = rebuildByWorkgroup(freshCache: &freshCache)
         }
         statusCounts = Self.countStatuses(in: rebuiltRoots)
+        reportedStatuses = Set(freshCache.values.compactMap(\.status))
         let pruned = (filter.isEmpty && statusFilter == nil)
             ? rebuiltRoots
             : Self.prune(rebuiltRoots, needle: filter.lowercased(), status: statusFilter, keptCache: &freshCache)
@@ -2290,7 +2297,8 @@ extension CockpitWindowController {
             let members = bucketed[status] ?? []
             if members.isEmpty { continue }
             let identity = CockpitRow.Identity.group(scope, status)
-            let label = String(localized: "ui.swift.claudecode.cockpitwindowcontroller.0_1.cd55a9d9", defaultValue: "\(status) · \(members.count)", bundle: .main, comment: "User-facing text in CockpitWindowController.")
+            let displayStatus = Self.statusDisplayName(status, reportedStatuses: Set(members.compactMap(\.status)))
+            let label = String(localized: "ui.swift.claudecode.cockpitwindowcontroller.0_1.cd55a9d9", defaultValue: "\(displayStatus) · \(members.count)", bundle: .main, comment: "User-facing text in CockpitWindowController.")
             let groupRow = rowCache[identity]
                 ?? CockpitRow(identity: identity,
                               kind: .group(scope: scope, status: status),
@@ -2600,7 +2608,15 @@ extension CockpitWindowController {
     }
 
     // Sentinel bucket/filter key for sessions that report no status.
-    static let noStatusLabel = String(localized: "ui.swift.claudecode.cockpitwindowcontroller.no_status.eace244c", defaultValue: "No status", bundle: .main, comment: "User-facing text in CockpitWindowController.")
+    static let noStatusLabel = "No status"
+
+    private static func statusDisplayName(_ status: String,
+                                          reportedStatuses: Set<String>) -> String {
+        guard status == noStatusLabel, !reportedStatuses.contains(status) else {
+            return status
+        }
+        return String(localized: "ui.swift.claudecode.cockpitwindowcontroller.no_status.eace244c", defaultValue: "No status", bundle: .main, comment: "User-facing text in CockpitWindowController.")
+    }
 
     // The session's live, arbitrary status text and its color, straight
     // from the tab status (the same source the Session Status tool uses).
