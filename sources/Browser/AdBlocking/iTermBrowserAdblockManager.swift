@@ -134,7 +134,7 @@ class iTermBrowserAdblockManager: NSObject {
         let urlString = iTermAdvancedSettingsModel.adblockListURL()!
         guard let url = URL(string: urlString) else {
             let error = NSError(domain: "iTermBrowserAdblockManager", code: 1, userInfo: [
-                NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.adblocking.itermbrowseradblockmanager.invalid_adblock_list_url_0.5999f3de", defaultValue: "Invalid adblock list URL: \(urlString)", bundle: .main, comment: "Error shown when the configured ad-block list URL is invalid.")
+                NSLocalizedDescriptionKey: "Invalid adblock list URL: \(urlString)"
             ])
             handleFailure(error)
             return
@@ -149,7 +149,7 @@ class iTermBrowserAdblockManager: NSObject {
                 
                 guard let data = data, let content = String(data: data, encoding: .utf8) else {
                     let error = NSError(domain: "iTermBrowserAdblockManager", code: 2, userInfo: [
-                        NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.adblocking.itermbrowseradblockmanager.failed_to_parse_adblock_list_response.4815fa5b", defaultValue: "Failed to parse adblock list response", bundle: .main, comment: "Error shown when an ad-block list response cannot be parsed.")
+                        NSLocalizedDescriptionKey: "Failed to parse adblock list response"
                     ])
                     self?.handleFailure(error)
                     return
@@ -167,7 +167,7 @@ class iTermBrowserAdblockManager: NSObject {
         guard let jsonData = content.data(using: .utf8),
               let _ = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [[String: Any]] else {
             let error = NSError(domain: "iTermBrowserAdblockManager", code: 3, userInfo: [
-                NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.adblocking.itermbrowseradblockmanager.downloaded_content_is_not_valid_json_format.92b689a5", defaultValue: "Downloaded content is not valid JSON format", bundle: .main, comment: "Error shown when a downloaded ad-block list is not valid JSON.")
+                NSLocalizedDescriptionKey: "Downloaded content is not valid JSON format"
             ])
             handleFailure(error)
             return
@@ -276,7 +276,7 @@ class iTermBrowserAdblockManager: NSObject {
         
         if daysSinceUpdate >= maxFailureDays {
             let error = NSError(domain: "iTermBrowserAdblockManager", code: 4, userInfo: [
-                NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.adblocking.itermbrowseradblockmanager.adblock_rules_haven_t_been_updated_for_0.6200e0fd", defaultValue: "Adblock rules haven't been updated for \(daysSinceUpdate) days", bundle: .main, comment: "Error shown after ad-block rules have not updated for several days.")
+                NSLocalizedDescriptionKey: "Adblock rules haven't been updated for \(daysSinceUpdate) days"
             ])
             NotificationCenter.default.post(
                 name: Self.didFailWithErrorNotification,

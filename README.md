@@ -69,6 +69,9 @@ English; the notification title is localized.
 GPU availability reasons are translated only in the status alert. The renderer's
 shared diagnostic descriptions, reason values and availability decisions remain
 unchanged. Unknown future reasons retain the original diagnostic as a fallback.
+Ad-block update errors likewise keep their original error fields and diagnostic
+logs. Only the settings-page display copy is translated; update requests, rule
+processing and unknown error descriptions remain unchanged.
 The installer's two built-in plugin names remain English in its diagnostic logs
 and verification-error arguments. Error descriptions translate their display
 copies; download addresses, bundle identities and installation are unchanged.
