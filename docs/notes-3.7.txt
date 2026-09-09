@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Localize job-list conjunctions in quit reasons
+  without changing job order or quit decisions.
 - Keep the original command-export fallback
   filename when switching UI languages.
 - Keep the real Dynamic Profile Parent Name key

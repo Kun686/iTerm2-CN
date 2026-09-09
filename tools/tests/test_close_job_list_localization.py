@@ -48,7 +48,13 @@ class CloseJobListLocalizationTests(unittest.TestCase):
         end = terminal.index("    // The PseudoTerminal might close", start)
         psm = (ROOT / "ThirdParty/PSMTabBarControl/source/PSMTabBarCell.m").read_text()
         psm = psm[psm.index("@implementation PSMTabCloseButtonAccessibilityElement"):]
+        reason = (ROOT / "sources/AppShutdown/iTermPromptOnCloseReason.m").read_text()
+        reason = reason.split("@implementation iTermPromptOnCloseBlockedReason", 1)[1].split("@end", 1)[0]
         includes = {
+            "close-reason-methods.inc": "\n".join([
+                method(reason, "- (instancetype)initWithName:"),
+                method(reason, "- (NSString *)message"),
+            ]),
             "close-list-message.inc": terminal[start:end],
             "close-label-getter.inc": method(psm, "- (NSString *)accessibilityLabel"),
             "close-list-helpers.inc": "\n".join([
@@ -79,8 +85,11 @@ class CloseJobListLocalizationTests(unittest.TestCase):
                       and "stringUnit" in entry["localizations"][language]}
             (resources / "Localizable.strings").write_bytes(plistlib.dumps(values))
 
-    def snapshot(self, language):
-        result = subprocess.run([str(self.probe), str(self.directory / f"{language}.lproj")],
+    def snapshot(self, language, mode=None):
+        arguments = [str(self.probe), str(self.directory / f"{language}.lproj")]
+        if mode is not None:
+            arguments.append(mode)
+        result = subprocess.run(arguments,
                                 capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stderr)
         return json.loads(result.stdout)
@@ -120,6 +129,26 @@ class CloseJobListLocalizationTests(unittest.TestCase):
 
     def test_chinese_close_messages_and_raw_joiner(self):
         self.check_language("zh-Hans")
+
+    def test_quit_reason_job_names_use_the_ui_conjunction(self):
+        for language in ("en", "zh-Hans"):
+            rows = self.snapshot(language, "reasons")["reasons"]
+            self.assertEqual(len(rows), 9)
+            for row in rows:
+                with self.subTest(language=language, names=row["names"]):
+                    names, profile = row["names"], row["profile"]
+                    if len(names) <= 3:
+                        listing = joined(names, "and" if language == "en" else "和")
+                        expected = (f"A session with profile “{profile}” is running {listing}."
+                                    if language == "en" else f"使用配置文件“{profile}”的会话正在运行 {listing}。")
+                    else:
+                        listing, remaining = ", ".join(names[:3]), len(names) - 3
+                        expected = (f"A session with profile “{profile}” is running {listing}, "
+                                    f"and {remaining} other " + ("job." if remaining == 1 else "jobs.")
+                                    if language == "en" else
+                                    f"使用配置文件“{profile}”的会话正在运行 {listing}，另有 {remaining} 个任务。")
+                    self.assertEqual(row["body"], expected)
+                    self.assertEqual(row["genericJoined"], joined(names, "and"))
 
     def test_third_party_ax_getter_ignores_inherited_label_setter(self):
         for language in ("en", "zh-Hans"):

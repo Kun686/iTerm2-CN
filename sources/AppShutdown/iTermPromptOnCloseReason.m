@@ -152,7 +152,8 @@
     if (_jobs.count <= maxJobsToList) {
         return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.appshutdown.itermpromptonclosereason.a_session_with_profile_is_running.d0546a43", nil, NSBundle.mainBundle, @"A session with profile “%@” is running %@.", @"Reason shown when a session has running jobs."),
                 _name,
-                [_jobs componentsJoinedWithOxfordComma]];
+                [_jobs componentsJoinedWithOxfordCommaAndConjunction:
+                    NSLocalizedStringWithDefaultValue(@"ui.terminalview.pseudoterminal.close_job_conjunction", nil, NSBundle.mainBundle, @"and", @"Conjunction between job names in a close confirmation.")]];
     } else {
         return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.appshutdown.itermpromptonclosereason.a_session_with_profile_is_running_and_other.d56440b9", nil, NSBundle.mainBundle, @"A session with profile “%@” is running %@, and %@ other %@.", @"Reason shown when a session has more running jobs than can be listed."),
                 _name,

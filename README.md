@@ -83,9 +83,11 @@ Hotkey migration help keeps the actual `Dynamic Profile Parent Name` key in
 English so users can locate it in their configuration. Migration data is unchanged.
 Command exports keep the original `iTerm2 Command.rtf` fallback filename in every
 UI language. Command-derived names, saved contents, and sharing data are unchanged.
-Close-confirmation job lists localize their conjunction and duplicate-count
+Close-confirmation job summaries localize their conjunction and duplicate-count
 description without translating process names or changing job grouping, sorting,
-or closing decisions. The generic list joiner used by diagnostics stays unchanged.
+or closing decisions. Quit-confirmation reason details also localize the job-list
+conjunction, preserving the original job order and first-three display limit.
+The generic list joiner used by diagnostics stays unchanged.
 The third-party tab bar's close-button accessibility name remains `Close Tab`:
 its private getter is hard-coded and does not honor the inherited label setter.
 This is a known third-party translation limitation, not a completed VoiceOver
