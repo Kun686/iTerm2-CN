@@ -31,27 +31,58 @@ EXPECTED = (
 
 class BrowserNavigationErrorLocalizationTests(unittest.TestCase):
     def test_scheme_failures_preserve_diagnostics_and_localize_display_copy(self):
-        sources = [(ROOT / path).read_text() for path in PATHS]
+        self.check_scheme_errors(PATHS, [(domain, -1, raw, chinese)
+                                        for domain, raw, chinese in EXPECTED])
+
+    def test_local_page_failures_preserve_diagnostics_and_localize_display_copy(self):
+        path = "/synthetic/用户 空格/100%.txt"
+        self.check_scheme_errors((
+            "sources/Browser/History/iTermBrowserHistoryViewHandler.swift",
+            "sources/Browser/LocalPages/iTermBrowserFileHandler.swift",
+            "sources/Browser/LocalPages/iTermBrowserLocalPageManager.swift",
+        ), (
+            ("iTermBrowserHistoryViewHandler", -1, "Failed to encode HTML", "无法编码 HTML"),
+            ("iTermBrowserManager", -1, "No path specified", "未指定路径"),
+            ("iTermBrowserManager", -1, "Failed to encode HTML", "无法编码 HTML"),
+            ("NSCocoaErrorDomain", 4, f"File not found: {path}", f"找不到文件：{path}"),
+            ("iTermBrowserLocalPageManager", -1, "Unknown iterm2-about URL", "未知的 iterm2-about URL"),
+        ), local_pages=True)
+
+    def check_scheme_errors(self, paths, expected, local_pages=False):
+        sources = [(ROOT / path).read_text() for path in paths]
         errors = []
         for source in sources:
-            for match in re.finditer(r'NSError\(domain: "(?:iTermBrowserManager|iTermBrowserBookmarkViewHandler)", code: -1,', source):
+            pattern = (r'NSError\(domain: (?:"(?:iTermBrowserManager|iTermBrowserBookmarkViewHandler|'
+                       r'iTermBrowserHistoryViewHandler|iTermBrowserLocalPageManager)"|NSCocoaErrorDomain), '
+                       r'code: (?:-1|NSFileNoSuchFileError),')
+            for match in re.finditer(pattern, source):
                 end = checker.swift_delimited_expression_end(source, match.start() + len("NSError"), "(", ")")
                 self.assertIsNotNone(end)
                 errors.append(source[match.start():end])
-        self.assertEqual(len(errors), 6)
-        log = re.findall(r'^\s*RLog\("🔌 didFailNavigation: .*$', sources[0], re.M)
+        self.assertEqual(len(errors), len(expected))
+        manager = (ROOT / PATHS[0]).read_text()
+        display_source = (ROOT / PATHS[2]).read_text()
+        local_manager = (ROOT / "sources/Browser/LocalPages/iTermBrowserLocalPageManager.swift").read_text()
+        log = re.findall(r'^\s*RLog\("🔌 didFailNavigation: .*$', manager, re.M)
         self.assertEqual(len(log), 1)
+        file_log = ""
+        if local_pages:
+            lines = re.findall(r'^\s*NSLog\("iTermBrowserFileHandler.start: error generating HTML: .*$', sources[1], re.M)
+            self.assertEqual(len(lines), 1)
+            file_log = lines[0]
         signature = "private func localizedNavigationErrorDescription("
-        helper = member(sources[2], signature) if signature in sources[2] else ""
-        display_method = member(sources[2], "private func errorTitleAndMessage(")
+        helper = member(display_source, signature) if signature in display_source else ""
+        display_method = member(display_source, "private func errorTitleAndMessage(")
         if helper:
             self.assertIn("let displayDescription = localizedNavigationErrorDescription(error)", display_method)
             self.assertEqual(display_method.count("displayDescription"), 3)
             self.assertNotIn("error.localizedDescription", display_method)
         template = (ROOT / "tests/browser_navigation_error_probe.swift").read_text()
         for marker, source in {
+            "// BROWSER-SCHEME-DECLARATIONS": member(local_manager, "struct iTermBrowserSchemes"),
             "// SCHEME-ERROR-CONSTRUCTORS": "return [" + ",\n".join(errors) + "]",
             "// NAVIGATION-ERROR-LOG": log[0],
+            "// LOCAL-PAGE-ERROR-LOG": file_log,
             "// NAVIGATION-DISPLAY-HELPER": helper,
             "// NAVIGATION-DISPLAY-CALL": "return localizedNavigationErrorDescription(error)" if helper else "return error.localizedDescription",
         }.items():
@@ -75,23 +106,31 @@ class BrowserNavigationErrorLocalizationTests(unittest.TestCase):
                           for key, entry in catalog.items() if key.startswith((
                               "ui.swift.browser.core.itermbrowsermanager.",
                               "ui.swift.browser.bookmarks.itermbrowserbookmarkviewhandler.",
-                              "ui.swift.browser.localpages.itermbrowsererrorhandler."))}
+                              "ui.swift.browser.localpages.itermbrowsererrorhandler.",
+                              "ui.swift.browser.history.itermbrowserhistoryviewhandler.",
+                              "ui.swift.browser.localpages.itermbrowserfilehandler.",
+                              "ui.swift.browser.localpages.itermbrowserlocalpagemanager."))}
                 (resources / "Localizable.strings").write_bytes(plistlib.dumps(values))
-                run = subprocess.run([str(probe), str(resources)],
+                arguments = [str(probe), str(resources)] + (["local-pages"] if local_pages else [])
+                run = subprocess.run(arguments,
                                      capture_output=True, text=True, timeout=5)
                 self.assertEqual(run.returncode, 0, run.stderr)
                 snapshot = json.loads(run.stdout)
-                self.assertEqual(len(snapshot["known"]), len(EXPECTED))
-                for index, (row, (domain, raw, chinese)) in enumerate(zip(snapshot["known"], EXPECTED)):
+                self.assertEqual(len(snapshot["known"]), len(expected))
+                for index, (row, (domain, code, raw, chinese)) in enumerate(zip(snapshot["known"], expected)):
                     for field, value in {
-                        "domain": domain, "code": -1,
+                        "domain": domain, "code": code,
                         "userInfo": {"NSLocalizedDescription": raw},
-                        "log": [f"🔌 didFailNavigation: domain={domain} code=-1 — {raw}"],
+                        "log": [f"🔌 didFailNavigation: domain={domain} code={code} — {raw}"],
                         "displayed": raw if language == "en" else chinese,
                     }.items():
                         with self.subTest(language=language, constructor=index, field=field):
                             self.assertEqual(row[field], value)
-                self.assertEqual(len(snapshot["unknown"]), 5)
+                    if local_pages:
+                        with self.subTest(language=language, constructor=index, field="fileLog"):
+                            self.assertEqual(len(row["fileLog"]), 1)
+                            self.assertIn(raw, row["fileLog"][0])
+                self.assertEqual(len(snapshot["unknown"]), 8 if local_pages else 5)
                 for row in snapshot["unknown"]:
                     with self.subTest(language=language, unknown=row["raw"]):
                         self.assertEqual(row["displayed"], row["raw"])

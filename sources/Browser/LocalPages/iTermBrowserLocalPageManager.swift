@@ -117,7 +117,7 @@ class iTermBrowserLocalPageManager: NSObject {
         setupPageContext(for: urlString)
 
         guard let context = activePageContexts[urlString] else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserLocalPageManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserlocalpagemanager.unknown_0_url.fcaa1a81", defaultValue: "Unknown \(iTermBrowserSchemes.about) URL", bundle: .main, comment: "Error shown when an internal browser URL is not recognized.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserLocalPageManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown \(iTermBrowserSchemes.about) URL"]))
             return true
         }
 

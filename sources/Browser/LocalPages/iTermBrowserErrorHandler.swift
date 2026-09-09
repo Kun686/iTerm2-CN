@@ -92,6 +92,15 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
     private func localizedNavigationErrorDescription(_ error: Error) -> String {
         let diagnostic = error.localizedDescription
         let nsError = error as NSError
+        // FileHandler's custom Cocoa error includes a raw path, not system error prose.
+        let missingFilePrefix = "File not found: "
+        if nsError.domain == NSCocoaErrorDomain,
+           nsError.code == NSFileNoSuchFileError,
+           diagnostic.hasPrefix(missingFilePrefix),
+           diagnostic.count > missingFilePrefix.count {
+            let path = String(diagnostic.dropFirst(missingFilePrefix.count))
+            return String(localized: "ui.swift.browser.localpages.itermbrowserfilehandler.file_not_found_0.255ad07b", defaultValue: "File not found: \(path)", bundle: .main, comment: "User-facing text in iTermBrowserFileHandler.")
+        }
         guard nsError.code == -1 else { return diagnostic }
         switch (nsError.domain, diagnostic) {
         case ("iTermBrowserManager", "Invalid URL"):
@@ -102,6 +111,12 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
             return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
         case ("iTermBrowserBookmarkViewHandler", "Failed to encode HTML"):
             return String(localized: "ui.swift.browser.bookmarks.itermbrowserbookmarkviewhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "Error shown when the browser bookmarks page cannot be encoded.")
+        case ("iTermBrowserHistoryViewHandler", "Failed to encode HTML"):
+            return String(localized: "ui.swift.browser.history.itermbrowserhistoryviewhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "Error shown when the browser history page cannot be encoded.")
+        case ("iTermBrowserManager", "No path specified"):
+            return String(localized: "ui.swift.browser.localpages.itermbrowserfilehandler.no_path_specified.17a4e672", defaultValue: "No path specified", bundle: .main, comment: "User-facing text in iTermBrowserFileHandler.")
+        case ("iTermBrowserLocalPageManager", "Unknown \(iTermBrowserSchemes.about) URL"):
+            return String(localized: "ui.swift.browser.localpages.itermbrowserlocalpagemanager.unknown_0_url.fcaa1a81", defaultValue: "Unknown \(iTermBrowserSchemes.about) URL", bundle: .main, comment: "Error shown when an internal browser URL is not recognized.")
         default:
             return diagnostic
         }

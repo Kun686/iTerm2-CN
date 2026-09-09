@@ -28,7 +28,7 @@ class iTermBrowserFileHandler: NSObject, iTermBrowserPageHandler {
 
         guard !path.isEmpty else {
             NSLog("iTermBrowserFileHandler.start: path is empty")
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserfilehandler.no_path_specified.17a4e672", defaultValue: "No path specified", bundle: .main, comment: "User-facing text in iTermBrowserFileHandler.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "No path specified"]))
             return
         }
 
@@ -49,7 +49,7 @@ class iTermBrowserFileHandler: NSObject, iTermBrowserPageHandler {
 
         guard let data = html.data(using: .utf8) else {
             NSLog("iTermBrowserFileHandler.start: failed to encode HTML")
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserfilehandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserFileHandler.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
             return
         }
 
@@ -67,7 +67,7 @@ class iTermBrowserFileHandler: NSObject, iTermBrowserPageHandler {
         var isDirectory: ObjCBool = false
 
         guard FileManager.default.fileExists(atPath: fileURL.resolvingSymlinksInPath().path, isDirectory: &isDirectory) else {
-            throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserfilehandler.file_not_found_0.255ad07b", defaultValue: "File not found: \(path)", bundle: .main, comment: "User-facing text in iTermBrowserFileHandler.")])
+            throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: [NSLocalizedDescriptionKey: "File not found: \(path)"])
         }
 
         if isDirectory.boolValue {

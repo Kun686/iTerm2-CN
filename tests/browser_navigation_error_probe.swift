@@ -2,12 +2,16 @@
 import Foundation
 
 let probeBundle: Bundle = {
-    guard CommandLine.arguments.count == 2,
+    guard (2...3).contains(CommandLine.arguments.count),
           let bundle = Bundle(path: CommandLine.arguments[1]) else { exit(2) }
     return bundle
 }()
 var logLines: [String] = []
+var fileLogLines: [String] = []
 func RLog(_ message: String) { logLines.append(message) }
+func NSLog(_ message: String) { fileLogLines.append(message) }
+let path = "/synthetic/用户 空格/100%.txt"
+// BROWSER-SCHEME-DECLARATIONS
 
 func makeErrors() -> [NSError] {
     // SCHEME-ERROR-CONSTRUCTORS
@@ -23,14 +27,33 @@ class iTermBrowserErrorHandler: NSObject {
 
 func snapshot(_ error: NSError) -> [String: Any] {
     logLines = []
+    fileLogLines = []
     let nsError = error
     // NAVIGATION-ERROR-LOG
+    // LOCAL-PAGE-ERROR-LOG
     return ["domain": error.domain, "code": error.code, "userInfo": error.userInfo,
-            "raw": error.localizedDescription, "log": logLines,
+            "raw": error.localizedDescription, "log": logLines, "fileLog": fileLogLines,
             "displayed": iTermBrowserErrorHandler().display(error)]
 }
 
-let unknown = [
+let unknownErrors: [NSError] = CommandLine.arguments.dropFirst(2).first == "local-pages" ? [
+    NSError(domain: "external.synthetic", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "No path specified"]),
+    NSError(domain: "iTermBrowserManager", code: -99,
+            userInfo: [NSLocalizedDescriptionKey: "No path specified"]),
+    NSError(domain: "iTermBrowserHistoryViewHandler", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Future history error 用户"]),
+    NSError(domain: "iTermBrowserLocalPageManager", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Unknown external URL"]),
+    NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError,
+            userInfo: [NSLocalizedDescriptionKey: "Future file error 用户"]),
+    NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError,
+            userInfo: [NSLocalizedDescriptionKey: "File not found: "]),
+    NSError(domain: NSCocoaErrorDomain, code: -99,
+            userInfo: [NSLocalizedDescriptionKey: "File not found: \(path)"]),
+    NSError(domain: "external.synthetic", code: NSFileNoSuchFileError,
+            userInfo: [NSLocalizedDescriptionKey: "File not found: \(path)"]),
+] : [
     NSError(domain: "external.synthetic", code: -1,
             userInfo: [NSLocalizedDescriptionKey: "Invalid URL"]),
     NSError(domain: "iTermBrowserManager", code: -99,
@@ -40,8 +63,8 @@ let unknown = [
     NSError(domain: "iTermBrowserBookmarkViewHandler", code: -1,
             userInfo: [NSLocalizedDescriptionKey: "Invalid URL"]),
     NSError(domain: "iTermBrowserManager", code: -1, userInfo: [:]),
-].map { snapshot($0) }
+]
 let data = try JSONSerialization.data(withJSONObject: [
-    "known": makeErrors().map { snapshot($0) }, "unknown": unknown
+    "known": makeErrors().map { snapshot($0) }, "unknown": unknownErrors.map { snapshot($0) }
 ])
 FileHandle.standardOutput.write(data)
