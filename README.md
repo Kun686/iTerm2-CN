@@ -78,6 +78,8 @@ their original NSError fields for logs and callbacks. The error page translates
 known descriptions only for display, preserving the raw path in missing-file messages.
 The browser toolbar's /dev/null help is localized without changing privacy-mode
 behavior, its Markdown structure, or the original English copy.
+The web-view wrapper also localizes its missing-browser-name fallback, while
+preserving detected application names and the original link-opening behavior.
 The installer's two built-in plugin names remain English in its diagnostic logs
 and verification-error arguments. Error descriptions translate their display
 copies; download addresses, bundle identities and installation are unchanged.

@@ -23848,6 +23848,24 @@
         }
       }
     },
+    "ui.infrastructure.views.itermwebviewwrapperviewcontroller.default_browser": {
+      "comment": "Display fallback when the default browser name is unavailable.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default Browser"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "默认浏览器"
+          }
+        }
+      }
+    },
     "ui.infrastructure.views.itermwebviewwrapperviewcontroller.open_in.5b0d7a92": {
       "comment": "User-facing text in iTermWebViewWrapperViewController (setTitle).",
       "extractionState": "manual",

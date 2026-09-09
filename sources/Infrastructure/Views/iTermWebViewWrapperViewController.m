@@ -94,7 +94,7 @@ NSString *const iTermWebViewErrorDomain = @"com.iterm2.webview";
             return name;
         }
     }
-    return @"Default Browser";
+    return NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermwebviewwrapperviewcontroller.default_browser", nil, NSBundle.mainBundle, @"Default Browser", @"Display fallback when the default browser name is unavailable.");
 }
 
 - (void)terminateWebView {
