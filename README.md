@@ -58,6 +58,10 @@ Dynamic tool names and the Codecierge product name are not translated.
 Cockpit keeps its original no-status grouping/filter key in both languages.
 Only its fallback display name is translated; session-reported status text is
 preserved, including text identical to that legacy key.
+Forked chat titles retain the original `(Forked at …)` marker because it also
+identifies the suffix to replace on later forks. Switching UI language does not
+add another suffix or reinterpret Chinese user text as that marker. Existing
+titles are not migrated or rewritten.
 
 Raw diagnostics remain untranslated. In particular, the fork-failure message
 is shared by logs, terminal output, and the notification body, so it stays in
@@ -65,6 +69,8 @@ English; the notification title is localized.
 The installer's two built-in plugin names remain English in its diagnostic logs
 and verification-error arguments. Error descriptions translate their display
 copies; download addresses, bundle identities and installation are unchanged.
+Unknown AI provider names stay English in shared request errors and diagnostic
+events; the attachment-rejection alert uses a localized display name instead.
 Close-confirmation job lists localize their conjunction and duplicate-count
 description without translating process names or changing job grouping, sorting,
 or closing decisions. The generic list joiner used by diagnostics stays unchanged.

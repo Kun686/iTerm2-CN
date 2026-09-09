@@ -570,7 +570,7 @@ class ChatInputView: NSView, NSTextFieldDelegate {
     private func presentRejectedAttachments(_ urls: [URL]) {
         guard let window else { return }
         let names = urls.map { $0.lastPathComponent }.joined(separator: ", ")
-        let providerName = AITermController.provider?.displayName ?? String(localized: "ui.swift.aiterm.chatinputview.the_current_ai_provider.937d613c", defaultValue: "the current AI provider", bundle: .main, comment: "User-facing text in ChatInputView.")
+        let providerName = AITermController.provider?.localizedDisplayName ?? String(localized: "ui.swift.aiterm.chatinputview.the_current_ai_provider.937d613c", defaultValue: "the current AI provider", bundle: .main, comment: "User-facing text in ChatInputView.")
         let alert = NSAlert()
         alert.messageText = urls.count == 1
             ? String(localized: "ui.swift.aiterm.chatinputview.attachment_not_supported.2fd3b239", defaultValue: "Attachment not supported", bundle: .main, comment: "User-facing text in ChatInputView.")

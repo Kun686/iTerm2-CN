@@ -1,6 +1,11 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve AI provider names in shared errors;
+  translate the unknown name only for display.
+- Preserve the stored chat-fork title marker
+  across language changes, avoiding duplicate
+  suffixes without rewriting existing titles.
 - Preserve Cockpit status grouping and filter keys.
   Translate only the missing-status display name,
   never the status text reported by a session.

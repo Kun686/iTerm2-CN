@@ -845,7 +845,9 @@ extension ChatWindowController: ChatViewControllerDelegate {
             let nowString = formatter.string(from: now)
 
             var title = originalTitle
-            let forkedAt = String(localized: "ui.swift.aiterm.chatwindowcontroller.forked_at.079deb8e", defaultValue: "(Forked at ", bundle: .main, comment: "User-facing text in ChatWindowController.")
+            // This persisted marker also identifies the suffix to replace.
+            // Keep it stable across UI languages; it is not a display-only label.
+            let forkedAt = "(Forked at "
             let desiredSuffix = forkedAt + nowString + ")"
             if let range = title.range(of: forkedAt) {
                 title = originalTitle[..<range.lowerBound] + desiredSuffix

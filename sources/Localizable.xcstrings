@@ -43156,7 +43156,8 @@
       }
     },
     "ui.swift.aiterm.chatwindowcontroller.forked_at.079deb8e": {
-      "comment": "User-facing text in ChatWindowController.",
+      "shouldTranslate": false,
+      "comment": "Persisted chat-title marker also parsed when forking an existing chat. Preserve the original marker and replacement rule across UI languages.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -43168,7 +43169,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "(分支创建于 "
+            "value": "(Forked at "
           }
         }
       }
