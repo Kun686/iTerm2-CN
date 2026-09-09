@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Keep the original command-export fallback
+  filename when switching UI languages.
 - Keep the real Dynamic Profile Parent Name key
   in translated hotkey migration instructions.
 - Keep password-trigger popup rows aligned with

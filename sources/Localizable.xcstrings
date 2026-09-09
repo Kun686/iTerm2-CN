@@ -65523,24 +65523,6 @@
         }
       }
     },
-    "ui.swift.sharing.commandsharemenuprovider.iterm2_command.2d85e969": {
-      "comment": "Default filename for a saved command and its output.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "iTerm2 Command"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "iTerm2 命令"
-          }
-        }
-      }
-    },
     "ui.swift.sharing.commandsharemenuprovider.save_command_output.50dceb6f": {
       "comment": "User-facing text in CommandShareMenuProvider.",
       "extractionState": "manual",
