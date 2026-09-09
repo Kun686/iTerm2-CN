@@ -25,7 +25,7 @@ class MoveSessionBuiltInFunction: iTermBuiltInFunction {
                       let before = parameters["before"] as? Bool else {
                     completion(nil, NSError(domain: "com.iterm2.move-session",
                                             code: 1,
-                                            userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.language.builtinfunctions.movesessionbuiltinfunction.invalid_argument.d66ea613", defaultValue: "Invalid argument", bundle: .main, comment: "Error shown when move_session receives an invalid argument.")]))
+                                            userInfo: [NSLocalizedDescriptionKey: "Invalid argument"]))
                     return
                 }
                 do {
@@ -47,22 +47,22 @@ class MoveSessionBuiltInFunction: iTermBuiltInFunction {
               let destination = iTermController.sharedInstance().session(withGUID: destinationID) else {
             throw NSError(domain: "com.iterm2.move-session",
                           code: 2,
-                          userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.language.builtinfunctions.movesessionbuiltinfunction.invalid_session_id.2aa56153", defaultValue: "Invalid session ID", bundle: .main, comment: "Error shown when move_session receives an invalid session identifier.")])
+                          userInfo: [NSLocalizedDescriptionKey: "Invalid session ID"])
         }
         if !source.is(compatibleWith: destination) {
             throw NSError(domain: "com.iterm2.move-session",
                           code: 3,
-                          userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.language.builtinfunctions.movesessionbuiltinfunction.sessions_are_not_compatible.ea3c5f1c", defaultValue: "Sessions are not compatible", bundle: .main, comment: "Error shown when move_session cannot combine two sessions.")])
+                          userInfo: [NSLocalizedDescriptionKey: "Sessions are not compatible"])
         }
         guard let sourceTab = source.delegate as? PTYTab, let destinationTab = destination.delegate as? PTYTab else {
             throw NSError(domain: "com.iterm2.move-session",
                           code: 5,
-                          userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.language.builtinfunctions.movesessionbuiltinfunction.session_has_no_tab.22312377", defaultValue: "Session has no tab", bundle: .main, comment: "Error shown when move_session finds a session without a tab.")])
+                          userInfo: [NSLocalizedDescriptionKey: "Session has no tab"])
         }
         if sourceTab.lockedSession == source || destinationTab.lockedSession == destination {
             throw NSError(domain: "com.iterm2.move-session",
                           code: 6,
-                          userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.language.builtinfunctions.movesessionbuiltinfunction.can_t_move_locked_session.ff90d933", defaultValue: "Can't move locked session", bundle: .main, comment: "Error shown when move_session is asked to move a locked session.")])
+                          userInfo: [NSLocalizedDescriptionKey: "Can't move locked session"])
         }
         if destinationTab.hasMaximizedPane() {
             destinationTab.unmaximize()

@@ -169,7 +169,7 @@
         _expressionType = iTermParsedExpressionTypeError;
         _object = [NSError errorWithDomain:@"com.iterm2.parser"
                                       code:code
-                                  userInfo:@{ NSLocalizedDescriptionKey: localizedDescription ?: NSLocalizedStringWithDefaultValue(@"ui.language.itermparsedexpression.unknown_error.27c2ccd9", nil, NSBundle.mainBundle, @"Unknown error", @"Fallback description for a parsed expression error.") }];
+                                  userInfo:@{ NSLocalizedDescriptionKey: localizedDescription ?: @"Unknown error" }];
     }
     return self;
 }

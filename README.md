@@ -80,6 +80,9 @@ The browser toolbar's /dev/null help is localized without changing privacy-mode
 behavior, its Markdown structure, or the original English copy.
 The web-view wrapper also localizes its missing-browser-name fallback, while
 preserving detected application names and the original link-opening behavior.
+Built-in expression errors and parser fallback diagnostics retain their original
+text in API responses and Script Console output. Exported trigger statistics
+also keep their original table headings; independent chart labels are localized.
 The installer's two built-in plugin names remain English in its diagnostic logs
 and verification-error arguments. Error descriptions translate their display
 copies; download addresses, bundle identities and installation are unchanged.

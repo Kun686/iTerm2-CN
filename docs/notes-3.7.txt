@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve expression errors in API replies and
+  script logs; keep exported stats unchanged.
 - Localize the missing browser-name fallback;
   preserve detected names and link targets.
 - Localize the browser toolbar's /dev/null help.
