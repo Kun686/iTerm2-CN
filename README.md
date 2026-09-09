@@ -135,6 +135,8 @@ The same diagnostic boundary covers bounce, mark, color-highlight, password,
 and notification triggers, including the legacy Growl trigger name. Popup labels
 remain localized while stored numeric options, color data, and the password
 unlock sentinel retain their original meanings.
+The password-trigger popup keeps its original account-name ordering even when
+the unlock label is translated, so each displayed row saves the matching key.
 Workgroup trigger menus retain `Untitled` for unnamed workgroups: that label's
 sort position determines the implicit target when no workgroup ID is stored.
 Both terminal and browser triggers preserve the upstream default-selection

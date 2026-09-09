@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Keep password-trigger popup rows aligned with
+  saved account keys when translating Unlock.
 - Preserve stop/prompt trigger diagnostic text;
   keep their action titles localized.
 - Show the active preferences file in manual

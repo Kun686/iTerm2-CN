@@ -183,6 +183,36 @@
     }
 }
 
+- (void)testPasswordPopupDisplayOrderMatchesStoredAccountKeys {
+    NSString *sentinel = @"Open Password Manager to Unlock";
+    BOOL chinese = [NSBundle.mainBundle.preferredLocalizations.firstObject isEqual:@"zh-Hans"];
+    for (NSString *account in @[ @"", @"A", @"O", @"S", @"Z", @"中文" ]) {
+        iTermSyntheticPasswordTrigger *trigger = (id)[self triggerForClassName:@"iTermSyntheticPasswordTrigger"
+                                                                  parameter:account];
+        NSDictionary *configuration = trigger.dictionaryValue;
+        NSData *digest = trigger.digest;
+        NSDictionary *menu = trigger.menuItemsForPoupupButton;
+        // TriggerController builds rows in this order, then saves the selected
+        // row using objectAtIndex:. Labels must not change that key mapping.
+        NSArray *displayOrder = [trigger objectsSortedByValueInDict:menu];
+        NSArray *originalOrder = [menu.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        XCTAssertEqualObjects(displayOrder, originalOrder);
+        for (NSUInteger index = 0; index < displayOrder.count; index++) {
+            NSString *key = displayOrder[index];
+            XCTAssertEqualObjects([trigger objectAtIndex:(NSInteger)index], key);
+            XCTAssertEqual([trigger indexForObject:key], (NSInteger)index);
+            NSString *expected = [key isEqual:sentinel] && chinese ? @"打开密码管理器以解锁" : key;
+            XCTAssertEqualObjects(menu[key], expected);
+        }
+        XCTAssertEqual(trigger.defaultIndex, 0);
+        XCTAssertNil([trigger objectAtIndex:-1]);
+        XCTAssertNil([trigger objectAtIndex:(NSInteger)displayOrder.count]);
+        XCTAssertEqualObjects(trigger.dictionaryValue, configuration);
+        XCTAssertEqualObjects(trigger.digest, digest);
+        XCTAssertEqual(trigger.reloadCount, 1);
+    }
+}
+
 - (void)testPasswordDescriptionAndSentinelWithoutReadingAccounts {
     iTermSyntheticPasswordTrigger *trigger = (id)[self triggerForClassName:@"iTermSyntheticPasswordTrigger" parameter:nil];
     XCTAssertEqual(trigger.reloadCount, 1);

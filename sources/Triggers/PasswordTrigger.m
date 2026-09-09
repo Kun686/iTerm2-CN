@@ -96,6 +96,11 @@ static NSString *PasswordTriggerPlaceholderString = @"Open Password Manager to U
     return [_accountNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
+- (NSArray *)objectsSortedByValueInDict:(NSDictionary *)dict {
+    // Match sortedAccountNames so localized labels cannot change saved keys.
+    return [[dict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+}
+
 - (NSInteger)indexForObject:(id)object {
     NSUInteger index = [[self sortedAccountNames] indexOfObject:object];
     if (index == NSNotFound) {
