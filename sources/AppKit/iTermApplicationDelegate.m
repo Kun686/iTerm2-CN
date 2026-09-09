@@ -3538,6 +3538,76 @@ static iTermKeyEventReplayer *gReplayer;
 }
 
 - (NSString *)gpuUnavailableStringForReason:(iTermMetalUnavailableReason)reason {
+    // Keep the shared producer in English: PTYTab also uses it for diagnostics.
+    switch (reason) {
+        case iTermMetalUnavailableReasonNone:
+            return nil;
+        case iTermMetalUnavailableReasonNoGPU:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.no_gpu", nil, NSBundle.mainBundle, @"no usable GPU found on this machine.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonDisabled:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.disabled", nil, NSBundle.mainBundle, @"GPU Renderer is disabled in Settings > General.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonLigatures:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.ligatures", nil, NSBundle.mainBundle, @"ligatures are enabled. You can disable them in Settings > Profiles > Text > Use ligatures.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonInitializing:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.initializing", nil, NSBundle.mainBundle, @"the GPU renderer is initializing. It should be ready soon.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonInvalidSize:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.invalid_size", nil, NSBundle.mainBundle, @"the session is too large or too small.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonSessionInitializing:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.session_initializing", nil, NSBundle.mainBundle, @"the session is initializing.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonTransparency:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.transparency", nil, NSBundle.mainBundle, @"transparent windows are not supported. They can be disabled in Settings > Profiles > Window > Transparency.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonVerticalSpacing:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.vertical_spacing", nil, NSBundle.mainBundle, @"the font's vertical spacing set to less than 100%. You can change it in Settings > Profiles > Text > Change Font.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonMarginSize:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.margin_size", nil, NSBundle.mainBundle, @"terminal window margins are too small. You can edit them in Settings > Advanced.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonAnnotations:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.annotations", nil, NSBundle.mainBundle, @"annotations or URL shortcuts are open.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonPortholes:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.portholes", nil, NSBundle.mainBundle, @"this session has natively rendered items.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonFindPanel:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.find_panel", nil, NSBundle.mainBundle, @"the find panel is open.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonPasteIndicator:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.paste_indicator", nil, NSBundle.mainBundle, @"the paste progress indicator is open.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonAnnouncement:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.announcement", nil, NSBundle.mainBundle, @"an announcement (yellow bar) is visible.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonURLPreview:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.url_preview", nil, NSBundle.mainBundle, @"a URL preview is visible.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonWindowResizing:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.window_resizing", nil, NSBundle.mainBundle, @"the window is being resized.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonDisconnectedFromPower:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.disconnected_from_power", nil, NSBundle.mainBundle, @"the computer is not connected to power. You can enable GPU rendering while disconnected from power in Settings > General > Advanced GPU Settings.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonIdle:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.idle", nil, NSBundle.mainBundle, @"the session is idle. You can enable Metal while idle in Settings > Advanced.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonTooManyPanesReason:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.too_many_panes_reason", nil, NSBundle.mainBundle, @"This tab has too many split panes", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonNoFocus:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.no_focus", nil, NSBundle.mainBundle, @"the window does not have keyboard focus.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonTabInactive:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.tab_inactive", nil, NSBundle.mainBundle, @"this tab is not active.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonTabBarTemporarilyVisible:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.tab_bar_temporarily_visible", nil, NSBundle.mainBundle, @"the tab bar is temporarily visible.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonScreensChanging:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.screens_changing", nil, NSBundle.mainBundle, @"the screen configuration has just changed.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonContextAllocationFailure:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.context_allocation_failure", nil, NSBundle.mainBundle, @"of a temporary failure to allocate a graphics context.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonTabDragInProgress:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.tab_drag_in_progress", nil, NSBundle.mainBundle, @"a tab is being dragged.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonSessionHasNoWindow:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.session_has_no_window", nil, NSBundle.mainBundle, @"the current session has no window (this shouldn't happen).", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonDropTargetsVisible:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.drop_targets_visible", nil, NSBundle.mainBundle, @"secure copy drop targets are visible.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonSwipingBetweenTabs:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.swiping_between_tabs", nil, NSBundle.mainBundle, @"swiping between tabs", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonSplitPaneBeingDragged:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.split_pane_being_dragged", nil, NSBundle.mainBundle, @"a split pane is being dragged.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonWindowObscured:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.window_obscured", nil, NSBundle.mainBundle, @"the window is mostly under another window.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonLowerPowerMode:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.lower_power_mode", nil, NSBundle.mainBundle, @"macOS is in low power mode.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+        case iTermMetalUnavailableReasonNotATerminal:
+            return NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.gpu_reason.not_a_terminal", nil, NSBundle.mainBundle, @"the current session is not a terminal.", @"Display-only GPU availability reason; keep the shared diagnostic unchanged.");
+    }
+    // A future reason must retain its diagnostic rather than show a wrong cause.
     return iTermMetalUnavailableReasonDescription(reason);
 }
 

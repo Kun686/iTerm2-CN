@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Translate GPU status reasons only for display;
+  keep rendering decisions and diagnostics intact.
 - Localize job-list conjunctions in quit reasons
   without changing job order or quit decisions.
 - Keep the original command-export fallback
