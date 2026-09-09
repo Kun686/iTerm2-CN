@@ -71,6 +71,8 @@ and verification-error arguments. Error descriptions translate their display
 copies; download addresses, bundle identities and installation are unchanged.
 Unknown AI provider names stay English in shared request errors and diagnostic
 events; the attachment-rejection alert uses a localized display name instead.
+The settings exporter's serialization failure keeps its original diagnostic
+reason; only the error shown to the user is translated. Exported data is unchanged.
 Close-confirmation job lists localize their conjunction and duplicate-count
 description without translating process names or changing job grouping, sorting,
 or closing decisions. The generic list joiner used by diagnostics stays unchanged.

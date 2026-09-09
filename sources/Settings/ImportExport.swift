@@ -50,7 +50,11 @@ class ImportExport: NSObject {
             case ImportExportError.failedToSaveFile(let reason):
                 return .failure(String(localized: "ui.swift.settings.importexport.failed_to_save_file_0.80945e86", defaultValue: "Failed to save file: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.bug(let reason):
-                return .failure(String(localized: "ui.swift.settings.importexport.a_bug_was_encountered_0_please_report_this.6f760c45", defaultValue: "A bug was encountered: \(reason). Please report this at https://iterm2.com/bugs", bundle: .main, comment: "User-facing text in ImportExport."))
+                // The error is also logged above. Translate only its display copy.
+                let displayReason = reason == "Failed to serialize user defaults"
+                    ? String(localized: "ui.swift.settings.importexport.failed_to_serialize_user_defaults.095521de", defaultValue: "Failed to serialize user defaults", bundle: .main, comment: "User-facing text in ImportExport.")
+                    : reason
+                return .failure(String(localized: "ui.swift.settings.importexport.a_bug_was_encountered_0_please_report_this.6f760c45", defaultValue: "A bug was encountered: \(displayReason). Please report this at https://iterm2.com/bugs", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.failedToCreateArchive(let reason):
                 return .failure(String(localized: "ui.swift.settings.importexport.failed_to_create_archive_0.a290c2fa", defaultValue: "Failed to create archive: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.failedToLoadFile(let reason):
@@ -1147,7 +1151,7 @@ fileprivate extension Dictionary {
         guard let plistData = try? PropertyListSerialization.data(fromPropertyList: self,
                                                                   format: .xml,
                                                                   options: 0) else {
-            throw ImportExportError.bug(String(localized: "ui.swift.settings.importexport.failed_to_serialize_user_defaults.095521de", defaultValue: "Failed to serialize user defaults", bundle: .main, comment: "User-facing text in ImportExport."))
+            throw ImportExportError.bug("Failed to serialize user defaults")
         }
 
         do {

@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve settings-export failure diagnostics;
+  translate serialization errors for display.
 - Preserve AI provider names in shared errors;
   translate the unknown name only for display.
 - Preserve the stored chat-fork title marker
