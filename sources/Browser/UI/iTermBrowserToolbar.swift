@@ -502,7 +502,7 @@ class iTermBrowserToolbar: NSView {
     }
     
     private func showDevNullInfoPopover() {
-        devNullIndicator.it_showInformativeMessage(withMarkdown: """
+        devNullIndicator.it_showInformativeMessage(withMarkdown: String(localized: "ui.browser.toolbar.dev_null_help", defaultValue: """
         ## /dev/null Mode
         
         Your browsing activity is not being saved. No history, bookmarks, or other data will be stored.
@@ -510,7 +510,7 @@ class iTermBrowserToolbar: NSView {
         This mode is set in the browser’s Profile under **Settings > Profile > Web > Privacy**.
         
         ## 🙈 🙉 🙊
-        """)
+        """, bundle: .main, comment: "Browser privacy-mode help. Preserve Markdown and the literal /dev/null name."))
     }
     
     // MARK: - Long Press History

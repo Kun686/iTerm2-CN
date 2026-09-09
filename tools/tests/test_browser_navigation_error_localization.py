@@ -60,14 +60,25 @@ class BrowserNavigationErrorLocalizationTests(unittest.TestCase):
             ("iTermBrowserWelcomePageHandler", -1, "Failed to encode HTML", "无法编码 HTML"),
         ), onboarding=True)
 
-    def check_scheme_errors(self, paths, expected, local_pages=False, onboarding=False):
+    def test_settings_source_failures_preserve_diagnostics_and_localize_display_copy(self):
+        self.check_scheme_errors((
+            "sources/Browser/Settings/iTermBrowserSettingsHandler.swift",
+            "sources/Browser/ViewSource/iTermBrowserSourceHandler.swift",
+        ), (
+            ("iTermBrowserSettingsHandler", -1, "Failed to encode HTML", "无法编码 HTML"),
+            ("iTermBrowserSourceHandler", -1, "Invalid source URL", "源代码 URL 无效"),
+        ), settings_source=True)
+
+    def check_scheme_errors(self, paths, expected, local_pages=False, onboarding=False,
+                            settings_source=False):
         sources = [(ROOT / path).read_text() for path in paths]
         errors = []
         for source in sources:
             pattern = (r'NSError\(domain: (?:"(?:iTermBrowserManager|iTermBrowserBookmarkViewHandler|'
                        r'iTermBrowserHistoryViewHandler|iTermBrowserLocalPageManager|'
                        r'iTermBrowserOnboardingHandler|iTermBrowserStaticPageHandler|'
-                       r'iTermBrowserWelcomePageHandler)"|NSCocoaErrorDomain),\s+'
+                       r'iTermBrowserWelcomePageHandler|iTermBrowserSettingsHandler|'
+                       r'iTermBrowserSourceHandler)"|NSCocoaErrorDomain),\s+'
                        r'code: (?:-1|NSFileNoSuchFileError),')
             for match in re.finditer(pattern, source):
                 end = checker.swift_delimited_expression_end(source, match.start() + len("NSError"), "(", ")")
@@ -126,9 +137,13 @@ class BrowserNavigationErrorLocalizationTests(unittest.TestCase):
                               "ui.swift.browser.localpages.itermbrowserlocalpagemanager.",
                               "ui.swift.browser.localpages.itermbrowseronboardinghandler.",
                               "ui.swift.browser.localpages.itermbrowserstaticpagehandler.",
-                              "ui.swift.browser.localpages.itermbrowserwelcomepagehandler."))}
+                              "ui.swift.browser.localpages.itermbrowserwelcomepagehandler.",
+                              "ui.swift.browser.settings.itermbrowsersettingshandler.",
+                              "ui.swift.browser.viewsource.itermbrowsersourcehandler."))}
                 (resources / "Localizable.strings").write_bytes(plistlib.dumps(values))
                 mode = ["onboarding"] if onboarding else (["local-pages"] if local_pages else [])
+                if settings_source:
+                    mode = ["settings-source"]
                 arguments = [str(probe), str(resources)] + mode
                 run = subprocess.run(arguments,
                                      capture_output=True, text=True, timeout=5)
@@ -148,7 +163,8 @@ class BrowserNavigationErrorLocalizationTests(unittest.TestCase):
                         with self.subTest(language=language, constructor=index, field="fileLog"):
                             self.assertEqual(len(row["fileLog"]), 1)
                             self.assertIn(raw, row["fileLog"][0])
-                self.assertEqual(len(snapshot["unknown"]), 6 if onboarding else (8 if local_pages else 5))
+                self.assertEqual(len(snapshot["unknown"]),
+                                 8 if settings_source else (6 if onboarding else (8 if local_pages else 5)))
                 for row in snapshot["unknown"]:
                     with self.subTest(language=language, unknown=row["raw"]):
                         self.assertEqual(row["displayed"], row["raw"])

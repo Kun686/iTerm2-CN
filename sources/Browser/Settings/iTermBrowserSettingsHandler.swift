@@ -141,7 +141,7 @@ class iTermBrowserSettingsHandler: NSObject, iTermBrowserPageHandler {
         let htmlToServe = generateSettingsHTML()
         
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserSettingsHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.settings.itermbrowsersettingshandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserSettingsHandler.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserSettingsHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
             return
         }
         

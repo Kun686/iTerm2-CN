@@ -41,7 +41,7 @@ class iTermBrowserSourceHandler: NSObject, iTermBrowserPageHandler {
     
     func start(urlSchemeTask: WKURLSchemeTask, url: URL) {
         guard url == Self.sourceURL else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserSourceHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.viewsource.itermbrowsersourcehandler.invalid_source_url.ccc170be", defaultValue: "Invalid source URL", bundle: .main, comment: "Error shown when the internal view-source URL is invalid.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserSourceHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid source URL"]))
             return
         }
         

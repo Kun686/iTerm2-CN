@@ -1,7 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
-- Preserve navigation and local-page errors;
+- Localize the browser toolbar's /dev/null help.
+- Preserve navigation, settings and source errors;
   translate known reasons only in the error page.
 - Keep ad-block update errors and logs unchanged;
   translate only the settings-page display copy.

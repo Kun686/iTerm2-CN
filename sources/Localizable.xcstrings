@@ -1,6 +1,14 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "ui.browser.toolbar.dev_null_help": {
+      "comment": "Browser privacy-mode help. Preserve Markdown and the literal /dev/null name.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "## /dev/null Mode\n\nYour browsing activity is not being saved. No history, bookmarks, or other data will be stored.\n\nThis mode is set in the browser’s Profile under **Settings > Profile > Web > Privacy**.\n\n## 🙈 🙉 🙊" } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "## /dev/null 模式\n\n不会保存你的浏览活动，也不会存储历史记录、书签或其他数据。\n\n此模式可在浏览器的配置文件中设置，位置为 **设置 > 配置文件 > 网页 > 隐私**。\n\n## 🙈 🙉 🙊" } }
+      }
+    },
     "ui.appkit.itermapplicationdelegate.gpu_reason.no_gpu": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"no usable GPU found on this machine."}},"zh-Hans":{"stringUnit":{"state":"translated","value":"此电脑上未找到可用的 GPU。"}}}},
     "ui.appkit.itermapplicationdelegate.gpu_reason.disabled": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"GPU Renderer is disabled in Settings > General."}},"zh-Hans":{"stringUnit":{"state":"translated","value":"GPU 渲染器已在“设置 > 通用”中停用。"}}}},
     "ui.appkit.itermapplicationdelegate.gpu_reason.ligatures": {"extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"ligatures are enabled. You can disable them in Settings > Profiles > Text > Use ligatures."}},"zh-Hans":{"stringUnit":{"state":"translated","value":"已启用连字。可在“设置 > 配置文件 > 文本 > 使用连字”中停用。"}}}},

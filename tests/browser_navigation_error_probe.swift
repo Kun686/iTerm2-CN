@@ -37,7 +37,23 @@ func snapshot(_ error: NSError) -> [String: Any] {
 }
 
 let mode = CommandLine.arguments.dropFirst(2).first
-let unknownErrors: [NSError] = mode == "onboarding" ? [
+let unknownErrors: [NSError] = mode == "settings-source" ? [
+    NSError(domain: "external.synthetic", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Invalid source URL"]),
+    NSError(domain: "external.synthetic", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]),
+    NSError(domain: "iTermBrowserSourceHandler", code: -99,
+            userInfo: [NSLocalizedDescriptionKey: "Invalid source URL"]),
+    NSError(domain: "iTermBrowserSettingsHandler", code: -99,
+            userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]),
+    NSError(domain: "iTermBrowserSourceHandler", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Future source error 用户"]),
+    NSError(domain: "iTermBrowserSettingsHandler", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Invalid source URL"]),
+    NSError(domain: "iTermBrowserSourceHandler", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]),
+    NSError(domain: "iTermBrowserSettingsHandler", code: -1, userInfo: [:]),
+] : mode == "onboarding" ? [
     NSError(domain: "external.synthetic", code: -1,
             userInfo: [NSLocalizedDescriptionKey: "Failed to encode redirect HTML"]),
     NSError(domain: "iTermBrowserWelcomePageHandler", code: -99,

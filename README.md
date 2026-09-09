@@ -72,10 +72,12 @@ unchanged. Unknown future reasons retain the original diagnostic as a fallback.
 Ad-block update errors likewise keep their original error fields and diagnostic
 logs. Only the settings-page display copy is translated; update requests, rule
 processing and unknown error descriptions remain unchanged.
-Internal browser URL/scheme errors, page-encoding failures (including onboarding
-and redirects), and local-file errors preserve their original NSError fields for logs and
-callbacks. The error page translates known descriptions only for display,
-preserving the raw path in missing-file messages.
+Internal browser URL/scheme and view-source errors, page-encoding failures
+(including settings, onboarding and redirects), and local-file errors preserve
+their original NSError fields for logs and callbacks. The error page translates
+known descriptions only for display, preserving the raw path in missing-file messages.
+The browser toolbar's /dev/null help is localized without changing privacy-mode
+behavior, its Markdown structure, or the original English copy.
 The installer's two built-in plugin names remain English in its diagnostic logs
 and verification-error arguments. Error descriptions translate their display
 copies; download addresses, bundle identities and installation are unchanged.
