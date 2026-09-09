@@ -361,10 +361,11 @@ respectingTimeoutSetting:(BOOL)respectingTimeoutSetting
 
     NSString *folder = [self expandedCustomFolderOrURL];
     if ([folder stringIsUrlLike]) {
+        NSString *domain = [iTermUserDefaults customSuiteName] ?: [[NSBundle mainBundle] bundleIdentifier];
+        NSString *localPrefsPath = [NSString stringWithFormat:@"~/Library/Preferences/%@.plist", domain];
         NSString *informativeText =
-            NSLocalizedStringWithDefaultValue(@"ui.settings.itermremotepreferences.to_make_it_available_first_quit_iterm2_and.e177c2bb", nil, NSBundle.mainBundle, @"To make it available, first quit iTerm2 and then manually "
-            @"copy ~/Library/Preferences/com.googlecode.iterm2.plist to "
-            @"your hosting provider.", @"User-facing text in iTermRemotePreferences (saveLocalUserDefaultsToRemotePrefsInteractive:).");
+            [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermremotepreferences.to_make_it_available_first_quit_iterm2_and.e177c2bb", nil, NSBundle.mainBundle, @"To make it available, first quit iTerm2 and then manually copy %@ to your hosting provider.", @"Manual-upload help. The argument is the active preferences domain's path and must not be translated."),
+             localPrefsPath];
         NSAlert *alert = [[NSAlert alloc] init];
         alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.itermremotepreferences.settings_cannot_be_copied_to_a_url.9c603a79", nil, NSBundle.mainBundle, @"Settings cannot be copied to a URL.", @"User-facing text in iTermRemotePreferences (saveLocalUserDefaultsToRemotePrefsInteractive:).");
         alert.informativeText = informativeText;

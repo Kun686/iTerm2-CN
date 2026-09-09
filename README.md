@@ -73,6 +73,9 @@ Unknown AI provider names stay English in shared request errors and diagnostic
 events; the attachment-rejection alert uses a localized display name instead.
 The settings exporter's serialization failure keeps its original diagnostic
 reason; only the error shown to the user is translated. Exported data is unchanged.
+Remote-settings manual-upload help names the active app or test-suite preferences
+file instead of always pointing to the official app's file. This changes only the
+displayed instruction, not settings synchronization or file operations.
 Semantic History mode help and its Learn More popover are translated. Literal
 backreferences, interpolation variable names, link targets, and saved commands
 remain unchanged; these translations are used only in explanatory UI text.

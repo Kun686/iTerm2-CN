@@ -33829,19 +33829,19 @@
       }
     },
     "ui.settings.itermremotepreferences.to_make_it_available_first_quit_iterm2_and.e177c2bb": {
-      "comment": "User-facing text in iTermRemotePreferences (saveLocalUserDefaultsToRemotePrefsInteractive:).",
+      "comment": "Manual-upload help. The argument is the active preferences domain's path and must not be translated.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "To make it available, first quit iTerm2 and then manually copy ~/Library/Preferences/com.googlecode.iterm2.plist to your hosting provider."
+            "value": "To make it available, first quit iTerm2 and then manually copy %@ to your hosting provider."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "要使其可用，请先退出 iTerm2，然后手动将 ~/Library/Preferences/com.googlecode.iterm2.plist 复制到托管位置。"
+            "value": "要使其可用，请先退出 iTerm2，然后手动将 %@ 复制到托管位置。"
           }
         }
       }
