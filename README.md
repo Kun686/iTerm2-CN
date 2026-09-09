@@ -79,6 +79,8 @@ displayed instruction, not settings synchronization or file operations.
 Semantic History mode help and its Learn More popover are translated. Literal
 backreferences, interpolation variable names, link targets, and saved commands
 remain unchanged; these translations are used only in explanatory UI text.
+Hotkey migration help keeps the actual `Dynamic Profile Parent Name` key in
+English so users can locate it in their configuration. Migration data is unchanged.
 Close-confirmation job lists localize their conjunction and duplicate-count
 description without translating process names or changing job grouping, sorting,
 or closing decisions. The generic list joiner used by diagnostics stays unchanged.
