@@ -1990,13 +1990,38 @@ extension TerminalButton: NSViewToolTipOwner {
 
     def test_shared_trigger_additional_direct_descriptions(self):
         for name, body in (
+                ("StopTrigger", 'return @"Stop Processing Triggers";'),
+                ("iTermShellPromptTrigger", 'return @"Prompt Detected";'),
                 ("PasswordTrigger", 'return @"Open Password Manager";'),
                 ("PasswordTrigger", 'return [NSString stringWithFormat:@"Open Password Manager to “%@”", self.param];'),
                 ("iTermUserNotificationTrigger", 'return [NSString stringWithFormat:@"Post Notification “%@”", self.param];')):
             with self.subTest(name=name, body=body):
                 self._write_shared_trigger_description(name=name, body=body)
-                result = self._run_checker()
-                self.assertEqual(result.returncode, 0, result.stderr)
+                try:
+                    result = self._run_checker()
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                finally:
+                    (self.sources / "Triggers" / f"{name}.m").unlink()
+
+    def test_stop_prompt_diagnostic_rule_remains_narrow(self):
+        for name, text in (("StopTrigger", "Stop Processing Triggers"),
+                           ("iTermShellPromptTrigger", "Prompt Detected")):
+            original = f'return @"{text}";'
+            for changes in ({"declaration": "+ (NSString *)title"},
+                            {"declaration": "+ (NSString *)description"},
+                            {"declaration": "- (NSString *)paramPlaceholder"},
+                            {"body": 'return @"Different diagnostic text";'},
+                            {"logs": 0}, {"logs": 1}, {"operand": "other"},
+                            {"commented": True}):
+                with self.subTest(name=name, changes=changes):
+                    options = {"name": name, "body": original, **changes}
+                    self._write_shared_trigger_description(**options)
+                    try:
+                        result = self._run_checker()
+                        self.assertNotEqual(result.returncode, 0)
+                        self.assertIn(f"{name}.m:2: hard-coded English", result.stderr)
+                    finally:
+                        (self.sources / "Triggers" / f"{name}.m").unlink()
 
     def _compound_trigger_bodies(self):
         return {

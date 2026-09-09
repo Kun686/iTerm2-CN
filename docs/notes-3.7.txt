@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve stop/prompt trigger diagnostic text;
+  keep their action titles localized.
 - Show the active preferences file in manual
   upload help, not the official app's file.
 - Localize Semantic History help while preserving

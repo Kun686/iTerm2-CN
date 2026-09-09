@@ -199,6 +199,8 @@ OBJC_SHARED_TRIGGER_DIAGNOSTICS = {
     "AlertTrigger": {"Show alert “%@”"},
     "AnnotateTrigger": {"Annotate as as “%@”"},
     "BellTrigger": {"Ring Bell"},
+    "StopTrigger": {"Stop Processing Triggers"},
+    "iTermShellPromptTrigger": {"Prompt Detected"},
     "CaptureTrigger": {"Capture output, running “%@” on double-click", "Capture Output"},
     "CoprocessTrigger": {"Run Coprocess “%@”"},
     "ScriptTrigger": {"Run Command “%@”"},

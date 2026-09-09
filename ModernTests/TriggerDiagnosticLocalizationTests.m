@@ -28,6 +28,8 @@
         @[ @"AlertTrigger", @"Show alert “{param}”", @"Show Alert…", @"显示提醒…" ],
         @[ @"AnnotateTrigger", @"Annotate as as “{param}”", @"Annotate…", @"添加注释…" ],
         @[ @"BellTrigger", @"Ring Bell", @"Ring Bell", @"响铃" ],
+        @[ @"StopTrigger", @"Stop Processing Triggers", @"Stop Processing Triggers", @"停止处理触发器" ],
+        @[ @"iTermShellPromptTrigger", @"Prompt Detected", @"Prompt Detected", @"检测到提示符" ],
         @[ @"CaptureTrigger", @"Capture output, running “{param}” on double-click", @"Capture Output", @"捕获输出" ],
         @[ @"CoprocessTrigger", @"Run Coprocess “{param}”", @"Run Coprocess…", @"运行协进程…" ],
         @[ @"ScriptTrigger", @"Run Command “{param}”", @"Run Command…", @"运行命令…" ],

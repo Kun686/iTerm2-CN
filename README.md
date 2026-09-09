@@ -129,6 +129,8 @@ Shared alert, annotation, bell, capture, command, send-text, directory, host,
 hyperlink, script-function, and title trigger descriptions retain their original
 log text, including when used in import summaries or unnamed-trigger fallbacks.
 Their independent action titles and parameter prompts remain localized.
+Stop-processing and prompt-detected trigger descriptions likewise keep their
+original log text while their action titles remain localized.
 The same diagnostic boundary covers bounce, mark, color-highlight, password,
 and notification triggers, including the legacy Growl trigger name. Popup labels
 remain localized while stored numeric options, color data, and the password
