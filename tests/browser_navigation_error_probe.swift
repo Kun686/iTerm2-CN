@@ -36,7 +36,20 @@ func snapshot(_ error: NSError) -> [String: Any] {
             "displayed": iTermBrowserErrorHandler().display(error)]
 }
 
-let unknownErrors: [NSError] = CommandLine.arguments.dropFirst(2).first == "local-pages" ? [
+let mode = CommandLine.arguments.dropFirst(2).first
+let unknownErrors: [NSError] = mode == "onboarding" ? [
+    NSError(domain: "external.synthetic", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Failed to encode redirect HTML"]),
+    NSError(domain: "iTermBrowserWelcomePageHandler", code: -99,
+            userInfo: [NSLocalizedDescriptionKey: "Failed to encode redirect HTML"]),
+    NSError(domain: "iTermBrowserWelcomePageHandler", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Future welcome error 用户"]),
+    NSError(domain: "iTermBrowserOnboardingHandler", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Failed to encode redirect HTML"]),
+    NSError(domain: "iTermBrowserStaticPageHandler", code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Future static error 用户"]),
+    NSError(domain: "iTermBrowserStaticPageHandler", code: -1, userInfo: [:]),
+] : mode == "local-pages" ? [
     NSError(domain: "external.synthetic", code: -1,
             userInfo: [NSLocalizedDescriptionKey: "No path specified"]),
     NSError(domain: "iTermBrowserManager", code: -99,

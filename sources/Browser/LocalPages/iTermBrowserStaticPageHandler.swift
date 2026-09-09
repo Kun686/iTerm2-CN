@@ -114,7 +114,7 @@ class iTermBrowserStaticPageHandler: NSObject, iTermBrowserPageHandler {
         guard let data = htmlContent.data(using: .utf8) else {
             let error = NSError(domain: "iTermBrowserStaticPageHandler", 
                                code: -1, 
-                               userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserstaticpagehandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserStaticPageHandler.")])
+                               userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"])
             urlSchemeTask.didFailWithError(error)
             return
         }

@@ -48,12 +48,26 @@ class BrowserNavigationErrorLocalizationTests(unittest.TestCase):
             ("iTermBrowserLocalPageManager", -1, "Unknown iterm2-about URL", "未知的 iterm2-about URL"),
         ), local_pages=True)
 
-    def check_scheme_errors(self, paths, expected, local_pages=False):
+    def test_onboarding_failures_preserve_diagnostics_and_localize_display_copy(self):
+        self.check_scheme_errors((
+            "sources/Browser/LocalPages/iTermBrowserOnboardingHandler.swift",
+            "sources/Browser/LocalPages/iTermBrowserStaticPageHandler.swift",
+            "sources/Browser/LocalPages/iTermBrowserWelcomePageHandler.swift",
+        ), (
+            ("iTermBrowserOnboardingHandler", -1, "Failed to encode HTML", "无法编码 HTML"),
+            ("iTermBrowserStaticPageHandler", -1, "Failed to encode HTML", "无法编码 HTML"),
+            ("iTermBrowserWelcomePageHandler", -1, "Failed to encode redirect HTML", "无法编码重定向 HTML"),
+            ("iTermBrowserWelcomePageHandler", -1, "Failed to encode HTML", "无法编码 HTML"),
+        ), onboarding=True)
+
+    def check_scheme_errors(self, paths, expected, local_pages=False, onboarding=False):
         sources = [(ROOT / path).read_text() for path in paths]
         errors = []
         for source in sources:
             pattern = (r'NSError\(domain: (?:"(?:iTermBrowserManager|iTermBrowserBookmarkViewHandler|'
-                       r'iTermBrowserHistoryViewHandler|iTermBrowserLocalPageManager)"|NSCocoaErrorDomain), '
+                       r'iTermBrowserHistoryViewHandler|iTermBrowserLocalPageManager|'
+                       r'iTermBrowserOnboardingHandler|iTermBrowserStaticPageHandler|'
+                       r'iTermBrowserWelcomePageHandler)"|NSCocoaErrorDomain),\s+'
                        r'code: (?:-1|NSFileNoSuchFileError),')
             for match in re.finditer(pattern, source):
                 end = checker.swift_delimited_expression_end(source, match.start() + len("NSError"), "(", ")")
@@ -109,9 +123,13 @@ class BrowserNavigationErrorLocalizationTests(unittest.TestCase):
                               "ui.swift.browser.localpages.itermbrowsererrorhandler.",
                               "ui.swift.browser.history.itermbrowserhistoryviewhandler.",
                               "ui.swift.browser.localpages.itermbrowserfilehandler.",
-                              "ui.swift.browser.localpages.itermbrowserlocalpagemanager."))}
+                              "ui.swift.browser.localpages.itermbrowserlocalpagemanager.",
+                              "ui.swift.browser.localpages.itermbrowseronboardinghandler.",
+                              "ui.swift.browser.localpages.itermbrowserstaticpagehandler.",
+                              "ui.swift.browser.localpages.itermbrowserwelcomepagehandler."))}
                 (resources / "Localizable.strings").write_bytes(plistlib.dumps(values))
-                arguments = [str(probe), str(resources)] + (["local-pages"] if local_pages else [])
+                mode = ["onboarding"] if onboarding else (["local-pages"] if local_pages else [])
+                arguments = [str(probe), str(resources)] + mode
                 run = subprocess.run(arguments,
                                      capture_output=True, text=True, timeout=5)
                 self.assertEqual(run.returncode, 0, run.stderr)
@@ -130,7 +148,7 @@ class BrowserNavigationErrorLocalizationTests(unittest.TestCase):
                         with self.subTest(language=language, constructor=index, field="fileLog"):
                             self.assertEqual(len(row["fileLog"]), 1)
                             self.assertIn(raw, row["fileLog"][0])
-                self.assertEqual(len(snapshot["unknown"]), 8 if local_pages else 5)
+                self.assertEqual(len(snapshot["unknown"]), 6 if onboarding else (8 if local_pages else 5))
                 for row in snapshot["unknown"]:
                     with self.subTest(language=language, unknown=row["raw"]):
                         self.assertEqual(row["displayed"], row["raw"])

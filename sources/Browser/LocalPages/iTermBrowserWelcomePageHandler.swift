@@ -78,7 +78,7 @@ class iTermBrowserWelcomePageHandler: NSObject, iTermBrowserPageHandler {
             """
             
             guard let data = redirectHTML.data(using: .utf8) else {
-                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserWelcomePageHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserwelcomepagehandler.failed_to_encode_redirect_html.b3f62562", defaultValue: "Failed to encode redirect HTML", bundle: .main, comment: "User-facing text in iTermBrowserWelcomePageHandler.")]))
+                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserWelcomePageHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode redirect HTML"]))
                 return
             }
             
@@ -93,7 +93,7 @@ class iTermBrowserWelcomePageHandler: NSObject, iTermBrowserPageHandler {
         let htmlToServe = generateWelcomeHTML()
         
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserWelcomePageHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowserwelcomepagehandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserWelcomePageHandler.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserWelcomePageHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
             return
         }
         

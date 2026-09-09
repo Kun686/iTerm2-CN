@@ -62,7 +62,7 @@ class iTermBrowserOnboardingHandler: NSObject, iTermBrowserPageHandler {
         )
 
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserOnboardingHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowseronboardinghandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserOnboardingHandler.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserOnboardingHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
             return
         }
 

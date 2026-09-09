@@ -107,8 +107,13 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
             return String(localized: "ui.swift.browser.core.itermbrowsermanager.invalid_url.82e45382", defaultValue: "Invalid URL", bundle: .main, comment: "Error shown when an internal browser request has no valid URL.")
         case ("iTermBrowserManager", "Unknown URL scheme"):
             return String(localized: "ui.swift.browser.core.itermbrowsermanager.unknown_url_scheme.f542e0b2", defaultValue: "Unknown URL scheme", bundle: .main, comment: "Error shown when an internal browser URL scheme is not recognized.")
-        case ("iTermBrowserManager", "Failed to encode HTML"):
+        case ("iTermBrowserManager", "Failed to encode HTML"),
+             ("iTermBrowserOnboardingHandler", "Failed to encode HTML"),
+             ("iTermBrowserStaticPageHandler", "Failed to encode HTML"),
+             ("iTermBrowserWelcomePageHandler", "Failed to encode HTML"):
             return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
+        case ("iTermBrowserWelcomePageHandler", "Failed to encode redirect HTML"):
+            return String(localized: "ui.swift.browser.localpages.itermbrowserwelcomepagehandler.failed_to_encode_redirect_html.b3f62562", defaultValue: "Failed to encode redirect HTML", bundle: .main, comment: "User-facing text in iTermBrowserWelcomePageHandler.")
         case ("iTermBrowserBookmarkViewHandler", "Failed to encode HTML"):
             return String(localized: "ui.swift.browser.bookmarks.itermbrowserbookmarkviewhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "Error shown when the browser bookmarks page cannot be encoded.")
         case ("iTermBrowserHistoryViewHandler", "Failed to encode HTML"):
