@@ -83,6 +83,8 @@ preserving detected application names and the original link-opening behavior.
 Built-in expression errors and parser fallback diagnostics retain their original
 text in API responses and Script Console output. Exported trigger statistics
 also keep their original table headings; independent chart labels are localized.
+Shell Integration installation steps are localized without changing generated
+commands, stage progression, supported shell names, or dotfile handling.
 The installer's two built-in plugin names remain English in its diagnostic logs
 and verification-error arguments. Error descriptions translate their display
 copies; download addresses, bundle identities and installation are unchanged.

@@ -1716,6 +1716,34 @@ def objc_fallback_is_shared_transfer_diagnostic(path, sources, source, match, st
         consumer[failure.end():failure_end]) is not None
 
 
+def objc_fallback_is_shared_parser_diagnostic(path, sources, source, match):
+    # The original parser NSError is shared with API/console consumers. Match
+    # its complete initializer, not all NSError creation or this entire file.
+    if path.relative_to(sources).parts != ("Language", "iTermParsedExpression.m"):
+        return False
+    boundaries = [item.start() for item in OBJC_METHOD_BOUNDARY.finditer(source)]
+    start = objc_method_start(boundaries, match.start())
+    declaration = re.match(r'-\s*\(instancetype\)\s*initWithErrorCode:[^{]+\{', source[start:])
+    if declaration is None:
+        return False
+    end = objc_braced_block_end(source, start + declaration.end() - 1)
+    if end is None or match.end() >= end:
+        return False
+    original = '''- (instancetype)initWithErrorCode:(int)code reason:(NSString *)localizedDescription {
+        self = [super init];
+        if (self) {
+            _expressionType = iTermParsedExpressionTypeError;
+            _object = [NSError errorWithDomain:@"com.iterm2.parser" code:code
+                userInfo:@{ NSLocalizedDescriptionKey: localizedDescription ?: @"Unknown error" }];
+        }
+        return self;
+    }'''
+    # Preserve literal contents and identifier boundaries; allow only whitespace
+    # between tokens to vary, as with the other reviewed diagnostic bodies.
+    token = OBJC_STRING_LITERAL.pattern + r"|\w+|\S"
+    return re.findall(token, source[start:end]) == re.findall(token, original)
+
+
 def check_hardcoded_english_objc_localized_description_fallbacks(sources):
     errors = []
     paths = sorted(
@@ -1730,6 +1758,8 @@ def check_hardcoded_english_objc_localized_description_fallbacks(sources):
         shared_imports = objc_shared_import_diagnostic_offsets(path, sources, source)
         for match in OBJC_LOCALIZED_DESCRIPTION_FALLBACK.finditer(source):
             if match.start("literal") in shared_imports:
+                continue
+            if objc_fallback_is_shared_parser_diagnostic(path, sources, source, match):
                 continue
             literal = match.group("literal")[2:-1]
             if not contains_translatable_english_text(literal):

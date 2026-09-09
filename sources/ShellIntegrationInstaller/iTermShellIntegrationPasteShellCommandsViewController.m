@@ -41,7 +41,7 @@
 }
 
 - (NSString *)waitingText {
-    return @"⏳ Waiting for command to complete…";
+    return NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.waiting", nil, NSBundle.mainBundle, @"⏳ Waiting for command to complete…", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
 }
 - (void)update {
     const int stage = _stage;
@@ -54,32 +54,32 @@
     NSString *prefix;
 
     if (stage < 0) {
-        prefix = @"1. Discover";
+        prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.discover_initial", nil, NSBundle.mainBundle, @"1. Discover", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
     } else if (stage == 0) {
         if (_busy) {
             prefix = self.waitingText;
         } else {
-            prefix = @"➡ Select “Continue” to discover";
+            prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.discover_next", nil, NSBundle.mainBundle, @"➡ Select “Continue” to discover", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
         }
         indexToBold = lines.count;
     } else if (stage > 0) {
         if (self.shell == iTermShellIntegrationShellUnknown) {
-            prefix = @"🛑 Your shell is not supported.\n\nOnly bash, fish, tcsh, xonsh, and zsh work with shell integration";
+            prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.unsupported", nil, NSBundle.mainBundle, @"🛑 Your shell is not supported.\n\nOnly bash, fish, tcsh, xonsh, and zsh work with shell integration", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
         } else {
-            prefix = @"✅ Discovered";
+            prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.discovered", nil, NSBundle.mainBundle, @"✅ Discovered", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
         }
     }
     if (self.shell == iTermShellIntegrationShellUnknown || (_busy && stage == 0)) {
         step = prefix;
     } else {
-        step = [NSString stringWithFormat:@"%@ your shell", prefix];
+        step = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.shell_suffix", nil, NSBundle.mainBundle, @"%@ your shell", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments."), prefix];
     }
     if (stage > 0) {
         if (self.shell != iTermShellIntegrationShellUnknown) {
-            step = [step stringByAppendingFormat:@": you use “%@”.", iTermShellIntegrationShellString(self.shell)];
+            step = [step stringByAppendingFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.shell_detected_suffix", nil, NSBundle.mainBundle, @": you use “%@”.", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments."), iTermShellIntegrationShellString(self.shell)];
         }
     } else if (stage != 0 || !_busy) {
-        step = [step stringByAppendingString:@"."];
+        step = [step stringByAppendingString:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.period", nil, NSBundle.mainBundle, @".", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.")];
     }
     [lines addObject:step];
 
@@ -89,23 +89,23 @@
         self.skipButton.enabled = NO;
     } else {
         if (stage < 1) {
-            prefix = @"Step 2. Write";
+            prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.write_initial", nil, NSBundle.mainBundle, @"Step 2. Write", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
         } else if (stage == 1) {
             if (self.shell == iTermShellIntegrationShellUnknown) {
-                prefix = @"Step 2. Write";
+                prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.write_initial", nil, NSBundle.mainBundle, @"Step 2. Write", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
             } else if (_busy) {
                 prefix = self.waitingText;
             } else {
-                prefix = @"➡ Select “Continue” to write";
+                prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.write_next", nil, NSBundle.mainBundle, @"➡ Select “Continue” to write", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
             }
             indexToBold = lines.count;
         } else if (stage > 1) {
-            prefix = @"✅ Wrote";
+            prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.wrote", nil, NSBundle.mainBundle, @"✅ Wrote", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
         }
         if (_busy && stage == 1) {
             step = prefix;
         } else {
-            step = [NSString stringWithFormat:@"%@ the shell integration script.", prefix];
+            step = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.script_suffix", nil, NSBundle.mainBundle, @"%@ the shell integration script.", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments."), prefix];
         }
         [lines addObject:step];
 
@@ -113,20 +113,20 @@
         if (self.installUtilities) {
             i += 1;
             if (stage < 2) {
-                prefix = @"Step 3. Install";
+                prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.utilities_initial", nil, NSBundle.mainBundle, @"Step 3. Install", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
             } else if (stage == 2 && !_busy) {
-                prefix = @"➡ Select “Continue” to install";
+                prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.utilities_next", nil, NSBundle.mainBundle, @"➡ Select “Continue” to install", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
                 indexToBold = lines.count;
             } else if (stage == 2 && _busy) {
                 prefix = self.waitingText;
                 indexToBold = lines.count;
             } else {
-                prefix = @"✅ Installed";
+                prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.installed", nil, NSBundle.mainBundle, @"✅ Installed", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
             }
             if (_busy && stage == 2) {
                 step = prefix;
             } else {
-                step = [NSString stringWithFormat:@"%@ iTerm2 utility scripts.", prefix];
+                step = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.utilities_suffix", nil, NSBundle.mainBundle, @"%@ iTerm2 utility scripts.", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments."), prefix];
             }
             [lines addObject:step];
         }
@@ -135,28 +135,28 @@
         // Show this step as already complete for xonsh.
         if (self.shell == iTermShellIntegrationShellXonsh) {
             if (stage < i) {
-                step = [NSString stringWithFormat:@"Step %d. Xonsh auto-loads scripts from rc.d (no dotfile update needed).", i + 1];
+                step = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.xonsh_step", nil, NSBundle.mainBundle, @"Step %d. Xonsh auto-loads scripts from rc.d (no dotfile update needed).", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments."), i + 1];
             } else {
-                step = [NSString stringWithFormat:@"✅ Xonsh auto-loads scripts from rc.d (no dotfile update needed)."];
+                step = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.xonsh_done", nil, NSBundle.mainBundle, @"✅ Xonsh auto-loads scripts from rc.d (no dotfile update needed).", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.")];
             }
             [lines addObject:step];
         } else {
             if (stage < i) {
-                prefix = [NSString stringWithFormat:@"Step %d. Update", i + 1];
+                prefix = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.update_step", nil, NSBundle.mainBundle, @"Step %d. Update", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments."), i + 1];
             } else if (stage == i && !_busy) {
-                prefix = [NSString stringWithFormat:@"➡ Select “Continue” to update"];
+                prefix = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.update_next", nil, NSBundle.mainBundle, @"➡ Select “Continue” to update", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.")];
                 indexToBold = lines.count;
             } else if (stage == i && _busy) {
                 prefix = self.waitingText;
                 indexToBold = lines.count;
             } else if (stage > i) {
-                prefix = @"✅ Updated";
+                prefix = NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.updated", nil, NSBundle.mainBundle, @"✅ Updated", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.");
             }
             if (_busy && stage == i) {
                 step = prefix;
             } else {
                 step =
-                [NSString stringWithFormat:@"%@ your shell's dotfile.", prefix];
+                [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.dotfile_suffix", nil, NSBundle.mainBundle, @"%@ your shell's dotfile.", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments."), prefix];
             }
             [lines addObject:step];
         }
@@ -167,7 +167,7 @@
         if (isDone) {
             [lines addObject:@""];
             indexToBold = lines.count;
-            [lines addObject:@"Done! Select “Continue” to proceed."];
+            [lines addObject:NSLocalizedStringWithDefaultValue(@"ui.shell_integration.steps.done", nil, NSBundle.mainBundle, @"Done! Select “Continue” to proceed.", @"Display-only Shell Integration step text. Preserve command and shell names in format arguments.")];
             self.skipButton.enabled = NO;
         } else {
             self.skipButton.enabled = !_busy;

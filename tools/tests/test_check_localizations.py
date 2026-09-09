@@ -1402,6 +1402,56 @@ extension TerminalButton: NSViewToolTipOwner {
             result.stderr,
         )
 
+    def _parser_diagnostic_initializer(self):
+        return '''- (instancetype)initWithErrorCode:(int)code reason:(NSString *)localizedDescription {
+    self = [super init];
+    if (self) {
+        _expressionType = iTermParsedExpressionTypeError;
+        _object = [NSError errorWithDomain:@"com.iterm2.parser"
+                                      code:code
+                                  userInfo:@{ NSLocalizedDescriptionKey: localizedDescription ?: @"Unknown error" }];
+    }
+    return self;
+}'''
+
+    def test_shared_parser_fallback_accepts_original_diagnostic_initializer(self):
+        body = self._parser_diagnostic_initializer()
+        relative = "Language/iTermParsedExpression.m"
+        original = SCRIPT.parents[1] / "sources" / relative
+        self.assertIn(body, original.read_text(encoding="utf-8"))
+        path = self.sources / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(body, encoding="utf-8")
+        result = self._run_checker()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_shared_parser_fallback_keeps_other_text_and_ui_checked(self):
+        body = self._parser_diagnostic_initializer()
+        relative = "Language/iTermParsedExpression.m"
+        ui = ('\n- (void)showError:(NSError *)error {\n'
+              '    alert.messageText = error.localizedDescription ?: @"Unknown error";\n}\n')
+        variants = [
+            ("Feature.m", body),
+            (relative, body.replace("initWithErrorCode:", "initWithUIErrorCode:")),
+            (relative, body.replace("com.iterm2.parser", "com.iterm2.ui")),
+            (relative, body.replace("Unknown error", "Please try again")),
+            (relative, body.replace("_object =", "alert.messageText =")),
+            (relative, body.replace("code:code", "code:42")),
+            (relative, body.replace("iTermParsedExpressionTypeError", "iTermParsedExpressionTypeString")),
+            (relative, body + ui),
+        ]
+        for filename, source in variants:
+            with self.subTest(filename=filename, source=source):
+                path = self.sources / filename
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(source, encoding="utf-8")
+                try:
+                    result = self._run_checker()
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("hard-coded English fallback", result.stderr)
+                finally:
+                    path.unlink()
+
     def test_objective_c_localized_description_log_fallback_is_not_ui_copy(self):
         (self.sources / "Feature.m").write_text(
             "- (void)logError:(NSError *)error {\n"
