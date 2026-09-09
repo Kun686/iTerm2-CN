@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Preserve internal browser navigation errors;
+  translate known reasons only in the error page.
 - Keep ad-block update errors and logs unchanged;
   translate only the settings-page display copy.
 - Translate GPU status reasons only for display;

@@ -71,7 +71,7 @@ extension iTermBrowserBookmarkViewHandler {
         let htmlToServe = generateBookmarksHTML()
         
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserBookmarkViewHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.bookmarks.itermbrowserbookmarkviewhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "Error shown when the browser bookmarks page cannot be encoded.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserBookmarkViewHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
             return
         }
         

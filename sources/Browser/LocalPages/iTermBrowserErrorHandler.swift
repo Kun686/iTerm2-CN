@@ -57,7 +57,7 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
         )
 
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
             return
         }
 
@@ -88,8 +88,28 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
                                                        substitutions: substitutions)
     }
     
+    // Navigation errors are also logged and returned to callers; keep their fields raw.
+    private func localizedNavigationErrorDescription(_ error: Error) -> String {
+        let diagnostic = error.localizedDescription
+        let nsError = error as NSError
+        guard nsError.code == -1 else { return diagnostic }
+        switch (nsError.domain, diagnostic) {
+        case ("iTermBrowserManager", "Invalid URL"):
+            return String(localized: "ui.swift.browser.core.itermbrowsermanager.invalid_url.82e45382", defaultValue: "Invalid URL", bundle: .main, comment: "Error shown when an internal browser request has no valid URL.")
+        case ("iTermBrowserManager", "Unknown URL scheme"):
+            return String(localized: "ui.swift.browser.core.itermbrowsermanager.unknown_url_scheme.f542e0b2", defaultValue: "Unknown URL scheme", bundle: .main, comment: "Error shown when an internal browser URL scheme is not recognized.")
+        case ("iTermBrowserManager", "Failed to encode HTML"):
+            return String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler.")
+        case ("iTermBrowserBookmarkViewHandler", "Failed to encode HTML"):
+            return String(localized: "ui.swift.browser.bookmarks.itermbrowserbookmarkviewhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "Error shown when the browser bookmarks page cannot be encoded.")
+        default:
+            return diagnostic
+        }
+    }
+
     private func errorTitleAndMessage(for error: Error) -> (title: String, message: String) {
         let nsError = error as NSError
+        let displayDescription = localizedNavigationErrorDescription(error)
 
         let tuple: (String, String, String?) = {
             switch nsError.code {
@@ -127,11 +147,11 @@ class iTermBrowserErrorHandler: NSObject, iTermBrowserPageHandler {
                 return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.file_not_found.bf599881", defaultValue: "File Not Found", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.the_requested_file_does_not_exist.02da121e", defaultValue: "The requested file does not exist.", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
 
             default:
-                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.page_can_t_be_loaded.e6b913ac", defaultValue: "Page Can’t Be Loaded", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.an_error_occurred_while_loading_this_page_0.dc88eff8", defaultValue: "An error occurred while loading this page. \(error.localizedDescription)", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
+                return (String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.page_can_t_be_loaded.e6b913ac", defaultValue: "Page Can’t Be Loaded", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), String(localized: "ui.swift.browser.localpages.itermbrowsererrorhandler.an_error_occurred_while_loading_this_page_0.dc88eff8", defaultValue: "An error occurred while loading this page. \(displayDescription)", bundle: .main, comment: "User-facing text in iTermBrowserErrorHandler."), nil)
             }
         }()
         return (title: tuple.0,
-                message: "<strong>" + tuple.1.escapedForHTML + "</strong><br/><br/>" + (tuple.2 ?? error.localizedDescription))
+                message: "<strong>" + tuple.1.escapedForHTML + "</strong><br/><br/>" + (tuple.2 ?? displayDescription))
     }
 }
 

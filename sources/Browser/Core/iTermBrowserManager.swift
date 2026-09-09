@@ -1198,21 +1198,21 @@ extension iTermBrowserManager {
 extension iTermBrowserManager {
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         guard let url = urlSchemeTask.request.url else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.core.itermbrowsermanager.invalid_url.82e45382", defaultValue: "Invalid URL", bundle: .main, comment: "Error shown when an internal browser request has no valid URL.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"]))
             return
         }
 
         switch url.scheme {
         case iTermBrowserSchemes.about, iTermBrowserSchemes.file:
             if !localPageManager.handleURLSchemeTask(urlSchemeTask, url: url) {
-                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.core.itermbrowsermanager.unknown_url_scheme.f542e0b2", defaultValue: "Unknown URL scheme", bundle: .main, comment: "Error shown when an internal browser URL scheme is not recognized.")]))
+                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown URL scheme"]))
             }
         case iTermBrowserSchemes.ssh:
             if !sshPageManager.handleURLSchemeTask(urlSchemeTask, url: url) {
-                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.core.itermbrowsermanager.unknown_url_scheme.f542e0b2", defaultValue: "Unknown URL scheme", bundle: .main, comment: "Error shown when an internal browser URL scheme is not recognized.")]))
+                urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown URL scheme"]))
             }
         default:
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.core.itermbrowsermanager.unknown_url_scheme.f542e0b2", defaultValue: "Unknown URL scheme", bundle: .main, comment: "Error shown when an internal browser URL scheme is not recognized.")]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown URL scheme"]))
         }
     }
     
