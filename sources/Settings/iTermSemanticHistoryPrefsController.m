@@ -397,14 +397,14 @@ enum {
     NSDictionary *attributes = @{ NSFontAttributeName: caveat_.font ?: [NSFont systemFontOfSize:[NSFont smallSystemFontSize]] };
     NSAttributedString *legacy = [NSAttributedString attributedStringWithString:text
                                                                      attributes:attributes];
-    NSAttributedString *learnMore = [NSAttributedString attributedStringWithLinkToURL:@"iterm2-private://semantic-history-learn-more/" string:@"Learn more"];
+    NSAttributedString *learnMore = [NSAttributedString attributedStringWithLinkToURL:@"iterm2-private://semantic-history-learn-more/" string:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.learn_more", nil, NSBundle.mainBundle, @"Learn more", @"Semantic History help link title.")];
     NSArray<NSAttributedString *> *parts = @[ legacy, learnMore ];
     return [NSAttributedString attributedStringWithAttributedStrings:parts];
 }
 
 - (NSString *)detailTextForCurrentMode {
     NSString *subs =
-    @"You can provide substitutions as follows:\n"
+    NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.substitutions", nil, NSBundle.mainBundle, @"You can provide substitutions as follows:\n"
     @"  \\1 will be replaced with the filename.\n"
     @"  \\2 will be replaced with the line number.\n"
     @"  \\3 will be replaced with the text before the click.\n"
@@ -417,7 +417,7 @@ enum {
     @"  \\(semanticHistory.columnNumber) will be replaced with the column number.\n"
     @"  \\(semanticHistory.prefix) will be replaced with the text before the click.\n"
     @"  \\(semanticHistory.suffix) will be replaced with the text after the click.\n"
-    @"  \\(semanticHistory.workingDirectory) will be replaced with the working directory.\n";
+    @"  \\(semanticHistory.workingDirectory) will be replaced with the working directory.\n", @"Semantic History help. Preserve all substitution tokens.");
 
     switch ([[action_ selectedItem] tag]) {
         case 1:
@@ -425,14 +425,14 @@ enum {
             break;
 
         case 5:
-            return [@"In this mode semantic history will be activated on any click, even if you click on something that is not an existing file.\n"
+            return [NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.any_click", nil, NSBundle.mainBundle, @"In this mode semantic history will be activated on any click, even if you click on something that is not an existing file.\n", @"Semantic History help for arbitrary text.")
                     stringByAppendingString:subs];
 
         case 2:
         case 4:
         case 6:
         case 7:
-            return [@"In this mode semantic history will only be activated when you click on an existing file name.\n"
+            return [NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.existing_file", nil, NSBundle.mainBundle, @"In this mode semantic history will only be activated when you click on an existing file name.\n", @"Semantic History help for existing files.")
                     stringByAppendingString:subs];
     }
     return @"";
@@ -452,8 +452,8 @@ enum {
         case 2: {
             [[text_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.enter_url.de285e29", nil, NSBundle.mainBundle, @"Enter URL.", @"User-facing text in iTermSemanticHistoryPrefsController (setPlaceholderString).")];
             NSString *text =
-            @"When you activate Semantic History on a filename, the browser opens a URL.\n"
-            @"Use \\1 for the filename you clicked on and \\2 for the line number. ";
+            NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.url", nil, NSBundle.mainBundle, @"When you activate Semantic History on a filename, the browser opens a URL.\n"
+            @"Use \\1 for the filename you clicked on and \\2 for the line number. ", @"Semantic History display help. Preserve backreferences.");
             caveat_.attributedStringValue = [self attributedStringWithLearnMoreLinkAfterText:text];
             hideCaveat = NO;
             hideText = NO;
@@ -469,9 +469,9 @@ enum {
         case 4: {
             [[text_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.enter_command.c3793610", nil, NSBundle.mainBundle, @"Enter command", @"User-facing text in iTermSemanticHistoryPrefsController (setPlaceholderString).")];
             NSString *text =
-            @"Command runs when you activate Semantic History on any filename. "
+            NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.command_file", nil, NSBundle.mainBundle, @"Command runs when you activate Semantic History on any filename. "
             @"Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. "
-            @"You can also use interpolated string syntax. ";
+            @"You can also use interpolated string syntax. ", @"Semantic History display help. Preserve backreferences.");
 
             caveat_.attributedStringValue = [self attributedStringWithLearnMoreLinkAfterText:text];
             hideCaveat = NO;
@@ -483,8 +483,8 @@ enum {
             [[text_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.enter_command.c3793610", nil, NSBundle.mainBundle, @"Enter command", @"User-facing text in iTermSemanticHistoryPrefsController (setPlaceholderString).")];
 
             NSString *text =
-            @"Command runs when you activate Semantic History on any text, even if it’s not a valid filename. "
-            @"Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. ";
+            NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.command_text", nil, NSBundle.mainBundle, @"Command runs when you activate Semantic History on any text, even if it’s not a valid filename. "
+            @"Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. ", @"Semantic History display help. Preserve backreferences.");
 
             caveat_.attributedStringValue = [self attributedStringWithLearnMoreLinkAfterText:text];
             hideCaveat = NO;
@@ -495,8 +495,8 @@ enum {
         case 6: {
             [[text_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.enter_command.c3793610", nil, NSBundle.mainBundle, @"Enter command", @"User-facing text in iTermSemanticHistoryPrefsController (setPlaceholderString).")];
             NSString *text =
-            @"Coprocess runs when you activate Semantic History on any filename. "
-            @"Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. ";
+            NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.coprocess", nil, NSBundle.mainBundle, @"Coprocess runs when you activate Semantic History on any filename. "
+            @"Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. ", @"Semantic History display help. Preserve backreferences.");
             caveat_.attributedStringValue = [self attributedStringWithLearnMoreLinkAfterText:text];
             hideCaveat = NO;
             hideText = NO;
@@ -506,8 +506,8 @@ enum {
         case 7: {
             [[text_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.enter_text.3bcca28c", nil, NSBundle.mainBundle, @"Enter text", @"User-facing text in iTermSemanticHistoryPrefsController (setPlaceholderString).")];
             NSString *text =
-            @"Text is sent when you activate Semantic History on any filename. Use vim-style special characters."
-            @"Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. ";
+            NSLocalizedStringWithDefaultValue(@"ui.settings.itermsemantichistoryprefscontroller.help.send_text", nil, NSBundle.mainBundle, @"Text is sent when you activate Semantic History on any filename. Use vim-style special characters."
+            @"Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. ", @"Semantic History display help. Preserve backreferences.");
             caveat_.attributedStringValue = [self attributedStringWithLearnMoreLinkAfterText:text];
             hideCaveat = NO;
             hideText = NO;

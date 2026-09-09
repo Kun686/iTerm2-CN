@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Localize Semantic History help while preserving
+  backreferences, variable names, and link targets.
 - Preserve settings-export failure diagnostics;
   translate serialization errors for display.
 - Preserve AI provider names in shared errors;

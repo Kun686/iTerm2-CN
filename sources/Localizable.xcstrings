@@ -33990,6 +33990,168 @@
         }
       }
     },
+    "ui.settings.itermsemantichistoryprefscontroller.help.any_click": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In this mode semantic history will be activated on any click, even if you click on something that is not an existing file.\n"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在此模式下，点击任何内容都会启用语义历史，即使点击的内容不是现有文件。\n"
+          }
+        }
+      }
+    },
+    "ui.settings.itermsemantichistoryprefscontroller.help.command_file": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Command runs when you activate Semantic History on any filename. Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. You can also use interpolated string syntax. "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "对任意文件名启用语义历史时，将运行命令。 使用 \\1 表示文件名、\\2 表示行号、\\3 表示点击位置之前的文本、\\4 表示点击位置之后的文本、\\5 表示工作目录。 也可以使用插值字符串语法。 "
+          }
+        }
+      }
+    },
+    "ui.settings.itermsemantichistoryprefscontroller.help.command_text": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Command runs when you activate Semantic History on any text, even if it’s not a valid filename. Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "对任意文本启用语义历史时，将运行命令，即使该文本不是有效的文件名。 使用 \\1 表示文件名、\\2 表示行号、\\3 表示点击位置之前的文本、\\4 表示点击位置之后的文本、\\5 表示工作目录。 "
+          }
+        }
+      }
+    },
+    "ui.settings.itermsemantichistoryprefscontroller.help.coprocess": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coprocess runs when you activate Semantic History on any filename. Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "对任意文件名启用语义历史时，将运行协进程。 使用 \\1 表示文件名、\\2 表示行号、\\3 表示点击位置之前的文本、\\4 表示点击位置之后的文本、\\5 表示工作目录。 "
+          }
+        }
+      }
+    },
+    "ui.settings.itermsemantichistoryprefscontroller.help.existing_file": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In this mode semantic history will only be activated when you click on an existing file name.\n"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在此模式下，只有点击现有文件名时才会启用语义历史。\n"
+          }
+        }
+      }
+    },
+    "ui.settings.itermsemantichistoryprefscontroller.help.learn_more": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learn more"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "了解更多"
+          }
+        }
+      }
+    },
+    "ui.settings.itermsemantichistoryprefscontroller.help.send_text": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text is sent when you activate Semantic History on any filename. Use vim-style special characters.Use \\1 for filename, \\2 for line number, \\3 for text before click, \\4 for text after click, \\5 for pwd. "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "对任意文件名启用语义历史时，将发送文本。请使用 vim 风格的特殊字符。使用 \\1 表示文件名、\\2 表示行号、\\3 表示点击位置之前的文本、\\4 表示点击位置之后的文本、\\5 表示工作目录。 "
+          }
+        }
+      }
+    },
+    "ui.settings.itermsemantichistoryprefscontroller.help.substitutions": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can provide substitutions as follows:\n  \\1 will be replaced with the filename.\n  \\2 will be replaced with the line number.\n  \\3 will be replaced with the text before the click.\n  \\4 will be replaced with the text after the click.\n  \\5 will be replaced with the working directory.\n\nThis is also an interpolated string evaluated in the context of the current session. In addition to the usual variables, the following substitutions are available:\n  \\(semanticHistory.path) will be replaced with the filename.\n  \\(semanticHistory.lineNumber) will be replaced with the line number.\n  \\(semanticHistory.columnNumber) will be replaced with the column number.\n  \\(semanticHistory.prefix) will be replaced with the text before the click.\n  \\(semanticHistory.suffix) will be replaced with the text after the click.\n  \\(semanticHistory.workingDirectory) will be replaced with the working directory.\n"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以使用以下替换参数：\n  \\1 将替换为文件名。\n  \\2 将替换为行号。\n  \\3 将替换为点击位置之前的文本。\n  \\4 将替换为点击位置之后的文本。\n  \\5 将替换为工作目录。\n\n这也是一个在当前会话上下文中求值的插值字符串。除常规变量外，还可使用以下替换参数：\n  \\(semanticHistory.path) 将替换为文件名。\n  \\(semanticHistory.lineNumber) 将替换为行号。\n  \\(semanticHistory.columnNumber) 将替换为列号。\n  \\(semanticHistory.prefix) 将替换为点击位置之前的文本。\n  \\(semanticHistory.suffix) 将替换为点击位置之后的文本。\n  \\(semanticHistory.workingDirectory) 将替换为工作目录。\n"
+          }
+        }
+      }
+    },
+    "ui.settings.itermsemantichistoryprefscontroller.help.url": {
+      "comment": "Semantic History display help only. Preserve backreferences, interpolation variable names, and line breaks.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you activate Semantic History on a filename, the browser opens a URL.\nUse \\1 for the filename you clicked on and \\2 for the line number. "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "对文件名启用语义历史时，浏览器会打开一个 URL。\n使用 \\1 表示点击的文件名，\\2 表示行号。 "
+          }
+        }
+      }
+    },
     "ui.settings.itermsemantichistoryprefscontroller.when_you_activate_semantic_history_on_a_filename.ac09ff2d": {
       "comment": "User-facing text in iTermSemanticHistoryPrefsController (actionChanged:).",
       "extractionState": "manual",
