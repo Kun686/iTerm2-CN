@@ -472,7 +472,7 @@
         }
         NSDate *date = [NSDate dateWithTimeIntervalSinceReferenceDate:entry.timeOfLastUse.doubleValue];
         return [[iTermCompletionItem alloc] initWithValue:value
-                                                   detail:[NSString stringWithFormat:@"Last used %@", [NSDateFormatter dateDifferenceStringFromDate:date
+                                                   detail:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.statusbar.large_composer.history_last_used", nil, NSBundle.mainBundle, @"Last used %@", @"Last-use time displayed beside a history suggestion; preserve the suggested command."), [NSDateFormatter dateDifferenceStringFromDate:date
                                                                                                                                             options:iTermDateDifferenceOptionsLowercase]]
                                                      kind:iTermCompletionItemKindHistory];
     }];

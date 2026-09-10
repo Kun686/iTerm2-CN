@@ -14,12 +14,18 @@ static NSDate *probeNow;
 #include "history-date-methods.inc"
 @end
 
+#ifdef CN_TEST_COMPOSER_DETAIL
+static NSString *composerHistoryDetail(NSDate *date) {
+#include "history-composer-detail.inc"
+}
+#else
 @interface NSString (HistoryMetadataProbe)
 + (NSString *)it_formatBytes:(double)bytes;
 @end
 @implementation NSString (HistoryMetadataProbe)
 #include "history-bytes-method.inc"
 @end
+#endif
 
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
@@ -27,6 +33,12 @@ int main(int argc, const char *argv[]) {
             return 2;
         }
         probeNow = [NSDate dateWithTimeIntervalSinceReferenceDate:1000000];
+#ifdef CN_TEST_COMPOSER_DETAIL
+        NSDictionary *snapshot = @{@"details": @[
+            composerHistoryDetail(probeNow),
+            composerHistoryDetail([probeNow dateByAddingTimeInterval:-120])
+        ]};
+#else
         NSMutableArray *dates = [NSMutableArray array];
         for (NSNumber *seconds in @[@0, @60, @120, @3600, @7200, @86400,
                                    @172800, @561600, @604800, @1209600]) {
@@ -41,8 +53,10 @@ int main(int argc, const char *argv[]) {
         for (NSNumber *bytes in @[@0, @90, @999, @1000, @10000, @1000000]) {
             [sizes addObject:[NSString it_formatBytes:bytes.doubleValue]];
         }
+        NSDictionary *snapshot = @{@"dates": dates, @"sizes": sizes};
+#endif
         NSError *error = nil;
-        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"dates": dates, @"sizes": sizes}
+        NSData *data = [NSJSONSerialization dataWithJSONObject:snapshot
                                                      options:0 error:&error];
         NSString *json = data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : nil;
         return json && !error && puts(json.UTF8String) >= 0 ? 0 : 3;

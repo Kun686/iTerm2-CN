@@ -1,6 +1,7 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Localize last-use labels in history suggestions.
 - Translate relative times and byte-count labels
   without changing calculations or history data.
 - Translate the hotkey-window reactivation help.

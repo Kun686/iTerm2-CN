@@ -1,6 +1,7 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "ui.statusbar.large_composer.history_last_used": {"comment":"Display-only history suggestion detail; preserve the time placeholder and command data.","extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Last used %@"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"上次使用：%@"}}}},
     "ui.categories.history_metadata.moments_ago_lower": {"comment":"Application UI metadata; preserve time thresholds, rounding, arguments and English output.","extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"moments ago"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"刚刚"}}}},
     "ui.categories.history_metadata.moments_ago": {"comment":"Application UI metadata; preserve time thresholds, rounding, arguments and English output.","extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"Moments ago"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"刚刚"}}}},
     "ui.categories.history_metadata.minute_ago": {"comment":"Application UI metadata; preserve time thresholds, rounding, arguments and English output.","extractionState":"manual","localizations":{"en":{"stringUnit":{"state":"translated","value":"1 minute ago"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"1 分钟前"}}}},
