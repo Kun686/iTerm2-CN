@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Localize tip actions and footer; preserve action
+  identifiers, shortcuts, and tip history.
 - Localize Shell Integration installation steps;
   preserve commands and stage progression.
 - Preserve expression errors in API replies and

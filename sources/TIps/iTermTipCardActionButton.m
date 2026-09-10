@@ -128,8 +128,51 @@ static const CGFloat kStandardButtonHeight = 34;
     return YES;
 }
 
+// Titles also identify actions. Localize only display/AX copies; leave the
+// original title, shortcut and action lookup untouched.
+- (NSString *)displayTitle {
+    NSString *title = self.titleValue;
+    if ([title isEqualToString:@"Learn More"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.learn_more", nil, NSBundle.mainBundle, @"Learn More", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Dismiss Tip"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.dismiss", nil, NSBundle.mainBundle, @"Dismiss Tip", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Fewer Options"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.fewer_options", nil, NSBundle.mainBundle, @"Fewer Options", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"More Options"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.more_options", nil, NSBundle.mainBundle, @"More Options", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Show This Later"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.show_later", nil, NSBundle.mainBundle, @"Show This Later", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Disable Tips"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.disable", nil, NSBundle.mainBundle, @"Disable Tips", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Enable Tips"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.enable", nil, NSBundle.mainBundle, @"Enable Tips", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Show Next Tip"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.next", nil, NSBundle.mainBundle, @"Show Next Tip", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Show Previous Tip"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.previous", nil, NSBundle.mainBundle, @"Show Previous Tip", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Show Tips Weekly"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.weekly", nil, NSBundle.mainBundle, @"Show Tips Weekly", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Show Tips Daily"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.daily", nil, NSBundle.mainBundle, @"Show Tips Daily", @"Tip button display label; the original title remains its action identifier.");
+    }
+    if ([title isEqualToString:@"Share"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.tips.display.action.share", nil, NSBundle.mainBundle, @"Share", @"Tip button display label; the original title remains its action identifier.");
+    }
+    return title;
+}
+
 - (id)accessibilityValue {
-    return _titleValue;
+    return self.displayTitle;
 }
 
 - (void)viewDidChangeEffectiveAppearance {
@@ -180,7 +223,7 @@ static const CGFloat kStandardButtonHeight = 34;
                                                        options:@{ }];
     paragraphStyle.tabStops = @[ tab ];
     NSString *string = [NSString stringWithFormat:@"%@\t%@",
-                                                  self.titleValue ?: @"",
+                                                  self.displayTitle ?: @"",
                                                   self.shortcutValue ?: @""];
     NSDictionary *attributes = @{ NSParagraphStyleAttributeName: paragraphStyle };
     NSAttributedString *attributedString =
