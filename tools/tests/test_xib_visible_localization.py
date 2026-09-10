@@ -30,6 +30,21 @@ class XibVisibleLocalizationTests(unittest.TestCase):
             "注：仅当窗口是因其他应用变为活跃状态而关闭时，才会重新打开。",
         )
 
+    def test_composer_help_has_catalog_entry(self):
+        directory = ROOT / "sources/StatusBar/Components"
+        name = "iTermStatusBarLargeComposerViewController"
+        catalog = json.loads((directory / f"{name}.xcstrings").read_text())["strings"]
+        xib = ET.parse(directory / f"Base.lproj/{name}.xib")
+        control = xib.find(".//button[@id='Due-Dn-30r']")
+        self.assertIsNotNone(control)
+        key = "Due-Dn-30r.ibShadowedToolTip"
+        self.assert_catalog_field(catalog, key, control.attrib["toolTip"])
+        self.assertIsNot(catalog[key].get("shouldTranslate"), False)
+        self.assertEqual(
+            catalog[key]["localizations"]["zh-Hans"]["stringUnit"]["value"],
+            "说明如何使用编写器。",
+        )
+
     def test_status_bar_advanced_help_has_catalog_entries(self):
         directory = ROOT / "sources/StatusBar/Setup"
         name = "iTermStatusBarSetupViewController"
