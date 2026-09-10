@@ -3,7 +3,7 @@ Version 3.7.0beta1 was built on April 20, 2026
 iTerm2-CN community localization:
 - Translate the missing AI plugin status only
   for display; preserve shared diagnostics.
-- Correct two Chinese settings-help quotes.
+- Correct three Chinese settings-help quotes.
 - Localize Git file and line count labels without
   changing the counts or repository state.
 - Localize tip actions and footer; preserve action

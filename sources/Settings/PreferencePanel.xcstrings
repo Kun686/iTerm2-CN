@@ -11195,7 +11195,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "提亮「正常「ANSI 颜色的文本。不影响「明亮」ANSI 颜色、8 位颜色、24 位颜色或默认前景色。"
+            "value": "提亮「正常」ANSI 颜色的文本。不影响「明亮」ANSI 颜色、8 位颜色、24 位颜色或默认前景色。"
           }
         }
       }
