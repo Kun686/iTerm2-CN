@@ -1,6 +1,8 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Translate relative times and byte-count labels
+  without changing calculations or history data.
 - Translate the hotkey-window reactivation help.
 - Keep live-test keys outside the repository;
   clean up private configs on exit or timeout.
