@@ -19,6 +19,15 @@ PREFIX = "ui.settings.profile.title_preview."
 
 
 class ProfileGeneralLocalizationTests(unittest.TestCase):
+    def test_reviewed_help_uses_paired_chinese_quotes(self):
+        catalog = json.loads((ROOT / "sources/Settings/PreferencePanel.xcstrings").read_text())["strings"]
+        for key, label in (("q57-nJ-Jbz.ibShadowedToolTip", "会话"),
+                           ("wgv-Ah-fFr.ibShadowedToolTip", "通用")):
+            with self.subTest(key=key):
+                text = catalog[key]["localizations"]["zh-Hans"]["stringUnit"]["value"]
+                self.assertIn("「" + label + "」", text)
+                self.assertEqual(text.count("「"), text.count("」"))
+
     def test_labels_fit_native_font_without_moving_neighbors(self):
         with tempfile.TemporaryDirectory(prefix="iterm2-profile-labels-") as temporary:
             probe = Path(temporary) / "label-metrics"

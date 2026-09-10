@@ -31705,6 +31705,24 @@
         }
       }
     },
+    "ui.settings.generalpreferencesviewcontroller.plugin_not_found": {
+      "comment": "Settings status when the AI plugin is missing. Shared diagnostics remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plugin not found"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到插件"
+          }
+        }
+      }
+    },
     "ui.settings.generalpreferencesviewcontroller.plugin_installed_and_working.bb8c2eaf": {
       "comment": "User-facing text in GeneralPreferencesViewController (setPluginProblem:).",
       "extractionState": "manual",

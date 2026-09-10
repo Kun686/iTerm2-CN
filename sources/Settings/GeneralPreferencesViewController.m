@@ -2620,7 +2620,10 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 - (void)setPluginProblem:(NSString *)problem {
     DLog(@"problem=%@", problem);
     if (problem) {
-        _pluginStatus.stringValue = problem;
+        // Keep shared plugin diagnostics raw; translate only the status label.
+        _pluginStatus.stringValue = [problem isEqualToString:@"Plugin not found"]
+            ? NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.plugin_not_found", nil, NSBundle.mainBundle, @"Plugin not found", @"Settings status when the AI plugin is missing. Shared diagnostics remain unchanged.")
+            : problem;
         _installPluginButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.install.8c1df2d5", nil, NSBundle.mainBundle, @"Install…", @"User-facing text in GeneralPreferencesViewController (setPluginProblem:).");
         _installPluginButton.action = @selector(installPlugin:);
         [_installPluginButton sizeToFit];

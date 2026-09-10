@@ -66,6 +66,8 @@ titles are not migrated or rewritten.
 Raw diagnostics remain untranslated. In particular, the fork-failure message
 is shared by logs, terminal output, and the notification body, so it stays in
 English; the notification title is localized.
+The AI settings page translates the known missing-plugin status only for display.
+Shared plugin diagnostics, unknown errors, and installation controls are unchanged.
 GPU availability reasons are translated only in the status alert. The renderer's
 shared diagnostic descriptions, reason values and availability decisions remain
 unchanged. Unknown future reasons retain the original diagnostic as a fallback.
