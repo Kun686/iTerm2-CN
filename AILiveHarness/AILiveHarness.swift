@@ -10,12 +10,10 @@
 //
 //  Run via: tools/run_ai_live.sh
 //
-//  Why a file and not env vars: xcodebuild's test runner subprocess does
-//  not inherit shell environment vars in any reliable way (verified
-//  empirically; even ITERM2_AI_LIVE=1 doesn't make it through). The
-//  wrapper script writes a JSON config file the harness reads. The file
-//  lives in NSTemporaryDirectory() with mode 0600 and is removed on
-//  script exit via a trap.
+//  Xcode's documented TEST_RUNNER_ prefix forwards only the config path.
+//  Credentials live outside the repository in a private 0700 directory and
+//  0600 file owned by the live wrapper. Missing, stale or unsafe configs do
+//  not opt in. Ordinary tests never discover configs by scanning the disk.
 //
 //  Config file shape (everything optional except the key for whichever
 //  vendor you want to exercise):
@@ -33,6 +31,7 @@
 //
 
 import XCTest
+import Darwin
 @testable import iTerm2SharedARC
 
 @MainActor
@@ -44,41 +43,51 @@ final class AILiveHarness: XCTestCase {
         var deepSeek: String?
     }
 
-    nonisolated static let configFileName = ".iterm2-ai-live.json"
-
-    /// The per-worktree config path: `<repo root>/.iterm2-ai-live.json`.
-    ///
-    /// Derived from the compiled source location (`#filePath`) so each git
-    /// worktree reads its OWN config - a leftover config in one checkout can no
-    /// longer silently drive the live harness in another (the failure mode the
-    /// old hardcoded `/tmp` path had). run_tests.expect, running from the repo,
-    /// can delete this exact file defensively. The file is gitignored so live API
-    /// keys can never be committed; `git status --ignored` still surfaces a
-    /// leftover, and setUpWithError logs loudly whenever it's active.
-    ///
-    /// The repo dir is not subject to the periodic `$TMPDIR` reaping that drove
-    /// the original `/tmp` choice. A worktree's `.git` is a file (not a dir), so
-    /// test for existence, not directory-ness.
+    /// Validate the explicit per-invocation path for all harness consumers.
+    /// Return an unreadable-as-JSON sentinel rather than a discoverable legacy
+    /// config when not opted in. No credential value is logged or returned here.
     nonisolated static func configFilePath() -> String {
-        let fm = FileManager.default
-        var dir = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
-        while dir.path != "/" {
-            if fm.fileExists(atPath: dir.appendingPathComponent(".git").path) {
-                return dir.appendingPathComponent(configFileName).path
-            }
-            dir = dir.deletingLastPathComponent()
+        guard let raw = ProcessInfo.processInfo.environment["ITERM2_AI_LIVE_CONFIG_PATH"],
+              raw.hasPrefix("/") else {
+            return "/dev/null"
         }
-        // Fallback (not inside a repo): beside the harness's parent directory.
-        return URL(fileURLWithPath: #filePath)
+        let candidate = URL(fileURLWithPath: raw)
+        let directory = candidate.deletingLastPathComponent()
+        let fm = FileManager.default
+        guard candidate.lastPathComponent == "config.json",
+              directory.lastPathComponent.hasPrefix("iterm2-ai-live."),
+              let file = try? fm.attributesOfItem(atPath: candidate.path),
+              let parent = try? fm.attributesOfItem(atPath: directory.path),
+              file[.type] as? FileAttributeType == .typeRegular,
+              parent[.type] as? FileAttributeType == .typeDirectory,
+              (file[.posixPermissions] as? NSNumber)?.intValue == 0o600,
+              (parent[.posixPermissions] as? NSNumber)?.intValue == 0o700,
+              (file[.ownerAccountID] as? NSNumber)?.uint32Value == getuid(),
+              (parent[.ownerAccountID] as? NSNumber)?.uint32Value == getuid(),
+              let size = file[.size] as? NSNumber, size.intValue <= 1_048_576 else {
+            return "/dev/null"
+        }
+        let root = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent().deletingLastPathComponent()
-            .appendingPathComponent(configFileName).path
+            .resolvingSymlinksInPath().path
+        let path = candidate.resolvingSymlinksInPath().path
+        guard !path.hasPrefix(root + "/"),
+              let data = try? Data(contentsOf: candidate),
+              let json = (try? JSONSerialization.jsonObject(with: data)) as? [String: String],
+              let configuredRoot = json["PROJECT_ROOT"], configuredRoot.hasPrefix("/"),
+              URL(fileURLWithPath: configuredRoot).resolvingSymlinksInPath().path == root,
+              let owner = json["OWNER_PID"].flatMap(Int32.init), owner > 1,
+              kill(owner, 0) == 0 else {
+            return "/dev/null"
+        }
+        return path
     }
 
     override func setUpWithError() throws {
         try XCTSkipUnless(Self.loadConfig() != nil,
                           "Live AI harness is opt-in. Run tools/run_ai_live.sh.")
-        // Loud: this hits real vendor APIs and spends money. If you see this in a
-        // plain test run, a stale config leaked in - delete configFilePath().
+        // Loud: this hits real vendor APIs and spends money. Only the private
+        // path is printed, never the configuration contents or credentials.
         print("⚠️ Live AI harness ACTIVE (real vendor APIs). Config: \(Self.configFilePath())")
         // Install the cassette interceptor + recorder for the whole test,
         // covering both AILiveDriver-based tests and the chat-queue tests
@@ -92,23 +101,15 @@ final class AILiveHarness: XCTestCase {
         AICassetteSession.shared?.uninstall()
     }
 
-    /// Last config we successfully read off disk. The config file lives in
-    /// NSTemporaryDirectory() and we've seen Xcode test environments rotate
-    /// that directory mid-run (the file is present for the first test method
-    /// invocation in a -only-testing batch and gone for later ones, even
-    /// without any explicit cleanup running). Caching the first successful
-    /// read keeps later setUpWithError calls from spuriously XCTSkip'ing the
-    /// whole live suite. Process-local; doesn't persist across runs.
-    private static var cachedConfig: [String: String]?
-
+    // Do not cache opt-in after its owner exits or the private file disappears.
+    // The explicit path is stable even when XCTest's own TMPDIR changes.
     private static func loadConfig() -> [String: String]? {
         if let data = try? Data(contentsOf: URL(fileURLWithPath: configFilePath())),
            let any = try? JSONSerialization.jsonObject(with: data),
            let json = any as? [String: String] {
-            cachedConfig = json
             return json
         }
-        return cachedConfig
+        return nil
     }
 
     private static func loadKeys() -> Keys {

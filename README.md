@@ -187,6 +187,15 @@ helpers. For a direct Xcode build, set both `ITERM2_EDITION=cn` and
 keep the original identity and update policy. Builds are unsigned by default;
 building successfully does not mean an artifact has been signed or notarized.
 
+The opt-in live AI test runner keeps API keys in a private temporary directory
+outside the repository and forwards only its file path through Xcode's
+`TEST_RUNNER_` environment mechanism. Normal tests ignore legacy root configs.
+The runner cleans up on completion, failure, timeout, and catchable signals;
+SIGKILL cannot be trapped, but an abandoned file does not opt in later runs.
+The default live-test time limit is 600 seconds. Set
+`ITERM2_AI_LIVE_TIMEOUT_SECONDS` explicitly to a value from 1 to 3600 if needed.
+This changes test credential transport only, not AI requests or application behavior.
+
 The main preferences domain changes with the Bundle ID. Back up settings and
 Profiles before using the existing import/export tools; this fork does not
 automatically copy preferences or protected Keychain items from the official
