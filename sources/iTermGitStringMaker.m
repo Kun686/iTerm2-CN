@@ -101,25 +101,25 @@
         NSMutableArray<NSAttributedString *> *parts = [NSMutableArray array];
         if (filesAdded > 0 || filesDeleted > 0) {
             if (filesAdded == 0) {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"-%@ files",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.files_deleted", nil, NSBundle.mainBundle, @"-%@ files", @"Deleted file count in the Git status display."),
                                                                                  @(filesDeleted)]]];
             } else if (filesDeleted == 0) {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"+%@ files",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.files_added", nil, NSBundle.mainBundle, @"+%@ files", @"Added file count in the Git status display."),
                                                                                  @(filesAdded)]]];
             } else {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"+%@/-%@ files",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.files_added_deleted", nil, NSBundle.mainBundle, @"+%@/-%@ files", @"Added and deleted file counts in the Git status display."),
                                                                                  @(filesAdded), @(filesDeleted)]]];
             }
         }
         if (linesInserted > 0 || linesDeleted > 0) {
             if (linesInserted == 0) {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"-%@ lines",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.lines_deleted", nil, NSBundle.mainBundle, @"-%@ lines", @"Deleted line count in the Git status display."),
                                                                                  @(linesDeleted)]]];
             } else if (linesDeleted == 0) {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"+%@ lines",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.lines_added", nil, NSBundle.mainBundle, @"+%@ lines", @"Added line count in the Git status display."),
                                                                                  @(linesInserted)]]];
             } else {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"+%@/-%@ lines",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.lines_added_deleted", nil, NSBundle.mainBundle, @"+%@/-%@ lines", @"Added and deleted line counts in the Git status display."),
                                                                                  @(linesInserted), @(linesDeleted)]]];
 
             }

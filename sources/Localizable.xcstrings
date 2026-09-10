@@ -24298,6 +24298,114 @@
         }
       }
     },
+    "ui.itermgitstringmaker.stats.files_added": {
+      "comment": "Added file count in the Git status display.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ files"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ 个文件"
+          }
+        }
+      }
+    },
+    "ui.itermgitstringmaker.stats.files_added_deleted": {
+      "comment": "Added and deleted file counts in the Git status display.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@/-%@ files"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@/-%@ 个文件"
+          }
+        }
+      }
+    },
+    "ui.itermgitstringmaker.stats.files_deleted": {
+      "comment": "Deleted file count in the Git status display.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "-%@ files"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "-%@ 个文件"
+          }
+        }
+      }
+    },
+    "ui.itermgitstringmaker.stats.lines_added": {
+      "comment": "Added line count in the Git status display.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ lines"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ 行"
+          }
+        }
+      }
+    },
+    "ui.itermgitstringmaker.stats.lines_added_deleted": {
+      "comment": "Added and deleted line counts in the Git status display.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@/-%@ lines"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@/-%@ 行"
+          }
+        }
+      }
+    },
+    "ui.itermgitstringmaker.stats.lines_deleted": {
+      "comment": "Deleted line count in the Git status display.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "-%@ lines"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "-%@ 行"
+          }
+        }
+      }
+    },
     "ui.keyboard.itermkeystrokeformatter.backward_delete": {
       "shouldTranslate": false,
       "comment": "Name of the backward-delete key in shortcut descriptions.",
