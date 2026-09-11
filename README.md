@@ -1,379 +1,201 @@
-<div align="center">
+# iTerm2-CN
 
-# iTerm2
+macOS 上的 iTerm2 非官方社区简体中文版本。
 
-### macOS Terminal Replacement
+[下载发行版](https://github.com/Kun686/iTerm2-CN/releases) ·
+[反馈问题](https://github.com/Kun686/iTerm2-CN/issues) ·
+[上游项目](https://github.com/gnachman/iTerm2) ·
+[官方使用文档](https://iterm2.com/documentation.html)
 
-![Version](https://img.shields.io/badge/version-3.6-blue.svg)
-![Platform](https://img.shields.io/badge/platform-macOS-lightgrey.svg)
+> 本项目与 iTerm2 官方项目不存在隶属关系，不代表官方发布、支持或安全保证。
+> 终端功能来自 George Nachman 与 iTerm2 上游贡献者；本 Fork 主要提供界面汉化。
 
-**[Website](https://iterm2.com)** • **[Downloads](https://iterm2.com/downloads.html)** • **[Documentation](https://iterm2.com/documentation.html)** • **[Features](https://iterm2.com/features.html)**
+## 提供什么
 
-</div>
+- 简体中文界面：菜单、设置、配置文件编辑器、提示、工具侧栏等应用自有文字。
+- 三种界面语言：**简体中文、English、跟随系统**，更改后下次启动生效。
+- CN 首次启动默认简体中文；已明确保存的语言选择会保留。
+- 保留原有终端功能，包括窗口／标签页／窗格、tmux、Shell 集成、搜索、
+  快捷键、触发器、状态栏、即时回放、Python API，以及原有 AI 和浏览器功能。
+- CN 版本使用独立的主应用 Bundle ID：`com.kun686.iterm2-cn`。
+- CN 自动更新已停用；“检查更新”打开本仓库 Releases，由用户手动更新。
 
----
+汉化只处理显示层，不翻译终端输入输出、命令、用户数据、API 字段或协议。
+不以汉化为理由修改终端解析、PTY、Shell 启动、渲染和数据持久化逻辑。
+应用语言与 Shell 的 `LANG`、`LC_*` 是不同设置，切换界面语言不会改写它们。
 
-## About
+## 下载与安装
 
-iTerm2 is a powerful terminal emulator for macOS that brings the terminal into the modern age with features you never knew you always wanted.
+运行要求：**macOS 13 或更新版本**。正式发行包为 **Universal**，
+同时包含 Apple Silicon（arm64）和 Intel（x86_64）。
 
-### Key Features
-
-- **tmux Integration** - Native iTerm2 windows/tabs replace tmux's text-based interface. Run tmux -CC and tmux windows become real macOS windows. Sessions persist through crashes, SSH disconnects, and even app upgrades. Collaborate by having two people attach to the same session.
-- **Shell Integration** - Deep shell awareness that tracks commands, directories, hostnames, and usernames. Enables click-to-download files via SCP, drag-and-drop uploads, command history per host, recent directories by "frecency," and marks at each prompt.
-- **AI Chat** - Built-in LLM chat window that can optionally interact with terminal contents. Link sessions to get context-aware help, run commands on your behalf, or explain output with annotations.
-- **Inline Images** - Display images (including animated GIFs) directly in the terminal. Use imgcat to view photos, charts, or visual output without leaving your workflow.
-- **Automatic Profile Switching** - Terminal appearance changes automatically based on hostname, username, directory, or running command. SSH to production? Background turns red. Different environments get different visual contexts.
-- **Dedicated Hotkey Windows** - System-wide hotkey summons a terminal that slides down from the top of the screen (or any edge), even over fullscreen apps. Pin it or let it auto-hide.
-- **Session Restoration** - Sessions run in long-lived server processes. If iTerm2 crashes or upgrades, your shells keep running. When iTerm2 restarts, it reconnects to your sessions exactly where you left off.
-- **Built-in Web Browser** - Browser profiles integrate web browsing into iTerm2's window/tab/pane hierarchy. Copy mode, triggers, AI chat, and other terminal features work in browser sessions.
-- **Configurable Status Bar** - Per-session status bar showing git branch, CPU/memory graphs, current directory, hostname, custom interpolated strings, or Python API components.
-- **Triggers** - Regex patterns that fire actions when matched: highlight text, run commands, send notifications, open password manager, set marks, or invoke Python scripts.
-- **Smart Selection** - Quad-click selects semantic objects (URLs, file paths, email addresses, quoted strings). Right-click for context actions. Cmd-click to open.
-- **Copy Mode** - Vim-like keyboard selection. Navigate and select text without touching the mouse. Works with marks to jump between command prompts.
-- **Instant Replay** - Scrub backward through terminal history to see exactly what was on screen at any moment, with timestamps. Perfect for catching fleeting errors.
-- **Python Scripting API** - Full automation and customization via Python. Create custom status bar components, triggers, menu items, or entirely new features.
-- **Open Quickly** - Cmd-Shift-O opens a search across all sessions by tab title, command, hostname, directory, or badge. Navigate large session collections instantly.
-
----
-
-## Installation
-
-### iTerm2-CN community fork
-
-iTerm2-CN is an unofficial Simplified Chinese localization. Its main application
-uses `com.kun686.iterm2-cn`; the executable and internal target names remain
-unchanged. Select Simplified Chinese, English, or Follow System in General
-settings, then relaunch to apply the selection. CN builds disable automatic
-updates; Check for Updates opens [Fork Releases](https://github.com/Kun686/iTerm2-CN/releases).
-
-Legacy title-only menu shortcuts recognize bundled menu translations. Opening
-or reloading the shortcut editor preserves the original complete parameter;
-only choosing a different action produces a new parameter. Stable menu IDs and
-action selectors are unchanged.
-Built-in Toolbelt menu and panel headings are translated only for display.
-Their original English titles remain the names used by existing actions,
-title-only shortcuts, automation, notifications, and saved configuration.
-Dynamic tool names and the Codecierge product name are not translated.
-Cockpit keeps its original no-status grouping/filter key in both languages.
-Only its fallback display name is translated; session-reported status text is
-preserved, including text identical to that legacy key.
-Forked chat titles retain the original `(Forked at …)` marker because it also
-identifies the suffix to replace on later forks. Switching UI language does not
-add another suffix or reinterpret Chinese user text as that marker. Existing
-titles are not migrated or rewritten.
-
-Raw diagnostics remain untranslated. In particular, the fork-failure message
-is shared by logs, terminal output, and the notification body, so it stays in
-English; the notification title is localized.
-The AI settings page translates the known missing-plugin status only for display.
-Shared plugin diagnostics, unknown errors, and installation controls are unchanged.
-GPU availability reasons are translated only in the status alert. The renderer's
-shared diagnostic descriptions, reason values and availability decisions remain
-unchanged. Unknown future reasons retain the original diagnostic as a fallback.
-Ad-block update errors likewise keep their original error fields and diagnostic
-logs. Only the settings-page display copy is translated; update requests, rule
-processing and unknown error descriptions remain unchanged.
-Internal browser URL/scheme and view-source errors, page-encoding failures
-(including settings, onboarding and redirects), and local-file errors preserve
-their original NSError fields for logs and callbacks. The error page translates
-known descriptions only for display, preserving the raw path in missing-file messages.
-The browser toolbar's /dev/null help is localized without changing privacy-mode
-behavior, its Markdown structure, or the original English copy.
-The web-view wrapper also localizes its missing-browser-name fallback, while
-preserving detected application names and the original link-opening behavior.
-Built-in expression errors and parser fallback diagnostics retain their original
-text in API responses and Script Console output. Exported trigger statistics
-also keep their original table headings; independent chart labels are localized.
-Shell Integration installation steps are localized without changing generated
-commands, stage progression, supported shell names, or dotfile handling.
-Tip action labels, accessibility text, and the tip footer are localized while
-internal action titles, shortcuts, navigation, and saved tip identifiers remain unchanged.
-The installer's two built-in plugin names remain English in its diagnostic logs
-and verification-error arguments. Error descriptions translate their display
-copies; download addresses, bundle identities and installation are unchanged.
-Unknown AI provider names stay English in shared request errors and diagnostic
-events; the attachment-rejection alert uses a localized display name instead.
-The settings exporter's serialization failure keeps its original diagnostic
-reason; only the error shown to the user is translated. Exported data is unchanged.
-Remote-settings manual-upload help names the active app or test-suite preferences
-file instead of always pointing to the official app's file. This changes only the
-displayed instruction, not settings synchronization or file operations.
-Semantic History mode help and its Learn More popover are translated. Literal
-backreferences, interpolation variable names, link targets, and saved commands
-remain unchanged; these translations are used only in explanatory UI text.
-Hotkey migration help keeps the actual `Dynamic Profile Parent Name` key in
-English so users can locate it in their configuration. Migration data is unchanged.
-Command exports keep the original `iTerm2 Command.rtf` fallback filename in every
-UI language. Command-derived names, saved contents, and sharing data are unchanged.
-Close-confirmation job summaries localize their conjunction and duplicate-count
-description without translating process names or changing job grouping, sorting,
-or closing decisions. Quit-confirmation reason details also localize the job-list
-conjunction, preserving the original job order and first-three display limit.
-The generic list joiner used by diagnostics stays unchanged.
-The third-party tab bar's close-button accessibility name remains `Close Tab`:
-its private getter is hard-coded and does not honor the inherited label setter.
-This is a known third-party translation limitation, not a completed VoiceOver
-or close-button interaction acceptance check.
-Status Bar Advanced help text is localized from the existing XIB tooltips.
-The upstream reuse of tight-packing help on the empty-component option is
-preserved; localization does not change either setting's behavior.
-Trigger-editor row identifiers retain their original values. Only the visible
-labels are translated, preserving regex, name, and job input bindings and the
-existing save expressions in both UI languages.
-The in-memory transfer path marker also retains its upstream value because
-file actions consume it as a path, not just a display label.
-The background Run Command Trigger, Smart Selection Action, and URL Handler
-titles remain in English because the runner shares them with diagnostic
-descriptions and script history. Their independent failure-notification titles
-remain localized.
-Terminal button tooltips retain their original stored and diagnostic values;
-their AppKit display copy is localized. Unknown tooltip values pass through
-unchanged, without altering button actions or rendering state.
-Python download phase titles and status messages are also localized only at
-their display boundary. Shared script-import error callbacks remain in English
-because they also feed diagnostic logs; independent prompts remain localized.
-The uv runtime also preserves original shared NSError descriptions, fields,
-and background-upgrade diagnostics. Manual upgrade results also stay in English
-because their callback writes script history. Shared callback text remains in
-English when shown in alerts; download labels and independent prompts are localized.
-Intel-only script launch errors retain their original Script Console history.
-Their alert body and recovery hints are translated only for display, leaving
-unknown recovery hints, script names, and launch decisions unchanged.
-SSH Integration transfer diagnostics shared with logs, completion handlers, and
-browser stream failures also retain their original text. Transfer summaries and
-independent UI labels remain localized.
-The same boundary applies to SCP/terminal-download NSError descriptions and the
-transfer manager's fallback and cancellation callback. Independent SCP error
-display wrappers, authentication prompts, and security warnings are localized;
-the underlying shared diagnostics are not.
-The SSH file panel keeps the original default folder name, `untitled folder`,
-because Create uses it as a filesystem path. Its prompts and file-kind labels
-remain localized; sorting by kind uses the displayed labels without changing
-file metadata or paths.
-SSH connection-closed and file-not-found descriptions remain in English because
-remote file creation includes them in AI tool responses as well as user notices.
-Other independent endpoint error descriptions remain localized.
-Shared alert, annotation, bell, capture, command, send-text, directory, host,
-hyperlink, script-function, and title trigger descriptions retain their original
-log text, including when used in import summaries or unnamed-trigger fallbacks.
-Their independent action titles and parameter prompts remain localized.
-Stop-processing and prompt-detected trigger descriptions likewise keep their
-original log text while their action titles remain localized.
-The same diagnostic boundary covers bounce, mark, color-highlight, password,
-and notification triggers, including the legacy Growl trigger name. Popup labels
-remain localized while stored numeric options, color data, and the password
-unlock sentinel retain their original meanings.
-The password-trigger popup keeps its original account-name ordering even when
-the unlock label is translated, so each displayed row saves the matching key.
-Workgroup trigger menus retain `Untitled` for unnamed workgroups: that label's
-sort position determines the implicit target when no workgroup ID is stored.
-Both terminal and browser triggers preserve the upstream default-selection
-algorithm and stored IDs. Their independent action titles remain localized.
-SGR-style, named-mark, fold, injected-data, user-variable, buffered-input, and
-workgroup-exit trigger descriptions also retain the original diagnostic text.
-Their action titles and independent prompts remain localized; buffered-input
-menu labels still map to the original numeric options.
-The terminal workgroup-entry description and its shared parameter-row fallbacks
-also keep their original diagnostic text; user-defined workgroup names are unchanged.
-Set Profile Setting diagnostics retain their English format and On/Off values.
-Only the setting name may follow the UI language when its existing label cache
-has been populated; the uncached background path retains the raw setting key.
-
-Build with `make cn-dev` or `UNIVERSAL=1 make cn-release`. These commands set the
-main-target-only `ITERM2_MAIN_BUNDLE_IDENTIFIER` without assigning the same ID to
-helpers. For a direct Xcode build, set both `ITERM2_EDITION=cn` and
-`ITERM2_MAIN_BUNDLE_IDENTIFIER=com.kun686.iterm2-cn`. Ordinary upstream builds
-keep the original identity and update policy. Builds are unsigned by default;
-building successfully does not mean an artifact has been signed or notarized.
-
-The opt-in live AI test runner keeps API keys in a private temporary directory
-outside the repository and forwards only its file path through Xcode's
-`TEST_RUNNER_` environment mechanism. Normal tests ignore legacy root configs.
-The runner cleans up on completion, failure, timeout, and catchable signals;
-SIGKILL cannot be trapped, but an abandoned file does not opt in later runs.
-The default live-test time limit is 600 seconds. Set
-`ITERM2_AI_LIVE_TIMEOUT_SECONDS` explicitly to a value from 1 to 3600 if needed.
-This changes test credential transport only, not AI requests or application behavior.
-
-The main preferences domain changes with the Bundle ID. Back up settings and
-Profiles before using the existing import/export tools; this fork does not
-automatically copy preferences or protected Keychain items from the official
-app. Developer ID signing must use a profile matching the new App ID and the
-actual signing team's Keychain access group. A different team cannot access the
-official team's protected Keychain items merely by keeping their service names.
-
-This is not a fully isolated parallel-install edition: helper IDs, URL schemes,
-the private preferences domain, and Application Support paths remain unchanged.
-Do not run both editions concurrently or erase shared data to uninstall one.
-Keep backups when switching editions; automation that explicitly selects the
-official Bundle ID must explicitly target `com.kun686.iterm2-cn` for this fork.
-
-### Download
-
-Get the latest version from [iterm2.com/downloads](https://iterm2.com/downloads.html)
-
-For the bleeding edge without building, try the [nightly build](https://iterm2.com/nightly/latest).
-
-### Build from Source
-
-> **Note:** Development builds may be less stable than official releases.
-
-#### Prerequisites
-
-- No manual prerequisites. `make setup` will install [Homebrew](https://brew.sh/), Xcode,
-  Rust, and all other dependencies, prompting for confirmation before each privileged step.
-
-#### Clone
-
-```bash
-git clone https://github.com/gnachman/iTerm2.git
-```
-
-#### Setup (first time)
-
-```bash
-make setup
-```
-
-`make setup` is interactive and will prompt for confirmation before any privileged or
-security-sensitive operation. It performs the following steps:
-
-- **Homebrew** -- Installs [Homebrew](https://brew.sh/) via its official install script
-  if not already present. Prompts before running the installer (which requires sudo).
-- **Xcode** -- If no Xcode is selected via `xcode-select`, installs
-  [xcodes](https://github.com/XcodesOrg/xcodes) (via Homebrew) and
-  [aria2](https://aria2.github.io/) (for faster downloads), then either selects an
-  existing `/Applications/Xcode*.app` or downloads the latest Xcode automatically.
-  Prompts before running `sudo xcode-select` and before accepting the Xcode license.
-- **Rust** -- Installs [rustup](https://rustup.rs) via the official `curl | sh`
-  installer if not already present. Prompts before executing the script.
-- **Homebrew packages** -- Installs cmake, pkg-config, automake, perl, and python3 if
-  missing. If `brew link python@3` would overwrite existing symlinks, prompts for
-  confirmation before proceeding.
-- **SF Symbols** -- Installs the SF Symbols cask (a `.pkg` installer that requires
-  sudo). Prompts before attempting the install; continues without it if declined.
-- **Python/Rust packages** -- Installs pyobjc (via pip) and cbindgen (via cargo) if not
-  already present.
-- **Submodules and toolchains** -- Initializes git submodules, adds the x86_64 Rust
-  target, and downloads the Metal toolchain.
-
-To skip all confirmation prompts, use `make dangerous-setup` instead.
-
-After setup, compile native dependencies and build:
-
-```bash
-make paranoid-deps   # compile OpenSSL, libsixel, libgit2, Sparkle, etc. (sandboxed)
-make                 # build iTerm2
-```
-
-Re-run `make paranoid-deps` whenever your active Xcode version changes -- the file `last-xcode-version` tracks which version was last used.
-
-If your Xcode version differs from the one committed in `last-xcode-version` (e.g. you're on an older machine), suppress the noise without committing your local version:
-
-```bash
-git update-index --skip-worktree last-xcode-version
-```
-
-To undo: `git update-index --no-skip-worktree last-xcode-version`
-
-#### Build
-
-```bash
-make Development
-```
-
-#### Run
-
-```bash
-make run
-```
-
-#### Architecture
-
-Builds target your native architecture by default. To produce a universal (arm64 + x86_64) binary:
-
-```bash
-UNIVERSAL=1 make Development
-```
-
-#### Code signing
-
-Code signing is disabled by default to keep contributor builds simple. To enable it with the project's signing identity:
-
-```bash
-SIGNED=1 make Development
-```
-
-#### Building in Xcode
-
-If you prefer building from Xcode instead of the command line:
-
-1. Complete the **Clone** and **Setup** steps above.
-2. Configure code signing with your team ID:
+1. 先导出并备份现有 iTerm2 的配置文件和设置，保存正在进行的工作并退出官方版。
+2. 打开 [Releases](https://github.com/Kun686/iTerm2-CN/releases)，
+   下载该版本的 `iTerm2-CN-…-macOS-universal.zip` 和 `SHA256SUMS`。
+   GitHub 自动生成的 “Source code” 压缩包不是安装包。
+3. 将两个文件放在同一文件夹，在该目录执行：
 
    ```bash
-   tools/set_team_id.sh YOUR_TEAM_ID
+   shasum -a 256 -c SHA256SUMS
    ```
 
-   This script updates `DEVELOPMENT_TEAM` in all Xcode project files (iTerm2 and its dependencies like Sparkle, SwiftyMarkdown, etc.) so code signing works with your identity.
+4. 校验显示 `OK` 后解压，将 `iTerm2-CN.app` 拖入“应用程序”并打开。
 
-   **To find your team ID:** Open Keychain Access, find your "Apple Development" or "Developer ID" certificate, and look for the 10-character string in parentheses (e.g., "H7V7XYVQ7D").
+正式发行包的 Developer ID 签名、Apple 公证和已知限制以对应 Release Notes
+为准。源码自行构建默认不签名；`UNSIGNED-TEST-ONLY` 或 development 产物
+不是正式发行包。不要通过关闭 Gatekeeper、删除隔离属性等方式掩盖验证失败。
 
-   **No Developer account?** Skip this step and select "Sign to Run Locally" in Xcode's Signing & Capabilities tab.
+如需复验已安装的发行包：
 
-3. Open `iTerm2.xcodeproj` in Xcode.
-4. Edit Scheme (Cmd-<) and set Build Configuration to **Development**.
-5. Press Cmd-R to build and run.
+```bash
+codesign --verify --deep --strict --verbose=2 /Applications/iTerm2-CN.app
+spctl --assess --type execute --verbose=4 /Applications/iTerm2-CN.app
+xcrun stapler validate /Applications/iTerm2-CN.app
+```
 
----
+## 切换语言
 
-## Development
+在“设置 → 通用”中找到“语言”，选择简体中文、English 或跟随系统。
+保存后正常退出并重新打开应用；不会替你关闭当前 Shell 会话。
 
-### Contributing
+- **简体中文**：使用随应用打包的中文资源。
+- **English**：使用英文资源。
+- **跟随系统**：移除应用内显式语言覆盖，由 macOS 选择；不支持的语言回退英文。
+- 无效或损坏的已保存语言值安全回退 English。
 
-We welcome contributions! Please read our [contribution guide](https://gitlab.com/gnachman/iterm2/-/wikis/How-to-Contribute) before submitting pull requests.
+## 更新与回滚
 
----
+第一版仅通过 [本 Fork 的 Releases](https://github.com/Kun686/iTerm2-CN/releases)
+手动更新，不会自动安装官方英文构建，也没有伪装成 Sparkle Appcast 的更新源。
+更新前备份设置、退出应用，再用新发行包替换旧的 `iTerm2-CN.app`。
 
-## Bug Reports & Issues
+回滚时先退出 CN 版，使用之前备份的 CN 发行包，或从
+[官方渠道](https://iterm2.com/downloads.html) 重新安装官方 iTerm2。
+按需要使用原有导入／导出功能恢复设置。**不要删除共享数据目录来卸载其中一个版本。**
 
-- **File bugs:** [iterm2.com/bugs](https://iterm2.com/bugs)
-- **Issue tracker:** [GitLab Issues](https://gitlab.com/gnachman/iterm2/issues)
+## 与官方版共存的限制
 
-> **Note:** We use GitLab for issues because it provides better support for attachments.
+独立的主 Bundle ID **不等于所有数据和组件完全隔离**。
+第一版不保证与官方 iTerm2 并行安装或同时运行；请避免同时运行两个版本。
 
----
+- 主应用偏好域随新 Bundle ID 改变；本 Fork 不自动迁移官方版的设置或受保护钥匙串项目。
+- Helper／XPC／Service 标识、URL Scheme、私有偏好域和部分 Application Support
+  路径仍沿用上游设计，不能据此承诺完整隔离。
+- 部分 Keychain 服务名仍相同；受访问组保护的项目还受签名团队权限限制。
+  保留服务名不会使 Fork 获得官方签名团队的钥匙串访问权。
+- 依赖官方 Bundle ID 的自动化，需要明确指定 `com.kun686.iterm2-cn`。
+  内部可执行文件、API 和协议名称没有全局重命名。
+- 浏览器和其他可选组件仍遵循原有插件安装、签名与权限要求；不会绕过官方校验。
+- 安装、切换版本和手动导入设置前均应备份；不承诺无损自动迁移或自动合并两套设置。
 
-## Resources
+## 汉化边界与已知英文内容
 
-| Resource         | Link                                                              |
-| ---------------- | ----------------------------------------------------------------- |
-| Official Website | [iterm2.com](https://iterm2.com)                                  |
-| Documentation    | [iterm2.com/documentation](https://iterm2.com/documentation.html) |
-| Community        | [iTerm2 Discussions](https://gitlab.com/gnachman/iterm2/-/issues) |
-| Downloads        | [iterm2.com/downloads](https://iterm2.com/downloads.html)         |
+为了保持原有行为，以下内容保留原文，不能简单全局替换：
 
----
+- Shell 输出、日志、共享 `NSError`／回调诊断、Script Console 历史和 API 响应；
+  独立的界面提示可以翻译，但共享诊断可能仍出现在提示窗口中。
+- 命令、路径、URL、正则表达式、环境变量、快捷键参数、用户自定义名称和外部网页。
+- 第三方组件的自有文字，例如标签关闭按钮的 `Close Tab` 辅助功能名称；
+  不宣称第三方界面或 VoiceOver 已达到全量中文覆盖。
+- 与配置、排序、文件操作或诊断共用的稳定名称，例如 `Dynamic Profile Parent Name`、
+  `iTerm2 Command.rtf`、`untitled folder`、未命名工作组的 `Untitled`、
+  聊天分叉标题标记 `(Forked at …)`，以及部分后台动作／触发器描述。
+- Toolbelt 内置工具的菜单／标题只翻译显示副本，原名称继续用于已有配置和自动化。
+  动态工具、进程、会话状态和 AI 提供商返回的内容不翻译。
 
-## License
+旧的标题式菜单快捷键兼容随应用打包的译文。仅打开或重新加载编辑器不会
+重写原参数；菜单稳定 ID、动作 selector 和配置值保持不变。
+未知诊断和未知第三方名称保留原文，不凭空生成可能改变含义的中文错误。
 
-iTerm2 is distributed under the [GPLv3](LICENSE) license.
+## 从源码构建
 
----
+完整 Xcode、命令行工具及依赖准备方式沿用上游工程。首次配置：
 
-## Support
+```bash
+git clone --recurse-submodules https://github.com/Kun686/iTerm2-CN.git
+cd iTerm2-CN
+make setup
+UNIVERSAL=1 make paranoid-deps
+```
 
-If you love iTerm2, consider:
+`make setup` 是交互式流程，可能安装 Homebrew、Xcode、Rust、构建工具与
+Metal toolchain，并在特权或安全敏感操作前询问。已配置好的机器无需重复执行。
+更换 Xcode 后按上游要求重新构建依赖；不要把本地依赖产物或工具链时间戳提交到 Fork。
 
-- Starring this repository
-- Spreading the word
-- [Sponsoring development](https://iterm2.com/donate.html)
+开发与分发构建：
 
----
+```bash
+make cn-dev
+make cn-run
+UNIVERSAL=1 make cn-release
+```
 
-<div align="center">
+`cn-run` 使用仓库要求的隔离 suite。手动测试启动也必须传入
+`-suite <隔离名称>`；suite 不会隔离全部 Keychain 或 Application Support 数据，
+不要用真实密码库做无隔离测试。可用 `BUILD_DIR=/绝对路径` 指定构建输出目录。
 
-**Made by [George Nachman](https://github.com/gnachman) and [contributors](https://github.com/gnachman/iTerm2/graphs/contributors)**
+直接在 Xcode 构建 CN 版本时，同时设置：
 
-</div>
+```text
+ITERM2_EDITION=cn
+ITERM2_MAIN_BUNDLE_IDENTIFIER=com.kun686.iterm2-cn
+```
+
+该标识设置仅用于主应用，不要给所有 Helper 批量设置相同 Bundle ID。
+普通上游构建仍保留原来的应用身份和更新策略。
+
+版本来自 `version.txt` 与工程的日期替换规则；发行修订号体现在
+`v<版本>-cn.1` Tag 和压缩包名称中，不向 Apple Bundle 版本字段塞入非法后缀。
+构建命令默认禁用签名；本地编译成功不等于完成正式签名或公证。
+维护者发布时须从最终合并提交的全新干净副本构建，逐层签名、公证、装订，
+并重新验证解压后的 App。Apple 凭据只应存入本机 Keychain 等安全存储。
+
+常用检查：
+
+```bash
+python3 tools/check_localizations.py
+python3 -m unittest discover -s tools/tests
+tools/run_tests.expect ModernTests
+```
+
+真实 AI 测试是单独的 opt-in 流程，可能产生费用；凭据使用仓库已有安全临时文件
+机制，不应写入源码或 README。日常检查不需要为了汉化重复调用真实供应商。
+
+### 首次发布的静态分析例外
+
+Xcode 26.6 的 Clang 在为未改动的 `iTermStreamingPNGWriter.m` 输出 plist
+静态分析报告时崩溃。相同分析规则下，单文件文本报告可完成，但这**不代表
+全项目静态分析已通过**，也不代表所有分析警告已被排除。
+本次发布已明确接受这一工具故障例外，不修改官方源码来规避工具问题；
+单元测试、Universal 构建、签名、公证和分发包复验不因此豁免。
+具体提交、测试结果及发行包验证记录见对应 Release Notes。
+
+## 反馈与贡献
+
+汉化遗漏、翻译错误、布局和本 Fork 发行包问题，请提交到
+[Kun686/iTerm2-CN Issues](https://github.com/Kun686/iTerm2-CN/issues)。
+请附版本、macOS 版本、界面语言、复现步骤和不含敏感信息的截图；
+不要上传密码、私钥、终端秘密内容或未脱敏的配置。
+
+上游文档与贡献规则：
+
+- [iTerm2 使用文档](https://iterm2.com/documentation.html)
+- [上游贡献指南](https://gitlab.com/gnachman/iterm2/-/wikis/How-to-Contribute)
+- [上游问题渠道](https://iterm2.com/bugs)
+
+先在官方版复现后再向上游反馈功能问题，明确说明是否与 Fork 有关。
+上游同步使用独立 PR，不混入本地化变更。添加语言应复用现有语言注册表和
+`<locale>.lproj` 资源，并补充检查与测试，不扩展终端核心。
+
+## 许可证与致谢
+
+iTerm2 原作者为 [George Nachman](https://github.com/gnachman)，感谢
+[上游贡献者](https://github.com/gnachman/iTerm2/graphs/contributors)。
+本 Fork 保留原有版权、源码授权及第三方许可证，不主张拥有上游作品。
+
+许可证以仓库 [LICENSE](LICENSE)、[COPYING](COPYING) 和各组件自带授权为准；
+其中 LICENSE 收录 GNU GPL version 2。对应发行源码可通过相同 Tag 获取，
+子模块版本由该提交固定；下载源码时请递归获取子模块。
+
+如果希望支持终端本身的发展，可通过
+[iTerm2 官方捐助渠道](https://iterm2.com/donate.html) 支持上游。
