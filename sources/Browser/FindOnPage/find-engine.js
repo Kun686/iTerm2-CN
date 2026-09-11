@@ -1907,7 +1907,7 @@ class FindEngine {
                 url = 'https://' + url;
             } else {
                 this.log('openUrl: text does not appear to be a URL:', text);
-                this.showToast('Not a valid URL: ' + text);
+                this.showToast({{INVALID_URL_PREFIX_JSON}} + text);
                 return;
             }
         }
@@ -1917,7 +1917,7 @@ class FindEngine {
             window.open(url, '_blank', 'noopener,noreferrer');
         } catch (e) {
             this.log('openUrl: error opening URL:', e);
-            this.showToast('Failed to open URL: ' + url);
+            this.showToast({{FAILED_TO_OPEN_URL_PREFIX_JSON}} + url);
         }
     }
 
@@ -1939,10 +1939,10 @@ class FindEngine {
                 document.body.removeChild(textArea);
                 this.log('copyToClipboard: copied using fallback method:', text);
             }
-            this.showToast('Copied');
+            this.showToast({{COPIED_JSON}});
         } catch (e) {
             this.log('copyToClipboard: error copying to clipboard:', e);
-            this.showToast('Failed to copy');
+            this.showToast({{FAILED_TO_COPY_JSON}});
         }
     }
 
@@ -2019,4 +2019,3 @@ function getEngine(id) {
     }
     return engine;
 }
-

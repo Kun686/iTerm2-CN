@@ -51,11 +51,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"CPU Utilization";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarcpuutilizationcomponent.cpu_utilization.a87cac97", nil, NSBundle.mainBundle, @"CPU Utilization", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Shows current CPU utilization.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarcpuutilizationcomponent.shows_current_cpu_utilization.ccd37a9c", nil, NSBundle.mainBundle, @"Shows current CPU utilization.", @"Status bar component description.");
 }
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor

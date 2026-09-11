@@ -155,6 +155,30 @@ final class UvProvisionerTests: XCTestCase {
         }
     }
 
+    func testSelectedEntryRetainsOriginalSharedError() {
+        switch iTermUvProvisioner.selectedEntry(fromManifestData: Data("not json".utf8),
+                                                runningMacOSVersion: "14.0.0") {
+        case .success:
+            XCTFail("must fail to parse")
+        case .failure(let error):
+            let error = error as NSError
+            XCTAssertEqual(error.domain, "com.googlecode.iterm2.uv")
+            XCTAssertEqual(error.code, -1)
+            XCTAssertEqual(Set(error.userInfo.keys), [NSLocalizedDescriptionKey])
+            XCTAssertEqual(error.localizedDescription,
+                           "The uv manifest is not valid JSON (a hosting problem, not a macOS-version problem).")
+        }
+    }
+
+    func testCancelErrorRetainsOriginalSharedError() {
+        let error = iTermUvProvisioner.cancelError()
+        XCTAssertEqual(error.domain, "com.googlecode.iterm2.uv")
+        XCTAssertEqual(error.code, -2)
+        XCTAssertEqual(Set(error.userInfo.keys), [NSLocalizedDescriptionKey])
+        XCTAssertEqual(error.localizedDescription, "The download was canceled.")
+        XCTAssertTrue(iTermUvProvisioner.isCancelationError(error))
+    }
+
     func testShouldUpgradeUvOnlyWhenStrictlyNewer() {
         XCTAssertTrue(iTermUvProvisioner.shouldUpgradeUv(installedVersion: "0.12.0", manifestVersion: "0.13.0"))
         XCTAssertTrue(iTermUvProvisioner.shouldUpgradeUv(installedVersion: "0.12.0", manifestVersion: "0.12.1"))
@@ -202,6 +226,25 @@ final class UvProvisionerTests: XCTestCase {
     }
 
     // MARK: - Offline shared-venv resolution (remapped shebang, item 2)
+
+    func testForcedRemapDiagnosticTextRemainsStableEnglish() {
+        XCTAssertEqual(
+            iTermUvProvisioner.forcedRemapDiagnosticText(
+                scriptName: "Example.py",
+                from: "3.7.9",
+                to: "3.9"),
+            "The script “Example.py” was written for Python 3.7, which is no longer available, "
+                + "so it now uses Python 3.9. Python versions are not always compatible across releases, "
+                + "so a bumped script may need small changes.")
+        XCTAssertEqual(
+            iTermUvProvisioner.forcedRemapDiagnosticText(
+                scriptName: nil,
+                from: "3.7.9",
+                to: "3.9"),
+            "A script was written for Python 3.7, which is no longer available, "
+                + "so it now uses Python 3.9. Python versions are not always compatible across releases, "
+                + "so a bumped script may need small changes.")
+    }
 
     private func provisionVenv(_ minor: String, inRoot root: String) throws -> String {
         let python = ((root as NSString).appendingPathComponent(minor) as NSString).appendingPathComponent("bin/python")
@@ -310,10 +353,12 @@ final class UvProvisionerTests: XCTestCase {
     }
 
     func testRuntimeMenuItemTitleAndCheckFlag() {
-        XCTAssertEqual(iTermScriptRuntime.pythonRuntimeMenuItemTitle(for: .uvInstall), "Install Python Runtime")
-        XCTAssertEqual(iTermScriptRuntime.pythonRuntimeMenuItemTitle(for: .uvCheckForUpdate), "Check for Updated Runtime")
-        XCTAssertEqual(iTermScriptRuntime.pythonRuntimeMenuItemTitle(for: .legacyInstall), "Install Python Runtime")
-        XCTAssertEqual(iTermScriptRuntime.pythonRuntimeMenuItemTitle(for: .legacyCheckForUpdate), "Check for Updated Runtime")
+        let install = String(localized: "ui.swift.api.itermscriptruntime.install_python_runtime.e231a60b", defaultValue: "Install Python Runtime", bundle: .main, comment: "Expected localized runtime menu title.")
+        let check = String(localized: "ui.swift.api.itermscriptruntime.check_for_updated_runtime.3c2bbc24", defaultValue: "Check for Updated Runtime", bundle: .main, comment: "Expected localized runtime menu title.")
+        XCTAssertEqual(iTermScriptRuntime.pythonRuntimeMenuItemTitle(for: .uvInstall), install)
+        XCTAssertEqual(iTermScriptRuntime.pythonRuntimeMenuItemTitle(for: .uvCheckForUpdate), check)
+        XCTAssertEqual(iTermScriptRuntime.pythonRuntimeMenuItemTitle(for: .legacyInstall), install)
+        XCTAssertEqual(iTermScriptRuntime.pythonRuntimeMenuItemTitle(for: .legacyCheckForUpdate), check)
         XCTAssertTrue(iTermScriptRuntime.isCheckForUpdate(.uvCheckForUpdate))
         XCTAssertTrue(iTermScriptRuntime.isCheckForUpdate(.legacyCheckForUpdate))
         XCTAssertFalse(iTermScriptRuntime.isCheckForUpdate(.uvInstall))

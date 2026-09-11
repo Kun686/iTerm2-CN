@@ -56,7 +56,13 @@
 + (void)complainThatCantSwitchToSpace:(int)spaceNum fix:(NSString *)fix {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [[iTermNotificationController sharedInstance] notify:[NSString stringWithFormat:@"Can’t switch to desktop %d", spaceNum]
+        [[iTermNotificationController sharedInstance]
+            notify:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.fixbrokenapplecrap.itermmissioncontrolhacks.cannot_switch_desktop_notification_title",
+                                                                                nil,
+                                                                                NSBundle.mainBundle,
+                                                                                @"Can’t switch to desktop %d",
+                                                                                @"Notification title when switching macOS desktops fails."),
+                    spaceNum]
                                              withDescription:fix];
     });
 }
@@ -64,14 +70,22 @@
 + (void)switchToSpace:(int)spaceNum {
     if (![[iTermPermissionsHelper accessibility] request]) {
         [self complainThatCantSwitchToSpace:spaceNum
-                                        fix:@"You must grant iTerm2 accessibility permission in System Settings > Security & Privacy."];
+                                        fix:NSLocalizedStringWithDefaultValue(@"ui.fixbrokenapplecrap.itermmissioncontrolhacks.grant_accessibility_permission",
+                                                                              nil,
+                                                                              NSBundle.mainBundle,
+                                                                              @"You must grant iTerm2 accessibility permission in System Settings > Security & Privacy.",
+                                                                              @"How to enable permission required for switching macOS desktops.")];
         return;
     }
     CGEventRef keyDownEvent = [self newEventToSwitchToSpace:spaceNum down:YES];
     CGEventRef keyUpEvent = [self newEventToSwitchToSpace:spaceNum down:NO];
     if (!keyDownEvent || !keyUpEvent) {
         [self complainThatCantSwitchToSpace:spaceNum
-                                        fix:@"You must enable shortcuts to switch desktops in System Settings > Keyboard."];
+                                        fix:NSLocalizedStringWithDefaultValue(@"ui.fixbrokenapplecrap.itermmissioncontrolhacks.enable_desktop_shortcuts",
+                                                                              nil,
+                                                                              NSBundle.mainBundle,
+                                                                              @"You must enable shortcuts to switch desktops in System Settings > Keyboard.",
+                                                                              @"How to enable keyboard shortcuts required for switching macOS desktops.")];
         if (keyDownEvent) {
             CFRelease(keyDownEvent);
         }

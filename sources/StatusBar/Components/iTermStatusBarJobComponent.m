@@ -66,11 +66,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Job Name";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarjobcomponent.job_name.325711f0", nil, NSBundle.mainBundle, @"Job Name", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Shows the currently running job. If space permits, parent process names are also shown.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarjobcomponent.shows_the_currently_running_job_if_space_permits_parent_process_names_are_also_shown.628279e1", nil, NSBundle.mainBundle, @"Shows the currently running job. If space permits, parent process names are also shown.", @"Status bar component description.");
 }
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor

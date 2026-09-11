@@ -84,6 +84,9 @@ jobs:
 
       - name: Run tests
         run: |
+          # Preserve the existing English test plan when CN startup applies
+          # its saved app-language preference. This is the isolated CI suite.
+          defaults write iterm2-tests NoSyncApplicationLanguage -string en
           # Retry up to 3 times, but only for flaky ibtoold/asset catalog crashes
           for attempt in 1 2 3; do
             echo "::group::Attempt $attempt of 3"
@@ -96,6 +99,8 @@ jobs:
               -scheme ModernTests \
               -parallel-testing-enabled NO \
               -resultBundlePath TestResults.xcresult \
+              ITERM2_EDITION=cn \
+              ITERM2_MAIN_BUNDLE_IDENTIFIER=com.kun686.iterm2-cn \
               CODE_SIGN_IDENTITY="" \
               CODE_SIGNING_REQUIRED=NO \
               CODE_SIGNING_ALLOWED=NO 2>&1 | tee build_output.txt

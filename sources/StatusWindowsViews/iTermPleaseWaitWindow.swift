@@ -30,7 +30,7 @@ class PleaseWaitWindow: NSWindow {
         vev.state = .active
         contentView?.addSubview(vev)
 
-        cancelButton = NSButton(title: "Cancel", target: self, action: #selector(cancel(_:)))
+        cancelButton = NSButton(title: String(localized: "ui.swift.statuswindowsviews.itermpleasewaitwindow.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermPleaseWaitWindow."), target: self, action: #selector(cancel(_:)))
         messageLabel.stringValue = message
         messageLabel.isEditable = false
         messageLabel.isSelectable = false

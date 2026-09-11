@@ -118,7 +118,7 @@ class ChatSessionMentionAttachment: NSTextAttachment {
     // attachment so it lays out inline with the name.
     private static func iconString(font: NSFont, color: NSColor, symbolName: String) -> NSAttributedString? {
         guard let symbol = NSImage(systemSymbolName: symbolName,
-                                   accessibilityDescription: "iTerm2 session") else {
+                                   accessibilityDescription: String(localized: "ui.swift.aiterm.chatsessionmentionattachment.iterm2_session.0895478c", defaultValue: "iTerm2 session", bundle: .main, comment: "User-facing text in ChatSessionMentionAttachment.")) else {
             return nil
         }
         let height = font.ascender - font.descender
@@ -164,7 +164,7 @@ enum ChatMentionDisplay {
            !role.isEmpty {
             return title.isEmpty ? role : "\(role): \(title)"
         }
-        return title.isEmpty ? "Untitled session" : title
+        return title.isEmpty ? String(localized: "ui.swift.aiterm.chatsessionmentionattachment.untitled_session.3d9b66fd", defaultValue: "Untitled session", bundle: .main, comment: "User-facing text in ChatSessionMentionAttachment.") : title
     }
 }
 

@@ -34,10 +34,27 @@ class iTermBrowserWelcomePageHandler: NSObject, iTermBrowserPageHandler {
     func generateWelcomeHTML() -> String {
         let script = iTermBrowserTemplateLoader.loadTemplate(named: "welcome-page",
                                                              type: "js",
-                                                             substitutions: ["SECRET": secret])
+                                                             substitutions: [
+                                                                 "SECRET": secret,
+                                                                 "EMPTY_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.welcome.empty.title", defaultValue: "Your most visited sites will appear here"),
+                                                                 "EMPTY_HINT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.welcome.empty.hint", defaultValue: "Start browsing to build your history!"),
+                                                                 "VISIT_FORMAT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.welcome.visit_format.singular", defaultValue: "%1$lld visit"),
+                                                                 "VISITS_FORMAT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.welcome.visit_format.plural", defaultValue: "%1$lld visits")
+                                                             ])
         return iTermBrowserTemplateLoader.loadTemplate(named: "welcome-page",
                                                        type: "html",
                                                        substitutions: [
+                                                           "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+                                                           "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.page_title", defaultValue: "Welcome to iTerm2 Browser"),
+                                                           "WELCOME_BACK": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.title", defaultValue: "Welcome Back"),
+                                                           "WELCOME_SUBTITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.subtitle", defaultValue: "Pick up where you left off"),
+                                                           "TOP_SITES": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.top_sites", defaultValue: "Top Sites"),
+                                                           "REFRESH": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.refresh", defaultValue: "Refresh"),
+                                                           "QUICK_ACTIONS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.quick_actions", defaultValue: "Quick Actions"),
+                                                           "BOOKMARKS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.bookmarks.title", defaultValue: "Bookmarks"),
+                                                           "HISTORY": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.history", defaultValue: "History"),
+                                                           "SETTINGS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.settings", defaultValue: "Settings"),
+                                                           "PERMISSIONS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.permissions", defaultValue: "Permissions"),
                                                            "WELCOME_SCRIPT": script
                                                        ])
     }

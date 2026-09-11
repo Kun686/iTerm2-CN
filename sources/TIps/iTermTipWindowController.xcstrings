@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
         }
       }
     }

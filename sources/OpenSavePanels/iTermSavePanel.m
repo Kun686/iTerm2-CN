@@ -108,22 +108,22 @@ static NSString *const iTermSavePanelLoggingStyleUserDefaultsKey = @"NoSyncLoggi
         button = [[NSPopUpButton alloc] init];
         NSMenuItem *item;
         {
-            item = [[NSMenuItem alloc] initWithTitle:@"Raw data" action:nil keyEquivalent:@""];
+            item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.raw_data.84428a7a", nil, NSBundle.mainBundle, @"Raw data", @"User-facing text in iTermSavePanel (newSavePanelWithOptions:identifier:initialDirectory:defaultFilename:allowedFileTypes:delegate:).") action:nil keyEquivalent:@""];
             item.tag = iTermLoggingStyleRaw;
             [button.menu addItem:item];
         }
         {
-            item = [[NSMenuItem alloc] initWithTitle:@"Plain text" action:nil keyEquivalent:@""];
+            item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.plain_text.cf416625", nil, NSBundle.mainBundle, @"Plain text", @"User-facing text in iTermSavePanel (newSavePanelWithOptions:identifier:initialDirectory:defaultFilename:allowedFileTypes:delegate:).") action:nil keyEquivalent:@""];
             item.tag = iTermLoggingStylePlainText;
             [button.menu addItem:item];
         }
         {
-            item = [[NSMenuItem alloc] initWithTitle:@"HTML" action:nil keyEquivalent:@""];
+            item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.html.07239dbd", nil, NSBundle.mainBundle, @"HTML", @"User-facing text in iTermSavePanel (newSavePanelWithOptions:identifier:initialDirectory:defaultFilename:allowedFileTypes:delegate:).") action:nil keyEquivalent:@""];
             item.tag = iTermLoggingStyleHTML;
             [button.menu addItem:item];
         }
         {
-            item = [[NSMenuItem alloc] initWithTitle:@"ASCIInema" action:nil keyEquivalent:@""];
+            item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.asciinema.9e677fc0", nil, NSBundle.mainBundle, @"ASCIInema", @"User-facing text in iTermSavePanel (newSavePanelWithOptions:identifier:initialDirectory:defaultFilename:allowedFileTypes:delegate:).") action:nil keyEquivalent:@""];
             item.tag = iTermLoggingStyleAsciicast;
             [button.menu addItem:item];
         }
@@ -323,19 +323,18 @@ typedef NS_ENUM(NSUInteger, iTermSavePanelAction) {
     NSString *location = @"";
     NSString *directory = [self.item.filename stringByDeletingLastPathComponent];
     if ([directory isEqualToString:self.item.host.homeDirectory]) {
-        location = @" in your home directory";
+        location = NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.in_your_home_directory.a92b8a98", nil, NSBundle.mainBundle, @" in your home directory", @"User-facing phrase fragment in iTermSavePanel.");
     } else if (self.item.host.isLocalhost && [directory isEqualToString:[[NSFileManager defaultManager] desktopDirectory]]) {
-        location = @" on the Desktop";
+        location = NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.on_the_desktop.870a3625", nil, NSBundle.mainBundle, @" on the Desktop", @"User-facing phrase fragment in iTermSavePanel.");
     }
 
     NSString *heading =
-    [NSString stringWithFormat:@"“%@” already exists. Do you want to replace it or append to it?",
+    [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.already_exists_do_you_want_to_replace_it_or_append_to_it.7fa3fd32", nil, NSBundle.mainBundle, @"“%@” already exists. Do you want to replace it or append to it?", @"User-facing text in iTermSavePanel (indirect UI)."),
      [self.item.filename lastPathComponent]];
-    NSString *body = [NSString stringWithFormat:@"A file or folder with the same name already exists%@. "
-                      @"Replacing it will overwrite its current contents.",
+    NSString *body = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.a_file_or_folder_with_the_same_name_already_exists_replacing_it_will_ove.4f462535", nil, NSBundle.mainBundle, @"A file or folder with the same name already exists%@. Replacing it will overwrite its current contents.", @"User-facing text in iTermSavePanel (indirect UI)."),
                       location];
     iTermWarningSelection selection = [iTermWarning showWarningWithTitle:body
-                                                                 actions:@[ @"Cancel", @"Replace", @"Append" ]
+                                                                 actions:@[ NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermSavePanel (actions)."), NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.replace.95e15439", nil, NSBundle.mainBundle, @"Replace", @"User-facing action label in iTermSavePanel (actions)."), NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.append.fc15cc0a", nil, NSBundle.mainBundle, @"Append", @"User-facing action label in iTermSavePanel (actions).") ]
                                                                accessory:nil
                                                               identifier:nil
                                                              silenceable:kiTermWarningTypePersistent
@@ -404,14 +403,14 @@ typedef NS_ENUM(NSUInteger, iTermSavePanelAction) {
     if ([proposedExtension isEqualToString:self.requiredExtension]) {
         return YES;
     }
-    iTermWarningSelection selection = [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"You can choose to use both, so that your file name ends in “.%@.%@”.", proposedExtension, _requiredExtension]
-                                                                 actions:@[ [NSString stringWithFormat:@"Use .%@", _requiredExtension],
-                                                                            @"Cancel",
-                                                                            @"Use both" ]
+    iTermWarningSelection selection = [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.you_can_choose_to_use_both_so_that.a1ff1265", nil, NSBundle.mainBundle, @"You can choose to use both, so that your file name ends in “.%@.%@”.", @"User-facing text in iTermSavePanel (showWarningWithTitle)."), proposedExtension, _requiredExtension]
+                                                                 actions:@[ [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.use.30232327", nil, NSBundle.mainBundle, @"Use .%@", @"User-facing action label in iTermSavePanel (actions)."), _requiredExtension],
+                                                                            NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermSavePanel (actions)."),
+                                                                            NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.use_both.81f7c50a", nil, NSBundle.mainBundle, @"Use both", @"User-facing action label in iTermSavePanel (actions).") ]
                                                                accessory:nil
                                                               identifier:nil
                                                              silenceable:kiTermWarningTypePersistent
-                                                                 heading:[NSString stringWithFormat:@"You cannot save this document with extension “.%@” at the end of the name. The required extension is “.%@”.",
+                                                                 heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.opensavepanels.itermsavepanel.you_cannot_save_this_document_with_extension_at.15ca49d8", nil, NSBundle.mainBundle, @"You cannot save this document with extension “.%@” at the end of the name. The required extension is “.%@”.", @"User-facing text in iTermSavePanel (heading)."),
                                                                           proposedExtension, _requiredExtension]
                                                                   window:nil];
     switch (selection) {

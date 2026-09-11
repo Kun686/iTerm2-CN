@@ -52,7 +52,7 @@ final class CodeReviewPromptManagerWindowController: NSWindowController {
             styleMask: [.titled, .closable, .resizable, .miniaturizable],
             backing: .buffered,
             defer: false)
-        window.title = "Code Review Prompts"
+        window.title = String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.code_review_prompts.ab674ae5", defaultValue: "Code Review Prompts", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController.")
         window.setFrameAutosaveName("CodeReviewPromptManager")
         window.minSize = NSSize(width: 560, height: 320)
         super.init(window: window)
@@ -135,7 +135,7 @@ final class CodeReviewPromptManagerWindowController: NSWindowController {
             using: .systemFont(ofSize: NSFont.systemFontSize))
 
         let nameColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Name"))
-        nameColumn.title = "Name"
+        nameColumn.title = String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.name.dcd1d522", defaultValue: "Name", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController.")
         nameColumn.isEditable = true
         nameColumn.width = leftWidth - 4
         table.addTableColumn(nameColumn)
@@ -146,9 +146,9 @@ final class CodeReviewPromptManagerWindowController: NSWindowController {
 
         let segmented = NSSegmentedControl(images: [
             NSImage(systemSymbolName: "plus",
-                     accessibilityDescription: "Add")!,
+                     accessibilityDescription: String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.add.9fd728c6", defaultValue: "Add", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController."))!,
             NSImage(systemSymbolName: "minus",
-                     accessibilityDescription: "Remove")!
+                     accessibilityDescription: String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.remove.c3812fc4", defaultValue: "Remove", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController."))!
         ], trackingMode: .momentary, target: nil, action: nil)
         segmented.frame = NSRect(x: margin, y: margin,
                                   width: 60, height: segmentHeight)
@@ -160,7 +160,7 @@ final class CodeReviewPromptManagerWindowController: NSWindowController {
         let rightX = margin + leftWidth + margin
         let rightWidth = container.bounds.width - rightX - margin
 
-        let nameLabel = NSTextField(labelWithString: "Name:")
+        let nameLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.name.2683cad4", defaultValue: "Name:", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController."))
         nameLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
         nameLabel.textColor = .secondaryLabelColor
         nameLabel.frame = NSRect(x: rightX,
@@ -175,13 +175,13 @@ final class CodeReviewPromptManagerWindowController: NSWindowController {
             y: nameLabel.frame.minY - 24,
             width: rightWidth,
             height: 22))
-        nameInput.placeholderString = "Untitled"
+        nameInput.placeholderString = String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.untitled.f59ab8d1", defaultValue: "Untitled", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController.")
         nameInput.autoresizingMask = [.width, .minYMargin]
         nameInput.delegate = self
         container.addSubview(nameInput)
         nameField = nameInput
 
-        let bodyLabel = NSTextField(labelWithString: "Prompt:")
+        let bodyLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.prompt.35261535", defaultValue: "Prompt:", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController."))
         bodyLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
         bodyLabel.textColor = .secondaryLabelColor
         bodyLabel.frame = NSRect(x: rightX,
@@ -221,7 +221,7 @@ final class CodeReviewPromptManagerWindowController: NSWindowController {
         bodyScrollView = bodyScroll
 
         let placeholder = NSTextField(wrappingLabelWithString:
-            "Select a prompt on the left to edit it, or click + to add a new prompt.")
+            String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.select_a_prompt_on_the_left_to_edit.d6dcce04", defaultValue: "Select a prompt on the left to edit it, or click + to add a new prompt.", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController."))
         placeholder.font = .systemFont(ofSize: NSFont.systemFontSize)
         placeholder.textColor = .secondaryLabelColor
         placeholder.alignment = .center
@@ -429,7 +429,7 @@ private final class PromptDataProvider: CRUDDataProvider {
 
     func makeNew(completion: @escaping (Int) -> ()) {
         guard let controller else { return }
-        let name = uniqueName(basedOn: "New Prompt")
+        let name = uniqueName(basedOn: String(localized: "ui.swift.workgroups.codereviewpromptmanagerwindowcontroller.new_prompt.c0053129", defaultValue: "New Prompt", bundle: .main, comment: "User-facing text in CodeReviewPromptManagerWindowController."))
         var newIndex = -1
         controller.performLocalMutation {
             controller.crudController?.undoable {

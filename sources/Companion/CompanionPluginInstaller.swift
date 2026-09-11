@@ -27,17 +27,28 @@ enum CompanionPluginInstallerError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .appSupportUnavailable:
-            return "Could not find iTerm2’s Application Support directory."
+            return String(localized: "ui.swift.companion.companionplugininstaller.could_not_find_iterm2_s_application_support_directory.067b7abf", defaultValue: "Could not find iTerm2’s Application Support directory.", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
         case .downloadFailed(let reason):
-            return "Download failed: \(reason)"
+            return String(localized: "ui.swift.companion.companionplugininstaller.download_failed_0.7f360187", defaultValue: "Download failed: \(reason)", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
         case .badResponse(let code):
-            return "Download failed with HTTP status \(code)."
+            return String(localized: "ui.swift.companion.companionplugininstaller.download_failed_with_http_status_0.d5b4ed3b", defaultValue: "Download failed with HTTP status \(code).", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
         case .unzipFailed(let reason):
-            return "Could not unpack the downloaded plugin: \(reason)"
+            return String(localized: "ui.swift.companion.companionplugininstaller.could_not_unpack_the_downloaded_plugin_0.95446eed", defaultValue: "Could not unpack the downloaded plugin: \(reason)", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
         case .bundleNotFound:
-            return "The downloaded archive did not contain a plugin."
+            return String(localized: "ui.swift.companion.companionplugininstaller.the_downloaded_archive_did_not_contain_a_plugin.cf2b08e2", defaultValue: "The downloaded archive did not contain a plugin.", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
         case .verificationFailed(let name):
-            return "The \(name) did not load after installation."
+            // Specs and error arguments also carry diagnostic names. Translate
+            // only their presentation copy, leaving unknown names untouched.
+            let displayName: String
+            switch name {
+            case "AI plugin":
+                displayName = String(localized: "ui.swift.companion.companionplugininstaller.ai_plugin.9412826a", defaultValue: "AI plugin", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
+            case "companion plugin":
+                displayName = String(localized: "ui.swift.companion.companionplugininstaller.companion_plugin.56041357", defaultValue: "companion plugin", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
+            default:
+                displayName = name
+            }
+            return String(localized: "ui.swift.companion.companionplugininstaller.the_0_did_not_load_after_installation.8d90e8e2", defaultValue: "The \(displayName) did not load after installation.", bundle: .main, comment: "User-facing text in CompanionPluginInstaller.")
         }
     }
 }

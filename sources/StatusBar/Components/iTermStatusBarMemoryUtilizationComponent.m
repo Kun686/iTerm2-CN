@@ -37,11 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Memory Utilization";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarmemoryutilizationcomponent.memory_utilization.50aad169", nil, NSBundle.mainBundle, @"Memory Utilization", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Shows current memory utilization.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarmemoryutilizationcomponent.shows_current_memory_utilization.d542a265", nil, NSBundle.mainBundle, @"Shows current memory utilization.", @"Status bar component description.");
 }
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor

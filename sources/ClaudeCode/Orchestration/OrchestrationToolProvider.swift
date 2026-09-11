@@ -372,120 +372,17 @@ final class OrchestrationToolProvider: ToolProvider {
     static func humanDescription(forToolName name: String,
                                   args: AnyCodable) -> String {
         let dict = (args.value as? [String: Any]) ?? [:]
-        switch name {
-        case "list_workgroups":
-            return "Looking up workgroups"
-        case "get_state":
-            return "Checking state of " + sessionDescription(args: dict)
-        case "get_screen_contents":
-            return "Reading screen of " + sessionDescription(args: dict)
-        case "scroll_wheel":
-            // direction defaults to "up" (reveal older content) at the
-            // dispatcher; mirror that here so the bubble matches behavior.
-            let direction = (dict["direction"] as? String) ?? "up"
-            let what = (direction == "down") ? "newer" : "older"
-            return "Scrolling " + sessionDescription(args: dict)
-                + " to show \(what) content"
-        case "list_workgroup_clippings":
-            return "Listing clippings in " + workgroupDescription(args: dict)
-        case "send_text":
-            let text = (dict["text"] as? String) ?? ""
-            return "Typing into " + sessionDescription(args: dict)
-                + ": " + previewQuote(text)
-        case "interrupt":
-            return "Interrupting " + sessionDescription(args: dict)
-        case "add_workgroup_clipping":
-            let title = (dict["title"] as? String) ?? "(untitled)"
-            return "Posting clipping \u{201C}\(title)\u{201D} to "
-                + workgroupDescription(args: dict)
-        case "start_session":
-            if let cmd = dict["command"] as? String, !cmd.isEmpty {
-                return "Starting new session: `\(cmd)`"
-            }
-            return "Starting new session"
-        case "start_code_review":
-            let promptLabel: String
-            if let name = dict["prompt_name"] as? String, !name.isEmpty {
-                promptLabel = "with saved prompt \u{201C}\(name)\u{201D}"
-            } else if let custom = dict["custom_prompt"] as? String, !custom.isEmpty {
-                promptLabel = "with " + previewQuote(custom)
-            } else {
-                promptLabel = "with the default prompt"
-            }
-            return "Kicking off Code Review on " + sessionDescription(args: dict)
-                + " " + promptLabel
-        case "register_watch":
-            // Session-bound register_watch carries no session_guid (the target
-            // is the chat's linked session); render that as "the linked session"
-            // rather than the "(unknown session)" fallback.
-            let hasGuid = (dict["session_guid"] as? String).map { !$0.isEmpty } ?? false
-            let target = hasGuid ? sessionDescription(args: dict) : "the linked session"
-            if let condition = dict["condition"] as? String, !condition.isEmpty {
-                return "Will notify when " + target + " satisfies: " + previewQuote(condition)
-            }
-            let state = (dict["target_state"] as? String) ?? "?"
-            return "Will notify when " + target + " becomes **\(state)**"
-        case "unregister_watch":
-            return "Cancelling a watch"
-        case "list_watches":
-            return "Listing active watches"
-        default:
-            if name.hasPrefix("session_") {
-                let raw = String(name.dropFirst("session_".count))
-                if raw == "execute_command",
-                   let cmd = dict["command"] as? String,
-                   !cmd.isEmpty {
-                    return "Executing `\(cmd.escapedForMarkdownCode.truncatedWithTrailingEllipsis(to: 80))`"
-                }
-                // Use the @<guid> mention form (not a bare backticked guid) so
-                // OrchestrationMentionRenderer rewrites it to the session's name
-                // (or "[defunct session]" when it no longer resolves).
-                return "\(prettifyToolName(raw)) in " + sessionDescription(args: dict)
-            }
-            return prettifyToolName(name)
-        }
+        return ExternalRemoteCommandDescriptionFormatter.localizedDescription(
+            forToolName: name,
+            args: dict)
     }
 
-    private static func prettifyToolName(_ name: String) -> String {
-        let words = name.split(separator: "_").map(String.init)
-        guard let first = words.first else { return name }
-        let capitalized = first.prefix(1).uppercased() + first.dropFirst()
-        return ([capitalized] + words.dropFirst()).joined(separator: " ")
-    }
-
-    // Emits an @-mention of the target session rather than resolving it
-    // here. OrchestrationMentionRenderer turns it into a link to the
-    // session's current name at display time, or "[defunct session]"
-    // once the session is gone, sharing the same machinery the
-    // orchestrator's text bubbles use.
-    private static func sessionDescription(args dict: [String: Any]) -> String {
-        guard let guid = dict["session_guid"] as? String, !guid.isEmpty else {
-            return "_(unknown session)_"
-        }
-        return "@\(guid)"
-    }
-
-    // As above, but for a whole-workgroup target. The workgroup_id is
-    // already in the "session:<uuid>" / "wg-<uuid>" form the mention
-    // renderer's regex understands.
-    private static func workgroupDescription(args dict: [String: Any]) -> String {
-        guard let wg = dict["workgroup_id"] as? String, !wg.isEmpty else {
-            return "_unknown workgroup_"
-        }
-        return "@\(wg)"
-    }
-
-    private static func previewQuote(_ text: String) -> String {
-        let oneLine = text
-            .replacingOccurrences(of: "\n", with: " ")
-            .replacingOccurrences(of: "\r", with: " ")
-        let maxLen = 80
-        let snippet: String
-        if oneLine.count <= maxLen {
-            snippet = oneLine
-        } else {
-            snippet = String(oneLine.prefix(maxLen)) + "…"
-        }
-        return "\u{201C}\(snippet)\u{201D}"
+    @MainActor
+    static func stableEnglishDescription(forToolName name: String,
+                                         args: AnyCodable) -> String {
+        let dict = (args.value as? [String: Any]) ?? [:]
+        return ExternalRemoteCommandDescriptionFormatter.englishDescription(
+            forToolName: name,
+            args: dict)
     }
 }

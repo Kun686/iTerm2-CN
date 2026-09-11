@@ -240,7 +240,7 @@
         return nil;
     }
     if ([[iTermSecureKeyboardEntryController sharedInstance] isEnabled]) {
-        return @"⚠️ Secure keyboard entry disables paste history.";
+        return NSLocalizedStringWithDefaultValue(@"ui.popups.pasteboardhistory.secure_keyboard_entry_disables_paste_history.9d09fa6d", nil, NSBundle.mainBundle, @"⚠️ Secure keyboard entry disables paste history.", @"Paste history footer shown while secure keyboard entry is enabled.");
     }
     return nil;
 }
@@ -302,9 +302,9 @@
         } else {
             plus = @"";
         }
-        NSString *s = numberOfLines != 1 ? @"s": @"";
-        formattedNumberOfLines = [NSString stringWithFormat:@"%@%@ line%@", @(numberOfLines), plus, s];
-        return [NSString stringWithFormat:@"%@, %@, %@", formattedNumberOfLines, formattedLength, formattedDate];
+        NSString *lineCountFormat = numberOfLines != 1 ? NSLocalizedStringWithDefaultValue(@"ui.popups.pasteboardhistory.lines.6f13fe4a", nil, NSBundle.mainBundle, @"%@%@ lines", @"Plural paste-history line count. The second placeholder is a plus sign when the count is truncated.") : NSLocalizedStringWithDefaultValue(@"ui.popups.pasteboardhistory.line.9a825460", nil, NSBundle.mainBundle, @"%@%@ line", @"Singular paste-history line count. The second placeholder is a plus sign when the count is truncated.");
+        formattedNumberOfLines = [NSString stringWithFormat:lineCountFormat, @(numberOfLines), plus];
+        return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.popups.pasteboardhistory.format.82260e58", nil, NSBundle.mainBundle, @"%@, %@, %@", @"Paste-history metadata summary: line count, size, and relative date."), formattedNumberOfLines, formattedLength, formattedDate];
     } else {
         // Contents
         return [super tableView:aTableView objectValueForTableColumn:aTableColumn row:rowIndex];
@@ -341,4 +341,3 @@
 }
 
 @end
-

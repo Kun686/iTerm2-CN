@@ -128,7 +128,7 @@ final class iTermWorkgroupInstance: NSObject {
     // Human-readable workgroup name for user-facing messages, with the
     // same empty-name fallback the Workgroups menu uses.
     @objc var workgroupDisplayName: String {
-        return workgroup.name.isEmpty ? "Untitled" : workgroup.name
+        return workgroup.name.isEmpty ? String(localized: "ui.swift.workgroups.itermworkgroupinstance.untitled.f59ab8d1", defaultValue: "Untitled", bundle: .main, comment: "User-facing text in iTermWorkgroupInstance.") : workgroup.name
     }
 
     // Every live session teardown would terminate: the main session,
@@ -188,11 +188,14 @@ final class iTermWorkgroupInstance: NSObject {
             names.append(instance.workgroupDisplayName)
         }
         guard extraCount > 0 else { return nil }
-        let sessionWord = extraCount == 1 ? "session" : "sessions"
         if names.count == 1 {
-            return "This will also exit the workgroup “\(names[0])” and close \(extraCount) other \(sessionWord)."
+            return extraCount == 1
+                ? String(localized: "ui.swift.workgroups.itermworkgroupinstance.this_will_also_exit_the_workgroup_0_and.0ee10d3d", defaultValue: "This will also exit the workgroup “\(names[0])” and close 1 other session.", bundle: .main, comment: "User-facing text in iTermWorkgroupInstance.")
+                : String(localized: "ui.swift.workgroups.itermworkgroupinstance.this_will_also_exit_the_workgroup_0_and.f682b0be", defaultValue: "This will also exit the workgroup “\(names[0])” and close \(extraCount) other sessions.", bundle: .main, comment: "User-facing text in iTermWorkgroupInstance.")
         }
-        return "This will also exit \(names.count) workgroups and close \(extraCount) other \(sessionWord)."
+        return extraCount == 1
+            ? String(localized: "ui.swift.workgroups.itermworkgroupinstance.this_will_also_exit_0_workgroups_and_close.5c6ea6aa", defaultValue: "This will also exit \(names.count) workgroups and close 1 other session.", bundle: .main, comment: "User-facing text in iTermWorkgroupInstance.")
+            : String(localized: "ui.swift.workgroups.itermworkgroupinstance.this_will_also_exit_0_workgroups_and_close.1a005d4b", defaultValue: "This will also exit \(names.count) workgroups and close \(extraCount) other sessions.", bundle: .main, comment: "User-facing text in iTermWorkgroupInstance.")
     }
 
     // Workgroup-wide git poller, shared across every gitStatus and

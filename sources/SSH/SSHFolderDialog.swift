@@ -36,15 +36,15 @@ class SSHFolderDialog: NSObject {
 
         // Initialize alert
         self.alert = NSAlert()
-        alert.messageText = "Go to the folder:"
-        alert.informativeText = "Type a pathname or select from the pop-up menu"
-        alert.addButton(withTitle: "Go")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.ssh.sshfolderdialog.go_to_the_folder.62bb0763", defaultValue: "Go to the folder:", bundle: .main, comment: "User-facing text in SSHFolderDialog.")
+        alert.informativeText = String(localized: "ui.swift.ssh.sshfolderdialog.type_a_pathname_or_select_from_the_pop.a6cf9661", defaultValue: "Type a pathname or select from the pop-up menu", bundle: .main, comment: "User-facing text in SSHFolderDialog.")
+        alert.addButton(withTitle: String(localized: "ui.swift.ssh.sshfolderdialog.go.6cc8519b", defaultValue: "Go", bundle: .main, comment: "User-facing text in SSHFolderDialog."))
+        alert.addButton(withTitle: String(localized: "ui.swift.ssh.sshfolderdialog.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in SSHFolderDialog."))
 
         // Initialize text field
         self.textField = SSHFolderDialogTextField(frame: NSRect(x: 0, y: 0, width: 300, height: 24))
         textField.stringValue = currentPath ?? ""
-        textField.placeholderString = "Enter path (e.g., /usr/local/bin)"
+        textField.placeholderString = String(localized: "ui.swift.ssh.sshfolderdialog.enter_path_e_g_usr_local_bin.25f1cdb1", defaultValue: "Enter path (e.g., /usr/local/bin)", bundle: .main, comment: "User-facing text in SSHFolderDialog.")
 
         super.init()
 
@@ -160,7 +160,7 @@ class SSHFolderDialog: NSObject {
                 parent: alert.window,
                 location: textFieldFrame,
                 mode: .indicator,
-                placeholder: "Loading completions…",
+                placeholder: String(localized: "ui.swift.ssh.sshfolderdialog.loading_completions.3b0bbedb", defaultValue: "Loading completions…", bundle: .main, comment: "User-facing text in SSHFolderDialog."),
                 allowKey: false
             )
             textField.onSpecialKey = { [weak completionsWindow, weak self] key in
@@ -199,7 +199,7 @@ class SSHFolderDialog: NSObject {
                     // Convert to CompletionsWindow items
                     let items = suggestions.map { path in
                         let displayPath = path
-                        let detail = "Folder on " + hostname
+                        let detail = String(localized: "ui.swift.ssh.sshfolderdialog.folder_on_0.1471dd0d", defaultValue: "Folder on \(hostname)", bundle: .main, comment: "User-facing text in SSHFolderDialog.")
 
                         return CompletionsWindow.Item(
                             suggestion: path,

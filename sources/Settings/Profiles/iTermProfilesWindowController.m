@@ -180,7 +180,7 @@ typedef enum {
         [tableView_ setTagsOpen:YES animated:NO];
     }
     // Load the new window icon for split buttons
-    _newWindowIcon = [NSImage imageWithSystemSymbolName:@"rectangle.badge.plus" accessibilityDescription:@"Open in new window"];
+        _newWindowIcon = [NSImage imageWithSystemSymbolName:@"rectangle.badge.plus" accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.open_in_new_window.2f0cf49d", nil, NSBundle.mainBundle, @"Open in new window", @"Accessibility description for opening a profile in a new window.")];
     [horizontalPaneButton_ setImagePosition:NSImageLeft];
     [verticalPaneButton_ setImagePosition:NSImageLeft];
 }
@@ -341,7 +341,7 @@ typedef enum {
 }
 
 - (void)profileTableTagsVisibilityDidChange:(ProfileListView *)profileListView {
-    [toggleTagsButton_ setTitle:profileListView.tagsVisible ? @"< Tags" : @"Tags >"];
+    [toggleTagsButton_ setTitle:profileListView.tagsVisible ? NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.tags.2ec6c78c", nil, NSBundle.mainBundle, @"< Tags", @"User-facing text in iTermProfilesWindowController (profileTableTagsVisibilityDidChange:).") : NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.tags.ceb515fa", nil, NSBundle.mainBundle, @"Tags >", @"User-facing text in iTermProfilesWindowController (profileTableTagsVisibilityDidChange:).")];
 }
 
 - (void)profileTableSelectionDidChange:(id)profileTable
@@ -361,7 +361,7 @@ typedef enum {
         // don't want to break that.
         [tabButton_ setEnabled:!anySelectionDisablesTabs];
         [windowButton_ setEnabled:YES];
-        [windowButton_ setTitle:([guids count] > 1 ? @"New Windows" : @"New Window")];
+        [windowButton_ setTitle:([guids count] > 1 ? NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.new_windows.57ab2d2b", nil, NSBundle.mainBundle, @"New Windows", @"User-facing text in iTermProfilesWindowController (profileTableSelectionDidChange:).") : NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.new_window.7469c2f6", nil, NSBundle.mainBundle, @"New Window", @"User-facing text in iTermProfilesWindowController (profileTableSelectionDidChange:)."))];
         if ([guids count] > 1) {
             [newTabsInNewWindowButton_ setEnabled:!anySelectionDisablesTabs];
             [horizontalPaneButton_ setEnabled:YES];
@@ -431,24 +431,24 @@ typedef enum {
 }
 
 - (NSMenu *)profileTable:(id)profileTable menuForEvent:(NSEvent *)theEvent {
-    NSMenu *menu = [[NSMenu alloc] initWithTitle:@"Contextual Menu"];
+    NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.contextual_menu.3db60c37", nil, NSBundle.mainBundle, @"Contextual Menu", @"User-facing text in iTermProfilesWindowController (profileTable:menuForEvent:).")];
 
     int count = [[profileTable selectedGuids] count];
     if (count == 1) {
-        [menu addItemWithTitle:@"Edit Profile..."
+        [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.edit_profile.a34d4447", nil, NSBundle.mainBundle, @"Edit Profile...", @"User-facing text in iTermProfilesWindowController (profileTable:menuForEvent:).")
                         action:@selector(editSelectedBookmark:)
                  keyEquivalent:@""];
-        [menu addItemWithTitle:@"Open in New Tab"
+        [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.open_in_new_tab.35e74c3a", nil, NSBundle.mainBundle, @"Open in New Tab", @"User-facing text in iTermProfilesWindowController (profileTable:menuForEvent:).")
                         action:@selector(openBookmarkInTab:)
                  keyEquivalent:@""];
-        [menu addItemWithTitle:@"Open in New Window"
+        [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.open_in_new_window.e8e0ccba", nil, NSBundle.mainBundle, @"Open in New Window", @"User-facing text in iTermProfilesWindowController (profileTable:menuForEvent:).")
                         action:@selector(openBookmarkInWindow:)
                  keyEquivalent:@""];
     } else if (count > 1) {
-        [menu addItemWithTitle:@"Open in New Tabs"
+        [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.open_in_new_tabs.7647b64f", nil, NSBundle.mainBundle, @"Open in New Tabs", @"User-facing text in iTermProfilesWindowController (profileTable:menuForEvent:).")
                         action:@selector(openBookmarkInTab:)
                  keyEquivalent:@""];
-        [menu addItemWithTitle:@"Open in New Windows"
+        [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profiles.itermprofileswindowcontroller.open_in_new_windows.e512e42e", nil, NSBundle.mainBundle, @"Open in New Windows", @"User-facing text in iTermProfilesWindowController (profileTable:menuForEvent:).")
                         action:@selector(openBookmarkInWindow:)
                  keyEquivalent:@""];
     }

@@ -182,7 +182,7 @@ class PathCompletionHelper: NSObject {
         completionsWindow = CompletionsWindow(parent: window,
                                               location: rect,
                                               mode: .indicator,
-                                              placeholder: "Getting directory listing…")
+                                              placeholder: String(localized: "ui.swift.ptysession.pathcompletionhelper.getting_directory_listing.2138c459", defaultValue: "Getting directory listing…", bundle: .main, comment: "User-facing text in PathCompletionHelper."))
         completionsWindow?.selectionDidChange = { [weak self] _, suggestion in
             self?.selection = suggestion
         }

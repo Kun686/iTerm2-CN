@@ -548,10 +548,10 @@
     if (version < 1) {
         DLogCyclic(_log, @"Migrating schema to version 1: adding generation and large_data columns");
         if (![state.db executeUpdate:@"ALTER TABLE Node ADD COLUMN generation INTEGER DEFAULT 0"]) {
-            NSString *error = [state.db.lastError localizedDescription] ?: @"Unknown error";
+            NSString *error = [state.db.lastError localizedDescription] ?: NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermgraphdatabase.unknown_error.27c2ccd9", nil, NSBundle.mainBundle, @"Unknown error", @"Fallback error shown when migrating the session database.");
             dispatch_async(dispatch_get_main_queue(), ^{
-                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Failed to migrate session database (adding generation column): %@", error]
-                                           actions:@[ @"OK" ]
+                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermgraphdatabase.failed_to_migrate_session_database_adding_generation_column.b27fa2ba", nil, NSBundle.mainBundle, @"Failed to migrate session database (adding generation column): %@", @"User-facing text in iTermGraphDatabase (showWarningWithTitle)."), error]
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermgraphdatabase.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermGraphDatabase (actions).") ]
                                         identifier:@"NoSyncGraphDatabaseMigrationFailed"
                                        silenceable:kiTermWarningTypePersistent
                                             window:nil];
@@ -559,10 +559,10 @@
             return NO;
         }
         if (![state.db executeUpdate:@"ALTER TABLE Node ADD COLUMN large_data BLOB"]) {
-            NSString *error = [state.db.lastError localizedDescription] ?: @"Unknown error";
+            NSString *error = [state.db.lastError localizedDescription] ?: NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermgraphdatabase.unknown_error.27c2ccd9", nil, NSBundle.mainBundle, @"Unknown error", @"Fallback error shown when migrating the session database.");
             dispatch_async(dispatch_get_main_queue(), ^{
-                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Failed to migrate session database (adding large_data column): %@", error]
-                                           actions:@[ @"OK" ]
+                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermgraphdatabase.failed_to_migrate_session_database_adding_large_data.1b81354a", nil, NSBundle.mainBundle, @"Failed to migrate session database (adding large_data column): %@", @"User-facing text in iTermGraphDatabase (showWarningWithTitle)."), error]
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.staterestoration.itermgraphdatabase.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermGraphDatabase (actions).") ]
                                         identifier:@"NoSyncGraphDatabaseMigrationFailed"
                                        silenceable:kiTermWarningTypePersistent
                                             window:nil];
@@ -658,4 +658,3 @@
 }
 
 @end
-

@@ -128,7 +128,7 @@ static NSString *const iTermInstallStagingPrefix = @".installing-";
             DLog(@"Unzip finished with %@", error);
             if (error) {
                 [pleaseWait.window close];
-                completion([NSString stringWithFormat: @"Could not unzip archive: %@", error.localizedDescription], NO, nil);
+                completion([NSString stringWithFormat:@"Could not unzip archive: %@", error.localizedDescription], NO, nil);
                 sInstallingScript = NO;
                 return;
             }
@@ -263,15 +263,15 @@ static NSString *const iTermInstallStagingPrefix = @".installing-";
                              withCertificate:(SIGCertificate *)cert
                                   completion:(void (^)(BOOL ok, BOOL toTemp))completion {
     DLog(@"Confirming");
-    NSString *body = [NSString stringWithFormat:@"The signature of ”%@” has been verified. The author is:\n\n%@\n\nWould you like to install it?",
+    NSString *body = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.the_signature_of_has_been_verified_the_author_is_would_you_like_to_insta.ab386218", nil, NSBundle.mainBundle, @"The signature of ”%@” has been verified. The author is:\n\n%@\n\nWould you like to install it?", @"User-facing text in iTermScriptImporter (indirect UI)."),
                       reader.url.lastPathComponent,
-                      ((cert.name ?: cert.longDescription) ?: @"Unknown")];
+                      ((cert.name ?: cert.longDescription) ?: NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.unknown.b764cdc0", nil, NSBundle.mainBundle, @"Unknown", @"User-facing phrase fragment in iTermScriptImporter."))];
     iTermWarningSelection selection = [iTermWarning showWarningWithTitle:body
-                                                                 actions:@[ @"OK", @"Cancel", @"Reveal Contents" ]
+                                                                 actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermScriptImporter (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermScriptImporter (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.reveal_contents.03c0877a", nil, NSBundle.mainBundle, @"Reveal Contents", @"User-facing action label in iTermScriptImporter (actions).") ]
                                                                accessory:nil
                                                               identifier:nil
                                                              silenceable:kiTermWarningTypePersistent
-                                                                 heading:@"Confirm Installation"
+                                                                 heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.confirm_installation.81e71716", nil, NSBundle.mainBundle, @"Confirm Installation", @"User-facing text in iTermScriptImporter (heading).")
                                                                   window:nil];
     completion(selection != kiTermWarningSelection1, selection == kiTermWarningSelection2);
 }
@@ -342,12 +342,12 @@ static NSString *const iTermInstallStagingPrefix = @".installing-";
         DLog(@"Already have a script named %@", archive.name);
         iTermWarningSelection selection = kiTermWarningSelection0;
         if (!avoidUI) {
-            selection = [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"A script named “%@” is already installed", archive.name]
-                                                   actions:@[ @"Replace Script", @"Cancel" ]
+            selection = [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.a_script_named_is_already_installed.be945841", nil, NSBundle.mainBundle, @"A script named “%@” is already installed", @"User-facing text in iTermScriptImporter (showWarningWithTitle)."), archive.name]
+                                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.replace_script.64453b4a", nil, NSBundle.mainBundle, @"Replace Script", @"User-facing action label in iTermScriptImporter (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermScriptImporter (actions).") ]
                                                  accessory:nil
                                                 identifier:nil
                                                silenceable:kiTermWarningTypePersistent
-                                                   heading:@"Script Already Exists"
+                                                   heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptimporter.script_already_exists.dd835987", nil, NSBundle.mainBundle, @"Script Already Exists", @"User-facing text in iTermScriptImporter (heading).")
                                                     window:nil];
         }
         if (selection == kiTermWarningSelection0) {

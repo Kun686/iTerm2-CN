@@ -90,25 +90,28 @@ class iTermKeyMappingRepair: NSObject {
                 return keystrokeString
             }
             let action = iTermKeyBindingAction.withDictionary(actionDict)
-            let actionName = action?.displayName ?? "Unknown action"
+            let actionName = action?.displayName ?? String(localized: "ui.swift.settings.itermkeymappingrepair.unknown_action.7ef8915e", defaultValue: "Unknown action", bundle: .main, comment: "User-facing text in iTermKeyMappingRepair.")
             return "\(keystrokeString): \(actionName)"
         }
 
         let bindingsList = descriptions.sorted().map { "• \($0)" }.joined(separator: "\n")
         let count = corrupted.count
-        let bindingWord = count == 1 ? "key binding" : "key bindings"
-        let message = """
-            This will repair \(count) \(bindingWord) that \(count == 1 ? "was" : "were") corrupted by a bug in \
-            an earlier version of iTerm2. The affected \(count == 1 ? "binding currently displays" : "bindings currently display") incorrectly \
-            but \(count == 1 ? "functions" : "function") properly. After repair, \(count == 1 ? "it" : "they") will display correctly.
-
-            Affected \(bindingWord):
-            \(bindingsList)
-            """
+        let message: String
+        if count == 1 {
+            message = String(localized: "ui.settings.key_mapping_repair.message.singular",
+                             defaultValue: "This will repair \(count) key binding that was corrupted by a bug in an earlier version of iTerm2. The affected binding currently displays incorrectly but functions properly. After repair, it will display correctly.\n\nAffected key binding:\n\(bindingsList)",
+                             bundle: .main,
+                             comment: "Confirmation message for repairing one corrupted key binding.")
+        } else {
+            message = String(localized: "ui.settings.key_mapping_repair.message.plural",
+                             defaultValue: "This will repair \(count) key bindings that were corrupted by a bug in an earlier version of iTerm2. The affected bindings currently display incorrectly but function properly. After repair, they will display correctly.\n\nAffected key bindings:\n\(bindingsList)",
+                             bundle: .main,
+                             comment: "Confirmation message for repairing multiple corrupted key bindings.")
+        }
 
         let selection = iTermWarning.show(
             withTitle: message,
-            actions: ["Repair", "Cancel"],
+            actions: [String(localized: "ui.swift.settings.itermkeymappingrepair.repair.1196b6c5", defaultValue: "Repair", bundle: .main, comment: "User-facing text in iTermKeyMappingRepair."), String(localized: "ui.swift.settings.itermkeymappingrepair.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermKeyMappingRepair.")],
             identifier: nil,
             silenceable: .kiTermWarningTypePersistent,
             window: window

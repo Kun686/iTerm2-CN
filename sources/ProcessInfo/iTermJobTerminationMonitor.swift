@@ -64,7 +64,7 @@ class iTermJobTerminationMonitor: NSObject {
                                                       eventMask: .exit,
                                                       queue: .main)
         sources[pid] = source
-        names[pid] = name ?? "unknown name"
+        names[pid] = name ?? String(localized: "ui.swift.processinfo.itermjobterminationmonitor.unknown_name.18d5a889", defaultValue: "unknown name", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor.")
         source.setEventHandler { [weak self] in
             self?.processDidTerminate(pid)
         }
@@ -125,28 +125,28 @@ class iTermJobTerminationMonitor: NSObject {
         let alert = NSAlert()
         if terminations.count == 1 {
             let termination = terminations[0]
-            alert.messageText = "Job Terminated"
+            alert.messageText = String(localized: "ui.swift.processinfo.itermjobterminationmonitor.job_terminated.600160d4", defaultValue: "Job Terminated", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor.")
             alert.informativeText = sentence(for: termination)
         } else {
-            alert.messageText = "Jobs Terminated"
+            alert.messageText = String(localized: "ui.swift.processinfo.itermjobterminationmonitor.jobs_terminated.703ce502", defaultValue: "Jobs Terminated", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor.")
             alert.informativeText = terminations.map { "• " + sentence(for: $0) }.joined(separator: "\n")
         }
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.processinfo.itermjobterminationmonitor.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor."))
         alert.runModal()
     }
 
     private func sentence(for termination: (name: String, pid: pid_t)) -> String {
-        let displayName = termination.name.isEmpty ? "(unknown)" : termination.name
-        return "The job \(displayName) with process ID \(termination.pid) has terminated."
+        let displayName = termination.name.isEmpty ? String(localized: "ui.swift.processinfo.itermjobterminationmonitor.unknown.8fe7794d", defaultValue: "(unknown)", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor.") : termination.name
+        return String(localized: "ui.swift.processinfo.itermjobterminationmonitor.the_job_0_with_process_id_1_has.81af8c43", defaultValue: "The job \(displayName) with process ID \(termination.pid) has terminated.", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor.")
     }
 
     private func showCannotMonitorAlert(pid: pid_t, name: String?) {
-        let displayName = (name?.isEmpty == false) ? name! : "(unknown)"
+        let displayName = (name?.isEmpty == false) ? name! : String(localized: "ui.swift.processinfo.itermjobterminationmonitor.unknown.8fe7794d", defaultValue: "(unknown)", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor.")
         NSApp.activate(ignoringOtherApps: true)
         let alert = NSAlert()
-        alert.messageText = "Cannot Notify on Termination"
-        alert.informativeText = "iTerm2 cannot watch the job \(displayName) with process ID \(pid) because it has already terminated."
-        alert.addButton(withTitle: "OK")
+        alert.messageText = String(localized: "ui.swift.processinfo.itermjobterminationmonitor.cannot_notify_on_termination.8907cc8d", defaultValue: "Cannot Notify on Termination", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor.")
+        alert.informativeText = String(localized: "ui.swift.processinfo.itermjobterminationmonitor.iterm2_cannot_watch_the_job_0_with_process.f3893427", defaultValue: "iTerm2 cannot watch the job \(displayName) with process ID \(pid) because it has already terminated.", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor.")
+        alert.addButton(withTitle: String(localized: "ui.swift.processinfo.itermjobterminationmonitor.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermJobTerminationMonitor."))
         alert.runModal()
     }
 }

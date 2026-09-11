@@ -101,7 +101,7 @@ enum MessagesSinceResponder {
         case .remoteCommandRequest(.classic(let command), safe: _):
             return command.permissionDescription
         case .selectSessionRequest:
-            return "The agent needs you to choose a session."
+            return String(localized: "ui.swift.companion.messagessinceresponder.the_agent_needs_you_to_choose_a_session.defa8a12", defaultValue: "The agent needs you to choose a session.", bundle: .main, comment: "User-facing text in MessagesSinceResponder.")
         default:
             return message.content.snippetText(maxLength: maxLength) ?? ""
         }

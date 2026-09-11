@@ -3588,7 +3588,7 @@ static void SetAgainstGrainDim(BOOL isVertical, NSSize *dest, CGFloat value) {
     }
     [theTab setParentWindow:term];
     theTab.delegate = term;
-    [theTab->tabViewItem_ setLabel:@"Restoring..."];
+    [theTab->tabViewItem_ setLabel:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytab.restoring.fa31c224", nil, NSBundle.mainBundle, @"Restoring...", @"User-facing text in PTYTab (tabWithArrangement:named:inTerminal:hasFlexibleView:viewMap:sessionMap:tmuxController:partialAttachments:reservedTabGUIDs:options:).")];
 
     [theTab setObjectCount:[term numberOfTabs] + 1];
 
@@ -7026,11 +7026,19 @@ typedef struct {
                 // See if a notification should be posted.
                 if (!session.havePostedIdleNotification && [session shouldPostUserNotification]) {
                     NSString *theDescription =
-                        [NSString stringWithFormat:@"Session %@ in tab #%d became idle.",
+                        [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytab.idle_notification_body",
+                                                                                     nil,
+                                                                                     NSBundle.mainBundle,
+                                                                                     @"Session %1$@ in tab #%2$d became idle.",
+                                                                                     @"Notification body when a terminal session becomes idle."),
                             [[session name] removingHTMLFromTabTitleIfNeeded],
                             [self tabNumber]];
                     if ([iTermProfilePreferences boolForKey:KEY_SEND_IDLE_ALERT inProfile:session.profile]) {
-                        [[iTermNotificationController sharedInstance] notify:@"Idle"
+                        [[iTermNotificationController sharedInstance] notify:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytab.idle_notification_title",
+                                                                                                               nil,
+                                                                                                               NSBundle.mainBundle,
+                                                                                                               @"Idle",
+                                                                                                               @"Notification title when a terminal session becomes idle.")
                                                          withDescription:theDescription
                                                              windowIndex:[session screenWindowIndex]
                                                                 tabIndex:[session screenTabIndex]
@@ -7069,11 +7077,16 @@ typedef struct {
         notify &&
         [[NSDate date] timeIntervalSinceDate:[SessionView lastResizeDate]] > POST_WINDOW_RESIZE_SILENCE_SEC) {
         if ([iTermProfilePreferences boolForKey:KEY_SEND_NEW_OUTPUT_ALERT inProfile:self.activeSession.profile]) {
-            [[iTermNotificationController sharedInstance] notify:NSLocalizedStringFromTableInBundle(@"New Output",
-                                                                                                @"iTerm",
-                                                                                                [NSBundle bundleForClass:[self class]],
-                                                                                                @"User Alerts")
-                                             withDescription:[NSString stringWithFormat:@"New output was received in %@, tab #%d.",
+            [[iTermNotificationController sharedInstance] notify:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytab.new_output",
+                                                                                                    nil,
+                                                                                                    [NSBundle bundleForClass:[self class]],
+                                                                                                    @"New Output",
+                                                                                                    @"User notification title")
+                                             withDescription:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.terminalview.ptytab.new_output_description",
+                                                                                                                          nil,
+                                                                                                                          [NSBundle bundleForClass:[self class]],
+                                                                                                                          @"New output was received in %1$@, tab #%2$d.",
+                                                                                                                          @"User notification body"),
                                                               [[[self activeSession] name] removingHTMLFromTabTitleIfNeeded],
                                                               [self tabNumber]]
                                                  windowIndex:[[self activeSession] screenWindowIndex]

@@ -24,24 +24,24 @@ class iTermAITermGatekeeper: NSObject {
         DLog("check")
         if !iTermAdvancedSettingsModel.generativeAIAllowed() {
             if !silent {
-                iTermWarning.show(withTitle: "Generative AI features have been disabled. Check with your system administrator.",
-                                  actions: ["OK"],
+                iTermWarning.show(withTitle: String(localized: "ui.swift.aiterm.itermaitermgatekeeper.generative_ai_features_have_been_disabled_check_with.69006f32", defaultValue: "Generative AI features have been disabled. Check with your system administrator.", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."),
+                                  actions: [String(localized: "ui.swift.aiterm.itermaitermgatekeeper.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper.")],
                                   accessory: nil,
                                   identifier: nil,
                                   silenceable: .kiTermWarningTypePersistent,
-                                  heading: "Feature Unavailable",
+                                  heading: String(localized: "ui.swift.aiterm.itermaitermgatekeeper.feature_unavailable.5031e0f3", defaultValue: "Feature Unavailable", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."),
                                   window: nil)
             }
             return false
         }
         if !iTermAITermGatekeeper.pluginInstalled() {
             if !silent {
-                let selection = iTermWarning.show(withTitle: "You must install the AI plugin before you can use this feature.",
-                                                  actions: ["Reveal in Settings", "Cancel"],
+                let selection = iTermWarning.show(withTitle: String(localized: "ui.swift.aiterm.itermaitermgatekeeper.you_must_install_the_ai_plugin_before_you.39e3a465", defaultValue: "You must install the AI plugin before you can use this feature.", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."),
+                                                  actions: [String(localized: "ui.swift.aiterm.itermaitermgatekeeper.reveal_in_settings.21379104", defaultValue: "Reveal in Settings", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."), String(localized: "ui.swift.aiterm.itermaitermgatekeeper.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper.")],
                                                   accessory: nil,
                                                   identifier: nil,
                                                   silenceable: .kiTermWarningTypePersistent,
-                                                  heading: "Plugin Missing",
+                                                  heading: String(localized: "ui.swift.aiterm.itermaitermgatekeeper.plugin_missing.5c735ad6", defaultValue: "Plugin Missing", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."),
                                                   window: nil)
                 if selection == .kiTermWarningSelection0 {
                     PreferencePanel.sharedInstance().openToPreference(withKey: kPhonyPreferenceKeyInstallAIPlugin)
@@ -51,12 +51,12 @@ class iTermAITermGatekeeper: NSObject {
         }
         if !SecureUserDefaults.instance.enableAI.value {
             if !silent {
-                let selection = iTermWarning.show(withTitle: "You must enable AI features in settings before you can use this feature.",
-                                                  actions: ["Reveal", "Cancel"],
+                let selection = iTermWarning.show(withTitle: String(localized: "ui.swift.aiterm.itermaitermgatekeeper.you_must_enable_ai_features_in_settings_before.a75b4f1e", defaultValue: "You must enable AI features in settings before you can use this feature.", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."),
+                                                  actions: [String(localized: "ui.swift.aiterm.itermaitermgatekeeper.reveal.36b830bd", defaultValue: "Reveal", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."), String(localized: "ui.swift.aiterm.itermaitermgatekeeper.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper.")],
                                                   accessory: nil,
                                                   identifier: nil,
                                                   silenceable: .kiTermWarningTypePersistent,
-                                                  heading: "Feature Unavailable",
+                                                  heading: String(localized: "ui.swift.aiterm.itermaitermgatekeeper.feature_unavailable.5031e0f3", defaultValue: "Feature Unavailable", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."),
                                                   window: nil)
                 if selection == .kiTermWarningSelection0 {
                     PreferencePanel.sharedInstance().openToPreference(withKey: kPreferenceKeyEnableAI)
@@ -70,22 +70,22 @@ class iTermAITermGatekeeper: NSObject {
             RLog("\(error.reason)")
             if !silent {
                 iTermWarning.show(withTitle: error.reason,
-                                  actions: ["OK"],
+                                  actions: [String(localized: "ui.swift.aiterm.itermaitermgatekeeper.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper.")],
                                   accessory: nil,
                                   identifier: nil,
                                   silenceable: .kiTermWarningTypePersistent,
-                                  heading: "Feature Unavailable",
+                                  heading: String(localized: "ui.swift.aiterm.itermaitermgatekeeper.feature_unavailable.5031e0f3", defaultValue: "Feature Unavailable", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."),
                                   window: nil)
             }
             return false
         } catch {
             if !silent {
                 iTermWarning.show(withTitle: error.localizedDescription,
-                                  actions: ["OK"],
+                                  actions: [String(localized: "ui.swift.aiterm.itermaitermgatekeeper.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper.")],
                                   accessory: nil,
                                   identifier: nil,
                                   silenceable: .kiTermWarningTypePersistent,
-                                  heading: "Feature Unavailable",
+                                  heading: String(localized: "ui.swift.aiterm.itermaitermgatekeeper.feature_unavailable.5031e0f3", defaultValue: "Feature Unavailable", bundle: .main, comment: "User-facing text in iTermAITermGatekeeper."),
                                   window: nil)
             }
             return false

@@ -302,12 +302,12 @@ extension PTYSession {
                                             sessionID: guid,
                                             baseOffset: screen.totalScrollbackOverflow()))
         guard let client = ChatClient.instance else {
-            iTermWarning.show(withTitle: "AI Chat could not be opened. Verify you only have one instance of iTerm2 running.",
-                              actions: ["OK"],
+            iTermWarning.show(withTitle: String(localized: "ui.swift.ptysession.ptysession.ai_chat_could_not_be_opened_verify_you.0ddf202b", defaultValue: "AI Chat could not be opened. Verify you only have one instance of iTerm2 running.", bundle: .main, comment: "User-facing text in PTYSession."),
+                              actions: [String(localized: "ui.swift.ptysession.ptysession.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in PTYSession.")],
                               accessory: nil,
                               identifier: nil,
                               silenceable: .kiTermWarningTypePersistent,
-                              heading: "Error",
+                              heading: String(localized: "ui.swift.ptysession.ptysession.error.54a0e8c1", defaultValue: "Error", bundle: .main, comment: "User-facing text in PTYSession."),
                               window: self.genericView?.window)
             return
         }
@@ -2680,7 +2680,7 @@ extension PTYSession {
             return nil
         }
         do {
-            let title = "Chat about \(self.name)"
+            let title = String(localized: "ui.swift.ptysession.ptysession.chat_about_0.713b508a", defaultValue: "Chat about \(self.name)", bundle: .main, comment: "User-facing text in PTYSession.")
             let isBrowser = self.isBrowserSession()
             let chatID = try client.create(
                 chatWithTitle: title,

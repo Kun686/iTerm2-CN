@@ -17,15 +17,15 @@ fileprivate enum CommandOption {
     var title: String {
         switch self {
         case let .hostname(hostname):
-            return "Run on \(hostname) via ssh"
+            return String(localized: "ui.swift.appkit.commandurlhandler.run_on_0_via_ssh.da549650", defaultValue: "Run on \(hostname) via ssh", bundle: .main, comment: "User-facing text in CommandURLHandler.")
         case let .username(username):
-            return "Run as \(username)"
+            return String(localized: "ui.swift.appkit.commandurlhandler.run_as_0.8d91a556", defaultValue: "Run as \(username)", bundle: .main, comment: "User-facing text in CommandURLHandler.")
         case let .directory(directory):
-            return "Run in directory \(directory)"
+            return String(localized: "ui.swift.appkit.commandurlhandler.run_in_directory_0.7f97b5d4", defaultValue: "Run in directory \(directory)", bundle: .main, comment: "User-facing text in CommandURLHandler.")
         case .offerTab:
-            return "Open in tab offered"
+            return String(localized: "ui.swift.appkit.commandurlhandler.open_in_tab_offered.c81f0947", defaultValue: "Open in tab offered", bundle: .main, comment: "User-facing text in CommandURLHandler.")
         case .offerCurrent:
-            return "Run in current session offered"
+            return String(localized: "ui.swift.appkit.commandurlhandler.run_in_current_session_offered.b88c4968", defaultValue: "Run in current session offered", bundle: .main, comment: "User-facing text in CommandURLHandler.")
         }
     }
     var isEnabled: Bool { true }
@@ -171,11 +171,11 @@ fileprivate class CommandOptionsView: NSView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         
-        addHorizontalStackView(createHorizontalStackView(label: "Command:",
+        addHorizontalStackView(createHorizontalStackView(label: String(localized: "ui.swift.appkit.commandurlhandler.command.a7a9c915", defaultValue: "Command:", bundle: .main, comment: "User-facing text in CommandURLHandler."),
                                                          view: scrollView,
                                                          firstBaselineAnchor: scrollView.centerYAnchor))
 
-        runOnSSHToggle = NSButton(checkboxWithTitle: "Run on \(hostname) via ssh", target: self, action: #selector(runOnSSHToggleValueChanged))
+        runOnSSHToggle = NSButton(checkboxWithTitle: String(localized: "ui.swift.appkit.commandurlhandler.run_on_0_via_ssh.da549650", defaultValue: "Run on \(hostname) via ssh", bundle: .main, comment: "User-facing text in CommandURLHandler."), target: self, action: #selector(runOnSSHToggleValueChanged))
         usernameTextField = NSTextField()
 
         if runOnSSH {
@@ -187,20 +187,20 @@ fileprivate class CommandOptionsView: NSView {
             usernameStackView.spacing = 10
             usernameStackView.translatesAutoresizingMaskIntoConstraints = false
 
-            usernameTextField.placeholderString = "Username"
+            usernameTextField.placeholderString = String(localized: "ui.swift.appkit.commandurlhandler.username.e3b89e9d", defaultValue: "Username", bundle: .main, comment: "User-facing text in CommandURLHandler.")
             usernameTextField.font = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
             usernameTextField.translatesAutoresizingMaskIntoConstraints = false
-            usernameStackView.addArrangedSubview(createHorizontalStackView(label: "Username:",
+            usernameStackView.addArrangedSubview(createHorizontalStackView(label: String(localized: "ui.swift.appkit.commandurlhandler.username.3806d61c", defaultValue: "Username:", bundle: .main, comment: "User-facing text in CommandURLHandler."),
                                                                            view: usernameTextField,
                                                                            firstBaselineAnchor: usernameTextField.firstBaselineAnchor))
             addHorizontalStackView(usernameStackView)
         }
 
         directoryTextField = NSTextField()
-        directoryTextField.placeholderString = "Directory"
+        directoryTextField.placeholderString = String(localized: "ui.swift.appkit.commandurlhandler.directory.c8f84c3c", defaultValue: "Directory", bundle: .main, comment: "User-facing text in CommandURLHandler.")
         directoryTextField.font = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
         directoryTextField.translatesAutoresizingMaskIntoConstraints = false
-        addHorizontalStackView(createHorizontalStackView(label: "Directory:",
+        addHorizontalStackView(createHorizontalStackView(label: String(localized: "ui.swift.appkit.commandurlhandler.directory.8b948460", defaultValue: "Directory:", bundle: .main, comment: "User-facing text in CommandURLHandler."),
                                                          view: directoryTextField,
                                                          firstBaselineAnchor: directoryTextField.firstBaselineAnchor))
 
@@ -208,23 +208,23 @@ fileprivate class CommandOptionsView: NSView {
         buttonsStackView.spacing = 10
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        cancelButton = NSButton(title: "Cancel", target: self, action: #selector(cancelButtonClicked))
+        cancelButton = NSButton(title: String(localized: "ui.swift.appkit.commandurlhandler.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in CommandURLHandler."), target: self, action: #selector(cancelButtonClicked))
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.keyEquivalent = "\01b"
         buttonsStackView.addArrangedSubview(cancelButton)
 
-        newWindowButton = NSButton(title: "Run in New Window", target: self, action: #selector(newWindowButtonClicked))
+        newWindowButton = NSButton(title: String(localized: "ui.swift.appkit.commandurlhandler.run_in_new_window.ebd1dc61", defaultValue: "Run in New Window", bundle: .main, comment: "User-facing text in CommandURLHandler."), target: self, action: #selector(newWindowButtonClicked))
         newWindowButton.translatesAutoresizingMaskIntoConstraints = false
         buttonsStackView.addArrangedSubview(newWindowButton)
 
         if offerTab {
-            newTabButton = NSButton(title: "Run in New Tab", target: self, action: #selector(newTabButtonClicked))
+            newTabButton = NSButton(title: String(localized: "ui.swift.appkit.commandurlhandler.run_in_new_tab.7fe3c70c", defaultValue: "Run in New Tab", bundle: .main, comment: "User-facing text in CommandURLHandler."), target: self, action: #selector(newTabButtonClicked))
             newTabButton.translatesAutoresizingMaskIntoConstraints = false
             buttonsStackView.addArrangedSubview(newTabButton)
         }
 
         if offerCurrent {
-            newTabButton = NSButton(title: "Run in Current Session", target: self, action: #selector(currentSessionButtonClicked))
+            newTabButton = NSButton(title: String(localized: "ui.swift.appkit.commandurlhandler.run_in_current_session.3eae81b1", defaultValue: "Run in Current Session", bundle: .main, comment: "User-facing text in CommandURLHandler."), target: self, action: #selector(currentSessionButtonClicked))
             newTabButton.translatesAutoresizingMaskIntoConstraints = false
             buttonsStackView.addArrangedSubview(newTabButton)
         }
@@ -406,22 +406,22 @@ class CommandURLHandler: NSObject {
     @objc
     func show(completion: ((CommandURLHandler) -> ())?) {
         if _action == .runSilently {
-            var parts = ["Run command", "“" + self.command + "”"]
+            var parts = [String(localized: "ui.swift.appkit.commandurlhandler.run_command.87e30f34", defaultValue: "Run command", bundle: .main, comment: "User-facing text in CommandURLHandler."), "“" + self.command + "”"]
             if let username {
-                parts.append("as \(username)")
+                parts.append(String(localized: "ui.swift.appkit.commandurlhandler.as_0.b2ab4ed2", defaultValue: "as \(username)", bundle: .main, comment: "User-facing text in CommandURLHandler."))
             }
             if let hostname, !hostname.isEmpty {
-                parts.append("on \(hostname)")
+                parts.append(String(localized: "ui.swift.appkit.commandurlhandler.on_0.e1950d94", defaultValue: "on \(hostname)", bundle: .main, comment: "User-facing text in CommandURLHandler."))
             }
             if let directory {
-                parts.append("in \(directory)")
+                parts.append(String(localized: "ui.swift.appkit.commandurlhandler.in_0.6b74890f", defaultValue: "in \(directory)", bundle: .main, comment: "User-facing text in CommandURLHandler."))
             }
-            let selection = iTermWarning.show(withTitle: parts.joined(separator: " ") + "?\nIt will run silently in the background.",
-                                              actions: [ "OK", "Cancel"],
+            let selection = iTermWarning.show(withTitle: parts.joined(separator: " ") + String(localized: "ui.swift.appkit.commandurlhandler.it_will_run_silently_in_the_background.f8b5f967", defaultValue: "?\nIt will run silently in the background.", bundle: .main, comment: "User-facing text in CommandURLHandler."),
+                                              actions: [ String(localized: "ui.swift.appkit.commandurlhandler.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in CommandURLHandler."), String(localized: "ui.swift.appkit.commandurlhandler.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in CommandURLHandler.")],
                                               accessory: nil,
                                               identifier: "NoSyncRunCommand_\(self.command)",
                                               silenceable: .kiTermWarningTypePermanentlySilenceable,
-                                              heading: "Run Command?",
+                                              heading: String(localized: "ui.swift.appkit.commandurlhandler.run_command.81c57ee5", defaultValue: "Run Command?", bundle: .main, comment: "User-facing text in CommandURLHandler."),
                                               window: nil)
             if selection == .kiTermWarningSelection0 {
                 _action = .runSilently
@@ -451,7 +451,7 @@ class CommandURLHandler: NSObject {
             defer: false
         )
         window.contentView = contentView
-        window.title = "Run Command from URL"
+        window.title = String(localized: "ui.swift.appkit.commandurlhandler.run_command_from_url.b7aa75af", defaultValue: "Run Command from URL", bundle: .main, comment: "User-facing text in CommandURLHandler.")
         window.setContentSize(contentView.fittingSize)
 
         window.center()

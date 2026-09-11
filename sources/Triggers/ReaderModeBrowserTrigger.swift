@@ -8,11 +8,11 @@
 @objc
 class ReaderModeBrowserTrigger: Trigger {
     override var description: String {
-        return "Enter Reader Mode"
+        return String(localized: "ui.swift.triggers.readermodebrowsertrigger.enter_reader_mode.a1c5c857", defaultValue: "Enter Reader Mode", bundle: .main, comment: "User-facing text in ReaderModeBrowserTrigger.")
     }
 
     override static var title: String {
-        return "Enter Reader Mode"
+        return String(localized: "ui.swift.triggers.readermodebrowsertrigger.enter_reader_mode.a1c5c857", defaultValue: "Enter Reader Mode", bundle: .main, comment: "User-facing text in ReaderModeBrowserTrigger.")
     }
 
     override func takesParameter() -> Bool {

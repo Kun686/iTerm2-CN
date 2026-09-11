@@ -18,6 +18,7 @@
 #import "iTerm2SharedARC-Swift.h"
 #import "iTermAPIHelper.h"
 #import "iTermAdvancedGPUSettingsViewController.h"
+#import "iTermApplicationLanguageController.h"
 #import "iTermApplicationDelegate.h"
 #import "iTermBuriedSessions.h"
 #import "iTermHotKeyController.h"
@@ -63,6 +64,10 @@ static NSString *const kAIManualModelsAPIColumn = @"api";
 static NSString *const kAIManualModelsEndpointColumn = @"endpoint";
 static NSString *const kAIDefaultModelProviderPrefix = @"provider:";
 static NSString *const kAIDefaultModelManualPrefix = @"manual:";
+
+static NSString *iTermGeneralPreferencesLocalizedString(NSString *key, NSString *fallback) {
+    return [NSBundle.mainBundle localizedStringForKey:key value:fallback table:nil];
+}
 
 // Preset-popup tag scheme for the manual model editor: Custom is -1, catalog
 // model presets use their index (0..n-1), and provider presets (OpenAI-compatible
@@ -111,7 +116,7 @@ static NSString *iTermTitleForAIAPI(iTermAIAPI api) {
         case iTermAIAPIAnthropic:
             return @"Anthropic";
         case iTermAIAPIAppleIntelligence:
-            return @"Apple Intelligence";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.apple_intelligence.f82f4943", nil, NSBundle.mainBundle, @"Apple Intelligence", @"User-facing text in GeneralPreferencesViewController (buildWindow).");
     }
     // An out-of-range api (e.g. api: 999 from hand-edited or synced prefs) would
     // otherwise fall off the end of this non-void function (UB). No default: in
@@ -136,7 +141,7 @@ static NSString *iTermAIVendorProviderName(iTermAIVendor vendor) {
         case iTermAIVendorLlama:
             return @"Llama";
         case iTermAIVendorApple:
-            return @"Apple Intelligence";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.apple_intelligence.f82f4943", nil, NSBundle.mainBundle, @"Apple Intelligence", @"User-facing text in GeneralPreferencesViewController (changeAPIKey:).");
     }
     return @"OpenAI";
 }
@@ -275,7 +280,7 @@ static NSString *iTermManualAIModelHost(NSDictionary *configuration) {
                                           styleMask:NSWindowStyleMaskTitled
                                             backing:NSBackingStoreBuffered
                                               defer:NO];
-    _window.title = @"Manual AI Models";
+    _window.title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.manual_ai_models.2e3927a8", nil, NSBundle.mainBundle, @"Manual AI Models", @"User-facing text in GeneralPreferencesViewController (buildWindow).");
     NSView *content = _window.contentView;
 
     NSScrollView *scrollView =
@@ -339,7 +344,7 @@ static NSString *iTermManualAIModelHost(NSDictionary *configuration) {
     [content addSubview:_editControl];
 
     // OK: its right edge aligns with the table's right edge.
-    NSButton *ok = [NSButton buttonWithTitle:@"OK" target:self action:@selector(okClicked:)];
+    NSButton *ok = [NSButton buttonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in GeneralPreferencesViewController (buildWindow).") target:self action:@selector(okClicked:)];
     ok.bezelStyle = NSBezelStyleRounded;
     ok.keyEquivalent = @"\r";
     ok.frame = NSMakeRect(margin + tableWidth - okWidth, bottomRowY, okWidth, okHeight);
@@ -416,7 +421,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     NSImageSymbolConfiguration *config =
         [NSImageSymbolConfiguration configurationWithHierarchicalColor:NSColor.labelColor];
     NSImage *image = [[NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolLeaf)
-                               accessibilityDescription:@"Economy model"]
+                               accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.economy_model.fa5f8d9e", nil, NSBundle.mainBundle, @"Economy model", @"Accessibility description for the economy AI model.")]
                       imageWithSymbolConfiguration:config];
     const CGFloat side = font.pointSize + 1;
     image.size = NSMakeSize(side, side);
@@ -608,7 +613,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
                                           styleMask:NSWindowStyleMaskTitled
                                             backing:NSBackingStoreBuffered
                                               defer:NO];
-    _window.title = _isEditing ? @"Edit Manual AI Model" : @"Add Manual AI Model";
+    _window.title = _isEditing ? NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.edit_manual_ai_model.6c0acb99", nil, NSBundle.mainBundle, @"Edit Manual AI Model", @"User-facing text in GeneralPreferencesViewController (buildWindow).") : NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.add_manual_ai_model.d172c364", nil, NSBundle.mainBundle, @"Add Manual AI Model", @"User-facing text in GeneralPreferencesViewController (buildWindow).");
     NSView *content = _window.contentView;
 
     NSTextField *title = [NSTextField labelWithString:_window.title];
@@ -634,9 +639,9 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
     // Presets copy a built-in model's settings into the form so a user can start
     // from something close to what they want and tweak it.
-    addLabel(@"Preset:");
+    addLabel(NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.preset.4336d942", nil, NSBundle.mainBundle, @"Preset:", @"User-facing text in GeneralPreferencesViewController (source UI)."));
     _presetPopup = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(fieldX, y, fieldWidth, 24)];
-    [_presetPopup addItemWithTitle:@"Custom"];
+    [_presetPopup addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.custom.494ca78f", nil, NSBundle.mainBundle, @"Custom", @"User-facing text in GeneralPreferencesViewController (buildWindow).")];
     _presetPopup.lastItem.tag = -1;
     [_presetPopup.menu addItem:[NSMenuItem separatorItem]];
     _presets = [[AIMetadata instance] presetModels];
@@ -660,10 +665,10 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     [content addSubview:_presetPopup];
     y -= rowHeight + 8;
 
-    _nameField = addTextField(@"Model:", _base[kAIManualModelNameKey]);
-    _urlField = addTextField(@"URL:", _base[kAIManualModelURLKey]);
+    _nameField = addTextField(NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.model.11a93106", nil, NSBundle.mainBundle, @"Model:", @"User-facing label in GeneralPreferencesViewController (buildWindow)."), _base[kAIManualModelNameKey]);
+    _urlField = addTextField(NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.url.734fd77b", nil, NSBundle.mainBundle, @"URL:", @"User-facing label in GeneralPreferencesViewController (buildWindow)."), _base[kAIManualModelURLKey]);
 
-    addLabel(@"API:");
+    addLabel(NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.api.359ba951", nil, NSBundle.mainBundle, @"API:", @"User-facing label in GeneralPreferencesViewController (buildWindow)."));
     _apiPopup = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(fieldX, y, fieldWidth, 24)];
     NSArray<NSNumber *> *apis = @[
         @(iTermAIAPIResponses),
@@ -703,30 +708,30 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     _urlField.delegate = self;
 
     _contextField =
-        addTextField(@"Context tokens:",
+        addTextField(NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.context_tokens.f0c7a018", nil, NSBundle.mainBundle, @"Context tokens:", @"User-facing label in GeneralPreferencesViewController (buildWindow)."),
                      [NSString stringWithFormat:@"%ld",
                       (long)iTermManualAIModelIntegerValue(_base, kAIManualModelContextWindowTokensKey, 8192)]);
     _responseField =
-        addTextField(@"Max response tokens:",
+        addTextField(NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.max_response_tokens.1fb887a2", nil, NSBundle.mainBundle, @"Max response tokens:", @"User-facing label in GeneralPreferencesViewController (buildWindow)."),
                      [NSString stringWithFormat:@"%ld",
                       (long)iTermManualAIModelIntegerValue(_base, kAIManualModelMaxResponseTokensKey, 8192)]);
 
-    addLabel(@"Vector store:");
+    addLabel(NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.vector_store.c25dfe73", nil, NSBundle.mainBundle, @"Vector store:", @"User-facing label in GeneralPreferencesViewController (buildWindow)."));
     _vectorStorePopup = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(fieldX, y, fieldWidth, 24)];
-    [_vectorStorePopup addItemWithTitle:@"Disabled"];
+    [_vectorStorePopup addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.disabled.75081b59", nil, NSBundle.mainBundle, @"Disabled", @"User-facing text in GeneralPreferencesViewController (buildWindow).")];
     _vectorStorePopup.lastItem.tag = 0;
-    [_vectorStorePopup addItemWithTitle:@"OpenAI"];
+    [_vectorStorePopup addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.openai.8b7d1a31", nil, NSBundle.mainBundle, @"OpenAI", @"User-facing text in GeneralPreferencesViewController (buildWindow).")];
     _vectorStorePopup.lastItem.tag = 1;
     [_vectorStorePopup selectItemWithTag:iTermManualAIModelIntegerValue(_base, kAIManualModelVectorStoreKey, 0)];
     [content addSubview:_vectorStorePopup];
     y -= rowHeight + 8;
 
     NSArray<NSDictionary *> *features = @[
-        @{ @"title": @"Function calling", @"key": kAIManualModelFunctionCallingKey },
-        @{ @"title": @"Streaming responses", @"key": kAIManualModelStreamingKey },
-        @{ @"title": @"Hosted web search", @"key": kAIManualModelHostedWebSearchKey },
-        @{ @"title": @"Hosted file search", @"key": kAIManualModelHostedFileSearchKey },
-        @{ @"title": @"Hosted code interpreter", @"key": kAIManualModelHostedCodeInterpreterKey }
+        @{ @"title": NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.function_calling.c5caadc9", nil, NSBundle.mainBundle, @"Function calling", @"User-facing feature label in GeneralPreferencesViewController (buildWindow)."), @"key": kAIManualModelFunctionCallingKey },
+        @{ @"title": NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.streaming_responses.43e6eb6d", nil, NSBundle.mainBundle, @"Streaming responses", @"User-facing feature label in GeneralPreferencesViewController (buildWindow)."), @"key": kAIManualModelStreamingKey },
+        @{ @"title": NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.hosted_web_search.99fd03fa", nil, NSBundle.mainBundle, @"Hosted web search", @"User-facing feature label in GeneralPreferencesViewController (buildWindow)."), @"key": kAIManualModelHostedWebSearchKey },
+        @{ @"title": NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.hosted_file_search.5cc595ed", nil, NSBundle.mainBundle, @"Hosted file search", @"User-facing feature label in GeneralPreferencesViewController (buildWindow)."), @"key": kAIManualModelHostedFileSearchKey },
+        @{ @"title": NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.hosted_code_interpreter.310badc6", nil, NSBundle.mainBundle, @"Hosted code interpreter", @"User-facing feature label in GeneralPreferencesViewController (buildWindow)."), @"key": kAIManualModelHostedCodeInterpreterKey }
     ];
     for (NSDictionary *feature in features) {
         NSString *key = feature[@"key"];
@@ -748,21 +753,20 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     NSString *baseName = [_base[kAIManualModelNameKey] isKindOfClass:NSString.class]
         ? _base[kAIManualModelNameKey] : @"";
     _configurableThinkingButton =
-        [self addQuirkCheckboxWithTitle:@"Configurable thinking"
+        [self addQuirkCheckboxWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.configurable_thinking.cb5c80d5", nil, NSBundle.mainBundle, @"Configurable thinking", @"User-facing text in GeneralPreferencesViewController (addQuirkCheckboxWithTitle:key:catalogValue:tooltip:toY:fieldX:width:content:).")
                                     key:kAIManualModelConfigurableThinkingKey
                            catalogValue:[[AIMetadata instance] modelSupportsConfigurableThinking:baseName]
-                                tooltip:@"Enable for reasoning models with a thinking mode, such as GPT-5, "
-                                        @"o-series, or DeepSeek models, so the chat’s Think toggle appears."
+                                tooltip:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.enable_for_reasoning_models_with_a_thinking_mode.f42915fc", nil, NSBundle.mainBundle, @"Enable for reasoning models with a thinking mode, such as GPT-5, "
+                                        @"o-series, or DeepSeek models, so the chat’s Think toggle appears.", @"User-facing text in GeneralPreferencesViewController (addQuirkCheckboxWithTitle:key:catalogValue:tooltip:toY:fieldX:width:content:).")
                                     toY:&y
                                  fieldX:fieldX
                                   width:fieldWidth
                                 content:content];
     _supportsTemperatureButton =
-        [self addQuirkCheckboxWithTitle:@"Supports temperature"
+        [self addQuirkCheckboxWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.supports_temperature.c03778d1", nil, NSBundle.mainBundle, @"Supports temperature", @"User-facing text in GeneralPreferencesViewController (buildWindow).")
                                     key:kAIManualModelSupportsTemperatureKey
                            catalogValue:[[AIMetadata instance] modelSupportsTemperature:baseName]
-                                tooltip:@"Uncheck for models that reject a temperature parameter, such as "
-                                        @"Anthropic Opus 4.7 and later."
+                                tooltip:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.uncheck_for_models_that_reject_a_temperature_parameter.e67da52c", nil, NSBundle.mainBundle, @"Uncheck for models that reject a temperature parameter, such as Anthropic Opus 4.7 and later.", @"User-facing tooltip in GeneralPreferencesViewController (buildWindow).")
                                     toY:&y
                                  fieldX:fieldX
                                   width:fieldWidth
@@ -782,7 +786,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
 
     y -= 6;
-    NSTextField *headersLabel = [NSTextField labelWithString:@"Custom headers:"];
+    NSTextField *headersLabel = [NSTextField labelWithString:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.custom_headers.60821357", nil, NSBundle.mainBundle, @"Custom headers:", @"User-facing text in GeneralPreferencesViewController (buildWindow).")];
     headersLabel.alignment = NSTextAlignmentRight;
     headersLabel.frame = NSMakeRect(margin, y - 17, labelWidth, 20);
     [content addSubview:headersLabel];
@@ -797,11 +801,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     _headersTable.allowsMultipleSelection = NO;
     _headersTable.rowHeight = 22;
     NSTableColumn *nameColumn = [[NSTableColumn alloc] initWithIdentifier:@"name"];
-    nameColumn.title = @"Header";
+    nameColumn.title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.header.ba5caa42", nil, NSBundle.mainBundle, @"Header", @"User-facing text in GeneralPreferencesViewController (buildWindow).");
     nameColumn.width = 170;
     nameColumn.editable = YES;
     NSTableColumn *valueColumn = [[NSTableColumn alloc] initWithIdentifier:@"value"];
-    valueColumn.title = @"Value";
+    valueColumn.title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.value.8e37953d", nil, NSBundle.mainBundle, @"Value", @"User-facing text in GeneralPreferencesViewController (buildWindow).");
     valueColumn.width = fieldWidth - nameColumn.width - 24;
     valueColumn.editable = YES;
     [_headersTable addTableColumn:nameColumn];
@@ -821,7 +825,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     [content addSubview:headersAddRemove];
     y -= 22 + 10;
 
-    NSButton *save = [NSButton buttonWithTitle:(_isEditing ? @"Save" : @"Add")
+    NSButton *save = [NSButton buttonWithTitle:(_isEditing ? NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.save.1509f561", nil, NSBundle.mainBundle, @"Save", @"User-facing text in GeneralPreferencesViewController (buildWindow).") : NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.add.9fd728c6", nil, NSBundle.mainBundle, @"Add", @"User-facing text in GeneralPreferencesViewController (buildWindow)."))
                                         target:self
                                         action:@selector(saveClicked:)];
     save.bezelStyle = NSBezelStyleRounded;
@@ -829,7 +833,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     save.frame = NSMakeRect(width - margin - 100, 16, 100, 30);
     [content addSubview:save];
 
-    NSButton *cancel = [NSButton buttonWithTitle:@"Cancel"
+    NSButton *cancel = [NSButton buttonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in GeneralPreferencesViewController (buildWindow).")
                                           target:self
                                           action:@selector(cancelClicked:)];
     cancel.bezelStyle = NSBezelStyleRounded;
@@ -840,7 +844,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     // Sends a live probe with the current form values so the user can confirm the
     // endpoint and API key work before saving. Sits on the far left of the button
     // row, away from Save/Cancel.
-    _testButton = [NSButton buttonWithTitle:@"Test Connection"
+    _testButton = [NSButton buttonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.test_connection.c02977b0", nil, NSBundle.mainBundle, @"Test Connection", @"User-facing text in GeneralPreferencesViewController (buildWindow).")
                                      target:self
                                      action:@selector(testClicked:)];
     _testButton.bezelStyle = NSBezelStyleRounded;
@@ -880,12 +884,12 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
                                                                      modelName:modelName];
     if (iTermAIVendorHasEnterableKey(vendor)) {
         _apiKeyHintLabel.stringValue =
-            [NSString stringWithFormat:@"Authorizes with your %@ API key.",
+            [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.authorizes_with_your_api_key.c776e962", nil, NSBundle.mainBundle, @"Authorizes with your %@ API key.", @"User-facing text in GeneralPreferencesViewController (stringValue)."),
              iTermAIVendorProviderName(vendor)];
     } else {
         // No key can be configured: self-hosted (Llama) or Apple Intelligence
         // (which runs on-device or via Private Cloud Compute).
-        _apiKeyHintLabel.stringValue = @"No API key is used.";
+        _apiKeyHintLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.no_api_key_is_used.0ba9ed8e", nil, NSBundle.mainBundle, @"No API key is used.", @"User-facing text in GeneralPreferencesViewController (updateEditorAPIKeyHint).");
     }
 }
 
@@ -1106,8 +1110,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         [_urlField.stringValue stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     if (name.length == 0 || url.length == 0) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Missing Information";
-        alert.informativeText = @"Enter a model name and URL before testing the connection.";
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.missing_information.d0f98531", nil, NSBundle.mainBundle, @"Missing Information", @"User-facing text in GeneralPreferencesViewController (testClicked:).");
+        alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.enter_a_model_name_and_url_before_testing.480721bb", nil, NSBundle.mainBundle, @"Enter a model name and URL before testing the connection.", @"User-facing text in GeneralPreferencesViewController (testClicked:).");
         [alert beginSheetModalForWindow:_window completionHandler:^(NSModalResponse returnCode) {}];
         return;
     }
@@ -1119,7 +1123,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
     NSString *savedTitle = _testButton.title;
     _testButton.enabled = NO;
-    _testButton.title = @"Testing…";
+    _testButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.testing.407b7a04", nil, NSBundle.mainBundle, @"Testing…", @"User-facing text in GeneralPreferencesViewController (testClicked:).");
     [_testSpinner startAnimation:nil];
     __weak __typeof(self) weakSelf = self;
     [iTermAIConnectionTester testModelName:name
@@ -1143,10 +1147,10 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         NSAlert *alert = [[NSAlert alloc] init];
         if (outcome == iTermAIConnectionTestOutcomeSuccess) {
             alert.alertStyle = NSAlertStyleInformational;
-            alert.messageText = @"Connection Succeeded";
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.connection_succeeded.c1c12eda", nil, NSBundle.mainBundle, @"Connection Succeeded", @"User-facing text in GeneralPreferencesViewController (source UI).");
         } else {
             alert.alertStyle = NSAlertStyleWarning;
-            alert.messageText = @"Connection Failed";
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.connection_failed.42aa4e7b", nil, NSBundle.mainBundle, @"Connection Failed", @"User-facing text in GeneralPreferencesViewController (source UI).");
         }
         alert.informativeText = message ?: @"";
         [alert beginSheetModalForWindow:strongSelf->_window completionHandler:^(NSModalResponse returnCode) {}];
@@ -1168,15 +1172,15 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         [_urlField.stringValue stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     NSString *failure = nil;
     if (name.length == 0) {
-        failure = @"Model is required.";
+        failure = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.model_is_required.8d9885c3", nil, NSBundle.mainBundle, @"Model is required.", @"User-facing text in GeneralPreferencesViewController (saveClicked:).");
     } else if (url.length == 0) {
-        failure = @"URL is required.";
+        failure = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.url_is_required.c9689eeb", nil, NSBundle.mainBundle, @"URL is required.", @"User-facing validation error in GeneralPreferencesViewController (saveClicked:).");
     } else if (_contextField.integerValue <= 0) {
-        failure = @"Context tokens must be greater than zero.";
+        failure = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.context_tokens_must_be_greater_than_zero.fe6aeff7", nil, NSBundle.mainBundle, @"Context tokens must be greater than zero.", @"User-facing manual AI model validation error.");
     } else if (_responseField.integerValue <= 0) {
-        failure = @"Max response tokens must be greater than zero.";
+        failure = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.max_response_tokens_must_be_greater_than_zero.ecbddd3a", nil, NSBundle.mainBundle, @"Max response tokens must be greater than zero.", @"User-facing manual AI model validation error.");
     } else if (_nameIsTaken && _nameIsTaken(name)) {
-        failure = @"Manual model names must be unique.";
+        failure = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.manual_model_names_must_be_unique.22207fa3", nil, NSBundle.mainBundle, @"Manual model names must be unique.", @"User-facing manual AI model validation error.");
     }
     // Validate custom headers here rather than in the per-cell delegate: the Save
     // button click ends the active cell edit, so a per-cell alert would race the
@@ -1190,22 +1194,18 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
             }
             NSString *headerValue = [entry[@"value"] isKindOfClass:NSString.class] ? entry[@"value"] : @"";
             if (![AICustomHeaders isValidName:headerName]) {
-                failure = [NSString stringWithFormat:
-                           @"Custom header name “%@” is not valid. Use only RFC 7230 token "
-                           @"characters (letters, digits, and any of !#$%%&'*+-.^_`|~).", headerName];
+                failure = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.custom_header_name_is_not_valid.0c849942", nil, NSBundle.mainBundle, @"Custom header name “%@” is not valid. Use only RFC 7230 token characters (letters, digits, and any of !#$%%&'*+-.^_`|~).", @"User-facing manual AI model validation error."), headerName];
                 break;
             }
             if (![AICustomHeaders isValidValue:headerValue]) {
-                failure = [NSString stringWithFormat:
-                           @"The value for custom header “%@” must not contain newline or "
-                           @"null characters.", headerName];
+                failure = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.the_value_for_custom_header_must_not_contain_newline.56b7e3c7", nil, NSBundle.mainBundle, @"The value for custom header “%@” must not contain newline or null characters.", @"User-facing manual AI model validation error."), headerName];
                 break;
             }
         }
     }
     if (failure) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Invalid Manual AI Model";
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.invalid_manual_ai_model.9c87edfe", nil, NSBundle.mainBundle, @"Invalid Manual AI Model", @"User-facing text in GeneralPreferencesViewController (saveClicked:).");
         alert.informativeText = failure;
         [alert beginSheetModalForWindow:_window completionHandler:^(NSModalResponse returnCode) {}];
         return;
@@ -1234,6 +1234,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 @end
 
 @interface GeneralPreferencesViewController () <iTermManualAIModelsPanelDelegate>
+- (void)updateApplicationLanguagePopup;
+- (IBAction)applicationLanguageDidChange:(id)sender;
 @end
 
 @implementation GeneralPreferencesViewController {
@@ -1245,6 +1247,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     // open bookmarks when iterm starts
     IBOutlet NSButton *_openBookmark;
     IBOutlet NSButton *_advancedGPUPrefsButton;
+    IBOutlet NSPopUpButton *_applicationLanguage;
 
     // Open saved window arrangement at startup
     IBOutlet NSPopUpButton *_openWindowsAtStartup;
@@ -1465,6 +1468,82 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     return self;
 }
 
+- (void)updateApplicationLanguagePopup {
+    if (![NSBundle it_isCNCommunityBuild]) {
+        return;
+    }
+    // Page sizing uses its first content view. Include the CN-only language
+    // row in that view, preserving the top-anchored controls' positions.
+    NSView *languageRow = _applicationLanguage.superview;
+    for (NSTabViewItem *item in _tabView.tabViewItems) {
+        if (languageRow.superview != item.view) {
+            continue;
+        }
+        NSView *content = item.view.subviews.firstObject;
+        if (content && content != languageRow) {
+            content.frame = NSUnionRect(content.frame, languageRow.frame);
+            NSRect frame = [content convertRect:languageRow.frame fromView:item.view];
+            [languageRow removeFromSuperview];
+            languageRow.frame = frame;
+            [content addSubview:languageRow];
+        }
+        break;
+    }
+    [_applicationLanguage removeAllItems];
+    for (iTermApplicationLanguageIdentifier identifier in
+         iTermApplicationLanguageController.supportedLanguageIdentifiers) {
+        [_applicationLanguage addItemWithTitle:
+            [iTermApplicationLanguageController localizedDisplayNameForLanguageIdentifier:identifier]];
+        _applicationLanguage.lastItem.representedObject = identifier;
+    }
+    iTermApplicationLanguageIdentifier selection =
+        iTermApplicationLanguageController.selectedLanguageIdentifier;
+    for (NSMenuItem *item in _applicationLanguage.itemArray) {
+        if ([item.representedObject isEqual:selection]) {
+            [_applicationLanguage selectItem:item];
+            break;
+        }
+    }
+    _applicationLanguage.accessibilityLabel = iTermGeneralPreferencesLocalizedString(
+        @"settings.general.language.accessibility_label", @"Application language");
+}
+
+- (IBAction)applicationLanguageDidChange:(id)sender {
+    if (![NSBundle it_isCNCommunityBuild]) {
+        return;
+    }
+    iTermApplicationLanguageIdentifier identifier = _applicationLanguage.selectedItem.representedObject;
+    BOOL didChange = NO;
+    NSError *error = nil;
+    if (![iTermApplicationLanguageController setSelectedLanguageIdentifier:identifier
+                                                                 didChange:&didChange
+                                                                     error:&error]) {
+        [self updateApplicationLanguagePopup];
+        NSString *format = iTermGeneralPreferencesLocalizedString(
+            @"settings.general.language.save_failed_format",
+            @"The application language could not be saved: %@");
+        NSString *title = [NSString stringWithFormat:format, error.localizedDescription ?: @""];
+        [iTermWarning showWarningWithTitle:title
+                                   actions:@[ iTermGeneralPreferencesLocalizedString(
+                                                  @"settings.general.language.action.ok", @"OK") ]
+                                identifier:nil
+                               silenceable:kiTermWarningTypePersistent
+                                    window:self.view.window];
+        return;
+    }
+    if (!didChange) {
+        return;
+    }
+    [iTermWarning showWarningWithTitle:iTermGeneralPreferencesLocalizedString(
+                                           @"settings.general.language.restart_notice",
+                                           @"Language will take effect the next time you launch iTerm2-CN.")
+                               actions:@[ iTermGeneralPreferencesLocalizedString(
+                                              @"settings.general.language.action.ok", @"OK") ]
+                            identifier:nil
+                           silenceable:kiTermWarningTypePersistent
+                                window:self.view.window];
+}
+
 - (void)awakeFromNib {
     if (_awoken) {
         // View-based NSTableView lazily unarchives each NSTableCellView prototype
@@ -1474,6 +1553,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
     _awoken = YES;
 
+    BOOL isCNCommunityBuild = [NSBundle it_isCNCommunityBuild];
+    _applicationLanguage.superview.hidden = !isCNCommunityBuild;
+    if (isCNCommunityBuild) {
+        [self updateApplicationLanguagePopup];
+    }
     [self setupDefaultAIModelSelector];
     PreferenceInfo *info;
 
@@ -1656,8 +1740,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         [[NSNotificationCenter defaultCenter] postNotificationName:iTermMetalSettingsDidChangeNotification object:nil];
     };
     info.onChange = ^{
-        [iTermWarning showWarningWithTitle:@"You must restart iTerm2 for this change to take effect."
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.you_must_restart_iterm2_for_this_change_to.6eef08ed", nil, NSBundle.mainBundle, @"You must restart iTerm2 for this change to take effect.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in GeneralPreferencesViewController (actions).") ]
                                 identifier:nil
                                silenceable:kiTermWarningTypePersistent
                                     window:nil];
@@ -1693,15 +1777,22 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
                     key:kPreferenceKeyCheckForUpdatesAutomatically
             relatedView:nil
                    type:kPreferenceInfoTypeCheckbox];
-    if ([NSBundle it_isNightlyBuild]) {
-        _checkTestRelease.enabled = NO;
-    } else {
-        _nightlyBuildNotice.hidden = YES;
-    }
     [self defineControl:_checkTestRelease
                     key:kPreferenceKeyCheckForTestReleases
             relatedView:nil
                    type:kPreferenceInfoTypeCheckbox];
+    if ([NSBundle it_isCNCommunityBuild]) {
+        _checkUpdate.enabled = NO;
+        _checkTestRelease.enabled = NO;
+        _nightlyBuildNotice.hidden = NO;
+        _nightlyBuildNotice.stringValue = iTermGeneralPreferencesLocalizedString(
+            @"settings.general.updates.cn_manual_notice",
+            @"Update iTerm2-CN manually through GitHub Releases.");
+    } else if ([NSBundle it_isNightlyBuild]) {
+        _checkTestRelease.enabled = NO;
+    } else {
+        _nightlyBuildNotice.hidden = YES;
+    }
 
     // ---------------------------------------------------------------------------------------------
     info = [self defineControl:_useCustomScriptsFolder
@@ -2413,22 +2504,22 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     NSString *title;
     switch (outcome) {
         case AIModelCatalogUpdateOutcomeUpdated:
-            title = @"A newer AI model list was downloaded. It will take effect the next time you launch iTerm2.";
+            title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.a_newer_ai_model_list_was_downloaded_it.611c9189", nil, NSBundle.mainBundle, @"A newer AI model list was downloaded. It will take effect the next time you launch iTerm2.", @"User-facing AI model update result.");
             break;
         case AIModelCatalogUpdateOutcomeUpToDate:
-            title = @"Your AI model list is already up to date.";
+            title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.your_ai_model_list_is_already_up_to.c9a881d3", nil, NSBundle.mainBundle, @"Your AI model list is already up to date.", @"User-facing AI model update result.");
             break;
         case AIModelCatalogUpdateOutcomeFailed:
-            title = @"Couldn’t check for AI model updates. Please try again later.";
+            title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.couldn_t_check_for_ai_model_updates_please.a521bdef", nil, NSBundle.mainBundle, @"Couldn’t check for AI model updates. Please try again later.", @"User-facing AI model update result.");
             break;
         case AIModelCatalogUpdateOutcomeDisabled:
-            title = @"AI model updates are turned off in Advanced Settings (the update URL is empty).";
+            title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.ai_model_updates_are_turned_off_in_advanced.57898e01", nil, NSBundle.mainBundle, @"AI model updates are turned off in Advanced Settings (the update URL is empty).", @"User-facing AI model update result.");
             break;
         case AIModelCatalogUpdateOutcomeNotEnabled:
-            title = @"Turn on AI features before checking for model updates.";
+            title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.turn_on_ai_features_before_checking_for_model.526b9293", nil, NSBundle.mainBundle, @"Turn on AI features before checking for model updates.", @"User-facing AI model update result.");
             break;
         case AIModelCatalogUpdateOutcomeBusy:
-            title = @"A check for AI model updates is already in progress.";
+            title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.a_check_for_ai_model_updates_is_already.73864601", nil, NSBundle.mainBundle, @"A check for AI model updates is already in progress.", @"User-facing AI model update result.");
             break;
         case AIModelCatalogUpdateOutcomeDeclined:
             // The user just dismissed or declined the consent modal; a second
@@ -2436,7 +2527,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
             return;
     }
     [iTermWarning showWarningWithTitle:title
-                               actions:@[ @"OK" ]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in GeneralPreferencesViewController (actions).") ]
                             identifier:nil
                            silenceable:kiTermWarningTypePersistent
                                 window:self.view.window];
@@ -2519,7 +2610,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 - (void)validatePlugin {
     DLog(@"validatePlugin");
-    _pluginStatus.stringValue = @"Checking plugin status…";
+    _pluginStatus.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.checking_plugin_status.97d29de1", nil, NSBundle.mainBundle, @"Checking plugin status…", @"User-facing text in GeneralPreferencesViewController (validatePlugin).");
     __weak __typeof(self) weakSelf = self;
     [iTermAITermGatekeeper validatePlugin:^(NSString * _Nullable problem) {
         [weakSelf setPluginProblem:problem];
@@ -2529,8 +2620,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 - (void)setPluginProblem:(NSString *)problem {
     DLog(@"problem=%@", problem);
     if (problem) {
-        _pluginStatus.stringValue = problem;
-        _installPluginButton.title = @"Install…";
+        // Keep shared plugin diagnostics raw; translate only the status label.
+        _pluginStatus.stringValue = [problem isEqualToString:@"Plugin not found"]
+            ? NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.plugin_not_found", nil, NSBundle.mainBundle, @"Plugin not found", @"Settings status when the AI plugin is missing. Shared diagnostics remain unchanged.")
+            : problem;
+        _installPluginButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.install.8c1df2d5", nil, NSBundle.mainBundle, @"Install…", @"User-facing text in GeneralPreferencesViewController (setPluginProblem:).");
         _installPluginButton.action = @selector(installPlugin:);
         [_installPluginButton sizeToFit];
         _installPluginButton.enabled = [iTermAdvancedSettingsModel generativeAIAllowed];
@@ -2540,8 +2634,8 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
             [weakSelf validatePlugin];
         });
     } else {
-        _pluginStatus.stringValue = @"Plugin installed and working ✅";
-        _installPluginButton.title = @"Reveal in Finder";
+        _pluginStatus.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.plugin_installed_and_working.bb8c2eaf", nil, NSBundle.mainBundle, @"Plugin installed and working ✅", @"User-facing text in GeneralPreferencesViewController (setPluginProblem:).");
+        _installPluginButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.reveal_in_finder.cc849385", nil, NSBundle.mainBundle, @"Reveal in Finder", @"User-facing text in GeneralPreferencesViewController (setPluginProblem:).");
         [_installPluginButton sizeToFit];
         _installPluginButton.action = @selector(revealPlugin:);
         _installPluginButton.enabled = YES;
@@ -2596,12 +2690,12 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     _mainAIAPIKeyHint.hidden = NO;
     if (iTermAIVendorHasEnterableKey(vendor)) {
         _mainAIAPIKeyHint.stringValue =
-            [NSString stringWithFormat:@"Authorizes with your %@ API key.",
+            [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.authorizes_with_your_api_key.c776e962", nil, NSBundle.mainBundle, @"Authorizes with your %@ API key.", @"User-facing text in GeneralPreferencesViewController (stringValue)."),
              iTermAIVendorProviderName(vendor)];
     } else {
         // No key can be configured: self-hosted (Llama) or Apple Intelligence
         // (which runs on-device or via Private Cloud Compute).
-        _mainAIAPIKeyHint.stringValue = @"No API key is used.";
+        _mainAIAPIKeyHint.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.no_api_key_is_used.0ba9ed8e", nil, NSBundle.mainBundle, @"No API key is used.", @"User-facing text in GeneralPreferencesViewController (updateAIAPIKeyHint).");
     }
 }
 
@@ -2657,7 +2751,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         variableName ? [NSString stringWithFormat:@"\\(ai.%@)", variableName] : nil;
     if (requiredVariable && ![[self stringForKey:key] containsString:requiredVariable]) {
         _aiPromptWarning.toolTip =
-            [NSString stringWithFormat:@"The prompt must contain the substring %@. %@",
+            [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.the_prompt_must_contain_the_substring.ea4e8b30", nil, NSBundle.mainBundle, @"The prompt must contain the substring %@. %@", @"User-facing text in GeneralPreferencesViewController (toolTip)."),
              requiredVariable, explanation];
         _aiPromptWarning.alphaValue = 1.0;
     } else {
@@ -2671,13 +2765,13 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 - (NSString *)alwaysOpenLegend {
     if ([iTermScriptsMenuController autoLaunchFolderExists]) {
-        return @"The presence of auto-launch scripts disables opening a window at startup.";
+        return NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.the_presence_of_auto_launch_scripts_disables_opening.0dca992c", nil, NSBundle.mainBundle, @"The presence of auto-launch scripts disables opening a window at startup.", @"User-facing text in GeneralPreferencesViewController (updateAlwaysOpenLegend).");
     }
     if ([[[iTermHotKeyController sharedInstance] profileHotKeys] count] > 0) {
-        return @"The existence of hotkey windows disables opening a window at startup.";
+        return NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.the_existence_of_hotkey_windows_disables_opening_a_window.3fef24e2", nil, NSBundle.mainBundle, @"The existence of hotkey windows disables opening a window at startup.", @"User-facing text in GeneralPreferencesViewController (alwaysOpenLegend).");
     }
     if ([[[iTermBuriedSessions sharedInstance] buriedSessions] count] > 0) {
-        return @"The existence of buried sessions disables opening a window at startup.";
+        return NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.the_existence_of_buried_sessions_disables_opening_a_window.085f15ea", nil, NSBundle.mainBundle, @"The existence of buried sessions disables opening a window at startup.", @"User-facing text in GeneralPreferencesViewController (alwaysOpenLegend).");
     }
     return nil;
 }
@@ -2761,10 +2855,10 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 
 - (IBAction)changeAPIKey:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Manage AI API Keys";
-    alert.informativeText = @"Keys are stored securely in the macOS Keychain.";
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.manage_ai_api_keys.a84e4221", nil, NSBundle.mainBundle, @"Manage AI API Keys", @"User-facing text in GeneralPreferencesViewController (changeAPIKey:).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.keys_are_stored_securely_in_the_macos_keychain.72deaa8c", nil, NSBundle.mainBundle, @"Keys are stored securely in the macOS Keychain.", @"User-facing text in GeneralPreferencesViewController (changeAPIKey:).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in GeneralPreferencesViewController (changeAPIKey:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in GeneralPreferencesViewController (changeAPIKey:).")];
 
     NSArray<NSNumber *> *vendors = [self aiAPIKeyProviderVendors];
     const CGFloat width = 620;
@@ -2801,7 +2895,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         field.usesSingleLineMode = YES;
         field.editable = YES;
         field.selectable = YES;
-        field.placeholderString = [NSString stringWithFormat:@"%@ API key", name];
+        field.placeholderString = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.api_key.551ed668", nil, NSBundle.mainBundle, @"%@ API key", @"User-facing text in GeneralPreferencesViewController (placeholderString)."), name];
         field.stringValue = [AITermControllerObjC apiKeyForVendor:vendor] ?: @"";
         [accessory addSubview:field];
         [_aiAPIKeySheetFields addObject:field];
@@ -3228,11 +3322,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     }
     [ud setBool:YES forKey:@"NoSyncAILegacyGlobalHeadersWarningShown"];
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Custom Headers Are Now Set Per Model";
-    alert.informativeText = @"Your AI custom HTTP headers used to be a single global "
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.custom_headers_are_now_set_per_model.4aa76a36", nil, NSBundle.mainBundle, @"Custom Headers Are Now Set Per Model", @"User-facing text in GeneralPreferencesViewController (warnAboutLegacyGlobalHeadersIfNeeded).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.your_ai_custom_http_headers_used_to_be.b818d52f", nil, NSBundle.mainBundle, @"Your AI custom HTTP headers used to be a single global "
                             @"setting. They still apply to your current model, but adding "
                             @"or editing models here does not carry them over. Re-add the "
-                            @"headers you need in each model’s “Custom headers” section.";
+                            @"headers you need in each model’s “Custom headers” section.", @"User-facing text in GeneralPreferencesViewController (warnAboutLegacyGlobalHeadersIfNeeded).");
     [alert runModal];
 }
 
@@ -3284,16 +3378,16 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 }
 
 - (IBAction)exportAllSettingsAndData:(id)sender {
-    [self showMessage:[iTerm2ImportExport exportAll] title:@"Problem Exporting"];
+    [self showMessage:[iTerm2ImportExport exportAll] title:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.problem_exporting.3a0c59c1", nil, NSBundle.mainBundle, @"Problem Exporting", @"User-facing text in GeneralPreferencesViewController (title).")];
 }
 
 - (IBAction)importAllSettingsAndData:(id)sender {
-    [self showMessage:[iTerm2ImportExport importAll] title:@"Problem Importing"];
+    [self showMessage:[iTerm2ImportExport importAll] title:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.problem_importing.9c3dc89a", nil, NSBundle.mainBundle, @"Problem Importing", @"User-facing text in GeneralPreferencesViewController (title).")];
 }
 
 - (IBAction)eraseAllSettingsAndData:(id)sender {
     [self showMessage:[iTerm2ImportExport eraseAllWithWindow:self.view.window]
-                title:@"Problem Erasing Settings and Data"];
+                title:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.problem_erasing_settings_and_data.7687fee4", nil, NSBundle.mainBundle, @"Problem Erasing Settings and Data", @"User-facing text in GeneralPreferencesViewController (title).")];
 }
 
 - (void)showMessage:(NSString *)message title:(NSString *)title {
@@ -3301,7 +3395,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
         return;
     }
     [iTermWarning showWarningWithTitle:message
-                               actions:@[ @"OK" ]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in GeneralPreferencesViewController (actions).") ]
                              accessory:nil
                             identifier:nil
                            silenceable:kiTermWarningTypePersistent
@@ -3314,21 +3408,21 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     NSString *action;
     NSString *path;
     if (@available(macOS 13, *)) {
-        message = @"System window restoration has been disabled, which prevents iTerm2 from respecting this setting. Disable ”System Settings > Desktop & Dock > Close windows when quitting an application“ to enable window restoration.";
-        action = @"Open System Settings";
+        message = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.system_window_restoration_has_been_disabled_which_prevents.f118cbd6", nil, NSBundle.mainBundle, @"System window restoration has been disabled, which prevents iTerm2 from respecting this setting. Disable ”System Settings > Desktop & Dock > Close windows when quitting an application“ to enable window restoration.", @"User-facing window restoration warning for macOS 13 and later.");
+        action = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.open_system_settings.18196b39", nil, NSBundle.mainBundle, @"Open System Settings", @"Window restoration warning action.");
         path = @"/System/Library/PreferencePanes/Dock.prefPane";
     } else {
-        message = @"System window restoration has been disabled, which prevents iTerm2 from respecting this setting. Disable System Settings > General > Close windows when quitting an app to enable window restoration.";
-        action = @"Open System Preferences";
+        message = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.system_window_restoration_has_been_disabled_which_prevents.cd072a02", nil, NSBundle.mainBundle, @"System window restoration has been disabled, which prevents iTerm2 from respecting this setting. Disable System Settings > General > Close windows when quitting an app to enable window restoration.", @"User-facing window restoration warning for earlier macOS versions.");
+        action = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.open_system_preferences.75bdba5e", nil, NSBundle.mainBundle, @"Open System Preferences", @"Window restoration warning action.");
         path = @"/System/Library/PreferencePanes/Appearance.prefPane";
     }
     const iTermWarningSelection selection =
     [iTermWarning showWarningWithTitle:message
-                               actions:@[ action, @"OK" ]
+                               actions:@[ action, NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in GeneralPreferencesViewController (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncWindowRestorationDisabled"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Window Restoration Disabled"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.window_restoration_disabled.b7908bce", nil, NSBundle.mainBundle, @"Window Restoration Disabled", @"User-facing text in GeneralPreferencesViewController (heading).")
                                 window:self.view.window];
     if (selection == kiTermWarningSelection0) {
         [[NSWorkspace sharedWorkspace] it_openURL:[NSURL fileURLWithPath:path]
@@ -3477,9 +3571,9 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
                 // User didn't hit cancel; if he chose a writable directory, ask if he wants to write to it.
                 if ([[iTermRemotePreferences sharedInstance] remoteLocationIsValid]) {
                     NSAlert *alert = [[NSAlert alloc] init];
-                    alert.messageText = @"Copy local settings to custom folder now?";
-                    [alert addButtonWithTitle:@"Copy"];
-                    [alert addButtonWithTitle:@"Don’t Copy"];
+                    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.copy_local_settings_to_custom_folder_now.8aed3381", nil, NSBundle.mainBundle, @"Copy local settings to custom folder now?", @"User-facing text in GeneralPreferencesViewController (loadPrefsFromCustomFolderDidChangeByUI:).");
+                    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.copy.e21f935f", nil, NSBundle.mainBundle, @"Copy", @"User-facing text in GeneralPreferencesViewController (loadPrefsFromCustomFolderDidChangeByUI:).")];
+                    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.generalpreferencesviewcontroller.don_t_copy.36ca587f", nil, NSBundle.mainBundle, @"Don’t Copy", @"User-facing text in GeneralPreferencesViewController (loadPrefsFromCustomFolderDidChangeByUI:).")];
                     if ([alert runModal] == NSAlertFirstButtonReturn) {
                         [[iTermRemotePreferences sharedInstance] saveLocalUserDefaultsToRemotePrefs];
                     }

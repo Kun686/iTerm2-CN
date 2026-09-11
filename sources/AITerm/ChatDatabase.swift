@@ -48,9 +48,12 @@ class ObjCChatDatabase: NSObject {
                     temp.browserSessionGuid = nil
                     do {
                         try chats.set(at: i, temp)
+                        let sessionKind = wasTerminal
+                            ? String(localized: "ui.swift.aiterm.chatdatabase.terminal.4e686af7", defaultValue: "terminal", bundle: .main, comment: "User-facing text in ChatDatabase.")
+                            : String(localized: "ui.swift.aiterm.chatdatabase.web_browser.7e16b4a1", defaultValue: "web browser", bundle: .main, comment: "User-facing text in ChatDatabase.")
                         try? ChatBroker.instance?.publishNotice(
                             chatID: temp.id,
-                            notice: "This chat is no longer linked to a \(wasTerminal ? "terminal" : "web browser") session.")
+                            notice: String(localized: "ui.swift.aiterm.chatdatabase.this_chat_is_no_longer_linked_to_a.06722177", defaultValue: "This chat is no longer linked to a \(sessionKind) session.", bundle: .main, comment: "User-facing text in ChatDatabase."))
                     } catch {
                         DLog("\(error)")
                     }
@@ -727,4 +730,3 @@ extension ChatDatabase: DatabaseBackedArrayDelegate {
         }
     }
 }
-

@@ -81,12 +81,12 @@ NSString *const kTerminalFileShouldStopNotification = @"kTerminalFileShouldStopN
 // attached to `window` so it matches the terminal-initiated download confirmation.
 - (BOOL)shouldPromptForDownloadLocationInWindow:(NSWindow *)window {
     const iTermWarningSelection selection =
-        [iTermWarning showWarningWithTitle:@"Where would you like to save this download?"
-                                   actions:@[ @"Save to Downloads", @"Choose…" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.where_would_you_like_to_save_this_download.89621979", nil, NSBundle.mainBundle, @"Where would you like to save this download?", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.save_to_downloads.9f23ea55", nil, NSBundle.mainBundle, @"Save to Downloads", @"User-facing action label in TerminalFile (actions)."), NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.choose.7ca41615", nil, NSBundle.mainBundle, @"Choose…", @"User-facing action label in TerminalFile (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncPromptForDownloadLocation"
                                silenceable:kiTermWarningTypePermanentlySilenceable
-                                   heading:@"Save Terminal-Initiated Download"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.save_terminal_initiated_download.3e42291b", nil, NSBundle.mainBundle, @"Save Terminal-Initiated Download", @"User-facing text in TerminalFile (heading).")
                                     window:window];
     return selection == kiTermWarningSelection1;
 }
@@ -129,15 +129,15 @@ NSString *const kTerminalFileShouldStopNotification = @"kTerminalFileShouldStopN
 }
 
 - (NSString *)displayName {
-    return self.localPath ? [self.localPath lastPathComponent] : @"Unnamed file";
+    return self.localPath ? [self.localPath lastPathComponent] : NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.unnamed_file.19f6d038", nil, NSBundle.mainBundle, @"Unnamed file", @"Fallback display name for a terminal-initiated file transfer.");
 }
 
 - (NSString *)shortName {
-    return self.localPath ? [self.localPath lastPathComponent] : @"Unnamed file";
+    return self.localPath ? [self.localPath lastPathComponent] : NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.unnamed_file.19f6d038", nil, NSBundle.mainBundle, @"Unnamed file", @"Fallback display name for a terminal-initiated file transfer.");
 }
 
 - (NSString *)subheading {
-    return self.filename ?: @"Terminal download";
+    return self.filename ?: NSLocalizedStringWithDefaultValue(@"ui.filetransfer.terminalfile.terminal_download.407a367a", nil, NSBundle.mainBundle, @"Terminal download", @"Fallback subtitle for a terminal-initiated download.");
 }
 
 - (void)download {

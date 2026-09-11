@@ -249,7 +249,7 @@ class PasswordManagerDataSourceProvider: NSObject {
             return
         }
         iTermApplication.shared().localAuthenticationDialogOpen = true
-        let reason = "open the password manager"
+        let reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.open_the_password_manager.2694f46a", defaultValue: "open the password manager", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
         context.evaluatePolicy(policy, localizedReason: reason) { success, error in
             RLog("Policy evaluation success=\(success) error=\(String(describing: error))")
             DispatchQueue.main.async {
@@ -282,65 +282,65 @@ class PasswordManagerDataSourceProvider: NSObject {
         let reason: String
         switch LAError.Code(rawValue: error.code) {
         case .authenticationFailed:
-            reason = "valid credentials weren't supplied.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.valid_credentials_weren_t_supplied.0421cbfe", defaultValue: "valid credentials weren't supplied.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .userCancel:
-            reason = "password entry was cancelled.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.password_entry_was_cancelled.b583c702", defaultValue: "password entry was cancelled.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .userFallback:
-            reason = "password authentication was requested.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.password_authentication_was_requested.19bddd18", defaultValue: "password authentication was requested.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .systemCancel:
-            reason = "the system cancelled the authentication request.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.the_system_cancelled_the_authentication_request.2d1207ce", defaultValue: "the system cancelled the authentication request.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .passcodeNotSet:
-            reason = "no passcode is set.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.no_passcode_is_set.c7ebb79c", defaultValue: "no passcode is set.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .touchIDNotAvailable:
-            reason = "touch ID is not available.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.touch_id_is_not_available.82d3a6a9", defaultValue: "touch ID is not available.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .biometryNotEnrolled:
-            reason = "touch ID doesn't have any fingers enrolled.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.touch_id_doesn_t_have_any_fingers_enrolled.7b0ecfa6", defaultValue: "touch ID doesn't have any fingers enrolled.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .biometryLockout:
-            reason = "there were too many failed Touch ID attempts.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.there_were_too_many_failed_touch_id_attempts.e52e18cc", defaultValue: "there were too many failed Touch ID attempts.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .appCancel:
-            reason = "authentication was cancelled by iTerm2.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.authentication_was_cancelled_by_iterm2.1f051b75", defaultValue: "authentication was cancelled by iTerm2.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .invalidContext:
-            reason = "the context is invalid. This is a bug in iTerm2. Please report it.";
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.the_context_is_invalid_this_is_a_bug.db20b08c", defaultValue: "the context is invalid. This is a bug in iTerm2. Please report it.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.");
 
         case .none:
             reason = error.localizedDescription
 
         case .touchIDNotEnrolled:
-            reason = "touch ID is not enrolled."
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.touch_id_is_not_enrolled.cb3e2e58", defaultValue: "touch ID is not enrolled.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
 
         case .touchIDLockout:
-            reason = "touch ID is locked out."
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.touch_id_is_locked_out.53eadca4", defaultValue: "touch ID is locked out.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
 
         case .notInteractive:
-            reason = "the required user interface could not be displayed."
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.the_required_user_interface_could_not_be_displayed.c1d23780", defaultValue: "the required user interface could not be displayed.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
 
         case .watchNotAvailable:
-            reason = "watch is not available."
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.watch_is_not_available.8f6e939e", defaultValue: "watch is not available.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
 
         case .biometryNotPaired:
-            reason = "biometry is not paired."
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.biometry_is_not_paired.057a660b", defaultValue: "biometry is not paired.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
 
         case .biometryDisconnected:
-            reason = "biometry is disconnected."
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.biometry_is_disconnected.195e5881", defaultValue: "biometry is disconnected.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
 
         case .invalidDimensions:
-            reason = "invalid dimensions given."
+            reason = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.invalid_dimensions_given.3ff2dba1", defaultValue: "invalid dimensions given.", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
 
         @unknown default:
             reason = error.localizedDescription
         }
-        alert.messageText = "Authentication Failed"
-        alert.informativeText = "Authentication failed because \(reason)"
-        alert.addButton(withTitle: "OK")
+        alert.messageText = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.authentication_failed.1a195253", defaultValue: "Authentication Failed", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
+        alert.informativeText = String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.authentication_failed_because_0.30527adf", defaultValue: "Authentication failed because \(reason)", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider.")
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.passwordmanagerdatasourceprovider.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in PasswordManagerDataSourceProvider."))
         alert.runModal()
     }
 }

@@ -135,22 +135,25 @@ exit:
             isArrow = YES;
             break;
         case NSDeleteFunctionKey:
-            aString = NSLocalizedStringFromTableInBundle(@"Del→",
-                                                         @"iTerm",
-                                                         [NSBundle bundleForClass:[self class]],
-                                                         @"Key Names");
+            aString = NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermkeystrokeformatter.forward_delete",
+                                                        nil,
+                                                        [NSBundle bundleForClass:[self class]],
+                                                        @"Del→",
+                                                        @"Forward-delete key name");
             break;
         case 0x7f:
-            aString = NSLocalizedStringFromTableInBundle(@"←Delete",
-                                                         @"iTerm",
-                                                         [NSBundle bundleForClass:[self class]],
-                                                         @"Key Names");
+            aString = NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermkeystrokeformatter.backward_delete",
+                                                        nil,
+                                                        [NSBundle bundleForClass:[self class]],
+                                                        @"←Delete",
+                                                        @"Backward-delete key name");
             break;
         case NSEndFunctionKey:
-            aString = NSLocalizedStringFromTableInBundle(@"End",
-                                                         @"iTerm",
-                                                         [NSBundle bundleForClass:[self class]],
-                                                         @"Key Names");
+            aString = NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermkeystrokeformatter.end",
+                                                        nil,
+                                                        [NSBundle bundleForClass:[self class]],
+                                                        @"End",
+                                                        @"End key name");
             break;
         case NSF1FunctionKey:
         case NSF2FunctionKey:
@@ -175,16 +178,18 @@ exit:
             aString = [NSString stringWithFormat: @"F%d", (character - NSF1FunctionKey + 1)];
             break;
         case NSHelpFunctionKey:
-            aString = NSLocalizedStringFromTableInBundle(@"Help",
-                                                         @"iTerm",
-                                                         [NSBundle bundleForClass:[self class]],
-                                                         @"Key Names");
+            aString = NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermkeystrokeformatter.help",
+                                                        nil,
+                                                        [NSBundle bundleForClass:[self class]],
+                                                        @"Help",
+                                                        @"Help key name");
             break;
         case NSHomeFunctionKey:
-            aString = NSLocalizedStringFromTableInBundle(@"Home",
-                                                         @"iTerm",
-                                                         [NSBundle bundleForClass:[self class]],
-                                                         @"Key Names");
+            aString = NSLocalizedStringWithDefaultValue(@"ui.keyboard.itermkeystrokeformatter.home",
+                                                        nil,
+                                                        [NSBundle bundleForClass:[self class]],
+                                                        @"Home",
+                                                        @"Home key name");
             break;
 
         // These are standard on Apple en_GB keyboards where ~ and ` go on US keyboards (between esc

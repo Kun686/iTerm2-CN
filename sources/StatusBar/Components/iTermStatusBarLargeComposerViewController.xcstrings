@@ -1,6 +1,24 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "Due-Dn-30r.ibShadowedToolTip": {
+      "comment": "Class = \"NSButton\"; toolTip = \"Describes how to use the composer.\"; ObjectID = \"Due-Dn-30r\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Describes how to use the composer."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "说明如何使用编写器。"
+          }
+        }
+      }
+    },
     "d6h-kf-O57.title": {
       "comment": "Class = \"NSTextFieldCell\"; title = \"AI completion enabled: all text sent to AI\"; ObjectID = \"d6h-kf-O57\";",
       "extractionState": "extracted_with_value",
@@ -9,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "AI completion enabled: all text sent to AI"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 补全已启用：所有文本将发送至 AI"
           }
         }
       }
@@ -22,16 +46,29 @@
             "state": "new",
             "value": "Press ⇧↩ to send."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按 ⇧↩ 发送。"
+          }
         }
       }
     },
     "zb3-gB-4Zi.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSButtonCell\"; title = \"AI\"; ObjectID = \"zb3-gB-4Zi\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "AI"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "AI"
           }
         }

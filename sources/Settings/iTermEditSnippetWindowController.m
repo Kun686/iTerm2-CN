@@ -41,7 +41,7 @@
                 _title = [pasteboardString ellipsizedDescriptionNoLongerThan:40];
                 _value = pasteboardString;
             } else {
-                _title = @"Untitled";
+                _title = NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditsnippetwindowcontroller.untitled.f59ab8d1", nil, NSBundle.mainBundle, @"Untitled", @"Fallback title for an unnamed snippet.");
                 _value = @"";
             }
             _guid = [[NSUUID UUID] UUIDString];
@@ -101,11 +101,11 @@
 
 - (IBAction)help:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Escaping";
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditsnippetwindowcontroller.escaping.436b2c35", nil, NSBundle.mainBundle, @"Escaping", @"User-facing text in iTermEditSnippetWindowController (help:).");
     alert.informativeText =
-    @"C-Style Backslash Escaping supports: \\a (bell), \\b (backspace), \\e (escape), \\n (newline), \\r (carriage return), \\t (tab), \\\\ (backslash), and \\x followed by two hex digits giving a single byte of UTF-8.\n\n"
+    NSLocalizedStringWithDefaultValue(@"ui.settings.itermeditsnippetwindowcontroller.c_style_backslash_escaping_supports_a_bell_b.cbd2e61e", nil, NSBundle.mainBundle, @"C-Style Backslash Escaping supports: \\a (bell), \\b (backspace), \\e (escape), \\n (newline), \\r (carriage return), \\t (tab), \\\\ (backslash), and \\x followed by two hex digits giving a single byte of UTF-8.\n\n"
     @"Unescaped Literal Text does not have any special characters.\n\n"
-    @"Backward Compatibility Escaping, which is not recommended for new snippets, supports: \\n (newline), \\e (escape), \\a (bell), and \\t (tab).\n\n";
+    @"Backward Compatibility Escaping, which is not recommended for new snippets, supports: \\n (newline), \\e (escape), \\a (bell), and \\t (tab).\n\n", @"User-facing text in iTermEditSnippetWindowController (informativeText).");
     [alert runModal];
 }
 

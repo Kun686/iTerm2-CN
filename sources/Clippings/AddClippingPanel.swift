@@ -25,7 +25,7 @@ class AddClippingPanel: NSObject {
                             styleMask: [.titled],
                             backing: .buffered,
                             defer: true)
-        panel.title = "New Clipping"
+        panel.title = String(localized: "ui.swift.clippings.addclippingpanel.new_clipping.466f535a", defaultValue: "New Clipping", bundle: .main, comment: "User-facing text in AddClippingPanel.")
         panel.isFloatingPanel = false
         let content = NSView(frame: panel.contentRect(forFrameRect: panel.frame))
         content.autoresizingMask = [.width, .height]
@@ -61,7 +61,7 @@ class AddClippingPanel: NSObject {
 
         let buttonH: CGFloat = 32
         let buttonY: CGFloat = pad
-        let cancel = NSButton(title: "Cancel", target: self, action: #selector(cancelClicked))
+        let cancel = NSButton(title: String(localized: "ui.swift.clippings.addclippingpanel.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in AddClippingPanel."), target: self, action: #selector(cancelClicked))
         cancel.bezelStyle = .rounded
         cancel.keyEquivalent = "\u{1b}"
         cancel.sizeToFit()
@@ -73,7 +73,7 @@ class AddClippingPanel: NSObject {
         cancel.autoresizingMask = [.minXMargin, .maxYMargin]
         container.addSubview(cancel)
 
-        let add = NSButton(title: "Add", target: self, action: #selector(addClicked))
+        let add = NSButton(title: String(localized: "ui.swift.clippings.addclippingpanel.add.9fd728c6", defaultValue: "Add", bundle: .main, comment: "User-facing text in AddClippingPanel."), target: self, action: #selector(addClicked))
         add.bezelStyle = .rounded
         add.keyEquivalent = "\r"
         add.sizeToFit()
@@ -94,7 +94,7 @@ class AddClippingPanel: NSObject {
         let detailFieldHeight = max(60, detailFieldTopY - topAreaY)
         let detailFieldY = detailFieldTopY - detailFieldHeight
 
-        let titleLabel = makeLabel("Title:", x: pad, y: titleRowY, width: labelW)
+        let titleLabel = makeLabel(String(localized: "ui.swift.clippings.addclippingpanel.title.ecd11fd9", defaultValue: "Title:", bundle: .main, comment: "User-facing text in AddClippingPanel."), x: pad, y: titleRowY, width: labelW)
         titleLabel.autoresizingMask = [.minYMargin]
         container.addSubview(titleLabel)
         titleField.frame = NSRect(x: fieldX, y: titleRowY, width: fieldW, height: rowH)
@@ -102,7 +102,7 @@ class AddClippingPanel: NSObject {
         titleField.bezelStyle = .squareBezel
         container.addSubview(titleField)
 
-        let detailLabel = makeLabel("Detail:", x: pad, y: detailLabelY, width: labelW)
+        let detailLabel = makeLabel(String(localized: "ui.swift.clippings.addclippingpanel.detail.764c9157", defaultValue: "Detail:", bundle: .main, comment: "User-facing text in AddClippingPanel."), x: pad, y: detailLabelY, width: labelW)
         detailLabel.autoresizingMask = [.minYMargin]
         container.addSubview(detailLabel)
 

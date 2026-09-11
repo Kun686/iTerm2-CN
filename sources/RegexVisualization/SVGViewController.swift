@@ -158,13 +158,17 @@ class RegexVisualizationViewController: SVGViewController {
         }
 
         guard let svg else {
+            let parseError = String(localized: "ui.regex_visualization.parse_error",
+                                    defaultValue: "The regular expression could not be parsed.",
+                                    bundle: .main,
+                                    comment: "Error shown when the regular expression visualization cannot parse an expression.")
             html = """
             <html>
             <head>
               <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </head>
             <body style="margin:0;padding:0;">
-            The regular expression could not be parsed.
+            \(parseError.escapedForHTML)
             </body>
             </html>
             """

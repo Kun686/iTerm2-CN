@@ -123,8 +123,8 @@ static NSString *const iTermCoprocessCommandsToIgnoreErrorOutputPrefsKey = @"NoS
         _exit(-1);
     } else if (pid < (pid_t)0) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Failed to launch coprocess.";
-        [alert addButtonWithTitle:@"OK"];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.tasks.coprocess.failed_to_launch_coprocess.b43d413b", nil, NSBundle.mainBundle, @"Failed to launch coprocess.", @"User-facing text in Coprocess (launchedCoprocessWithCommand:environment:).");
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.tasks.coprocess.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in Coprocess (launchedCoprocessWithCommand:environment:).")];
         [alert runModal];
         return nil;
     }

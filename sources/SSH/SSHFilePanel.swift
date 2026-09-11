@@ -381,7 +381,7 @@ extension SSHFilePanel {
     }
 
     private func setupWindow() {
-        window?.title = "Open"
+        window?.title = String(localized: "ui.swift.ssh.sshfilepanel.open.ed077f3d", defaultValue: "Open", bundle: .main, comment: "User-facing text in SSHFilePanel.")
         window?.center()
         window?.isRestorable = false
         window?.delegate = self
@@ -618,7 +618,7 @@ extension SSHFilePanel {
         container.translatesAutoresizingMaskIntoConstraints = false
         
         // Create "Save As:" label
-        saveAsLabel = NSTextField(labelWithString: "Save As:")
+        saveAsLabel = NSTextField(labelWithString: String(localized: "ui.swift.ssh.sshfilepanel.save_as.147fcffb", defaultValue: "Save As:", bundle: .main, comment: "User-facing text in SSHFilePanel."))
         saveAsLabel.translatesAutoresizingMaskIntoConstraints = false
         saveAsLabel.alignment = .right
         saveAsLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
@@ -631,7 +631,7 @@ extension SSHFilePanel {
         saveAsTextField.isBezeled = true
         saveAsTextField.bezelStyle = .roundedBezel
         saveAsTextField.focusRingType = .default
-        saveAsTextField.placeholderString = "Enter filename"
+        saveAsTextField.placeholderString = String(localized: "ui.swift.ssh.sshfilepanel.enter_filename.f06a0eee", defaultValue: "Enter filename", bundle: .main, comment: "User-facing text in SSHFilePanel.")
         saveAsTextField.delegate = self
 
         // Pre-fill with default filename if provided
@@ -666,7 +666,7 @@ extension SSHFilePanel {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.bezelStyle = .texturedRounded
         backButton.image = NSImage.it_image(forSymbolName: SFSymbol.chevronLeft.rawValue,
-                                            accessibilityDescription: "Back",
+                                            accessibilityDescription: String(localized: "ui.swift.ssh.sshfilepanel.back.76900f1b", defaultValue: "Back", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                             fallbackImageName: "chevron.left",
                                             for: SSHFilePanel.self)
         backButton.isEnabled = false
@@ -677,7 +677,7 @@ extension SSHFilePanel {
         forwardButton.translatesAutoresizingMaskIntoConstraints = false
         forwardButton.bezelStyle = .texturedRounded
         forwardButton.image = NSImage.it_image(forSymbolName: SFSymbol.chevronRight.rawValue,
-                                               accessibilityDescription: "Forward",
+                                               accessibilityDescription: String(localized: "ui.swift.ssh.sshfilepanel.forward.f1c65e14", defaultValue: "Forward", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                                fallbackImageName: "chevron.right",
                                                for: SSHFilePanel.self)
         forwardButton.isEnabled = false
@@ -694,7 +694,7 @@ extension SSHFilePanel {
         // Search field
         searchField = NSSearchField()
         searchField.translatesAutoresizingMaskIntoConstraints = false
-        searchField.placeholderString = "Search"
+        searchField.placeholderString = String(localized: "ui.swift.ssh.sshfilepanel.search.49c266ba", defaultValue: "Search", bundle: .main, comment: "User-facing text in SSHFilePanel.")
         searchField.target = self
         searchField.action = #selector(searchFieldChanged)
 
@@ -789,7 +789,7 @@ extension SSHFilePanel {
     private func setupButtons() {
         cancelButton = NSButton()
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.title = "Cancel"
+        cancelButton.title = String(localized: "ui.swift.ssh.sshfilepanel.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in SSHFilePanel.")
         cancelButton.bezelStyle = .rounded
         cancelButton.keyEquivalent = "\u{1b}" // Escape
         cancelButton.keyEquivalentModifierMask = []
@@ -798,7 +798,7 @@ extension SSHFilePanel {
 
         openButton = NSButton()
         openButton.translatesAutoresizingMaskIntoConstraints = false
-        openButton.title = isSavePanel ? "Save" : "Open"
+        openButton.title = isSavePanel ? String(localized: "ui.swift.ssh.sshfilepanel.save.1509f561", defaultValue: "Save", bundle: .main, comment: "User-facing text in SSHFilePanel.") : String(localized: "ui.swift.ssh.sshfilepanel.open.ed077f3d", defaultValue: "Open", bundle: .main, comment: "User-facing text in SSHFilePanel.")
         openButton.bezelStyle = .rounded
         openButton.keyEquivalent = "\r" // Return
         openButton.isEnabled = false
@@ -809,7 +809,7 @@ extension SSHFilePanel {
         if canCreateDirectories {
             newFolderButton = NSButton()
             newFolderButton.translatesAutoresizingMaskIntoConstraints = false
-            newFolderButton.title = "New Folder"
+            newFolderButton.title = String(localized: "ui.swift.ssh.sshfilepanel.new_folder.c75ba807", defaultValue: "New Folder", bundle: .main, comment: "User-facing text in SSHFilePanel.")
             newFolderButton.bezelStyle = .rounded
             newFolderButton.target = self
             newFolderButton.action = #selector(newFolderButtonClicked)
@@ -818,7 +818,7 @@ extension SSHFilePanel {
         // Create Use System Panel button
         systemPanelButton = NSButton()
         systemPanelButton.translatesAutoresizingMaskIntoConstraints = false
-        systemPanelButton.title = "Use System Panel…"
+        systemPanelButton.title = String(localized: "ui.swift.ssh.sshfilepanel.use_system_panel.0ed61248", defaultValue: "Use System Panel…", bundle: .main, comment: "User-facing text in SSHFilePanel.")
         systemPanelButton.bezelStyle = .rounded
         systemPanelButton.target = self
         systemPanelButton.action = #selector(systemPanelButtonClicked)
@@ -1124,11 +1124,11 @@ extension SSHFilePanel {
             return
         }
         _ = iTermWarning.show(withTitle: e.localizedDescription,
-                              actions: [ "OK" ],
+                              actions: [ String(localized: "ui.swift.ssh.sshfilepanel.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in SSHFilePanel.") ],
                               accessory: nil,
                               identifier: nil,
                               silenceable: .kiTermWarningTypePersistent,
-                              heading: "Could not save file",
+                              heading: String(localized: "ui.swift.ssh.sshfilepanel.could_not_save_file.b84a9a78", defaultValue: "Could not save file", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                               window: window)
         cancelButtonClicked(nil)
     }
@@ -1144,13 +1144,13 @@ extension SSHFilePanel {
     private func presentFileExistsAlert(for descriptor: SSHFileDescriptor) async -> NSApplication.ModalResponse {
         let alert = NSAlert()
         alert.alertStyle = .warning
-        alert.messageText = "A file with the name “\(descriptor.absolutePath.lastPathComponent)” on \(descriptor.sshIdentity.displayName) already exists in this location. Do you want to replace it?"
-        alert.informativeText = "Replacing it will overwrite its current contents."
+        alert.messageText = String(localized: "ui.swift.ssh.sshfilepanel.a_file_with_the_name_0_on_1.249b4ded", defaultValue: "A file with the name “\(descriptor.absolutePath.lastPathComponent)” on \(descriptor.sshIdentity.displayName) already exists in this location. Do you want to replace it?", bundle: .main, comment: "User-facing text in SSHFilePanel.")
+        alert.informativeText = String(localized: "ui.swift.ssh.sshfilepanel.replacing_it_will_overwrite_its_current_contents.e1a13641", defaultValue: "Replacing it will overwrite its current contents.", bundle: .main, comment: "User-facing text in SSHFilePanel.")
 
-        let replaceButton = alert.addButton(withTitle: "Replace")
+        let replaceButton = alert.addButton(withTitle: String(localized: "ui.swift.ssh.sshfilepanel.replace.95e15439", defaultValue: "Replace", bundle: .main, comment: "User-facing text in SSHFilePanel."))
         replaceButton.hasDestructiveAction = true
 
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "ui.swift.ssh.sshfilepanel.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in SSHFilePanel."))
 
         if let window {
             return await alert.beginSheetModal(for: window)
@@ -1237,49 +1237,49 @@ extension SSHFilePanel {
         let menu = NSMenu()
 
         // Go to Folder (Cmd+Shift+G)
-        let goToFolderItem = NSMenuItem(title: "Go to Folder…",
+        let goToFolderItem = NSMenuItem(title: String(localized: "ui.swift.ssh.sshfilepanel.go_to_folder.f5ea0150", defaultValue: "Go to Folder…", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                        action: #selector(goToFolder),
                                        keyEquivalent: "g")
         goToFolderItem.keyEquivalentModifierMask = [.command, .shift]
         menu.addItem(goToFolderItem)
 
         // Go to Home (Cmd+Shift+H)
-        let goToHomeItem = NSMenuItem(title: "Go to Home",
+        let goToHomeItem = NSMenuItem(title: String(localized: "ui.swift.ssh.sshfilepanel.go_to_home.746c8138", defaultValue: "Go to Home", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                      action: #selector(goToHome),
                                      keyEquivalent: "h")
         goToHomeItem.keyEquivalentModifierMask = [.command, .shift]
         menu.addItem(goToHomeItem)
 
         // Go Up (Cmd+Up Arrow)
-        let goUpItem = NSMenuItem(title: "Go Up",
+        let goUpItem = NSMenuItem(title: String(localized: "ui.swift.ssh.sshfilepanel.go_up.40adf160", defaultValue: "Go Up", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                  action: #selector(goUp),
                                  keyEquivalent: String(Character(UnicodeScalar(NSUpArrowFunctionKey)!)))
         goUpItem.keyEquivalentModifierMask = [.command]
         menu.addItem(goUpItem)
 
         // Navigate Back (Cmd+Left Arrow)
-        let backItem = NSMenuItem(title: "Back",
+        let backItem = NSMenuItem(title: String(localized: "ui.swift.ssh.sshfilepanel.back.76900f1b", defaultValue: "Back", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                  action: #selector(backButtonClicked),
                                  keyEquivalent: String(Character(UnicodeScalar(NSLeftArrowFunctionKey)!)))
         backItem.keyEquivalentModifierMask = [.command]
         menu.addItem(backItem)
 
         // Navigate Forward (Cmd+Right Arrow)
-        let forwardItem = NSMenuItem(title: "Forward",
+        let forwardItem = NSMenuItem(title: String(localized: "ui.swift.ssh.sshfilepanel.forward.f1c65e14", defaultValue: "Forward", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                     action: #selector(forwardButtonClicked),
                                     keyEquivalent: String(Character(UnicodeScalar(NSRightArrowFunctionKey)!)))
         forwardItem.keyEquivalentModifierMask = [.command]
         menu.addItem(forwardItem)
 
         // Refresh (Cmd+R)
-        let refreshItem = NSMenuItem(title: "Refresh",
+        let refreshItem = NSMenuItem(title: String(localized: "ui.swift.ssh.sshfilepanel.refresh.0e916101", defaultValue: "Refresh", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                     action: #selector(refresh),
                                     keyEquivalent: "r")
         refreshItem.keyEquivalentModifierMask = [.command]
         menu.addItem(refreshItem)
 
         // Toggle show hidden (Cmd+Shift+.)
-        let toggleShowHiddenFilesItem = NSMenuItem(title: "Show Hidden Files",
+        let toggleShowHiddenFilesItem = NSMenuItem(title: String(localized: "ui.swift.ssh.sshfilepanel.show_hidden_files.415951a5", defaultValue: "Show Hidden Files", bundle: .main, comment: "User-facing text in SSHFilePanel."),
                                     action: #selector(toggleShowHidenFiles),
                                     keyEquivalent: ".")
         toggleShowHiddenFilesItem.keyEquivalentModifierMask = [.command, .shift]
@@ -1476,14 +1476,14 @@ extension SSHFilePanel {
         newFolderSheet.contentView = contentView
         
         // Create main title
-        let mainTitle = NSTextField(labelWithString: "New Folder")
+        let mainTitle = NSTextField(labelWithString: String(localized: "ui.swift.ssh.sshfilepanel.new_folder.c75ba807", defaultValue: "New Folder", bundle: .main, comment: "User-facing text in SSHFilePanel."))
         mainTitle.translatesAutoresizingMaskIntoConstraints = false
         mainTitle.font = NSFont.boldSystemFont(ofSize: NSFont.systemFontSize)
         mainTitle.textColor = NSColor.labelColor
         mainTitle.alignment = .left
         
         // Create subtitle
-        let subtitleLabel = NSTextField(labelWithString: "Name of new folder inside “\(currentPath.absolutePath.lastPathComponent)”:")
+        let subtitleLabel = NSTextField(labelWithString: String(localized: "ui.swift.ssh.sshfilepanel.name_of_new_folder_inside_0.5894a7db", defaultValue: "Name of new folder inside “\(currentPath.absolutePath.lastPathComponent)”:", bundle: .main, comment: "User-facing text in SSHFilePanel."))
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         subtitleLabel.textColor = NSColor.secondaryLabelColor
@@ -1500,13 +1500,13 @@ extension SSHFilePanel {
         // Create buttons
         let cancelSheetButton = NSButton()
         cancelSheetButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelSheetButton.title = "Cancel"
+        cancelSheetButton.title = String(localized: "ui.swift.ssh.sshfilepanel.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in SSHFilePanel.")
         cancelSheetButton.bezelStyle = .rounded
         cancelSheetButton.keyEquivalent = "\u{1b}" // Escape
         
         let createButton = NSButton()
         createButton.translatesAutoresizingMaskIntoConstraints = false
-        createButton.title = "Create"
+        createButton.title = String(localized: "ui.swift.ssh.sshfilepanel.create.4759498a", defaultValue: "Create", bundle: .main, comment: "User-facing text in SSHFilePanel.")
         createButton.bezelStyle = .rounded
         createButton.keyEquivalent = "\r" // Return
         
@@ -1591,10 +1591,10 @@ extension SSHFilePanel {
             } catch {
                 // Show error alert
                 let alert = NSAlert()
-                alert.messageText = "Unable to create folder"
+                alert.messageText = String(localized: "ui.swift.ssh.sshfilepanel.unable_to_create_folder.31b867f7", defaultValue: "Unable to create folder", bundle: .main, comment: "User-facing text in SSHFilePanel.")
                 alert.informativeText = error.localizedDescription
                 alert.alertStyle = .warning
-                alert.addButton(withTitle: "OK")
+                alert.addButton(withTitle: String(localized: "ui.swift.ssh.sshfilepanel.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in SSHFilePanel."))
                 alert.beginSheetModal(for: sheet) { _ in }
             }
         }
@@ -1847,7 +1847,7 @@ extension SSHFilePanel {
                     }
                 }
             } else {
-                seal.reject(iTermFilePanelError("The connection to \(file.sshIdentity.displayName) was lost."))
+                seal.reject(iTermFilePanelError(String(localized: "ui.swift.ssh.sshfilepanel.the_connection_to_0_was_lost.3427538c", defaultValue: "The connection to \(file.sshIdentity.displayName) was lost.", bundle: .main, comment: "User-facing SSH file-panel error.")))
             }
         } renege: {
             cancellation?.cancel()

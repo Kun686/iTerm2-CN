@@ -197,7 +197,7 @@ class SSHConfigurationWindowController: NSWindowController {
             if FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) {
                 // ...and it's either a directory or not executable, throw an error.
                 if isDir.boolValue || !FileManager.default.isExecutableFile(atPath: url.path) {
-                    let errorInfo = [NSLocalizedDescriptionKey: "Selected file must be an executable."]
+                    let errorInfo = [NSLocalizedDescriptionKey: String(localized: "ui.swift.settings.sshconfigurationwindowcontroller.selected_file_must_be_an_executable.b0bda432", defaultValue: "Selected file must be an executable.", bundle: .main, comment: "User-facing text in SSHConfigurationWindowController.")]
                     throw NSError(domain: NSCocoaErrorDomain, code: NSUserCancelledError, userInfo: errorInfo)
                 }
             }
@@ -214,7 +214,7 @@ class SSHConfigurationWindowController: NSWindowController {
             panelDelegate = SSHBinaryPanelDelegate()
             openPanel.delegate = panelDelegate
 
-            openPanel.title = "Select SSH Binary"
+            openPanel.title = String(localized: "ui.swift.settings.sshconfigurationwindowcontroller.select_ssh_binary.56c38876", defaultValue: "Select SSH Binary", bundle: .main, comment: "User-facing text in SSHConfigurationWindowController.")
             openPanel.canChooseFiles = true
             openPanel.canChooseDirectories = false
             openPanel.allowsMultipleSelection = false
@@ -365,7 +365,7 @@ fileprivate class SSHCopyDestinationView: NSView {
 
         textField = NSTextField()
         textField.stringValue = "~"
-        label = NSTextField(labelWithString: "Destination folder on remote host:")
+        label = NSTextField(labelWithString: String(localized: "ui.swift.settings.sshconfigurationwindowcontroller.destination_folder_on_remote_host.41d36eca", defaultValue: "Destination folder on remote host:", bundle: .main, comment: "User-facing text in SSHConfigurationWindowController."))
         label.translatesAutoresizingMaskIntoConstraints = false
         label.sizeToFit()
 

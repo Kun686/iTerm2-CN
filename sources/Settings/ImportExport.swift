@@ -20,8 +20,8 @@ class ImportExport: NSObject {
         DLog("Begin")
         let savePanel = NSSavePanel()
         savePanel.allowedContentTypes = ["itermexport"].compactMap { UTType(filenameExtension: $0) }
-        savePanel.nameFieldStringValue = "iTerm2 State.itermexport"
-        savePanel.title = "Export iTerm2 Settings and Data"
+        savePanel.nameFieldStringValue = String(localized: "ui.swift.settings.importexport.iterm2_state_itermexport.be363a6c", defaultValue: "iTerm2 State.itermexport", bundle: .main, comment: "User-facing text in ImportExport.")
+        savePanel.title = String(localized: "ui.swift.settings.importexport.export_iterm2_settings_and_data.cfb0f5f7", defaultValue: "Export iTerm2 Settings and Data", bundle: .main, comment: "User-facing text in ImportExport.")
 
         let response = savePanel.runModal()
         guard response == NSApplication.ModalResponse.OK else {
@@ -42,27 +42,31 @@ class ImportExport: NSObject {
             RLog("Failed: \(error)")
             switch error {
             case ImportExportError.failedToCreateTempDir(let reason):
-                return .failure("Failed to create temporary directory: \(reason)")
+                return .failure(String(localized: "ui.swift.settings.importexport.failed_to_create_temporary_directory_0.5f642f7f", defaultValue: "Failed to create temporary directory: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.failedToCreateIntermediateFolder(let reason):
-                return .failure("Failed to create folder: \(reason)")
+                return .failure(String(localized: "ui.swift.settings.importexport.failed_to_create_folder_0.3457e17b", defaultValue: "Failed to create folder: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.failedToCopyFile(let reason):
-                return .failure("Failed to copy file: \(reason)")
+                return .failure(String(localized: "ui.swift.settings.importexport.failed_to_copy_file_0.c9c6e918", defaultValue: "Failed to copy file: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.failedToSaveFile(let reason):
-                return .failure("Failed to save file: \(reason)")
+                return .failure(String(localized: "ui.swift.settings.importexport.failed_to_save_file_0.80945e86", defaultValue: "Failed to save file: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.bug(let reason):
-                return .failure("A bug was encountered: \(reason). Please report this at https://iterm2.com/bugs")
+                // The error is also logged above. Translate only its display copy.
+                let displayReason = reason == "Failed to serialize user defaults"
+                    ? String(localized: "ui.swift.settings.importexport.failed_to_serialize_user_defaults.095521de", defaultValue: "Failed to serialize user defaults", bundle: .main, comment: "User-facing text in ImportExport.")
+                    : reason
+                return .failure(String(localized: "ui.swift.settings.importexport.a_bug_was_encountered_0_please_report_this.6f760c45", defaultValue: "A bug was encountered: \(displayReason). Please report this at https://iterm2.com/bugs", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.failedToCreateArchive(let reason):
-                return .failure("Failed to create archive: \(reason)")
+                return .failure(String(localized: "ui.swift.settings.importexport.failed_to_create_archive_0.a290c2fa", defaultValue: "Failed to create archive: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.failedToLoadFile(let reason):
-                return .failure("Failed to load file: \(reason)")
+                return .failure(String(localized: "ui.swift.settings.importexport.failed_to_load_file_0.c0a2c438", defaultValue: "Failed to load file: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.corruptDataFound(let reason):
-                return .failure("Malformed data found: \(reason)")
+                return .failure(String(localized: "ui.swift.settings.importexport.malformed_data_found_0.7bbaeb16", defaultValue: "Malformed data found: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.scriptExportFailed(let reason):
-                return .failure("Script could not be exported: \(reason)")
+                return .failure(String(localized: "ui.swift.settings.importexport.script_could_not_be_exported_0.3f7542bd", defaultValue: "Script could not be exported: \(reason)", bundle: .main, comment: "User-facing text in ImportExport."))
             case ImportExportError.failedToInstallPythonRuntime:
-                return .failure("Failed to install Python runtime")
+                return .failure(String(localized: "ui.swift.settings.importexport.failed_to_install_python_runtime.99195490", defaultValue: "Failed to install Python runtime", bundle: .main, comment: "User-facing text in ImportExport."))
             default:
-                return .failure("Unexpected error: \(error.localizedDescription)")
+                return .failure(String(localized: "ui.swift.settings.importexport.unexpected_error_0.de613ef4", defaultValue: "Unexpected error: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in ImportExport."))
             }
         }
     }
@@ -91,12 +95,12 @@ class ImportExport: NSObject {
 
         do {
             let selection = iTermWarning.show(
-                withTitle: "Any needed Python runtimes will be installed and secure settings will be updated, which may require you to enter your password. Then iTerm2 will restart and finish importing. This can take several minutes.",
-                actions: ["OK", "Cancel"],
+                withTitle: String(localized: "ui.swift.settings.importexport.any_needed_python_runtimes_will_be_installed_and.6e2b1a50", defaultValue: "Any needed Python runtimes will be installed and secure settings will be updated, which may require you to enter your password. Then iTerm2 will restart and finish importing. This can take several minutes.", bundle: .main, comment: "User-facing text in ImportExport."),
+                actions: [String(localized: "ui.swift.settings.importexport.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in ImportExport."), String(localized: "ui.swift.settings.importexport.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ImportExport.")],
                 accessory: nil,
                 identifier: nil,
                 silenceable: .kiTermWarningTypePersistent,
-                heading: "Importing Settings and Data",
+                heading: String(localized: "ui.swift.settings.importexport.importing_settings_and_data.c617ab5e", defaultValue: "Importing Settings and Data", bundle: .main, comment: "User-facing text in ImportExport."),
                 window: nil)
             if selection == .kiTermWarningSelection1 {
                 return nil
@@ -125,12 +129,12 @@ class ImportExport: NSObject {
     @objc
     static func eraseAll(window: NSWindow?) -> String? {
         let exportSelection = iTermWarning.show(
-            withTitle: "Would you like to export your settings and data first? You will be able to re-import the exported file later if you change your mind.",
-            actions: ["Export First", "Skip Export", "Cancel"],
+            withTitle: String(localized: "ui.swift.settings.importexport.would_you_like_to_export_your_settings_and.7322e9ce", defaultValue: "Would you like to export your settings and data first? You will be able to re-import the exported file later if you change your mind.", bundle: .main, comment: "User-facing text in ImportExport."),
+            actions: [String(localized: "ui.swift.settings.importexport.export_first.5eab6bb1", defaultValue: "Export First", bundle: .main, comment: "User-facing text in ImportExport."), String(localized: "ui.swift.settings.importexport.skip_export.dce101a3", defaultValue: "Skip Export", bundle: .main, comment: "User-facing text in ImportExport."), String(localized: "ui.swift.settings.importexport.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ImportExport.")],
             accessory: nil,
             identifier: nil,
             silenceable: .kiTermWarningTypePersistent,
-            heading: "Erase All Settings and Data",
+            heading: String(localized: "ui.swift.settings.importexport.erase_all_settings_and_data.e592af72", defaultValue: "Erase All Settings and Data", bundle: .main, comment: "User-facing text in ImportExport."),
             window: window)
 
         switch exportSelection {
@@ -150,11 +154,11 @@ class ImportExport: NSObject {
                 // export, not erase, and the erase has not happened.
                 _ = iTermWarning.show(
                     withTitle: message,
-                    actions: ["OK"],
+                    actions: [String(localized: "ui.swift.settings.importexport.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in ImportExport.")],
                     accessory: nil,
                     identifier: nil,
                     silenceable: .kiTermWarningTypePersistent,
-                    heading: "Problem Exporting Settings and Data",
+                    heading: String(localized: "ui.swift.settings.importexport.problem_exporting_settings_and_data.5cec6267", defaultValue: "Problem Exporting Settings and Data", bundle: .main, comment: "User-facing text in ImportExport."),
                     window: window)
                 return nil
             }
@@ -169,13 +173,13 @@ class ImportExport: NSObject {
         let confirmHeading: String
         let actionLabel: String
         if dryRun {
-            confirmTitle = """
+            confirmTitle = String(localized: "ui.swift.settings.importexport.dry_run_mode_is_enabled_iterm2_will_log.6374541d", defaultValue: """
             Dry-run mode is enabled. iTerm2 will log to Console.app what it would erase and stay running. Nothing will actually be deleted.
-            """
-            confirmHeading = "Dry-Run Erase?"
-            actionLabel = "Run Dry Run"
+            """, bundle: .main, comment: "User-facing text in ImportExport.")
+            confirmHeading = String(localized: "ui.swift.settings.importexport.dry_run_erase.3931a071", defaultValue: "Dry-Run Erase?", bundle: .main, comment: "User-facing text in ImportExport.")
+            actionLabel = String(localized: "ui.swift.settings.importexport.run_dry_run.3faab382", defaultValue: "Run Dry Run", bundle: .main, comment: "User-facing text in ImportExport.")
         } else {
-            confirmTitle = """
+            confirmTitle = String(localized: "ui.swift.settings.importexport.the_following_will_be_erased_and_iterm2_will.41d5b4a2", defaultValue: """
             The following will be erased and iTerm2 will quit immediately:
 
             \u{2022} Preferences (profiles, key bindings, arrangements, advanced settings)
@@ -187,9 +191,9 @@ class ImportExport: NSObject {
             Items stored in the macOS Keychain (such as the AI API key and Password Manager entries) are not erased and must be removed manually from Keychain Access if you want them gone too. On systems with networked home directories, secure settings stored under /usr/local are written by an administrator and may also need to be removed manually.
 
             This cannot be undone.
-            """
-            confirmHeading = "Erase Everything?"
-            actionLabel = "Erase Everything and Quit"
+            """, bundle: .main, comment: "User-facing text in ImportExport.")
+            confirmHeading = String(localized: "ui.swift.settings.importexport.erase_everything.16313de3", defaultValue: "Erase Everything?", bundle: .main, comment: "User-facing text in ImportExport.")
+            actionLabel = String(localized: "ui.swift.settings.importexport.erase_everything_and_quit.4acae498", defaultValue: "Erase Everything and Quit", bundle: .main, comment: "User-facing text in ImportExport.")
         }
 
         let warning = iTermWarning()
@@ -197,7 +201,7 @@ class ImportExport: NSObject {
         warning.heading = confirmHeading
         let eraseAction = iTermWarningAction(label: actionLabel, block: nil)
         eraseAction.destructive = !dryRun
-        warning.warningActions = [iTermWarningAction(label: "Cancel"), eraseAction]
+        warning.warningActions = [iTermWarningAction(label: String(localized: "ui.swift.settings.importexport.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ImportExport.")), eraseAction]
         warning.warningType = .kiTermWarningTypePersistent
         warning.window = window
         let confirm = warning.runModal()
@@ -210,12 +214,12 @@ class ImportExport: NSObject {
             _exit(0)
         }
         _ = iTermWarning.show(
-            withTitle: "iTerm2 logged what it would have erased to Console.app. Nothing was actually deleted because the “Dry-run Erase All Settings and Data” advanced setting is enabled.",
-            actions: ["OK"],
+            withTitle: String(localized: "ui.swift.settings.importexport.iterm2_logged_what_it_would_have_erased_to.a8a6b903", defaultValue: "iTerm2 logged what it would have erased to Console.app. Nothing was actually deleted because the “Dry-run Erase All Settings and Data” advanced setting is enabled.", bundle: .main, comment: "User-facing text in ImportExport."),
+            actions: [String(localized: "ui.swift.settings.importexport.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in ImportExport.")],
             accessory: nil,
             identifier: nil,
             silenceable: .kiTermWarningTypePersistent,
-            heading: "Dry Run Complete",
+            heading: String(localized: "ui.swift.settings.importexport.dry_run_complete.acf67e21", defaultValue: "Dry Run Complete", bundle: .main, comment: "User-facing text in ImportExport."),
             window: window)
         return nil
     }
@@ -391,23 +395,23 @@ private struct ImportExportConfig {
     }
     var entities: [Entity] = [
         Entity(key: "python-runtimes",
-               displayName: "Python Runtimes",
+               displayName: String(localized: "ui.swift.settings.importexport.python_runtimes.4a006a73", defaultValue: "Python Runtimes", bundle: .main, comment: "User-facing text in ImportExport."),
                flavor: .pythonRuntimes),
         Entity(key: "secure-user-defaults",
-               displayName: "Secure Settings",
+               displayName: String(localized: "ui.swift.settings.importexport.secure_settings.30963f1b", defaultValue: "Secure Settings", bundle: .main, comment: "User-facing text in ImportExport."),
                flavor: .secureUserDefaults),
         Entity(key: "disable-automation-auth",
-               displayName: "Python API Authorization Setting",
+               displayName: String(localized: "ui.swift.settings.importexport.python_api_authorization_setting.b36b2ca9", defaultValue: "Python API Authorization Setting", bundle: .main, comment: "User-facing text in ImportExport."),
                flavor: .disableAutomationAuth),
         Entity(key: "user-defaults",
-               displayName: "User Defaults",
+               displayName: String(localized: "ui.swift.settings.importexport.user_defaults.484ba876", defaultValue: "User Defaults", bundle: .main, comment: "User-facing text in ImportExport."),
                flavor: .userDefaults),
         Entity(key: "dot-iterm2",
                displayName: "~/.iterm2",
                flavor: .folder(Path(baseDirectory: .home, relativePath: ".iterm2"),
                                exclude: Set(["AppSupport", "iTermServer-*", "sockets", "Scripts"]))),
         Entity(key: "app-support",
-               displayName: "Application Support",
+               displayName: String(localized: "ui.swift.settings.importexport.application_support.7ef6ff25", defaultValue: "Application Support", bundle: .main, comment: "User-facing text in ImportExport."),
                flavor: .folder(Path(baseDirectory: .applicationSupport, relativePath: nil),
                                exclude: Set(["????????-????-????-????-????????????",
                                              "*.secureSetting",
@@ -422,7 +426,7 @@ private struct ImportExportConfig {
                                              "servers",
                                              "version.txt"]))),
         Entity(key: "scripts",
-               displayName: "Python API Scripts",
+               displayName: String(localized: "ui.swift.settings.importexport.python_api_scripts.64843f3a", defaultValue: "Python API Scripts", bundle: .main, comment: "User-facing text in ImportExport."),
                flavor: .scripts),
     ]
 }
@@ -478,7 +482,7 @@ private class Importer {
 
     func importEntities(from url: URL) throws {
         let tempDir = try makeTempDir()
-        setStatus("Extracting Archive")
+        setStatus(String(localized: "ui.swift.settings.importexport.extracting_archive.f9d33e01", defaultValue: "Extracting Archive", bundle: .main, comment: "User-facing text in ImportExport."))
         if NSData.untar(fromArchive: url, to: tempDir) != 0 {
             return
         }
@@ -501,7 +505,7 @@ private class Importer {
                               from baseURL: URL,
                               phase: Phase) throws {
         let url = baseURL.appendingPathComponent(entity.key)
-        setStatus("Importing \(entity.displayName)")
+        setStatus(String(localized: "ui.swift.settings.importexport.importing_0.f401d743", defaultValue: "Importing \(entity.displayName)", bundle: .main, comment: "User-facing text in ImportExport."))
         switch entity.flavor {
         case .pythonRuntimes:
             switch phase {
@@ -769,11 +773,11 @@ private struct PythonRuntimesImporterExporter {
             if !install(requirement: nil) {
                 throw ImportExportError.failedToInstallPythonRuntime
             }
-            setStatus?("Installing Python runtime \(i) of \(n)")
+            setStatus?(String(localized: "ui.swift.settings.importexport.installing_python_runtime_0_of_1.44766448", defaultValue: "Installing Python runtime \(i) of \(n)", bundle: .main, comment: "User-facing text in ImportExport."))
             i += 1
         }
         for requirement in info.requirements {
-            setStatus?("Installing Python runtime \(i) of \(n)")
+            setStatus?(String(localized: "ui.swift.settings.importexport.installing_python_runtime_0_of_1.44766448", defaultValue: "Installing Python runtime \(i) of \(n)", bundle: .main, comment: "User-facing text in ImportExport."))
             i += 1
             DLog("Install \(requirement)")
             if !install(requirement: requirement) {
@@ -931,13 +935,13 @@ private struct SecureUserDefaultsImporterExporter {
             plist = try PropertyListSerialization.propertyList(from: data, options: [], format: nil)
         } catch {
             DLog("\(error) for \(data.stringOrHex)")
-            throw ImportExportError.corruptDataFound("Invalid data found at \(source.path)")
+            throw ImportExportError.corruptDataFound(String(localized: "ui.swift.settings.importexport.invalid_data_found_at_0.556efe68", defaultValue: "Invalid data found at \(source.path)", bundle: .main, comment: "User-facing text in ImportExport."))
         }
         if let stringDict = plist as? [String: String] {
             reallyPerformImport(stringDict)
         } else {
             DLog("Cast failed for \(plist)")
-            throw ImportExportError.corruptDataFound("Wrong format content for \(source.path)")
+            throw ImportExportError.corruptDataFound(String(localized: "ui.swift.settings.importexport.wrong_format_content_for_0.4a1add6a", defaultValue: "Wrong format content for \(source.path)", bundle: .main, comment: "User-facing text in ImportExport."))
         }
     }
 
@@ -1058,7 +1062,7 @@ private struct ScriptsImporterExporter {
         }
         for (i, path) in items.enumerated() {
             DLog("\(path)")
-            setStatus?("Import script \(i + 1) of \(items.count)")
+            setStatus?(String(localized: "ui.swift.settings.importexport.import_script_0_of_1.2fa58584", defaultValue: "Import script \(i + 1) of \(items.count)", bundle: .main, comment: "User-facing text in ImportExport."))
             importScript(from: path, autolaunch: path.lastPathComponent.hasPrefix("autolaunch"))
         }
     }

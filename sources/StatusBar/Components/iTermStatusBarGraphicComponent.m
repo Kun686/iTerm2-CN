@@ -88,7 +88,7 @@
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {
     iTermStatusBarComponentKnob *backgroundColorKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Background Color:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbargraphiccomponent.background_color.2f484fe0", nil, NSBundle.mainBundle, @"Background Color:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeColor
                                                    placeholder:nil
                                                   defaultValue:nil
@@ -96,7 +96,7 @@
     NSArray<iTermStatusBarComponentKnob *> *knobs = [@[ backgroundColorKnob ] arrayByAddingObjectsFromArray:[super statusBarComponentKnobs]];
     if (self.shouldHaveTextColorKnob) {
         iTermStatusBarComponentKnob *textColorKnob =
-            [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Text Color:"
+            [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbargraphiccomponent.text_color.87715c40", nil, NSBundle.mainBundle, @"Text Color:", @"Status bar component setting label.")
                                                               type:iTermStatusBarComponentKnobTypeColor
                                                        placeholder:nil
                                                       defaultValue:nil
@@ -223,4 +223,3 @@
 }
 
 @end
-

@@ -56,7 +56,7 @@
 
 - (void)reload {
     [self.menu removeAllItems];
-    [self.menu addItemWithTitle:@"Press Option to Edit Before Sending" action:@selector(bogus) keyEquivalent:@""];
+    [self.menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.snippets.itermsnippetsmenucontroller.press_option_to_edit_before_sending.86c79d34", nil, NSBundle.mainBundle, @"Press Option to Edit Before Sending", @"User-facing text in iTermSnippetsMenuController (reload).") action:@selector(bogus) keyEquivalent:@""];
     [self.menu addItem:[NSMenuItem separatorItem]];
 
     NSMutableArray *tagTree = [NSMutableArray array];

@@ -37,7 +37,7 @@
     [_button setButtonType:NSButtonTypeMomentaryPushIn];
     [_button setTarget:self];
     [_button setAction:@selector(buttonPressed:)];
-    [_button setTitle:@"Configure Action…"];
+    [_button setTitle:NSLocalizedStringWithDefaultValue(@"ui.statusbar.setup.knobs.itermstatusbarknobactionviewcontroller.configure_action.0dfccc6f", nil, NSBundle.mainBundle, @"Configure Action…", @"User-facing text in iTermStatusBarKnobActionViewController (viewDidLoad).")];
     [_button setBezelStyle:NSBezelStyleTexturedRounded];
     [_button sizeToFit];
     [self.view addSubview:_button];

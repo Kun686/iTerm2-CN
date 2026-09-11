@@ -183,8 +183,8 @@ static void FlushDebugLog(void) {
         // writeData:error: populates `error`, but a failed createFileAtPath: or a
         // nil file handle leaves it nil; fall back to a concrete message so the
         // user gets an actionable reason instead of "(null)".
-        NSString *reason = error.localizedDescription ?: [NSString stringWithFormat:@"could not open %@ for writing", kDebugLogFilename];
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Failed to save debug log: %@", reason] actions:@[ @"OK" ] accessory:nil identifier:nil silenceable:kiTermWarningTypePersistent heading:@"Problem Saving Debug Log" window:nil];
+        NSString *reason = error.localizedDescription ?: [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.could_not_open_for_writing.ad05c96b", nil, NSBundle.mainBundle, @"could not open %@ for writing", @"Fallback reason shown when the debug log cannot be saved. Preserve the filename placeholder."), kDebugLogFilename];
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.failed_to_save_debug_log.6bdb5990", nil, NSBundle.mainBundle, @"Failed to save debug log: %@", @"User-facing text in DebugLogging (showWarningWithTitle)."), reason] actions:@[ NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in DebugLogging (actions).") ] accessory:nil identifier:nil silenceable:kiTermWarningTypePersistent heading:NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.problem_saving_debug_log.a0b3205a", nil, NSBundle.mainBundle, @"Problem Saving Debug Log", @"User-facing text in DebugLogging (heading).") window:nil];
     }
 
     [gDebugLogStr setString:@""];
@@ -531,17 +531,17 @@ BOOL TurnOffDebugLoggingSilently(void) {
 void ToggleDebugLogging(void) {
     if (!gDebugLogging) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Debug Logging Enabled";
-        alert.informativeText = @"Please reproduce the bug. Then toggle debug logging again to save the log.";
-        [alert addButtonWithTitle:@"OK"];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.debug_logging_enabled.f690ca43", nil, NSBundle.mainBundle, @"Debug Logging Enabled", @"User-facing text in DebugLogging (messageText).");
+        alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.please_reproduce_the_bug_then_toggle_debug_logging.c65b9d07", nil, NSBundle.mainBundle, @"Please reproduce the bug. Then toggle debug logging again to save the log.", @"User-facing text in DebugLogging (informativeText).");
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in DebugLogging (addButtonWithTitle).")];
         [alert runModal];
         StartDebugLogging();
     } else {
         StopDebugLogging();
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Debug Logging Stopped";
-        alert.informativeText = @"Please send /tmp/debuglog.txt to the developers.";
-        [alert addButtonWithTitle:@"OK"];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.debug_logging_stopped.9de2b755", nil, NSBundle.mainBundle, @"Debug Logging Stopped", @"User-facing text in DebugLogging (messageText).");
+        alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.please_send_tmp_debuglog_txt_to_the_developers.3ce2c76c", nil, NSBundle.mainBundle, @"Please send /tmp/debuglog.txt to the developers.", @"User-facing text in DebugLogging (informativeText).");
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in DebugLogging (addButtonWithTitle).")];
         [alert runModal];
     }
 }
@@ -585,4 +585,3 @@ void DLogC(const char *format, va_list args) {
 }
 
 @end
-

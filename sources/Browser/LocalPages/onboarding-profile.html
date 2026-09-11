@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iTerm2 Browser - Create Profile</title>
+    <title>{{PAGE_TITLE}}</title>
     <style>
         {{COMMON_CSS}}
         
@@ -221,6 +221,11 @@
     </style>
     <script>
         const sessionSecret = '{{SECRET}}';
+        const localized = {
+            profileCreated: {{PROFILE_CREATED_JSON}},
+            profileExists: {{PROFILE_EXISTS_JSON}},
+            profileAlreadyExists: {{PROFILE_ALREADY_EXISTS_JSON}}
+        };
         let profileReady = false;
         
         function createBrowserProfile() {
@@ -239,16 +244,16 @@
             const continueBtn = document.getElementById('continue-btn');
             
             if (success) {
-                button.textContent = '✓ Profile Created';
+                button.textContent = localized.profileCreated;
                 button.disabled = true;
                 successMsg.classList.add('show');
                 continueBtn.disabled = false;
             } else {
                 // Profile already exists
-                button.textContent = '✓ Profile Exists';
+                button.textContent = localized.profileExists;
                 button.disabled = true;
                 successMsg.classList.add('show');
-                successMsg.querySelector('p').textContent = 'A browser profile already exists. You can continue to the next step.';
+                successMsg.querySelector('p').textContent = localized.profileAlreadyExists;
                 continueBtn.disabled = false;
             }
         }
@@ -281,34 +286,28 @@
 <body>
     <div class="onboarding-container">
         <div class="onboarding-header">
-            <h1 class="onboarding-title">First Things First</h1>
-            <p class="onboarding-subtitle">Let's create a browser profile to get started</p>
+            <h1 class="onboarding-title">{{TITLE}}</h1>
+            <p class="onboarding-subtitle">{{SUBTITLE}}</p>
         </div>
         
         <div class="profile-card">
             <span class="profile-icon">👤</span>
-            <h2 class="profile-title">Create Your Browser Profile</h2>
-            <p class="profile-description">
-                A browser profile stores all your preferences and settings specifically for web browsing. 
-                This keeps your terminal and browser configurations separate and organized.
-            </p>
+            <h2 class="profile-title">{{PROFILE_TITLE}}</h2>
+            <p class="profile-description">{{PROFILE_DESCRIPTION}}</p>
             <button id="create-profile-btn" class="create-profile-button" onclick="createBrowserProfile()">
-                Create Browser Profile
+                {{CREATE_PROFILE}}
             </button>
         </div>
         
         <div id="success-message" class="success-message">
             <p>
-                <strong>Success!</strong> Your browser profile has been created. 
-                You can now continue to configure your browsing experience.
+                <strong>{{SUCCESS}}</strong> {{SUCCESS_DESCRIPTION}}
             </p>
         </div>
         
         <div class="info-box">
             <p>
-                <strong>Note:</strong> You can create multiple browser profiles with different settings 
-                for different use cases. Each profile can have its own keyboard shortcuts 
-                and browser-specific configurations.
+                <strong>{{NOTE}}</strong> {{NOTE_DESCRIPTION}}
             </p>
         </div>
         
@@ -322,10 +321,10 @@
             <div class="nav-buttons">
                 <a href="iterm2-about:onboarding-features" class="nav-button secondary">
                     <span>←</span>
-                    Back
+                    {{BACK}}
                 </a>
                 <button id="continue-btn" onclick="continueToSetup()" class="nav-button" disabled>
-                    Continue to Setup
+                    {{CONTINUE}}
                     <span>→</span>
                 </button>
             </div>

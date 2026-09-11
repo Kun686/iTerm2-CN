@@ -31,20 +31,20 @@ final class CompanionAlertBridge: NSObject {
     /// enabled state alone no longer conveys the notification-permission step.
     @objc static var sendToPhoneStatusMessage: String {
         if !CompanionPushRegistry.devicePaired {
-            return "Pair an iPhone running iTerm2 Buddy to use this."
+            return String(localized: "ui.swift.companion.companionalertbridge.pair_an_iphone_running_iterm2_buddy_to_use.16fb4681", defaultValue: "Pair an iPhone running iTerm2 Buddy to use this.", bundle: .main, comment: "User-facing text in CompanionAlertBridge.")
         }
         if !CompanionPushRegistry.supportsContentlessWakeup {
             // Either the phone hasn't connected since pairing (so its revision isn't
             // known yet) or it is too old for terminal alerts.
-            return "Open iTerm2 Buddy on your paired iPhone (update it if needed)."
+            return String(localized: "ui.swift.companion.companionalertbridge.open_iterm2_buddy_on_your_paired_iphone_update.82992835", defaultValue: "Open iTerm2 Buddy on your paired iPhone (update it if needed).", bundle: .main, comment: "User-facing text in CompanionAlertBridge.")
         }
         switch CompanionPushRegistry.authorization {
         case .authorized:
-            return "Alerts will be delivered to your paired iPhone."
+            return String(localized: "ui.swift.companion.companionalertbridge.alerts_will_be_delivered_to_your_paired_iphone.9b2bfe5e", defaultValue: "Alerts will be delivered to your paired iPhone.", bundle: .main, comment: "User-facing text in CompanionAlertBridge.")
         case .denied:
-            return "Turn on notifications for iTerm2 Buddy in iOS Settings."
+            return String(localized: "ui.swift.companion.companionalertbridge.turn_on_notifications_for_iterm2_buddy_in_ios.ed810c6f", defaultValue: "Turn on notifications for iTerm2 Buddy in iOS Settings.", bundle: .main, comment: "User-facing text in CompanionAlertBridge.")
         case .notDetermined:
-            return "Turn this on to allow notifications on your iPhone."
+            return String(localized: "ui.swift.companion.companionalertbridge.turn_this_on_to_allow_notifications_on_your.b06f6079", defaultValue: "Turn this on to allow notifications on your iPhone.", bundle: .main, comment: "User-facing text in CompanionAlertBridge.")
         }
     }
 

@@ -415,20 +415,20 @@ withApplicationAtURL:appURL
         case iTermOpenStyleWindow:
         case iTermOpenStyleTab:
             if (isFileURL) {
-                selection = [iTermWarning showWarningWithTitle:@"iTerm2 can display files like this in its built-in web browser! Would you like to open this link in iTerm2?"
-                                                      actions:@[ @"Use Default App", @"Open in iTerm2", @"Cancel"]
+                selection = [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.iterm2_can_display_files_like_this_in_its.af97110b", nil, NSBundle.mainBundle, @"iTerm2 can display files like this in its built-in web browser! Would you like to open this link in iTerm2?", @"User-facing warning message.")
+                                                      actions:@[ NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.use_default_app.2b48651c", nil, NSBundle.mainBundle, @"Use Default App", @"User-facing action label in NSWorkspace+iTerm (actions)."), NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.open_in_iterm2.5bfba017", nil, NSBundle.mainBundle, @"Open in iTerm2", @"User-facing action label in NSWorkspace+iTerm (actions)."), NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in NSWorkspace+iTerm (actions).")]
                                                     accessory:nil
                                                    identifier:identifier
                                                   silenceable:kiTermWarningTypePermanentlySilenceable
-                                                      heading:@"Open in iTerm2?"
+                                                      heading:NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.open_in_iterm2.166ee7ff", nil, NSBundle.mainBundle, @"Open in iTerm2?", @"User-facing text in NSWorkspace+iTerm (heading).")
                                                        window:window];
             } else {
-                selection = [iTermWarning showWarningWithTitle:@"iTerm2 can display web pages! Would you like to open this link in iTerm2?"
-                                                      actions:@[ @"Use Default Browser", @"Open in iTerm2", @"Cancel"]
+                selection = [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.iterm2_can_display_web_pages_would_you_like.76b1b930", nil, NSBundle.mainBundle, @"iTerm2 can display web pages! Would you like to open this link in iTerm2?", @"User-facing warning message.")
+                                                      actions:@[ NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.use_default_browser.d2b2b47c", nil, NSBundle.mainBundle, @"Use Default Browser", @"User-facing action label in NSWorkspace+iTerm (actions)."), NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.open_in_iterm2.5bfba017", nil, NSBundle.mainBundle, @"Open in iTerm2", @"User-facing action label in NSWorkspace+iTerm (actions)."), NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in NSWorkspace+iTerm (actions).")]
                                                     accessory:nil
                                                    identifier:identifier
                                                   silenceable:kiTermWarningTypePermanentlySilenceable
-                                                      heading:@"Open in iTerm2?"
+                                                      heading:NSLocalizedStringWithDefaultValue(@"ui.categories.nsworkspace_iterm.open_in_iterm2.166ee7ff", nil, NSBundle.mainBundle, @"Open in iTerm2?", @"User-facing text in NSWorkspace+iTerm (heading).")
                                                        window:window];
             }
             break;

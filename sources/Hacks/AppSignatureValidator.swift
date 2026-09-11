@@ -50,16 +50,16 @@ class AppSignatureValidator: NSObject {
     static func warn(reason: String) {
         let team = currentAppTeamID()
         let message = if team == nil {
-            "A required file appears to be missing or corrupted and iTerm2’s code signature could not be verified.\n\nYou should download a fresh copy of the app and reinstall it."
+            String(localized: "ui.swift.hacks.appsignaturevalidator.a_required_file_appears_to_be_missing_or.f5640313", defaultValue: "A required file appears to be missing or corrupted and iTerm2’s code signature could not be verified.\n\nYou should download a fresh copy of the app and reinstall it.", bundle: .main, comment: "User-facing text in AppSignatureValidator.")
         } else if team == "H7V7XYVQ7D" {
-            "A required file appears to be missing or corrupted and iTerm2’s code signature did not match that of the official distribution.\n\nYou should download a fresh copy of the app and reinstall it."
+            String(localized: "ui.swift.hacks.appsignaturevalidator.a_required_file_appears_to_be_missing_or.905e94a4", defaultValue: "A required file appears to be missing or corrupted and iTerm2’s code signature did not match that of the official distribution.\n\nYou should download a fresh copy of the app and reinstall it.", bundle: .main, comment: "User-facing text in AppSignatureValidator.")
         } else {
-            "A required file appears to be missing or corrupted, yet against all odds the code signature for iTerm2 is valid. Please file a bug at https://iterm2.com/bugs"
+            String(localized: "ui.swift.hacks.appsignaturevalidator.a_required_file_appears_to_be_missing_or.85976d5f", defaultValue: "A required file appears to be missing or corrupted, yet against all odds the code signature for iTerm2 is valid. Please file a bug at https://iterm2.com/bugs", bundle: .main, comment: "User-facing text in AppSignatureValidator.")
         }
         let alert = NSAlert()
-        alert.messageText = "Application Corrupt"
+        alert.messageText = String(localized: "ui.swift.hacks.appsignaturevalidator.application_corrupt.c446cbb1", defaultValue: "Application Corrupt", bundle: .main, comment: "User-facing text in AppSignatureValidator.")
         alert.informativeText = reason + ": " + message
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.hacks.appsignaturevalidator.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in AppSignatureValidator."))
         alert.alertStyle = .critical
         alert.runModal()
     }

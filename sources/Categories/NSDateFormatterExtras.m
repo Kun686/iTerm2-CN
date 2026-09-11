@@ -30,50 +30,50 @@
     theTime *= -1;
     if (theTime < 60) {
         if (lowerCase) {
-            return @"moments ago";
+            return NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.moments_ago_lower", nil, NSBundle.mainBundle, @"moments ago", @"Relative time displayed in application UI.");
         } else {
-            return @"Moments ago";
+            return NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.moments_ago", nil, NSBundle.mainBundle, @"Moments ago", @"Relative time displayed in application UI.");
         }
     } else if (theTime < 3600) {
         int diff = round(theTime / 60);
         if (diff == 1) {
-            return [NSString stringWithFormat:@"1 minute ago"];
+            return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.minute_ago", nil, NSBundle.mainBundle, @"1 minute ago", @"Relative time displayed in application UI.")];
         }
-        return [NSString stringWithFormat:@"%d minutes ago", diff];
+        return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.minutes_ago", nil, NSBundle.mainBundle, @"%d minutes ago", @"Relative time displayed in application UI."), diff];
     } else if (theTime < 86400) {
         int diff = round(theTime / 60 / 60);
         if (diff == 1) {
-            return [NSString stringWithFormat:@"1 hour ago"];
+            return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.hour_ago", nil, NSBundle.mainBundle, @"1 hour ago", @"Relative time displayed in application UI.")];
         }
-        return [NSString stringWithFormat:@"%d hours ago", diff];
+        return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.hours_ago", nil, NSBundle.mainBundle, @"%d hours ago", @"Relative time displayed in application UI."), diff];
     } else if (theTime < 604800) {
         int diff = round(theTime / 60 / 60 / 24);
         if (diff == 1) {
             if (lowerCase) {
-                return @"yesterday";
+                return NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.yesterday_lower", nil, NSBundle.mainBundle, @"yesterday", @"Relative time displayed in application UI.");
             } else {
-                return @"Yesterday";
+                return NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.yesterday", nil, NSBundle.mainBundle, @"Yesterday", @"Relative time displayed in application UI.");
             }
         }
         if (diff == 7) {
             if (lowerCase) {
-                return @"one week ago";
+                return NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.one_week_ago_lower", nil, NSBundle.mainBundle, @"one week ago", @"Relative time displayed in application UI.");
             } else {
-                return @"One week ago";
+                return NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.one_week_ago", nil, NSBundle.mainBundle, @"One week ago", @"Relative time displayed in application UI.");
             }
         }
-        return[NSString stringWithFormat:@"%d days ago", diff];
+        return[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.days_ago", nil, NSBundle.mainBundle, @"%d days ago", @"Relative time displayed in application UI."), diff];
     } else {
         int diff = round(theTime / 60 / 60 / 24 / 7);
         if (diff == 1) {
             if (lowerCase) {
-                return @"last week";
+                return NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.last_week_lower", nil, NSBundle.mainBundle, @"last week", @"Relative time displayed in application UI.");
             } else {
-                return @"Last week";
+                return NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.last_week", nil, NSBundle.mainBundle, @"Last week", @"Relative time displayed in application UI.");
             }
 
         }
-        return [NSString stringWithFormat:@"%d weeks ago", diff];
+        return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.history_metadata.weeks_ago", nil, NSBundle.mainBundle, @"%d weeks ago", @"Relative time displayed in application UI."), diff];
     }
 }
 

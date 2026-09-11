@@ -11,11 +11,11 @@
 @implementation StopTrigger
 
 + (NSString *)title {
-  return @"Stop Processing Triggers";
+  return NSLocalizedStringWithDefaultValue(@"ui.triggers.stoptrigger.stop_processing_triggers.d310e6b3", nil, NSBundle.mainBundle, @"Stop Processing Triggers", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [StopTrigger title];
+    return @"Stop Processing Triggers";
 }
 
 - (BOOL)takesParameter {

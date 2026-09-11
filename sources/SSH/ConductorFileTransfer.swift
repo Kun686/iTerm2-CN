@@ -43,12 +43,13 @@ class ConductorFileTransfer: TransferrableFile {
     }
 
     override func displayName() -> String? {
-        return """
+        let username = path.username ?? String(localized: "ui.swift.ssh.conductorfiletransfer.unknown.8fe7794d", defaultValue: "(unknown)", bundle: .main, comment: "Fallback user name in the file-transfer summary.")
+        return String(localized: "ui.swift.ssh.conductorfiletransfer.iterm2_ssh_integration_protocol_user_name_0_host.169107a6", defaultValue: """
         iTerm2 SSH Integration Protocol
-        User name: \(path.username ?? "(unknown)")")
+        User name: \(username)")
         Host: \(path.hostname!)
         File: \(path.path!)"
-        """
+        """, bundle: .main, comment: "User-facing SSH Integration file-transfer summary.")
     }
 
     override func shortName() -> String? {
@@ -56,7 +57,7 @@ class ConductorFileTransfer: TransferrableFile {
     }
 
     override func subheading() -> String? {
-        path.hostname! + " via SSH Integration"
+        String(localized: "ui.swift.ssh.conductorfiletransfer.0_via_ssh_integration.8acd2af9", defaultValue: "\(path.hostname!) via SSH Integration", bundle: .main, comment: "User-facing file-transfer subheading.")
     }
 
     override func authRequestor() -> String? {
@@ -67,7 +68,7 @@ class ConductorFileTransfer: TransferrableFile {
     }
 
     override func protocolName() -> String? {
-        return "SSH Integration"
+        return String(localized: "ui.swift.ssh.conductorfiletransfer.ssh_integration.2de7a54f", defaultValue: "SSH Integration", bundle: .main, comment: "User-facing text in ConductorFileTransfer.")
     }
 
     private var chunked = false

@@ -244,24 +244,24 @@ static NSString *const iTermActionsEditingPasteboardType = @"com.googlecode.iter
                                                   encoding:NSUTF8StringEncoding
                                                      error:&error];
     if (!content || error) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"While loading %@: %@", url.path, error.localizedDescription]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.while_loading.6d2b4144", nil, NSBundle.mainBundle, @"While loading %@: %@", @"User-facing text in iTermActionsEditingViewController (showWarningWithTitle)."), url.path, error.localizedDescription]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermActionsEditingViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncImportActionsFailed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:[NSString stringWithFormat:@"Import Failed"]
+                                   heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in iTermActionsEditingViewController (heading).")]
                                     window:self.view.window];
         return;
     }
 
     id root = [NSJSONSerialization it_objectForJsonString:content error:&error];
     if (!root) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"While parsing %@: %@", url.path, error.localizedDescription]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.while_parsing.e18bb6fb", nil, NSBundle.mainBundle, @"While parsing %@: %@", @"User-facing text in iTermActionsEditingViewController (showWarningWithTitle)."), url.path, error.localizedDescription]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermActionsEditingViewController (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncImportActionsFailed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:[NSString stringWithFormat:@"Import Failed"]
+                                   heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in iTermActionsEditingViewController (heading).")]
                                     window:self.view.window];
         return;
     }
@@ -289,12 +289,12 @@ static NSString *const iTermActionsEditingPasteboardType = @"com.googlecode.iter
 }
 
 - (void)showEncodingErrorForURL:(NSURL *)url {
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Malformed file at %@", url.path]
-                               actions:@[ @"OK" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.malformed_file_at.7dee9e42", nil, NSBundle.mainBundle, @"Malformed file at %@", @"User-facing text in iTermActionsEditingViewController (showWarningWithTitle)."), url.path]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermActionsEditingViewController (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncActionEncodingError"
                            silenceable:kiTermWarningTypePersistent
-                               heading:[NSString stringWithFormat:@"Import Failed"]
+                               heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in iTermActionsEditingViewController (heading).")]
                                 window:self.view.window];
 }
 
@@ -310,13 +310,13 @@ static NSString *const iTermActionsEditingPasteboardType = @"com.googlecode.iter
     NSString *json = [NSJSONSerialization it_jsonStringForObject:array];
     [json writeToSaveItem:item completionHandler:^(NSError *error) {
         if (error) {
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Error saving to %@: %@",
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.error_saving_to.9c1965ed", nil, NSBundle.mainBundle, @"Error saving to %@: %@", @"User-facing text in iTermActionsEditingViewController (showWarningWithTitle)."),
                                                 item.displayName, error.localizedDescription]
-                                       actions:@[ @"OK" ]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermActionsEditingViewController (actions).") ]
                                      accessory:nil
                                     identifier:@"NoSyncActionWritingError"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:[NSString stringWithFormat:@"Export Failed"]
+                                       heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermactionseditingviewcontroller.export_failed.9a5e4d95", nil, NSBundle.mainBundle, @"Export Failed", @"User-facing text in iTermActionsEditingViewController (heading).")]
                                         window:self.view.window];
         } else {
             [item revealInFinderIfLocal];

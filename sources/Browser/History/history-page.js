@@ -5,6 +5,21 @@ let isLoading = false;
 let hasMore = true;
 let currentSearchQuery = '';
 
+const localized = {
+    deleteEntryPrompt: {{DELETE_ENTRY_PROMPT_JSON}},
+    clearAllPrompt: {{CLEAR_ALL_PROMPT_JSON}},
+    entryDeleted: {{ENTRY_DELETED_JSON}},
+    allCleared: {{ALL_CLEARED_JSON}},
+    untitled: {{UNTITLED_JSON}},
+    navigateTitle: {{NAVIGATE_TITLE_JSON}},
+    deleteTitle: {{DELETE_TITLE_JSON}},
+    today: {{TODAY_JSON}},
+    yesterday: {{YESTERDAY_JSON}},
+    emptyTitle: {{EMPTY_TITLE_JSON}},
+    emptyDescription: {{EMPTY_DESCRIPTION_JSON}},
+    pageTitle: {{PAGE_TITLE_JSON}}
+};
+
 // Initialize history page
 window.loadHistoryEntries = function(offset = 0, limit = 50, searchQuery = '') {
     if (isLoading) return;
@@ -21,7 +36,7 @@ window.loadHistoryEntries = function(offset = 0, limit = 50, searchQuery = '') {
 };
 
 window.deleteHistoryEntry = function(entryId) {
-    if (confirm('Delete this history entry?')) {
+    if (confirm(localized.deleteEntryPrompt)) {
         window.webkit.messageHandlers['iterm2-about:history'].postMessage({
             action: 'deleteEntry',
             entryId: entryId
@@ -37,7 +52,7 @@ window.navigateToURL = function(url) {
 };
 
 window.clearAllHistory = function() {
-    if (confirm('This will delete all browsing history. This action cannot be undone. Continue?')) {
+    if (confirm(localized.clearAllPrompt)) {
         window.webkit.messageHandlers['iterm2-about:history'].postMessage({
             action: 'clearAllHistory'
         });
@@ -75,14 +90,14 @@ window.onHistoryEntryDeleted = function(entryId) {
         }
     }
     
-    showStatus('History entry deleted', 'success');
+    showStatus(localized.entryDeleted, 'success');
 };
 
 window.onHistoryCleared = function() {
     clearHistoryContainer();
     currentOffset = 0;
     hasMore = true;
-    showStatus('All history cleared', 'success');
+    showStatus(localized.allCleared, 'success');
     
     // Show empty state
     showEmptyState();
@@ -160,7 +175,7 @@ function createHistoryEntryElement(entry, date) {
     entryDiv.setAttribute('data-entry-id', entry.id);
     
     const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const title = entry.title || 'Untitled';
+    const title = entry.title || localized.untitled;
     const url = entry.url;
     
     entryDiv.innerHTML = `
@@ -169,12 +184,12 @@ function createHistoryEntryElement(entry, date) {
                 <span class="entry-time">${timeString}</span>
                 <span class="entry-title">${escapeHtml(title)}</span>
             </div>
-            <div class="entry-url" onclick="navigateToURL('${escapeHtml(url)}')" title="Click to navigate to this URL">
+            <div class="entry-url" onclick="navigateToURL('${escapeHtml(url)}')" title="${escapeAttribute(localized.navigateTitle)}">
                 ${escapeHtml(url)}
             </div>
         </div>
         <div class="entry-actions">
-            <button class="delete-button" onclick="deleteHistoryEntry('${entry.id}')" title="Delete this entry">
+            <button class="delete-button" onclick="deleteHistoryEntry('${entry.id}')" title="${escapeAttribute(localized.deleteTitle)}">
                 <span class="delete-icon">×</span>
             </button>
         </div>
@@ -190,9 +205,9 @@ function formatDateHeader(dateString) {
     yesterday.setDate(yesterday.getDate() - 1);
     
     if (date.toDateString() === today.toDateString()) {
-        return 'Today';
+        return localized.today;
     } else if (date.toDateString() === yesterday.toDateString()) {
-        return 'Yesterday';
+        return localized.yesterday;
     } else {
         return date.toLocaleDateString([], { 
             weekday: 'long', 
@@ -213,8 +228,8 @@ function showEmptyState() {
     container.innerHTML = `
         <div class="empty-state">
             <div class="empty-icon">📚</div>
-            <h3>No browsing history</h3>
-            <p>Your browsing history will appear here as you visit websites.</p>
+            <h3>${escapeHtml(localized.emptyTitle)}</h3>
+            <p>${escapeHtml(localized.emptyDescription)}</p>
         </div>
     `;
 }
@@ -274,6 +289,10 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+function escapeAttribute(text) {
+    return escapeHtml(text).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+}
+
 // Search functionality
 function performSearch() {
     const searchInput = document.getElementById('searchInput');
@@ -305,7 +324,7 @@ function loadMore() {
 // Initialize page when loaded
 window.addEventListener('load', function() {
     // Set document title explicitly for custom URL scheme
-    document.title = 'Browsing History';
+    document.title = localized.pageTitle;
     // Setup search input
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {

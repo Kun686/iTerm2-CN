@@ -30,19 +30,64 @@ extension iTermBrowserPermissionsViewHandler {
     // MARK: - Public Interface
 
     func generatePermissionsHTML() -> String {
+        let scriptSubstitutions = [
+            "REVOKE_PERMISSION_FORMAT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.confirm.revoke_format", defaultValue: "Revoke %1$@ permission for %2$@?"),
+            "REVOKE_ALL_FOR_SITE_FORMAT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.confirm.revoke_all_for_site_format", defaultValue: "Revoke all permissions for %1$@? This action cannot be undone."),
+            "CLEAR_ALL_PROMPT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.confirm.clear_all", defaultValue: "This will revoke all permissions for all websites. This action cannot be undone. Continue?"),
+            "CLEAR_SITE_TOOLTIP_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.clear_site_tooltip", defaultValue: "Clear all permissions for this site"),
+            "CLEAR_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.common.clear", defaultValue: "Clear"),
+            "ALLOWED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.status.allowed", defaultValue: "Allowed"),
+            "BLOCKED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.status.blocked", defaultValue: "Blocked"),
+            "GRANTED_DATE_FORMAT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.granted_date_format", defaultValue: "Granted %1$@"),
+            "REVOKE_TOOLTIP_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.revoke_tooltip", defaultValue: "Revoke this permission"),
+            "NOTIFICATIONS_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.type.notifications", defaultValue: "Notifications"),
+            "CAMERA_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.type.camera", defaultValue: "Camera"),
+            "MICROPHONE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.type.microphone", defaultValue: "Microphone"),
+            "CAMERA_AND_MICROPHONE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.type.camera_and_microphone", defaultValue: "Camera and Microphone"),
+            "LOCATION_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.type.location", defaultValue: "Location"),
+            "AUDIO_PLAYBACK_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.type.audio_playback", defaultValue: "Audio Playback"),
+            "EMPTY_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.empty.title", defaultValue: "No permissions found"),
+            "EMPTY_DESCRIPTION_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.empty.description", defaultValue: "Website permissions will appear here when you grant them."),
+            "PERMISSION_REVOKED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.status.revoked", defaultValue: "Permission revoked"),
+            "ALL_REVOKED_FOR_SITE_FORMAT_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.status.all_revoked_for_site_format", defaultValue: "All permissions revoked for %1$@"),
+            "ALL_CLEARED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.status.all_cleared", defaultValue: "All permissions cleared"),
+            "PAGE_TITLE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.permissions.title", defaultValue: "Site Permissions")
+        ]
         let script = iTermBrowserTemplateLoader.loadTemplate(named: "permissions-page",
                                                              type: "js",
-                                                             substitutions: [:])
+                                                             substitutions: scriptSubstitutions)
         return iTermBrowserTemplateLoader.loadTemplate(named: "permissions-page",
                                                        type: "html",
-                                                       substitutions: ["PERMISSIONS_SCRIPT": script])
+                                                       substitutions: [
+                                                           "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+                                                           "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.title", defaultValue: "Site Permissions"),
+                                                           "PAGE_SUBTITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.subtitle", defaultValue: "Manage permissions granted to websites"),
+                                                           "CLEAR_ALL": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.clear_all", defaultValue: "Clear All Permissions"),
+                                                           "SEARCH_PLACEHOLDER": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.search_placeholder", defaultValue: "Search by website or permission type…"),
+                                                           "CLEAR_SEARCH_TOOLTIP": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.clear_search", defaultValue: "Clear search"),
+                                                           "FILTER_BY_TYPE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.filter_by_type", defaultValue: "Filter by type:"),
+                                                           "ALL_TYPES": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.all_types", defaultValue: "All Types"),
+                                                           "AUDIO_PLAYBACK": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.type.audio_playback", defaultValue: "Audio Playback"),
+                                                           "NOTIFICATIONS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.type.notifications", defaultValue: "Notifications"),
+                                                           "CAMERA": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.type.camera", defaultValue: "Camera"),
+                                                           "MICROPHONE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.type.microphone", defaultValue: "Microphone"),
+                                                           "CAMERA_AND_MICROPHONE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.type.camera_and_microphone_short", defaultValue: "Camera & Microphone"),
+                                                           "LOCATION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.type.location", defaultValue: "Location"),
+                                                           "FILTER_BY_STATUS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.filter_by_status", defaultValue: "Filter by status:"),
+                                                           "ALL_STATUSES": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.all_statuses", defaultValue: "All Statuses"),
+                                                           "ALLOWED": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.status.allowed", defaultValue: "Allowed"),
+                                                           "BLOCKED": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.status.blocked", defaultValue: "Blocked"),
+                                                           "LOADING": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.permissions.loading", defaultValue: "Loading permissions…"),
+                                                           "LOAD_MORE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.load_more", defaultValue: "Load More"),
+                                                           "PERMISSIONS_SCRIPT": script
+                                                       ])
     }
     
     func start(urlSchemeTask: WKURLSchemeTask, url: URL) {
         let htmlToServe = generatePermissionsHTML()
         
         guard let data = htmlToServe.data(using: .utf8) else {
-            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserPermissionsViewHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode HTML"]))
+            urlSchemeTask.didFailWithError(NSError(domain: "iTermBrowserPermissionsViewHandler", code: -1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.browser.permissions.itermbrowserpermissionsviewhandler.failed_to_encode_html.c166d582", defaultValue: "Failed to encode HTML", bundle: .main, comment: "Error shown when the browser permissions page cannot be encoded.")]))
             return
         }
         

@@ -10,16 +10,29 @@
             "state": "new",
             "value": "Reveal"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示"
+          }
         }
       }
     },
     "4kZ-xL-XWK.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"4kZ-xL-XWK\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -34,16 +47,29 @@
             "state": "new",
             "value": "Path"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "路径"
+          }
         }
       }
     },
     "Chg-vY-InI.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"Chg-vY-InI\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -58,6 +84,12 @@
             "state": "new",
             "value": "Scripting Inspector"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脚本检查器"
+          }
         }
       }
     },
@@ -70,16 +102,29 @@
             "state": "new",
             "value": "Variables"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "变量"
+          }
         }
       }
     },
     "Ky4-re-4k0.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"Ky4-re-4k0\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -94,6 +139,12 @@
             "state": "new",
             "value": "Copy Path"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝路径"
+          }
         }
       }
     },
@@ -106,16 +157,29 @@
             "state": "new",
             "value": "Registered Functions"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已注册的函数"
+          }
         }
       }
     },
     "Npb-X7-GRK.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"Npb-X7-GRK\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Table View Cell"
           }
         }
@@ -130,10 +194,17 @@
             "state": "new",
             "value": "Object Name (ID)"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "对象名称 (ID)"
+          }
         }
       }
     },
     "TE5-Lb-pFb.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"TE5-Lb-pFb\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -142,16 +213,29 @@
             "state": "new",
             "value": "Table View Cell"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table View Cell"
+          }
         }
       }
     },
     "UR4-22-8xy.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSButtonCell\"; title = \"⨁\"; ObjectID = \"UR4-22-8xy\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "⨁"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "⨁"
           }
         }
@@ -166,10 +250,17 @@
             "state": "new",
             "value": "Script"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脚本"
+          }
         }
       }
     },
     "XSZ-1k-tzU.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"XSZ-1k-tzU\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -178,16 +269,29 @@
             "state": "new",
             "value": "Text Cell"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
         }
       }
     },
     "YVQ-Gm-rQT.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"YVQ-Gm-rQT\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Table View Cell"
           }
         }
@@ -202,10 +306,17 @@
             "state": "new",
             "value": "Signature"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "签名"
+          }
         }
       }
     },
     "e4w-Qo-WSh.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"e4w-Qo-WSh\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -214,16 +325,29 @@
             "state": "new",
             "value": "Text Cell"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
         }
       }
     },
     "eP2-4q-ZDd.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"eP2-4q-ZDd\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -238,6 +362,12 @@
             "state": "new",
             "value": "Sessions, Tabs, and Windows"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话、标签页和窗口"
+          }
         }
       }
     },
@@ -249,6 +379,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Role"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "角色"
           }
         }
       }
@@ -262,16 +398,29 @@
             "state": "new",
             "value": "Value"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "值"
+          }
         }
       }
     },
     "pXH-vy-Cey.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"pXH-vy-Cey\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Table View Cell"
           }
         }
@@ -286,6 +435,12 @@
             "state": "new",
             "value": "Copy ID"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝 ID"
+          }
         }
       }
     },
@@ -298,16 +453,29 @@
             "state": "new",
             "value": "Copy Value"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝值"
+          }
         }
       }
     },
     "zzD-i1-39n.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Table View Cell\"; ObjectID = \"zzD-i1-39n\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Table View Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Table View Cell"
           }
         }

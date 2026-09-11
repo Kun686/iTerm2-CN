@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Permissions</title>
+    <title>{{PAGE_TITLE}}</title>
     <style>
         {{COMMON_CSS}}
         
@@ -177,11 +177,11 @@
     <div class="container">
         <div class="header">
             <div class="header-content">
-                <h1>🔒 <span class="title-text">Site Permissions</span></h1>
-                <p>Manage permissions granted to websites</p>
+                <h1>🔒 <span class="title-text">{{PAGE_TITLE}}</span></h1>
+                <p>{{PAGE_SUBTITLE}}</p>
             </div>
             <div class="header-actions">
-                <button class="button small danger" onclick="clearAllPermissions()">Clear All Permissions</button>
+                <button class="button small danger" onclick="clearAllPermissions()">{{CLEAR_ALL}}</button>
             </div>
         </div>
         
@@ -191,29 +191,29 @@
                 <input type="text" 
                        id="searchInput" 
                        class="search-input" 
-                       placeholder="Search by website or permission type…"
+                       placeholder="{{SEARCH_PLACEHOLDER}}"
                        autocomplete="off">
-                <button class="clear-button" onclick="clearSearch()" title="Clear search">×</button>
+                <button class="clear-button" onclick="clearSearch()" title="{{CLEAR_SEARCH_TOOLTIP}}">×</button>
             </div>
             <div class="filter-controls">
                 <div>
-                    <label for="permissionTypeFilter">Filter by type:</label>
+                    <label for="permissionTypeFilter">{{FILTER_BY_TYPE}}</label>
                     <select id="permissionTypeFilter" class="filter-select">
-                        <option value="">All Types</option>
-                        <option value="audioPlayback">Audio Playback</option>
-                        <option value="notification">Notifications</option>
-                        <option value="camera">Camera</option>
-                        <option value="microphone">Microphone</option>
-                        <option value="cameraAndMicrophone">Camera & Microphone</option>
-                        <option value="geolocation">Location</option>
+                        <option value="">{{ALL_TYPES}}</option>
+                        <option value="audioPlayback">{{AUDIO_PLAYBACK}}</option>
+                        <option value="notification">{{NOTIFICATIONS}}</option>
+                        <option value="camera">{{CAMERA}}</option>
+                        <option value="microphone">{{MICROPHONE}}</option>
+                        <option value="cameraAndMicrophone">{{CAMERA_AND_MICROPHONE}}</option>
+                        <option value="geolocation">{{LOCATION}}</option>
                     </select>
                 </div>
                 <div>
-                    <label for="statusFilter">Filter by status:</label>
+                    <label for="statusFilter">{{FILTER_BY_STATUS}}</label>
                     <select id="statusFilter" class="filter-select">
-                        <option value="">All Statuses</option>
-                        <option value="granted">Allowed</option>
-                        <option value="denied">Blocked</option>
+                        <option value="">{{ALL_STATUSES}}</option>
+                        <option value="granted">{{ALLOWED}}</option>
+                        <option value="denied">{{BLOCKED}}</option>
                     </select>
                 </div>
             </div>
@@ -225,12 +225,12 @@
         
         <div class="loading-indicator" id="loadingIndicator">
             <div class="loading-spinner"></div>
-            Loading permissions…
+            {{LOADING}}
         </div>
         
         <div class="load-more-container" id="loadMoreContainer">
             <button id="loadMoreButton" class="load-more-button" onclick="loadMore()" style="display: none;">
-                Load More
+                {{LOAD_MORE}}
             </button>
         </div>
     </div>

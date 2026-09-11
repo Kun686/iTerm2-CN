@@ -105,7 +105,14 @@ struct LLMProvider {
             return "Llama"
         }
 
+        // Also used in shared request errors and diagnostic events.
         return "Unknown Platform"
+    }
+
+    var localizedDisplayName: String {
+        let name = displayName
+        guard name == "Unknown Platform" else { return name }
+        return String(localized: "ui.swift.aiterm.llmprovider.unknown_platform.9c60e933", defaultValue: "Unknown Platform", bundle: .main, comment: "User-facing text in LLMProvider.")
     }
 
     var dynamicModelsSupported: Bool {

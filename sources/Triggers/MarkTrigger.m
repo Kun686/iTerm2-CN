@@ -20,7 +20,7 @@ typedef enum {
 @implementation MarkTrigger
 
 + (NSString *)title {
-    return @"Set Mark";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.set_mark.ae11f7ac", nil, NSBundle.mainBundle, @"Set Mark", @"Trigger action title.");
 }
 
 - (NSString *)description {
@@ -74,8 +74,8 @@ typedef enum {
 
 - (NSDictionary *)menuItemsForPoupupButton
 {
-    return @{ @(kMarkTriggerParamTagKeepScrolling): @"Keep Scrolling",
-              @(kMarkTriggerParamTagStopScrolling): @"Stop Scrolling" };
+    return @{ @(kMarkTriggerParamTagKeepScrolling): NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.keep_scrolling.4e9a386c", nil, NSBundle.mainBundle, @"Keep Scrolling", @"Trigger popup option."),
+              @(kMarkTriggerParamTagStopScrolling): NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.stop_scrolling.1c1df101", nil, NSBundle.mainBundle, @"Stop Scrolling", @"Trigger popup option.") };
 }
 
 - (BOOL)shouldStopScrolling {
@@ -98,7 +98,7 @@ typedef enum {
 }
 
 - (NSAttributedString *)paramAttributedString {
-    NSString *message = self.shouldStopScrolling ? @"and stop scrolling" : @"";
+    NSString *message = self.shouldStopScrolling ? NSLocalizedStringWithDefaultValue(@"ui.triggers.marktrigger.and_stop_scrolling.bc5c3332", nil, NSBundle.mainBundle, @"and stop scrolling", @"User-facing text in MarkTrigger (paramAttributedString).") : @"";
     return [[NSAttributedString alloc] initWithString:message attributes:self.regularAttributes];
 }
 

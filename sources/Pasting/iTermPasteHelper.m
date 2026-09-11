@@ -754,12 +754,12 @@ const NSInteger iTermQuickPasteBytesPerCallDefaultValue = 768;
             NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
             numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
             const iTermWarningSelection selection =
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"OK to paste %@ characters?", [numberFormatter stringFromNumber:@(pasteEvent.string.length)]]
-                                       actions:@[ @"OK", @"Cancel", @"Advanced…" ]
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.ok_to_paste_characters.58d0b4af", nil, NSBundle.mainBundle, @"OK to paste %@ characters?", @"User-facing text in iTermPasteHelper (showWarningWithTitle)."), [numberFormatter stringFromNumber:@(pasteEvent.string.length)]]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermPasteHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermPasteHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.advanced.1de3a18e", nil, NSBundle.mainBundle, @"Advanced…", @"User-facing action label in iTermPasteHelper (actions).") ]
                                      accessory:nil
                                     identifier:@"NoSyncPasteOverCharacterLimitWarning"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Paste Limit Exceeded"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.paste_limit_exceeded.d11b1e3b", nil, NSBundle.mainBundle, @"Paste Limit Exceeded", @"User-facing text in iTermPasteHelper (heading).")
                                         window:self.delegate.pasteHelperViewForIndicator.window];
             switch (selection) {
                 case kiTermWarningSelection0:
@@ -808,12 +808,12 @@ const NSInteger iTermQuickPasteBytesPerCallDefaultValue = 768;
     NSMutableArray<iTermWarningAction *> *actions = [NSMutableArray array];
 
     __block BOOL result = YES;
-    iTermWarningAction *cancel = [iTermWarningAction warningActionWithLabel:@"Cancel"
+    iTermWarningAction *cancel = [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermPasteHelper (warningActionWithLabel).")
                                                                       block:^(iTermWarningSelection selection) { result = NO; }];
-    iTermWarningAction *paste = [iTermWarningAction warningActionWithLabel:@"Paste"
+    iTermWarningAction *paste = [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.paste.f3380f7b", nil, NSBundle.mainBundle, @"Paste", @"User-facing action label in iTermPasteHelper (warningActionWithLabel).")
                                                                      block:^(iTermWarningSelection selection) { result = YES; }];
     iTermWarningAction *pasteWithoutNewline =
-        [iTermWarningAction warningActionWithLabel:@"Paste Without Newline"
+        [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.paste_without_newline.65a81bb4", nil, NSBundle.mainBundle, @"Paste Without Newline", @"User-facing action label in iTermPasteHelper (warningActionWithLabel).")
                                              block:^(iTermWarningSelection selection) {
             [pasteEvent trimNewlines];
             RLog(@"paste without newline selected: set result to YES");
@@ -826,23 +826,39 @@ const NSInteger iTermQuickPasteBytesPerCallDefaultValue = 768;
     BOOL prompt = YES;
     if (lines.count > 1) {
         if (atShellPrompt) {
-            theTitle = [NSString stringWithFormat:@"OK to paste %d lines at shell prompt?",
+            theTitle = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.confirm_lines_at_shell_prompt",
+                                                                                    nil,
+                                                                                    NSBundle.mainBundle,
+                                                                                    @"OK to paste %d lines at shell prompt?",
+                                                                                    @"Confirmation before pasting multiple lines at a shell prompt."),
                         (int)[lines count]];
         } else {
             prompt = [iTermAdvancedSettingsModel promptForPasteWhenNotAtPrompt];
             DLog(@"set prompt to %@: there are multiple lines and we are not at the shell prompt", @(prompt));
-            theTitle = [NSString stringWithFormat:@"OK to paste %d lines?",
+            theTitle = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.confirm_lines",
+                                                                                    nil,
+                                                                                    NSBundle.mainBundle,
+                                                                                    @"OK to paste %d lines?",
+                                                                                    @"Confirmation before pasting multiple lines."),
                         (int)[lines count]];
         }
     } else {
         [actions insertObject:pasteWithoutNewline atIndex:1];
         if (atShellPrompt) {
             identifier = [iTermAdvancedSettingsModel noSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPromptUserDefaultsKey];
-            theTitle = @"OK to paste one line ending in a newline at shell prompt?";
+            theTitle = NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.confirm_one_line_with_newline_at_shell_prompt",
+                                                          nil,
+                                                          NSBundle.mainBundle,
+                                                          @"OK to paste one line ending in a newline at shell prompt?",
+                                                          @"Confirmation before pasting one newline-terminated line at a shell prompt.");
         } else {
             prompt = [iTermAdvancedSettingsModel promptForPasteWhenNotAtPrompt];
             DLog(@"set prompt to %@: pasting 0 or 1 lines and not at shell prompt", @(prompt));
-            theTitle = @"OK to paste one line ending in a newline?";
+            theTitle = NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.confirm_one_line_with_newline",
+                                                          nil,
+                                                          NSBundle.mainBundle,
+                                                          @"OK to paste one line ending in a newline?",
+                                                          @"Confirmation before pasting one newline-terminated line.");
         }
     }
 
@@ -852,7 +868,7 @@ const NSInteger iTermQuickPasteBytesPerCallDefaultValue = 768;
     }
     // Issue 5115
     [iTermWarning unsilenceIdentifier:identifier ifSelectionEquals:[actions indexOfObjectIdenticalTo:cancel]];
-    [actions addObject:[iTermWarningAction warningActionWithLabel:@"Advanced…" block:^(iTermWarningSelection selection) {
+    [actions addObject:[iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.advanced.1de3a18e", nil, NSBundle.mainBundle, @"Advanced…", @"User-facing action label in iTermPasteHelper (warningActionWithLabel).") block:^(iTermWarningSelection selection) {
         PTYSessionPasteFlags flags = 0;
         if (pasteEvent.slow) {
             flags |= kPTYSessionPasteSlowly;
@@ -863,12 +879,12 @@ const NSInteger iTermQuickPasteBytesPerCallDefaultValue = 768;
         result = NO;
     }]];
     iTermWarning *warning = [[iTermWarning alloc] init];
-    warning.heading = @"Confirm Multi-Line Paste";
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.confirm_multi_line_paste.fe4cfa4c", nil, NSBundle.mainBundle, @"Confirm Multi-Line Paste", @"User-facing text in iTermPasteHelper (heading).");
     warning.title = theTitle;
     warning.warningActions = actions;
     warning.identifier = identifier;
     warning.warningType = kiTermWarningTypePermanentlySilenceable;
-    warning.cancelLabel = @"Cancel";
+    warning.cancelLabel = NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermPasteHelper (cancelLabel).");
     warning.window = [[self.delegate pasteHelperViewForIndicator] window];
     [warning runModal];
     DLog(@"Return result of %@", @(result));
@@ -908,8 +924,8 @@ const NSInteger iTermQuickPasteBytesPerCallDefaultValue = 768;
             [[iTermNumberOfSpacesAccessoryViewController alloc] init];
 
         iTermWarningSelection selection =
-            [iTermWarning showWarningWithTitle:@"You're about to paste a string with tabs."
-                                       actions:@[ @"OK", @"Cancel", @"Convert tabs to spaces", @"Advanced…" ]
+            [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.you_re_about_to_paste_a_string_with.c29767fb", nil, NSBundle.mainBundle, @"You're about to paste a string with tabs.", @"User-facing warning message.")
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermPasteHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermPasteHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.convert_tabs_to_spaces.3e660a74", nil, NSBundle.mainBundle, @"Convert tabs to spaces", @"User-facing action label in iTermPasteHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastehelper.advanced.1de3a18e", nil, NSBundle.mainBundle, @"Advanced…", @"User-facing action label in iTermPasteHelper (actions).") ]
                                      accessory:accessoryController.view
                                     identifier:@"AboutToPasteTabsWithCancel"
                                    silenceable:kiTermWarningTypePermanentlySilenceable

@@ -215,10 +215,10 @@ extension iTermBrowserPermissionManager {
     
     private func showPermissionDialog(for permissionType: BrowserPermissionType, origin: String) async -> BrowserPermissionDecision {
         let alert = NSAlert()
-        alert.messageText = "Allow \(permissionType.displayName)"
-        alert.informativeText = "The website \(origin) wants to access \(permissionType.displayName.lowercased())."
-        alert.addButton(withTitle: "Allow")
-        alert.addButton(withTitle: "Block")
+        alert.messageText = String(localized: "ui.swift.browser.permissions.itermbrowserpermissionmanager.allow_0.2b456e85", defaultValue: "Allow \(permissionType.displayName)", bundle: .main, comment: "User-facing text in iTermBrowserPermissionManager.")
+        alert.informativeText = String(localized: "ui.swift.browser.permissions.itermbrowserpermissionmanager.the_website_0_wants_to_access_1.b7713a62", defaultValue: "The website \(origin) wants to access \(permissionType.displayName.lowercased()).", bundle: .main, comment: "User-facing text in iTermBrowserPermissionManager.")
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.permissions.itermbrowserpermissionmanager.allow.e213c161", defaultValue: "Allow", bundle: .main, comment: "User-facing text in iTermBrowserPermissionManager."))
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.permissions.itermbrowserpermissionmanager.block.211d0bb8", defaultValue: "Block", bundle: .main, comment: "User-facing text in iTermBrowserPermissionManager."))
         alert.alertStyle = .informational
         
         let response = alert.runModal()

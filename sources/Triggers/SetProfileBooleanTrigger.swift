@@ -62,7 +62,7 @@ class SetProfileBooleanTrigger: Trigger {
     // MARK: - Trigger overrides
 
     override static var title: String {
-        return "Set Profile Setting…"
+        return String(localized: "ui.swift.triggers.setprofilebooleantrigger.set_profile_setting.8630c091", defaultValue: "Set Profile Setting…", bundle: .main, comment: "User-facing text in SetProfileBooleanTrigger.")
     }
 
     override var description: String {

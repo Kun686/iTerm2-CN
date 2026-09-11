@@ -10,10 +10,17 @@
             "state": "new",
             "value": "A simple script that doesn't have any dependencies besides the iterm2 library."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "除 iterm2 库外不含任何依赖的简单脚本。"
+          }
         }
       }
     },
     "2sA-HX-RoK.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSBox\"; title = \"Box\"; ObjectID = \"2sA-HX-RoK\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -22,16 +29,29 @@
             "state": "new",
             "value": "Box"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Box"
+          }
         }
       }
     },
     "3cc-Nd-Tie.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"😈\"; ObjectID = \"3cc-Nd-Tie\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "😈"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "😈"
           }
         }
@@ -46,16 +66,29 @@
             "state": "new",
             "value": "Basic"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "基本"
+          }
         }
       }
     },
     "8LH-HR-XoS.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"😊\"; ObjectID = \"8LH-HR-XoS\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "😊"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "😊"
           }
         }
@@ -70,6 +103,12 @@
             "state": "new",
             "value": "Long-Running Daemon"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "常驻后台进程"
+          }
         }
       }
     },
@@ -82,16 +121,29 @@
             "state": "new",
             "value": "Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
         }
       }
     },
     "JSO-Dq-LjB.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSBox\"; title = \"Box\"; ObjectID = \"JSO-Dq-LjB\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Box"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Box"
           }
         }
@@ -106,6 +158,12 @@
             "state": "new",
             "value": "Choose a script template:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择脚本模板："
+          }
         }
       }
     },
@@ -117,6 +175,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Simple"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "简单"
           }
         }
       }
@@ -130,6 +194,12 @@
             "state": "new",
             "value": "Cancel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
         }
       }
     },
@@ -141,6 +211,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Choose this template for a simple script that performs actions and terminates."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "如果脚本只需执行操作后终止，请选择此模板。"
           }
         }
       }
@@ -154,10 +230,17 @@
             "state": "new",
             "value": "A script that depends on PyPI packages other than the iterm2 library. A private pyenv will be created for this script."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "依赖 iterm2 库以外的 PyPI 包的脚本。将为此脚本创建一个私有的 pyenv 环境。"
+          }
         }
       }
     },
     "nKj-9L-NfW.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"🔗\"; ObjectID = \"nKj-9L-NfW\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -166,16 +249,29 @@
             "state": "new",
             "value": "🔗"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔗"
+          }
         }
       }
     },
     "tXz-uS-5p0.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSBox\"; title = \"Box\"; ObjectID = \"tXz-uS-5p0\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Box"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Box"
           }
         }
@@ -190,6 +286,12 @@
             "state": "new",
             "value": "Full Environment"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完整环境"
+          }
         }
       }
     },
@@ -202,10 +304,17 @@
             "state": "new",
             "value": "Choose this template for a script that stays running and responds to notifications."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "如果脚本需要持续运行并响应通知，请选择此模板。"
+          }
         }
       }
     },
     "y6b-6d-y5d.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSBox\"; title = \"Box\"; ObjectID = \"y6b-6d-y5d\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -214,16 +323,29 @@
             "state": "new",
             "value": "Box"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Box"
+          }
         }
       }
     },
     "yaQ-52-C21.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"🛠️\"; ObjectID = \"yaQ-52-C21\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "🛠️"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "🛠️"
           }
         }
@@ -237,6 +359,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Choose a Python environment:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择 Python 环境："
           }
         }
       }

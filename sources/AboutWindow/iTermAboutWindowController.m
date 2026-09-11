@@ -11,6 +11,7 @@
 #import "iTerm2SharedARC-Swift.h"
 #import "iTermLaunchExperienceController.h"
 #import "NSArray+iTerm.h"
+#import "NSBundle+iTerm.h"
 #import "NSColor+iTerm.h"
 #import "NSMutableAttributedString+iTerm.h"
 #import "NSObject+iTerm.h"
@@ -75,7 +76,12 @@ static const CGFloat kSponsorRowY = 170.0;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     _sponsorsHeading.selectable = YES;
     _sponsorsHeading.editable = NO;
-    [_sponsorsHeading.textStorage setAttributedString:[NSAttributedString attributedStringWithHTML:_sponsorsHeading.textStorage.string
+    NSString *sponsorsHeading = NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.supporters_heading_html",
+                                                                   nil,
+                                                                   NSBundle.mainBundle,
+                                                                   @"iTerm2 is supported by these backers on <a href=\"https://patreon.com/gnachman\">Patreon</a> and <a href=\"https://github.com/sponsors/gnachman\">GitHub Sponsors</a>:",
+                                                                   @"Heading above the supporter list; preserve the HTML links");
+    [_sponsorsHeading.textStorage setAttributedString:[NSAttributedString attributedStringWithHTML:sponsorsHeading
                                                                                               font:_sponsorsHeading.font
                                                                                     paragraphStyle:paragraphStyle]];
 
@@ -196,21 +202,38 @@ static const CGFloat kSponsorRowY = 170.0;
     if (self) {
         NSDictionary *myDict = [[NSBundle bundleForClass:[self class]] infoDictionary];
         NSString *const versionNumber = myDict[(NSString *)kCFBundleVersionKey];
-        NSString *versionString = [NSString stringWithFormat: @"Build %@\n\n", versionNumber];
+        NSString *versionFormat = NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.build_format",
+                                                                     nil,
+                                                                     NSBundle.mainBundle,
+                                                                     @"Build %@\n\n",
+                                                                     @"Build number shown in the About window");
+        NSString *versionString = [NSString stringWithFormat:versionFormat, versionNumber];
         NSAttributedString *whatsNew = nil;
         if ([versionNumber hasPrefix:@"3.7."] || [versionString isEqualToString:@"unknown"]) {
             whatsNew = [self attributedStringWithLinkToURL:iTermAboutWindowControllerWhatsNewURLString
-                                                     title:@"What’s New in 3.7?\n"];
+                                                     title:NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.whats_new_in_3_7",
+                                                                                             nil,
+                                                                                             NSBundle.mainBundle,
+                                                                                             @"What’s New in 3.7?\n",
+                                                                                             @"Link to the iTerm2 3.7 release notes")];
         }
 
         NSAttributedString *webAString = [self attributedStringWithLinkToURL:@"https://iterm2.com/"
-                                                                       title:@"Home Page"];
+                                                                       title:NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.home_page.d2c7f6be", nil, NSBundle.mainBundle, @"Home Page", @"User-facing text in iTermAboutWindowController (attributedStringWithLinkToURL:title:).")];
         NSAttributedString *bugsAString =
                 [self attributedStringWithLinkToURL:@"https://iterm2.com/bugs"
-                                              title:@"Report a bug"];
+                                              title:NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.report_a_bug",
+                                                                                      nil,
+                                                                                      NSBundle.mainBundle,
+                                                                                      @"Report a bug",
+                                                                                      @"Link to report an iTerm2 bug")];
         NSAttributedString *creditsAString =
                 [self attributedStringWithLinkToURL:@"https://iterm2.com/credits"
-                                              title:@"Credits"];
+                                              title:NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.credits",
+                                                                                      nil,
+                                                                                      NSBundle.mainBundle,
+                                                                                      @"Credits",
+                                                                                      @"Link to iTerm2 credits")];
 
         // Force IBOutlets to be bound by creating window.
         [self window];
@@ -264,6 +287,17 @@ static const CGFloat kSponsorRowY = 170.0;
 
     [_patronsTextView setLinkTextAttributes:self.linkTextViewAttributes];
     [[_patronsTextView textStorage] deleteCharactersInRange:NSMakeRange(0, [[_patronsTextView textStorage] length])];
+    if ([NSBundle it_isCNCommunityBuild]) {
+        NSString *disclaimer = NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.unofficial_disclaimer",
+                                                                  nil,
+                                                                  NSBundle.mainBundle,
+                                                                  @"iTerm2-CN is an unofficial community localization of iTerm2 and is not affiliated with the official iTerm2 project.",
+                                                                  @"Required iTerm2-CN community-edition disclaimer");
+        [[_patronsTextView textStorage] appendAttributedString:
+            [[NSAttributedString alloc] initWithString:disclaimer attributes:self.attributes]];
+        [[_patronsTextView textStorage] appendAttributedString:
+            [[NSAttributedString alloc] initWithString:@"\n\n" attributes:self.attributes]];
+    }
     [[_patronsTextView textStorage] appendAttributedString:patronsAttributedString];
     [_patronsTextView setAlignment:NSTextAlignmentLeft
                          range:NSMakeRange(0, [[_patronsTextView textStorage] length])];
@@ -284,7 +318,11 @@ static const CGFloat kSponsorRowY = 170.0;
 }
 
 - (NSAttributedString *)defaultPatronsString {
-    NSString *string = [NSString stringWithFormat:@"Loading supporters…"];
+    NSString *string = NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.loading_supporters",
+                                                          nil,
+                                                          NSBundle.mainBundle,
+                                                          @"Loading supporters…",
+                                                          @"Placeholder shown while the supporter list loads");
     NSMutableAttributedString *attributedString =
         [[NSMutableAttributedString alloc] initWithString:string
                                                attributes:self.attributes];
@@ -303,7 +341,7 @@ static const CGFloat kSponsorRowY = 170.0;
 
 - (void)setPatrons:(NSArray *)patronNames {
     if (!patronNames.count) {
-        [self setPatronsString:[[NSAttributedString alloc] initWithString:@"Error loading patrons :("
+        [self setPatronsString:[[NSAttributedString alloc] initWithString:NSLocalizedStringWithDefaultValue(@"ui.aboutwindow.itermaboutwindowcontroller.error_loading_patrons.368a8690", nil, NSBundle.mainBundle, @"Error loading patrons :(", @"User-facing text in iTermAboutWindowController (setPatrons:).")
                                                                 attributes:[self attributes]]
                        animate:NO];
         return;

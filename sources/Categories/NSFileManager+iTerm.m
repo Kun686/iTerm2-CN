@@ -142,12 +142,12 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
     if (result == nil) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"There was a problem finding or creating your application support directory. iTerm2 won't work very well until this problem is fixed.\n\nIt should be at ~/Library/Application Support/iTerm2.\n\nThe error was:\n%@", error.localizedDescription]
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.nsfilemanager_iterm.there_was_a_problem_finding_or_creating_your.0dc004bc", nil, NSBundle.mainBundle, @"There was a problem finding or creating your application support directory. iTerm2 won't work very well until this problem is fixed.\n\nIt should be at ~/Library/Application Support/iTerm2.\n\nThe error was:\n%@", @"User-facing text in NSFileManager+iTerm (showWarningWithTitle)."), error.localizedDescription]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.categories.nsfilemanager_iterm.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in NSFileManager+iTerm (actions).") ]
                                      accessory:nil
                                     identifier:@"NoSyncAppSupportFail"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Problem with Application Support Directory"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.categories.nsfilemanager_iterm.problem_with_application_support_directory.91c9315d", nil, NSBundle.mainBundle, @"Problem with Application Support Directory", @"User-facing text in NSFileManager+iTerm (heading).")
                                         window:nil];
         });
     }
@@ -386,12 +386,12 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             RLog(@"Failed to create the config directory: %@", error);
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"There was a problem finding or creating the config directory. You can set “Settings > Advanced > Folder for config files“ to set a custom location for this directory. Until this is fixed, some features will be disabled.\n%@", error.localizedDescription]
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.categories.nsfilemanager_iterm.there_was_a_problem_finding_or_creating_the.497a5a59", nil, NSBundle.mainBundle, @"There was a problem finding or creating the config directory. You can set “Settings > Advanced > Folder for config files“ to set a custom location for this directory. Until this is fixed, some features will be disabled.\n%@", @"User-facing text in NSFileManager+iTerm (showWarningWithTitle)."), error.localizedDescription]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.categories.nsfilemanager_iterm.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in NSFileManager+iTerm (actions).") ]
                                      accessory:nil
                                     identifier:@"NoSyncErrorCreatingConfigFolder"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Problem Creating Config Folder"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.categories.nsfilemanager_iterm.problem_creating_config_folder.e5d924de", nil, NSBundle.mainBundle, @"Problem Creating Config Folder", @"User-facing text in NSFileManager+iTerm (heading).")
                                         window:nil];
         });
     }
@@ -501,4 +501,3 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 }
 
 @end
-

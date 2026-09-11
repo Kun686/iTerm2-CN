@@ -103,9 +103,15 @@ private extension NSMenuItem {
     func title(descendsFromProfiles: Bool) -> String {
         switch itemType(descendsFromProfiles: descendsFromProfiles) {
         case .newWindow:
-            return "\(self.title) — New Window"
+            return String(localized: "ui.swift.settings.menuitempopupview.0_new_window.83f5d25f",
+                          defaultValue: "\(self.title) — New Window",
+                          bundle: .main,
+                          comment: "Searchable menu item title for opening a profile in a new window.")
         case .newTab:
-            return "\(self.title) — New Tab"
+            return String(localized: "ui.swift.settings.menuitempopupview.0_new_tab.90b97d6d",
+                          defaultValue: "\(self.title) — New Tab",
+                          bundle: .main,
+                          comment: "Searchable menu item title for opening a profile in a new tab.")
         case .other:
             return self.title
         }
@@ -142,7 +148,10 @@ private extension SearchableComboViewItem {
 
     static private func moveToScreenItems(tagProvider: () -> (Int)) -> [SearchableComboViewItem] {
         return NSScreen.screens.map { screen in
-            return SearchableComboViewItem("Move to \(screen.it_uniqueName())",
+            return SearchableComboViewItem(String(localized: "ui.swift.settings.menuitempopupview.move_to_0.699bb2f5",
+                                                  defaultValue: "Move to \(screen.it_uniqueName())",
+                                                  bundle: .main,
+                                                  comment: "Searchable Window-menu action for moving a window to a display."),
                                            tag: tagProvider(),
                                            identifier: screen.it_uniqueKey())
         }
@@ -170,6 +179,8 @@ private extension SearchableComboViewItem {
 
 @objc(iTermMenuItemPopupView)
 class MenuItemPopupView: NSView {
+    private var items: [SearchableComboViewItem] = []
+    private var restoredParameter: (tag: Int, value: String)?
     @objc private(set) var comboView: SearchableComboView? = nil
     @IBOutlet var delegate: SearchableComboViewDelegate? {
         set {
@@ -200,34 +211,80 @@ class MenuItemPopupView: NSView {
     }
 
     @objc func reloadData() {
-        let identifier = selectedIdentifier
+        let parameter = selectedParameter
+        restoredParameter = nil
         comboView?.removeFromSuperview()
-        let newComboView = SearchableComboView(SearchableComboViewGroup.fromMainMenu(),
-                                               defaultTitle: "Select Menu Item…")
+        let groups = SearchableComboViewGroup.fromMainMenu()
+        items = groups.flatMap { $0.items }
+        let newComboView = SearchableComboView(groups,
+                                               defaultTitle: String(localized: "ui.swift.settings.menuitempopupview.select_menu_item.b037b203",
+                                                                    defaultValue: "Select Menu Item…",
+                                                                    bundle: .main,
+                                                                    comment: "Placeholder title in the searchable menu-item picker."))
         newComboView.frame = self.bounds
         newComboView.delegate = comboView?.delegate
         addSubview(newComboView)
         comboView = newComboView
-        if let identifier = identifier {
-            _ = select(identifier: identifier)
+        if let parameter = parameter {
+            _ = restore(parameter: parameter)
         }
     }
 
+    private var selectedItem: SearchableComboViewItem? {
+        guard let tag = comboView?.selectedTag() else { return nil }
+        return items.first { $0.tag == tag }
+    }
+
     @objc var selectedTitle: String? {
-        return comboView?.selectedItem?.title
+        return selectedItem?.label
     }
 
     @objc var selectedIdentifier: String? {
-        return comboView?.selectedItem?.identifier.map { $0 as NSString as String }
+        return selectedItem?.identifier
+    }
+
+    @objc var selectedParameter: String? {
+        if let restored = restoredParameter, comboView?.selectedTag() == restored.tag {
+            return restored.value
+        }
+        guard let title = selectedTitle else { return nil }
+        if let identifier = selectedIdentifier, !identifier.isEmpty {
+            return title + "\n" + identifier
+        }
+        return title
+    }
+
+    @discardableResult
+    @objc(restoreParameter:) func restore(parameter: String) -> Bool {
+        let parts = parameter.components(separatedBy: "\n")
+        if parts.count < 2 {
+            select(title: parts[0])
+        } else if !select(identifier: parts[1]) {
+            // Preserve the editor's existing exact-title fallback for missing
+            // IDs, but never turn an unknown ID into a legacy alias match.
+            comboView?.selectItem(withTitle: parts[0])
+        }
+        // Opening/reloading an editor must not rewrite legacy titles, opaque
+        // trailing fields, or an unavailable menu action. An actual change of
+        // selectedTag makes the getter use the new selection instead.
+        restoredParameter = (comboView?.selectedTag() ?? -1, parameter)
+        return selectedItem != nil
     }
 
     @objc(selectItemWithTitle:) func select(title: String) {
-        _ = comboView?.selectItem(withTitle: title)
+        restoredParameter = nil
+        comboView?.selectItem(withTitle: title)
+        if selectedItem != nil { return }
+        if let item = items.first(where: {
+            MenuItemLegacyTitles.matches(title: title, identifier: $0.identifier, currentTitle: $0.label)
+        }) {
+            _ = comboView?.selectItem(withTag: item.tag)
+        }
     }
 
     @discardableResult
     @objc(selectItemWithIdentifier:) func select(identifier: String) -> Bool {
+        restoredParameter = nil
         return comboView?.selectItem(withIdentifier: NSUserInterfaceItemIdentifier(identifier)) ?? false
     }
 }
-

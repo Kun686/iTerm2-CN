@@ -91,14 +91,14 @@ class ChatInputView: NSView, NSTextFieldDelegate {
         // .medium). Without this, paperplane.fill renders ~10pt taller
         // than plus, throwing off the row visually.
         let sendConfig = NSImage.SymbolConfiguration(pointSize: 16, weight: .medium)
-        let rawSendImage = NSImage(systemSymbolName: SFSymbol.paperplaneFill.rawValue, accessibilityDescription: "Send")!
-        let rawStopImage = NSImage(systemSymbolName: SFSymbol.stopCircleFill.rawValue, accessibilityDescription: "Stop")!
+        let rawSendImage = NSImage(systemSymbolName: SFSymbol.paperplaneFill.rawValue, accessibilityDescription: String(localized: "ui.swift.aiterm.chatinputview.send.f6f4688f", defaultValue: "Send", bundle: .main, comment: "User-facing text in ChatInputView."))!
+        let rawStopImage = NSImage(systemSymbolName: SFSymbol.stopCircleFill.rawValue, accessibilityDescription: String(localized: "ui.swift.aiterm.chatinputview.stop.cae7d57b", defaultValue: "Stop", bundle: .main, comment: "User-facing text in ChatInputView."))!
         sendImage = rawSendImage.withSymbolConfiguration(sendConfig) ?? rawSendImage
         stopImage = rawStopImage.withSymbolConfiguration(sendConfig) ?? rawStopImage
         vev = NSVisualEffectView()
         super.init(frame: .zero)
 
-        inputTextFieldContainer.placeholder = "Type a message…"
+        inputTextFieldContainer.placeholder = String(localized: "ui.swift.aiterm.chatinputview.type_a_message.04711048", defaultValue: "Type a message…", bundle: .main, comment: "User-facing text in ChatInputView.")
         inputTextFieldContainer.isEnabled = false
         inputTextFieldContainer.textView.delegate = self
         inputTextFieldContainer.textView.onDropFileURLs = { [weak self] urls in
@@ -116,7 +116,7 @@ class ChatInputView: NSView, NSTextFieldDelegate {
         sendButton.setButtonType(.momentaryPushIn)
 
         var addImage = NSImage.it_image(forSymbolName: SFSymbol.plus.rawValue,
-                                        accessibilityDescription: "Attach files",
+                                        accessibilityDescription: String(localized: "ui.swift.aiterm.chatinputview.attach_files.e697cc1e", defaultValue: "Attach files", bundle: .main, comment: "User-facing text in ChatInputView."),
                                         fallbackImageName: "plus",
                                         for: ChatInputView.self)!
         let config = NSImage.SymbolConfiguration(pointSize: 16, weight: .medium)
@@ -129,7 +129,7 @@ class ChatInputView: NSView, NSTextFieldDelegate {
         addAttachmentButton.bezelStyle = .regularSquare
         addAttachmentButton.isBordered = false
         addAttachmentButton.setButtonType(.momentaryPushIn)
-        addAttachmentButton.toolTip = "Attach files"
+        addAttachmentButton.toolTip = String(localized: "ui.swift.aiterm.chatinputview.attach_files.e697cc1e", defaultValue: "Attach files", bundle: .main, comment: "User-facing text in ChatInputView.")
 
         attachmentsView.onItemsWillBeDeleted = { _ in true }
         attachmentsView.onDidDeleteItems = { [weak self] in
@@ -137,7 +137,7 @@ class ChatInputView: NSView, NSTextFieldDelegate {
             self?.updateSendButtonEnabled()
         }
 
-        hintLabel = NSTextField(labelWithString: "↩ to submit")
+        hintLabel = NSTextField(labelWithString: String(localized: "ui.swift.aiterm.chatinputview.to_submit.183f2849", defaultValue: "↩ to submit", bundle: .main, comment: "User-facing text in ChatInputView."))
         hintLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize - 1)
         hintLabel.textColor = .tertiaryLabelColor
         hintLabel.alignment = .right
@@ -500,11 +500,11 @@ class ChatInputView: NSView, NSTextFieldDelegate {
             }
             let selection = iTermWarning.show(
                 withTitle: dropPromptTitle(for: supported),
-                actions: ["Attach", "Insert Path"],
+                actions: [String(localized: "ui.swift.aiterm.chatinputview.attach.d406ade2", defaultValue: "Attach", bundle: .main, comment: "User-facing text in ChatInputView."), String(localized: "ui.swift.aiterm.chatinputview.insert_path.0a7164b7", defaultValue: "Insert Path", bundle: .main, comment: "User-facing text in ChatInputView.")],
                 accessory: nil,
                 identifier: "NoSyncAIChatAttachDroppedFile",
                 silenceable: .kiTermWarningTypePermanentlySilenceable,
-                heading: supported.count == 1 ? "Attach File?" : "Attach Files?",
+                heading: supported.count == 1 ? String(localized: "ui.swift.aiterm.chatinputview.attach_file.70404d29", defaultValue: "Attach File?", bundle: .main, comment: "User-facing text in ChatInputView.") : String(localized: "ui.swift.aiterm.chatinputview.attach_files.231a7007", defaultValue: "Attach Files?", bundle: .main, comment: "User-facing text in ChatInputView."),
                 window: window)
             if selection == .kiTermWarningSelection0 {
                 addFiles(from: supported)
@@ -522,9 +522,9 @@ class ChatInputView: NSView, NSTextFieldDelegate {
 
     private func dropPromptTitle(for urls: [URL]) -> String {
         if urls.count == 1 {
-            return "Add “\(urls[0].lastPathComponent)” to your message as an attachment, or insert its path as text?"
+            return String(localized: "ui.swift.aiterm.chatinputview.add_0_to_your_message_as_an_attachment.e042141b", defaultValue: "Add “\(urls[0].lastPathComponent)” to your message as an attachment, or insert its path as text?", bundle: .main, comment: "User-facing text in ChatInputView.")
         }
-        return "Add the \(urls.count) dropped files to your message as attachments, or insert their paths as text?"
+        return String(localized: "ui.swift.aiterm.chatinputview.add_the_0_dropped_files_to_your_message.06110db2", defaultValue: "Add the \(urls.count) dropped files to your message as attachments, or insert their paths as text?", bundle: .main, comment: "User-facing text in ChatInputView.")
     }
 
     private func insertFilePathsAsText(_ urls: [URL]) {
@@ -570,14 +570,14 @@ class ChatInputView: NSView, NSTextFieldDelegate {
     private func presentRejectedAttachments(_ urls: [URL]) {
         guard let window else { return }
         let names = urls.map { $0.lastPathComponent }.joined(separator: ", ")
-        let providerName = AITermController.provider?.displayName ?? "the current AI provider"
+        let providerName = AITermController.provider?.localizedDisplayName ?? String(localized: "ui.swift.aiterm.chatinputview.the_current_ai_provider.937d613c", defaultValue: "the current AI provider", bundle: .main, comment: "User-facing text in ChatInputView.")
         let alert = NSAlert()
         alert.messageText = urls.count == 1
-            ? "Attachment not supported"
-            : "Attachments not supported"
-        alert.informativeText = "\(providerName) doesn’t accept this file type as a chat attachment: \(names)."
+            ? String(localized: "ui.swift.aiterm.chatinputview.attachment_not_supported.2fd3b239", defaultValue: "Attachment not supported", bundle: .main, comment: "User-facing text in ChatInputView.")
+            : String(localized: "ui.swift.aiterm.chatinputview.attachments_not_supported.ddd4c4e4", defaultValue: "Attachments not supported", bundle: .main, comment: "User-facing text in ChatInputView.")
+        alert.informativeText = String(localized: "ui.swift.aiterm.chatinputview.0_doesn_t_accept_this_file_type_as.6b381aa2", defaultValue: "\(providerName) doesn’t accept this file type as a chat attachment: \(names).", bundle: .main, comment: "User-facing text in ChatInputView.")
         alert.alertStyle = .informational
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.aiterm.chatinputview.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in ChatInputView."))
         alert.beginSheetModal(for: window)
     }
 
@@ -632,8 +632,8 @@ class ChatInputView: NSView, NSTextFieldDelegate {
     func refreshPlaceholder() {
         let orchestration = orchestrationEnabledProvider?() ?? false
         inputTextFieldContainer.placeholder = orchestration
-            ? "Type a message, or @ to mention a session…"
-            : "Type a message…"
+            ? String(localized: "ui.swift.aiterm.chatinputview.type_a_message_or_to_mention_a_session.e4d7a5ac", defaultValue: "Type a message, or @ to mention a session…", bundle: .main, comment: "User-facing text in ChatInputView.")
+            : String(localized: "ui.swift.aiterm.chatinputview.type_a_message.04711048", defaultValue: "Type a message…", bundle: .main, comment: "User-facing text in ChatInputView.")
     }
 
     private func revealSelectedRange() {

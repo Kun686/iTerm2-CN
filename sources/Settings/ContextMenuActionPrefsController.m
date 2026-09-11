@@ -336,7 +336,7 @@ static ContextMenuActionDeclaration ContextMenuActionDeclarationForTag(ContextMe
         _parameterInfoTextField.selectable = YES;
         _parameterInfoTextField.allowsEditingTextAttributes = YES;
     } else {
-        _parameterInfoTextField.stringValue = @"You can use captured strings from the Smart Selection's regular expression in the parameter. Use \\0 for match, \\1…\\9 for match groups, \\d for directory, \\u for user, \\h for host.";
+        _parameterInfoTextField.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.contextmenuactionprefscontroller.you_can_use_captured_strings_from_the_smart.12927258", nil, NSBundle.mainBundle, @"You can use captured strings from the Smart Selection's regular expression in the parameter. Use \\0 for match, \\1…\\9 for match groups, \\d for directory, \\u for user, \\h for host.", @"User-facing text in ContextMenuActionPrefsController (updateHelpText).");
     }
 }
 
@@ -412,7 +412,7 @@ static ContextMenuActionDeclaration ContextMenuActionDeclarationForTag(ContextMe
 
     NSString *title = action[kTitleKey];
     if (title.length == 0) {
-        title = @"Untitled Action";
+        title = NSLocalizedStringWithDefaultValue(@"ui.settings.contextmenuactionprefscontroller.untitled_action.86725a8c", nil, NSBundle.mainBundle, @"Untitled Action", @"User-facing text in ContextMenuActionPrefsController (attributedStringForAction:).");
     }
     NSAttributedString *nameAttributedString = [[NSAttributedString alloc] initWithString:title
                                                                                attributes:self.nameAttributes];
@@ -512,7 +512,7 @@ static ContextMenuActionDeclaration ContextMenuActionDeclarationForTag(ContextMe
     _parameter.hidden = NO;
     _parameterInfoTextField.hidden = NO;
     if (action.integerValue == kCopyContextMenuAction) {
-        _parameter.placeholderString = @"Leave empty to copy matching text";
+        _parameter.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.contextmenuactionprefscontroller.leave_empty_to_copy_matching_text.af43e742", nil, NSBundle.mainBundle, @"Leave empty to copy matching text", @"User-facing text in ContextMenuActionPrefsController (updateDetailView).");
     } else {
         _parameter.placeholderString = @"";
     }

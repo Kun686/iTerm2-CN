@@ -20,7 +20,7 @@
 @implementation CaptureTrigger
 
 + (NSString *)title {
-    return @"Capture Output";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.capturetrigger.capture_output.2543ca4b", nil, NSBundle.mainBundle, @"Capture Output", @"Trigger action title.");
 }
 
 - (NSString *)description {
@@ -36,7 +36,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Coprocess to run on activation";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.capturetrigger.coprocess_to_run_on_activation.d97dd8bc", nil, NSBundle.mainBundle, @"Coprocess to run on activation", @"Trigger parameter placeholder.");
 }
 
 - (void)showCaptureOutputToolInSession:(id<iTermTriggerSession>)aSession {

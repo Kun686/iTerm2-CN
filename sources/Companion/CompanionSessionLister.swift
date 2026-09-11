@@ -46,7 +46,12 @@ enum CompanionSessionLister {
             }
             let windowTitle = term.window().title
             return CompanionSessionTree.Window(
-                title: windowTitle.isEmpty ? "Window \(index + 1)" : windowTitle,
+                title: windowTitle.isEmpty ?
+                    String(localized: "ui.swift.companion.companionsessionlister.window_0.38ae7a46",
+                           defaultValue: "Window \(index + 1)",
+                           bundle: .main,
+                           comment: "Fallback window title shown in the companion session hierarchy.") :
+                    windowTitle,
                 tabs: tabs)
         }
         return CompanionSessionTree(windows: windows)

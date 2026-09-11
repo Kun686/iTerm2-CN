@@ -149,6 +149,8 @@ static const CGFloat iTermToolWrapperCollapsedHeight = 22.0;
 
 - (void)setTitleEditable {
     [_title setEditable:NO];
+    // This deferred hook runs after the existing name binding has updated.
+    _title.stringValue = [iTermToolbeltView displayNameForToolName:self.name];
 }
 
 - (id<ToolbeltTool>)tool {

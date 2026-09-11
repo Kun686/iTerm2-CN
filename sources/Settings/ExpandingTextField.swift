@@ -44,10 +44,10 @@ class ExpandingTextField: NSTextField {
 
     private static func setImage(button: NSButton, expand: Bool) {
         if expand {
-            button.image = NSImage(systemSymbolName: SFSymbol.rectangleExpandVertical.rawValue, accessibilityDescription: "Expand")
+            button.image = NSImage(systemSymbolName: SFSymbol.rectangleExpandVertical.rawValue, accessibilityDescription: String(localized: "ui.swift.settings.expandingtextfield.expand.07548c2c", defaultValue: "Expand", bundle: .main, comment: "User-facing text in ExpandingTextField."))
             button.imagePosition = .imageOnly
         } else {
-            button.image = NSImage(systemSymbolName: SFSymbol.rectangleCompressVertical.rawValue, accessibilityDescription: "Expand")
+            button.image = NSImage(systemSymbolName: SFSymbol.rectangleCompressVertical.rawValue, accessibilityDescription: String(localized: "ui.swift.settings.expandingtextfield.expand.07548c2c", defaultValue: "Expand", bundle: .main, comment: "User-facing text in ExpandingTextField."))
             button.imagePosition = .imageOnly
         }
     }

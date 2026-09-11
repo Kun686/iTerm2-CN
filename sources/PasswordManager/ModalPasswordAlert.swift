@@ -159,16 +159,16 @@ class ModalPasswordAlert {
     private func makeAlert() -> Views {
         let alert = NSAlert()
         alert.messageText = prompt
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.modalpasswordalert.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in ModalPasswordAlert."))
+        alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.modalpasswordalert.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ModalPasswordAlert."))
         if showPasswordManagerButton {
-            alert.addButton(withTitle: "Password Manager")
+            alert.addButton(withTitle: String(localized: "ui.swift.passwordmanager.modalpasswordalert.password_manager.f7ed8e02", defaultValue: "Password Manager", bundle: .main, comment: "User-facing text in ModalPasswordAlert."))
         }
 
         let newPassword = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 22))
         newPassword.isEditable = true
         newPassword.isSelectable = true
-        newPassword.placeholderString = "Password"
+        newPassword.placeholderString = String(localized: "ui.swift.passwordmanager.modalpasswordalert.password.e7cf3ef4", defaultValue: "Password", bundle: .main, comment: "User-facing text in ModalPasswordAlert.")
         if let initialPassword {
             newPassword.stringValue = initialPassword
         }
@@ -193,7 +193,7 @@ class ModalPasswordAlert {
             field.isEditable = true
             field.isSelectable = true
             field.stringValue = username
-            field.placeholderString = "User name"
+            field.placeholderString = String(localized: "ui.swift.passwordmanager.modalpasswordalert.user_name.b82e11da", defaultValue: "User name", bundle: .main, comment: "User-facing text in ModalPasswordAlert.")
 
             wrapper.addArrangedSubview(field)
             field.nextKeyView = newPassword
@@ -206,7 +206,7 @@ class ModalPasswordAlert {
 
         let rememberCheckbox: NSButton?
         if showRememberCheckbox {
-            let checkbox = NSButton(checkboxWithTitle: "Remember this password", target: nil, action: nil)
+            let checkbox = NSButton(checkboxWithTitle: String(localized: "ui.swift.passwordmanager.modalpasswordalert.remember_this_password.c98b2350", defaultValue: "Remember this password", bundle: .main, comment: "User-facing text in ModalPasswordAlert."), target: nil, action: nil)
             checkbox.state = rememberByDefault ? .on : .off
             rememberCheckbox = checkbox
             wrapper.addArrangedSubview(checkbox)

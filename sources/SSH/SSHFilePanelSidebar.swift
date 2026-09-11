@@ -124,9 +124,9 @@ class SSHFilePanelSidebar: NSView {
         var name: String {
             switch identifier {
             case .favorites:
-                return "Favorites"
+                return String(localized: "ui.swift.ssh.sshfilepanelsidebar.favorites.7a1f2a83", defaultValue: "Favorites", bundle: .main, comment: "User-facing text in SSHFilePanelSidebar.")
             case .connectedHosts:
-                return "Connected Hosts"
+                return String(localized: "ui.swift.ssh.sshfilepanelsidebar.connected_hosts.9d8a45d0", defaultValue: "Connected Hosts", bundle: .main, comment: "User-facing text in SSHFilePanelSidebar.")
             }
         }
 
@@ -724,14 +724,14 @@ extension SSHFilePanelSidebar: NSOutlineViewDelegate {
                 } else {
                     image = NSImage.it_image(
                         forSymbolName: SFSymbol.folder.rawValue,
-                        accessibilityDescription: "Folder",
+                        accessibilityDescription: String(localized: "ui.swift.ssh.sshfilepanelsidebar.folder.74ccd433", defaultValue: "Folder", bundle: .main, comment: "User-facing text in SSHFilePanelSidebar."),
                         fallbackImageName: "folder",
                         for: SSHFilePanelSidebar.self)
                 }
             } else {
                 image = NSImage.it_image(
                     forSymbolName: SFSymbol.folder.rawValue,
-                    accessibilityDescription: "Folder",
+                    accessibilityDescription: String(localized: "ui.swift.ssh.sshfilepanelsidebar.folder.74ccd433", defaultValue: "Folder", bundle: .main, comment: "User-facing text in SSHFilePanelSidebar."),
                     fallbackImageName: "folder",
                     for: SSHFilePanel.self)
             }
@@ -744,7 +744,7 @@ extension SSHFilePanelSidebar: NSOutlineViewDelegate {
             } else {
                 image = NSImage.it_image(
                     forSymbolName: SFSymbol.serverRack.rawValue,
-                    accessibilityDescription: "Server",
+                    accessibilityDescription: String(localized: "ui.swift.ssh.sshfilepanelsidebar.server.aef7de28", defaultValue: "Server", bundle: .main, comment: "User-facing text in SSHFilePanelSidebar."),
                     fallbackImageName: "rack",
                     for: SSHFilePanel.self
                 )

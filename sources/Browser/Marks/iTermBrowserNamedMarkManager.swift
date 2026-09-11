@@ -496,7 +496,12 @@ private extension iTermBrowserNamedMarkManager {
             type: "js",
             substitutions: [
                 "MARKS_JSON": jsonString,
-                "SECRET": secret
+                "SECRET": secret,
+                "EXPAND_TOOLTIP_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.named_mark.expand_tooltip", defaultValue: "Click to expand and edit name"),
+                "NAME_PLACEHOLDER_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.named_mark.name_placeholder", defaultValue: "Enter mark name"),
+                "SAVE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.named_mark.save", defaultValue: "Save"),
+                "DELETE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.named_mark.delete", defaultValue: "Delete"),
+                "CLOSE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.named_mark.close", defaultValue: "Close")
             ])
 
         do {

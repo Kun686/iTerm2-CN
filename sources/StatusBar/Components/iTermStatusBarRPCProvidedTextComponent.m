@@ -399,12 +399,12 @@ static NSString *const iTermStatusBarRPCRegistrationRequestV2Key = @"registratio
         return;
     }
 
-    if ([iTermWarning showWarningWithTitle:@"This will move the script into the AutoLaunch folder."
-                                   actions:@[ @"OK", @"Cancel" ]
+    if ([iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.this_will_move_the_script_into_the_autolaunch.daef0912", nil, NSBundle.mainBundle, @"This will move the script into the AutoLaunch folder.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermStatusBarRPCProvidedTextComponent (actions)."), NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermStatusBarRPCProvidedTextComponent (actions).") ]
                                  accessory:nil
                                 identifier:[NSString stringWithFormat:@"NoSyncAutoLaunchScript_%@", _fullPath]
                                silenceable:kiTermWarningTypePermanentlySilenceable
-                                   heading:@"Always launch this script when iTerm2 starts?"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.always_launch_this_script_when_iterm2_starts.c7eb704c", nil, NSBundle.mainBundle, @"Always launch this script when iTerm2 starts?", @"User-facing text in iTermStatusBarRPCProvidedTextComponent (heading).")
                                     window:self.delegate.textField.window] == kiTermWarningSelection0) {
         [menuController moveScriptToAutoLaunch:_fullPath];
     }
@@ -534,22 +534,22 @@ static NSString *const iTermStatusBarRPCRegistrationRequestV2Key = @"registratio
     if (_errorMessage) {
         iTermWarning *warning = [[iTermWarning alloc] init];
         warning.title = _errorMessage;
-        warning.heading = @"Status Bar Component Problem";
-        NSArray *actions = @[ [iTermWarningAction warningActionWithLabel:@"OK" block:nil] ];
+        warning.heading = NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.status_bar_component_problem.13fd213f", nil, NSBundle.mainBundle, @"Status Bar Component Problem", @"User-facing text in iTermStatusBarRPCProvidedTextComponent (heading).");
+        NSArray *actions = @[ [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermStatusBarRPCProvidedTextComponent (warningActionWithLabel).") block:nil] ];
         if ([self scriptIsNotRunningButCouldBeLaunched]) {
-            iTermWarningAction *launch = [iTermWarningAction warningActionWithLabel:@"Launch Script" block:^(iTermWarningSelection selection) {
+            iTermWarningAction *launch = [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.launch_script.4e19aa19", nil, NSBundle.mainBundle, @"Launch Script", @"User-facing action label in iTermStatusBarRPCProvidedTextComponent (warningActionWithLabel).") block:^(iTermWarningSelection selection) {
                 [self launchScript];
             }];
-            iTermWarningAction *reveal = [iTermWarningAction warningActionWithLabel:@"Reveal in Finder" block:^(iTermWarningSelection selection) {
+            iTermWarningAction *reveal = [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.reveal_in_finder.cc849385", nil, NSBundle.mainBundle, @"Reveal in Finder", @"User-facing action label in iTermStatusBarRPCProvidedTextComponent (warningActionWithLabel).") block:^(iTermWarningSelection selection) {
                 [self revealInFinder];
             }];
             actions = [actions arrayByAddingObjectsFromArray:@[ launch, reveal ]];
 
-            warning.title = [NSString stringWithFormat:@"%@It looks like the script is not running. Launching it might fix the problem.", _errorMessage];
+            warning.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.it_looks_like_the_script_is_not_running.4a6efdf8", nil, NSBundle.mainBundle, @"%@It looks like the script is not running. Launching it might fix the problem.", @"User-facing text in iTermStatusBarRPCProvidedTextComponent (title)."), _errorMessage];
         }
         warning.warningActions = actions;
         warning.warningType = kiTermWarningTypePersistent;
-        warning.heading = @"Status Bar Script Error";
+        warning.heading = NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarrpcprovidedtextcomponent.status_bar_script_error.537d99ab", nil, NSBundle.mainBundle, @"Status Bar Script Error", @"User-facing text in iTermStatusBarRPCProvidedTextComponent (heading).");
         warning.window = self.delegate.textField.window;
         [warning runModal];
         return;

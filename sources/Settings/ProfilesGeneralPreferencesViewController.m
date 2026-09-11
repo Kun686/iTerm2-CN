@@ -160,7 +160,7 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
 
 - (void)awakeFromNib {
     _sessionHotkeyInputView.leaderAllowed = NO;
-    _sessionHotkeyInputView.purpose = @"as a hotkey";
+    _sessionHotkeyInputView.purpose = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.as_a_hotkey.44b9579e", nil, NSBundle.mainBundle, @"as a hotkey", @"User-facing text in ProfilesGeneralPreferencesViewController (purpose).");
     _rateLimit = [[iTermRateLimitedUpdate alloc] initWithName:@"General prefs" minimumInterval:0.75];
     
     PreferenceInfo *info;
@@ -732,7 +732,7 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
     if ([ProfilesGeneralPreferencesViewController shouldOfferAITitleComponentWithSettingEnabled:[iTermAdvancedSettingsModel aiGeneratedTabTitles]
                                                                               profileComponents:selectedComponents]) {
         NSMenuItem *aiItem = [[NSMenuItem alloc] init];
-        aiItem.title = @"AI-generated name";
+        aiItem.title = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.ai_generated_name.2b1efb26", nil, NSBundle.mainBundle, @"AI-generated name", @"User-facing text in ProfilesGeneralPreferencesViewController (updateTitleSettingsMenuForView:).");
         aiItem.tag = iTermTitleComponentsAI;
         [titleSettings.menu addItem:aiItem];
     }
@@ -797,7 +797,7 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
             NSArray<NSString *> *parts = [param componentsInShellCommand];
             if ([parts.firstObject isEqual:@"/bin/bash"]) {
                 // Apple's bash disables sourcing ENV when --posix is set 🤬
-                *reasonOut = @"Shell integration needs a newer version of bash.";
+                *reasonOut = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.shell_integration_needs_a_newer_version_of_bash.3e074de4", nil, NSBundle.mainBundle, @"Shell integration needs a newer version of bash.", @"User-facing Shell Integration requirement.");
                 return NO;
             }
             NSString *shell = [parts.firstObject lastPathComponent];
@@ -806,7 +806,7 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
                 *reasonOut = nil;
                 return YES;
             } else if (shell) {
-                *reasonOut = [NSString stringWithFormat:@"Automatic loading doesn’t work with %@", shell];
+                *reasonOut = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.automatic_loading_doesn_t_work_with.a65d4516", nil, NSBundle.mainBundle, @"Automatic loading doesn’t work with %@", @"User-facing Shell Integration requirement."), shell];
                 return NO;
             } else {
                 *reasonOut = nil;
@@ -816,7 +816,7 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
         case iTermGeneralProfilePreferenceCustomCommandTagLoginShell: {
             if ([self.loginShell isEqual:@"/bin/bash"]) {
                 // Apple's bash disables sourcing ENV when --posix is set 🤬
-                *reasonOut = @"Shell integration needs a newer version of bash.";
+                *reasonOut = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.shell_integration_needs_a_newer_version_of_bash.3e074de4", nil, NSBundle.mainBundle, @"Shell integration needs a newer version of bash.", @"User-facing Shell Integration requirement.");
                 return NO;
             }
             NSString *shell = [self.loginShell lastPathComponent];
@@ -825,7 +825,7 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
                 *reasonOut = nil;
                 return YES;
             } else if (shell) {
-                *reasonOut = [NSString stringWithFormat:@"Automatic loading doesn’t work with %@", shell];
+                *reasonOut = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.automatic_loading_doesn_t_work_with.a65d4516", nil, NSBundle.mainBundle, @"Automatic loading doesn’t work with %@", @"User-facing Shell Integration requirement."), shell];
                 return NO;
             } else {
                 *reasonOut = nil;
@@ -833,11 +833,11 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
             }
         }
         case iTermGeneralProfilePreferenceCustomCommandTagSSH:
-            *reasonOut = @"Requires bash, fish, tcsh, xonsh, or zsh.";
+            *reasonOut = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.requires_bash_fish_tcsh_xonsh_or_zsh.b94f3feb", nil, NSBundle.mainBundle, @"Requires bash, fish, tcsh, xonsh, or zsh.", @"User-facing explanation in ProfilesGeneralPreferencesViewController (shouldEnableLoadShellIntegration:).");
             return YES;
 
         case iTermGeneralProfilePreferenceCustomCommandTagBrowser:
-            *reasonOut = @"Not available with browser tabs";
+            *reasonOut = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.not_available_with_browser_tabs.c9345a36", nil, NSBundle.mainBundle, @"Not available with browser tabs", @"User-facing text in ProfilesGeneralPreferencesViewController (updateEnabledState).");
             return NO;
     }
     return NO;
@@ -889,9 +889,9 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
     [super updateBrowserSpecific];
     NSMenuItem *item = [_icon.menu itemWithTag:iTermProfileIconAutomatic];
     if ([[self stringForKey:KEY_CUSTOM_COMMAND] isEqualToString:kProfilePreferenceCommandTypeBrowserValue]) {
-        item.title = @"Favicon";
+        item.title = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.favicon.42955289", nil, NSBundle.mainBundle, @"Favicon", @"User-facing text in ProfilesGeneralPreferencesViewController (updateBrowserSpecific).");
     } else {
-        item.title = @"Built-in Icon for Current App";
+        item.title = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.built_in_icon_for_current_app.1f39e4a1", nil, NSBundle.mainBundle, @"Built-in Icon for Current App", @"User-facing text in ProfilesGeneralPreferencesViewController (updateBrowserSpecific).");
     }
 }
 
@@ -960,9 +960,9 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
         return;
     }
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Plugin Invalid";
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.plugin_invalid.795aeb93", nil, NSBundle.mainBundle, @"Plugin Invalid", @"User-facing text in ProfilesGeneralPreferencesViewController (didLocatePlugin:).");
     alert.informativeText = error;
-    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in ProfilesGeneralPreferencesViewController (didLocatePlugin:).")];
     [alert runSheetModalForWindow:self.view.window];
 }
 
@@ -1079,12 +1079,12 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
             NSString *rhs = obj2[@"CFBundleURLSchemes"][0];
             return [lhs compare:rhs];
         }];
-        [_urlSchemes addItemWithTitle:@"Select URL Schemes…"];
+        [_urlSchemes addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.select_url_schemes.3e03afa7", nil, NSBundle.mainBundle, @"Select URL Schemes…", @"User-facing text in ProfilesGeneralPreferencesViewController (populateBookmarkUrlSchemesFromProfile:).")];
         for (NSDictionary *dict in urlArray) {
             NSString *scheme = dict[@"CFBundleURLSchemes"][0];
             [_urlSchemes addItemWithTitle:scheme];
         }
-        [_urlSchemes setTitle:@"Select URL Schemes…"];
+        [_urlSchemes setTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.select_url_schemes.3e03afa7", nil, NSBundle.mainBundle, @"Select URL Schemes…", @"User-facing text in ProfilesGeneralPreferencesViewController (populateBookmarkUrlSchemesFromProfile:).")];
     }
 
     [[_urlSchemes menu] setAutoenablesItems:YES];
@@ -1307,17 +1307,17 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
     NSString *value = [self stringForKey:KEY_CUSTOM_COMMAND];
     if ([value isEqualToString:kProfilePreferenceCommandTypeCustomValue]) {
         [_commandType selectItemWithTag:iTermGeneralProfilePreferenceCustomCommandTagCustom];
-        _customCommand.placeholderString = @"Enter command to run when a new session is created";
+        _customCommand.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.enter_command_to_run_when_a_new_session.f6623cc4", nil, NSBundle.mainBundle, @"Enter command to run when a new session is created", @"User-facing text in ProfilesGeneralPreferencesViewController (updateCommandType).");
     } else if ([value isEqualToString:kProfilePreferenceCommandTypeCustomShellValue]) {
         [_commandType selectItemWithTag:iTermGeneralProfilePreferenceCustomCommandTagCustomShell];
-        _customCommand.placeholderString = @"Enter full path to shell";
+        _customCommand.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.enter_full_path_to_shell.326a5185", nil, NSBundle.mainBundle, @"Enter full path to shell", @"User-facing text in ProfilesGeneralPreferencesViewController (updateCommandType).");
         [self removeWhitespaceFromCustomCommand];
     } else if ([value isEqualToString:kProfilePreferenceCommandTypeSSHValue]) {
         [_commandType selectItemWithTag:iTermGeneralProfilePreferenceCustomCommandTagSSH];
-        _customCommand.placeholderString = @"Arguments to ssh";
+        _customCommand.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.arguments_to_ssh.7319606f", nil, NSBundle.mainBundle, @"Arguments to ssh", @"User-facing text in ProfilesGeneralPreferencesViewController (updateCommandType).");
     } else if ([value isEqualToString:kProfilePreferenceCommandTypeBrowserValue]) {
         [_commandType selectItemWithTag:iTermGeneralProfilePreferenceCustomCommandTagBrowser];
-        _customCommand.placeholderString = @"Initial URL";
+        _customCommand.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesgeneralpreferencesviewcontroller.initial_url.cb7e5826", nil, NSBundle.mainBundle, @"Initial URL", @"User-facing text in ProfilesGeneralPreferencesViewController (updateCommandType).");
     } else {
         [_commandType selectItemWithTag:iTermGeneralProfilePreferenceCustomCommandTagLoginShell];
     }
@@ -1521,14 +1521,14 @@ static NSString *const iTermProfilePreferencesUpdateSessionName = @"iTermProfile
         }
     }
 
-    titleSettings.title = customName ?: [iTermSessionTitleBuiltInFunction titleForSessionName:@"Name"
-                                                                                  profileName:@"Profile"
-                                                                                          job:@"Job"
-                                                                                  commandLine:@"Job+Args"
+    titleSettings.title = customName ?: [iTermSessionTitleBuiltInFunction titleForSessionName:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.name", nil, NSBundle.mainBundle, @"Name", @"Sample session name in the profile title preview; not a stored session name.")
+                                                                                  profileName:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.profile", nil, NSBundle.mainBundle, @"Profile", @"Sample profile name in the profile title preview; not a stored profile name.")
+                                                                                          job:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.job", nil, NSBundle.mainBundle, @"Job", @"Sample job name in the profile title preview; not actual terminal output.")
+                                                                                  commandLine:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.job_and_arguments", nil, NSBundle.mainBundle, @"Job+Args", @"Sample command with arguments in the profile title preview; not an executable command.")
                                                                                           pwd:@"PWD"
                                                                                           tty:@"TTY"
-                                                                                         user:@"User"
-                                                                                         host:@"Host"
+                                                                                         user:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.user", nil, NSBundle.mainBundle, @"User", @"Sample user name in the profile title preview; not an account identifier.")
+                                                                                         host:NSLocalizedStringWithDefaultValue(@"ui.settings.profile.title_preview.host", nil, NSBundle.mainBundle, @"Host", @"Sample host name in the profile title preview; not a network address.")
                                                                                       aiTitle:@"AI"
                                                                                 homeDirectory:nil
                                                                                      tmuxPane:nil

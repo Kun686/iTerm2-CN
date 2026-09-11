@@ -1607,9 +1607,9 @@ extension iTermBrowserManager: WKUIDelegate {
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         // Handle JavaScript alerts
         let alert = NSAlert()
-        alert.messageText = "Web Page Alert"
+        alert.messageText = String(localized: "ui.swift.browser.core.itermbrowsermanager.web_page_alert.809721e0", defaultValue: "Web Page Alert", bundle: .main, comment: "User-facing text in iTermBrowserManager.")
         alert.informativeText = message
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.core.itermbrowsermanager.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermBrowserManager."))
         alert.runModal()
         completionHandler()
     }
@@ -1617,10 +1617,10 @@ extension iTermBrowserManager: WKUIDelegate {
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         // Handle JavaScript confirmations
         let alert = NSAlert()
-        alert.messageText = "Web Page Confirmation"
+        alert.messageText = String(localized: "ui.swift.browser.core.itermbrowsermanager.web_page_confirmation.8039bc7f", defaultValue: "Web Page Confirmation", bundle: .main, comment: "User-facing text in iTermBrowserManager.")
         alert.informativeText = message
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.core.itermbrowsermanager.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermBrowserManager."))
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.core.itermbrowsermanager.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermBrowserManager."))
         let response = alert.runModal()
         completionHandler(response == .alertFirstButtonReturn)
     }
@@ -1938,6 +1938,37 @@ extension iTermBrowserManager {
         notifySettingsPageOfAdblockUpdate(success: true)
     }
     
+    // Error objects also feed diagnostic logs. Translate only the settings-page copy.
+    private static func localizedAdblockErrorDescription(_ error: Error) -> String {
+        let diagnostic = error.localizedDescription
+        let nsError = error as NSError
+        guard nsError.domain == "iTermBrowserAdblockManager" else {
+            return diagnostic
+        }
+        switch nsError.code {
+        case 1:
+            let prefix = "Invalid adblock list URL: "
+            guard diagnostic.hasPrefix(prefix) else { return diagnostic }
+            let urlString = String(diagnostic.dropFirst(prefix.count))
+            return String(localized: "ui.swift.browser.adblocking.itermbrowseradblockmanager.invalid_adblock_list_url_0.5999f3de", defaultValue: "Invalid adblock list URL: \(urlString)", bundle: .main, comment: "Error shown when the configured ad-block list URL is invalid.")
+        case 2 where diagnostic == "Failed to parse adblock list response":
+            return String(localized: "ui.swift.browser.adblocking.itermbrowseradblockmanager.failed_to_parse_adblock_list_response.4815fa5b", defaultValue: "Failed to parse adblock list response", bundle: .main, comment: "Error shown when an ad-block list response cannot be parsed.")
+        case 3 where diagnostic == "Downloaded content is not valid JSON format":
+            return String(localized: "ui.swift.browser.adblocking.itermbrowseradblockmanager.downloaded_content_is_not_valid_json_format.92b689a5", defaultValue: "Downloaded content is not valid JSON format", bundle: .main, comment: "Error shown when a downloaded ad-block list is not valid JSON.")
+        case 4:
+            let prefix = "Adblock rules haven't been updated for "
+            let suffix = " days"
+            guard diagnostic.hasPrefix(prefix), diagnostic.hasSuffix(suffix),
+                  let daysSinceUpdate = Int(diagnostic.dropFirst(prefix.count).dropLast(suffix.count)),
+                  diagnostic == "\(prefix)\(daysSinceUpdate)\(suffix)" else {
+                return diagnostic
+            }
+            return String(localized: "ui.swift.browser.adblocking.itermbrowseradblockmanager.adblock_rules_haven_t_been_updated_for_0.6200e0fd", defaultValue: "Adblock rules haven't been updated for \(daysSinceUpdate) days", bundle: .main, comment: "Error shown after ad-block rules have not updated for several days.")
+        default:
+            return diagnostic
+        }
+    }
+
     @objc private func adblockDidFail(_ notification: Notification) {
         guard let error = notification.userInfo?[iTermBrowserAdblockManager.errorKey] as? Error else {
             return
@@ -1948,7 +1979,7 @@ extension iTermBrowserManager {
         print("Adblock error: \(error.localizedDescription)")
 
         // Notify settings page if it's open
-        notifySettingsPageOfAdblockUpdate(success: false, error: error.localizedDescription)
+        notifySettingsPageOfAdblockUpdate(success: false, error: Self.localizedAdblockErrorDescription(error))
     }
 
     // MARK: - Private Implementation
@@ -2086,12 +2117,12 @@ extension iTermBrowserManager: iTermBrowserAudioHandlerDelegate {
                     case denyAlways
                 }
                 let announcement = BrowserAnnouncement(
-                    message: "Audio was muted. Allow playback by \(origin)?",
+                    message: String(localized: "ui.swift.browser.core.itermbrowsermanager.audio_was_muted_allow_playback_by_0.5f6adbe0", defaultValue: "Audio was muted. Allow playback by \(origin)?", bundle: .main, comment: "User-facing text in iTermBrowserManager."),
                     style: .kiTermAnnouncementViewStyleQuestion,
-                    options: [.init(title: "Allow _Once", identifier: Action.allowOnce),
-                              .init(title: "Allow _Always", identifier: Action.allowAlways),
-                              .init(title: "_Deny Once", identifier: Action.denyOnce),
-                              .init(title: "De_ny Always", identifier: Action.denyAlways) ],
+                    options: [.init(title: String(localized: "ui.swift.browser.core.itermbrowsermanager.allow_once.9013a356", defaultValue: "Allow _Once", bundle: .main, comment: "User-facing text in iTermBrowserManager."), identifier: Action.allowOnce),
+                              .init(title: String(localized: "ui.swift.browser.core.itermbrowsermanager.allow_always.7b52fc23", defaultValue: "Allow _Always", bundle: .main, comment: "User-facing text in iTermBrowserManager."), identifier: Action.allowAlways),
+                              .init(title: String(localized: "ui.swift.browser.core.itermbrowsermanager.deny_once.92e73763", defaultValue: "_Deny Once", bundle: .main, comment: "User-facing text in iTermBrowserManager."), identifier: Action.denyOnce),
+                              .init(title: String(localized: "ui.swift.browser.core.itermbrowsermanager.de_ny_always.6181d799", defaultValue: "De_ny Always", bundle: .main, comment: "User-facing text in iTermBrowserManager."), identifier: Action.denyAlways) ],
                     identifier: "NoSyncMuteAudio_\(origin)")
                 switch await delegate?.browserManager(self, announce: announcement) {
                 case .allowOnce:

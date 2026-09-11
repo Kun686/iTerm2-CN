@@ -348,11 +348,11 @@ static NSString *const kDeleteKeyString = @"0x7f-0x0";
         NSString *formattedAction = action.displayName;
         return [NSString stringWithFormat:@"%@\t%@", formattedCombo, formattedAction];
     }];
-    warning.title = [NSString stringWithFormat  :@"This profile has some key bindings from a preset that conflict with CSI u. Remove them?"];
+    warning.title = [NSString stringWithFormat  :NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.this_profile_has_some_key_bindings_from_a.575fb050", nil, NSBundle.mainBundle, @"This profile has some key bindings from a preset that conflict with CSI u. Remove them?", @"User-facing text in ProfilesKeysPreferencesViewController (title).")];
     NSString *message = [descriptions componentsJoinedByString:@"\n"];
 
     iTermScrollingDisclosableView *accessory = [[iTermScrollingDisclosableView alloc] initWithFrame:NSZeroRect
-                                                                                             prompt:@"Show incompatible key bindings"
+                                                                                             prompt:NSLocalizedStringWithDefaultValue(@"ui.disclosure.key_bindings", nil, NSBundle.mainBundle, @"Show incompatible key bindings", @"Disclosure title for incompatible key bindings.")
                                                                                             message:message
                                                                                       maximumHeight:150];
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
@@ -372,11 +372,11 @@ static NSString *const kDeleteKeyString = @"0x7f-0x0";
                                  0,
                                  accessory.intrinsicContentSize.width,
                                  accessory.intrinsicContentSize.height);
-    warning.heading = @"Remove Incompatible Key Bindings?";
-    NSArray *actions = @[ [iTermWarningAction warningActionWithLabel:@"Remove" block:^(iTermWarningSelection selection) {
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.remove_incompatible_key_bindings.4e163f87", nil, NSBundle.mainBundle, @"Remove Incompatible Key Bindings?", @"User-facing text in ProfilesKeysPreferencesViewController (heading).");
+    NSArray *actions = @[ [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.remove.c3812fc4", nil, NSBundle.mainBundle, @"Remove", @"User-facing action label in ProfilesKeysPreferencesViewController (warningActionWithLabel).") block:^(iTermWarningSelection selection) {
         [self removeKeystrokeBindings:incompatibles];
     }],
-                          [iTermWarningAction warningActionWithLabel:@"Cancel" block:^(iTermWarningSelection selection) {}] ];
+                          [iTermWarningAction warningActionWithLabel:NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in ProfilesKeysPreferencesViewController (warningActionWithLabel).") block:^(iTermWarningSelection selection) {}] ];
     warning.warningActions = actions;
     warning.warningType = kiTermWarningTypePersistent;
     warning.window = self.view.window;
@@ -710,10 +710,8 @@ static NSString *const kDeleteKeyString = @"0x7f-0x0";
 #pragma mark - Warnings
 
 - (BOOL)warnAboutOverride {
-    switch ([iTermWarning showWarningWithTitle:@"The keyboard shortcut you have set for this profile "
-                                               @"will take precedence over an existing shortcut for "
-                                               @"the same key combination in a global shortcut."
-                                       actions:@[ @"OK", @"Cancel" ]
+    switch ([iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.the_keyboard_shortcut_you_have_set_for_this.8f542584", nil, NSBundle.mainBundle, @"The keyboard shortcut you have set for this profile will take precedence over an existing shortcut for the same key combination in a global shortcut.", @"User-facing warning message.")
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesKeysPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in ProfilesKeysPreferencesViewController (actions).") ]
                                     identifier:@"NeverWarnAboutOverrides"
                                    silenceable:kiTermWarningTypePermanentlySilenceable
                                         window:self.view.window]) {
@@ -725,10 +723,8 @@ static NSString *const kDeleteKeyString = @"0x7f-0x0";
 }
 
 - (void)maybeWarnAboutMeta {
-    [iTermWarning showWarningWithTitle:@"You have chosen to have an option key act as Meta. "
-                                       @"This option is useful for backward compatibility with older "
-                                       @"systems. The \"Esc+\" option is recommended for most users."
-                               actions:@[ @"OK" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.you_have_chosen_to_have_an_option_key.12bbc922", nil, NSBundle.mainBundle, @"You have chosen to have an option key act as Meta. This option is useful for backward compatibility with older systems. The \"Esc+\" option is recommended for most users.", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profileskeyspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilesKeysPreferencesViewController (actions).") ]
                             identifier:@"NeverWarnAboutMeta"
                            silenceable:kiTermWarningTypePermanentlySilenceable
                                 window:self.view.window];

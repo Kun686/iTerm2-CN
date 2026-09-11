@@ -60,16 +60,16 @@ final class WorkgroupAutoRequestReviewToolbarItem: SessionToolbarControl {
         // glyph as well as the tint (matching the paperplane auto-send toggle).
         let symbol: SFSymbol = (isOn && enabled) ? .checkmarkSealFill : .checkmarkSeal
         button.image = NSImage(systemSymbolName: symbol.rawValue,
-                               accessibilityDescription: "Auto-request review when idle")
+                               accessibilityDescription: String(localized: "ui.swift.workgroups.workgroupautorequestreviewtoolbaritem.auto_request_review_when_idle.7f33dead", defaultValue: "Auto-request review when idle", bundle: .main, comment: "User-facing text in WorkgroupAutoRequestReviewToolbarItem."))
         if !enabled {
             button.contentTintColor = .tertiaryLabelColor
-            button.toolTip = "Auto-request a review when idle (needs exactly one code review session)"
+            button.toolTip = String(localized: "ui.swift.workgroups.workgroupautorequestreviewtoolbaritem.auto_request_a_review_when_idle_needs_exactly.967af910", defaultValue: "Auto-request a review when idle (needs exactly one code review session)", bundle: .main, comment: "User-facing text in WorkgroupAutoRequestReviewToolbarItem.")
             return
         }
         button.contentTintColor = isOn ? .controlAccentColor : .secondaryLabelColor
         button.toolTip = isOn
-            ? "Auto-request a review from the code review session when idle: on"
-            : "Auto-request a review from the code review session when idle: off"
+            ? String(localized: "ui.swift.workgroups.workgroupautorequestreviewtoolbaritem.auto_request_a_review_from_the_code_review.813fa2de", defaultValue: "Auto-request a review from the code review session when idle: on", bundle: .main, comment: "User-facing text in WorkgroupAutoRequestReviewToolbarItem.")
+            : String(localized: "ui.swift.workgroups.workgroupautorequestreviewtoolbaritem.auto_request_a_review_from_the_code_review.51e90cae", defaultValue: "Auto-request a review from the code review session when idle: off", bundle: .main, comment: "User-facing text in WorkgroupAutoRequestReviewToolbarItem.")
     }
 
     @objc private func didToggle(_ sender: Any?) {

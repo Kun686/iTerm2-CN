@@ -131,6 +131,7 @@ class iTermBrowserFileHandler: NSObject, iTermBrowserPageHandler {
         let directoryContent = "<ul>\n\(items)</ul>"
 
         let substitutions = [
+            "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
             "TITLE": url.lastPathComponent.escapedForHTML,
             "PATH": url.path.escapedForHTML,
             "CONTENT": directoryContent

@@ -11,6 +11,48 @@ import WebKit
 /// Converts ICU style regular expressions into railroad DSL for visualization
 class ICURegexToRailroadConverter {
 
+    private enum Label {
+        static let anyCharacter = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.any_character.0382b1f3", defaultValue: "any character", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let startOfLine = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.start_of_line.6e2b24aa", defaultValue: "start of line", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let endOfLine = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.end_of_line.7655a5b4", defaultValue: "end of line", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let comment = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.comment.c44bb2fd", defaultValue: "comment", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let flags = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.flags.2934fb49", defaultValue: "flags", bundle: .main, comment: "Visible label for regular-expression flags in a railroad diagram.")
+        static let atomic = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.atomic.fd43322a", defaultValue: "atomic", bundle: .main, comment: "Visible label for an atomic regular-expression group.")
+        static let lookahead = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.lookahead.ce9a8bb4", defaultValue: "lookahead", bundle: .main, comment: "Visible label for a positive lookahead assertion.")
+        static let negativeLookahead = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.negative_lookahead.8bbf4689", defaultValue: "negative lookahead", bundle: .main, comment: "Visible label for a negative lookahead assertion.")
+        static let lookbehind = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.lookbehind.e7d87dd7", defaultValue: "lookbehind", bundle: .main, comment: "Visible label for a positive lookbehind assertion.")
+        static let negativeLookbehind = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.negative_lookbehind.a2fad949", defaultValue: "negative lookbehind", bundle: .main, comment: "Visible label for a negative lookbehind assertion.")
+        static let not = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.not.254bb97b", defaultValue: "not", bundle: .main, comment: "Visible negation label in a regular-expression railroad diagram.")
+        static let bell = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.bell.f683740c", defaultValue: "bell", bundle: .main, comment: "Visible label for the bell character in a regular-expression railroad diagram.")
+        static let startOfInput = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.start_of_input.8add6f8f", defaultValue: "start of input", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let wordBoundary = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.word_boundary.85f13795", defaultValue: "word boundary", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let nonWordBoundary = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.non_word_boundary.6fe535fd", defaultValue: "non-word boundary", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let digit = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.digit.95ff34cf", defaultValue: "digit", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let nonDigit = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.non_digit.527a4572", defaultValue: "non-digit", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let escape = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.escape.b3140286", defaultValue: "escape", bundle: .main, comment: "Visible label for the escape character in a regular-expression railroad diagram.")
+        static let formFeed = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.form_feed.8e47ed66", defaultValue: "form feed", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let endOfPreviousMatch = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.end_of_previous_match.d777b45e", defaultValue: "end of previous match", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let horizontalWhitespace = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.horizontal_whitespace.278b3873", defaultValue: "horizontal whitespace", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let nonHorizontalWhitespace = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.non_horizontal_whitespace.35cb5862", defaultValue: "non-horizontal whitespace", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let lineFeed = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.line_feed.46f77b43", defaultValue: "line feed", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let carriageReturn = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.carriage_return.609c910e", defaultValue: "carriage return", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let newline = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.newline.ea889d83", defaultValue: "newline", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let whitespace = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.whitespace.6db1c4fb", defaultValue: "whitespace", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let nonWhitespace = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.non_whitespace.6c820459", defaultValue: "non-whitespace", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let tab = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.tab.7508386a", defaultValue: "tab", bundle: .main, comment: "Visible label for the tab character in a regular-expression railroad diagram.")
+        static let verticalWhitespace = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.vertical_whitespace.0b3ad312", defaultValue: "vertical whitespace", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let nonVerticalWhitespace = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.non_vertical_whitespace.61fa32f4", defaultValue: "non-vertical whitespace", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let wordCharacter = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.word_character.03d81287", defaultValue: "word character", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let nonWordCharacter = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.non_word_character.579838e7", defaultValue: "non-word character", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let graphemeCluster = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.grapheme_cluster.f4524f88", defaultValue: "grapheme cluster", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let endOfInputBeforeFinalNewline = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.end_of_input_before_final_newline.1d28e424", defaultValue: "end of input (before final newline)", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let endOfInput = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.end_of_input.e6d428a0", defaultValue: "end of input", bundle: .main, comment: "Visible label in a regular-expression railroad diagram.")
+        static let group = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.group.ad936fcb", defaultValue: "group", bundle: .main, comment: "Visible label for a numbered regular-expression capture group.")
+        static let control = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.control.0fcd568a", defaultValue: "control", bundle: .main, comment: "Visible label for a control character in a regular-expression railroad diagram.")
+        static let lazy = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.lazy.81fd67d0", defaultValue: "lazy", bundle: .main, comment: "Visible label for a lazy regular-expression quantifier.")
+        static let possessive = String(localized: "ui.swift.regexvisualization.icuregextorailroadconverter.possessive.f64df5ab", defaultValue: "possessive", bundle: .main, comment: "Visible label for a possessive regular-expression quantifier.")
+    }
+
     // MARK: - Types
 
     enum Token {
@@ -130,13 +172,13 @@ class ICURegexToRailroadConverter {
             return parseEscape()
         case ".":
             advance()
-            return applyQuantifier("\"[any character]\"")
+            return applyQuantifier("\"[\(Label.anyCharacter)]\"")
         case "^":
             advance()
-            return "`start of line`"
+            return "`\(Label.startOfLine)`"
         case "$":
             advance()
-            return "`end of line`"
+            return "`\(Label.endOfLine)`"
         case "*", "+", "?", "{":
             // Quantifier without preceding element - invalid regex
             advance()
@@ -194,7 +236,7 @@ class ICURegexToRailroadConverter {
                         advance()
                     }
                     if hasMore() { advance() } // consume )
-                    return "`comment`"
+                    return "`\(Label.comment)`"
                 case "<":
                     advance()
                     if hasMore() {
@@ -232,7 +274,7 @@ class ICURegexToRailroadConverter {
                         } else {
                             // Flag change without group
                             if hasMore() { advance() } // consume )
-                            return "`flags: \(flags)`"
+                            return "`\(Label.flags): \(flags)`"
                         }
                     }
                 }
@@ -261,17 +303,17 @@ class ICURegexToRailroadConverter {
             // Named capture group - add the name as annotation
             result = "\(content)#`\(groupName)`"
         case "atomic":
-            result = "\(content)#`atomic`"
+            result = "\(content)#`\(Label.atomic)`"
         case "lookahead":
-            result = "\(content)#`lookahead`"
+            result = "\(content)#`\(Label.lookahead)`"
         case "negative-lookahead":
-            result = "\(content)#`negative lookahead`"
+            result = "\(content)#`\(Label.negativeLookahead)`"
         case "lookbehind":
-            result = "\(content)#`lookbehind`"
+            result = "\(content)#`\(Label.lookbehind)`"
         case "negative-lookbehind":
-            result = "\(content)#`negative lookbehind`"
+            result = "\(content)#`\(Label.negativeLookbehind)`"
         case "flags":
-            result = "\(content)#`flags: \(groupName)`"
+            result = "\(content)#`\(Label.flags): \(groupName)`"
         default:
             break
         }
@@ -334,7 +376,7 @@ class ICURegexToRailroadConverter {
 
         // Character classes are choices, so use <...> with commas
         let classContent = elements.isEmpty ? "!" : "<\(elements.joined(separator: ", "))>"
-        let result = isNegated ? "{`not`, \(classContent)}" : classContent
+        let result = isNegated ? "{`\(Label.not)`, \(classContent)}" : classContent
         return applyQuantifier(result)
     }
 
@@ -348,30 +390,30 @@ class ICURegexToRailroadConverter {
 
         switch escaped {
             // Special sequences
-        case "a": return applyQuantifier("\"[bell]\"")
-        case "A": return "`start of input`"
-        case "b": return "`word boundary`"
-        case "B": return "`non-word boundary`"
-        case "d": return applyQuantifier("\"[digit]\"")
-        case "D": return applyQuantifier("\"[non-digit]\"")
-        case "e": return applyQuantifier("\"[escape]\"")
-        case "f": return applyQuantifier("\"[form feed]\"")
-        case "G": return "`end of previous match`"
-        case "h": return applyQuantifier("\"[horizontal whitespace]\"")
-        case "H": return applyQuantifier("\"[non-horizontal whitespace]\"")
-        case "n": return applyQuantifier("\"[line feed]\"")
-        case "r": return applyQuantifier("\"[carriage return]\"")
-        case "R": return applyQuantifier("\"[newline]\"")
-        case "s": return applyQuantifier("\"[whitespace]\"")
-        case "S": return applyQuantifier("\"[non-whitespace]\"")
-        case "t": return applyQuantifier("\"[tab]\"")
-        case "v": return applyQuantifier("\"[vertical whitespace]\"")
-        case "V": return applyQuantifier("\"[non-vertical whitespace]\"")
-        case "w": return applyQuantifier("\"[word character]\"")
-        case "W": return applyQuantifier("\"[non-word character]\"")
-        case "X": return applyQuantifier("\"[grapheme cluster]\"")
-        case "Z": return "`end of input (before final newline)`"
-        case "z": return "`end of input`"
+        case "a": return applyQuantifier("\"[\(Label.bell)]\"")
+        case "A": return "`\(Label.startOfInput)`"
+        case "b": return "`\(Label.wordBoundary)`"
+        case "B": return "`\(Label.nonWordBoundary)`"
+        case "d": return applyQuantifier("\"[\(Label.digit)]\"")
+        case "D": return applyQuantifier("\"[\(Label.nonDigit)]\"")
+        case "e": return applyQuantifier("\"[\(Label.escape)]\"")
+        case "f": return applyQuantifier("\"[\(Label.formFeed)]\"")
+        case "G": return "`\(Label.endOfPreviousMatch)`"
+        case "h": return applyQuantifier("\"[\(Label.horizontalWhitespace)]\"")
+        case "H": return applyQuantifier("\"[\(Label.nonHorizontalWhitespace)]\"")
+        case "n": return applyQuantifier("\"[\(Label.lineFeed)]\"")
+        case "r": return applyQuantifier("\"[\(Label.carriageReturn)]\"")
+        case "R": return applyQuantifier("\"[\(Label.newline)]\"")
+        case "s": return applyQuantifier("\"[\(Label.whitespace)]\"")
+        case "S": return applyQuantifier("\"[\(Label.nonWhitespace)]\"")
+        case "t": return applyQuantifier("\"[\(Label.tab)]\"")
+        case "v": return applyQuantifier("\"[\(Label.verticalWhitespace)]\"")
+        case "V": return applyQuantifier("\"[\(Label.nonVerticalWhitespace)]\"")
+        case "w": return applyQuantifier("\"[\(Label.wordCharacter)]\"")
+        case "W": return applyQuantifier("\"[\(Label.nonWordCharacter)]\"")
+        case "X": return applyQuantifier("\"[\(Label.graphemeCluster)]\"")
+        case "Z": return "`\(Label.endOfInputBeforeFinalNewline)`"
+        case "z": return "`\(Label.endOfInput)`"
 
             // Unicode escapes
         case "u":
@@ -440,7 +482,7 @@ class ICURegexToRailroadConverter {
                     advance()
                 }
                 if hasMore() { advance() } // consume }
-                let propDesc = isNegated ? "not \(property)" : property
+                let propDesc = isNegated ? "\(Label.not) \(property)" : property
                 return applyQuantifier("\"[\(propDesc)]\"")
             }
             return applyQuantifier("\"\(escaped)\"")
@@ -461,7 +503,7 @@ class ICURegexToRailroadConverter {
 
             // Numeric back reference
         case "1"..."9":
-            return applyQuantifier("'group \(escaped)'")
+            return applyQuantifier("'\(Label.group) \(escaped)'")
 
             // Octal
         case "0":
@@ -479,7 +521,7 @@ class ICURegexToRailroadConverter {
             if hasMore() {
                 let control = peek()
                 advance()
-                return applyQuantifier("\"[control-\(control)]\"")
+                return applyQuantifier("\"[\(Label.control)-\(control)]\"")
             }
             return applyQuantifier("\"c\"")
 
@@ -517,11 +559,11 @@ class ICURegexToRailroadConverter {
             if hasMore() && peek() == "?" {
                 advance()
                 // Lazy zero-or-more: choice between empty and one-or-more
-                return "<!, {\(base)*!, `*? (lazy)`}>"
+                return "<!, {\(base)*!, `*? (\(Label.lazy))`}>"
             } else if hasMore() && peek() == "+" {
                 advance()
                 // Possessive zero-or-more: choice between empty and one-or-more
-                return "<!, {\(base)*!, `*+ (possessive)`}>"
+                return "<!, {\(base)*!, `*+ (\(Label.possessive))`}>"
             }
             // Zero or more: choice between empty and one-or-more
             return "<!, {\(base)*!}>"
@@ -531,11 +573,11 @@ class ICURegexToRailroadConverter {
             if hasMore() && peek() == "?" {
                 advance()
                 // Lazy one-or-more
-                return "{\(base)*!, `+? (lazy)`}"
+                return "{\(base)*!, `+? (\(Label.lazy))`}"
             } else if hasMore() && peek() == "+" {
                 advance()
                 // Possessive one-or-more
-                return "{\(base)*!, `++ (possessive)`}"
+                return "{\(base)*!, `++ (\(Label.possessive))`}"
             }
             // One or more
             return "{\(base)*!}"
@@ -545,11 +587,11 @@ class ICURegexToRailroadConverter {
             if hasMore() && peek() == "?" {
                 advance()
                 // Lazy optional: prefer empty
-                return "<!, \(base), `?? (lazy)`>"
+                return "<!, \(base), `?? (\(Label.lazy))`>"
             } else if hasMore() && peek() == "+" {
                 advance()
                 // Possessive optional
-                return "<!, \(base), `?+ (possessive)`>"
+                return "<!, \(base), `?+ (\(Label.possessive))`>"
             }
             // Optional: choice between empty and the element
             return "<!, \(base)>"
@@ -567,10 +609,10 @@ class ICURegexToRailroadConverter {
             if hasMore() {
                 if peek() == "?" {
                     advance()
-                    suffix = " (lazy)"
+                    suffix = " (\(Label.lazy))"
                 } else if peek() == "+" {
                     advance()
-                    suffix = " (possessive)"
+                    suffix = " (\(Label.possessive))"
                 }
             }
 
@@ -702,22 +744,22 @@ class ICURegexToRailroadConverter {
 
     private func handleEscapeInClass(_ char: Character) -> String {
         switch char {
-        case "d": return "\"[digit]\""
-        case "D": return "\"[non-digit]\""
-        case "s": return "\"[whitespace]\""
-        case "S": return "\"[non-whitespace]\""
-        case "w": return "\"[word character]\""
-        case "W": return "\"[non-word character]\""
-        case "h": return "\"[horizontal whitespace]\""
-        case "H": return "\"[non-horizontal whitespace]\""
-        case "v": return "\"[vertical whitespace]\""
-        case "V": return "\"[non-vertical whitespace]\""
-        case "n": return "\"[line feed]\""
-        case "r": return "\"[carriage return]\""
-        case "t": return "\"[tab]\""
-        case "f": return "\"[form feed]\""
-        case "a": return "\"[bell]\""
-        case "e": return "\"[escape]\""
+        case "d": return "\"[\(Label.digit)]\""
+        case "D": return "\"[\(Label.nonDigit)]\""
+        case "s": return "\"[\(Label.whitespace)]\""
+        case "S": return "\"[\(Label.nonWhitespace)]\""
+        case "w": return "\"[\(Label.wordCharacter)]\""
+        case "W": return "\"[\(Label.nonWordCharacter)]\""
+        case "h": return "\"[\(Label.horizontalWhitespace)]\""
+        case "H": return "\"[\(Label.nonHorizontalWhitespace)]\""
+        case "v": return "\"[\(Label.verticalWhitespace)]\""
+        case "V": return "\"[\(Label.nonVerticalWhitespace)]\""
+        case "n": return "\"[\(Label.lineFeed)]\""
+        case "r": return "\"[\(Label.carriageReturn)]\""
+        case "t": return "\"[\(Label.tab)]\""
+        case "f": return "\"[\(Label.formFeed)]\""
+        case "a": return "\"[\(Label.bell)]\""
+        case "e": return "\"[\(Label.escape)]\""
         default: return "\"\(escapeForTerminal(String(char)))\""
         }
     }

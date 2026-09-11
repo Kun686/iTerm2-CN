@@ -667,4 +667,5 @@ NSString *iTermPathToSSH(void);
 + (BOOL)removeProfile:(Profile *)profile fromModel:(ProfileModel *)model;
 + (void)performBlockWithCoalescedNotifications:(void (^)(void))block;
 + (BOOL)shortcutIdentifier:(NSString *)identifier title:(NSString *)title matchesItem:(NSMenuItem *)item;
++ (BOOL)shortcutIdentifier:(NSString *)identifier title:(NSString *)title matchesItem:(NSMenuItem *)item allowLegacyTitles:(BOOL)allowLegacyTitles;
 @end

@@ -48,13 +48,13 @@ final class WorkgroupAutoSendClippingsToolbarItem: SessionToolbarControl {
     private static func configure(button: NSButton, isOn: Bool) {
         let symbol: SFSymbol = isOn ? .paperplaneFill : .paperplane
         button.image = NSImage(systemSymbolName: symbol.rawValue,
-                               accessibilityDescription: "Auto-send clippings when idle")
+                               accessibilityDescription: String(localized: "ui.swift.workgroups.workgroupautosendclippingstoolbaritem.auto_send_clippings_when_idle.819b0667", defaultValue: "Auto-send clippings when idle", bundle: .main, comment: "User-facing text in WorkgroupAutoSendClippingsToolbarItem."))
         // Explicit tints so the look is stable across window-active changes:
         // accent when on, a dim secondary label color when off.
         button.contentTintColor = isOn ? .controlAccentColor : .secondaryLabelColor
         button.toolTip = isOn
-            ? "Auto-send clippings to the main session when idle: on"
-            : "Auto-send clippings to the main session when idle: off"
+            ? String(localized: "ui.swift.workgroups.workgroupautosendclippingstoolbaritem.auto_send_clippings_to_the_main_session_when.c92111b4", defaultValue: "Auto-send clippings to the main session when idle: on", bundle: .main, comment: "User-facing text in WorkgroupAutoSendClippingsToolbarItem.")
+            : String(localized: "ui.swift.workgroups.workgroupautosendclippingstoolbaritem.auto_send_clippings_to_the_main_session_when.614f4a49", defaultValue: "Auto-send clippings to the main session when idle: off", bundle: .main, comment: "User-facing text in WorkgroupAutoSendClippingsToolbarItem.")
     }
 
     @objc private func didToggle(_ sender: Any?) {

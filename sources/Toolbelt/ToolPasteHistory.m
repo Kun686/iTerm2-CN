@@ -51,7 +51,7 @@ static const CGFloat kMargin = 4;
         clear_ = [[NSButton alloc] initWithFrame:NSMakeRect(0, frame.size.height - kButtonHeight, frame.size.width, kButtonHeight)];
         clear_.bezelStyle = NSBezelStyleRegularSquare;
         clear_.bordered = NO;
-        clear_.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolTrash) accessibilityDescription:@"Delete All"];
+        clear_.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolTrash) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolpastehistory.delete_all.ef85afa1", nil, NSBundle.mainBundle, @"Delete All", @"Accessibility description for deleting all paste history entries.")];
         clear_.imagePosition = NSImageOnly;
         clear_.frame = NSMakeRect(0, 0, 22, 22);
         [clear_ setTarget:self];
@@ -60,7 +60,7 @@ static const CGFloat kMargin = 4;
         [self addSubview:clear_];
 
         _secureKeyboardEntryWarning = [NSTextField newLabelStyledTextField];
-        _secureKeyboardEntryWarning.stringValue = @"⚠️ Secure keyboard entry disables paste history.";
+        _secureKeyboardEntryWarning.stringValue = NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolpastehistory.secure_keyboard_entry_disables_paste_history.9d09fa6d", nil, NSBundle.mainBundle, @"⚠️ Secure keyboard entry disables paste history.", @"User-facing text in ToolPasteHistory (initWithFrame:).");
         _secureKeyboardEntryWarning.font = [NSFont systemFontOfSize:[NSFont smallSystemFontSize]];
         _secureKeyboardEntryWarning.cell.truncatesLastVisibleLine = YES;
         _secureKeyboardEntryWarning.hidden = ![[iTermSecureKeyboardEntryController sharedInstance] isEnabled];
@@ -96,13 +96,13 @@ static const CGFloat kMargin = 4;
         _tableView.menu = [[NSMenu alloc] init];
         _tableView.menu.delegate = self;
         NSMenuItem *item;
-        item = [[NSMenuItem alloc] initWithTitle:@"Copy"
+        item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolpastehistory.copy.e21f935f", nil, NSBundle.mainBundle, @"Copy", @"User-facing text in ToolPasteHistory (initWithFrame:).")
                                           action:@selector(copySelection:)
                                    keyEquivalent:@""];
         item.target = self;
         [_tableView.menu addItem:item];
 
-        item = [[NSMenuItem alloc] initWithTitle:@"Open in Advanced Paste"
+        item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolpastehistory.open_in_advanced_paste.129127ec", nil, NSBundle.mainBundle, @"Open in Advanced Paste", @"User-facing text in ToolPasteHistory (initWithFrame:).")
                                           action:@selector(openInAdvancedPaste:)
                                    keyEquivalent:@""];
         item.target = self;
@@ -276,10 +276,10 @@ static const CGFloat kMargin = 4;
 
 - (void)clear:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Erase Paste History";
-    alert.informativeText = @"Paste history will be erased. Continue?";
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolpastehistory.erase_paste_history.0d685412", nil, NSBundle.mainBundle, @"Erase Paste History", @"User-facing text in ToolPasteHistory (clear:).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolpastehistory.paste_history_will_be_erased_continue.2971e6ea", nil, NSBundle.mainBundle, @"Paste history will be erased. Continue?", @"User-facing text in ToolPasteHistory (clear:).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolpastehistory.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in ToolPasteHistory (clear:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolpastehistory.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in ToolPasteHistory (clear:).")];
     if ([alert runModal] == NSAlertFirstButtonReturn) {
         [pasteHistory_ eraseHistory];
         [pasteHistory_ clear];

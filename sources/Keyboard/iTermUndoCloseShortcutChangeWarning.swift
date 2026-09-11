@@ -99,20 +99,20 @@ class iTermUndoCloseShortcutChangeWarning: NSObject {
     }
 
     private static func showWarning(offeringBindingFor keystroke: iTermKeystroke) {
-        let ok = iTermWarningAction(label: "Keep New Shortcut")
-        let restore = iTermWarningAction(label: "Restore ⌘⇧T to Show Tabs") { _ in
+        let ok = iTermWarningAction(label: String(localized: "ui.swift.keyboard.itermundocloseshortcutchangewarning.keep_new_shortcut.9da39b91", defaultValue: "Keep New Shortcut", bundle: .main, comment: "User-facing text in iTermUndoCloseShortcutChangeWarning."))
+        let restore = iTermWarningAction(label: String(localized: "ui.swift.keyboard.itermundocloseshortcutchangewarning.restore_t_to_show_tabs.c01a3f4a", defaultValue: "Restore ⌘⇧T to Show Tabs", bundle: .main, comment: "User-facing text in iTermUndoCloseShortcutChangeWarning.")) { _ in
             addGlobalShowTabsBinding(for: keystroke)
         }
 
         let warning = iTermWarning()
-        warning.heading = "Keyboard Shortcut Changed"
-        warning.title = """
+        warning.heading = String(localized: "ui.swift.keyboard.itermundocloseshortcutchangewarning.keyboard_shortcut_changed.5c0e0727", defaultValue: "Keyboard Shortcut Changed", bundle: .main, comment: "Heading for the Undo Close shortcut-change warning.")
+        warning.title = String(localized: "ui.swift.keyboard.itermundocloseshortcutchangewarning.t_now_restores_recently_closed_tabs_undo_close.7cb24fa1", defaultValue: """
             ⌘⇧T now restores recently closed tabs (Undo Close). The Show Tabs in \
             Fullscreen shortcut has moved to ⌘⇧U.
 
             Would you like to keep ⌘⇧T as the shortcut for Show Tabs in Fullscreen \
             by adding a key binding?
-            """
+            """, bundle: .main, comment: "User-facing text in iTermUndoCloseShortcutChangeWarning.")
         warning.warningActions = [ok, restore]
         warning.warningType = .kiTermWarningTypePersistent
         warning.window = iTermController.sharedInstance().currentTerminal?.window()

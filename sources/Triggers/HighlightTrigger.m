@@ -64,7 +64,7 @@ enum {
 }
 
 + (NSString *)title {
-    return @"Highlight Text…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.highlight_text.b6130a2f", nil, NSBundle.mainBundle, @"Highlight Text…", @"Trigger action title.");
 }
 
 - (NSString *)description {
@@ -110,91 +110,91 @@ enum {
 
 - (NSDictionary *)menuItemsForPoupupButton {
     return [NSDictionary dictionaryWithObjectsAndKeys:
-            @"Yellow on Black", [NSNumber numberWithInt:(int)kYellowOnBlackHighlight],
-            @"Black on Yellow", [NSNumber numberWithInt:(int)kBlackOnYellowHighlight],
-            @"White on Red",    [NSNumber numberWithInt:(int)kWhiteOnRedHighlight],
-            @"Red on White",    [NSNumber numberWithInt:(int)kRedOnWhiteHighlight],
-            @"Black on Orange", [NSNumber numberWithInt:(int)kBlackOnOrangeHighlight],
-            @"Orange on Black", [NSNumber numberWithInt:(int)kOrangeOnBlackHighlight],
-            @"Purple on Black", [NSNumber numberWithInt:(int)kPurpleOnBlackHighlight],
-            @"Black on Purple", [NSNumber numberWithInt:(int)kBlackOnPurpleHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.yellow_on_black.761765b9", nil, NSBundle.mainBundle, @"Yellow on Black", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kYellowOnBlackHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_on_yellow.e1ee5d3e", nil, NSBundle.mainBundle, @"Black on Yellow", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kBlackOnYellowHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.white_on_red.83b5edbd", nil, NSBundle.mainBundle, @"White on Red", @"Highlight trigger color option."),    [NSNumber numberWithInt:(int)kWhiteOnRedHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.red_on_white.81fa7d2c", nil, NSBundle.mainBundle, @"Red on White", @"Highlight trigger color option."),    [NSNumber numberWithInt:(int)kRedOnWhiteHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_on_orange.9bec7a8a", nil, NSBundle.mainBundle, @"Black on Orange", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kBlackOnOrangeHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.orange_on_black.455c2e0e", nil, NSBundle.mainBundle, @"Orange on Black", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kOrangeOnBlackHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.purple_on_black.3317ead3", nil, NSBundle.mainBundle, @"Purple on Black", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kPurpleOnBlackHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_on_purple.d76ca289", nil, NSBundle.mainBundle, @"Black on Purple", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kBlackOnPurpleHighlight],
 
-            @"Black Foreground",  [NSNumber numberWithInt:(int)kBlackHighlight],
-            @"Blue Foreground",  [NSNumber numberWithInt:(int)kBlueHighlight],
-            @"Brown Foreground",  [NSNumber numberWithInt:(int)kBrownHighlight],
-            @"Cyan Foreground",  [NSNumber numberWithInt:(int)kCyanHighlight],
-            @"Dark Gray Foreground",  [NSNumber numberWithInt:(int)kDarkGrayHighlight],
-            @"Gray Foreground",  [NSNumber numberWithInt:(int)kGrayHighlight],
-            @"Green Foreground",  [NSNumber numberWithInt:(int)kGreenHighlight],
-            @"Light Gray Foreground",  [NSNumber numberWithInt:(int)kLightGrayHighlight],
-            @"Magenta Foreground",  [NSNumber numberWithInt:(int)kMagentaHighlight],
-            @"Orange Foreground",  [NSNumber numberWithInt:(int)kOrangeHighlight],
-            @"Purple Foreground",  [NSNumber numberWithInt:(int)kPurpleHighlight],
-            @"Red Foreground",  [NSNumber numberWithInt:(int)kRedHighlight],
-            @"White Foreground",  [NSNumber numberWithInt:(int)kWhiteHighlight],
-            @"Yellow Foreground",  [NSNumber numberWithInt:(int)kYellowHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_foreground.fc077eb5", nil, NSBundle.mainBundle, @"Black Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBlackHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.blue_foreground.ceaf9af9", nil, NSBundle.mainBundle, @"Blue Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBlueHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.brown_foreground.b44985bf", nil, NSBundle.mainBundle, @"Brown Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBrownHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.cyan_foreground.11db9503", nil, NSBundle.mainBundle, @"Cyan Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kCyanHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.dark_gray_foreground.09e92a52", nil, NSBundle.mainBundle, @"Dark Gray Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kDarkGrayHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.gray_foreground.18b5036f", nil, NSBundle.mainBundle, @"Gray Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kGrayHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.green_foreground.fa77200c", nil, NSBundle.mainBundle, @"Green Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kGreenHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.light_gray_foreground.852ec861", nil, NSBundle.mainBundle, @"Light Gray Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kLightGrayHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.magenta_foreground.46eba388", nil, NSBundle.mainBundle, @"Magenta Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kMagentaHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.orange_foreground.ee40fa4d", nil, NSBundle.mainBundle, @"Orange Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kOrangeHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.purple_foreground.193e532b", nil, NSBundle.mainBundle, @"Purple Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kPurpleHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.red_foreground.00e89ff4", nil, NSBundle.mainBundle, @"Red Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kRedHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.white_foreground.c12073d6", nil, NSBundle.mainBundle, @"White Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kWhiteHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.yellow_foreground.804fd792", nil, NSBundle.mainBundle, @"Yellow Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kYellowHighlight],
 
-            @"Black Background",  [NSNumber numberWithInt:(int)kBlackBackgroundHighlight],
-            @"Blue Background",  [NSNumber numberWithInt:(int)kBlueBackgroundHighlight],
-            @"Brown Background",  [NSNumber numberWithInt:(int)kBrownBackgroundHighlight],
-            @"Cyan Background",  [NSNumber numberWithInt:(int)kCyanBackgroundHighlight],
-            @"Dark Gray Background",  [NSNumber numberWithInt:(int)kDarkGrayBackgroundHighlight],
-            @"Gray Background",  [NSNumber numberWithInt:(int)kGrayBackgroundHighlight],
-            @"Green Background",  [NSNumber numberWithInt:(int)kGreenBackgroundHighlight],
-            @"Light Gray Background",  [NSNumber numberWithInt:(int)kLightGrayBackgroundHighlight],
-            @"Magenta Background",  [NSNumber numberWithInt:(int)kMagentaBackgroundHighlight],
-            @"Orange Background",  [NSNumber numberWithInt:(int)kOrangeBackgroundHighlight],
-            @"Purple Background",  [NSNumber numberWithInt:(int)kPurpleBackgroundHighlight],
-            @"Red Background",  [NSNumber numberWithInt:(int)kRedBackgroundHighlight],
-            @"White Background",  [NSNumber numberWithInt:(int)kWhiteBackgroundHighlight],
-            @"Yellow Background",  [NSNumber numberWithInt:(int)kYellowBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_background.b04caa23", nil, NSBundle.mainBundle, @"Black Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBlackBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.blue_background.990b650d", nil, NSBundle.mainBundle, @"Blue Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBlueBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.brown_background.13494d58", nil, NSBundle.mainBundle, @"Brown Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBrownBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.cyan_background.f5cf08c2", nil, NSBundle.mainBundle, @"Cyan Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kCyanBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.dark_gray_background.04082214", nil, NSBundle.mainBundle, @"Dark Gray Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kDarkGrayBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.gray_background.21c8f560", nil, NSBundle.mainBundle, @"Gray Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kGrayBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.green_background.375e1e8f", nil, NSBundle.mainBundle, @"Green Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kGreenBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.light_gray_background.6b018f49", nil, NSBundle.mainBundle, @"Light Gray Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kLightGrayBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.magenta_background.64552500", nil, NSBundle.mainBundle, @"Magenta Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kMagentaBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.orange_background.e283a2e6", nil, NSBundle.mainBundle, @"Orange Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kOrangeBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.purple_background.0a86ae56", nil, NSBundle.mainBundle, @"Purple Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kPurpleBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.red_background.be2d0745", nil, NSBundle.mainBundle, @"Red Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kRedBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.white_background.c18f4c71", nil, NSBundle.mainBundle, @"White Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kWhiteBackgroundHighlight],
+            NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.yellow_background.8222644b", nil, NSBundle.mainBundle, @"Yellow Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kYellowBackgroundHighlight],
 
             nil];
 }
 
 - (NSArray *)groupedMenuItemsForPopupButton {
     NSDictionary *fgbg = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"Yellow on Black", [NSNumber numberWithInt:(int)kYellowOnBlackHighlight],
-                          @"Black on Yellow", [NSNumber numberWithInt:(int)kBlackOnYellowHighlight],
-                          @"White on Red",    [NSNumber numberWithInt:(int)kWhiteOnRedHighlight],
-                          @"Red on White",    [NSNumber numberWithInt:(int)kRedOnWhiteHighlight],
-                          @"Black on Orange", [NSNumber numberWithInt:(int)kBlackOnOrangeHighlight],
-                          @"Orange on Black", [NSNumber numberWithInt:(int)kOrangeOnBlackHighlight],
-                          @"Purple on Black", [NSNumber numberWithInt:(int)kPurpleOnBlackHighlight],
-                          @"Black on Purple", [NSNumber numberWithInt:(int)kBlackOnPurpleHighlight],
+                          NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.yellow_on_black.761765b9", nil, NSBundle.mainBundle, @"Yellow on Black", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kYellowOnBlackHighlight],
+                          NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_on_yellow.e1ee5d3e", nil, NSBundle.mainBundle, @"Black on Yellow", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kBlackOnYellowHighlight],
+                          NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.white_on_red.83b5edbd", nil, NSBundle.mainBundle, @"White on Red", @"Highlight trigger color option."),    [NSNumber numberWithInt:(int)kWhiteOnRedHighlight],
+                          NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.red_on_white.81fa7d2c", nil, NSBundle.mainBundle, @"Red on White", @"Highlight trigger color option."),    [NSNumber numberWithInt:(int)kRedOnWhiteHighlight],
+                          NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_on_orange.9bec7a8a", nil, NSBundle.mainBundle, @"Black on Orange", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kBlackOnOrangeHighlight],
+                          NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.orange_on_black.455c2e0e", nil, NSBundle.mainBundle, @"Orange on Black", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kOrangeOnBlackHighlight],
+                          NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.purple_on_black.3317ead3", nil, NSBundle.mainBundle, @"Purple on Black", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kPurpleOnBlackHighlight],
+                          NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_on_purple.d76ca289", nil, NSBundle.mainBundle, @"Black on Purple", @"Highlight trigger color option."), [NSNumber numberWithInt:(int)kBlackOnPurpleHighlight],
                           nil];
     NSDictionary *fg = [NSDictionary dictionaryWithObjectsAndKeys:
-                        @"Black Foreground",  [NSNumber numberWithInt:(int)kBlackHighlight],
-                        @"Blue Foreground",  [NSNumber numberWithInt:(int)kBlueHighlight],
-                        @"Brown Foreground",  [NSNumber numberWithInt:(int)kBrownHighlight],
-                        @"Cyan Foreground",  [NSNumber numberWithInt:(int)kCyanHighlight],
-                        @"Dark Gray Foreground",  [NSNumber numberWithInt:(int)kDarkGrayHighlight],
-                        @"Gray Foreground",  [NSNumber numberWithInt:(int)kGrayHighlight],
-                        @"Green Foreground",  [NSNumber numberWithInt:(int)kGreenHighlight],
-                        @"Light Gray Foreground",  [NSNumber numberWithInt:(int)kLightGrayHighlight],
-                        @"Magenta Foreground",  [NSNumber numberWithInt:(int)kMagentaHighlight],
-                        @"Orange Foreground",  [NSNumber numberWithInt:(int)kOrangeHighlight],
-                        @"Purple Foreground",  [NSNumber numberWithInt:(int)kPurpleHighlight],
-                        @"Red Foreground",  [NSNumber numberWithInt:(int)kRedHighlight],
-                        @"White Foreground",  [NSNumber numberWithInt:(int)kWhiteHighlight],
-                        @"Yellow Foreground",  [NSNumber numberWithInt:(int)kYellowHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_foreground.fc077eb5", nil, NSBundle.mainBundle, @"Black Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBlackHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.blue_foreground.ceaf9af9", nil, NSBundle.mainBundle, @"Blue Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBlueHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.brown_foreground.b44985bf", nil, NSBundle.mainBundle, @"Brown Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBrownHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.cyan_foreground.11db9503", nil, NSBundle.mainBundle, @"Cyan Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kCyanHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.dark_gray_foreground.09e92a52", nil, NSBundle.mainBundle, @"Dark Gray Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kDarkGrayHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.gray_foreground.18b5036f", nil, NSBundle.mainBundle, @"Gray Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kGrayHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.green_foreground.fa77200c", nil, NSBundle.mainBundle, @"Green Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kGreenHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.light_gray_foreground.852ec861", nil, NSBundle.mainBundle, @"Light Gray Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kLightGrayHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.magenta_foreground.46eba388", nil, NSBundle.mainBundle, @"Magenta Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kMagentaHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.orange_foreground.ee40fa4d", nil, NSBundle.mainBundle, @"Orange Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kOrangeHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.purple_foreground.193e532b", nil, NSBundle.mainBundle, @"Purple Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kPurpleHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.red_foreground.00e89ff4", nil, NSBundle.mainBundle, @"Red Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kRedHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.white_foreground.c12073d6", nil, NSBundle.mainBundle, @"White Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kWhiteHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.yellow_foreground.804fd792", nil, NSBundle.mainBundle, @"Yellow Foreground", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kYellowHighlight],
                         nil];
 
     NSDictionary *bg = [NSDictionary dictionaryWithObjectsAndKeys:
-                        @"Black Background",  [NSNumber numberWithInt:(int)kBlackBackgroundHighlight],
-                        @"Blue Background",  [NSNumber numberWithInt:(int)kBlueBackgroundHighlight],
-                        @"Brown Background",  [NSNumber numberWithInt:(int)kBrownBackgroundHighlight],
-                        @"Cyan Background",  [NSNumber numberWithInt:(int)kCyanBackgroundHighlight],
-                        @"Gray Background",  [NSNumber numberWithInt:(int)kDarkGrayBackgroundHighlight],
-                        @"Gray Background",  [NSNumber numberWithInt:(int)kGrayBackgroundHighlight],
-                        @"Green Background",  [NSNumber numberWithInt:(int)kGreenBackgroundHighlight],
-                        @"Light Gray Background",  [NSNumber numberWithInt:(int)kLightGrayBackgroundHighlight],
-                        @"Magenta Background",  [NSNumber numberWithInt:(int)kMagentaBackgroundHighlight],
-                        @"Orange Background",  [NSNumber numberWithInt:(int)kOrangeBackgroundHighlight],
-                        @"Purple Background",  [NSNumber numberWithInt:(int)kPurpleBackgroundHighlight],
-                        @"Red Background",  [NSNumber numberWithInt:(int)kRedBackgroundHighlight],
-                        @"White Background",  [NSNumber numberWithInt:(int)kWhiteBackgroundHighlight],
-                        @"Yellow Background",  [NSNumber numberWithInt:(int)kYellowBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.black_background.b04caa23", nil, NSBundle.mainBundle, @"Black Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBlackBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.blue_background.990b650d", nil, NSBundle.mainBundle, @"Blue Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBlueBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.brown_background.13494d58", nil, NSBundle.mainBundle, @"Brown Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kBrownBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.cyan_background.f5cf08c2", nil, NSBundle.mainBundle, @"Cyan Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kCyanBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.gray_background.21c8f560", nil, NSBundle.mainBundle, @"Gray Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kDarkGrayBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.gray_background.21c8f560", nil, NSBundle.mainBundle, @"Gray Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kGrayBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.green_background.375e1e8f", nil, NSBundle.mainBundle, @"Green Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kGreenBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.light_gray_background.6b018f49", nil, NSBundle.mainBundle, @"Light Gray Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kLightGrayBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.magenta_background.64552500", nil, NSBundle.mainBundle, @"Magenta Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kMagentaBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.orange_background.e283a2e6", nil, NSBundle.mainBundle, @"Orange Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kOrangeBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.purple_background.0a86ae56", nil, NSBundle.mainBundle, @"Purple Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kPurpleBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.red_background.be2d0745", nil, NSBundle.mainBundle, @"Red Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kRedBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.white_background.c18f4c71", nil, NSBundle.mainBundle, @"White Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kWhiteBackgroundHighlight],
+                        NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.yellow_background.8222644b", nil, NSBundle.mainBundle, @"Yellow Background", @"Highlight trigger color option."),  [NSNumber numberWithInt:(int)kYellowBackgroundHighlight],
                         nil];
     return [NSArray arrayWithObjects:fgbg, fg, bg, nil];
 }
@@ -508,7 +508,7 @@ enum {
 - (NSAttributedString *)paramAttributedString {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
 
-    [result appendAttributedString:[[NSAttributedString alloc] initWithString:@"Text: "]];
+    [result appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.text.21784f40", nil, NSBundle.mainBundle, @"Text: ", @"User-facing text in HighlightTrigger (paramAttributedString).")]];
 
     NSTextAttachment *textColorAttachment = [[NSTextAttachment alloc] init];
     textColorAttachment.image = [self imageForColor:self.textColor];
@@ -518,7 +518,7 @@ enum {
     [mutableTextAttachmentString addAttribute:NSBaselineOffsetAttributeName value:@(-2) range:NSMakeRange(0, mutableTextAttachmentString.length)];
     [result appendAttributedString:mutableTextAttachmentString];
 
-    [result appendAttributedString:[[NSAttributedString alloc] initWithString:@" Background: "]];
+    [result appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedStringWithDefaultValue(@"ui.triggers.highlighttrigger.background.effa332c", nil, NSBundle.mainBundle, @" Background: ", @"User-facing text in HighlightTrigger (paramAttributedString).")]];
 
     NSTextAttachment *backgroundColorAttachment = [[NSTextAttachment alloc] init];
     backgroundColorAttachment.image = [self imageForColor:self.backgroundColor];

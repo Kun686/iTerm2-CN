@@ -71,10 +71,10 @@ class SSHFilePanelFileList: NSScrollView {
 
         var title: String {
             switch self {
-            case .name: return "Name"
-            case .dateModified: return "Date Created"
-            case .size: return "Size"
-            case .kind: return "Kind"
+            case .name: return String(localized: "ui.swift.ssh.sshfilepanelfilelist.name.dcd1d522", defaultValue: "Name", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
+            case .dateModified: return String(localized: "ui.swift.ssh.sshfilepanelfilelist.date_created.ffb2623a", defaultValue: "Date Created", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
+            case .size: return String(localized: "ui.swift.ssh.sshfilepanelfilelist.size.1af85190", defaultValue: "Size", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
+            case .kind: return String(localized: "ui.swift.ssh.sshfilepanelfilelist.kind.f5387f9b", defaultValue: "Kind", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             }
         }
 
@@ -512,7 +512,7 @@ class SSHFilePanelFileList: NSScrollView {
         guard let size = size else { return "--" }
 
         if size == 0 {
-            return "Zero bytes"
+            return String(localized: "ui.swift.ssh.sshfilepanelfilelist.zero_bytes.e113391a", defaultValue: "Zero bytes", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
         }
 
         let formatter = ByteCountFormatter()
@@ -570,36 +570,36 @@ class SSHFilePanelFileList: NSScrollView {
             let pathExtension = (file.name as NSString).pathExtension.lowercased()
             switch pathExtension {
             case "png", "jpg", "jpeg", "gif", "bmp", "tiff":
-                return "\(pathExtension.uppercased()) image"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.0_image.bd83b343", defaultValue: "\(pathExtension.uppercased()) image", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "txt", "md", "rtf":
-                return "Text document"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.text_document.11e19469", defaultValue: "Text document", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "pdf":
-                return "PDF document"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.pdf_document.64d53e28", defaultValue: "PDF document", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "mp4", "mov", "avi", "mkv":
-                return "Video"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.video.d534be82", defaultValue: "Video", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "mp3", "wav", "aac", "flac":
-                return "Audio"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.audio.bc1b8890", defaultValue: "Audio", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "zip", "tar", "gz", "bz2":
-                return "Archive"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.archive.66f4804e", defaultValue: "Archive", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "lua":
-                return "Lua script"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.lua_script.781a8661", defaultValue: "Lua script", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "nvim":
-                return "Neovim config"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.neovim_config.efb9ff07", defaultValue: "Neovim config", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "sh":
-                return "Shell script"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.shell_script.82fbe842", defaultValue: "Shell script", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "m":
-                return "Objective-C source"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.objective_c_source.e272c610", defaultValue: "Objective-C source", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             case "":
-                return "Document"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.document.d6bd8c0a", defaultValue: "Document", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             default:
-                return "Document"
+                return String(localized: "ui.swift.ssh.sshfilepanelfilelist.document.d6bd8c0a", defaultValue: "Document", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
             }
         case .folder:
-            return "Folder"
+            return String(localized: "ui.swift.ssh.sshfilepanelfilelist.folder.74ccd433", defaultValue: "Folder", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
         case .host:
-            return "Host"
+            return String(localized: "ui.swift.ssh.sshfilepanelfilelist.host.4a823118", defaultValue: "Host", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
         case .symlink:
-            return "Alias"
+            return String(localized: "ui.swift.ssh.sshfilepanelfilelist.alias.b19e02e9", defaultValue: "Alias", bundle: .main, comment: "User-facing text in SSHFilePanelFileList.")
         }
     }
 }
@@ -1005,7 +1005,7 @@ extension SSHFilePanelFileList: NSFilePromiseProviderDelegate {
               let endpoint = userInfo["endpoint"] as? SSHEndpoint,
               let fullPath = userInfo["fullPath"] as? String else {
             DLog("Missing file information for promise")
-            let error = NSError(domain: "SSHFilePanelError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Missing file information"])
+            let error = NSError(domain: "SSHFilePanelError", code: 1, userInfo: [NSLocalizedDescriptionKey: String(localized: "ui.swift.ssh.sshfilepanelfilelist.missing_file_information.abc94f1a", defaultValue: "Missing file information", bundle: .main, comment: "Error shown when an SSH file promise is missing required metadata.")])
             completionHandler(error)
             return
         }

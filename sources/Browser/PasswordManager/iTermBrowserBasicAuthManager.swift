@@ -227,9 +227,9 @@ final class iTermBrowserBasicAuthManager {
         let realm = request.space.realm
         let promptText: String
         if !realm.isEmpty {
-            promptText = "The website “\(host)” requires a user name and password for “\(realm)”."
+            promptText = String(localized: "ui.browser.basic_auth.prompt.with_realm", defaultValue: "The website “\(host)” requires a user name and password for “\(realm)”.", bundle: .main, comment: "Authentication prompt shown by the built-in browser for a protected website realm.")
         } else {
-            promptText = "The website “\(host)” requires a user name and password."
+            promptText = String(localized: "ui.browser.basic_auth.prompt.without_realm", defaultValue: "The website “\(host)” requires a user name and password.", bundle: .main, comment: "Authentication prompt shown by the built-in browser for a protected website.")
         }
         let alert = ModalPasswordAlert(promptText)
         // A non-nil username makes ModalPasswordAlert show a user name field.

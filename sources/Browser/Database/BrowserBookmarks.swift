@@ -173,11 +173,11 @@ enum BookmarkSortOption: String, CaseIterable {
     var displayName: String {
         switch self {
         case .dateAdded:
-            return "Date Added"
+            return String(localized: "ui.swift.browser.database.browserbookmarks.date_added.55ad74b6", defaultValue: "Date Added", bundle: .main, comment: "User-facing text in BrowserBookmarks.")
         case .title:
-            return "Title"
+            return String(localized: "ui.swift.browser.database.browserbookmarks.title.7e8cd205", defaultValue: "Title", bundle: .main, comment: "User-facing text in BrowserBookmarks.")
         case .url:
-            return "URL"
+            return String(localized: "ui.swift.browser.database.browserbookmarks.url.e7a241de", defaultValue: "URL", bundle: .main, comment: "User-facing text in BrowserBookmarks.")
         }
     }
 }

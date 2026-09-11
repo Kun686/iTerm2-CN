@@ -268,7 +268,7 @@ NSString*    gCrashLogString = nil;
     // Insert user name and e-mail address into the information field:
     NSMutableString*    userMessage = nil;
     if( gCrashLogString )
-        userMessage = [[[informationField string] mutableCopy] autorelease];
+        userMessage = [[NSLocalizedStringFromTable(@"CRASH_MESSAGE_TEXT",@"UKCrashReporter",@"") mutableCopy] autorelease];
     else
         userMessage = [[NSLocalizedStringFromTable(@"FEEDBACK_MESSAGE_TEXT",@"UKCrashReporter",@"") mutableCopy] autorelease];
 

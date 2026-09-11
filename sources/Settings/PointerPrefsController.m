@@ -300,15 +300,15 @@ typedef enum {
 {
     switch (n) {
         case 1:
-            return @"single click";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.single_click.e55e7538", nil, NSBundle.mainBundle, @"single click", @"User-facing mouse click count in PointerPrefsController.");
         case 2:
-            return @"double click";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.double_click.41258880", nil, NSBundle.mainBundle, @"double click", @"User-facing mouse click count in PointerPrefsController.");
         case 3:
-            return @"triple click";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.triple_click.e0abf345", nil, NSBundle.mainBundle, @"triple click", @"User-facing mouse click count in PointerPrefsController.");
         case 4:
-            return @"quad click";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.quad_click.794ad66c", nil, NSBundle.mainBundle, @"quad click", @"User-facing mouse click count in PointerPrefsController.");
         default:
-            return @"(error)";  // shouldn't happen
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.error.67e6fcca", nil, NSBundle.mainBundle, @"(error)", @"User-facing fallback for an invalid mouse click count in PointerPrefsController.");  // shouldn't happen
     }
 }
 
@@ -316,26 +316,26 @@ typedef enum {
 {
     switch (n) {
         case -1:
-            return @"Unknown button";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.unknown_button.258b9c86", nil, NSBundle.mainBundle, @"Unknown button", @"User-facing mouse button name in PointerPrefsController.");
         case kLeftButton:
-            return @"Left button";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.left_button.58b63cfd", nil, NSBundle.mainBundle, @"Left button", @"User-facing mouse button name in PointerPrefsController.");
         case kRightButton:
-            return @"Right button";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.right_button.361fd907", nil, NSBundle.mainBundle, @"Right button", @"User-facing mouse button name in PointerPrefsController.");
         case kMiddleButton:
-            return @"Middle button";
+            return NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.middle_button.f971c1b5", nil, NSBundle.mainBundle, @"Middle button", @"User-facing mouse button name in PointerPrefsController.");
         default:
-            return [NSString stringWithFormat:@"Button #%d", n+1];
+            return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.button_d.7cb5d3be", nil, NSBundle.mainBundle, @"Button #%d", @"User-facing numbered mouse button name in PointerPrefsController."), n+1];
     }
 }
 
 + (NSDictionary *)gestureNamesDict
 {
-    NSDictionary *names = @{ kThreeFingerClickGesture: @"Three-finger Tap",
-                             kThreeFingerSwipeRight: @"Three-finger Swipe Right",
-                             kThreeFingerSwipeLeft: @"Three-finger Swipe Left",
-                             kThreeFingerSwipeUp: @"Three-finger Swipe Up",
-                             kThreeFingerSwipeDown: @"Three-finger Swipe Down",
-                             kForceTouchSingleClick: @"Force Touch Single Click" };
+    NSDictionary *names = @{ kThreeFingerClickGesture: NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.three_finger_tap.9a5fd56e", nil, NSBundle.mainBundle, @"Three-finger Tap", @"User-facing trackpad gesture name in PointerPrefsController."),
+                             kThreeFingerSwipeRight: NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.three_finger_swipe_right.3f2f16c0", nil, NSBundle.mainBundle, @"Three-finger Swipe Right", @"User-facing trackpad gesture name in PointerPrefsController."),
+                             kThreeFingerSwipeLeft: NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.three_finger_swipe_left.829c2fcb", nil, NSBundle.mainBundle, @"Three-finger Swipe Left", @"User-facing trackpad gesture name in PointerPrefsController."),
+                             kThreeFingerSwipeUp: NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.three_finger_swipe_up.758365bf", nil, NSBundle.mainBundle, @"Three-finger Swipe Up", @"User-facing trackpad gesture name in PointerPrefsController."),
+                             kThreeFingerSwipeDown: NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.three_finger_swipe_down.26722dd0", nil, NSBundle.mainBundle, @"Three-finger Swipe Down", @"User-facing trackpad gesture name in PointerPrefsController."),
+                             kForceTouchSingleClick: NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.force_touch_single_click.f7fd1d1a", nil, NSBundle.mainBundle, @"Force Touch Single Click", @"User-facing trackpad gesture name in PointerPrefsController.") };
     return names;
 }
 
@@ -406,39 +406,39 @@ typedef enum {
 + (NSDictionary *)localizedActionMap
 {
     NSDictionary *names = [NSDictionary dictionaryWithObjectsAndKeys:
-                           @"Ignore", kIgnoreAction,
-                           @"Invoke Script Function…", kInvokeScriptFunction,
-                           @"Paste from Clipboard…", kPasteFromClipboardPointerAction,
-                           @"Paste from Selection…", kPasteFromSelectionPointerAction,
-                           @"Extend Selection", kExtendSelectionPointerAction,
-                           @"Open URL/Semantic History", kOpenTargetPointerAction,
-                           @"Open URL in background", kOpenTargetInBackgroundPointerAction,
-                           @"Smart Selection", kSmartSelectionPointerAction,
-                           @"Smart Selection Ignoring Newlines", kSmartSelectionIgnoringNewlinesPointerAction,
-                           @"Open Context Menu", kContextMenuPointerAction,
-                           @"Next Tab", kNextTabPointerAction,
-                           @"Previous Tab", kPrevTabPointerAction,
-                           @"Next Window", kNextWindowPointerAction,
-                           @"Previous Window", kPrevWindowPointerAction,
-                           @"Move Pane", kMovePanePointerAction,
-                           @"Send Escape Sequence…", kSendEscapeSequencePointerAction,
-                           @"Send Hex Code…", kSendHexCodePointerAction,
-                           @"Send Text…", kSendTextPointerAction,
-                           @"Select Pane Left", kSelectPaneLeftPointerAction,
-                           @"Select Pane Right", kSelectPaneRightPointerAction,
-                           @"Select Pane Above", kSelectPaneAbovePointerAction,
-                           @"Select Pane Below", kSelectPaneBelowPointerAction,
-                           @"New Window With Profile…", kNewWindowWithProfilePointerAction,
-                           @"New Tab With Profile…", kNewWindowWithProfilePointerAction,
-                           @"New Tab With Profile…", kNewTabWithProfilePointerAction,
-                           @"New Vertical Split With Profile…", kNewVerticalSplitWithProfilePointerAction,
-                           @"New Horizontal Split With Profile…", kNewHorizontalSplitWithProfilePointerAction,
-                           @"QuickLook", kQuickLookAction,
-                           @"Select Menu Item", kSelectMenuItemPointerAction,
-                           @"Copy Link Address", kCopyLinkAddressPointerAction,
-                           @"Select Next Pane", kSelectNextPanePointerAction,
-                           @"Select Previous Pane", kSelectPreviousPanePointerAction,
-                           @"Copy or Paste", kCopyOrPastePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.ignore.fce77c34", nil, NSBundle.mainBundle, @"Ignore", @"User-facing pointer action name."), kIgnoreAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.invoke_script_function.225d35cc", nil, NSBundle.mainBundle, @"Invoke Script Function…", @"User-facing pointer action name."), kInvokeScriptFunction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.paste_from_clipboard.8be5023b", nil, NSBundle.mainBundle, @"Paste from Clipboard…", @"User-facing pointer action name."), kPasteFromClipboardPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.paste_from_selection.496fc8aa", nil, NSBundle.mainBundle, @"Paste from Selection…", @"User-facing pointer action name."), kPasteFromSelectionPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.extend_selection.316c5c6b", nil, NSBundle.mainBundle, @"Extend Selection", @"User-facing pointer action name."), kExtendSelectionPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.open_url_semantic_history.1242b4b9", nil, NSBundle.mainBundle, @"Open URL/Semantic History", @"User-facing pointer action name."), kOpenTargetPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.open_url_in_background.1c32b5b2", nil, NSBundle.mainBundle, @"Open URL in background", @"User-facing pointer action name."), kOpenTargetInBackgroundPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.smart_selection.a0a6f4c7", nil, NSBundle.mainBundle, @"Smart Selection", @"User-facing pointer action name."), kSmartSelectionPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.smart_selection_ignoring_newlines.9b4018cc", nil, NSBundle.mainBundle, @"Smart Selection Ignoring Newlines", @"User-facing pointer action name."), kSmartSelectionIgnoringNewlinesPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.open_context_menu.b293fe31", nil, NSBundle.mainBundle, @"Open Context Menu", @"User-facing pointer action name."), kContextMenuPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.next_tab.a9426fb3", nil, NSBundle.mainBundle, @"Next Tab", @"User-facing pointer action name."), kNextTabPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.previous_tab.80f06bdc", nil, NSBundle.mainBundle, @"Previous Tab", @"User-facing pointer action name."), kPrevTabPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.next_window.95bf685f", nil, NSBundle.mainBundle, @"Next Window", @"User-facing pointer action name."), kNextWindowPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.previous_window.4c8b1a6d", nil, NSBundle.mainBundle, @"Previous Window", @"User-facing pointer action name."), kPrevWindowPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.move_pane.2ece78d1", nil, NSBundle.mainBundle, @"Move Pane", @"User-facing pointer action name."), kMovePanePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.send_escape_sequence.1c6713ac", nil, NSBundle.mainBundle, @"Send Escape Sequence…", @"User-facing pointer action name."), kSendEscapeSequencePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.send_hex_code.732855d1", nil, NSBundle.mainBundle, @"Send Hex Code…", @"User-facing pointer action name."), kSendHexCodePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.send_text.31619199", nil, NSBundle.mainBundle, @"Send Text…", @"User-facing pointer action name."), kSendTextPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.select_pane_left.bee9b274", nil, NSBundle.mainBundle, @"Select Pane Left", @"User-facing pointer action name."), kSelectPaneLeftPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.select_pane_right.4378d16b", nil, NSBundle.mainBundle, @"Select Pane Right", @"User-facing pointer action name."), kSelectPaneRightPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.select_pane_above.ee438829", nil, NSBundle.mainBundle, @"Select Pane Above", @"User-facing pointer action name."), kSelectPaneAbovePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.select_pane_below.ab450541", nil, NSBundle.mainBundle, @"Select Pane Below", @"User-facing pointer action name."), kSelectPaneBelowPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.new_window_with_profile.9e1e556b", nil, NSBundle.mainBundle, @"New Window With Profile…", @"User-facing pointer action name."), kNewWindowWithProfilePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.new_tab_with_profile.dc1504fd", nil, NSBundle.mainBundle, @"New Tab With Profile…", @"User-facing pointer action name."), kNewWindowWithProfilePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.new_tab_with_profile.dc1504fd", nil, NSBundle.mainBundle, @"New Tab With Profile…", @"User-facing pointer action name."), kNewTabWithProfilePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.new_vertical_split_with_profile.5bc7de2d", nil, NSBundle.mainBundle, @"New Vertical Split With Profile…", @"User-facing pointer action name."), kNewVerticalSplitWithProfilePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.new_horizontal_split_with_profile.b609549f", nil, NSBundle.mainBundle, @"New Horizontal Split With Profile…", @"User-facing pointer action name."), kNewHorizontalSplitWithProfilePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.quicklook.88b519ff", nil, NSBundle.mainBundle, @"QuickLook", @"User-facing pointer action name."), kQuickLookAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.select_menu_item.8d63e41c", nil, NSBundle.mainBundle, @"Select Menu Item", @"User-facing pointer action name."), kSelectMenuItemPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.copy_link_address.c8270401", nil, NSBundle.mainBundle, @"Copy Link Address", @"User-facing pointer action name."), kCopyLinkAddressPointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.select_next_pane.99b54fae", nil, NSBundle.mainBundle, @"Select Next Pane", @"User-facing pointer action name."), kSelectNextPanePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.select_previous_pane.25342530", nil, NSBundle.mainBundle, @"Select Previous Pane", @"User-facing pointer action name."), kSelectPreviousPanePointerAction,
+                           NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.copy_or_paste.848f339e", nil, NSBundle.mainBundle, @"Copy or Paste", @"User-facing pointer action name."), kCopyOrPastePointerAction,
                            nil];
     return names;
 }
@@ -475,7 +475,7 @@ typedef enum {
         name = [names objectForKey:action];
     }
     if (!name) {
-        name = @"(Unknown)";
+        name = NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.unknown.57ac0a07", nil, NSBundle.mainBundle, @"(Unknown)", @"User-facing text in PointerPrefsController (tableViewSelectionDidChange:).");
     }
     return name;
 }
@@ -489,7 +489,7 @@ typedef enum {
         name = [names objectForKey:action];
     }
     if (!name) {
-        name = @"(Unknown)";
+        name = NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.unknown.57ac0a07", nil, NSBundle.mainBundle, @"(Unknown)", @"User-facing text in PointerPrefsController (formattedLocalizedActionForDict:).");
     }
     if (action) {
         switch ([PointerPrefsController argumentTypeForAction:action]) {
@@ -497,7 +497,7 @@ typedef enum {
                 break;
             case kEscPlusArg:
                 return [name stringByReplacingOccurrencesOfString:@"…"
-                                                       withString:[NSString stringWithFormat:@" Esc + %@", argument]];
+                                                       withString:[NSString stringWithFormat:@" %@ %@", NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.esc.9f07f759", nil, NSBundle.mainBundle, @"Esc +", @"User-facing keyboard notation in PointerPrefsController."), argument]];
             case kHexCodeArg:
             case kTextArg:
             case kScriptFunctionArg:
@@ -525,7 +525,7 @@ typedef enum {
                 if (!title.length) {
                     break;
                 }
-                return [NSString stringWithFormat:@"Select Menu Item “%@”", title];
+                return [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.select_menu_item.a31db23f", nil, NSBundle.mainBundle, @"Select Menu Item “%@”", @"User-facing selected menu item summary in PointerPrefsController."), title];
             }
         }
     }
@@ -915,8 +915,8 @@ typedef enum {
             [editArgumentField_ setEnabled:YES];
             [editArgumentButton_ setHidden:YES];
             _menuItemPopupView.hidden = YES;
-            [editArgumentLabel_ setStringValue:@"Esc +"];
-            [[editArgumentField_ cell] setPlaceholderString:@"characters to send"];
+            [editArgumentLabel_ setStringValue:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.esc.9f07f759", nil, NSBundle.mainBundle, @"Esc +", @"User-facing text in PointerPrefsController (updateArgumentFieldsForAction:argument:).")];
+            [[editArgumentField_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.characters_to_send.a988c1eb", nil, NSBundle.mainBundle, @"characters to send", @"User-facing text in PointerPrefsController (setPlaceholderString).")];
             [editArgumentField_ setStringValue:currentArg];
             [editArgumentField_ setRefusesFirstResponder:NO];
             [editArgumentField_ setSelectable:YES];
@@ -930,8 +930,8 @@ typedef enum {
             [editArgumentField_ setEnabled:YES];
             [editArgumentButton_ setHidden:YES];
             _menuItemPopupView.hidden = YES;
-            [editArgumentLabel_ setStringValue:@"Hex codes:"];
-            [[editArgumentField_ cell] setPlaceholderString:@"ex: 0x7f 0x20"];
+            [editArgumentLabel_ setStringValue:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.hex_codes.2504b906", nil, NSBundle.mainBundle, @"Hex codes:", @"User-facing text in PointerPrefsController (updateArgumentFieldsForAction:argument:).")];
+            [[editArgumentField_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.ex_0x7f_0x20.e68fba4e", nil, NSBundle.mainBundle, @"ex: 0x7f 0x20", @"User-facing text in PointerPrefsController (setPlaceholderString).")];
             [editArgumentField_ setStringValue:currentArg];
             _pasteSpecialViewContainer.hidden = YES;
             editArgumentField_.delegate = nil;
@@ -943,8 +943,8 @@ typedef enum {
             [editArgumentField_ setEnabled:YES];
             [editArgumentButton_ setHidden:YES];
             _menuItemPopupView.hidden = YES;
-            [editArgumentLabel_ setStringValue:@"Text:"];
-            [[editArgumentField_ cell] setPlaceholderString:@"Enter value to send"];
+            [editArgumentLabel_ setStringValue:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.text.796961b8", nil, NSBundle.mainBundle, @"Text:", @"User-facing text in PointerPrefsController (updateArgumentFieldsForAction:argument:).")];
+            [[editArgumentField_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.enter_value_to_send.2ed37f5b", nil, NSBundle.mainBundle, @"Enter value to send", @"User-facing text in PointerPrefsController (setPlaceholderString).")];
             [editArgumentField_ setStringValue:currentArg];
             _pasteSpecialViewContainer.hidden = YES;
             editArgumentField_.delegate = nil;
@@ -956,8 +956,8 @@ typedef enum {
             [editArgumentField_ setEnabled:YES];
             [editArgumentButton_ setHidden:YES];
             _menuItemPopupView.hidden = YES;
-            [editArgumentLabel_ setStringValue:@"Text:"];
-            [[editArgumentField_ cell] setPlaceholderString:@"Enter function invocation"];
+            [editArgumentLabel_ setStringValue:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.text.796961b8", nil, NSBundle.mainBundle, @"Text:", @"User-facing text in PointerPrefsController (updateArgumentFieldsForAction:argument:).")];
+            [[editArgumentField_ cell] setPlaceholderString:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.enter_function_invocation.9ca13521", nil, NSBundle.mainBundle, @"Enter function invocation", @"User-facing text in PointerPrefsController (setPlaceholderString).")];
             [editArgumentField_ setStringValue:currentArg];
             _pasteSpecialViewContainer.hidden = YES;
             _invocationDelegate = [[iTermFunctionCallTextFieldDelegate alloc] initWithPathSource:[iTermVariableHistory pathSourceForContext:iTermVariablesSuggestionContextSession]
@@ -971,7 +971,7 @@ typedef enum {
             [editArgumentField_ setHidden:YES];
             [editArgumentButton_ setHidden:NO];
             _menuItemPopupView.hidden = YES;
-            [editArgumentLabel_ setStringValue:@"Profile:"];
+            [editArgumentLabel_ setStringValue:NSLocalizedStringWithDefaultValue(@"ui.settings.pointerprefscontroller.profile.468998b1", nil, NSBundle.mainBundle, @"Profile:", @"User-facing text in PointerPrefsController (updateArgumentFieldsForAction:argument:).")];
             [editArgumentButton_ populateWithProfilesSelectingGuid:currentArg
                                                       profileTypes:ProfileTypeAll];
             _pasteSpecialViewContainer.hidden = YES;

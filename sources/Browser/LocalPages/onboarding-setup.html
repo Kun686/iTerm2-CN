@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iTerm2 Browser - Setup</title>
+    <title>{{PAGE_TITLE}}</title>
     <style>
         {{COMMON_CSS}}
         
@@ -235,6 +235,13 @@
     </style>
     <script>
         const sessionSecret = '{{SECRET}}';
+        const localized = {
+            enabled: {{ENABLED_JSON}},
+            disabled: {{DISABLED_JSON}},
+            created: {{CREATED_JSON}},
+            notCreated: {{NOT_CREATED_JSON}},
+            done: {{DONE_JSON}}
+        };
         
         function enableAdBlocker() {
             window.webkit.messageHandlers['iterm2-about:onboarding-setup'].postMessage({
@@ -262,19 +269,19 @@
             if (!element) return;
             
             const statusTexts = {
-                'adblocker-status': enabled ? 'Enabled' : 'Disabled',
-                'replay-status': enabled ? 'Enabled' : 'Disabled',
-                'profile-status': enabled ? 'Created' : 'Not Created'
+                'adblocker-status': enabled ? localized.enabled : localized.disabled,
+                'replay-status': enabled ? localized.enabled : localized.disabled,
+                'profile-status': enabled ? localized.created : localized.notCreated
             };
             
-            element.textContent = statusTexts[elementId] || (enabled ? 'Enabled' : 'Disabled');
+            element.textContent = statusTexts[elementId] || (enabled ? localized.enabled : localized.disabled);
             element.classList.remove('enabled', 'disabled');
             element.classList.add(enabled ? 'enabled' : 'disabled');
             
             // Update button state
             const button = element.closest('.setup-card').querySelector('.setup-action');
             if (button && enabled) {
-                button.textContent = '✓ Done';
+                button.textContent = localized.done;
                 button.disabled = true;
                 button.style.opacity = '0.5';
                 button.style.cursor = 'default';
@@ -316,48 +323,37 @@
 <body>
     <div class="onboarding-container">
         <div class="onboarding-header">
-            <h1 class="onboarding-title">Let’s Get You Set Up</h1>
-            <p class="onboarding-subtitle">Quick configuration to get the most out of your browser</p>
+            <h1 class="onboarding-title">{{TITLE}}</h1>
+            <p class="onboarding-subtitle">{{SUBTITLE}}</p>
         </div>
         
         <div class="setup-card">
             <div class="setup-header">
-                <h3 class="setup-title">🛡️ Ad Blocker</h3>
-                <span id="adblocker-status" class="setup-status disabled">Disabled</span>
+                <h3 class="setup-title">🛡️ {{AD_BLOCKER}}</h3>
+                <span id="adblocker-status" class="setup-status disabled">{{DISABLED}}</span>
             </div>
-            <p class="setup-description">
-                Blocks ads and trackers using WebKit content blockers.
-                Improves browsing speed and privacy without sacrificing compatibility.
-                If enabled, a new block list will be downloaded from the internet once a day.
-            </p>
+            <p class="setup-description">{{AD_BLOCKER_DESCRIPTION}}</p>
             <button class="setup-action" onclick="enableAdBlocker()">
-                Enable Ad Blocker
+                {{ENABLE_AD_BLOCKER}}
             </button>
         </div>
         
         <div class="setup-card">
             <div class="setup-header">
-                <h3 class="setup-title">🎬 Instant Replay</h3>
-                <span id="replay-status" class="setup-status disabled">Disabled</span>
+                <h3 class="setup-title">🎬 {{INSTANT_REPLAY}}</h3>
+                <span id="replay-status" class="setup-status disabled">{{DISABLED}}</span>
             </div>
-            <p class="setup-description">
-                Instant Replay keeps a rolling screen recording of your browser window, storing only
-                the most recent contents. If you miss something, launch the player to review what
-                was on the screen.
-                Requires screen recording permission.
-            </p>
+            <p class="setup-description">{{INSTANT_REPLAY_DESCRIPTION}}</p>
             <button class="setup-action" onclick="enableInstantReplay()">
-                Enable Instant Replay
+                {{ENABLE_INSTANT_REPLAY}}
             </button>
         </div>
         
         <div class="info-box">
             <p>
-                <strong>Tip:</strong>
-                To view or change browser settings, go to
-                <strong>Preferences → Profiles → Web</strong>
-                or by clicking the ☰ button in the browser
-                toolbar and then select <strong>Settings</strong>.
+                <strong>{{TIP}}</strong>
+                {{TIP_PREFIX}} <strong>{{PREFERENCES_PATH}}</strong>
+                {{TIP_INFIX}} <strong>{{SETTINGS}}</strong>{{TIP_SUFFIX}}
             </p>
         </div>
         
@@ -371,10 +367,10 @@
             <div class="nav-buttons">
                 <a href="iterm2-about:onboarding-profile" class="nav-button secondary">
                     <span>←</span>
-                    Back
+                    {{BACK}}
                 </a>
                 <button onclick="finishSetup()" class="nav-button primary">
-                    Start Browsing
+                    {{START_BROWSING}}
                     <span>🚀</span>
                 </button>
             </div>

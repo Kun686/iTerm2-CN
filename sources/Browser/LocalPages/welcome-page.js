@@ -5,6 +5,20 @@
     
     // Session secret for secure communication
     const sessionSecret = '{{SECRET}}';
+    const localized = {
+        emptyTitle: {{EMPTY_TITLE_JSON}},
+        emptyHint: {{EMPTY_HINT_JSON}},
+        visitFormat: {{VISIT_FORMAT_JSON}},
+        visitsFormat: {{VISITS_FORMAT_JSON}}
+    };
+
+    function formatLocalized(format, values) {
+        values.forEach((value, index) => {
+            format = format.split(`%${index + 1}$@`).join(value);
+            format = format.split(`%${index + 1}$lld`).join(value);
+        });
+        return format;
+    }
     
     // Request top sites when the page loads
     document.addEventListener('DOMContentLoaded', function() {
@@ -32,8 +46,8 @@
             container.innerHTML = `
                 <div class="empty-state">
                     <span class="empty-icon">🌟</span>
-                    <p>Your most visited sites will appear here</p>
-                    <p class="empty-hint">Start browsing to build your history!</p>
+                    <p>${escapeHtml(localized.emptyTitle)}</p>
+                    <p class="empty-hint">${escapeHtml(localized.emptyHint)}</p>
                 </div>
             `;
             return;
@@ -62,7 +76,7 @@
             <div class="site-info">
                 <div class="site-title">${escapeHtml(site.title || site.hostname)}</div>
                 <div class="site-url">${escapeHtml(site.hostname)}</div>
-                <div class="site-visits">${site.visitCount} ${site.visitCount === 1 ? 'visit' : 'visits'}</div>
+                <div class="site-visits">${escapeHtml(formatLocalized(site.visitCount === 1 ? localized.visitFormat : localized.visitsFormat, [site.visitCount.toLocaleString()]))}</div>
             </div>
         `;
         

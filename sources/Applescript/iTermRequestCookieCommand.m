@@ -47,17 +47,17 @@ static NSString *const kReusableCookieAnnouncementIdentifier = @"ReusableCookieA
         return;
     }
 
-    NSString *appName = self.arguments[@"appName"] ?: @"An app";
-    NSString *message = [NSString stringWithFormat:@"%@ requests a reusable API cookie.", appName];
+    NSString *appName = self.arguments[@"appName"] ?: NSLocalizedStringWithDefaultValue(@"ui.applescript.itermrequestcookiecommand.an_app.094f9581", nil, NSBundle.mainBundle, @"An app", @"Fallback application name in a reusable API cookie announcement.");
+    NSString *message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.applescript.itermrequestcookiecommand.requests_a_reusable_api_cookie.de447566", nil, NSBundle.mainBundle, @"%@ requests a reusable API cookie.", @"User-facing reusable API cookie announcement format string."), appName];
 
     __weak __typeof(self) weakSelf = self;
     iTermAnnouncementViewController *announcement =
         [iTermAnnouncementViewController announcementWithTitle:message
                                                          style:kiTermAnnouncementViewStyleQuestion
-                                                   withActions:@[ @"_24 Hours",
-                                                                  @"Forever",
-                                                                  @"Always Allow All Apps",
-                                                                  @"Deny" ]
+                                                   withActions:@[ NSLocalizedStringWithDefaultValue(@"ui.applescript.itermrequestcookiecommand.24_hours.7fe40c99", nil, NSBundle.mainBundle, @"_24 Hours", @"Announcement action; underscore marks the Option-key shortcut."),
+                                                                  NSLocalizedStringWithDefaultValue(@"ui.applescript.itermrequestcookiecommand.forever.55f980cf", nil, NSBundle.mainBundle, @"Forever", @"Announcement action."),
+                                                                  NSLocalizedStringWithDefaultValue(@"ui.applescript.itermrequestcookiecommand.always_allow_all_apps.374f129e", nil, NSBundle.mainBundle, @"Always Allow All Apps", @"Announcement action."),
+                                                                  NSLocalizedStringWithDefaultValue(@"ui.applescript.itermrequestcookiecommand.deny.05a2d733", nil, NSBundle.mainBundle, @"Deny", @"Announcement action.") ]
                                                     completion:^(int selection) {
             [weakSelf handleReusableCookieSelection:selection];
         }];

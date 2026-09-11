@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Duplicate Session"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制会话"
+          }
         }
       }
     },
@@ -21,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Zoom Out"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缩小"
           }
         }
       }
@@ -34,6 +46,12 @@
             "state": "new",
             "value": "Install Python Runtime"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装 Python 运行时"
+          }
         }
       }
     },
@@ -45,6 +63,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Move Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移动标签页"
           }
         }
       }
@@ -58,6 +82,12 @@
             "state": "new",
             "value": "Help"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "帮助"
+          }
         }
       }
     },
@@ -69,6 +99,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Help"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "帮助"
           }
         }
       }
@@ -82,6 +118,12 @@
             "state": "new",
             "value": "Undo"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "撤销"
+          }
         }
       }
     },
@@ -93,6 +135,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Redo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重做"
           }
         }
       }
@@ -106,6 +154,12 @@
             "state": "new",
             "value": "iTerm2 Help"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2 帮助"
+          }
         }
       }
     },
@@ -117,6 +171,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Open Paste History…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开粘贴历史…"
           }
         }
       }
@@ -130,6 +190,12 @@
             "state": "new",
             "value": "Open Autocomplete…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开自动补全…"
+          }
         }
       }
     },
@@ -141,6 +207,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Paste Special"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴特殊"
           }
         }
       }
@@ -154,6 +226,12 @@
             "state": "new",
             "value": "Paste Special"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴特殊"
+          }
         }
       }
     },
@@ -165,6 +243,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Paste Selection"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴所选内容"
           }
         }
       }
@@ -178,6 +262,12 @@
             "state": "new",
             "value": "Paste Slowly"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "慢速粘贴"
+          }
         }
       }
     },
@@ -189,6 +279,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Secure Keyboard Entry"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全键盘输入"
           }
         }
       }
@@ -202,6 +298,12 @@
             "state": "new",
             "value": "Arrange Windows Horizontally"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "水平排列窗口"
+          }
         }
       }
     },
@@ -213,6 +315,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Close"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
           }
         }
       }
@@ -226,6 +334,12 @@
             "state": "new",
             "value": "Split Vertically with Current Profile"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用当前配置文件垂直拆分"
+          }
         }
       }
     },
@@ -237,6 +351,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Split Horizontally with Current Profile"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用当前配置文件水平拆分"
           }
         }
       }
@@ -250,6 +370,12 @@
             "state": "new",
             "value": "Save Window Arrangement"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存储窗口布局"
+          }
         }
       }
     },
@@ -261,6 +387,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Select Split Pane"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择拆分面板"
           }
         }
       }
@@ -274,6 +406,12 @@
             "state": "new",
             "value": "Select Split Pane"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择拆分面板"
+          }
         }
       }
     },
@@ -285,6 +423,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Select Pane Above"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择上方面板"
           }
         }
       }
@@ -298,6 +442,12 @@
             "state": "new",
             "value": "Select Pane Below"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择下方面板"
+          }
         }
       }
     },
@@ -309,6 +459,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Select Pane Left"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择左侧面板"
           }
         }
       }
@@ -322,6 +478,12 @@
             "state": "new",
             "value": "Select Pane Right"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择右侧面板"
+          }
         }
       }
     },
@@ -333,6 +495,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Use Transparency"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用透明度"
           }
         }
       }
@@ -346,6 +514,12 @@
             "state": "new",
             "value": "Maximize Active Pane"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大化活跃面板"
+          }
         }
       }
     },
@@ -357,6 +531,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Item 3"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 3"
           }
         }
       }
@@ -370,6 +550,12 @@
             "state": "new",
             "value": "Item 2"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 2"
+          }
         }
       }
     },
@@ -381,6 +567,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Item 1"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 1"
           }
         }
       }
@@ -394,6 +586,12 @@
             "state": "new",
             "value": "Set Mark"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设定标记"
+          }
         }
       }
     },
@@ -405,6 +603,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Jump to Mark"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跳到标记"
           }
         }
       }
@@ -418,6 +622,12 @@
             "state": "new",
             "value": "Next Pane"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下一个面板"
+          }
         }
       }
     },
@@ -429,6 +639,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Previous Pane"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上一个面板"
           }
         }
       }
@@ -442,6 +658,12 @@
             "state": "new",
             "value": "Show Tabs in Fullscreen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在全屏幕中显示标签页"
+          }
         }
       }
     },
@@ -453,6 +675,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Broadcast Input"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "广播输入"
           }
         }
       }
@@ -466,6 +694,12 @@
             "state": "new",
             "value": "Broadcast Input"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "广播输入"
+          }
         }
       }
     },
@@ -477,6 +711,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Broadcast Input to All Panes in All Tabs"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向所有标签页的所有面板广播输入"
           }
         }
       }
@@ -490,6 +730,12 @@
             "state": "new",
             "value": "Broadcast Input to All Panes in Current Tab"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向当前标签页的所有面板广播输入"
+          }
         }
       }
     },
@@ -501,6 +747,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Send Input to Current Session Only"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅向当前会话发送输入"
           }
         }
       }
@@ -514,6 +766,12 @@
             "state": "new",
             "value": "Restore Window Arrangement"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢复窗口布局"
+          }
         }
       }
     },
@@ -525,6 +783,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Restore Window Arrangement"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢复窗口布局"
           }
         }
       }
@@ -538,6 +802,12 @@
             "state": "new",
             "value": "Find Cursor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找光标"
+          }
         }
       }
     },
@@ -549,6 +819,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Split Horizontally…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "水平拆分…"
           }
         }
       }
@@ -562,6 +838,12 @@
             "state": "new",
             "value": "Preferences..."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置..."
+          }
         }
       }
     },
@@ -573,6 +855,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Split Vertically…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "垂直拆分…"
           }
         }
       }
@@ -586,6 +874,12 @@
             "state": "new",
             "value": "Toolbelt"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工具栏"
+          }
         }
       }
     },
@@ -597,6 +891,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Toolbelt"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工具栏"
           }
         }
       }
@@ -610,6 +910,12 @@
             "state": "new",
             "value": "Show Toolbelt"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示工具栏"
+          }
         }
       }
     },
@@ -621,6 +927,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Services"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "服务"
           }
         }
       }
@@ -634,6 +946,12 @@
             "state": "new",
             "value": "New Tab with Current Profile"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用当前配置文件新建标签页"
+          }
         }
       }
     },
@@ -645,6 +963,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Run Coprocess…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行协处理…"
           }
         }
       }
@@ -658,6 +982,12 @@
             "state": "new",
             "value": "Services"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "服务"
+          }
         }
       }
     },
@@ -669,6 +999,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Stop Coprocess"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止协处理"
           }
         }
       }
@@ -682,6 +1018,12 @@
             "state": "new",
             "value": "Copy"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝"
+          }
         }
       }
     },
@@ -693,6 +1035,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Hide iTerm2"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐藏 iTerm2"
           }
         }
       }
@@ -706,6 +1054,12 @@
             "state": "new",
             "value": "Quit iTerm2"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出 iTerm2"
+          }
         }
       }
     },
@@ -717,6 +1071,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Move Tab to New Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将标签页移到新窗口"
           }
         }
       }
@@ -730,6 +1090,12 @@
             "state": "new",
             "value": "Move Tab Right"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将标签页右移"
+          }
         }
       }
     },
@@ -742,10 +1108,17 @@
             "state": "new",
             "value": "Show Background Pattern Indicator"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示背景图案指示器"
+          }
         }
       }
     },
     "1448.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"tmux\"; ObjectID = \"1448\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -754,16 +1127,29 @@
             "state": "new",
             "value": "tmux"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tmux"
+          }
         }
       }
     },
     "1449.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenu\"; title = \"tmux\"; ObjectID = \"1449\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "tmux"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "tmux"
           }
         }
@@ -778,6 +1164,12 @@
             "state": "new",
             "value": "Hide Others"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐藏其他"
+          }
         }
       }
     },
@@ -789,6 +1181,12 @@
           "stringUnit": {
             "state": "new",
             "value": "New Tmux Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建 tmux 标签页"
           }
         }
       }
@@ -802,6 +1200,12 @@
             "state": "new",
             "value": "New Tmux Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建 tmux 窗口"
+          }
         }
       }
     },
@@ -813,6 +1217,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Detach"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分离"
           }
         }
       }
@@ -826,6 +1236,12 @@
             "state": "new",
             "value": "Dashboard"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仪表盘"
+          }
         }
       }
     },
@@ -837,6 +1253,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Make Text Normal Size"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将文字恢复为正常大小"
           }
         }
       }
@@ -850,6 +1272,12 @@
             "state": "new",
             "value": "Restore Text and Session Size"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢复文字和会话大小"
+          }
         }
       }
     },
@@ -861,6 +1289,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Make iTerm2 Default Term"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将 iTerm2 设为默认终端"
           }
         }
       }
@@ -874,6 +1308,12 @@
             "state": "new",
             "value": "Make Terminal Default Term"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将 Terminal 设为默认终端"
+          }
         }
       }
     },
@@ -885,6 +1325,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Toggle Broadcast Input to Current Session"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切换向当前会话广播输入"
           }
         }
       }
@@ -898,6 +1344,12 @@
             "state": "new",
             "value": "Paste Faster"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加快粘贴"
+          }
         }
       }
     },
@@ -909,6 +1361,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Paste Slower"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "减慢粘贴"
           }
         }
       }
@@ -922,6 +1380,12 @@
             "state": "new",
             "value": "Paste Slowly Faster"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加快慢速粘贴"
+          }
         }
       }
     },
@@ -933,6 +1397,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Paste Slowly Slower"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "减慢慢速粘贴"
           }
         }
       }
@@ -946,6 +1416,12 @@
             "state": "new",
             "value": "Show All"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部显示"
+          }
         }
       }
     },
@@ -957,6 +1433,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Reset Character Set"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重置字符集"
           }
         }
       }
@@ -970,6 +1452,12 @@
             "state": "new",
             "value": "Cut"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剪切"
+          }
         }
       }
     },
@@ -981,6 +1469,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Edit"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑"
           }
         }
       }
@@ -994,6 +1488,12 @@
             "state": "new",
             "value": "Edit"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑"
+          }
         }
       }
     },
@@ -1005,6 +1505,12 @@
           "stringUnit": {
             "state": "new",
             "value": "GPU Renderer Availability"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPU 渲染器可用性"
           }
         }
       }
@@ -1018,6 +1524,12 @@
             "state": "new",
             "value": "Select All"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全选"
+          }
         }
       }
     },
@@ -1029,6 +1541,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
           }
         }
       }
@@ -1042,6 +1560,12 @@
             "state": "new",
             "value": "Increase Height"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "增加高度"
+          }
         }
       }
     },
@@ -1053,6 +1577,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Move Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移动标签页"
           }
         }
       }
@@ -1066,6 +1596,12 @@
             "state": "new",
             "value": "Open Location…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开位置…"
+          }
         }
       }
     },
@@ -1077,6 +1613,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Paste"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴"
           }
         }
       }
@@ -1090,6 +1632,12 @@
             "state": "new",
             "value": "Clear Buffer"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除缓冲区"
+          }
         }
       }
     },
@@ -1101,6 +1649,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Log"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日志"
           }
         }
       }
@@ -1114,6 +1668,12 @@
             "state": "new",
             "value": "Log"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日志"
+          }
         }
       }
     },
@@ -1125,6 +1685,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Minimize"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最小化"
           }
         }
       }
@@ -1138,6 +1704,12 @@
             "state": "new",
             "value": "About iTerm2"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关于 iTerm2"
+          }
         }
       }
     },
@@ -1150,16 +1722,29 @@
             "state": "new",
             "value": "Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
         }
       }
     },
     "29.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenu\"; title = \"MainMenu\"; ObjectID = \"29\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "MainMenu"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "MainMenu"
           }
         }
@@ -1174,6 +1759,12 @@
             "state": "new",
             "value": "Focus Reporting"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "焦点报告"
+          }
         }
       }
     },
@@ -1185,6 +1776,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Normal"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正常"
           }
         }
       }
@@ -1198,6 +1795,12 @@
             "state": "new",
             "value": "Move Divider Up"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向上移动分隔条"
+          }
         }
       }
     },
@@ -1209,6 +1812,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Replace with Base 64-Decoded Value"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "替换为 Base64 解码值"
           }
         }
       }
@@ -1222,6 +1831,12 @@
             "state": "new",
             "value": "Session"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话"
+          }
         }
       }
     },
@@ -1233,6 +1848,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Move Session to Split Pane"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将会话移到拆分面板"
           }
         }
       }
@@ -1246,10 +1867,17 @@
             "state": "new",
             "value": "Password Manager"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "密码管理器"
+          }
         }
       }
     },
     "56.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"iTerm2\"; ObjectID = \"56\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -1258,16 +1886,29 @@
             "state": "new",
             "value": "iTerm2"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iTerm2"
+          }
         }
       }
     },
     "57.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenu\"; title = \"iTerm2\"; ObjectID = \"57\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "iTerm2"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "iTerm2"
           }
         }
@@ -1282,6 +1923,12 @@
             "state": "new",
             "value": "Change Profile in Arrangement…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更改布局中的配置文件…"
+          }
         }
       }
     },
@@ -1293,6 +1940,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Profiles"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配置文件"
           }
         }
       }
@@ -1306,6 +1959,12 @@
             "state": "new",
             "value": "Profiles"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配置文件"
+          }
         }
       }
     },
@@ -1317,6 +1976,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Close Terminal Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭终端窗口"
           }
         }
       }
@@ -1330,6 +1995,12 @@
             "state": "new",
             "value": "Item 1"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 1"
+          }
         }
       }
     },
@@ -1341,6 +2012,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Left of Screen"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕左侧"
           }
         }
       }
@@ -1354,6 +2031,12 @@
             "state": "new",
             "value": "Centered"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "居中"
+          }
         }
       }
     },
@@ -1365,6 +2048,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Replace Selection"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "替换所选内容"
           }
         }
       }
@@ -1378,6 +2067,12 @@
             "state": "new",
             "value": "Close All Panes in Tab"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭标签页中的所有面板"
+          }
         }
       }
     },
@@ -1389,6 +2084,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Page Setup..."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "页面设置..."
           }
         }
       }
@@ -1402,6 +2103,12 @@
             "state": "new",
             "value": "Save Selected Text…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存储所选文本…"
+          }
         }
       }
     },
@@ -1413,6 +2120,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Application Cursor"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用程序光标"
           }
         }
       }
@@ -1426,6 +2139,12 @@
             "state": "new",
             "value": "Clear Scrollback Buffer"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除回滚缓冲区"
+          }
         }
       }
     },
@@ -1437,6 +2156,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Use Selection for Find"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用所选内容查找"
           }
         }
       }
@@ -1450,6 +2175,12 @@
             "state": "new",
             "value": "Find"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找"
+          }
         }
       }
     },
@@ -1461,6 +2192,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Find"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找"
           }
         }
       }
@@ -1474,6 +2211,12 @@
             "state": "new",
             "value": "Find Next"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找下一个"
+          }
         }
       }
     },
@@ -1485,6 +2228,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Find Previous"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找上一个"
           }
         }
       }
@@ -1498,6 +2247,12 @@
             "state": "new",
             "value": "Jump to Selection"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跳到所选内容"
+          }
         }
       }
     },
@@ -1509,6 +2264,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Item"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目"
           }
         }
       }
@@ -1522,6 +2283,12 @@
             "state": "new",
             "value": "Open Recent Directories…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开最近的目录…"
+          }
         }
       }
     },
@@ -1533,6 +2300,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Full Screen"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全屏"
           }
         }
       }
@@ -1546,6 +2319,12 @@
             "state": "new",
             "value": "Arrangements"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口布局"
+          }
         }
       }
     },
@@ -1557,6 +2336,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Fold Selected Lines"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "折叠所选行"
           }
         }
       }
@@ -1570,6 +2355,12 @@
             "state": "new",
             "value": "View"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示"
+          }
         }
       }
     },
@@ -1581,6 +2372,12 @@
           "stringUnit": {
             "state": "new",
             "value": "View"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示"
           }
         }
       }
@@ -1594,6 +2391,12 @@
             "state": "new",
             "value": "Make Text Bigger"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "放大文字"
+          }
         }
       }
     },
@@ -1606,16 +2409,29 @@
             "state": "new",
             "value": "Make Text Smaller"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缩小文字"
+          }
         }
       }
     },
     "81.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenu\"; title = \"Shell\"; ObjectID = \"81\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Shell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Shell"
           }
         }
@@ -1630,6 +2446,12 @@
             "state": "new",
             "value": "Set Default Width"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设定默认宽度"
+          }
         }
       }
     },
@@ -1641,6 +2463,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Print"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打印"
           }
         }
       }
@@ -1654,6 +2482,12 @@
             "state": "new",
             "value": "Screen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕"
+          }
         }
       }
     },
@@ -1665,6 +2499,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Print"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打印"
           }
         }
       }
@@ -1678,6 +2518,12 @@
             "state": "new",
             "value": "Selection"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所选内容"
+          }
         }
       }
     },
@@ -1690,16 +2536,29 @@
             "state": "new",
             "value": "Buffer"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缓冲区"
+          }
         }
       }
     },
     "83.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"Shell\"; ObjectID = \"83\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Shell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Shell"
           }
         }
@@ -1714,6 +2573,12 @@
             "state": "new",
             "value": "Select Previous Tab"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择上一个标签页"
+          }
         }
       }
     },
@@ -1725,6 +2590,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Select Next Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择下一个标签页"
           }
         }
       }
@@ -1738,6 +2609,12 @@
             "state": "new",
             "value": "Select Tab"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择标签页"
+          }
         }
       }
     },
@@ -1749,6 +2626,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Select Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择标签页"
           }
         }
       }
@@ -1762,6 +2645,12 @@
             "state": "new",
             "value": "New Tab"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建标签页"
+          }
         }
       }
     },
@@ -1773,6 +2662,12 @@
           "stringUnit": {
             "state": "new",
             "value": "New Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建窗口"
           }
         }
       }
@@ -1786,6 +2681,12 @@
             "state": "new",
             "value": "Press Option for New Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按住 Option 以在新窗口中打开"
+          }
         }
       }
     },
@@ -1797,6 +2698,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Open In New Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在新窗口中打开"
           }
         }
       }
@@ -1810,6 +2717,12 @@
             "state": "new",
             "value": "Check for Updates…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新…"
+          }
         }
       }
     },
@@ -1821,6 +2734,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Zoom"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缩放"
           }
         }
       }
@@ -1834,6 +2753,12 @@
             "state": "new",
             "value": "Actions"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "动作"
+          }
         }
       }
     },
@@ -1845,6 +2770,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Capture GPU Frame"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "捕获 GPU 帧"
           }
         }
       }
@@ -1858,6 +2789,12 @@
             "state": "new",
             "value": "Marks and Annotations"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标记与注释"
+          }
         }
       }
     },
@@ -1869,6 +2806,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Full-Height Left of Screen"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕左侧全高"
           }
         }
       }
@@ -1882,6 +2825,12 @@
             "state": "new",
             "value": "Set Named Mark"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设定命名标记"
+          }
         }
       }
     },
@@ -1893,6 +2842,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Reset"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重置"
           }
         }
       }
@@ -1906,6 +2861,12 @@
             "state": "new",
             "value": "Toggle Full Screen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切换全屏幕"
+          }
         }
       }
     },
@@ -1917,6 +2878,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Toggle Debug Logging"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切换调试日志"
           }
         }
       }
@@ -1930,6 +2897,12 @@
             "state": "new",
             "value": "Open Profiles…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开配置文件…"
+          }
         }
       }
     },
@@ -1941,6 +2914,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Edit Session…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑会话…"
           }
         }
       }
@@ -1954,6 +2933,12 @@
             "state": "new",
             "value": "Start Instant Replay"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始即时回放"
+          }
         }
       }
     },
@@ -1965,6 +2950,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Duplicate Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制窗口"
           }
         }
       }
@@ -1978,6 +2969,12 @@
             "state": "new",
             "value": "Auto Command Completion"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动命令补全"
+          }
         }
       }
     },
@@ -1989,6 +2986,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Window Style"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口样式"
           }
         }
       }
@@ -2002,16 +3005,29 @@
             "state": "new",
             "value": "Archives"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "归档"
+          }
         }
       }
     },
     "AfM-Tg-ZYT.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"VT400\"; ObjectID = \"AfM-Tg-ZYT\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "VT400"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "VT400"
           }
         }
@@ -2026,6 +3042,12 @@
             "state": "new",
             "value": "Zoom In on Selection"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缩放到所选内容"
+          }
         }
       }
     },
@@ -2037,6 +3059,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Disable All"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部停用"
           }
         }
       }
@@ -2050,6 +3078,12 @@
             "state": "new",
             "value": "Move Session"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移动会话"
+          }
         }
       }
     },
@@ -2061,6 +3095,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Force Detach"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "强制分离"
           }
         }
       }
@@ -2074,6 +3114,12 @@
             "state": "new",
             "value": "Show Composer"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示编写器"
+          }
         }
       }
     },
@@ -2085,6 +3131,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Find…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找…"
           }
         }
       }
@@ -2098,16 +3150,29 @@
             "state": "new",
             "value": "Export Recording"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导出录制"
+          }
         }
       }
     },
     "CLa-er-Pr0.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"VT500\"; ObjectID = \"CLa-er-Pr0\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "VT500"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "VT500"
           }
         }
@@ -2122,6 +3187,12 @@
             "state": "new",
             "value": "Copy Mode"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝模式"
+          }
         }
       }
     },
@@ -2133,6 +3204,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Clear to Start of Selection"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除到所选内容开头"
           }
         }
       }
@@ -2146,6 +3223,12 @@
             "state": "new",
             "value": "Scripts"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脚本"
+          }
         }
       }
     },
@@ -2157,6 +3240,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Show Clippings"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示剪贴片段"
           }
         }
       }
@@ -2170,6 +3259,12 @@
             "state": "new",
             "value": "Companion Device Settings"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Companion 设备设置"
+          }
         }
       }
     },
@@ -2181,6 +3276,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Save Current Window as Arrangement"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将当前窗口存储为布局"
           }
         }
       }
@@ -2194,6 +3295,12 @@
             "state": "new",
             "value": "Triggers"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "触发器"
+          }
         }
       }
     },
@@ -2205,6 +3312,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Show Cursor Guide"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示光标引导线"
           }
         }
       }
@@ -2218,6 +3331,12 @@
             "state": "new",
             "value": "Web"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "网页"
+          }
         }
       }
     },
@@ -2229,6 +3348,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Decrease Height"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "减小高度"
           }
         }
       }
@@ -2242,6 +3367,12 @@
             "state": "new",
             "value": "Disable Transparency for Active Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停用活跃窗口的透明度"
+          }
         }
       }
     },
@@ -2253,6 +3384,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Paste Bracketing"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴括号模式"
           }
         }
       }
@@ -2266,6 +3403,12 @@
             "state": "new",
             "value": "Add Annotation at Cursor"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在光标处添加注释"
+          }
         }
       }
     },
@@ -2277,6 +3420,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Replace with Pretty-Printed JSON"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "替换为格式化的 JSON"
           }
         }
       }
@@ -2290,6 +3439,12 @@
             "state": "new",
             "value": "Next Annotation"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下一个注释"
+          }
         }
       }
     },
@@ -2301,6 +3456,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Alerts"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提醒"
           }
         }
       }
@@ -2314,6 +3475,12 @@
             "state": "new",
             "value": "Copy with Control Sequences"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝（含控制序列）"
+          }
         }
       }
     },
@@ -2325,6 +3492,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Move Session to Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将会话移到标签页"
           }
         }
       }
@@ -2338,6 +3511,12 @@
             "state": "new",
             "value": "Bottom of Screen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕底部"
+          }
         }
       }
     },
@@ -2349,6 +3528,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Prompt to Convert Tabs to Spaces when Pasting"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粘贴时提示将制表符转换为空格"
           }
         }
       }
@@ -2362,6 +3547,12 @@
             "state": "new",
             "value": "Resize Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "调整窗口大小"
+          }
         }
       }
     },
@@ -2373,6 +3564,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Raw Key Reporting Mode"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "原始按键报告模式"
           }
         }
       }
@@ -2386,6 +3583,12 @@
             "state": "new",
             "value": "Reset"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重置"
+          }
         }
       }
     },
@@ -2397,6 +3600,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Duplicate Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制标签页"
           }
         }
       }
@@ -2410,6 +3619,12 @@
             "state": "new",
             "value": "Move Session to Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将会话移到窗口"
+          }
         }
       }
     },
@@ -2421,6 +3636,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Report All Keys as Escape Codes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将所有按键报告为转义码"
           }
         }
       }
@@ -2434,6 +3655,12 @@
             "state": "new",
             "value": "Warn Before Multi-Line Paste"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "多行粘贴前警告"
+          }
         }
       }
     },
@@ -2445,6 +3672,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Show Inline Chat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示内联聊天"
           }
         }
       }
@@ -2458,6 +3691,12 @@
             "state": "new",
             "value": "Toggle Buffer Input"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切换缓冲输入"
+          }
         }
       }
     },
@@ -2469,6 +3708,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Triggers"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "触发器"
           }
         }
       }
@@ -2482,6 +3727,12 @@
             "state": "new",
             "value": "Exit Workgroup"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出工作组"
+          }
         }
       }
     },
@@ -2493,6 +3744,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Select Output of Last Command"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择上一个命令的输出"
           }
         }
       }
@@ -2506,6 +3763,12 @@
             "state": "new",
             "value": "Restart Session"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新启动会话"
+          }
         }
       }
     },
@@ -2517,6 +3780,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Top of Screen"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕顶部"
           }
         }
       }
@@ -2530,6 +3799,12 @@
             "state": "new",
             "value": "Disambiguate Escape"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "消歧义 Escape"
+          }
         }
       }
     },
@@ -2541,6 +3816,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Pick Result to Open"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选取结果打开"
           }
         }
       }
@@ -2554,6 +3835,12 @@
             "state": "new",
             "value": "Merge All Windows"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "合并所有窗口"
+          }
         }
       }
     },
@@ -2565,6 +3852,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Pin Hotkey Window"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "固定热键窗口"
           }
         }
       }
@@ -2578,6 +3871,12 @@
             "state": "new",
             "value": "Open Quickly"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速打开"
+          }
         }
       }
     },
@@ -2589,6 +3888,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Manage"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理"
           }
         }
       }
@@ -2602,6 +3907,12 @@
             "state": "new",
             "value": "Limit Multi-Line Paste Warning to Shell Prompt"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅在 Shell 提示符下显示多行粘贴警告"
+          }
         }
       }
     },
@@ -2613,6 +3924,12 @@
           "stringUnit": {
             "state": "new",
             "value": "New Window with Current Profile"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用当前配置文件新建窗口"
           }
         }
       }
@@ -2626,6 +3943,12 @@
             "state": "new",
             "value": "Item 2"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 2"
+          }
         }
       }
     },
@@ -2637,6 +3960,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Mouse Reporting"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鼠标报告"
           }
         }
       }
@@ -2650,6 +3979,12 @@
             "state": "new",
             "value": "Marks and Annotations"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标记与注释"
+          }
         }
       }
     },
@@ -2661,6 +3996,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Lock Layout"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁定布局"
           }
         }
       }
@@ -2674,6 +4015,12 @@
             "state": "new",
             "value": "Arrange Windows"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "排列窗口"
+          }
         }
       }
     },
@@ -2685,6 +4032,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Find All Smart Selection Matches"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找所有智能选择匹配项"
           }
         }
       }
@@ -2698,6 +4051,12 @@
             "state": "new",
             "value": "Open Command History…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开命令历史…"
+          }
         }
       }
     },
@@ -2710,16 +4069,29 @@
             "state": "new",
             "value": "Play a Sound"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "播放声音"
+          }
         }
       }
     },
     "NGU-fy-0o1.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"ssh\"; ObjectID = \"NGU-fy-0o1\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "ssh"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "ssh"
           }
         }
@@ -2734,6 +4106,12 @@
             "state": "new",
             "value": "Full-Height Right of Screen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕右侧全高"
+          }
         }
       }
     },
@@ -2745,6 +4123,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Standard Key Reporting Mode"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标准按键报告模式"
           }
         }
       }
@@ -2758,6 +4142,12 @@
             "state": "new",
             "value": "Notify on Status Change"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状态更改时通知"
+          }
         }
       }
     },
@@ -2769,6 +4159,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Uninstall Claude Code Integration"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "卸载 Claude Code 集成"
           }
         }
       }
@@ -2782,6 +4178,12 @@
             "state": "new",
             "value": "Arrangements"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口布局"
+          }
         }
       }
     },
@@ -2793,6 +4195,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Previous Peer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上一个对等会话"
           }
         }
       }
@@ -2806,6 +4214,12 @@
             "state": "new",
             "value": "Undo Close"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "撤销关闭"
+          }
         }
       }
     },
@@ -2817,6 +4231,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Workgroups"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工作组"
           }
         }
       }
@@ -2830,6 +4250,12 @@
             "state": "new",
             "value": "Report Alternate Keys"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "报告替代键"
+          }
         }
       }
     },
@@ -2841,6 +4267,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Split Pane"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拆分面板"
           }
         }
       }
@@ -2854,6 +4286,12 @@
             "state": "new",
             "value": "Lock Split Pane Width"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁定拆分面板宽度"
+          }
         }
       }
     },
@@ -2866,16 +4304,29 @@
             "state": "new",
             "value": "Forward"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前进"
+          }
         }
       }
     },
     "P4S-PI-zKU.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"VT300\"; ObjectID = \"P4S-PI-zKU\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "VT300"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "VT300"
           }
         }
@@ -2890,6 +4341,12 @@
             "state": "new",
             "value": "Manage"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理"
+          }
         }
       }
     },
@@ -2901,6 +4358,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Buried Sessions"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已隐藏的会话"
           }
         }
       }
@@ -2914,6 +4377,12 @@
             "state": "new",
             "value": "Post Notification"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "发送通知"
+          }
         }
       }
     },
@@ -2925,6 +4394,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Install Claude Code Integration"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装 Claude Code 集成"
           }
         }
       }
@@ -2938,6 +4413,12 @@
             "state": "new",
             "value": "Current Session is Broadcast Source"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前会话是广播源"
+          }
         }
       }
     },
@@ -2949,6 +4430,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Alert on Next Mark"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在下一个标记时提醒"
           }
         }
       }
@@ -2962,6 +4449,12 @@
             "state": "new",
             "value": "CSI u Mode"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSI u 模式"
+          }
         }
       }
     },
@@ -2973,6 +4466,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Move Divider Down"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向下移动分隔条"
           }
         }
       }
@@ -2986,6 +4485,12 @@
             "state": "new",
             "value": "Resize Split Pane"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "调整拆分面板大小"
+          }
         }
       }
     },
@@ -2997,6 +4502,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Reinstall Claude Code Integration"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新安装 Claude Code 集成"
           }
         }
       }
@@ -3010,6 +4521,12 @@
             "state": "new",
             "value": "Pause Pane"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂停面板"
+          }
         }
       }
     },
@@ -3021,6 +4538,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Save Retrospective Debug Logs"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存回溯调试日志"
           }
         }
       }
@@ -3034,6 +4557,12 @@
             "state": "new",
             "value": "Select Current Command"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择当前命令"
+          }
         }
       }
     },
@@ -3045,6 +4574,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Render Selection Natively"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以原生方式渲染所选内容"
           }
         }
       }
@@ -3058,6 +4593,12 @@
             "state": "new",
             "value": "Edit Window Title"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑窗口标题"
+          }
         }
       }
     },
@@ -3070,16 +4611,29 @@
             "state": "new",
             "value": "Suppressed Alerts…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已抑制的提醒…"
+          }
         }
       }
     },
     "TJi-5Q-RCM.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"Auto Composer\"; ObjectID = \"TJi-5Q-RCM\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Auto Composer"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Auto Composer"
           }
         }
@@ -3094,6 +4648,12 @@
             "state": "new",
             "value": "Download Files…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下载文件…"
+          }
         }
       }
     },
@@ -3105,6 +4665,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标签页"
           }
         }
       }
@@ -3118,6 +4684,12 @@
             "state": "new",
             "value": "Move Tab Left"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将标签页左移"
+          }
         }
       }
     },
@@ -3129,6 +4701,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Show Timestamps"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示时间戳"
           }
         }
       }
@@ -3142,6 +4720,12 @@
             "state": "new",
             "value": "Select Matches"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择匹配项"
+          }
         }
       }
     },
@@ -3153,6 +4737,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Restore Archive…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢复归档…"
           }
         }
       }
@@ -3166,6 +4756,12 @@
             "state": "new",
             "value": "Clear Find"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除查找"
+          }
         }
       }
     },
@@ -3177,6 +4773,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Emulation Level"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仿真级别"
           }
         }
       }
@@ -3190,6 +4792,12 @@
             "state": "new",
             "value": "Find URLs"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查找 URL"
+          }
         }
       }
     },
@@ -3201,6 +4809,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Window Style"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口样式"
           }
         }
       }
@@ -3214,6 +4828,12 @@
             "state": "new",
             "value": "Full-Width Bottom of Screen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕底部全宽"
+          }
         }
       }
     },
@@ -3225,6 +4845,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Back"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "后退"
           }
         }
       }
@@ -3238,6 +4864,12 @@
             "state": "new",
             "value": "Remove Recent Profiles from Dock Menu"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从 Dock 菜单移除最近的配置文件"
+          }
         }
       }
     },
@@ -3249,6 +4881,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Buried Sessions"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已隐藏的会话"
           }
         }
       }
@@ -3262,6 +4900,12 @@
             "state": "new",
             "value": "Resize Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "调整窗口大小"
+          }
         }
       }
     },
@@ -3273,6 +4917,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Decrease Width"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "减小宽度"
           }
         }
       }
@@ -3286,6 +4936,12 @@
             "state": "new",
             "value": "Right of Screen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕右侧"
+          }
         }
       }
     },
@@ -3297,6 +4953,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Paste File Base64-Encoded"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以 Base64 编码粘贴文件"
           }
         }
       }
@@ -3310,6 +4972,12 @@
             "state": "new",
             "value": "Clear to Last Mark"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除到上一个标记"
+          }
         }
       }
     },
@@ -3322,16 +4990,29 @@
             "state": "new",
             "value": "Import Recording"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导入录制"
+          }
         }
       }
     },
     "Xze-0w-34U.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"VT100\"; ObjectID = \"Xze-0w-34U\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "VT100"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "VT100"
           }
         }
@@ -3346,6 +5027,12 @@
             "state": "new",
             "value": "Warn Before Pasting One Line Ending in a Newline at Shell Prompt"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 Shell 提示符下粘贴以换行符结尾的单行前警告"
+          }
         }
       }
     },
@@ -3358,16 +5045,29 @@
             "state": "new",
             "value": "New Tab Next to Current Tab"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在当前标签页旁新建标签页"
+          }
         }
       }
     },
     "Yat-BG-Cr5.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenuItem\"; title = \"VT200\"; ObjectID = \"Yat-BG-Cr5\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "VT200"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "VT200"
           }
         }
@@ -3382,6 +5082,12 @@
             "state": "new",
             "value": "Console"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "控制台"
+          }
         }
       }
     },
@@ -3393,6 +5099,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Session"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话"
           }
         }
       }
@@ -3406,6 +5118,12 @@
             "state": "new",
             "value": "Named Marks"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "命名标记"
+          }
         }
       }
     },
@@ -3417,6 +5135,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Replace with Base 64-Encoded Value"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "替换为 Base64 编码值"
           }
         }
       }
@@ -3430,6 +5154,12 @@
             "state": "new",
             "value": "Next Peer"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下一个对等会话"
+          }
         }
       }
     },
@@ -3441,6 +5171,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Annotate Selection"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "注释所选内容"
           }
         }
       }
@@ -3454,6 +5190,12 @@
             "state": "new",
             "value": "Move Divider Left"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向左移动分隔条"
+          }
         }
       }
     },
@@ -3465,6 +5207,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Named Marks"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "命名标记"
           }
         }
       }
@@ -3478,6 +5226,12 @@
             "state": "new",
             "value": "No Title Bar"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无标题栏"
+          }
         }
       }
     },
@@ -3489,6 +5243,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Tab"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标签页"
           }
         }
       }
@@ -3502,6 +5262,12 @@
             "state": "new",
             "value": "Copy Performance Stats"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝性能统计"
+          }
         }
       }
     },
@@ -3513,6 +5279,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Move Session"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移动会话"
           }
         }
       }
@@ -3526,6 +5298,12 @@
             "state": "new",
             "value": "Report Associated Text"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "报告关联文本"
+          }
         }
       }
     },
@@ -3537,6 +5315,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Open Source Licenses"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开源许可证"
           }
         }
       }
@@ -3550,6 +5334,12 @@
             "state": "new",
             "value": "Lock Size"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁定大小"
+          }
         }
       }
     },
@@ -3561,6 +5351,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Log to File"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "记录到文件"
           }
         }
       }
@@ -3574,6 +5370,12 @@
             "state": "new",
             "value": "Export…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导出…"
+          }
         }
       }
     },
@@ -3585,6 +5387,12 @@
           "stringUnit": {
             "state": "new",
             "value": "New Python Script"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建 Python 脚本"
           }
         }
       }
@@ -3598,6 +5406,12 @@
             "state": "new",
             "value": "Clear Instant Replay"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除即时回放"
+          }
         }
       }
     },
@@ -3609,6 +5423,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Scripts"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脚本"
           }
         }
       }
@@ -3622,6 +5442,12 @@
             "state": "new",
             "value": "Reveal Scripts in Finder"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 Finder 中显示脚本"
+          }
         }
       }
     },
@@ -3633,6 +5459,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Save Contents…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "存储内容…"
           }
         }
       }
@@ -3646,6 +5478,12 @@
             "state": "new",
             "value": "Bring All To Front"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前置全部窗口"
+          }
         }
       }
     },
@@ -3657,6 +5495,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Fold All"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部折叠"
           }
         }
       }
@@ -3670,6 +5514,12 @@
             "state": "new",
             "value": "Restore Window Arrangement as Tabs"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将窗口布局恢复为标签页"
+          }
         }
       }
     },
@@ -3681,6 +5531,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Archives"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "归档"
           }
         }
       }
@@ -3694,6 +5550,12 @@
             "state": "new",
             "value": "Show Tip of the Day"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示每日提示"
+          }
         }
       }
     },
@@ -3705,6 +5567,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Cockpit"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工作台"
           }
         }
       }
@@ -3718,6 +5586,12 @@
             "state": "new",
             "value": "Reload Page"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新载入页面"
+          }
         }
       }
     },
@@ -3729,6 +5603,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Import…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导入…"
           }
         }
       }
@@ -3742,6 +5622,12 @@
             "state": "new",
             "value": "Remote host can control iTerm2"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "远程主机可控制 iTerm2"
+          }
         }
       }
     },
@@ -3753,6 +5639,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Selection Respects Soft Boundaries"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所选内容遵循软边界"
           }
         }
       }
@@ -3766,6 +5658,12 @@
             "state": "new",
             "value": "Open Python REPL"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开 Python REPL"
+          }
         }
       }
     },
@@ -3777,6 +5675,12 @@
           "stringUnit": {
             "state": "new",
             "value": "modifyOtherKeys Mode 2"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "modifyOtherKeys 模式 2"
           }
         }
       }
@@ -3790,6 +5694,12 @@
             "state": "new",
             "value": "Enable Triggers in Interactive Apps"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在交互式应用中启用触发器"
+          }
         }
       }
     },
@@ -3801,6 +5711,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Bury Session"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐藏会话"
           }
         }
       }
@@ -3814,6 +5730,12 @@
             "state": "new",
             "value": "Show Modal Alert Box"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示模态提醒框"
+          }
         }
       }
     },
@@ -3825,6 +5747,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Enable All"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部启用"
           }
         }
       }
@@ -3838,6 +5766,12 @@
             "state": "new",
             "value": "Next Mark"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下一个标记"
+          }
         }
       }
     },
@@ -3849,6 +5783,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Copy with Styles"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝（含样式）"
           }
         }
       }
@@ -3862,6 +5802,30 @@
             "state": "new",
             "value": "Alternate Screen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "备用屏幕"
+          }
+        }
+      }
+    },
+    "nTg-01-nxt.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Select Next Tab Group\"; ObjectID = \"nTg-01-nxt\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Select Next Tab Group"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择下一个标签组"
+          }
         }
       }
     },
@@ -3873,6 +5837,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Resize Split Pane"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "调整拆分面板大小"
           }
         }
       }
@@ -3886,6 +5856,12 @@
             "state": "new",
             "value": "Alerts"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提醒"
+          }
         }
       }
     },
@@ -3897,6 +5873,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Edit Tab Title"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑标签页标题"
           }
         }
       }
@@ -3910,6 +5892,12 @@
             "state": "new",
             "value": "Terminal State"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "终端状态"
+          }
         }
       }
     },
@@ -3921,6 +5909,12 @@
           "stringUnit": {
             "state": "new",
             "value": "AI Chats"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 聊天"
           }
         }
       }
@@ -3934,6 +5928,12 @@
             "state": "new",
             "value": "Save Archive of Current Session…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存当前会话归档…"
+          }
         }
       }
     },
@@ -3945,6 +5945,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Replace Selection"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "替换所选内容"
           }
         }
       }
@@ -3958,16 +5964,47 @@
             "state": "new",
             "value": "Show Annotations"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示注释"
+          }
+        }
+      }
+    },
+    "pTg-01-prv.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Select Previous Tab Group\"; ObjectID = \"pTg-01-prv\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Select Previous Tab Group"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择上一个标签组"
+          }
         }
       }
     },
     "pbR-BZ-1Bc.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenu\"; title = \"ssh\"; ObjectID = \"pbR-BZ-1Bc\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "ssh"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "ssh"
           }
         }
@@ -3982,6 +6019,12 @@
             "state": "new",
             "value": "Item 3"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "项目 3"
+          }
         }
       }
     },
@@ -3993,6 +6036,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Previous Annotation"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上一个注释"
           }
         }
       }
@@ -4006,6 +6055,12 @@
             "state": "new",
             "value": "Alert on Marks in Offscreen Sessions"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在离屏会话中标记时提醒"
+          }
         }
       }
     },
@@ -4017,6 +6072,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Increase Width"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "增加宽度"
           }
         }
       }
@@ -4030,6 +6091,12 @@
             "state": "new",
             "value": "Install Shell Integration"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装 Shell 集成"
+          }
         }
       }
     },
@@ -4041,6 +6108,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Filter"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "过滤"
           }
         }
       }
@@ -4054,6 +6127,12 @@
             "state": "new",
             "value": "Edit Triggers"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑触发器"
+          }
         }
       }
     },
@@ -4065,6 +6144,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Snippets"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "代码片段"
           }
         }
       }
@@ -4078,6 +6163,12 @@
             "state": "new",
             "value": "Show Session Note"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示会话备注"
+          }
         }
       }
     },
@@ -4089,6 +6180,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Snippets"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "代码片段"
           }
         }
       }
@@ -4102,6 +6199,12 @@
             "state": "new",
             "value": "Previous Mark"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上一个标记"
+          }
         }
       }
     },
@@ -4113,6 +6216,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Make Screenshot…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "创建截图…"
           }
         }
       }
@@ -4126,6 +6235,12 @@
             "state": "new",
             "value": "Install Already-Downloaded Python Runtime"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装已下载的 Python 运行时"
+          }
         }
       }
     },
@@ -4137,6 +6252,48 @@
           "stringUnit": {
             "state": "new",
             "value": "Move Divider Right"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向右移动分隔条"
+          }
+        }
+      }
+    },
+    "tgA-01-new.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Add Tab to New Group…\"; ObjectID = \"tgA-01-new\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Add Tab to New Group…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将标签页添加到新标签组…"
+          }
+        }
+      }
+    },
+    "tgR-01-rem.title": {
+      "comment": "Class = \"NSMenuItem\"; title = \"Remove Tab from Group\"; ObjectID = \"tgR-01-rem\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Remove Tab from Group"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将标签页移出标签组"
           }
         }
       }
@@ -4150,6 +6307,12 @@
             "state": "new",
             "value": "Open AI Chat…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开 AI 聊天…"
+          }
         }
       }
     },
@@ -4161,6 +6324,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Advanced Paste…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "高级粘贴…"
           }
         }
       }
@@ -4174,6 +6343,12 @@
             "state": "new",
             "value": "Arrange Windows"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "排列窗口"
+          }
         }
       }
     },
@@ -4185,6 +6360,12 @@
           "stringUnit": {
             "state": "new",
             "value": "History"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "历史记录"
           }
         }
       }
@@ -4198,6 +6379,12 @@
             "state": "new",
             "value": "Emulation Level"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仿真级别"
+          }
         }
       }
     },
@@ -4209,6 +6396,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Open Selection"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开所选内容"
           }
         }
       }
@@ -4222,6 +6415,12 @@
             "state": "new",
             "value": "Literal Controls"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "字面控制字符"
+          }
         }
       }
     },
@@ -4233,6 +6432,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Explain Output with AI"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用 AI 解释输出"
           }
         }
       }
@@ -4246,6 +6451,12 @@
             "state": "new",
             "value": "Replace with Pretty-Printed JSON"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "替换为格式化的 JSON"
+          }
         }
       }
     },
@@ -4257,6 +6468,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Actions"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "动作"
           }
         }
       }
@@ -4270,6 +6487,12 @@
             "state": "new",
             "value": "Manage Dependencies…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理依赖项…"
+          }
         }
       }
     },
@@ -4281,6 +6504,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Workgroups"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "工作组"
           }
         }
       }
@@ -4294,6 +6523,12 @@
             "state": "new",
             "value": "Load Arrangement from File…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从文件载入布局…"
+          }
         }
       }
     },
@@ -4305,6 +6540,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Copy Mode Shortcuts"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝模式快捷键"
           }
         }
       }
@@ -4318,6 +6559,12 @@
             "state": "new",
             "value": "Split Pane"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拆分面板"
+          }
         }
       }
     },
@@ -4329,6 +6576,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Size Changes Update Profile"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大小更改时更新配置文件"
           }
         }
       }
@@ -4342,6 +6595,12 @@
             "state": "new",
             "value": "Report All Event Types"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "报告所有事件类型"
+          }
         }
       }
     },
@@ -4353,6 +6612,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Web"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "网页"
           }
         }
       }
@@ -4366,6 +6631,12 @@
             "state": "new",
             "value": "modifyOtherKeys Mode 1"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "modifyOtherKeys 模式 1"
+          }
         }
       }
     },
@@ -4377,6 +6648,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Application Keypad"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用程序键盘"
           }
         }
       }
@@ -4390,6 +6667,12 @@
             "state": "new",
             "value": "Add Trigger…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加触发器…"
+          }
         }
       }
     },
@@ -4401,6 +6684,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Arrange Split Panes Evenly"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "均匀排列拆分面板"
           }
         }
       }
@@ -4414,6 +6703,12 @@
             "state": "new",
             "value": "Full-Width Top of Screen"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕顶部全宽"
+          }
         }
       }
     },
@@ -4425,6 +6720,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Find Globally..."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全局查找..."
           }
         }
       }
@@ -4438,6 +6739,12 @@
             "state": "new",
             "value": "Maximized"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大化"
+          }
         }
       }
     },
@@ -4449,6 +6756,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Disconnect"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "断开连接"
           }
         }
       }
@@ -4462,6 +6775,12 @@
             "state": "new",
             "value": "Restore Window Arrangement as Tabs"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将窗口布局恢复为标签页"
+          }
         }
       }
     },
@@ -4473,6 +6792,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Engage Artificial Intelligence"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启用人工智能"
           }
         }
       }

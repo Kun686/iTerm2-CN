@@ -10,16 +10,29 @@
             "state": "new",
             "value": "12 bytes"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "12 字节"
+          }
         }
       }
     },
     "0w1-N3-vpN.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"/directory\"; ObjectID = \"0w1-N3-vpN\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "/directory"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "/directory"
           }
         }
@@ -34,16 +47,29 @@
             "state": "new",
             "value": "Started at %@"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始于 %@"
+          }
         }
       }
     },
     "MHQ-ga-Xvf.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"command\"; ObjectID = \"MHQ-ga-Xvf\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "command"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "command"
           }
         }
@@ -58,6 +84,12 @@
             "state": "new",
             "value": "Directory:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目录："
+          }
         }
       }
     },
@@ -69,6 +101,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Return Code:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "返回码："
           }
         }
       }
@@ -82,16 +120,29 @@
             "state": "new",
             "value": "Command:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "命令："
+          }
         }
       }
     },
     "YLQ-rO-0Mh.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"127\"; ObjectID = \"YLQ-rO-0Mh\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "127"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "127"
           }
         }
@@ -106,6 +157,12 @@
             "state": "new",
             "value": "Disable showing offscreen command"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "禁用显示屏幕外的命令"
+          }
         }
       }
     },
@@ -117,6 +174,12 @@
           "stringUnit": {
             "state": "new",
             "value": "1h 35m"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 小时 35 分"
           }
         }
       }
@@ -130,6 +193,12 @@
             "state": "new",
             "value": "Output:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "输出："
+          }
         }
       }
     },
@@ -142,6 +211,12 @@
             "state": "new",
             "value": "Copied"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷贝"
+          }
         }
       }
     },
@@ -153,6 +228,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Running Time:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "运行时间："
           }
         }
       }

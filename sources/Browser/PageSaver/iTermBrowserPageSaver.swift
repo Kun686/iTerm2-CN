@@ -328,11 +328,11 @@ enum PageSaveError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .failedToGetHTML:
-            return "Failed to get page HTML content"
+            return String(localized: "ui.swift.browser.pagesaver.itermbrowserpagesaver.failed_to_get_page_html_content.2a5fc2d9", defaultValue: "Failed to get page HTML content", bundle: .main, comment: "User-facing text in iTermBrowserPageSaver.")
         case .failedToCreateDirectory:
-            return "Failed to create save directory"
+            return String(localized: "ui.swift.browser.pagesaver.itermbrowserpagesaver.failed_to_create_save_directory.6f4412b7", defaultValue: "Failed to create save directory", bundle: .main, comment: "User-facing text in iTermBrowserPageSaver.")
         case .failedToSaveFile:
-            return "Failed to save file"
+            return String(localized: "ui.swift.browser.pagesaver.itermbrowserpagesaver.failed_to_save_file.a11e2c2c", defaultValue: "Failed to save file", bundle: .main, comment: "User-facing text in iTermBrowserPageSaver.")
         }
     }
 }
@@ -382,10 +382,10 @@ extension iTermBrowserPageSaver {
     @MainActor
     private static func showSaveError(_ error: Error, window: NSWindow) {
         let alert = NSAlert()
-        alert.messageText = "Save Failed"
-        alert.informativeText = "Could not save the page: \(error.localizedDescription)"
+        alert.messageText = String(localized: "ui.swift.browser.pagesaver.itermbrowserpagesaver.save_failed.9bcdbf65", defaultValue: "Save Failed", bundle: .main, comment: "User-facing text in iTermBrowserPageSaver.")
+        alert.informativeText = String(localized: "ui.swift.browser.pagesaver.itermbrowserpagesaver.could_not_save_the_page_0.20695363", defaultValue: "Could not save the page: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in iTermBrowserPageSaver.")
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.pagesaver.itermbrowserpagesaver.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermBrowserPageSaver."))
         alert.beginSheetModal(for: window, completionHandler: nil)
     }
 

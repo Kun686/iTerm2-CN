@@ -205,11 +205,11 @@ static NSInteger sWindowArrangementGeneration;
                completion:(void (^)(NSString *name, iTermSavePanelItem *saveItem))completion {
     NSAlert *alert = [[NSAlert alloc] init];
     alert.messageText = prompt;
-    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in WindowArrangements (showAlertWithText:defaultInput:offerExport:completion:).")];
     if (offerExport) {
-        [alert addButtonWithTitle:@"Save to File with Contents…"];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.save_to_file_with_contents.d68eb17f", nil, NSBundle.mainBundle, @"Save to File with Contents…", @"User-facing text in WindowArrangements (showAlertWithText:defaultInput:offerExport:completion:).")];
     }
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in WindowArrangements (showAlertWithText:defaultInput:offerExport:completion:).")];
 
     NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 24)];
     [input setStringValue:defaultValue];
@@ -283,7 +283,7 @@ static NSInteger sWindowArrangementGeneration;
 }
 
 + (void)nameForNewArrangement:(void (^)(NSString *))completion {
-    [WindowArrangements showAlertWithText:@"Name for saved window arrangement:"
+    [WindowArrangements showAlertWithText:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.name_for_saved_window_arrangement.7c3f1164", nil, NSBundle.mainBundle, @"Name for saved window arrangement:", @"User-facing text in WindowArrangements (nameForNewArrangement:).")
                              defaultInput:[self nameForNewArrangement]
                               offerExport:NO
                                completion:^(NSString *name, iTermSavePanelItem *saveItem) {
@@ -293,10 +293,10 @@ static NSInteger sWindowArrangementGeneration;
         }
         if ([WindowArrangements hasWindowArrangement:name]) {
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Replace Existing Saved Window Arrangement?";
-            alert.informativeText = @"There is an existing saved window arrangement with this name. Would you like to replace it with the current arrangement?";
-            [alert addButtonWithTitle:@"Yes"];
-            [alert addButtonWithTitle:@"No"];
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.replace_existing_saved_window_arrangement.e5ea7c2d", nil, NSBundle.mainBundle, @"Replace Existing Saved Window Arrangement?", @"User-facing text in WindowArrangements (source UI).");
+            alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.there_is_an_existing_saved_window_arrangement_with.ebe21a22", nil, NSBundle.mainBundle, @"There is an existing saved window arrangement with this name. Would you like to replace it with the current arrangement?", @"User-facing text in WindowArrangements (source UI).");
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.yes.85a39ab3", nil, NSBundle.mainBundle, @"Yes", @"User-facing text in WindowArrangements (source UI).")];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.no.1ea442a1", nil, NSBundle.mainBundle, @"No", @"User-facing text in WindowArrangements (source UI).")];
             if ([alert runModal] == NSAlertSecondButtonReturn) {
                 completion(nil);
                 return;
@@ -307,7 +307,7 @@ static NSInteger sWindowArrangementGeneration;
 }
 
 + (void)selectNameAndWhetherToIncludeContentsWithCompletion:(void (^)(NSString *name, iTermSavePanelItem *saveItem))completion {
-    [self showAlertWithText:@"Name for saved window arrangement:"
+    [self showAlertWithText:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.name_for_saved_window_arrangement.7c3f1164", nil, NSBundle.mainBundle, @"Name for saved window arrangement:", @"User-facing text in WindowArrangements (showAlertWithText:defaultInput:offerExport:completion:).")
                defaultInput:[self nameForNewArrangement]
                 offerExport:YES
                  completion:completion];
@@ -361,10 +361,10 @@ static NSInteger sWindowArrangementGeneration;
     NSDictionary *value = [dict[oldName] copy];
     if (dict[newName]) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Replace Arrangement?";
-        alert.informativeText = [NSString stringWithFormat:@"An arrangement named “%@” already exists. Would you like to replace it?", newName];
-        [alert addButtonWithTitle:@"OK"];
-        [alert addButtonWithTitle:@"Cancel"];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.replace_arrangement.a33d0dba", nil, NSBundle.mainBundle, @"Replace Arrangement?", @"User-facing text in WindowArrangements (controlTextDidEndEditing:).");
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.an_arrangement_named_already_exists_would_you_like.27143372", nil, NSBundle.mainBundle, @"An arrangement named “%@” already exists. Would you like to replace it?", @"User-facing text in WindowArrangements (informativeText)."), newName];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in WindowArrangements (controlTextDidEndEditing:).")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.windowarrangements.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in WindowArrangements (controlTextDidEndEditing:).")];
         if ([alert runSheetModalForWindow:self.view.window] == NSAlertSecondButtonReturn) {
             textField.stringValue = oldName;
             return;

@@ -42,13 +42,13 @@ static NSString *const iTermBatteryComponentKnobKeyShowTime = @"ShowTime";
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {
     iTermStatusBarComponentKnob *showPercentageKnob =
-    [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Show Percentage"
+    [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarbatterycomponent.show_percentage.600daf45", nil, NSBundle.mainBundle, @"Show Percentage", @"Status bar component setting label.")
                                                       type:iTermStatusBarComponentKnobTypeCheckbox
                                                placeholder:nil
                                               defaultValue:@YES
                                                        key:iTermBatteryComponentKnobKeyShowPercentage];
     iTermStatusBarComponentKnob *showEstimatedTimeKnob =
-    [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Show Estimated Time"
+    [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarbatterycomponent.show_estimated_time.f67d6f51", nil, NSBundle.mainBundle, @"Show Estimated Time", @"Status bar component setting label.")
                                                       type:iTermStatusBarComponentKnobTypeCheckbox
                                                placeholder:nil
                                               defaultValue:@NO
@@ -83,11 +83,11 @@ static NSString *const iTermBatteryComponentKnobKeyShowTime = @"ShowTime";
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Battery Level";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarbatterycomponent.battery_level.bece9110", nil, NSBundle.mainBundle, @"Battery Level", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Shows current battery level and its recent history.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarbatterycomponent.shows_current_battery_level_and_its_recent_history.a755fd05", nil, NSBundle.mainBundle, @"Shows current battery level and its recent history.", @"Status bar component description.");
 }
 
 - (id)statusBarComponentExemplarWithBackgroundColor:(NSColor *)backgroundColor

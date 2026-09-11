@@ -53,7 +53,7 @@ class iTermWorkgroupsEditingViewController: NSViewController {
         tableView.allowsMultipleSelection = false
         tableView.rowSizeStyle = .default
         let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("name"))
-        column.title = "Name"
+        column.title = String(localized: "ui.swift.workgroups.itermworkgroupseditingviewcontroller.name.dcd1d522", defaultValue: "Name", bundle: .main, comment: "User-facing text in iTermWorkgroupsEditingViewController.")
         column.resizingMask = .autoresizingMask
         tableView.addTableColumn(column)
         tableView.dataSource = self
@@ -78,7 +78,7 @@ class iTermWorkgroupsEditingViewController: NSViewController {
         presetPopup = NSPopUpButton(frame: .zero, pullsDown: true)
         presetPopup.bezelStyle = .rounded
         presetPopup.controlSize = .regular
-        let titleItem = NSMenuItem(title: "Add Preset",
+        let titleItem = NSMenuItem(title: String(localized: "ui.swift.workgroups.itermworkgroupseditingviewcontroller.add_preset.0b0bb9c5", defaultValue: "Add Preset", bundle: .main, comment: "User-facing text in iTermWorkgroupsEditingViewController."),
                                    action: nil, keyEquivalent: "")
         presetPopup.menu?.addItem(titleItem)
         for preset in WorkgroupPresets.all {
@@ -246,7 +246,7 @@ class iTermWorkgroupsEditingViewController: NSViewController {
 
     private func addWorkgroup() {
         pushUndo()
-        let wg = iTermWorkgroup.newEmpty(name: "Untitled Workgroup")
+        let wg = iTermWorkgroup.newEmpty(name: String(localized: "ui.swift.workgroups.itermworkgroupseditingviewcontroller.untitled_workgroup.fec3411a", defaultValue: "Untitled Workgroup", bundle: .main, comment: "User-facing text in iTermWorkgroupsEditingViewController."))
         iTermWorkgroupModel.instance.add(wg)
         if let idx = iTermWorkgroupModel.instance.workgroups.firstIndex(where: {
             $0.uniqueIdentifier == wg.uniqueIdentifier
@@ -284,7 +284,7 @@ class iTermWorkgroupsEditingViewController: NSViewController {
             target.pushUndo()
             iTermWorkgroupModel.instance.setAll(snapshot)
         }
-        view.window?.undoManager?.setActionName("Change Workgroups")
+        view.window?.undoManager?.setActionName(String(localized: "ui.swift.workgroups.itermworkgroupseditingviewcontroller.change_workgroups.c424047c", defaultValue: "Change Workgroups", bundle: .main, comment: "User-facing text in iTermWorkgroupsEditingViewController."))
     }
 
     func replaceSelectedWorkgroup(_ updated: iTermWorkgroup,

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browsing History</title>
+    <title>{{PAGE_TITLE}}</title>
     <style>
         {{COMMON_CSS}}
         
@@ -72,11 +72,11 @@
     <div class="container">
         <div class="header">
             <div class="header-content">
-                <h1>📚 <span class="title-text">Browsing History</span></h1>
-                <p>View and manage your browsing history</p>
+                <h1>📚 <span class="title-text">{{PAGE_TITLE}}</span></h1>
+                <p>{{PAGE_SUBTITLE}}</p>
             </div>
             <div class="header-actions">
-                <button class="button small danger" onclick="clearAllHistory()">Clear All History</button>
+                <button class="button small danger" onclick="clearAllHistory()">{{CLEAR_ALL}}</button>
             </div>
         </div>
         
@@ -86,9 +86,9 @@
                 <input type="text" 
                        id="searchInput" 
                        class="search-input" 
-                       placeholder="Search your browsing history…" 
+                       placeholder="{{SEARCH_PLACEHOLDER}}"
                        autocomplete="off">
-                <button class="clear-button" onclick="clearSearch()" title="Clear search">×</button>
+                <button class="clear-button" onclick="clearSearch()" title="{{CLEAR_SEARCH_TOOLTIP}}">×</button>
             </div>
         </div>
         
@@ -98,12 +98,12 @@
         
         <div class="loading-indicator" id="loadingIndicator">
             <div class="loading-spinner"></div>
-            Loading history...
+            {{LOADING}}
         </div>
         
         <div class="load-more-container">
             <button id="loadMoreButton" class="load-more-button" onclick="loadMore()" style="display: none;">
-                Load More
+                {{LOAD_MORE}}
             </button>
         </div>
     </div>

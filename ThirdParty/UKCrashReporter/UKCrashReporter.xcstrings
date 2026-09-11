@@ -1,0 +1,403 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "5.title" : {
+      "comment" : "Class = \"NSWindow\"; title = \"Crash Reporter\"; ObjectID = \"5\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Crash Reporter"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "崩溃报告"
+          }
+        }
+      }
+    },
+    "11.label" : {
+      "comment" : "Class = \"NSTabViewItem\"; label = \"Description\"; ObjectID = \"11\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Description"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "说明"
+          }
+        }
+      }
+    },
+    "12.label" : {
+      "comment" : "Class = \"NSTabViewItem\"; label = \"Crash Log\"; ObjectID = \"12\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Crash Log"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "崩溃日志"
+          }
+        }
+      }
+    },
+    "84.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; crash-report explanation; ObjectID = \"84\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "It appears that %%APPNAME crashed the last time it was used. Do you want to send a crash log to the developers?\n\nCrash logs from Apple are not sent to other developers, so this is the only way the developers of %%APPNAME can find out about and fix this crash."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%APPNAME 上次使用时似乎发生了崩溃。要向开发者发送崩溃日志吗？\n\nApple 不会将崩溃日志发送给其他开发者，因此 %%APPNAME 的开发者只能通过这种方式了解并修复此次崩溃。"
+          }
+        }
+      }
+    },
+    "85.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; crash-report privacy explanation; ObjectID = \"85\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You can delete any information you do not want transmitted, but this will make it more difficult to detect the bug. By default, the crash log as well as what Mac you are using and your settings are transmitted."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您可以删除不想发送的任何信息，但这会增加定位问题的难度。默认情况下，将发送崩溃日志、Mac 型号及应用设置。"
+          }
+        }
+      }
+    },
+    "86.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"Send\"; ObjectID = \"86\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Send"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送"
+          }
+        }
+      }
+    },
+    "87.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"Remind Me Later\"; ObjectID = \"87\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Remind Me Later"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稍后提醒"
+          }
+        }
+      }
+    },
+    "88.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"Discard\"; ObjectID = \"88\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Discard"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "丢弃"
+          }
+        }
+      }
+    },
+    "COULDNT_SEND_CRASH_REPORT_ERROR" : {
+      "comment" : "Title of the error shown when a crash report cannot be submitted.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't submit crash report"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法提交崩溃报告"
+          }
+        }
+      }
+    },
+    "COULDNT_SEND_CRASH_REPORT_ERROR_OK" : {
+      "comment" : "Dismisses the crash-report submission error.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好"
+          }
+        }
+      }
+    },
+    "COULDNT_SEND_FEEDBACK_ERROR" : {
+      "comment" : "Title of the error shown when feedback cannot be submitted.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't send out your message."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法发送消息。"
+          }
+        }
+      }
+    },
+    "CRASH_REPORT_CGI_URL" : {
+      "shouldTranslate": false,
+      "comment" : "Existing upstream crash-report endpoint. This technical value must not be translated.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://iterm2.com/crashreportform.php"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://iterm2.com/crashreportform.php"
+          }
+        }
+      }
+    },
+    "FEEDBACK_EXPLANATION_TEXT" : {
+      "comment" : "Instructions shown above the feedback message field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your message below. If you are reporting a bug, please include information about your Mac and operating system version and a list of steps to help reproduce the problem.\n\nBe sure to include your email address or we won't be able to get back to you."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请在下方输入消息。如果您要报告错误，请提供 Mac 和操作系统版本，以及有助于重现问题的步骤。\n\n请务必填写电子邮件地址，否则我们无法回复您。"
+          }
+        }
+      }
+    },
+    "FEEDBACK_MESSAGE_TEXT" : {
+      "comment" : "Template placed in the feedback message field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi iTerm2 Developers,\n\nhere's what I'd like to tell you:\n\n\t...\n\n-- %%LONGUSERNAME\n\nReply to me at %%EMAILADDRESS"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iTerm2 开发者，您好：\n\n我想反馈以下内容：\n\n\t...\n\n-- %%LONGUSERNAME\n\n请通过 %%EMAILADDRESS 回复我"
+          }
+        }
+      }
+    },
+    "CRASH_MESSAGE_TEXT" : {
+      "comment" : "Template placed in the crash report description field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi, I'm %%LONGUSERNAME!\n\nI was doing the following at the time of the crash:\n\n- Step One\n- Step Two\n- ...\n\nMy E-Mail address is %%EMAILADDRESS, in case you want to get back to me.\n"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您好，我是 %%LONGUSERNAME！\n\n崩溃发生时，我正在进行以下操作：\n\n- 第一步\n- 第二步\n- ……\n\n我的电子邮件地址是 %%EMAILADDRESS，如需回复请通过该地址联系我。\n"
+          }
+        }
+      }
+    },
+    "MISSING_EMAIL_ADDRESS" : {
+      "comment" : "Placeholder used when the user's email address is unavailable.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "<Your E-Mail Address here>"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "<请在此填写电子邮件地址>"
+          }
+        }
+      }
+    },
+    "SYSTEM_INFO_TAB_NAME" : {
+      "comment" : "Label of the system information tab in feedback mode.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Information"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "系统信息"
+          }
+        }
+      }
+    },
+    "WANT_TO_SEND_CRASH" : {
+      "comment" : "Message asking whether to submit a recent crash log.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The application %@ has recently crashed. To help improve it, you can send the system's crash log and a copy of the settings file to the programmers working on this program so they can use the information in it to fix the bug. Do you want to send the log?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用 %@ 最近发生了崩溃。为了帮助改进应用，您可以将系统崩溃日志和设置文件副本发送给开发人员，以便他们分析并修复问题。要发送日志吗？"
+          }
+        }
+      }
+    },
+    "WANT_TO_SEND_CRASH_DONT_SEND" : {
+      "comment" : "Declines to submit a crash report.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't Send"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不发送"
+          }
+        }
+      }
+    },
+    "WANT_TO_SEND_CRASH_SEND" : {
+      "comment" : "Submits a crash report.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送"
+          }
+        }
+      }
+    },
+    "WANT_TO_SEND_CRASH_SEND_LATER" : {
+      "comment" : "Defers crash-report submission.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Later"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稍后发送"
+          }
+        }
+      }
+    },
+    "WANT_TO_SEND_CRASH_TITLE" : {
+      "comment" : "Title asking whether to report the most recent crash.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to report the last crash?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "要报告上次崩溃吗？"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

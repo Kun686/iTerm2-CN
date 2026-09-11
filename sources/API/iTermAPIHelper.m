@@ -439,12 +439,12 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
 
     // "Reveal Preference" is a one-time navigation action and shouldn't be remembered.
     iTermWarning *warning = [[iTermWarning alloc] init];
-    warning.title = @"The location of your Application Support directory appears to have moved or its contents have changed unexpectedly. As a precaution, the authentication mechanism for Python API scripts for iTerm2 has been reverted to always require Automation permission.";
-    warning.actionLabels = @[ @"OK", @"Reveal Preference" ];
+    warning.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.the_location_of_your_application_support_directory_appears.4436760f", nil, NSBundle.mainBundle, @"The location of your Application Support directory appears to have moved or its contents have changed unexpectedly. As a precaution, the authentication mechanism for Python API scripts for iTerm2 has been reverted to always require Automation permission.", @"User-facing text in iTermAPIHelper (title).");
+    warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIHelper (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.reveal_preference.6c4d6d0d", nil, NSBundle.mainBundle, @"Reveal Preference", @"User-facing action label in iTermAPIHelper (actionLabels).") ];
     warning.identifier = @"NoSyncAppSupportMoved";
     warning.warningType = kiTermWarningTypePermanentlySilenceable;
-    warning.heading = @"Python API Permissions Reset";
-    warning.doNotRememberLabels = @[ @"Reveal Preference" ];
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.python_api_permissions_reset.a9d73584", nil, NSBundle.mainBundle, @"Python API Permissions Reset", @"User-facing text in iTermAPIHelper (heading).");
+    warning.doNotRememberLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.reveal_preference.6c4d6d0d", nil, NSBundle.mainBundle, @"Reveal Preference", @"User-facing action label in iTermAPIHelper (doNotRememberLabels).") ];
     const iTermWarningSelection selection = [warning runModal];
     if (selection == kiTermWarningSelection1) {
         [[PreferencePanel sharedInstance] openToPreferenceWithKey:kPreferenceKeyAPIAuthentication];
@@ -455,12 +455,12 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
 
 + (BOOL)createNoAuthFile:(NSWindow *)window {
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:@"Do you want to allow all apps running on this machine to use the Python API?\n\nThis will disable the check for Automation permission. If you agree, you’ll be prompted for administrator access to make the change."
-                               actions:@[ @"OK", @"Cancel", @"More Info" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.do_you_want_to_allow_all_apps_running.ee2f7d3d", nil, NSBundle.mainBundle, @"Do you want to allow all apps running on this machine to use the Python API?\n\nThis will disable the check for Automation permission. If you agree, you’ll be prompted for administrator access to make the change.", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermAPIHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.more_info.d0407f5d", nil, NSBundle.mainBundle, @"More Info", @"User-facing action label in iTermAPIHelper (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncRequireApplescriptAuth"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Disable per-app authentication?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.disable_per_app_authentication.2b6bedda", nil, NSBundle.mainBundle, @"Disable per-app authentication?", @"User-facing text in iTermAPIHelper (heading).")
                                 window:window];
     switch (selection) {
         case kiTermWarningSelection0:
@@ -490,12 +490,12 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
 
     [self setEnabled:NO];
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Failed to remove the file “%@”: %@\n\nPlease remove this file manually to require Automation permission for the Python API.\n\nThe Python API has been disabled for your security.", path, error.localizedDescription]
-                               actions:@[ @"OK", @"Reveal In Finder" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.failed_to_remove_the_file_please_remove_this.bfed414c", nil, NSBundle.mainBundle, @"Failed to remove the file “%@”: %@\n\nPlease remove this file manually to require Automation permission for the Python API.\n\nThe Python API has been disabled for your security.", @"User-facing text in iTermAPIHelper (showWarningWithTitle)."), path, error.localizedDescription]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.reveal_in_finder.b97ada43", nil, NSBundle.mainBundle, @"Reveal In Finder", @"User-facing action label in iTermAPIHelper (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncFailedToRemoveNoAuth"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Error changing API permissions setting"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.error_changing_api_permissions_setting.7d633443", nil, NSBundle.mainBundle, @"Error changing API permissions setting", @"User-facing text in iTermAPIHelper (heading).")
                                 window:window];
     switch (selection) {
         case kiTermWarningSelection0:
@@ -543,23 +543,23 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
     if (!dict) {
         return YES;
     }
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"The setting could not be changed: %@", dict[NSAppleScriptErrorBriefMessage]]
-                               actions:@[ @"OK" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.the_setting_could_not_be_changed.0dec29f1", nil, NSBundle.mainBundle, @"The setting could not be changed: %@", @"User-facing text in iTermAPIHelper (showWarningWithTitle)."), dict[NSAppleScriptErrorBriefMessage]]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIHelper (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncFailedToCreateNoAuth"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Failed to make change"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.failed_to_make_change.0740df31", nil, NSBundle.mainBundle, @"Failed to make change", @"User-facing text in iTermAPIHelper (heading).")
                                 window:window];
     return NO;
 }
 
 + (void)reportFunctionCallError:(NSError *)error forInvocation:(NSString *)invocation origin:(NSString *)origin window:(NSWindow *)window {
-    NSString *message = [NSString stringWithFormat:@"Error running “%@”:\n%@",
+    NSString *message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.error_running.726db3b7", nil, NSBundle.mainBundle, @"Error running “%@”:\n%@", @"User-facing text in iTermAPIHelper (indirect UI)."),
                          invocation, error.localizedDescription];
     NSString *traceback = error.localizedFailureReason;
-    NSArray *actions = @[ @"OK" ];
+    NSArray *actions = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIHelper (actions).") ];
     if (traceback) {
-        actions = [actions arrayByAddingObject:@"Reveal in Script Console"];
+        actions = [actions arrayByAddingObject:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.reveal_in_script_console.f6d8fa01", nil, NSBundle.mainBundle, @"Reveal in Script Console", @"User-facing action label in iTermAPIHelper.")];
     }
     NSString *connectionKey = error.userInfo[iTermAPIHelperFunctionCallErrorUserInfoKeyConnection];
     iTermScriptHistoryEntry *entry = [[iTermScriptHistory sharedInstance] entryWithIdentifier:connectionKey];
@@ -573,7 +573,7 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
                                                                accessory:nil
                                                               identifier:@"NoSyncFunctionCallError"
                                                              silenceable:kiTermWarningTypeTemporarilySilenceable
-                                                                 heading:[NSString stringWithFormat:@"%@ Function Call Failed", origin]
+                                                                 heading:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.function_call_failed.492e3d74", nil, NSBundle.mainBundle, @"%@ Function Call Failed", @"User-facing text in iTermAPIHelper (heading)."), origin]
                                                                   window:window];
     if (selection == kiTermWarningSelection1) {
         [[iTermScriptConsole sharedInstance] revealTailOfHistoryEntry:entry];
@@ -620,11 +620,11 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
     // It was not enabled in preferences. Ask the user. If they permanently silence this
     // they'll need to go into prefs to enable it.
     iTermWarning *warning = [[iTermWarning alloc] init];
-    warning.heading = @"Enable Python API?";
-    warning.actionLabels = @[ @"OK", @"Cancel" ];
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.enable_python_api.f11044b6", nil, NSBundle.mainBundle, @"Enable Python API?", @"User-facing text in iTermAPIHelper (heading).");
+    warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIHelper (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermAPIHelper (actionLabels).") ];
     warning.identifier = iTermAPIHelperEnablePythonAPIWarningIdentifier;
     warning.warningType = forced ? kiTermWarningTypePersistent : kiTermWarningTypePermanentlySilenceable;
-    warning.title = @"The Python API allows scripts you run to control iTerm2 and access all its data.";
+    warning.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.the_python_api_allows_scripts_you_run_to.63806e14", nil, NSBundle.mainBundle, @"The Python API allows scripts you run to control iTerm2 and access all its data.", @"User-facing text in iTermAPIHelper (title).");
     static BOOL showing;
     if (showing) {
         // This can happen because the call to -runModal below starts a runloop and a delayed perform can then call this.
@@ -1551,15 +1551,15 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
     }
 
     NSString *message =
-        @"Another process is trying to use the iTerm2 API. The API allows a script to control iTerm2 and view and modify its contents. Allow the connection?";
+        NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.another_process_is_trying_to_use_the_iterm2.6982c1ec", nil, NSBundle.mainBundle, @"Another process is trying to use the iTerm2 API. The API allows a script to control iTerm2 and view and modify its contents. Allow the connection?", @"User-facing API authorization message.");
 
     if ([iTermAdvancedSettingsModel setCookie]) {
-        message = [NSString stringWithFormat:@"%@\n\nAlthough you have chosen to allow connections automatically, this script has not presented a valid cookie.", message];
+        message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.although_you_have_chosen_to_allow_connections_automatically.51e6c7ba", nil, NSBundle.mainBundle, @"%@\n\nAlthough you have chosen to allow connections automatically, this script has not presented a valid cookie.", @"User-facing API authorization format string."), message];
     }
 
-    NSArray<NSString *> *actions = @[ @"OK", @"Cancel", @"More Info" ];
+    NSArray<NSString *> *actions = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermAPIHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.more_info.d0407f5d", nil, NSBundle.mainBundle, @"More Info", @"User-facing action label in iTermAPIHelper (actions).") ];
     if (![iTermAdvancedSettingsModel setCookie]) {
-        actions = [actions arrayByAddingObject:@"Always"];
+        actions = [actions arrayByAddingObject:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.always.de9f057a", nil, NSBundle.mainBundle, @"Always", @"User-facing API authorization action.")];
     }
     const iTermWarningSelection selection =
     [iTermWarning showWarningWithTitle:message
@@ -1567,7 +1567,7 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
                              accessory:nil
                             identifier:@"NoSyncAllowPythonAPI"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Allow Python API Usage?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.allow_python_api_usage.2019578d", nil, NSBundle.mainBundle, @"Allow Python API Usage?", @"User-facing text in iTermAPIHelper (heading).")
                                 window:nil];
     switch (selection) {
         case kiTermWarningSelection0:
@@ -1584,12 +1584,12 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
                                                window:nil];
             return NO;
         case kiTermWarningSelection3:
-            if ([iTermWarning showWarningWithTitle:@"New sessions will contain an environment variable that allows scripts to run without confirmation. Are you sure you want to enable this?"
-                                           actions:@[ @"OK", @"Cancel" ]
+            if ([iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.new_sessions_will_contain_an_environment_variable_that.3f5cb960", nil, NSBundle.mainBundle, @"New sessions will contain an environment variable that allows scripts to run without confirmation. Are you sure you want to enable this?", @"User-facing warning message.")
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermAPIHelper (actions).") ]
                                          accessory:nil
                                         identifier:@"NoSyncConfirmAlways"
                                        silenceable:kiTermWarningTypePersistent
-                                           heading:@"Confirm"
+                                           heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapihelper.confirm.eebdd24a", nil, NSBundle.mainBundle, @"Confirm", @"User-facing text in iTermAPIHelper (heading).")
                                             window:nil] == kiTermWarningSelection0) {
                 [iTermAdvancedSettingsModel setSetCookie:YES];
                 *reason = @"Allowed by user";

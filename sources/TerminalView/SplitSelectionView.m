@@ -128,22 +128,22 @@ static CGFloat SplitHalfDistanceFromEdge(SplitSessionHalf half, NSSize size, NSP
     dirtyRect = NSIntersectionRect(dirtyRect, self.bounds);
     switch (_mode) {
         case SplitSelectionViewModeSourceMove:
-            [self drawSourceWithMessage:@"Select a destination pane" rect:dirtyRect];
+            [self drawSourceWithMessage:NSLocalizedStringWithDefaultValue(@"ui.terminalview.splitselectionview.select_a_destination_pane.5adb7e30", nil, NSBundle.mainBundle, @"Select a destination pane", @"User-facing split selection instruction.") rect:dirtyRect];
             return;
         case SplitSelectionViewModeSourceSwap:
-            [self drawSourceWithMessage:@"Select pane to swap with" rect:dirtyRect];
+            [self drawSourceWithMessage:NSLocalizedStringWithDefaultValue(@"ui.terminalview.splitselectionview.select_pane_to_swap_with.f20321c8", nil, NSBundle.mainBundle, @"Select pane to swap with", @"User-facing split selection instruction.") rect:dirtyRect];
             return;
         case SplitSelectionViewModeTargetMove:
-            [self drawTargetWithMessage:@"Click to move source pane to this split"];
+            [self drawTargetWithMessage:NSLocalizedStringWithDefaultValue(@"ui.terminalview.splitselectionview.click_to_move_source_pane_to_this_split.3fb11ba2", nil, NSBundle.mainBundle, @"Click to move source pane to this split", @"User-facing split selection instruction.")];
             return;
         case SplitSelectionViewModeTargetSwap:
-            [self drawTargetWithMessage:@"Click to swap source pane with this one"];
+            [self drawTargetWithMessage:NSLocalizedStringWithDefaultValue(@"ui.terminalview.splitselectionview.click_to_swap_source_pane_with_this_one.b59720a1", nil, NSBundle.mainBundle, @"Click to swap source pane with this one", @"User-facing split selection instruction.")];
             return;
         case SplitSelectionViewModeInspect:
-            [self drawInspectWithMessage:@"Click to inspect" rect:dirtyRect];
+            [self drawInspectWithMessage:NSLocalizedStringWithDefaultValue(@"ui.terminalview.splitselectionview.click_to_inspect.f70a37db", nil, NSBundle.mainBundle, @"Click to inspect", @"User-facing text in SplitSelectionView (drawRect:).") rect:dirtyRect];
             return;
         case SplitSelectionViewModeSelect:
-            [self drawInspectWithMessage:@"Click to select" rect:dirtyRect];
+            [self drawInspectWithMessage:NSLocalizedStringWithDefaultValue(@"ui.terminalview.splitselectionview.click_to_select.161acf36", nil, NSBundle.mainBundle, @"Click to select", @"User-facing text in SplitSelectionView (_showMessage:inRect:).") rect:dirtyRect];
             return;
     }
 }

@@ -411,6 +411,60 @@ class MainMenuMangler: NSObject {
         }
     }
 
+    private func applyCNApplicationIdentityIfNeeded(in mainMenu: NSMenu?) {
+        guard Bundle.main.object(forInfoDictionaryKey: "iTermCNCommunityBuild") as? Bool == true,
+              let displayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String,
+              !displayName.isEmpty,
+              let mainMenu else {
+            return
+        }
+
+        let titleFormatsByIdentifier = [
+            "About iTerm2": String(localized: "ui.swift.mainmenu.mainmenumangler.about.cfba7582", defaultValue: "About %@", bundle: .main, comment: "Application menu item followed by the localized product display name."),
+            "Hide iTerm2": String(localized: "ui.swift.mainmenu.mainmenumangler.hide.93367d5f", defaultValue: "Hide %@", bundle: .main, comment: "Application menu item followed by the localized product display name."),
+            "Make iTerm2 Default Term": String(localized: "ui.swift.mainmenu.mainmenumangler.make_default_term.820e711b", defaultValue: "Make %@ Default Term", bundle: .main, comment: "Application menu item containing the localized product display name."),
+            "Quit iTerm2": String(localized: "ui.swift.mainmenu.mainmenumangler.quit.e07155ac", defaultValue: "Quit %@", bundle: .main, comment: "Application menu item followed by the localized product display name."),
+            "iTerm2 Help": String(localized: "ui.swift.mainmenu.mainmenumangler.help.9c488006", defaultValue: "%@ Help", bundle: .main, comment: "Help menu item preceded by the localized product display name.")
+        ]
+        applyApplicationIdentity(displayName,
+                                 titleFormatsByIdentifier: titleFormatsByIdentifier,
+                                 in: mainMenu)
+    }
+
+    @objc func applyCNApplicationIdentityIfNeeded() {
+        applyCNApplicationIdentityIfNeeded(in: NSApp.mainMenu)
+    }
+
+    func applyApplicationIdentity(
+        _ displayName: String,
+        titleFormatsByIdentifier: [String: String],
+        in menu: NSMenu
+    ) {
+        menu.items.first?.title = displayName
+        menu.items.first?.submenu?.title = displayName
+        applyApplicationIdentityTitles(displayName,
+                                       titleFormatsByIdentifier: titleFormatsByIdentifier,
+                                       in: menu)
+    }
+
+    private func applyApplicationIdentityTitles(
+        _ displayName: String,
+        titleFormatsByIdentifier: [String: String],
+        in menu: NSMenu
+    ) {
+        for item in menu.items {
+            if let identifier = item.identifier?.rawValue,
+               let format = titleFormatsByIdentifier[identifier] {
+                item.title = String(format: format, displayName)
+            }
+            if let submenu = item.submenu {
+                applyApplicationIdentityTitles(displayName,
+                                               titleFormatsByIdentifier: titleFormatsByIdentifier,
+                                               in: submenu)
+            }
+        }
+    }
+
     @objc func start(web: NSMenuItem) {
         self.web = web
 

@@ -397,7 +397,7 @@ struct Message: Codable {
                     return "Explanation: \(response.annotations.count) annotations: \(response.mainResponse?.truncatedWithTrailingEllipsis(to: maxLength) ?? "No main response")"
                 }
             case .remoteCommandRequest(let rc, safe: _):
-                return "Run remote command: \(rc.markdownDescription)"
+                return "Run remote command: \(rc.safetyTranscriptDescription)"
             case .remoteCommandResponse(let result, _, let name, _):
                 return "Response to remote command \(name): " + result.map(success: { $0.truncatedWithTrailingEllipsis(to: maxLength)},
                                                                            failure: { $0.localizedDescription.truncatedWithTrailingEllipsis(to: maxLength)})
@@ -406,7 +406,7 @@ struct Message: Codable {
             case .clientLocal(let cl):
                 switch cl.action {
                 case .executingCommand(let rc):
-                    return "Client-local: executing \(rc.markdownDescription)"
+                    return "Client-local: executing \(rc.safetyTranscriptDescription)"
                 case .pickingSession:
                     return "Client-local: picking session"
                 case .notice(let string):
@@ -465,18 +465,18 @@ struct Message: Codable {
             case .explanationResponse(_, _, let markdown):
                 return markdown.truncatedWithTrailingEllipsis(to: maxLength)
             case .remoteCommandRequest(let command, safe: _): return command.markdownDescription
-            case .selectSessionRequest: return "Selecting session…"
+            case .selectSessionRequest: return String(localized: "ui.swift.aiterm.message.selecting_session.a7caea89", defaultValue: "Selecting session…", bundle: .main, comment: "User-facing text in Message.")
             case .clientLocal(let cl):
                 switch cl.action {
                 case .executingCommand(let command): return command.markdownDescription
-                case .pickingSession: return "Selecting session…"
+                case .pickingSession: return String(localized: "ui.swift.aiterm.message.selecting_session.a7caea89", defaultValue: "Selecting session…", bundle: .main, comment: "User-facing text in Message.")
                 case .notice(let message): return message
                 case .streamingChanged(let state):
                     return switch state {
                     case .stopped, .stoppedAutomatically:
-                        "Stopped sending commands to AI"
+                        String(localized: "ui.swift.aiterm.message.stopped_sending_commands_to_ai.af56ab25", defaultValue: "Stopped sending commands to AI", bundle: .main, comment: "User-facing text in Message.")
                     case .active:
-                        "Sending commands to AI automatically"
+                        String(localized: "ui.swift.aiterm.message.sending_commands_to_ai_automatically.6364d19b", defaultValue: "Sending commands to AI automatically", bundle: .main, comment: "User-facing text in Message.")
                     }
                 case .offerLink, .offerOrchestration, .permissions, .workgroupPermissionRequest,
                         .enableOrchestrationRequest, .orchestrationPermissionGranted:
@@ -488,9 +488,9 @@ struct Message: Codable {
             case .watcherEvent(let update):
                 return update.detail.truncatedWithTrailingEllipsis(to: maxLength)
             case .remoteCommandResponse:
-                return "Finished executing command"
+                return String(localized: "ui.swift.aiterm.message.finished_executing_command.9cb4300a", defaultValue: "Finished executing command", bundle: .main, comment: "User-facing text in Message.")
             case .terminalCommand(let cmd):
-                return "Ran `\(cmd.command.truncatedWithTrailingEllipsis(to: maxLength - 4))`"
+                return String(localized: "ui.swift.aiterm.message.ran_0.b966d3e6", defaultValue: "Ran `\(cmd.command.truncatedWithTrailingEllipsis(to: maxLength - 4))`", bundle: .main, comment: "User-facing text in Message.")
             case .multipart(let subparts, _):
                 // Return the last substantive subpart's preview (shared with the
                 // companion's reply-preview classifier via Subpart.previewAndLabel).
@@ -499,7 +499,7 @@ struct Message: Codable {
                         return preview.text
                     }
                 }
-                return "Empty message"
+                return String(localized: "ui.swift.aiterm.message.empty_message.79791f17", defaultValue: "Empty message", bundle: .main, comment: "User-facing text in Message.")
             }
         }
     }

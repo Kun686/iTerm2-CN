@@ -153,11 +153,11 @@
     }
     NSString *string;
     if (isFirstResponder && self.hotkeyBeingRecorded.length == 0) {
-        string = @"Recording";
+        string = NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermshortcutinputview.recording.80e8dd1a", nil, NSBundle.mainBundle, @"Recording", @"User-facing text in iTermShortcutInputView (drawRect:).");
     } else if (isFirstResponder) {
         string = self.hotkeyBeingRecorded;
     } else if (self.stringValue.length == 0) {
-        string = self.isEnabled ? @"Click to Set" : @"";
+        string = self.isEnabled ? NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermshortcutinputview.click_to_set.a32b111b", nil, NSBundle.mainBundle, @"Click to Set", @"User-facing text in iTermShortcutInputView (drawRect:).") : @"";
     } else {
         string = self.stringValue;
     }
@@ -233,12 +233,12 @@
                                                      leaderAllowed:_leaderAllowed];
         if (self.purpose && shortcut.smellsAccidental) {
             const iTermWarningSelection selection =
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Are you sure you want to use “%@” %@? This looks like a commonly used keystroke.", shortcut.stringValue, self.purpose]
-                                       actions:@[ @"OK", @"Cancel" ]
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermshortcutinputview.are_you_sure_you_want_to_use_this.e70aaa58", nil, NSBundle.mainBundle, @"Are you sure you want to use “%@” %@? This looks like a commonly used keystroke.", @"User-facing text in iTermShortcutInputView (showWarningWithTitle)."), shortcut.stringValue, self.purpose]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermshortcutinputview.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermShortcutInputView (actions)."), NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermshortcutinputview.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermShortcutInputView (actions).") ]
                                      accessory:nil
                                     identifier:nil
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Confirm Shortcut"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.infrastructure.views.itermshortcutinputview.confirm_shortcut.f27de622", nil, NSBundle.mainBundle, @"Confirm Shortcut", @"User-facing text in iTermShortcutInputView (heading).")
                                         window:self.window];
             if (selection == kiTermWarningSelection1) {
                 [self revert];

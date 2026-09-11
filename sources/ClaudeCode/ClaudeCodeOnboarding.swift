@@ -32,36 +32,36 @@ class ClaudeCodeOnboarding: NSObject {
 
         var title: String {
             switch self {
-            case .enablePythonAPI: return "Enable Python API"
-            case .installHook: return "Install Hook"
-            case .showToolbelt: return "Show Toolbelt"
-            case .installWorkgroup: return "Install Workgroup"
-            case .installTriggers: return "Auto-Enter Workgroup"
+            case .enablePythonAPI: return String(localized: "ui.swift.claudecode.claudecodeonboarding.enable_python_api.3013992d", defaultValue: "Enable Python API", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            case .installHook: return String(localized: "ui.swift.claudecode.claudecodeonboarding.install_hook.58663632", defaultValue: "Install Hook", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            case .showToolbelt: return String(localized: "ui.swift.claudecode.claudecodeonboarding.show_toolbelt.fab4c242", defaultValue: "Show Toolbelt", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            case .installWorkgroup: return String(localized: "ui.swift.claudecode.claudecodeonboarding.install_workgroup.070ece19", defaultValue: "Install Workgroup", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            case .installTriggers: return String(localized: "ui.swift.claudecode.claudecodeonboarding.auto_enter_workgroup.e3c02e2c", defaultValue: "Auto-Enter Workgroup", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             }
         }
 
         var buttonTitle: String {
             switch self {
-            case .enablePythonAPI: return "Enable"
-            case .installHook: return "Install"
-            case .showToolbelt: return "Show"
-            case .installWorkgroup: return "Install"
-            case .installTriggers: return "Install"
+            case .enablePythonAPI: return String(localized: "ui.swift.claudecode.claudecodeonboarding.enable.5342e09f", defaultValue: "Enable", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            case .installHook: return String(localized: "ui.swift.claudecode.claudecodeonboarding.install.569ca49f", defaultValue: "Install", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            case .showToolbelt: return String(localized: "ui.swift.claudecode.claudecodeonboarding.show.0df6f1ca", defaultValue: "Show", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            case .installWorkgroup: return String(localized: "ui.swift.claudecode.claudecodeonboarding.install.569ca49f", defaultValue: "Install", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            case .installTriggers: return String(localized: "ui.swift.claudecode.claudecodeonboarding.install.569ca49f", defaultValue: "Install", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             }
         }
 
         var description: String {
             switch self {
             case .enablePythonAPI:
-                return "The Claude Code integration relies on iTerm2\u{2019}s Python API to find sessions running Claude and track their status.\n\nThe Python API is currently disabled. Setup can\u{2019}t continue until it is enabled. Click Enable to turn it on."
+                return String(localized: "ui.swift.claudecode.claudecodeonboarding.the_claude_code_integration_relies_on_iterm2_s.30fd57aa", defaultValue: "The Claude Code integration relies on iTerm2\u{2019}s Python API to find sessions running Claude and track their status.\n\nThe Python API is currently disabled. Setup can\u{2019}t continue until it is enabled. Click Enable to turn it on.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             case .installHook:
-                return "Install a Claude Code hook that lets iTerm2 detect Claude\u{2019}s state (working, waiting, idle) and display it in the Session Status tool.\n\nThis adds a hook to your Claude Code settings that runs automatically as Claude works."
+                return String(localized: "ui.swift.claudecode.claudecodeonboarding.install_a_claude_code_hook_that_lets_iterm2.926e5dcb", defaultValue: "Install a Claude Code hook that lets iTerm2 detect Claude\u{2019}s state (working, waiting, idle) and display it in the Session Status tool.\n\nThis adds a hook to your Claude Code settings that runs automatically as Claude works.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             case .showToolbelt:
-                return "Show the toolbelt and enable the Session Status tool. The toolbelt appears on the right side of your terminal window.\n\nYou can toggle the toolbelt from View > Toolbelt > Show Toolbelt, or with the shortcut \u{2318}\u{21E7}B."
+                return String(localized: "ui.swift.claudecode.claudecodeonboarding.show_the_toolbelt_and_enable_the_session_status.1b627dcf", defaultValue: "Show the toolbelt and enable the Session Status tool. The toolbelt appears on the right side of your terminal window.\n\nYou can toggle the toolbelt from View > Toolbelt > Show Toolbelt, or with the shortcut \u{2318}\u{21E7}B.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             case .installWorkgroup:
-                return "Install the Claude Code workgroup, which groups your main Claude session with two peer sessions: a diff viewer and a code-review session. You can switch between them with one click.\n\nYou can customize this layout later in Settings > Shortcuts > Workgroups."
+                return String(localized: "ui.swift.claudecode.claudecodeonboarding.install_the_claude_code_workgroup_which_groups_your.bd549419", defaultValue: "Install the Claude Code workgroup, which groups your main Claude session with two peer sessions: a diff viewer and a code-review session. You can switch between them with one click.\n\nYou can customize this layout later in Settings > Shortcuts > Workgroups.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             case .installTriggers:
-                return "Pick the terminal profiles where you run claude. iTerm2 will add triggers so the Claude Code workgroup is entered automatically when claude starts and exited when it stops.\n\nWithout this, you can still enter the workgroup manually via Shell > Workgroups > Claude Code."
+                return String(localized: "ui.swift.claudecode.claudecodeonboarding.pick_the_terminal_profiles_where_you_run_claude.404e9689", defaultValue: "Pick the terminal profiles where you run claude. iTerm2 will add triggers so the Claude Code workgroup is entered automatically when claude starts and exited when it stops.\n\nWithout this, you can still enter the workgroup manually via Shell > Workgroups > Claude Code.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             }
         }
     }
@@ -762,7 +762,7 @@ class ClaudeCodeOnboarding: NSObject {
             styleMask: [.titled, .closable],
             backing: .buffered,
             defer: false)
-        panel.title = "Claude Code Integration Setup"
+        panel.title = String(localized: "ui.swift.claudecode.claudecodeonboarding.claude_code_integration_setup.216c517c", defaultValue: "Claude Code Integration Setup", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
         panel.isFloatingPanel = true
         panel.hidesOnDeactivate = true
         panel.delegate = self
@@ -807,7 +807,7 @@ class ClaudeCodeOnboarding: NSObject {
         // Button bar at the bottom
         let buttonY: CGFloat = 15
 
-        nextButton = NSButton(title: "Next", target: self, action: #selector(nextPressed(_:)))
+        nextButton = NSButton(title: String(localized: "ui.swift.claudecode.claudecodeonboarding.next.1ff57a29", defaultValue: "Next", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."), target: self, action: #selector(nextPressed(_:)))
         nextButton.bezelStyle = .rounded
         nextButton.frame = NSRect(x: contentView.bounds.width - margin - 80,
                                   y: buttonY,
@@ -816,7 +816,7 @@ class ClaudeCodeOnboarding: NSObject {
         nextButton.autoresizingMask = [.minXMargin, .maxYMargin]
         contentView.addSubview(nextButton)
 
-        doItButton = NSButton(title: "Do It", target: self, action: #selector(doItPressed(_:)))
+        doItButton = NSButton(title: String(localized: "ui.swift.claudecode.claudecodeonboarding.do_it.0c4c78a3", defaultValue: "Do It", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."), target: self, action: #selector(doItPressed(_:)))
         doItButton.bezelStyle = .rounded
         doItButton.keyEquivalent = "\r"
         doItButton.frame = NSRect(x: nextButton.frame.minX - 90,
@@ -826,7 +826,7 @@ class ClaudeCodeOnboarding: NSObject {
         doItButton.autoresizingMask = [.minXMargin, .maxYMargin]
         contentView.addSubview(doItButton)
 
-        backButton = NSButton(title: "Back", target: self, action: #selector(backPressed(_:)))
+        backButton = NSButton(title: String(localized: "ui.swift.claudecode.claudecodeonboarding.back.76900f1b", defaultValue: "Back", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."), target: self, action: #selector(backPressed(_:)))
         backButton.bezelStyle = .rounded
         backButton.frame = NSRect(x: margin,
                                   y: buttonY,
@@ -843,15 +843,14 @@ class ClaudeCodeOnboarding: NSObject {
         let sheetPadding: CGFloat = 24
         let textWidth = sheetWidth - sheetPadding * 2
 
-        let titleLabel = NSTextField(labelWithString: "Before You Start")
+        let titleLabel = NSTextField(labelWithString: String(localized: "ui.swift.claudecode.claudecodeonboarding.before_you_start.467eac1e", defaultValue: "Before You Start", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."))
         titleLabel.font = NSFont.boldSystemFont(ofSize: 16)
         titleLabel.frame.size.width = textWidth
         titleLabel.sizeToFit()
         introTitleLabel = titleLabel
 
         let lead = NSTextField(wrappingLabelWithString:
-            "Don’t panic! All of this can be undone later via "
-            + "iTerm2 > Uninstall Claude Code Integration.")
+            String(localized: "ui.swift.claudecode.claudecodeonboarding.don_t_panic_all_of_this_can_be.5937a270", defaultValue: "Don’t panic! All of this can be undone later via iTerm2 > Uninstall Claude Code Integration.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."))
         lead.font = NSFont.systemFont(ofSize: 13)
         lead.textColor = .labelColor
         lead.isSelectable = false
@@ -872,7 +871,7 @@ class ClaudeCodeOnboarding: NSObject {
         disclosure.sizeToFit()
         introDisclosureButton = disclosure
 
-        let disclosureLabel = NSTextField(labelWithString: "What gets changed")
+        let disclosureLabel = NSTextField(labelWithString: String(localized: "ui.swift.claudecode.claudecodeonboarding.what_gets_changed.797f4e6b", defaultValue: "What gets changed", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."))
         disclosureLabel.font = NSFont.systemFont(ofSize: 13)
         disclosureLabel.textColor = .labelColor
         disclosureLabel.isSelectable = false
@@ -880,11 +879,7 @@ class ClaudeCodeOnboarding: NSObject {
         introDisclosureLabel = disclosureLabel
 
         let details = NSTextField(wrappingLabelWithString:
-            "\u{2022} iTerm2\u{2019}s Python API is enabled\n"
-            + "\u{2022} A cc-status hook is added to ~/.claude/settings.json\n"
-            + "\u{2022} The toolbelt is shown\n"
-            + "\u{2022} A Claude Code workgroup is added to iTerm2\u{2019}s settings\n"
-            + "\u{2022} Enter/Exit Workgroup triggers are added to the profiles you pick")
+            String(localized: "ui.swift.claudecode.claudecodeonboarding.iterm2_s_python_api_is_enabled_a_cc.4fe94a0c", defaultValue: "• iTerm2’s Python API is enabled\n• A cc-status hook is added to ~/.claude/settings.json\n• The toolbelt is shown\n• A Claude Code workgroup is added to iTerm2’s settings\n• Enter/Exit Workgroup triggers are added to the profiles you pick", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."))
         details.font = NSFont.systemFont(ofSize: 13)
         details.textColor = .secondaryLabelColor
         details.isSelectable = false
@@ -895,7 +890,7 @@ class ClaudeCodeOnboarding: NSObject {
         // Always-visible link to the full writeup, regardless of the
         // disclosure state. Sits below the "What gets changed" row so
         // users who want the whole story can read it on the web.
-        let helpLink = LinkButton(title: "Learn more about the Claude Code integration",
+        let helpLink = LinkButton(title: String(localized: "ui.swift.claudecode.claudecodeonboarding.learn_more_about_the_claude_code_integration.429eec85", defaultValue: "Learn more about the Claude Code integration", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."),
                                   target: self,
                                   action: #selector(openIntegrationHelp(_:)))
         helpLink.font = NSFont.systemFont(ofSize: 13)
@@ -903,7 +898,7 @@ class ClaudeCodeOnboarding: NSObject {
         helpLink.sizeToFit()
         introHelpLink = helpLink
 
-        let continueButton = NSButton(title: "Continue",
+        let continueButton = NSButton(title: String(localized: "ui.swift.claudecode.claudecodeonboarding.continue.31fbef16", defaultValue: "Continue", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."),
                                       target: self,
                                       action: #selector(dismissIntroSheet(_:)))
         continueButton.bezelStyle = .rounded
@@ -1107,10 +1102,10 @@ class ClaudeCodeOnboarding: NSObject {
         doItButton.isHidden = false
 
         if isLastStep {
-            nextButton.title = "Close"
+            nextButton.title = String(localized: "ui.swift.claudecode.claudecodeonboarding.close.7d9eb7ac", defaultValue: "Close", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             nextButton.isEnabled = true
         } else {
-            nextButton.title = "Next"
+            nextButton.title = String(localized: "ui.swift.claudecode.claudecodeonboarding.next.1ff57a29", defaultValue: "Next", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             // Show Toolbelt is optional: Next is always enabled so the
             // user can skip it. The default-button logic below keeps
             // Show as the default until the toolbelt has actually been
@@ -1386,8 +1381,8 @@ class ClaudeCodeOnboarding: NSObject {
         } catch {
             RLog("Onboarding: failed to write settings.json: \(error)")
             let alert = NSAlert()
-            alert.messageText = "Failed to install hook"
-            alert.informativeText = "Could not write to \(settingsURL.path): \(error.localizedDescription)"
+            alert.messageText = String(localized: "ui.swift.claudecode.claudecodeonboarding.failed_to_install_hook.879041a6", defaultValue: "Failed to install hook", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+            alert.informativeText = String(localized: "ui.swift.claudecode.claudecodeonboarding.could_not_write_to_0_1.cbd7bf52", defaultValue: "Could not write to \(settingsURL.path): \(error.localizedDescription)", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             alert.runModal()
             return false
         }
@@ -1532,13 +1527,13 @@ class ClaudeCodeOnboarding: NSObject {
         let orphanCount = orphanScan.sessionCount
         if orphanCount > 0 {
             let title = orphanCount == 1
-                ? "Also update 1 session whose profile is missing"
-                : "Also update \(orphanCount) sessions whose profiles are missing"
+                ? String(localized: "ui.swift.claudecode.claudecodeonboarding.also_update_1_session_whose_profile_is_missing.643c9307", defaultValue: "Also update 1 session whose profile is missing", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+                : String(localized: "ui.swift.claudecode.claudecodeonboarding.also_update_0_sessions_whose_profiles_are_missing.4b9df3f5", defaultValue: "Also update \(orphanCount) sessions whose profiles are missing", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             let checkbox = NSButton(
                 checkboxWithTitle: title,
                 target: nil,
                 action: nil)
-            checkbox.toolTip = "Includes running sessions that were created from a profile that has since been deleted."
+            checkbox.toolTip = String(localized: "ui.swift.claudecode.claudecodeonboarding.includes_running_sessions_that_were_created_from_a.dd259823", defaultValue: "Includes running sessions that were created from a profile that has since been deleted.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             checkbox.state = .on
             checkbox.translatesAutoresizingMaskIntoConstraints = true
             checkbox.sizeToFit()
@@ -1569,12 +1564,10 @@ class ClaudeCodeOnboarding: NSObject {
         }
 
         let alert = NSAlert()
-        alert.messageText = "Install Auto-Enter Triggers"
-        alert.informativeText = "Pick the profiles you\u{2019}ll run claude in. "
-            + "We\u{2019}ll add Enter/Exit Workgroup triggers to each one so the "
-            + "Claude Code workgroup is entered automatically."
-        alert.addButton(withTitle: "Install")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.claudecode.claudecodeonboarding.install_auto_enter_triggers.f1a13418", defaultValue: "Install Auto-Enter Triggers", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+        alert.informativeText = String(localized: "ui.swift.claudecode.claudecodeonboarding.pick_the_profiles_you_ll_run_claude_in.b0e7636d", defaultValue: "Pick the profiles you’ll run claude in. We’ll add Enter/Exit Workgroup triggers to each one so the Claude Code workgroup is entered automatically.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+        alert.addButton(withTitle: String(localized: "ui.swift.claudecode.claudecodeonboarding.install.569ca49f", defaultValue: "Install", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."))
+        alert.addButton(withTitle: String(localized: "ui.swift.claudecode.claudecodeonboarding.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."))
         alert.accessoryView = accessoryView
 
         // Pre-select every visible row so the default action is "all
@@ -1617,7 +1610,7 @@ class ClaudeCodeOnboarding: NSObject {
                 guidsToInstall.insert(guid)
                 continue
             }
-            let name = (profile[KEY_NAME] as? String) ?? "(unknown)"
+            let name = (profile[KEY_NAME] as? String) ?? String(localized: "ui.swift.claudecode.claudecodeonboarding.unknown.8fe7794d", defaultValue: "(unknown)", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
             nonRewritableDynamic.append((guid, name))
         }
 
@@ -1771,18 +1764,13 @@ class ClaudeCodeOnboarding: NSObject {
             profiles: [(guid: String, name: String)]) -> DynamicProfileChoice {
         let listed = profiles.map { "\u{2022} \($0.name)" }.joined(separator: "\n")
         let warning = iTermWarning()
-        warning.heading = "Dynamic Profiles Selected"
-        warning.title = "These profiles are dynamic and not marked "
-            + "\u{201C}rewritable,\u{201D} so iTerm2 normally regenerates them "
-            + "from disk and any change here would be lost:\n\n\(listed)\n\n"
-            + "iTerm2 can write the triggers back to dynamic profiles when "
-            + "they\u{2019}re marked rewritable. Rewriting can change the "
-            + "order of values in the underlying file."
+        warning.heading = String(localized: "ui.swift.claudecode.claudecodeonboarding.dynamic_profiles_selected.b365e9c7", defaultValue: "Dynamic Profiles Selected", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
+        warning.title = String(localized: "ui.swift.claudecode.claudecodeonboarding.these_profiles_are_dynamic_and_not_marked_rewritable.4fe68e3f", defaultValue: "These profiles are dynamic and not marked “rewritable,” so iTerm2 normally regenerates them from disk and any change here would be lost:\n\n\(listed)\n\niTerm2 can write the triggers back to dynamic profiles when they’re marked rewritable. Rewriting can change the order of values in the underlying file.", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
         warning.warningType = .kiTermWarningTypePersistent
         warning.actionLabels = [
-            "Mark Rewritable & Install",
-            "Skip Dynamic Profiles",
-            "Cancel"
+            String(localized: "ui.swift.claudecode.claudecodeonboarding.mark_rewritable_install.caec173a", defaultValue: "Mark Rewritable & Install", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."),
+            String(localized: "ui.swift.claudecode.claudecodeonboarding.skip_dynamic_profiles.1de66c6d", defaultValue: "Skip Dynamic Profiles", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding."),
+            String(localized: "ui.swift.claudecode.claudecodeonboarding.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ClaudeCodeOnboarding.")
         ]
         switch warning.runModal() {
         case .kiTermWarningSelection0:

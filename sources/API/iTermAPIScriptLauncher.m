@@ -32,6 +32,20 @@
 
 static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallbackNotification = @"iTermAPIScriptLauncherScriptDidFailUserNotificationCallbackNotification";
 
+// Recovery hints also enter Script Console history. Translate only the alert copy.
+static NSString *iTermLocalizedScriptRecoveryDisplayString(NSString *diagnostic) {
+    if ([diagnostic isEqualToString:@"The Apple Silicon runtime could not be downloaded. Check your network connection and try again."]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.apple_silicon_runtime_download_failed.e4c30da1", nil, NSBundle.mainBundle, @"The Apple Silicon runtime could not be downloaded. Check your network connection and try again.", @"Recovery suggestion when the Apple Silicon Python runtime download fails.");
+    }
+    if ([diagnostic isEqualToString:@"Its setup.cfg could not be read, so it cannot be rebuilt automatically."]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.setup_cfg_could_not_be_read.037b527a", nil, NSBundle.mainBundle, @"Its setup.cfg could not be read, so it cannot be rebuilt automatically.", @"Recovery explanation when a script environment cannot be rebuilt because setup.cfg is unreadable.");
+    }
+    if ([diagnostic isEqualToString:@"Its environment is intact; turn off the uv advanced setting to rebuild it for Apple Silicon."]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.environment_intact_disable_uv_for_apple_silicon.47b5cbaf", nil, NSBundle.mainBundle, @"Its environment is intact; turn off the uv advanced setting to rebuild it for Apple Silicon.", @"Recovery suggestion for rebuilding an intact legacy script environment for Apple Silicon.");
+    }
+    return diagnostic;
+}
+
 @interface iTermAPIScriptLauncher ()
 + (NSString *)uvCertifiPathInVenv:(NSString *)venvDirectory;
 @end
@@ -69,14 +83,14 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
                           configParser:(iTermSetupCfgParser *)configParser
                             completion:(void (^)(NSString *))completion {
     DLog(@"%@", fullPath);
-    NSString *message = [NSString stringWithFormat:@"The Python API script “%@” needs a newer version of the runtime environment for security reasons. You must upgrade it before this version of iTerm2 can launch the script.", fullPath.lastPathComponent];
+    NSString *message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.the_python_api_script_needs_a_newer_version_of_the_runtime_environment_f.c6b7489f", nil, NSBundle.mainBundle, @"The Python API script “%@” needs a newer version of the runtime environment for security reasons. You must upgrade it before this version of iTerm2 can launch the script.", @"User-facing text in iTermAPIScriptLauncher (indirect UI)."), fullPath.lastPathComponent];
     const iTermWarningSelection selection =
     [iTermWarning showWarningWithTitle:message
-                               actions:@[ @"Upgrade", @"Cancel" ]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.upgrade.7ec0261b", nil, NSBundle.mainBundle, @"Upgrade", @"User-facing action label in iTermAPIScriptLauncher (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermAPIScriptLauncher (actions).") ]
                              accessory:nil
                             identifier:@"UpgradeFullEnvironmentScript"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Upgrade Python Runtime?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.upgrade_python_runtime.9f1b4e58", nil, NSBundle.mainBundle, @"Upgrade Python Runtime?", @"User-facing text in iTermAPIScriptLauncher (heading).")
                                 window:nil];
     switch (selection) {
         case kiTermWarningSelection0:
@@ -189,11 +203,11 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [iTermWarning showWarningWithTitle:errorStatus.localizedDescription
-                                       actions:@[ @"OK" ]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIScriptLauncher (actions).") ]
                                      accessory:nil
                                     identifier:nil
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Error Upgrading Script"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.error_upgrading_script.3394f6ed", nil, NSBundle.mainBundle, @"Error Upgrading Script", @"User-facing text in iTermAPIScriptLauncher (heading).")
                                         window:nil];
         });
     }];
@@ -253,7 +267,7 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
                                                     provisioningDidBegin:^{
             // Show progress only once the download phase is done and the venv build
             // starts, so a launch-time migration is not a silent multi-second stall.
-            [progress showWithMessage:@"Migrating this script to the new Python runtime…"];
+            [progress showWithMessage:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.migrating_script_to_new_python_runtime.88bf244a", nil, NSBundle.mainBundle, @"Migrating this script to the new Python runtime…", @"Progress message while migrating a script to the new Python runtime.")];
         }
                                                               completion:^(NSError *migrationError) {
             [progress dismiss];
@@ -399,9 +413,9 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
                 }
                 if (uvError != nil || sharedPython == nil) {
                     NSAlert *alert = [[NSAlert alloc] init];
-                    alert.messageText = @"Python Environment Unavailable";
-                    alert.informativeText = [NSString stringWithFormat:@"Could not prepare the Python environment for this script: %@",
-                                             uvError.localizedDescription ?: @"unknown error"];
+                    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.python_environment_unavailable.77664649", nil, NSBundle.mainBundle, @"Python Environment Unavailable", @"User-facing text in iTermAPIScriptLauncher (source UI).");
+                    alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.could_not_prepare_the_python_environment_for_this.4107b7b6", nil, NSBundle.mainBundle, @"Could not prepare the Python environment for this script: %@", @"User-facing text in iTermAPIScriptLauncher (informativeText)."),
+                                             uvError.localizedDescription ?: NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.unknown_error.3e4443e5", nil, NSBundle.mainBundle, @"unknown error", @"Fallback detail in a Python environment error alert.")];
                     [alert runModal];
                     return;
                 }
@@ -481,12 +495,12 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
 
 + (BOOL)userConsentsToInstallingRosetta {
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:@"You must install Rosetta 2 in order to use the Python API. Install it now?"
-                               actions:@[ @"OK", @"Cancel" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.you_must_install_rosetta_2_in_order_to.e71c245a", nil, NSBundle.mainBundle, @"You must install Rosetta 2 in order to use the Python API. Install it now?", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermAPIScriptLauncher (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermAPIScriptLauncher (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncInstallRosetta"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Install Rosetta?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.install_rosetta.b5629ada", nil, NSBundle.mainBundle, @"Install Rosetta?", @"User-facing text in iTermAPIScriptLauncher (heading).")
                                 window:nil];
     return selection == kiTermWarningSelection0;
 }
@@ -523,8 +537,8 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
     [[iTermScriptHistoryEntry globalEntry] addOutput:[NSString stringWithFormat:@"%@ %@\n", base, recovery] completion:^{}];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Script Cannot Run";
-        alert.informativeText = [NSString stringWithFormat:@"%@ %@", base, recovery];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.script_cannot_run.9bb4684c", nil, NSBundle.mainBundle, @"Script Cannot Run", @"User-facing text in iTermAPIScriptLauncher (source UI).");
+        alert.informativeText = [NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.intel_only_python_environment_unavailable.b7ae1806", nil, NSBundle.mainBundle, @"“%@” uses an Intel-only Python environment, which cannot run on this version of macOS because Rosetta is not available.", @"Explanation shown when a legacy script cannot run without Rosetta. Preserve the script-name placeholder."), name], iTermLocalizedScriptRecoveryDisplayString(recovery)];
         [alert runModal];
     });
 }
@@ -559,12 +573,12 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
 + (void)refetchArm64StandardRuntimeForPythonVersion:(NSString *)pythonVersion
                                          completion:(void (^)(iTermPythonRuntimeDownloaderStatus status))completion {
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:@"The shared Python runtime is Intel-only and cannot run on this version of macOS. Download the Apple Silicon version now?"
-                               actions:@[ @"Download", @"Cancel" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.the_shared_python_runtime_is_intel_only_and.e78c18a7", nil, NSBundle.mainBundle, @"The shared Python runtime is Intel-only and cannot run on this version of macOS. Download the Apple Silicon version now?", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.download.d6eafe82", nil, NSBundle.mainBundle, @"Download", @"User-facing action label in iTermAPIScriptLauncher (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermAPIScriptLauncher (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncRefetchArm64Runtime"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Download Apple Silicon Runtime?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.download_apple_silicon_runtime.79fad979", nil, NSBundle.mainBundle, @"Download Apple Silicon Runtime?", @"User-facing text in iTermAPIScriptLauncher (heading).")
                                 window:nil];
     if (selection != kiTermWarningSelection0) {
         completion(iTermPythonRuntimeDownloaderStatusCanceledByUser);
@@ -1021,8 +1035,8 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
 + (void)didFailToLaunchScript:(NSString *)filename withException:(NSException *)e {
     ELog(@"Exception occurred %@", e);
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Error running script";
-    alert.informativeText = [NSString stringWithFormat:@"Script at \"%@\" failed.\n\n%@",
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.error_running_script.02e476c9", nil, NSBundle.mainBundle, @"Error running script", @"User-facing text in iTermAPIScriptLauncher (didFailToLaunchScript:withException:).");
+    alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermapiscriptlauncher.script_at_failed.0fdb4f1c", nil, NSBundle.mainBundle, @"Script at \"%@\" failed.\n\n%@", @"User-facing text in iTermAPIScriptLauncher (informativeText)."),
                              filename, e.reason];
     [alert runModal];
 }
@@ -1113,4 +1127,3 @@ static NSString *const iTermAPIScriptLauncherScriptDidFailUserNotificationCallba
 }
 
 @end
-

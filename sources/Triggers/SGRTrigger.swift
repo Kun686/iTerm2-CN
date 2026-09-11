@@ -14,7 +14,7 @@ class SGRTrigger: Trigger {
     }
 
     override static var title: String {
-        return "Change Style…"
+        return String(localized: "ui.swift.triggers.sgrtrigger.change_style.15462509", defaultValue: "Change Style…", bundle: .main, comment: "User-facing text in SGRTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -22,11 +22,12 @@ class SGRTrigger: Trigger {
     }
 
     override func triggerOptionalParameterPlaceholder(withInterpolation interpolation: Bool) -> String? {
-        return "Enter SGR codes. See help button for details."
+        return String(localized: "ui.swift.triggers.sgrtrigger.enter_sgr_codes_see_help_button_for_details.92d13b4a", defaultValue: "Enter SGR codes. See help button for details.", bundle: .main, comment: "User-facing text in SGRTrigger.")
     }
 
     override var helpText: String? {
-        """
+        return String(localized: "ui.triggers.sgr.help",
+                      defaultValue: """
         A sequence of SGR codes specifying the style to apply. Codes are delimited by semicolons. For example, to change text to be bold and red you’d use `1;31`. You may use the following codes:
         
         ```
@@ -109,7 +110,9 @@ class SGRTrigger: Trigger {
                         I is a value in 0…255.
               48;5;I    8-bit background color. 
                         I is a value in 0…255.
-        """
+        """,
+                      bundle: .main,
+                      comment: "Help for SGR style codes used by the Change Style trigger.")
     }
 
     override func performAction(withCapturedStrings strings: [String],

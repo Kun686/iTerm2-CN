@@ -33,7 +33,7 @@
     dispatch_once(&onceToken, ^{
         presets = @[
             // Slow, meditative, symmetric breath.
-            [[iTermCursorBlinkFadePreset alloc] initWithName:@"Breathing"
+            [[iTermCursorBlinkFadePreset alloc] initWithName:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcursorblinkfadepreset.breathing.762c550a", nil, NSBundle.mainBundle, @"Breathing", @"Cursor blink fade preset name.")
                                               fadeInDuration:0.9
                                              fadeOutDuration:0.9
                                                  fadeInCurve:iTermCursorBlinkFadeCurveEaseInOut
@@ -41,7 +41,7 @@
                                                 visibleDwell:0.5
                                                  hiddenDwell:0.5],
             // Neutral, constant-rate fade.
-            [[iTermCursorBlinkFadePreset alloc] initWithName:@"Linear"
+            [[iTermCursorBlinkFadePreset alloc] initWithName:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcursorblinkfadepreset.linear.e6950b45", nil, NSBundle.mainBundle, @"Linear", @"Cursor blink fade preset name.")
                                               fadeInDuration:0.4
                                              fadeOutDuration:0.4
                                                  fadeInCurve:iTermCursorBlinkFadeCurveLinear
@@ -49,7 +49,7 @@
                                                 visibleDwell:0.7
                                                  hiddenDwell:0.5],
             // Quick but still smooth.
-            [[iTermCursorBlinkFadePreset alloc] initWithName:@"Fast"
+            [[iTermCursorBlinkFadePreset alloc] initWithName:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcursorblinkfadepreset.fast.6c582b62", nil, NSBundle.mainBundle, @"Fast", @"Cursor blink fade preset name.")
                                               fadeInDuration:0.2
                                              fadeOutDuration:0.2
                                                  fadeInCurve:iTermCursorBlinkFadeCurveEaseInOut
@@ -57,7 +57,7 @@
                                                 visibleDwell:0.7
                                                  hiddenDwell:0.2],
             // Slow, with a longer fade-out than fade-in.
-            [[iTermCursorBlinkFadePreset alloc] initWithName:@"Slow"
+            [[iTermCursorBlinkFadePreset alloc] initWithName:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcursorblinkfadepreset.slow.4b2bebbf", nil, NSBundle.mainBundle, @"Slow", @"Cursor blink fade preset name.")
                                               fadeInDuration:0.5
                                              fadeOutDuration:0.75
                                                  fadeInCurve:iTermCursorBlinkFadeCurveEaseInOut
@@ -65,7 +65,7 @@
                                                 visibleDwell:1.0
                                                  hiddenDwell:0.2],
             // Mostly solid with a brief, soft dip.
-            [[iTermCursorBlinkFadePreset alloc] initWithName:@"Subtle"
+            [[iTermCursorBlinkFadePreset alloc] initWithName:NSLocalizedStringWithDefaultValue(@"ui.settings.itermcursorblinkfadepreset.subtle.3eadecfb", nil, NSBundle.mainBundle, @"Subtle", @"Cursor blink fade preset name.")
                                               fadeInDuration:0.15
                                              fadeOutDuration:0.15
                                                  fadeInCurve:iTermCursorBlinkFadeCurveEaseInOut

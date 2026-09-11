@@ -13,7 +13,7 @@
 
 + (NSString *)title
 {
-    return @"Send Text…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.sendtexttrigger.send_text.31619199", nil, NSBundle.mainBundle, @"Send Text…", @"Trigger action title.");
 }
 
 - (NSString *)description {
@@ -26,7 +26,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter text to send";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.sendtexttrigger.enter_text_to_send.da82d0ba", nil, NSBundle.mainBundle, @"Enter text to send", @"Trigger parameter placeholder.");
 }
 
 // Requires a live session to send text to

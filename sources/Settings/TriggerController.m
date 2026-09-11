@@ -583,26 +583,26 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
                                                  encoding:NSUTF8StringEncoding
                                                     error:&error];
     if (!content || error) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"While loading %@: %@",
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.while_loading.6d2b4144", nil, NSBundle.mainBundle, @"While loading %@: %@", @"User-facing text in TriggerController (showWarningWithTitle)."),
                                             filename, error.localizedDescription]
-                                   actions:@[ @"OK" ]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in TriggerController (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncImportTriggersFailed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Import Failed"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in TriggerController (heading).")
                                     window:window];
         return nil;
     }
 
     id root = [NSJSONSerialization it_objectForJsonString:content error:&error];
     if (!root) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"While parsing %@: %@",
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.while_parsing.e18bb6fb", nil, NSBundle.mainBundle, @"While parsing %@: %@", @"User-facing text in TriggerController (showWarningWithTitle)."),
                                             filename, error.localizedDescription]
-                                   actions:@[ @"OK" ]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in TriggerController (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncImportTriggersFailed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Import Failed"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in TriggerController (heading).")
                                     window:window];
         return nil;
     }
@@ -616,12 +616,12 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
         array = [NSArray castFrom:root];
     }
     if (!array) {
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Malformed file at %@", filename]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.malformed_file_at.7dee9e42", nil, NSBundle.mainBundle, @"Malformed file at %@", @"User-facing text in TriggerController (showWarningWithTitle)."), filename]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in TriggerController (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncTriggerEncodingError"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Import Failed"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in TriggerController (heading).")
                                     window:window];
         return nil;
     }
@@ -630,23 +630,23 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
     for (id element in array) {
         NSDictionary *dict = [NSDictionary castFrom:element];
         if (!dict) {
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Malformed file at %@", filename]
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.malformed_file_at.7dee9e42", nil, NSBundle.mainBundle, @"Malformed file at %@", @"User-facing text in TriggerController (showWarningWithTitle)."), filename]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in TriggerController (actions).") ]
                                      accessory:nil
                                     identifier:@"NoSyncTriggerEncodingError"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Import Failed"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in TriggerController (heading).")
                                         window:window];
             return nil;
         }
         Trigger *trigger = [Trigger triggerFromUntrustedDict:dict];
         if (!trigger) {
-            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Malformed file at %@", filename]
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.malformed_file_at.7dee9e42", nil, NSBundle.mainBundle, @"Malformed file at %@", @"User-facing text in TriggerController (showWarningWithTitle)."), filename]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in TriggerController (actions).") ]
                                      accessory:nil
                                     identifier:@"NoSyncTriggerEncodingError"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Import Failed"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.import_failed.09876dab", nil, NSBundle.mainBundle, @"Import Failed", @"User-facing text in TriggerController (heading).")
                                         window:window];
             return nil;
         }
@@ -688,8 +688,8 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
     NSString *joined = [descriptions componentsJoinedByString:@"\n"];
     NSString *message = [NSString stringWithFormat:@"Select the profiles into which these triggers should be imported:\n\n%@", joined];
     [alert setMessageText:message];
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in TriggerController (guidsForProfilesToImportTriggersInto:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in TriggerController (guidsForProfilesToImportTriggersInto:).")];
 
     ProfileListView *profiles = [[ProfileListView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
     [profiles disableArrowHandler];
@@ -822,7 +822,7 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
                                                                      size.width,
                                                                      size.height)];
         CGFloat x = 4;
-        NSTextField *label = [self labelWithString:@"Text:" origin:NSMakePoint(x, 0)];
+        NSTextField *label = [self labelWithString:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.text.796961b8", nil, NSBundle.mainBundle, @"Text:", @"User-facing text in TriggerController (labelWithString:origin:).") origin:NSMakePoint(x, 0)];
         [container addSubview:label];
         x += label.frame.size.width;
         const CGFloat kWellWidth = 30;
@@ -836,7 +836,7 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
         [container addSubview:well];
 
         x += 10 + kWellWidth;
-        label = [self labelWithString:@"Background:" origin:NSMakePoint(x, 0)];
+        label = [self labelWithString:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.background.7b27ca8c", nil, NSBundle.mainBundle, @"Background:", @"User-facing text in TriggerController (labelWithString).") origin:NSMakePoint(x, 0)];
         [container addSubview:label];
         x += label.frame.size.width;
 
@@ -872,7 +872,7 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
 
         // Dot color well
         const CGFloat kWellWidth = 30;
-        NSTextField *label = [self labelWithString:@"Dot:" origin:NSMakePoint(x, 0)];
+        NSTextField *label = [self labelWithString:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.dot.c8da5ec2", nil, NSBundle.mainBundle, @"Dot:", @"User-facing text in TriggerController (labelWithString).") origin:NSMakePoint(x, 0)];
         [container addSubview:label];
         x += label.frame.size.width;
 
@@ -883,7 +883,7 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
         x += kWellWidth + 6;
 
         // Status text color well
-        label = [self labelWithString:@"Text:" origin:NSMakePoint(x, 0)];
+        label = [self labelWithString:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.text.796961b8", nil, NSBundle.mainBundle, @"Text:", @"User-facing text in TriggerController (labelWithString).") origin:NSMakePoint(x, 0)];
         [container addSubview:label];
         x += label.frame.size.width;
 
@@ -911,13 +911,13 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
         iTermTuple<NSString *, NSString *> *pair = [iTermTwoParameterTriggerCodec tupleFromString:[NSString castFrom:value]];
         NSTextField *nameTextField = [self newTextFieldOfSize:subsize
                                                         value:pair.firstObject
-                                                  placeholder:@"Name"
+                                                  placeholder:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.name.dcd1d522", nil, NSBundle.mainBundle, @"Name", @"User-facing text in TriggerController (newTextFieldOfSize:value:placeholder:identifier:).")
                                                    identifier:kTwoPraramNameColumnIdentifier];
         nameTextField.delegate = delegate;
 
         NSTextField *valueTextField = [self newTextFieldOfSize:subsize
                                                          value:pair.secondObject
-                                                   placeholder:@"Value"
+                                                   placeholder:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.value.8e37953d", nil, NSBundle.mainBundle, @"Value", @"User-facing text in TriggerController (newTextFieldOfSize:value:placeholder:identifier:).")
                                                     identifier:kTwoPraramValueColumnIdentifier];
         valueTextField.delegate = delegate;
 
@@ -1116,17 +1116,17 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
 
     iTermSimpleContextMenu *menu = [[iTermSimpleContextMenu alloc] init];
     NSURL *url = [self urlForSelectedTriggers];
-    [menu addItemWithTitle:@"Copy Trigger as URL to Clipboard" action:^{
+    [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.copy_trigger_as_url_to_clipboard.ef98028a", nil, NSBundle.mainBundle, @"Copy Trigger as URL to Clipboard", @"Trigger sharing menu item.") action:^{
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [pasteboard clearContents];
         NSArray *objects = @[ url, url.absoluteString ];
         [pasteboard writeObjects:objects];
-        [ToastWindowController showToastWithMessage:@"Copied"
+        [ToastWindowController showToastWithMessage:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.copied.8d525e5f", nil, NSBundle.mainBundle, @"Copied", @"Confirmation toast after copying a trigger URL.")
                                            duration:1
                             topLeftScreenCoordinate:screenPoint
                                           pointSize:12];
     }];
-    [menu addItemWithTitle:@"Export to File" action:^{
+    [menu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.export_to_file.c5afbdd5", nil, NSBundle.mainBundle, @"Export to File", @"Trigger sharing menu item.") action:^{
         [self exportSelectedTriggers];
     }];
     [menu showInView:_tableView forEvent:[NSApp currentEvent]];
@@ -1149,13 +1149,13 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
         NSString *json = [NSJSONSerialization it_jsonStringForObject:array];
         [json writeToSaveItem:item completionHandler:^(NSError *error) {
             if (error) {
-                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Error saving to %@: %@",
+                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.error_saving_to.9c1965ed", nil, NSBundle.mainBundle, @"Error saving to %@: %@", @"User-facing text in TriggerController (showWarningWithTitle)."),
                                                     item.displayName, error.localizedDescription]
-                                           actions:@[ @"OK" ]
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in TriggerController (actions).") ]
                                          accessory:nil
                                         identifier:@"NoSyncTriggerWritingError"
                                        silenceable:kiTermWarningTypePersistent
-                                           heading:@"Export Failed"
+                                           heading:NSLocalizedStringWithDefaultValue(@"ui.settings.triggercontroller.export_failed.9a5e4d95", nil, NSBundle.mainBundle, @"Export Failed", @"User-facing text in TriggerController (heading).")
                                             window:self.window];
             } else {
                 [item revealInFinderIfLocal];
@@ -1477,4 +1477,3 @@ NSString *const kStatusTextComboBoxIdentifier = @"kStatusTextComboBoxIdentifier"
 }
 
 @end
-

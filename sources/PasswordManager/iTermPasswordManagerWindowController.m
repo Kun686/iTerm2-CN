@@ -305,7 +305,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
         NSMenu *menu = _settingsButton.menu;
         NSInteger index = [menu indexOfItemWithTarget:self andAction:@selector(useBitwarden:)];
         if (index != -1) {
-            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Test Adapter (Dev)"
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.test_adapter_dev.a2ffec47", nil, NSBundle.mainBundle, @"Test Adapter (Dev)", @"User-facing text in iTermPasswordManagerWindowController (awakeFromNib).")
                                                           action:@selector(useTestAdapter:)
                                                    keyEquivalent:@""];
             item.tag = 1;
@@ -359,13 +359,13 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
 
     if (_sendUserByDefault && _didSendUserName == nil) {
         _secondaryButton.hidden = YES;
-        _defaultButton.title = @"Enter User Name";
+        _defaultButton.title = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.enter_user_name.a1f4e48b", nil, NSBundle.mainBundle, @"Enter User Name", @"User-facing text in iTermPasswordManagerWindowController (updateKeyEquivalents).");
     } else {
         _secondaryButton.hidden = NO;
         if (_didSendUserName) {
-            _defaultButton.title = @"Enter Username & Password";
+            _defaultButton.title = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.enter_username_password.66712963", nil, NSBundle.mainBundle, @"Enter Username & Password", @"User-facing text in iTermPasswordManagerWindowController (updateKeyEquivalents).");
         } else {
-            _defaultButton.title = @"Enter Password";
+            _defaultButton.title = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.enter_password.3d816527", nil, NSBundle.mainBundle, @"Enter Password", @"User-facing text in iTermPasswordManagerWindowController (updateKeyEquivalents).");
         }
     }
 
@@ -623,12 +623,12 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
 }
 
 - (IBAction)resetIntegrationConfiguration:(id)sender {
-    const iTermWarningSelection selection = [iTermWarning showWarningWithTitle:@"This will erase iTerm2’s configuration settings for this password manager. The actual passwords will remain unaffected. You’ll have to go through some setup steps to use it again. This action cannot be undone."
-                                                                       actions:@[ @"OK", @"Cancel" ]
+    const iTermWarningSelection selection = [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.this_will_erase_iterm2_s_configuration_settings_for.c28de847", nil, NSBundle.mainBundle, @"This will erase iTerm2’s configuration settings for this password manager. The actual passwords will remain unaffected. You’ll have to go through some setup steps to use it again. This action cannot be undone.", @"User-facing warning message.")
+                                                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermPasswordManagerWindowController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermPasswordManagerWindowController (actions).") ]
                                                                      accessory:nil
                                                                     identifier:nil
                                                                    silenceable:kiTermWarningTypePersistent
-                                                                       heading:@"Are you sure?"
+                                                                       heading:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.are_you_sure.f0762c4f", nil, NSBundle.mainBundle, @"Are you sure?", @"User-facing text in iTermPasswordManagerWindowController (heading).")
                                                                         window:self.window];
     if (selection == kiTermWarningSelection0) {
         [self.currentDataSource resetConfiguration];
@@ -716,24 +716,24 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
                                                   backing:NSBackingStoreBuffered
                                                     defer:YES];
     panel.releasedWhenClosed = NO;
-    panel.title = @"New Account";
+    panel.title = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.new_account.495931de", nil, NSBundle.mainBundle, @"New Account", @"User-facing text in iTermPasswordManagerWindowController (ensureNewAccountPanel).");
     NSView *content = panel.contentView;
 
-    _newAccountLabel = iTermPWMakeRightLabel(@"Account:", NSMakeRect(34, 165, 58, 16));
+    _newAccountLabel = iTermPWMakeRightLabel(NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.account.23cc97b0", nil, NSBundle.mainBundle, @"Account:", @"User-facing text in iTermPasswordManagerWindowController (iTermPWMakeRightLabel)."), NSMakeRect(34, 165, 58, 16));
     [content addSubview:_newAccountLabel];
 
     _newAccount = iTermPWConfigureField([[NSTextField alloc] init], NSMakeRect(98, 162, 216, 21));
-    _newAccount.placeholderString = @"Required";
+    _newAccount.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.required.4850b174", nil, NSBundle.mainBundle, @"Required", @"User-facing text in iTermPasswordManagerWindowController (ensureNewAccountPanel).");
     _newAccount.delegate = self;
     [content addSubview:_newAccount];
 
-    _newUserNameLabel = iTermPWMakeRightLabel(@"User name:", NSMakeRect(18, 138, 74, 16));
+    _newUserNameLabel = iTermPWMakeRightLabel(NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.user_name.b5bee278", nil, NSBundle.mainBundle, @"User name:", @"User-facing text in iTermPasswordManagerWindowController (ensureNewAccountPanel)."), NSMakeRect(18, 138, 74, 16));
     [content addSubview:_newUserNameLabel];
 
     _newUserName = iTermPWConfigureField([[NSTextField alloc] init], NSMakeRect(98, 135, 216, 21));
     [content addSubview:_newUserName];
 
-    _newPasswordLabel = iTermPWMakeRightLabel(@"Password:", NSMakeRect(18, 111, 74, 16));
+    _newPasswordLabel = iTermPWMakeRightLabel(NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.password.569b2482", nil, NSBundle.mainBundle, @"Password:", @"User-facing text in iTermPasswordManagerWindowController (ensureNewAccountPanel)."), NSMakeRect(18, 111, 74, 16));
     [content addSubview:_newPasswordLabel];
 
     _newAccountPassword = (NSSecureTextField *)iTermPWConfigureField([[NSSecureTextField alloc] init], NSMakeRect(98, 108, 183, 21));
@@ -755,10 +755,10 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
     _generatePasswordButton.bezelStyle = NSBezelStyleRounded;
     [_generatePasswordButton setButtonType:NSButtonTypeMomentaryPushIn];
     _generatePasswordButton.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolDice)
-                                             accessibilityDescription:@"Generate password"];
+                                             accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.generate_password.bd5bede8", nil, NSBundle.mainBundle, @"Generate password", @"Accessibility description in iTermPasswordManagerWindowController.")];
     _generatePasswordButton.imagePosition = NSImageOnly;
     _generatePasswordButton.imageScaling = NSImageScaleProportionallyDown;
-    _generatePasswordButton.toolTip = @"Generate a random password. Hold Option to use only alphanumerics.";
+    _generatePasswordButton.toolTip = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.generate_a_random_password_hold_option_to_use.138c39e8", nil, NSBundle.mainBundle, @"Generate a random password. Hold Option to use only alphanumerics.", @"User-facing text in iTermPasswordManagerWindowController (ensureNewAccountPanel).");
     _generatePasswordButton.target = self;
     _generatePasswordButton.action = @selector(generatePassword:);
     _generatePasswordButton.autoresizingMask = NSViewNotSizable;
@@ -766,7 +766,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
 
     _addAccountToggleCheckbox = [[NSButton alloc] initWithFrame:NSMakeRect(96, 78, 220, 18)];
     [_addAccountToggleCheckbox setButtonType:NSButtonTypeSwitch];
-    _addAccountToggleCheckbox.title = @"Toggle";
+    _addAccountToggleCheckbox.title = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.toggle.3d03a1de", nil, NSBundle.mainBundle, @"Toggle", @"User-facing text in iTermPasswordManagerWindowController (ensureNewAccountPanel).");
     _addAccountToggleCheckbox.autoresizingMask = NSViewNotSizable;
     [content addSubview:_addAccountToggleCheckbox];
 
@@ -779,10 +779,10 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
     _addAccountToggleLabel.autoresizingMask = NSViewNotSizable;
     [content addSubview:_addAccountToggleLabel];
 
-    _newAccountOkButton = iTermPWMakePushButton(@"OK", NSMakeRect(257, 13, 53, 32), @"\r", self, @selector(reallyAdd:));
+    _newAccountOkButton = iTermPWMakePushButton(NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPasswordManagerWindowController (iTermPWMakePushButton)."), NSMakeRect(257, 13, 53, 32), @"\r", self, @selector(reallyAdd:));
     [content addSubview:_newAccountOkButton];
 
-    NSButton *cancelButton = iTermPWMakePushButton(@"Cancel", NSMakeRect(169, 13, 76, 32), @"\033", self, @selector(cancelNewAccount:));
+    NSButton *cancelButton = iTermPWMakePushButton(NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermPasswordManagerWindowController (ensureNewAccountPanel)."), NSMakeRect(169, 13, 76, 32), @"\033", self, @selector(cancelNewAccount:));
     [content addSubview:cancelButton];
 
     panel.initialFirstResponder = _newAccount;
@@ -797,7 +797,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
     [self ensureNewAccountPanel];
     _editingAccount = nil;
     _editingPasswordAtOpen = nil;
-    _newAccountPanel.title = @"New Account";
+    _newAccountPanel.title = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.new_account.495931de", nil, NSBundle.mainBundle, @"New Account", @"User-facing text in iTermPasswordManagerWindowController (add:).");
     _newAccount.stringValue = self.defaultAccountName ?: @"";
     // Add never prefetches a password; make sure the field is visible and the spinner is off in
     // case the panel was last used for an Edit.
@@ -809,7 +809,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
     if (self.currentDataSource.autogeneratedPasswordsOnly) {
         _newAccountPassword.enabled = NO;
         _newAccountPassword.stringValue = @"";
-        _newAccountPassword.placeholderString = @"Autogenerated";
+        _newAccountPassword.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.autogenerated.fae4ab64", nil, NSBundle.mainBundle, @"Autogenerated", @"User-facing text in iTermPasswordManagerWindowController (add:).");
         // The source generates the password itself; disable Generate so a user-chosen random
         // value is not injected into the disabled field (mirrors the Edit path's guard).
         _generatePasswordButton.enabled = NO;
@@ -970,7 +970,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
         DLog(@"New account password is required but empty");
         // Point the user at the empty password field (this source no longer auto-generates), so
         // the shake is not unexplained; the dice button is right there to generate one.
-        _newAccountPassword.placeholderString = @"Enter or generate a password";
+        _newAccountPassword.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.enter_or_generate_a_password.d10b8069", nil, NSBundle.mainBundle, @"Enter or generate a password", @"User-facing text in iTermPasswordManagerWindowController (reallyAdd:).");
         [_newAccountPanel makeFirstResponder:_newAccountPassword];
         [_newAccountPanel it_shakeNo];
         return;
@@ -1016,10 +1016,10 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
         return;
     }
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Could Not Save Changes";
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.could_not_save_changes.725f0455", nil, NSBundle.mainBundle, @"Could Not Save Changes", @"User-facing text in iTermPasswordManagerWindowController (presentEditError:).");
     alert.informativeText = error.localizedDescription.length > 0 ? error.localizedDescription
-                                                                  : @"The password manager reported an error.";
-    [alert addButtonWithTitle:@"OK"];
+                                                                  : NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.the_password_manager_reported_an_error.2caa0ce4", nil, NSBundle.mainBundle, @"The password manager reported an error.", @"User-facing text in iTermPasswordManagerWindowController (presentEditError:).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPasswordManagerWindowController (presentEditError:).")];
     [alert runSheetModalForWindow:self.window];
 }
 
@@ -1080,9 +1080,9 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
 
 - (BOOL)shouldRemoveSelection {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Are you sure you want to delete this password?";
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.are_you_sure_you_want_to_delete_this.60a4e814", nil, NSBundle.mainBundle, @"Are you sure you want to delete this password?", @"User-facing text in iTermPasswordManagerWindowController (shouldRemoveSelection).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPasswordManagerWindowController (shouldRemoveSelection).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermPasswordManagerWindowController (shouldRemoveSelection).")];
     return [alert runSheetModalForWindow:self.window] == NSAlertFirstButtonReturn;
 }
 
@@ -1111,7 +1111,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
     _passwordSpinner.hidden = YES;
     if (!self.currentDataSource.canEditPassword) {
         _newAccountPassword.enabled = NO;
-        _newAccountPassword.placeholderString = @"Cannot change password here";
+        _newAccountPassword.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.cannot_change_password_here.52e18277", nil, NSBundle.mainBundle, @"Cannot change password here", @"User-facing text in iTermPasswordManagerWindowController (presentEditPanelForEntry:).");
         // Generate writes into the same secure field; disable it too, otherwise the user
         // could inject a password into a data source that just declared it cannot set one.
         _generatePasswordButton.enabled = NO;
@@ -1123,7 +1123,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
         [self prefillPasswordForEntry:entry];
     }
     [self updateNewAccountOkButtonEnabled];
-    _newAccountPanel.title = @"Edit Account";
+    _newAccountPanel.title = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.edit_account.1915995d", nil, NSBundle.mainBundle, @"Edit Account", @"User-facing text in iTermPasswordManagerWindowController (presentEditPanelForEntry:).");
     [self configureFirstAddAccountToggle];
     NSWindow *panel = _newAccountPanel;
     [self.window beginSheet:panel completionHandler:^(NSModalResponse response) {
@@ -1356,9 +1356,9 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
     }
 
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = [NSString stringWithFormat:@"%@ Settings", [self currentDataSource].name];
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.settings.01234dc3", nil, NSBundle.mainBundle, @"%@ Settings", @"User-facing text in iTermPasswordManagerWindowController (messageText)."), [self currentDataSource].name];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPasswordManagerWindowController (showAdapterSettingsSheet:forWindow:completion:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermPasswordManagerWindowController (showAdapterSettingsSheet:forWindow:completion:).")];
 
     const CGFloat width = 560;
     const CGFloat rowHeight = 22;
@@ -1444,7 +1444,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
             NSButton *reveal = [[NSButton alloc] initWithFrame:NSMakeRect(labelWidth + 8 + fieldWidth + 4, y, eyeButtonWidth, rowHeight)];
             reveal.bezelStyle = NSBezelStyleRegularSquare;
             reveal.bordered = YES;
-            reveal.image = [NSImage imageWithSystemSymbolName:@"eye" accessibilityDescription:@"Show"];
+        reveal.image = [NSImage imageWithSystemSymbolName:@"eye" accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.show.0df6f1ca", nil, NSBundle.mainBundle, @"Show", @"Accessibility description for revealing a password.")];
             reveal.imagePosition = NSImageOnly;
             reveal.buttonType = NSButtonTypeMomentaryPushIn;
             reveal.target = helper;
@@ -1505,14 +1505,19 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
             [weakSelf ifCancelCountUnchanged:cancelCount perform:^{
                 [weakSelf decrBusy];
                 if (error) {
-                    NSMutableString *info = [NSMutableString stringWithString:error.localizedDescription ?: @"An error occurred."];
+                    NSMutableString *info = [NSMutableString stringWithString:error.localizedDescription ?:
+                                             NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.generic_error",
+                                                                               nil,
+                                                                               NSBundle.mainBundle,
+                                                                               @"An error occurred.",
+                                                                               @"Fallback error text for a password-manager adapter command.")];
                     if (message.length > 0) {
                         [info appendFormat:@"\n\n%@", message];
                     }
                     NSAlert *alert = [[NSAlert alloc] init];
-                    alert.messageText = @"Command Failed";
+                    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.command_failed.b460450d", nil, NSBundle.mainBundle, @"Command Failed", @"User-facing text in iTermPasswordManagerWindowController (source UI).");
                     alert.informativeText = info;
-                    [alert addButtonWithTitle:@"OK"];
+                    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPasswordManagerWindowController (source UI).")];
                     [alert runModal];
                 } else {
                     [weakSelf reloadItems:nil];
@@ -1520,7 +1525,7 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
                         NSAlert *alert = [[NSAlert alloc] init];
                         alert.messageText = commandName;
                         alert.informativeText = message;
-                        [alert addButtonWithTitle:@"OK"];
+                        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPasswordManagerWindowController (source UI).")];
                         [alert runModal];
                     }
                 }
@@ -1606,10 +1611,10 @@ static NSArray<NSString *> *gTerminalCachedCombinedAccountNames;
         return;
     }
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = [NSString stringWithFormat:@"Password for %@", accountName];
+    alert.messageText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.password_for.ad669fe1", nil, NSBundle.mainBundle, @"Password for %@", @"User-facing text in iTermPasswordManagerWindowController (messageText)."), accountName];
     alert.informativeText = password;
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Copy"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPasswordManagerWindowController (revealPassword:forAccountName:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.copy.e21f935f", nil, NSBundle.mainBundle, @"Copy", @"User-facing text in iTermPasswordManagerWindowController (revealPassword:forAccountName:).")];
 
     __weak __typeof(self) weakSelf = self;
     [self runModal:alert completion:^(NSModalResponse response) {
@@ -1689,7 +1694,7 @@ static NSInteger const kDynamicMenuItemTag = 9999;
     BOOL addedAny = NO;
 
     if (adapter.hasSettingsFields) {
-        NSMenuItem *settingsItem = [[NSMenuItem alloc] initWithTitle:@"Settings\u2026"
+        NSMenuItem *settingsItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.settings.7a04083b", nil, NSBundle.mainBundle, @"Settings\u2026", @"User-facing text in iTermPasswordManagerWindowController (menuNeedsUpdate:).")
                                                               action:@selector(adapterSettings:)
                                                        keyEquivalent:@""];
         settingsItem.target = self;
@@ -1771,9 +1776,9 @@ static NSInteger const kDynamicMenuItemTag = 9999;
     else if (menuItem.action == @selector(resetIntegrationConfiguration:)) {
         const BOOL allowed = [[self currentDataSource] canResetConfiguration];
         if (allowed) {
-            menuItem.title = [NSString stringWithFormat:@"Reset %@ Configuration", [[self currentDataSource] name]];
+            menuItem.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.reset_configuration.693e32ea", nil, NSBundle.mainBundle, @"Reset %@ Configuration", @"User-facing text in iTermPasswordManagerWindowController (title)."), [[self currentDataSource] name]];
         } else {
-            menuItem.title = @"Reset Integration Configuration";
+            menuItem.title = NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.reset_integration_configuration.6a6f7314", nil, NSBundle.mainBundle, @"Reset Integration Configuration", @"User-facing text in iTermPasswordManagerWindowController (validateMenuItem:).");
         }
         return allowed;
     } else if (menuItem.action == @selector(copyPassword:) ||
@@ -1931,9 +1936,9 @@ static NSInteger const kDynamicMenuItemTag = 9999;
                 RLog(@"passwordForRow: return nil, keychain gave error %@", error);
 
                 NSAlert *alert = [[NSAlert alloc] init];
-                alert.messageText = [NSString stringWithFormat:@"Could not get password. Keychain query failed: %@",
+                alert.messageText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.could_not_get_password_keychain_query_failed.875a414a", nil, NSBundle.mainBundle, @"Could not get password. Keychain query failed: %@", @"User-facing text in iTermPasswordManagerWindowController (messageText)."),
                                      error.localizedDescription];
-                [alert addButtonWithTitle:@"OK"];
+                [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.passwordmanager.itermpasswordmanagerwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPasswordManagerWindowController (source UI).")];
                 [self runModal:alert completion:^(NSModalResponse response) { }];
                 completion(nil, nil);
             } else {

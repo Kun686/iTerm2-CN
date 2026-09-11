@@ -36,7 +36,7 @@ class CommandShareMenuProvider: NSObject {
         let command = mark.fullCommand ?? ""
         if !command.isEmpty {
             let snippetTitle = mark.firstLineOfCommand.flatMap { $0.isEmpty ? nil : $0 } ?? command
-            menu.addItem(title: "Add Command as Snippet") { [weak window] in
+            menu.addItem(title: String(localized: "ui.swift.sharing.commandsharemenuprovider.add_command_as_snippet.1d7e8a18", defaultValue: "Add Command as Snippet", bundle: .main, comment: "User-facing text in CommandShareMenuProvider.")) { [weak window] in
                 CommandShareMenuProvider.addCommandAsSnippet(title: snippetTitle,
                                                              value: command,
                                                              window: window,
@@ -49,7 +49,7 @@ class CommandShareMenuProvider: NSObject {
         let mark = self.mark
         let promisedContent = self.promisedContent
         let defaultBackgroundColor = self.defaultBackgroundColor
-        menu.addItem(title: "Save Command & Output…") { [weak window] in
+        menu.addItem(title: String(localized: "ui.swift.sharing.commandsharemenuprovider.save_command_output.50dceb6f", defaultValue: "Save Command & Output…", bundle: .main, comment: "User-facing text in CommandShareMenuProvider.")) { [weak window] in
             CommandShareMenuProvider.saveCommandAndOutput(promisedContent: promisedContent,
                                                           defaultBackgroundColor: defaultBackgroundColor,
                                                           mark: mark,
@@ -58,7 +58,7 @@ class CommandShareMenuProvider: NSObject {
 
         menu.addSeparator()
 
-        menu.addItem(title: "Share Command Output…") { [weak view] in
+        menu.addItem(title: String(localized: "ui.swift.sharing.commandsharemenuprovider.share_command_output.383ff6e0", defaultValue: "Share Command Output…", bundle: .main, comment: "User-facing text in CommandShareMenuProvider.")) { [weak view] in
             if let view {
                 CommandShareMenuProvider.shareCommandOutput(locationInWindow: locationInWindow,
                                                             promisedContent: promisedContent,
@@ -69,12 +69,12 @@ class CommandShareMenuProvider: NSObject {
         menu.addSeparator()
 
         if let commandURL {
-            menu.addItem(title: "Copy Command URL to Clipboard") { [weak window] in
+            menu.addItem(title: String(localized: "ui.swift.sharing.commandsharemenuprovider.copy_command_url_to_clipboard.f165a68f", defaultValue: "Copy Command URL to Clipboard", bundle: .main, comment: "User-facing text in CommandShareMenuProvider.")) { [weak window] in
                 CommandShareMenuProvider.copyCommandURL(url: commandURL,
                                                         window: window,
                                                         locationInWindow: locationInWindow)
             }
-            menu.addItem(title: "Share Command URL…") { [weak view] in
+            menu.addItem(title: String(localized: "ui.swift.sharing.commandsharemenuprovider.share_command_url.3daeb75f", defaultValue: "Share Command URL…", bundle: .main, comment: "User-facing text in CommandShareMenuProvider.")) { [weak view] in
                 if let view {
                     CommandShareMenuProvider.shareCommandURL(locationInWindow: locationInWindow,
                                                              url: commandURL,
@@ -103,7 +103,7 @@ class CommandShareMenuProvider: NSObject {
             return
         }
         let point = window.convertPoint(toScreen: locationInWindow)
-        ToastWindowController.showToast(withMessage: "Snippet Added",
+        ToastWindowController.showToast(withMessage: String(localized: "ui.swift.sharing.commandsharemenuprovider.snippet_added.0a54b0a6", defaultValue: "Snippet Added", bundle: .main, comment: "Confirmation shown after adding a command as a snippet."),
                                         duration: 1,
                                         topLeftScreenCoordinate: point,
                                         pointSize: 12)
@@ -143,7 +143,7 @@ class CommandShareMenuProvider: NSObject {
             return
         }
         let point = window.convertPoint(toScreen: locationInWindow)
-        ToastWindowController.showToast(withMessage: "Copied",
+        ToastWindowController.showToast(withMessage: String(localized: "ui.swift.sharing.commandsharemenuprovider.copied.8d525e5f", defaultValue: "Copied", bundle: .main, comment: "Confirmation shown after copying a command URL."),
                                         duration: 1,
                                         topLeftScreenCoordinate: point,
                                         pointSize: 12)

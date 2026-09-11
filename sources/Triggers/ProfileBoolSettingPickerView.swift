@@ -28,14 +28,14 @@ class ProfileBoolSettingPickerView: NSView, SearchableComboViewDelegate {
     private var selectedKeyStorage: String?
 
     @objc override init(frame frameRect: NSRect) {
-        comboView = SearchableComboView(Self.groups(), defaultTitle: "Select Setting…")
+        comboView = SearchableComboView(Self.groups(), defaultTitle: String(localized: "ui.swift.triggers.profileboolsettingpickerview.select_setting.826b0c41", defaultValue: "Select Setting…", bundle: .main, comment: "User-facing text in ProfileBoolSettingPickerView."))
         super.init(frame: frameRect)
 
         comboView.delegate = self
         addSubview(comboView)
 
-        onOffButton.addItem(withTitle: "On")
-        onOffButton.addItem(withTitle: "Off")
+        onOffButton.addItem(withTitle: String(localized: "ui.swift.triggers.profileboolsettingpickerview.on.13001175", defaultValue: "On", bundle: .main, comment: "User-facing text in ProfileBoolSettingPickerView."))
+        onOffButton.addItem(withTitle: String(localized: "ui.swift.triggers.profileboolsettingpickerview.off.ca7981b4", defaultValue: "Off", bundle: .main, comment: "User-facing text in ProfileBoolSettingPickerView."))
         onOffButton.target = self
         onOffButton.action = #selector(onOffChanged(_:))
         addSubview(onOffButton)

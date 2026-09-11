@@ -19,9 +19,9 @@ enum SSHEndpointException: LocalizedError {
             case .fileNotFound:
                 return "File not found"
             case .internalError:
-                return "Internal error"
+                return String(localized: "ui.swift.ssh.sshendpointexception.internal_error.1dac8dea", defaultValue: "Internal error", bundle: .main, comment: "User-facing text in SSHEndpointException.")
             case .transferCanceled:
-                return "File transfer canceled"
+                return String(localized: "ui.swift.ssh.sshendpointexception.file_transfer_canceled.699d73cf", defaultValue: "File transfer canceled", bundle: .main, comment: "User-facing text in SSHEndpointException.")
             }
         }
     }

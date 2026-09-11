@@ -9,12 +9,21 @@
 #import "iTermTipData.h"
 #import "iTermTip.h"
 
+static NSString *iTermLocalizedTipValue(NSString *identifier,
+                                        NSString *field,
+                                        NSString *fallback) {
+    NSString *key = [NSString stringWithFormat:@"ui.tips.data.%@.%@", identifier, field];
+    return [NSBundle.mainBundle localizedStringForKey:key
+                                                value:fallback
+                                                table:@"iTermTipData"];
+}
+
 @implementation iTermTipData
 
 + (NSDictionary *)allTips {
   // The keys in this dictionary are saved in user defaults and should not be changed or
   // recycled, or users will see the same tip more than once.
-  return @{
+  NSDictionary *tips = @{
     // Big new features
             @"000": @{ kTipTitleKey: @"Tip of the Day",
                         kTipBodyKey: @"This window shows the iTerm2 tip of the day. It’ll appear every 24 hours to let you know about new features and hidden secrets. Hit “More Options” to view more tips or to stop getting them altogether." },
@@ -418,6 +427,20 @@
 
 // IMPORTANT: When updating this, also update it2tip
             };
+    NSMutableDictionary *localizedTips =
+        [NSMutableDictionary dictionaryWithCapacity:tips.count];
+    [tips enumerateKeysAndObjectsUsingBlock:^(NSString *identifier,
+                                              NSDictionary *tip,
+                                              BOOL *stop) {
+        (void)stop;
+        NSMutableDictionary *localizedTip = [tip mutableCopy];
+        NSString *title = tip[kTipTitleKey];
+        NSString *body = tip[kTipBodyKey];
+        localizedTip[kTipTitleKey] = iTermLocalizedTipValue(identifier, @"title", title);
+        localizedTip[kTipBodyKey] = iTermLocalizedTipValue(identifier, @"body", body);
+        localizedTips[identifier] = [localizedTip copy];
+    }];
+    return [localizedTips copy];
 }
 
 @end

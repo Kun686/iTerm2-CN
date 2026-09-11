@@ -121,10 +121,10 @@ static NSString *const kPermissionToShowTip = @"NoSyncPermissionToShowTip";
 
 - (void)askForPermission {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"See Tips of the Day?";
-    alert.informativeText = @"iTerm2 can show you a Tip of the Day message to help you learn about its many features. Are you interested?";
-    [alert addButtonWithTitle:@"Yes"];
-    [alert addButtonWithTitle:@"No"];
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.tips.itermtipcontroller.see_tips_of_the_day.1c4b0bbe", nil, NSBundle.mainBundle, @"See Tips of the Day?", @"User-facing text in iTermTipController (askForPermission).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.tips.itermtipcontroller.iterm2_can_show_you_a_tip_of_the.aff73f6b", nil, NSBundle.mainBundle, @"iTerm2 can show you a Tip of the Day message to help you learn about its many features. Are you interested?", @"User-facing text in iTermTipController (askForPermission).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.tips.itermtipcontroller.yes.85a39ab3", nil, NSBundle.mainBundle, @"Yes", @"User-facing text in iTermTipController (askForPermission).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.tips.itermtipcontroller.no.1ea442a1", nil, NSBundle.mainBundle, @"No", @"User-facing text in iTermTipController (askForPermission).")];
     BOOL havePermission = ([alert runModal] == NSAlertFirstButtonReturn);
     [[iTermUserDefaults userDefaults] setBool:havePermission forKey:kPermissionToShowTip];
 }

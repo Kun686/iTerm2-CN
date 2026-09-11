@@ -7,6 +7,38 @@ let currentSearchQuery = '';
 let currentPermissionTypeFilter = '';
 let currentStatusFilter = '';
 
+const localized = {
+    revokePermissionFormat: {{REVOKE_PERMISSION_FORMAT_JSON}},
+    revokeAllForSiteFormat: {{REVOKE_ALL_FOR_SITE_FORMAT_JSON}},
+    clearAllPrompt: {{CLEAR_ALL_PROMPT_JSON}},
+    clearSiteTooltip: {{CLEAR_SITE_TOOLTIP_JSON}},
+    clear: {{CLEAR_JSON}},
+    allowed: {{ALLOWED_JSON}},
+    blocked: {{BLOCKED_JSON}},
+    grantedDateFormat: {{GRANTED_DATE_FORMAT_JSON}},
+    revokeTooltip: {{REVOKE_TOOLTIP_JSON}},
+    notifications: {{NOTIFICATIONS_JSON}},
+    camera: {{CAMERA_JSON}},
+    microphone: {{MICROPHONE_JSON}},
+    cameraAndMicrophone: {{CAMERA_AND_MICROPHONE_JSON}},
+    location: {{LOCATION_JSON}},
+    audioPlayback: {{AUDIO_PLAYBACK_JSON}},
+    emptyTitle: {{EMPTY_TITLE_JSON}},
+    emptyDescription: {{EMPTY_DESCRIPTION_JSON}},
+    permissionRevoked: {{PERMISSION_REVOKED_JSON}},
+    allRevokedForSiteFormat: {{ALL_REVOKED_FOR_SITE_FORMAT_JSON}},
+    allCleared: {{ALL_CLEARED_JSON}},
+    pageTitle: {{PAGE_TITLE_JSON}}
+};
+
+function formatLocalized(format, values) {
+    values.forEach((value, index) => {
+        format = format.split(`%${index + 1}$@`).join(value);
+        format = format.split(`%${index + 1}$lld`).join(value);
+    });
+    return format;
+}
+
 console.debug("Permissions page loading");
 
 // Initialize permissions page
@@ -36,7 +68,7 @@ window.loadPermissions = function(offset = 0, limit = 50, searchQuery = '', perm
 };
 
 window.revokePermission = function(origin, permissionType) {
-    if (confirm(`Revoke ${getPermissionDisplayName(permissionType)} permission for ${origin}?`)) {
+    if (confirm(formatLocalized(localized.revokePermissionFormat, [getPermissionDisplayName(permissionType), origin]))) {
         window.webkit.messageHandlers['iterm2-about:permissions'].postMessage({
             action: 'revokePermission',
             origin: origin,
@@ -46,7 +78,7 @@ window.revokePermission = function(origin, permissionType) {
 };
 
 window.revokeAllPermissions = function(origin) {
-    if (confirm(`Revoke all permissions for ${origin}? This action cannot be undone.`)) {
+    if (confirm(formatLocalized(localized.revokeAllForSiteFormat, [origin]))) {
         window.webkit.messageHandlers['iterm2-about:permissions'].postMessage({
             action: 'revokeAllPermissions',
             origin: origin
@@ -55,7 +87,7 @@ window.revokeAllPermissions = function(origin) {
 };
 
 window.clearAllPermissions = function() {
-    if (confirm('This will revoke all permissions for all websites. This action cannot be undone. Continue?')) {
+    if (confirm(localized.clearAllPrompt)) {
         window.webkit.messageHandlers['iterm2-about:permissions'].postMessage({
             action: 'clearAllPermissions'
         });
@@ -101,8 +133,8 @@ function createOriginSection(origin, permissions) {
     originHeader.innerHTML = `
         ${escapeHtml(origin)}
         <div style="margin-left: auto; display: flex; align-items: center; gap: 8px;">
-            <button class="button small danger" onclick="revokeAllPermissions('${escapeAttribute(origin)}')" title="Clea all permissions for this site">
-                Clear
+            <button class="button small danger" onclick="revokeAllPermissions('${escapeAttribute(origin)}')" title="${escapeAttribute(localized.clearSiteTooltip)}">
+                ${escapeHtml(localized.clear)}
             </button>
         </div>
     `;
@@ -130,7 +162,7 @@ function createPermissionElement(permission) {
     const icon = getPermissionIcon(permission.permissionType);
     const displayName = getPermissionDisplayName(permission.permissionType);
     const statusClass = permission.decision === 'granted' ? 'permission-granted' : 'permission-denied';
-    const statusText = permission.decision === 'granted' ? 'Allowed' : 'Blocked';
+    const statusText = permission.decision === 'granted' ? localized.allowed : localized.blocked;
     
     const createdDate = new Date(permission.createdAt * 1000);
     const formattedDate = createdDate.toLocaleDateString([], { 
@@ -145,13 +177,13 @@ function createPermissionElement(permission) {
             <div class="permission-details">
                 <div class="permission-type">${escapeHtml(displayName)}</div>
                 <div class="permission-status">
-                    <span class="${statusClass}">${statusText}</span>
-                    <span class="permission-metadata">• Granted ${formattedDate}</span>
+                    <span class="${statusClass}">${escapeHtml(statusText)}</span>
+                    <span class="permission-metadata">• ${escapeHtml(formatLocalized(localized.grantedDateFormat, [formattedDate]))}</span>
                 </div>
             </div>
         </div>
         <div class="permission-actions">
-            <button class="revoke-button" onclick="revokePermission('${escapeAttribute(permission.origin)}', '${escapeAttribute(permission.permissionType)}')" title="Revoke this permission">
+            <button class="revoke-button" onclick="revokePermission('${escapeAttribute(permission.origin)}', '${escapeAttribute(permission.permissionType)}')" title="${escapeAttribute(localized.revokeTooltip)}">
                 ×
             </button>
         </div>
@@ -174,12 +206,12 @@ function getPermissionIcon(permissionType) {
 
 function getPermissionDisplayName(permissionType) {
     const names = {
-        'notification': 'Notifications',
-        'camera': 'Camera',
-        'microphone': 'Microphone',
-        'cameraAndMicrophone': 'Camera and Microphone',
-        'geolocation': 'Location',
-        'audioPlayback': 'Audio Playback'
+        'notification': localized.notifications,
+        'camera': localized.camera,
+        'microphone': localized.microphone,
+        'cameraAndMicrophone': localized.cameraAndMicrophone,
+        'geolocation': localized.location,
+        'audioPlayback': localized.audioPlayback
     };
     return names[permissionType] || permissionType;
 }
@@ -194,8 +226,8 @@ function showEmptyState() {
     container.innerHTML = `
         <div class="empty-state">
             <div class="empty-icon">🔒</div>
-            <h3>No permissions found</h3>
-            <p>Website permissions will appear here when you grant them.</p>
+            <h3>${escapeHtml(localized.emptyTitle)}</h3>
+            <p>${escapeHtml(localized.emptyDescription)}</p>
         </div>
     `;
 }
@@ -361,7 +393,7 @@ window.onPermissionRevoked = function(origin, permissionType) {
         }
     }
     
-    showStatus('Permission revoked', 'success');
+    showStatus(localized.permissionRevoked, 'success');
 };
 
 window.onAllPermissionsRevoked = function(origin) {
@@ -377,21 +409,21 @@ window.onAllPermissionsRevoked = function(origin) {
         }
     }
     
-    showStatus(`All permissions revoked for ${origin}`, 'success');
+    showStatus(formatLocalized(localized.allRevokedForSiteFormat, [origin]), 'success');
 };
 
 window.onAllPermissionsCleared = function() {
     clearPermissionsContainer();
     currentOffset = 0;
     hasMore = true;
-    showStatus('All permissions cleared', 'success');
+    showStatus(localized.allCleared, 'success');
     showEmptyState();
 };
 
 // Initialize page when loaded
 window.addEventListener('load', function() {
     // Set document title explicitly for custom URL scheme
-    document.title = 'Site Permissions';
+    document.title = localized.pageTitle;
     
     // Setup search input
     const searchInput = document.getElementById('searchInput');

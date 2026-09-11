@@ -387,7 +387,7 @@ static double EuclideanDistance(NSPoint p1, NSPoint p2) {
             textField.frame = view.bounds;
             textField.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
         }
-        view.textField.stringValue = [[[[iTermController sharedInstance] sessionWithGUID:guid] name] removingHTMLFromTabTitleIfNeeded] ?: @"Session";
+        view.textField.stringValue = [[[[iTermController sharedInstance] sessionWithGUID:guid] name] removingHTMLFromTabTitleIfNeeded] ?: NSLocalizedStringWithDefaultValue(@"ui.globalsearch.itermglobalsearchwindowcontroller.session.6959b415", nil, NSBundle.mainBundle, @"Session", @"User-facing text in iTermGlobalSearchWindowController (outlineView:viewForTableColumn:item:).");
         return view;
     }
 
@@ -399,7 +399,7 @@ static double EuclideanDistance(NSPoint p1, NSPoint p2) {
             view = [[NSTableCellView alloc] init];
 
             NSImageView *imageView = [NSImageView imageViewWithImage:[NSImage imageWithSystemSymbolName:@"rectangle.compress.vertical"
-                                                                                      accessibilityDescription:@"Folded region"]];
+                                                     accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.globalsearch.itermglobalsearchwindowcontroller.folded_region.fd0fa10c", nil, NSBundle.mainBundle, @"Folded region", @"Accessibility description for a folded region.")]];
             imageView.translatesAutoresizingMaskIntoConstraints = NO;
             imageView.contentTintColor = [NSColor secondaryLabelColor];
             [imageView setContentHuggingPriority:NSLayoutPriorityRequired forOrientation:NSLayoutConstraintOrientationHorizontal];

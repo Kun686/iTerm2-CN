@@ -67,12 +67,12 @@ class MessageCellView: NSView {
     override var menu: NSMenu? {
         get {
             DLog("menu \(self)")
-            let menu = NSMenu(title: "Context Menu")
+            let menu = NSMenu(title: String(localized: "ui.swift.aiterm.messagecellview.context_menu.36d75142", defaultValue: "Context Menu", bundle: .main, comment: "User-facing text in MessageCellView."))
             if editable {
                 menu.addItem(makeEditItem())
             }
 
-            let copyItem = NSMenuItem(title: "Copy", action: #selector(copyMenuItemClicked(_:)), keyEquivalent: "")
+            let copyItem = NSMenuItem(title: String(localized: "ui.swift.aiterm.messagecellview.copy.e21f935f", defaultValue: "Copy", bundle: .main, comment: "User-facing text in MessageCellView."), action: #selector(copyMenuItemClicked(_:)), keyEquivalent: "")
             copyItem.target = self
             menu.addItem(copyItem)
 
@@ -102,19 +102,19 @@ class MessageCellView: NSView {
     }
 
     private func makeEditItem() -> NSMenuItem {
-        let item = NSMenuItem(title: "Edit", action: #selector(editMenuItemClicked(_:)), keyEquivalent: "")
+        let item = NSMenuItem(title: String(localized: "ui.swift.aiterm.messagecellview.edit.464c4ffd", defaultValue: "Edit", bundle: .main, comment: "User-facing text in MessageCellView."), action: #selector(editMenuItemClicked(_:)), keyEquivalent: "")
         item.target = self
         return item
     }
 
     private func makeForkItem() -> NSMenuItem {
-        let item = NSMenuItem(title: "Fork", action: #selector(forkMenuItemClicked(_:)), keyEquivalent: "")
+        let item = NSMenuItem(title: String(localized: "ui.swift.aiterm.messagecellview.fork.8e5b1a73", defaultValue: "Fork", bundle: .main, comment: "User-facing text in MessageCellView."), action: #selector(forkMenuItemClicked(_:)), keyEquivalent: "")
         item.target = self
         return item
     }
 
     private func makeDeleteItem() -> NSMenuItem {
-        let item = NSMenuItem(title: "Delete", action: #selector(deleteMenuItemClicked(_:)), keyEquivalent: "")
+        let item = NSMenuItem(title: String(localized: "ui.swift.aiterm.messagecellview.delete.e2d0a549", defaultValue: "Delete", bundle: .main, comment: "User-facing text in MessageCellView."), action: #selector(deleteMenuItemClicked(_:)), keyEquivalent: "")
         item.target = self
         return item
     }

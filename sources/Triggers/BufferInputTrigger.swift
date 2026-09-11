@@ -30,7 +30,7 @@ class BufferInputTrigger: Trigger {
     }
 
     override static var title: String {
-        return "Buffer Input…"
+        return String(localized: "ui.swift.triggers.bufferinputtrigger.buffer_input.ecb7661d", defaultValue: "Buffer Input…", bundle: .main, comment: "User-facing text in BufferInputTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -64,8 +64,8 @@ class BufferInputTrigger: Trigger {
     }
 
     override func menuItemsForPoupupButton() -> [AnyHashable : Any]? {
-        [ NSNumber(value: Tag.start.rawValue): "Start Buffering Input",
-          NSNumber(value: Tag.stop.rawValue): "Stop Buffering Input" ]
+        [ NSNumber(value: Tag.start.rawValue): String(localized: "ui.swift.triggers.bufferinputtrigger.start_buffering_input.9e4cac20", defaultValue: "Start Buffering Input", bundle: .main, comment: "User-facing text in BufferInputTrigger."),
+          NSNumber(value: Tag.stop.rawValue): String(localized: "ui.swift.triggers.bufferinputtrigger.stop_buffering_input.b1c5cfdb", defaultValue: "Stop Buffering Input", bundle: .main, comment: "User-facing text in BufferInputTrigger.") ]
     }
 
     override func performAction(withCapturedStrings strings: [String],
@@ -80,7 +80,7 @@ class BufferInputTrigger: Trigger {
     }
 
     override func paramAttributedString() -> NSAttributedString? {
-        NSAttributedString(string: shouldBuffer ? "Start buffering" : "Stop buffering",
+        NSAttributedString(string: shouldBuffer ? String(localized: "ui.swift.triggers.bufferinputtrigger.start_buffering.f8706b96", defaultValue: "Start buffering", bundle: .main, comment: "User-facing text in BufferInputTrigger.") : String(localized: "ui.swift.triggers.bufferinputtrigger.stop_buffering.6d97a5ce", defaultValue: "Stop buffering", bundle: .main, comment: "User-facing text in BufferInputTrigger."),
                            attributes: regularAttributes())
     }
 }

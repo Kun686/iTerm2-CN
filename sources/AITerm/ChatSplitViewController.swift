@@ -17,7 +17,7 @@ class ChatSplitViewController: NSSplitViewController {
     private var sidebarToggleRelayoutGeneration = 0
     private let sidebarToggleButton: NSButton = {
         let image = NSImage(systemSymbolName: SFSymbol.sidebarLeft.rawValue,
-                            accessibilityDescription: "Toggle Chat List")!
+                            accessibilityDescription: String(localized: "ui.swift.aiterm.chatsplitviewcontroller.toggle_chat_list.1b57d229", defaultValue: "Toggle Chat List", bundle: .main, comment: "User-facing text in ChatSplitViewController."))!
         let button = NSButton(image: image, target: nil, action: nil)
         button.isBordered = false
         button.bezelStyle = .badge
@@ -170,7 +170,7 @@ class ChatSplitViewController: NSSplitViewController {
 
     private func updateSidebarToggleButton() {
         let collapsed = sidebarItem?.isCollapsed ?? false
-        sidebarToggleButton.toolTip = collapsed ? "Show chat list" : "Hide chat list"
+        sidebarToggleButton.toolTip = collapsed ? String(localized: "ui.swift.aiterm.chatsplitviewcontroller.show_chat_list.0cec9e66", defaultValue: "Show chat list", bundle: .main, comment: "User-facing text in ChatSplitViewController.") : String(localized: "ui.swift.aiterm.chatsplitviewcontroller.hide_chat_list.d4cf3996", defaultValue: "Hide chat list", bundle: .main, comment: "User-facing text in ChatSplitViewController.")
         sidebarToggleButton.layer?.backgroundColor = (collapsed
                                                       ? NSColor.controlAccentColor.withAlphaComponent(0.28)
                                                       : NSColor.clear).cgColor

@@ -111,11 +111,11 @@ class FileAttachmentSubpartView: NSView {
     private func setupContextMenu() {
         let menu = NSMenu()
 
-        let revealItem = NSMenuItem(title: "Reveal in Finder", action: #selector(revealInFinder), keyEquivalent: "")
+        let revealItem = NSMenuItem(title: String(localized: "ui.swift.aiterm.fileattachmentsubpartview.reveal_in_finder.cc849385", defaultValue: "Reveal in Finder", bundle: .main, comment: "User-facing text in FileAttachmentSubpartView."), action: #selector(revealInFinder), keyEquivalent: "")
         revealItem.target = self
         menu.addItem(revealItem)
 
-        let openItem = NSMenuItem(title: "Open", action: #selector(openFile), keyEquivalent: "")
+        let openItem = NSMenuItem(title: String(localized: "ui.swift.aiterm.fileattachmentsubpartview.open.ed077f3d", defaultValue: "Open", bundle: .main, comment: "User-facing text in FileAttachmentSubpartView."), action: #selector(openFile), keyEquivalent: "")
         openItem.target = self
         menu.addItem(openItem)
 

@@ -12,7 +12,7 @@ class SetNamedMarkTrigger: Trigger {
     }
 
     override static var title: String {
-        return "Set Named Mark"
+        return String(localized: "ui.swift.triggers.setnamedmarktrigger.set_named_mark.58bf242c", defaultValue: "Set Named Mark", bundle: .main, comment: "User-facing text in SetNamedMarkTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -26,7 +26,7 @@ class SetNamedMarkTrigger: Trigger {
     }
 
     override func triggerOptionalParameterPlaceholder(withInterpolation interpolation: Bool) -> String? {
-        return "Name for this mark"
+        return String(localized: "ui.swift.triggers.setnamedmarktrigger.name_for_this_mark.4df3fc3e", defaultValue: "Name for this mark", bundle: .main, comment: "User-facing text in SetNamedMarkTrigger.")
     }
 
     override func performAction(withCapturedStrings strings: [String],
@@ -51,4 +51,3 @@ class SetNamedMarkTrigger: Trigger {
         return true
     }
 }
-

@@ -97,24 +97,24 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
     override func loadView() {
         let root = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 400))
 
-        emptyLabel = NSTextField(labelWithString: "No session selected.")
+        emptyLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.no_session_selected.e393fff9", defaultValue: "No session selected.", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         emptyLabel.textColor = .secondaryLabelColor
         emptyLabel.alignment = .center
         root.addSubview(emptyLabel)
 
-        profileRow = makeLabeledRow(labelText: "Profile:",
+        profileRow = makeLabeledRow(labelText: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.profile.468998b1", defaultValue: "Profile:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."),
                                     control: makeProfilePopup())
-        modeRow = makeLabeledRow(labelText: "Mode:",
+        modeRow = makeLabeledRow(labelText: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.mode.7ce1afa3", defaultValue: "Mode:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."),
                                  control: makeModePopup())
-        commandRow = makeLabeledRow(labelText: "Command:",
+        commandRow = makeLabeledRow(labelText: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.command.a7a9c915", defaultValue: "Command:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."),
                                     control: makeCommandField())
         perFileCommandRow = makeLabeledRow(
-            labelText: "File command:",
+            labelText: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.file_command.39c1b483", defaultValue: "File command:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."),
             control: makePerFileCommandField())
-        urlRow = makeLabeledRow(labelText: "URL:", control: makeURLField())
-        peerRow = makeLabeledRow(labelText: "Name:",
+        urlRow = makeLabeledRow(labelText: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.url.734fd77b", defaultValue: "URL:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."), control: makeURLField())
+        peerRow = makeLabeledRow(labelText: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.name.2683cad4", defaultValue: "Name:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."),
                                  control: makePeerNameField())
-        peerShortcutRow = makeLabeledRow(labelText: "Shortcut:",
+        peerShortcutRow = makeLabeledRow(labelText: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.shortcut.a67470e1", defaultValue: "Shortcut:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."),
                                          control: makePeerShortcutInput())
         splitSection = makeSplitSection()
         toolbarSection = makeToolbarSection()
@@ -222,16 +222,16 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
     private func makeSplitSection() -> NSView {
         let section = NSView(frame: .zero)
 
-        let splitLabel = NSTextField(labelWithString: "Split:")
+        let splitLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.split.787e66e0", defaultValue: "Split:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         splitLabel.sizeToFit()
         splitLabel.identifier = NSUserInterfaceItemIdentifier("splitLabel")
         section.addSubview(splitLabel)
 
         let orientation: NSSegmentedControl
         if let verticalImage = NSImage(systemSymbolName: "square.split.2x1",
-                                       accessibilityDescription: "Vertical"),
+                                       accessibilityDescription: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.vertical.727cd3a6", defaultValue: "Vertical", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")),
            let horizontalImage = NSImage(systemSymbolName: "square.split.1x2",
-                                         accessibilityDescription: "Horizontal") {
+                                         accessibilityDescription: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.horizontal.0abba441", defaultValue: "Horizontal", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")) {
             orientation = NSSegmentedControl(
                 images: [verticalImage, horizontalImage],
                 trackingMode: .selectOne,
@@ -239,7 +239,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
                 action: #selector(splitOrientationChanged(_:)))
         } else {
             orientation = NSSegmentedControl(
-                labels: ["􀏠 Vertical", "􀕰 Horizontal"],
+                labels: [String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.vertical.d853a749", defaultValue: "􀏠 Vertical", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."), String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.horizontal.123e136f", defaultValue: "􀕰 Horizontal", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")],
                 trackingMode: .selectOne,
                 target: self,
                 action: #selector(splitOrientationChanged(_:)))
@@ -249,7 +249,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
         section.addSubview(orientation)
 
         let side = NSSegmentedControl(
-            labels: ["Left", "Right"],
+            labels: [String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.left.58eb9032", defaultValue: "Left", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."), String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.right.883361d5", defaultValue: "Right", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")],
             trackingMode: .selectOne,
             target: self,
             action: #selector(splitSideChanged(_:)))
@@ -257,7 +257,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
         splitSidePicker = side
         section.addSubview(side)
 
-        let locationLabel = NSTextField(labelWithString: "Location:")
+        let locationLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.location.bbdffe25", defaultValue: "Location:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         locationLabel.sizeToFit()
         locationLabel.identifier = NSUserInterfaceItemIdentifier("locationLabel")
         section.addSubview(locationLabel)
@@ -280,7 +280,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
     private func makeToolbarSection() -> NSView {
         let section = NSView(frame: .zero)
 
-        toolbarHeaderLabel = NSTextField(labelWithString: "Toolbar Items:")
+        toolbarHeaderLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.toolbar_items.bdda3846", defaultValue: "Toolbar Items:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         toolbarHeaderLabel.sizeToFit()
         section.addSubview(toolbarHeaderLabel)
 
@@ -332,7 +332,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
     private func makeToolbarParamContainer() -> NSView {
         let container = NSView(frame: .zero)
 
-        let minLabel = NSTextField(labelWithString: "Min width:")
+        let minLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.min_width.138bd0e7", defaultValue: "Min width:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         minLabel.sizeToFit()
         minLabel.identifier = NSUserInterfaceItemIdentifier("minLabel")
         container.addSubview(minLabel)
@@ -342,7 +342,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
         spacerMinField = minField
         container.addSubview(minField)
 
-        let maxLabel = NSTextField(labelWithString: "Max width:")
+        let maxLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.max_width.1abe8867", defaultValue: "Max width:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         maxLabel.sizeToFit()
         maxLabel.identifier = NSUserInterfaceItemIdentifier("maxLabel")
         container.addSubview(maxLabel)
@@ -363,7 +363,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
     private func makeToolbarShortcutsContainer() -> NSView {
         let container = NSView(frame: .zero)
 
-        backShortcutLabel = NSTextField(labelWithString: "Back:")
+        backShortcutLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.back.a8358a49", defaultValue: "Back:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         backShortcutLabel.sizeToFit()
         container.addSubview(backShortcutLabel)
         backShortcutInput = iTermShortcutInputView(frame: NSRect(x: 0, y: 0, width: 200, height: kShortcutPreferredHeight))
@@ -371,7 +371,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
         backShortcutInput.disableKeyRemapping = true
         container.addSubview(backShortcutInput)
 
-        forwardShortcutLabel = NSTextField(labelWithString: "Forward:")
+        forwardShortcutLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.forward.1ee2d852", defaultValue: "Forward:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         forwardShortcutLabel.sizeToFit()
         container.addSubview(forwardShortcutLabel)
         forwardShortcutInput = iTermShortcutInputView(frame: NSRect(x: 0, y: 0, width: 200, height: kShortcutPreferredHeight))
@@ -379,7 +379,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
         forwardShortcutInput.disableKeyRemapping = true
         container.addSubview(forwardShortcutInput)
 
-        reloadShortcutLabel = NSTextField(labelWithString: "Reload:")
+        reloadShortcutLabel = NSTextField(labelWithString: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.reload.0335480a", defaultValue: "Reload:", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         reloadShortcutLabel.sizeToFit()
         container.addSubview(reloadShortcutLabel)
         reloadShortcutInput = iTermShortcutInputView(frame: NSRect(x: 0, y: 0, width: 200, height: kShortcutPreferredHeight))
@@ -724,11 +724,11 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
 
     private func refreshSideLabels(for orientation: SplitSettings.Orientation) {
         if orientation == .vertical {
-            splitSidePicker.setLabel("Left", forSegment: 0)
-            splitSidePicker.setLabel("Right", forSegment: 1)
+            splitSidePicker.setLabel(String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.left.58eb9032", defaultValue: "Left", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."), forSegment: 0)
+            splitSidePicker.setLabel(String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.right.883361d5", defaultValue: "Right", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."), forSegment: 1)
         } else {
-            splitSidePicker.setLabel("Top", forSegment: 0)
-            splitSidePicker.setLabel("Bottom", forSegment: 1)
+            splitSidePicker.setLabel(String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.top.d5cdfcf7", defaultValue: "Top", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."), forSegment: 0)
+            splitSidePicker.setLabel(String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.bottom.479ad21a", defaultValue: "Bottom", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."), forSegment: 1)
         }
     }
 
@@ -739,7 +739,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
 
     private func populateProfilePopup() {
         profilePopup.removeAllItems()
-        profilePopup.addItem(withTitle: "Default")
+        profilePopup.addItem(withTitle: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.default.21b111cb", defaultValue: "Default", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         profilePopup.lastItem?.representedObject = NSNull()
         guard let model = ProfileModel.sharedInstance() else { return }
         for profile in model.bookmarks() {
@@ -771,7 +771,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
     @objc private func profileChanged(_ sender: NSPopUpButton) {
         guard var s = session else { return }
         s.profileGUID = sender.selectedItem?.representedObject as? String
-        commitUpdate(s, actionName: "Change Profile") { [weak self] in
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_profile.d30d5c8c", defaultValue: "Change Profile", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")) { [weak self] in
             self?.refresh()
         }
     }
@@ -782,7 +782,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
               let mode = iTermWorkgroupSessionMode(rawValue: raw),
               s.mode != mode else { return }
         s.mode = mode
-        commitUpdate(s, actionName: "Change Mode")
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_mode.9ec218a2", defaultValue: "Change Mode", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
     }
 
     @objc private func splitOrientationChanged(_ sender: NSSegmentedControl) {
@@ -791,7 +791,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
         settings.orientation = sender.selectedSegment == 0 ? .vertical : .horizontal
         refreshSideLabels(for: settings.orientation)
         s.kind = .split(settings)
-        commitUpdate(s, actionName: "Change Orientation")
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_orientation.1f52c043", defaultValue: "Change Orientation", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
     }
 
     @objc private func splitSideChanged(_ sender: NSSegmentedControl) {
@@ -799,7 +799,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
               case .split(var settings) = s.kind else { return }
         settings.side = sender.selectedSegment == 0 ? .leadingOrTop : .trailingOrBottom
         s.kind = .split(settings)
-        commitUpdate(s, actionName: "Change Side")
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_side.dbd6cd8f", defaultValue: "Change Side", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
     }
 
     @objc private func splitLocationChanged(_ sender: NSSlider) {
@@ -809,7 +809,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
                                 splitLocationMax)
         updateLocationReadout(settings.location)
         s.kind = .split(settings)
-        commitUpdate(s, actionName: "Change Split Location")
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_split_location.7487dd71", defaultValue: "Change Split Location", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
     }
 
     // Called by the detail VC while the user drags a divider in the
@@ -993,7 +993,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
             else { return }
         let insertAt = (selectedToolbarRow ?? (s.toolbarItems.count - 1)) + 1
         s.toolbarItems.insert(metadata.defaultValue, at: insertAt)
-        commitUpdate(s, actionName: "Add Toolbar Item") { [weak self] in
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.add_toolbar_item.2f6588f7", defaultValue: "Add Toolbar Item", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")) { [weak self] in
             guard let self else { return }
             self.toolbarTable.reloadData()
             self.toolbarTable.selectRowIndexes(IndexSet(integer: insertAt),
@@ -1012,7 +1012,7 @@ class iTermWorkgroupSessionDetailViewController: NSViewController {
             return
         }
         s.toolbarItems.remove(at: row)
-        commitUpdate(s, actionName: "Remove Toolbar Item") { [weak self] in
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.remove_toolbar_item.46640679", defaultValue: "Remove Toolbar Item", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")) { [weak self] in
             guard let self else { return }
             self.toolbarTable.reloadData()
             self.refreshToolbarParamUI()
@@ -1106,22 +1106,22 @@ extension iTermWorkgroupSessionDetailViewController: NSTextFieldDelegate {
             // pass restores a default if the session is a peer.
             if s.displayName != field.stringValue {
                 s.displayName = field.stringValue
-                commitUpdate(s, actionName: "Rename Peer")
+                commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.rename_peer.7970ce12", defaultValue: "Rename Peer", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
             }
         case commandField:
             if s.command != field.stringValue {
                 s.command = field.stringValue
-                commitUpdate(s, actionName: "Change Command")
+                commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_command.de03908e", defaultValue: "Change Command", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
             }
         case perFileCommandField:
             if s.perFileCommand != field.stringValue {
                 s.perFileCommand = field.stringValue
-                commitUpdate(s, actionName: "Change Per-File Command")
+                commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_per_file_command.8318a712", defaultValue: "Change Per-File Command", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
             }
         case urlField:
             if s.urlString != field.stringValue {
                 s.urlString = field.stringValue
-                commitUpdate(s, actionName: "Change URL")
+                commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_url.fc1a80e1", defaultValue: "Change URL", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
             }
         default:
             break
@@ -1148,7 +1148,7 @@ extension iTermWorkgroupSessionDetailViewController: NSTextFieldDelegate {
                 field.stringValue = replacement
                 if s.displayName != replacement {
                     s.displayName = replacement
-                    commitUpdate(s, actionName: "Rename Peer")
+                    commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.rename_peer.7970ce12", defaultValue: "Rename Peer", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
                 }
                 return
             }
@@ -1156,7 +1156,7 @@ extension iTermWorkgroupSessionDetailViewController: NSTextFieldDelegate {
             // the kind-based default in the visual view).
             if s.displayName != trimmed {
                 s.displayName = trimmed
-                commitUpdate(s, actionName: "Rename Peer")
+                commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.rename_peer.7970ce12", defaultValue: "Rename Peer", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
             }
         case spacerMinField, spacerMaxField:
             applySpacerEditIfNeeded()
@@ -1195,7 +1195,7 @@ extension iTermWorkgroupSessionDetailViewController: NSTextFieldDelegate {
         let minCG = CGFloat(minValue)
         let maxCG = max(minCG, CGFloat(maxValue))
         s.toolbarItems[row] = .spacer(minWidth: minCG, maxWidth: maxCG)
-        commitUpdate(s, actionName: "Change Spacer Width") { [weak self] in
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_spacer_width.b4349c73", defaultValue: "Change Spacer Width", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")) { [weak self] in
             guard let self else { return }
             self.toolbarTable.reloadData(
                 forRowIndexes: IndexSet(integer: row),
@@ -1268,7 +1268,7 @@ extension iTermWorkgroupSessionDetailViewController: NSTableViewDataSource, NSTa
         // shifts down by one.
         let insertAt = destinationRow > sourceRow ? destinationRow - 1 : destinationRow
         s.toolbarItems.insert(item, at: insertAt)
-        commitUpdate(s, actionName: "Reorder Toolbar Item") { [weak self] in
+        commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.reorder_toolbar_item.2a2c33d5", defaultValue: "Reorder Toolbar Item", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")) { [weak self] in
             guard let self else { return }
             self.toolbarTable.reloadData()
             self.toolbarTable.selectRowIndexes(IndexSet(integer: insertAt),
@@ -1322,7 +1322,7 @@ extension iTermWorkgroupSessionDetailViewController: NSTableViewDataSource, NSTa
             ?? item.kind.rawValue
         switch item {
         case .spacer(let minWidth, let maxWidth):
-            return "\(base) (\(formatWidth(minWidth))–\(formatWidth(maxWidth)) pt)"
+            return String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.0_1_2_pt.7a696cc1", defaultValue: "\(base) (\(formatWidth(minWidth))–\(formatWidth(maxWidth)) pt)", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController.")
         default:
             return base
         }
@@ -1352,7 +1352,7 @@ extension iTermWorkgroupSessionDetailViewController: iTermShortcutInputViewDeleg
         if view === peerShortcutInput {
             guard sessionIsInPeerGroup(s) else { return }
             s.peerSwitchShortcut = newValue
-            commitUpdate(s, actionName: "Change Peer Shortcut")
+            commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_peer_shortcut.580bc1cc", defaultValue: "Change Peer Shortcut", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
             return
         }
         guard let row = selectedToolbarRow,
@@ -1369,10 +1369,10 @@ extension iTermWorkgroupSessionDetailViewController: iTermShortcutInputViewDeleg
                 return
             }
             s.toolbarItems[row] = .navigation(shortcuts)
-            commitUpdate(s, actionName: "Change Shortcut")
+            commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_shortcut.edd29c07", defaultValue: "Change Shortcut", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         case .reload:
             s.toolbarItems[row] = .reload(newValue)
-            commitUpdate(s, actionName: "Change Shortcut")
+            commitUpdate(s, actionName: String(localized: "ui.swift.workgroups.itermworkgroupsessiondetailviewcontroller.change_shortcut.edd29c07", defaultValue: "Change Shortcut", bundle: .main, comment: "User-facing text in iTermWorkgroupSessionDetailViewController."))
         default:
             return
         }

@@ -54,10 +54,11 @@ class iTermBrowserOnboardingHandler: NSObject, iTermBrowserPageHandler {
             templateName = "onboarding-setup"
         }
         
+        let substitutions = url == Self.profileURL ? profileSubstitutions() : setupSubstitutions()
         let htmlToServe = iTermBrowserTemplateLoader.loadTemplate(
             named: templateName,
             type: "html",
-            substitutions: ["SECRET": secret]
+            substitutions: substitutions
         )
 
         guard let data = htmlToServe.data(using: .utf8) else {
@@ -163,5 +164,57 @@ class iTermBrowserOnboardingHandler: NSObject, iTermBrowserPageHandler {
 
     func resetState() {
 
+    }
+
+    private func profileSubstitutions() -> [String: String] {
+        return [
+            "SECRET": secret,
+            "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+            "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.page_title", defaultValue: "iTerm2 Browser - Create Profile"),
+            "TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.title", defaultValue: "First Things First"),
+            "SUBTITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.subtitle", defaultValue: "Let's create a browser profile to get started"),
+            "PROFILE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.profile_title", defaultValue: "Create Your Browser Profile"),
+            "PROFILE_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.profile_description", defaultValue: "A browser profile stores all your preferences and settings specifically for web browsing. This keeps your terminal and browser configurations separate and organized."),
+            "CREATE_PROFILE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.create_profile", defaultValue: "Create Browser Profile"),
+            "SUCCESS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.success", defaultValue: "Success!"),
+            "SUCCESS_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.success_description", defaultValue: "Your browser profile has been created. You can now continue to configure your browsing experience."),
+            "NOTE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.note", defaultValue: "Note:"),
+            "NOTE_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.note_description", defaultValue: "You can create multiple browser profiles with different settings for different use cases. Each profile can have its own keyboard shortcuts and browser-specific configurations."),
+            "BACK": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.back", defaultValue: "Back"),
+            "CONTINUE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.profile.continue", defaultValue: "Continue to Setup"),
+            "PROFILE_CREATED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.onboarding.profile.status.created", defaultValue: "✓ Profile Created"),
+            "PROFILE_EXISTS_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.onboarding.profile.status.exists", defaultValue: "✓ Profile Exists"),
+            "PROFILE_ALREADY_EXISTS_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.onboarding.profile.status.already_exists", defaultValue: "A browser profile already exists. You can continue to the next step.")
+        ]
+    }
+
+    private func setupSubstitutions() -> [String: String] {
+        return [
+            "SECRET": secret,
+            "HTML_LANG": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.language_code", defaultValue: "en"),
+            "PAGE_TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.page_title", defaultValue: "iTerm2 Browser - Setup"),
+            "TITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.title", defaultValue: "Let’s Get You Set Up"),
+            "SUBTITLE": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.subtitle", defaultValue: "Quick configuration to get the most out of your browser"),
+            "AD_BLOCKER": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.ad_blocker.title", defaultValue: "Ad Blocker"),
+            "DISABLED": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.status.disabled", defaultValue: "Disabled"),
+            "AD_BLOCKER_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.ad_blocker.description", defaultValue: "Blocks ads and trackers using WebKit content blockers. Improves browsing speed and privacy without sacrificing compatibility. If enabled, a new block list will be downloaded from the internet once a day."),
+            "ENABLE_AD_BLOCKER": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.ad_blocker.enable", defaultValue: "Enable Ad Blocker"),
+            "INSTANT_REPLAY": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.instant_replay.title", defaultValue: "Instant Replay"),
+            "INSTANT_REPLAY_DESCRIPTION": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.instant_replay.description", defaultValue: "Instant Replay keeps a rolling screen recording of your browser window, storing only the most recent contents. If you miss something, launch the player to review what was on the screen. Requires screen recording permission."),
+            "ENABLE_INSTANT_REPLAY": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.instant_replay.enable", defaultValue: "Enable Instant Replay"),
+            "TIP": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.tip", defaultValue: "Tip:"),
+            "TIP_PREFIX": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.tip.prefix", defaultValue: "To view or change browser settings, go to"),
+            "PREFERENCES_PATH": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.tip.preferences_path", defaultValue: "Preferences → Profiles → Web"),
+            "TIP_INFIX": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.tip.infix", defaultValue: "or by clicking the ☰ button in the browser toolbar and then select"),
+            "SETTINGS": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.welcome.settings", defaultValue: "Settings"),
+            "TIP_SUFFIX": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.tip.suffix", defaultValue: "."),
+            "BACK": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.common.back", defaultValue: "Back"),
+            "START_BROWSING": iTermBrowserTemplateLoader.localizedHTML("ui.browser.page.onboarding.setup.start_browsing", defaultValue: "Start Browsing"),
+            "ENABLED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.onboarding.setup.status.enabled", defaultValue: "Enabled"),
+            "DISABLED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.onboarding.setup.status.disabled", defaultValue: "Disabled"),
+            "CREATED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.onboarding.setup.status.created", defaultValue: "Created"),
+            "NOT_CREATED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.onboarding.setup.status.not_created", defaultValue: "Not Created"),
+            "DONE_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.page.onboarding.setup.status.done", defaultValue: "✓ Done")
+        ]
     }
 }

@@ -39,12 +39,12 @@ extension RemoteCommand {
                     if iTermUserDefaults.userDefaults().object(forKey: kPreferenceKeyAISafetyCheck) == nil &&
                         !iTermUserDefaults.userDefaults().bool(forKey: nagKey) {
                         let selection = iTermWarning.show(
-                            withTitle: "iTerm2 can use AI to check the safety of commands suggested by your AI agent. Would you like to enable safety checking?\n\nWhen enabled, each proposed command will be sent to your configured AI provider for a safety check.",
-                            actions: ["OK", "Cancel"],
+                            withTitle: String(localized: "ui.swift.aiterm.remotecommand_mac.iterm2_can_use_ai_to_check_the_safety.2c521501", defaultValue: "iTerm2 can use AI to check the safety of commands suggested by your AI agent. Would you like to enable safety checking?\n\nWhen enabled, each proposed command will be sent to your configured AI provider for a safety check.", bundle: .main, comment: "User-facing text in RemoteCommand+Mac."),
+                            actions: [String(localized: "ui.swift.aiterm.remotecommand_mac.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in RemoteCommand+Mac."), String(localized: "ui.swift.aiterm.remotecommand_mac.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in RemoteCommand+Mac.")],
                             accessory: nil,
                             identifier: nil,
                             silenceable: .kiTermWarningTypePersistent,
-                            heading: "Enable Command Safety Checking?",
+                            heading: String(localized: "ui.swift.aiterm.remotecommand_mac.enable_command_safety_checking.746e910c", defaultValue: "Enable Command Safety Checking?", bundle: .main, comment: "User-facing text in RemoteCommand+Mac."),
                             window: nil)
                         iTermPreferences.setBool(true, forKey: nagKey)
                         if selection == .kiTermWarningSelection0 {
@@ -85,12 +85,12 @@ extension RemoteCommand {
         }
         defaults.set(false, forKey: kPreferenceKeyAISafetyCheckProviderSwitchPending)
         let selection = iTermWarning.show(
-            withTitle: "Until now, iTerm2 checked the safety of AI-suggested commands on your Mac using Apple Intelligence, at no cost. It can now use your configured AI model instead, which is more accurate but sends each checked command to your AI provider and may incur charges.\n\nSwitch to your configured model? If you decline, iTerm2 keeps using Apple Intelligence.",
-            actions: ["Switch to My Model", "Keep Apple Intelligence"],
+            withTitle: String(localized: "ui.swift.aiterm.remotecommand_mac.until_now_iterm2_checked_the_safety_of_ai.1fc5b44a", defaultValue: "Until now, iTerm2 checked the safety of AI-suggested commands on your Mac using Apple Intelligence, at no cost. It can now use your configured AI model instead, which is more accurate but sends each checked command to your AI provider and may incur charges.\n\nSwitch to your configured model? If you decline, iTerm2 keeps using Apple Intelligence.", bundle: .main, comment: "User-facing text in RemoteCommand+Mac."),
+            actions: [String(localized: "ui.swift.aiterm.remotecommand_mac.switch_to_my_model.c2a3ad63", defaultValue: "Switch to My Model", bundle: .main, comment: "User-facing text in RemoteCommand+Mac."), String(localized: "ui.swift.aiterm.remotecommand_mac.keep_apple_intelligence.18a05b96", defaultValue: "Keep Apple Intelligence", bundle: .main, comment: "User-facing text in RemoteCommand+Mac.")],
             accessory: nil,
             identifier: nil,
             silenceable: .kiTermWarningTypePersistent,
-            heading: "Command Safety Checking Has Changed",
+            heading: String(localized: "ui.swift.aiterm.remotecommand_mac.command_safety_checking_has_changed.5515379b", defaultValue: "Command Safety Checking Has Changed", bundle: .main, comment: "User-facing text in RemoteCommand+Mac."),
             window: nil)
         // Selection 0 == switch to the configured model; 1 == keep Apple.
         defaults.set(selection != .kiTermWarningSelection0,

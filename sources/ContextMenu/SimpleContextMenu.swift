@@ -27,7 +27,7 @@ class SimpleContextMenu: NSObject, NSMenuDelegate {
         var action: () -> ()
     }
     private var items = [Item]()
-    private let menu = NSMenu(title: "Context menu")
+    private let menu = NSMenu(title: String(localized: "ui.swift.contextmenu.simplecontextmenu.context_menu.41afe4cc", defaultValue: "Context menu", bundle: .main, comment: "User-facing text in SimpleContextMenu."))
     private var cycle: SimpleContextMenu?
     var isEmpty: Bool { items.isEmpty }
     

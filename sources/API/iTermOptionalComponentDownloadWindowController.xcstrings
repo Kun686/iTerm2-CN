@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Python Runtime Installer"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Python 运行时安装器"
+          }
         }
       }
     },
@@ -22,6 +28,12 @@
             "state": "new",
             "value": "Cancel"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
         }
       }
     },
@@ -33,6 +45,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Downloading optional components…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在下载可选组件…"
           }
         }
       }

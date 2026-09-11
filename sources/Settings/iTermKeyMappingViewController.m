@@ -127,12 +127,12 @@ static NSString *const INTERCHANGE_TOUCH_BAR_ITEMS = @"Touch Bar Items";
         [_presetsPopup.menu addItem:[NSMenuItem separatorItem]];
     }
     NSMenuItem *item;
-    item = [[NSMenuItem alloc] initWithTitle:@"Import…"
+    item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermkeymappingviewcontroller.import.ea94509e", nil, NSBundle.mainBundle, @"Import…", @"User-facing text in iTermKeyMappingViewController (setPlaceholderView:).")
                                       action:@selector(importMenuItem:)
                                keyEquivalent:@""];
     item.target = self;
     [_presetsPopup.menu addItem:item];
-    item = [[NSMenuItem alloc] initWithTitle:@"Export…"
+    item = [[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermkeymappingviewcontroller.export.4a4c59c5", nil, NSBundle.mainBundle, @"Export…", @"User-facing text in iTermKeyMappingViewController (setPlaceholderView:).")
                                       action:@selector(exportMenuItem:)
                                keyEquivalent:@""];
     item.target = self;
@@ -529,12 +529,12 @@ static NSString *const INTERCHANGE_TOUCH_BAR_ITEMS = @"Touch Bar Items";
 
 - (NSNumber *)removeBeforeLoading:(NSString *)thing {
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Remove all key mappings before %@?", thing]
-                               actions:@[ @"Keep", @"Remove", @"Cancel" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermkeymappingviewcontroller.remove_all_key_mappings_before.aeed4978", nil, NSBundle.mainBundle, @"Remove all key mappings before %@?", @"User-facing text in iTermKeyMappingViewController (showWarningWithTitle)."), thing]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermkeymappingviewcontroller.keep.183f00f4", nil, NSBundle.mainBundle, @"Keep", @"User-facing action label in iTermKeyMappingViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.itermkeymappingviewcontroller.remove.c3812fc4", nil, NSBundle.mainBundle, @"Remove", @"User-facing action label in iTermKeyMappingViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.itermkeymappingviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermKeyMappingViewController (actions).") ]
                              accessory:nil
                             identifier:@"RemoveExistingGlobalKeyMappingsBeforeLoading"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Load Preset"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.settings.itermkeymappingviewcontroller.load_preset.1a121983", nil, NSBundle.mainBundle, @"Load Preset", @"User-facing text in iTermKeyMappingViewController (heading).")
                                 window:self.view.window];
     switch (selection) {
         case kiTermWarningSelection0:

@@ -100,15 +100,15 @@ class StatusBarFilterComponent: iTermStatusBarBaseComponent, iTermFilterViewCont
     }
 
     override func statusBarComponentShortDescription() -> String {
-        return "Filter Tool"
+        return String(localized: "ui.swift.statusbar.components.statusbarfiltercomponent.filter_tool.63cd478b", defaultValue: "Filter Tool", bundle: .main, comment: "User-facing text in StatusBarFilterComponent.")
     }
 
     override func statusBarComponentDetailedDescription() -> String {
-        return "Filter tool to remove non-matching lines from terminal window."
+        return String(localized: "ui.swift.statusbar.components.statusbarfiltercomponent.filter_tool_to_remove_non_matching_lines_from.37575c17", defaultValue: "Filter tool to remove non-matching lines from terminal window.", bundle: .main, comment: "User-facing text in StatusBarFilterComponent.")
     }
 
     override func statusBarComponentKnobs() -> [iTermStatusBarComponentKnob] {
-        return [iTermStatusBarComponentKnob(labelText: "Color",
+        return [iTermStatusBarComponentKnob(labelText: String(localized: "ui.swift.statusbar.components.statusbarfiltercomponent.color.6b73191a", defaultValue: "Color", bundle: .main, comment: "User-facing text in StatusBarFilterComponent."),
                                             type: .color,
                                             placeholder: nil,
                                             defaultValue: nil,
@@ -116,7 +116,7 @@ class StatusBarFilterComponent: iTermStatusBarBaseComponent, iTermFilterViewCont
     }
 
     override func statusBarComponentExemplar(withBackgroundColor backgroundColor: NSColor, textColor: NSColor) -> Any {
-        return "⥹ Filter"
+        return String(localized: "ui.swift.statusbar.components.statusbarfiltercomponent.filter.d226c8d9", defaultValue: "⥹ Filter", bundle: .main, comment: "User-facing text in StatusBarFilterComponent.")
     }
 
     override func statusBarComponentView() -> NSView {

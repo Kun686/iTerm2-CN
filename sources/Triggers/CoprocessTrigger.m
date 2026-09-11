@@ -16,7 +16,7 @@ static NSString *const kSuppressCoprocessTriggerWarning = @"NoSyncSuppressCoproc
 @implementation CoprocessTrigger
 
 + (NSString *)title {
-    return @"Run Coprocess…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.coprocesstrigger.run_coprocess.18345782", nil, NSBundle.mainBundle, @"Run Coprocess…", @"Trigger action title.");
 }
 
 - (NSString *)description {
@@ -28,7 +28,7 @@ static NSString *const kSuppressCoprocessTriggerWarning = @"NoSyncSuppressCoproc
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter coprocess command to run";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.coprocesstrigger.enter_coprocess_command_to_run.5a0f5c0b", nil, NSBundle.mainBundle, @"Enter coprocess command to run", @"Trigger parameter placeholder.");
 }
 
 // Requires a live session to launch a coprocess
@@ -71,7 +71,7 @@ static NSString *const kSuppressCoprocessTriggerWarning = @"NoSyncSuppressCoproc
 @implementation MuteCoprocessTrigger
 
 + (NSString *)title {
-    return @"Run Silent Coprocess…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.coprocesstrigger.run_silent_coprocess.4269812b", nil, NSBundle.mainBundle, @"Run Silent Coprocess…", @"Trigger action title.");
 }
 
 - (BOOL)takesParameter {
@@ -79,7 +79,7 @@ static NSString *const kSuppressCoprocessTriggerWarning = @"NoSyncSuppressCoproc
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter coprocess command to run";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.coprocesstrigger.enter_coprocess_command_to_run.5a0f5c0b", nil, NSBundle.mainBundle, @"Enter coprocess command to run", @"Trigger parameter placeholder.");
 }
 
 - (BOOL)isSilent {

@@ -109,18 +109,18 @@ class iTermClippingsView: NSView {
         editSegmentedControl.segmentCount = 3
         editSegmentedControl.segmentStyle = .smallSquare
         editSegmentedControl.trackingMode = .momentary
-        if let plus = NSImage(systemSymbolName: "plus", accessibilityDescription: "Add clipping") {
+        if let plus = NSImage(systemSymbolName: "plus", accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.add_clipping.570aebb8", defaultValue: "Add clipping", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             editSegmentedControl.setImage(plus, forSegment: 0)
         }
-        if let minus = NSImage(systemSymbolName: "minus", accessibilityDescription: "Remove clipping") {
+        if let minus = NSImage(systemSymbolName: "minus", accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.remove_clipping.58f05b90", defaultValue: "Remove clipping", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             editSegmentedControl.setImage(minus, forSegment: 1)
         }
-        if let archive = NSImage(systemSymbolName: "archivebox", accessibilityDescription: "Archive clippings") {
+        if let archive = NSImage(systemSymbolName: "archivebox", accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.archive_clippings.dc02246f", defaultValue: "Archive clippings", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             editSegmentedControl.setImage(archive, forSegment: 2)
         }
-        editSegmentedControl.setToolTip("Add clipping", forSegment: 0)
-        editSegmentedControl.setToolTip("Remove selected clipping", forSegment: 1)
-        editSegmentedControl.setToolTip("Archive all clippings", forSegment: 2)
+        editSegmentedControl.setToolTip(String(localized: "ui.swift.clippings.clippingsview.add_clipping.570aebb8", defaultValue: "Add clipping", bundle: .main, comment: "User-facing text in ClippingsView."), forSegment: 0)
+        editSegmentedControl.setToolTip(String(localized: "ui.swift.clippings.clippingsview.remove_selected_clipping.ebd86e44", defaultValue: "Remove selected clipping", bundle: .main, comment: "User-facing text in ClippingsView."), forSegment: 1)
+        editSegmentedControl.setToolTip(String(localized: "ui.swift.clippings.clippingsview.archive_all_clippings.dbed617d", defaultValue: "Archive all clippings", bundle: .main, comment: "User-facing text in ClippingsView."), forSegment: 2)
         editSegmentedControl.setEnabled(false, forSegment: 1)
         editSegmentedControl.setEnabled(false, forSegment: 2)
         editSegmentedControl.target = self
@@ -131,14 +131,14 @@ class iTermClippingsView: NSView {
         actionSegmentedControl.segmentCount = 2
         actionSegmentedControl.segmentStyle = .smallSquare
         actionSegmentedControl.trackingMode = .momentary
-        if let send = NSImage(systemSymbolName: "play.fill", accessibilityDescription: "Send clipping") {
+        if let send = NSImage(systemSymbolName: "play.fill", accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.send_clipping.00a44731", defaultValue: "Send clipping", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             actionSegmentedControl.setImage(send, forSegment: 0)
         }
-        if let copy = NSImage(systemSymbolName: "doc.on.doc", accessibilityDescription: "Copy clipping") {
+        if let copy = NSImage(systemSymbolName: "doc.on.doc", accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.copy_clipping.da47ae97", defaultValue: "Copy clipping", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             actionSegmentedControl.setImage(copy, forSegment: 1)
         }
-        actionSegmentedControl.setToolTip("Send selected to terminal", forSegment: 0)
-        actionSegmentedControl.setToolTip("Copy selected to pasteboard", forSegment: 1)
+        actionSegmentedControl.setToolTip(String(localized: "ui.swift.clippings.clippingsview.send_selected_to_terminal.5e1acbd4", defaultValue: "Send selected to terminal", bundle: .main, comment: "User-facing text in ClippingsView."), forSegment: 0)
+        actionSegmentedControl.setToolTip(String(localized: "ui.swift.clippings.clippingsview.copy_selected_to_pasteboard.2d1b39cc", defaultValue: "Copy selected to pasteboard", bundle: .main, comment: "User-facing text in ClippingsView."), forSegment: 1)
         actionSegmentedControl.setEnabled(false, forSegment: 0)
         actionSegmentedControl.setEnabled(false, forSegment: 1)
         actionSegmentedControl.target = self
@@ -149,14 +149,14 @@ class iTermClippingsView: NSView {
         historySegmentedControl.segmentCount = 2
         historySegmentedControl.segmentStyle = .smallSquare
         historySegmentedControl.trackingMode = .momentary
-        if let back = NSImage(systemSymbolName: "chevron.left", accessibilityDescription: "Previous archived clippings") {
+        if let back = NSImage(systemSymbolName: "chevron.left", accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.previous_archived_clippings.596b4d2d", defaultValue: "Previous archived clippings", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             historySegmentedControl.setImage(back, forSegment: 0)
         }
-        if let forward = NSImage(systemSymbolName: "chevron.right", accessibilityDescription: "Next archived clippings") {
+        if let forward = NSImage(systemSymbolName: "chevron.right", accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.next_archived_clippings.4f65ac0e", defaultValue: "Next archived clippings", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             historySegmentedControl.setImage(forward, forSegment: 1)
         }
-        historySegmentedControl.setToolTip("Show previous archived clippings", forSegment: 0)
-        historySegmentedControl.setToolTip("Show next archived clippings", forSegment: 1)
+        historySegmentedControl.setToolTip(String(localized: "ui.swift.clippings.clippingsview.show_previous_archived_clippings.027401d9", defaultValue: "Show previous archived clippings", bundle: .main, comment: "User-facing text in ClippingsView."), forSegment: 0)
+        historySegmentedControl.setToolTip(String(localized: "ui.swift.clippings.clippingsview.show_next_archived_clippings.5f89fba3", defaultValue: "Show next archived clippings", bundle: .main, comment: "User-facing text in ClippingsView."), forSegment: 1)
         historySegmentedControl.setEnabled(false, forSegment: 0)
         historySegmentedControl.setEnabled(false, forSegment: 1)
         historySegmentedControl.target = self
@@ -173,7 +173,7 @@ class iTermClippingsView: NSView {
         historyStatusLabel.autoresizingMask = [.minXMargin, .maxYMargin]
         addSubview(historyStatusLabel)
 
-        if let xmark = NSImage(systemSymbolName: "xmark", accessibilityDescription: "Hide clippings") {
+        if let xmark = NSImage(systemSymbolName: "xmark", accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.hide_clippings.a770961e", defaultValue: "Hide clippings", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             closeButton.image = xmark
         }
         closeButton.bezelStyle = .smallSquare
@@ -181,7 +181,7 @@ class iTermClippingsView: NSView {
         closeButton.imagePosition = .imageOnly
         closeButton.target = self
         closeButton.action = #selector(closeClicked(_:))
-        closeButton.toolTip = "Hide clippings"
+        closeButton.toolTip = String(localized: "ui.swift.clippings.clippingsview.hide_clippings.a770961e", defaultValue: "Hide clippings", bundle: .main, comment: "User-facing text in ClippingsView.")
         closeButton.autoresizingMask = [.minXMargin, .maxYMargin]
         addSubview(closeButton)
 
@@ -278,7 +278,7 @@ class iTermClippingsView: NSView {
 
         if !viewingLive {
             historyStatusLabel.stringValue = "\(historyIndex + 1)/\(total)"
-            historyStatusLabel.toolTip = "Viewing archived clippings (\(historyIndex + 1) of \(total))"
+            historyStatusLabel.toolTip = String(localized: "ui.swift.clippings.clippingsview.viewing_archived_clippings_0_of_1.b37bc579", defaultValue: "Viewing archived clippings (\(historyIndex + 1) of \(total))", bundle: .main, comment: "User-facing text in ClippingsView.")
             historyStatusLabel.isHidden = false
         } else {
             historyStatusLabel.stringValue = ""
@@ -608,14 +608,14 @@ private class ClippingsCellView: NSTableCellView {
         addSubview(detailLabel)
 
         if let glass = NSImage(systemSymbolName: "magnifyingglass",
-                               accessibilityDescription: "Preview clipping") {
+                               accessibilityDescription: String(localized: "ui.swift.clippings.clippingsview.preview_clipping.f198004d", defaultValue: "Preview clipping", bundle: .main, comment: "User-facing text in ClippingsView.")) {
             previewButton.image = glass
         }
         previewButton.bezelStyle = .smallSquare
         previewButton.isBordered = false
         previewButton.imagePosition = .imageOnly
         previewButton.contentTintColor = .secondaryLabelColor
-        previewButton.toolTip = "Preview (Space)"
+        previewButton.toolTip = String(localized: "ui.swift.clippings.clippingsview.preview_space.0bae4ec9", defaultValue: "Preview (Space)", bundle: .main, comment: "User-facing text in ClippingsView.")
         previewButton.target = self
         previewButton.action = #selector(previewButtonClicked(_:))
         previewButton.autoresizingMask = [.minXMargin, .minYMargin]

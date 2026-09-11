@@ -18,7 +18,7 @@ typedef NS_ENUM(int, BounceTriggerParamTag) {
 
 + (NSString *)title
 {
-    return @"Bounce Dock Icon";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_dock_icon.fb1a9eef", nil, NSBundle.mainBundle, @"Bounce Dock Icon", @"Trigger action title.");
 }
 
 - (NSString *)description {
@@ -76,11 +76,11 @@ typedef NS_ENUM(int, BounceTriggerParamTag) {
 + (NSString *)stringForParameter:(BounceTriggerParamTag)parameter {
     switch (parameter) {
         case kBounceTriggerParamTagBounceUntilFocus:
-            return @"Bounce Until Activated";
+            return NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_until_activated.2dd837b1", nil, NSBundle.mainBundle, @"Bounce Until Activated", @"User-facing text in BounceTrigger (stringForParameter:).");
         case kBounceTriggerParamTagBounceOnce:
-            return @"Bounce Once";
+            return NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_once.0c9c8142", nil, NSBundle.mainBundle, @"Bounce Once", @"User-facing text in BounceTrigger (paramAttributedString).");
     }
-    return @"Bounce Until Activated";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.bouncetrigger.bounce_until_activated.2dd837b1", nil, NSBundle.mainBundle, @"Bounce Until Activated", @"User-facing text in BounceTrigger (stringForParameter:).");
 }
 
 - (NSDictionary *)menuItemsForPoupupButton

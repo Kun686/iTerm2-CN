@@ -708,18 +708,20 @@ class iTermUvProvisioner: NSObject {
     // suppressible modal so the user knows their script may need small changes. Design
     // decision 7 / Phase 3. Called off the main thread. scriptName is nil for a shared
     // basic-script venv (which is not tied to one script), giving a generic message.
-    private static func reportForcedRemap(scriptName: String?, from: String, to: String) {
+    static func forcedRemapDiagnosticText(scriptName: String?, from: String, to: String) -> String {
         let fromMinor = iTermUvPythonVersion.twoPartVersion(from)
-        let caveat = "Python versions are not always compatible across releases, so a bumped script may need small changes."
-        let text: String
         if let scriptName = scriptName {
-            text = iTermUvMigration.consolidatedWarningText(
+            return iTermUvMigration.consolidatedWarningDiagnosticText(
                 remaps: [iTermUvPythonRemap(scriptName: scriptName, fromVersion: fromMinor, toVersion: to)])
-        } else {
-            text = "A script was written for Python \(fromMinor), which is no longer available, "
-                + "so it now uses Python \(to). " + caveat
         }
-        RLog("uv: \(text)")
+        return "A script was written for Python \(fromMinor), which is no longer available, "
+            + "so it now uses Python \(to). Python versions are not always compatible across releases, "
+            + "so a bumped script may need small changes."
+    }
+
+    private static func reportForcedRemap(scriptName: String?, from: String, to: String) {
+        let diagnosticText = Self.forcedRemapDiagnosticText(scriptName: scriptName, from: from, to: to)
+        RLog("uv: \(diagnosticText)")
         // Console-only, per the design: the ONE user-facing modal is the consolidated
         // predictive warning shown at startup (iTermScriptsMenuController). Showing a
         // per-script modal here too meant a user with N affected scripts saw N+1 modals,
@@ -727,7 +729,7 @@ class iTermUvProvisioner: NSObject {
         // same modal recurred every upgrade cycle. A Script Console line each migration is
         // the intended per-script record.
         DispatchQueue.main.async {
-            iTermScriptHistoryEntry.global().addOutput(text + "\n", completion: {})
+            iTermScriptHistoryEntry.global().addOutput(diagnosticText + "\n", completion: {})
         }
     }
 
@@ -1433,13 +1435,10 @@ final class iTermUvWindowControllerFetcher: iTermUvTarballFetcher {
         // Ask before downloading, like the legacy runtime download did.
         let megabytes = max(1, (declaredSize + 512 * 1024) / (1024 * 1024))
         let alert = NSAlert()
-        alert.messageText = "Download Python Support?"
-        alert.informativeText = "To run Python scripts, iTerm2 needs to download uv "
-            + "(about \(megabytes) MB) and a Python interpreter. Additional Python "
-            + "versions are downloaded automatically later if a script needs them. "
-            + "OK to download it now?"
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.api.itermuvprovisioner.download_python_support.7b01f018", defaultValue: "Download Python Support?", bundle: .main, comment: "User-facing text in iTermUvProvisioner.")
+        alert.informativeText = String(localized: "ui.swift.api.itermuvprovisioner.to_run_python_scripts_iterm2_needs_to_download.1eb791fe", defaultValue: "To run Python scripts, iTerm2 needs to download uv (about \(megabytes) MB) and a Python interpreter. Additional Python versions are downloaded automatically later if a script needs them. OK to download it now?", bundle: .main, comment: "User-facing text in iTermUvProvisioner.")
+        alert.addButton(withTitle: String(localized: "ui.swift.api.itermuvprovisioner.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermUvProvisioner."))
+        alert.addButton(withTitle: String(localized: "ui.swift.api.itermuvprovisioner.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermUvProvisioner."))
         guard alert.runModal() == .alertFirstButtonReturn else {
             completion(.failure(iTermUvProvisioner.cancelError()))
             return

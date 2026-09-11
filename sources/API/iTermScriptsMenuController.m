@@ -285,11 +285,11 @@ NS_ASSUME_NONNULL_BEGIN
     [iTermWarning unsilenceIdentifier:warningIdentifier ifSelectionEquals:kiTermWarningSelection0];
     const iTermWarningSelection selection =
         [iTermWarning showWarningWithTitle:text
-                                   actions:@[ @"Upgrade Now", @"Not Now" ]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.upgrade_now.66a1419e", nil, NSBundle.mainBundle, @"Upgrade Now", @"User-facing action label in iTermScriptsMenuController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.not_now.ccb4c324", nil, NSBundle.mainBundle, @"Not Now", @"User-facing action label in iTermScriptsMenuController (actions).") ]
                                  accessory:nil
                                 identifier:warningIdentifier
                                silenceable:kiTermWarningTypePermanentlySilenceable
-                                   heading:@"Python Version Changes"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.python_version_changes.85098800", nil, NSBundle.mainBundle, @"Python Version Changes", @"User-facing text in iTermScriptsMenuController (heading).")
                                     window:nil];
     if (selection == kiTermWarningSelection0) {
         [self upgradeBumpedScripts:[iTermUvMigration scriptsNeedingBump:scripts]];
@@ -337,7 +337,7 @@ NS_ASSUME_NONNULL_BEGIN
                                               requestedPythonVersion:script.requestedVersion
                                                         dependencies:script.dependencies
                                                 provisioningDidBegin:^{
-        [progress showWithMessage:[NSString stringWithFormat:@"Upgrading “%@”…", script.relativeName]];
+        [progress showWithMessage:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.upgrading_script.ca9cc18c", nil, NSBundle.mainBundle, @"Upgrading “%@”…", @"Progress message while upgrading a script. Preserve the script-name placeholder."), script.relativeName]];
     }
                                                           completion:^(NSError *error) {
         if (error != nil) {
@@ -362,15 +362,17 @@ NS_ASSUME_NONNULL_BEGIN
     }
     NSString *list = [failures componentsJoinedByString:@"\n• "];
     NSString *body = [NSString stringWithFormat:
-                      @"%@ could not be upgraded and still use the previous Python runtime. "
-                      @"Each will be upgraded automatically the next time it runs.\n\n• %@",
-                      failures.count == 1 ? @"One script" : @"Some scripts", list];
+                      NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.could_not_be_upgraded_and_still_use_the_previous_python_runtime_each_wil.2b32aa21", nil, NSBundle.mainBundle,
+                                                        @"%@ could not be upgraded and still use the previous Python runtime. "
+                                                        @"Each will be upgraded automatically the next time it runs.\n\n• %@",
+                                                        @"User-facing text in iTermScriptsMenuController (indirect UI)."),
+                      failures.count == 1 ? NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.one_script.7f9ea254", nil, NSBundle.mainBundle, @"One script", @"User-facing phrase fragment in iTermScriptsMenuController.") : NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.some_scripts.88c87deb", nil, NSBundle.mainBundle, @"Some scripts", @"User-facing phrase fragment in iTermScriptsMenuController."), list];
     [iTermWarning showWarningWithTitle:body
-                               actions:@[ @"OK" ]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermScriptsMenuController (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncUvBumpUpgradeIncomplete"
                            silenceable:kiTermWarningTypePermanentlySilenceable
-                               heading:@"Upgrade Incomplete"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.upgrade_incomplete.3a3571c1", nil, NSBundle.mainBundle, @"Upgrade Incomplete", @"User-facing text in iTermScriptsMenuController (heading).")
                                 window:nil];
 }
 
@@ -484,21 +486,21 @@ NS_ASSUME_NONNULL_BEGIN
 
     for (NSString *file in directoryEnumerator) {
         if (clockWatcher.reachedMaxTime) {
-            iTermWarningSelection selection = [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"It is taking a long time to locate all scripts under %@. Avoid storing many files or using network mounts for the scripts folder.\n\nContinue?", originalRoot]
-                                                                         actions:@[ @"Stop", @"Continue"]
+            iTermWarningSelection selection = [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.it_is_taking_a_long_time_to_locate.9a46b957", nil, NSBundle.mainBundle, @"It is taking a long time to locate all scripts under %@. Avoid storing many files or using network mounts for the scripts folder.\n\nContinue?", @"User-facing text in iTermScriptsMenuController (showWarningWithTitle)."), originalRoot]
+                                                                         actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.stop.cae7d57b", nil, NSBundle.mainBundle, @"Stop", @"User-facing action label in iTermScriptsMenuController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.continue.31fbef16", nil, NSBundle.mainBundle, @"Continue", @"User-facing action label in iTermScriptsMenuController (actions).")]
                                                                        accessory:nil
                                                                       identifier:@"TakingTooLongToEnumerateScripts"
                                                                      silenceable:kiTermWarningTypePersistent
-                                                                         heading:@"Performance Issue"
+                                                                         heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.performance_issue.de1dc398", nil, NSBundle.mainBundle, @"Performance Issue", @"User-facing text in iTermScriptsMenuController (heading).")
                                                                           window:nil];
             if (selection == kiTermWarningSelection0) {
                 _disableEnumeration = YES;
-                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Some scripts will not be available until the app has restarted or you change the scripts folder."]
-                                                                             actions:@[ @"OK"]
+                [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.some_scripts_will_not_be_available_until_the.f8b2ad08", nil, NSBundle.mainBundle, @"Some scripts will not be available until the app has restarted or you change the scripts folder.", @"User-facing text in iTermScriptsMenuController (showWarningWithTitle).")]
+                                                                             actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermScriptsMenuController (actions).")]
                                                                            accessory:nil
                                                                           identifier:@"TakingTooLongToEnumerateScripts2"
                                                                          silenceable:kiTermWarningTypePersistent
-                                                                             heading:@"Scripts Disabled"
+                                                                             heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.scripts_disabled.e0300517", nil, NSBundle.mainBundle, @"Scripts Disabled", @"User-facing text in iTermScriptsMenuController (heading).")
                                             window:nil];
                 return;
             } else {
@@ -556,12 +558,12 @@ NS_ASSUME_NONNULL_BEGIN
     // "Move to Trash" should not be remembered - silently trashing future
     // script archives without prompting would be surprising.
     iTermWarning *warning = [[iTermWarning alloc] init];
-    warning.title = [NSString stringWithFormat:@"A script archive named “%@” was found in the Scripts directory. Would you like to install it?", file.lastPathComponent];
-    warning.actionLabels = @[ @"OK", @"Cancel", @"Move to Trash" ];
+    warning.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.a_script_archive_named_was_found_in_the.c772065b", nil, NSBundle.mainBundle, @"A script archive named “%@” was found in the Scripts directory. Would you like to install it?", @"User-facing text in iTermScriptsMenuController (title)."), file.lastPathComponent];
+    warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermScriptsMenuController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermScriptsMenuController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.move_to_trash.9adcdf33", nil, NSBundle.mainBundle, @"Move to Trash", @"User-facing action label in iTermScriptsMenuController (actionLabels).") ];
     warning.identifier = @"NoSyncInstallScriptArchive";
     warning.warningType = kiTermWarningTypeTemporarilySilenceable;
-    warning.heading = @"Install Script Archive?";
-    warning.doNotRememberLabels = @[ @"Move to Trash", @"Cancel" ];
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.install_script_archive.c3b83ea0", nil, NSBundle.mainBundle, @"Install Script Archive?", @"User-facing text in iTermScriptsMenuController (heading).");
+    warning.doNotRememberLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.move_to_trash.9adcdf33", nil, NSBundle.mainBundle, @"Move to Trash", @"User-facing action label in iTermScriptsMenuController (doNotRememberLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermScriptsMenuController (doNotRememberLabels).") ];
     const iTermWarningSelection selection = [warning runModal];
     NSURL *url = [NSURL fileURLWithPath:file];
     switch (selection) {
@@ -697,8 +699,8 @@ NS_ASSUME_NONNULL_BEGIN
                                         completion:^(NSString *errorMessage, NSURL *zipURL) {
                 if (errorMessage || !zipURL) {
                     NSAlert *alert = [[NSAlert alloc] init];
-                    alert.messageText = @"Export Failed";
-                    alert.informativeText = errorMessage ?: @"Failed to create archive";
+                    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.export_failed.9a5e4d95", nil, NSBundle.mainBundle, @"Export Failed", @"User-facing text in iTermScriptsMenuController (source UI).");
+                    alert.informativeText = errorMessage ?: NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.failed_to_create_archive.01ff78a6", nil, NSBundle.mainBundle, @"Failed to create archive", @"User-facing text in iTermScriptsMenuController (source UI).");
                     [alert runModal];
                     return;
                 }
@@ -760,18 +762,18 @@ NS_ASSUME_NONNULL_BEGIN
     RLog(@"error=%@ location=%@ url=%@", errorMessage, location, url);
     if (errorMessage) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Could Not Install Script";
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.could_not_install_script.81975977", nil, NSBundle.mainBundle, @"Could Not Install Script", @"User-facing text in iTermScriptsMenuController (importDidFinishWithErrorMessage:location:originalURL:).");
         alert.informativeText = errorMessage;
-        [alert addButtonWithTitle:@"OK"];
-        [alert addButtonWithTitle:@"Try Again"];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermScriptsMenuController (importDidFinishWithErrorMessage:location:originalURL:).")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.try_again.df0fe9e0", nil, NSBundle.mainBundle, @"Try Again", @"User-facing text in iTermScriptsMenuController (importDidFinishWithErrorMessage:location:originalURL:).")];
         if ([alert runModal] ==  NSAlertSecondButtonReturn) {
             [self importFromURL:url];
         }
     } else {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Script Imported Successfully";
-        [alert addButtonWithTitle:@"OK"];
-        [alert addButtonWithTitle:@"Launch"];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.script_imported_successfully.2819e51f", nil, NSBundle.mainBundle, @"Script Imported Successfully", @"User-facing text in iTermScriptsMenuController (importDidFinishWithErrorMessage:location:originalURL:).");
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermScriptsMenuController (importDidFinishWithErrorMessage:location:originalURL:).")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.launch.ccf56ef5", nil, NSBundle.mainBundle, @"Launch", @"User-facing text in iTermScriptsMenuController (importDidFinishWithErrorMessage:location:originalURL:).")];
         const NSModalResponse response = [alert runModal];
         if (response == NSAlertFirstButtonReturn) {
             return;
@@ -953,12 +955,12 @@ NS_ASSUME_NONNULL_BEGIN
     if ([[NSFileManager defaultManager] itemIsDirectory:fullPath]) {
         // "Reveal" is a one-time Finder action and shouldn't be remembered.
         iTermWarning *warning = [[iTermWarning alloc] init];
-        warning.title = [NSString stringWithFormat:@"The script “%@” is malformed.", fullPath.lastPathComponent];
-        warning.actionLabels = @[ @"OK", @"Reveal" ];
+        warning.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.the_script_is_malformed.c1c2b124", nil, NSBundle.mainBundle, @"The script “%@” is malformed.", @"User-facing text in iTermScriptsMenuController (title)."), fullPath.lastPathComponent];
+        warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermScriptsMenuController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.reveal.36b830bd", nil, NSBundle.mainBundle, @"Reveal", @"User-facing action label in iTermScriptsMenuController (actionLabels).") ];
         warning.identifier = @"NoSyncScriptMalformed";
         warning.warningType = kiTermWarningTypeTemporarilySilenceable;
-        warning.heading = @"Cannot Run Script";
-        warning.doNotRememberLabels = @[ @"Reveal" ];
+        warning.heading = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.cannot_run_script.7f0a0af6", nil, NSBundle.mainBundle, @"Cannot Run Script", @"User-facing text in iTermScriptsMenuController (heading).");
+        warning.doNotRememberLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.reveal.36b830bd", nil, NSBundle.mainBundle, @"Reveal", @"User-facing action label in iTermScriptsMenuController (doNotRememberLabels).") ];
         iTermWarningSelection selection = [warning runModal];
         if (selection == kiTermWarningSelection1) {
             [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[ [NSURL fileURLWithPath:fullPath] ]];
@@ -991,12 +993,12 @@ NS_ASSUME_NONNULL_BEGIN
                 explicitUserAction:(BOOL)explicitUserAction {
     NSString *name = container.lastPathComponent;
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"The Python environment for “%@” is missing (the shared runtime may have been deleted). Rebuild it from its saved requirements now?", name]
-                               actions:@[ @"Rebuild", @"Cancel" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.the_python_environment_for_is_missing_the_shared.033e867e", nil, NSBundle.mainBundle, @"The Python environment for “%@” is missing (the shared runtime may have been deleted). Rebuild it from its saved requirements now?", @"User-facing text in iTermScriptsMenuController (showWarningWithTitle)."), name]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.rebuild.95aefb08", nil, NSBundle.mainBundle, @"Rebuild", @"User-facing action label in iTermScriptsMenuController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermScriptsMenuController (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncRebuildMissingUvEnv"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Rebuild Python Environment?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.rebuild_python_environment.e7c9665c", nil, NSBundle.mainBundle, @"Rebuild Python Environment?", @"User-facing text in iTermScriptsMenuController (heading).")
                                 window:nil];
     if (selection != kiTermWarningSelection0) {
         return;
@@ -1016,7 +1018,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                                     dependencies:dependencies
                                                                   createSetupCfg:NO
                                                             provisioningDidBegin:^{
-        [progress showWithMessage:@"Rebuilding the Python environment…"];
+        [progress showWithMessage:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.rebuilding_the_python_environment.44036a59", nil, NSBundle.mainBundle, @"Rebuilding the Python environment…", @"Progress message while rebuilding a script environment.")];
     }
                                                                       completion:^(NSError *error) {
         [progress dismiss];
@@ -1024,8 +1026,8 @@ NS_ASSUME_NONNULL_BEGIN
         if (error != nil) {
             if (![iTermUvProvisioner isCancelationError:error]) {
                 NSAlert *alert = [[NSAlert alloc] init];
-                alert.messageText = @"Could Not Rebuild Environment";
-                alert.informativeText = error.localizedDescription ?: @"Unknown error";
+                alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.could_not_rebuild_environment.87ee8c97", nil, NSBundle.mainBundle, @"Could Not Rebuild Environment", @"User-facing text in iTermScriptsMenuController (source UI).");
+                alert.informativeText = error.localizedDescription ?: NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.unknown_error.27c2ccd9", nil, NSBundle.mainBundle, @"Unknown error", @"Fallback error description when rebuilding a script environment fails.");
                 [alert runModal];
             }
             return;
@@ -1182,11 +1184,11 @@ NS_ASSUME_NONNULL_BEGIN
                      return;
                  }
                  NSAlert *alert = [[NSAlert alloc] init];
-                 alert.messageText = @"Installation Failed";
+                 alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.installation_failed.faa69b07", nil, NSBundle.mainBundle, @"Installation Failed", @"User-facing text in iTermScriptsMenuController (source UI).");
                  if ([iTermAdvancedSettingsModel pythonRuntimeUsesUV]) {
-                     alert.informativeText = [NSString stringWithFormat:@"An error occurred while creating the Python environment. The error was: %@", errorStatus.localizedDescription];
+                     alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.an_error_occurred_while_creating_the_python_environment.5bec1fad", nil, NSBundle.mainBundle, @"An error occurred while creating the Python environment. The error was: %@", @"User-facing text in iTermScriptsMenuController (informativeText)."), errorStatus.localizedDescription];
                  } else {
-                     alert.informativeText = [NSString stringWithFormat:@"An error ocurred while installing the Python runtime. Remove ~/Library/Application Support/iTerm2/iterm2env and try again. The error was: %@", errorStatus.localizedDescription];
+                     alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.an_error_ocurred_while_installing_the_python_runtime.da3b733a", nil, NSBundle.mainBundle, @"An error ocurred while installing the Python runtime. Remove ~/Library/Application Support/iTerm2/iterm2env and try again. The error was: %@", @"User-facing text in iTermScriptsMenuController (informativeText)."), errorStatus.localizedDescription];
                  }
                  [alert runModal];
                  return;
@@ -1204,7 +1206,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                                             dependencies:dependencies ?: @[]
                                                                           createSetupCfg:YES
                                                                     provisioningDidBegin:^{
-                [progress showWithMessage:@"Setting up the Python environment…"];
+                [progress showWithMessage:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.setting_up_python_environment.32371e53", nil, NSBundle.mainBundle, @"Setting up the Python environment…", @"Progress message while setting up a script's Python environment.")];
             }
                                                                               completion:installCompletion];
         } else {
@@ -1243,11 +1245,11 @@ NS_ASSUME_NONNULL_BEGIN
     if (app) {
         // "Show in Finder" is a one-time navigation action and shouldn't be remembered.
         iTermWarning *warning = [[iTermWarning alloc] init];
-        warning.title = [NSString stringWithFormat:@"Open new script in %@?", app];
-        warning.actionLabels = @[ @"OK", @"Show in Finder" ];
+        warning.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.open_new_script_in.084fe9ff", nil, NSBundle.mainBundle, @"Open new script in %@?", @"User-facing text in iTermScriptsMenuController (title)."), app];
+        warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermScriptsMenuController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.show_in_finder.c2a9c77a", nil, NSBundle.mainBundle, @"Show in Finder", @"User-facing action label in iTermScriptsMenuController (actionLabels).") ];
         warning.identifier = @"NoSyncOpenNewPythonScriptInDefaultEditor";
         warning.warningType = kiTermWarningTypePermanentlySilenceable;
-        warning.doNotRememberLabels = @[ @"Show in Finder" ];
+        warning.doNotRememberLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.show_in_finder.c2a9c77a", nil, NSBundle.mainBundle, @"Show in Finder", @"User-facing action label in iTermScriptsMenuController (doNotRememberLabels).") ];
         iTermWarningSelection selection = [warning runModal];
         if (selection == kiTermWarningSelection0) {
             [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:destinationTemplatePath]];
@@ -1312,7 +1314,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSTokenField *)newTokenFieldForDependencies {
     NSTokenField *tokenField = [[NSTokenField alloc] initWithFrame:NSMakeRect(0, 0, 100, 22)];
     tokenField.tokenizingCharacterSet = [NSCharacterSet whitespaceCharacterSet];
-    tokenField.placeholderString = @"Package names";
+    tokenField.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.package_names.7b8c829c", nil, NSBundle.mainBundle, @"Package names", @"User-facing text in iTermScriptsMenuController (newTokenFieldForDependencies).");
     tokenField.font = [NSFont systemFontOfSize:13];
     return tokenField;
 }
@@ -1321,7 +1323,7 @@ NS_ASSUME_NONNULL_BEGIN
                                     pythonVersionPopup:(NSPopUpButton *)pythonVersionPopup {
     NSTextField *label = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 5, 60, 22)];
     [label setEditable:NO];
-    [label setStringValue:@"PyPI Dependencies:"];
+    [label setStringValue:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.pypi_dependencies.b5cdd629", nil, NSBundle.mainBundle, @"PyPI Dependencies:", @"User-facing text in iTermScriptsMenuController (newAccessoryViewForSavePanelWithTokenField:pythonVersionPopup:).")];
     label.font = [NSFont systemFontOfSize:13];
     [label setBordered:NO];
     [label setBezeled:NO];
@@ -1330,7 +1332,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     NSTextField *pythonVersionLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 5, 60, 22)];
     [pythonVersionLabel setEditable:NO];
-    [pythonVersionLabel setStringValue:@"Python Version:"];
+    [pythonVersionLabel setStringValue:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.python_version.659af6e7", nil, NSBundle.mainBundle, @"Python Version:", @"User-facing text in iTermScriptsMenuController (newAccessoryViewForSavePanelWithTokenField:pythonVersionPopup:).")];
     pythonVersionLabel.font = [NSFont systemFontOfSize:13];
     [pythonVersionLabel setBordered:NO];
     [pythonVersionLabel setBezeled:NO];
@@ -1454,10 +1456,10 @@ NS_ASSUME_NONNULL_BEGIN
             return url;
         } else {
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Spaces Not Allowed";
-            alert.informativeText = @"Scripts can't have space characters in their filenames.";
-            [alert addButtonWithTitle:@"Use _ Instead of Space"];
-            [alert addButtonWithTitle:@"Change Name"];
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.spaces_not_allowed.a3f713bf", nil, NSBundle.mainBundle, @"Spaces Not Allowed", @"User-facing text in iTermScriptsMenuController (runSavePanelForNewScriptWithPicker:dependencies:pythonVersion:).");
+            alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.scripts_can_t_have_space_characters_in_their.08615a48", nil, NSBundle.mainBundle, @"Scripts can't have space characters in their filenames.", @"User-facing text in iTermScriptsMenuController (runSavePanelForNewScriptWithPicker:dependencies:pythonVersion:).");
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.use_instead_of_space.885d3f35", nil, NSBundle.mainBundle, @"Use _ Instead of Space", @"User-facing text in iTermScriptsMenuController (runSavePanelForNewScriptWithPicker:dependencies:pythonVersion:).")];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.change_name.1301998a", nil, NSBundle.mainBundle, @"Change Name", @"User-facing text in iTermScriptsMenuController (runSavePanelForNewScriptWithPicker:dependencies:pythonVersion:).")];
             if ([alert runModal] == NSAlertFirstButtonReturn) {
                 return [[url URLByDeletingLastPathComponent] URLByAppendingPathComponent:safeFilename];
             } else {
@@ -1559,7 +1561,7 @@ NS_ASSUME_NONNULL_BEGIN
     scriptItem.identifier = path;
     [scriptMenu addItem:scriptItem];
 
-    NSMenuItem *altItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Reveal %@", file]
+    NSMenuItem *altItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.reveal.97028cbd", nil, NSBundle.mainBundle, @"Reveal %@", @"User-facing text in iTermScriptsMenuController (initWithTitle)."), file]
                                                         action:@selector(revealScript:)
                                                  keyEquivalent:@""];
 
@@ -1572,8 +1574,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showAlertForScript:(NSString *)fullPath error:(NSError *)error {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Problem running script";
-    alert.informativeText = [NSString stringWithFormat:@"The script at “%@” failed:\n\n%@",
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.problem_running_script.2a252ac5", nil, NSBundle.mainBundle, @"Problem running script", @"User-facing text in iTermScriptsMenuController (showAlertForScript:error:).");
+    alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.the_script_at_failed.59df45fb", nil, NSBundle.mainBundle, @"The script at “%@” failed:\n\n%@", @"User-facing text in iTermScriptsMenuController (informativeText)."),
                              fullPath, error.localizedFailureReason];
     [alert runModal];
 }
@@ -1693,13 +1695,13 @@ NS_ASSUME_NONNULL_BEGIN
     if ([self urlIsUnderScripts:url]) {
         return YES;
     }
-    NSString *message = [NSString stringWithFormat:@"Full-environment scripts must be located under in your Application Support/iTerm2/Scripts directory:\n%@", [[NSFileManager defaultManager] scriptsPath]];
+    NSString *message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.full_environment_scripts_must_be_located_under_in_your_application_suppo.262525c8", nil, NSBundle.mainBundle, @"Full-environment scripts must be located under in your Application Support/iTerm2/Scripts directory:\n%@", @"User-facing text in iTermScriptsMenuController (indirect UI)."), [[NSFileManager defaultManager] scriptsPath]];
     [iTermWarning showWarningWithTitle:message
-                               actions:@[ @"OK" ]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermScriptsMenuController (actions).") ]
                              accessory:nil
                             identifier:@"FullEnvironmentScriptsLocationRestricted"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Invalid Folder"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptsmenucontroller.invalid_folder.55fc0560", nil, NSBundle.mainBundle, @"Invalid Folder", @"User-facing text in iTermScriptsMenuController (heading).")
                                 window:sender];
     return NO;
 }

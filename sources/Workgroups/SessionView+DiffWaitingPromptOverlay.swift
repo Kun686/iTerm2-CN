@@ -19,13 +19,8 @@ extension SessionView {
         installOverlay(
             DiffWaitingPromptView(
                 frame: scrollview.frame,
-                title: "Diff session is waiting for changes.",
-                body: "This session is set to Diff mode and only starts its "
-                    + "command when git reports staged or unstaged changes. "
-                    + "The working tree is currently clean, or iTerm2 hasn’t "
-                    + "finished its first check yet. Edit a file (or stage one) "
-                    + "and the command will start on its own. To run it now "
-                    + "anyway, click below.",
+                title: String(localized: "ui.swift.workgroups.sessionview_diffwaitingpromptoverlay.diff_session_is_waiting_for_changes.5c8540a1", defaultValue: "Diff session is waiting for changes.", bundle: .main, comment: "User-facing text in SessionView+DiffWaitingPromptOverlay."),
+                body: String(localized: "ui.swift.workgroups.sessionview_diffwaitingpromptoverlay.this_session_is_set_to_diff_mode_and.dbd142a8", defaultValue: "This session is set to Diff mode and only starts its command when git reports staged or unstaged changes. The working tree is currently clean, or iTerm2 hasn’t finished its first check yet. Edit a file (or stage one) and the command will start on its own. To run it now anyway, click below.", bundle: .main, comment: "User-facing text in SessionView+DiffWaitingPromptOverlay."),
                 showCancel: false),
             onRunAnyway: onRunAnyway,
             onCancel: nil)
@@ -44,12 +39,8 @@ extension SessionView {
         installOverlay(
             DiffWaitingPromptView(
                 frame: scrollview.frame,
-                title: "Reload queued. Waiting for changes.",
-                body: "This session is set to Diff mode, so Reload will "
-                    + "re-run the command only after git reports staged or "
-                    + "unstaged changes. The previous output is still on "
-                    + "screen behind this panel. Cancel to keep that output "
-                    + "and abandon the reload, or run the command now anyway.",
+                title: String(localized: "ui.swift.workgroups.sessionview_diffwaitingpromptoverlay.reload_queued_waiting_for_changes.5131b4b0", defaultValue: "Reload queued. Waiting for changes.", bundle: .main, comment: "User-facing text in SessionView+DiffWaitingPromptOverlay."),
+                body: String(localized: "ui.swift.workgroups.sessionview_diffwaitingpromptoverlay.this_session_is_set_to_diff_mode_so.b5b74e95", defaultValue: "This session is set to Diff mode, so Reload will re-run the command only after git reports staged or unstaged changes. The previous output is still on screen behind this panel. Cancel to keep that output and abandon the reload, or run the command now anyway.", bundle: .main, comment: "User-facing text in SessionView+DiffWaitingPromptOverlay."),
                 showCancel: true),
             onRunAnyway: onRunAnyway,
             onCancel: onCancel)

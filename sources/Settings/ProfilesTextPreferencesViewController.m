@@ -249,13 +249,8 @@
             // mixed Asian/non-asian environments find it useful but almost nobody should turn it on
             // unless they really know what they're doing.
             iTermWarningSelection selection =
-                [iTermWarning showWarningWithTitle:@"You probably don’t want to turn this on. "
-                                                   @"It will confuse interactive programs. "
-                                                   @"You might want it if you work mostly with "
-                                                   @"East Asian text combined with legacy or "
-                                                   @"mathematical character sets. "
-                                                   @"Are you sure you want this?"
-                                           actions:@[ @"Enable", @"Cancel" ]
+                [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilestextpreferencesviewcontroller.you_probably_don_t_want_to_turn_this.ced18a49", nil, NSBundle.mainBundle, @"You probably don’t want to turn this on. It will confuse interactive programs. You might want it if you work mostly with East Asian text combined with legacy or mathematical character sets. Are you sure you want this?", @"User-facing warning message.")
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilestextpreferencesviewcontroller.enable.5342e09f", nil, NSBundle.mainBundle, @"Enable", @"User-facing action label in ProfilesTextPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profilestextpreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in ProfilesTextPreferencesViewController (actions).") ]
                                         identifier:kWarnAboutAmbiguousWidth
                                        silenceable:kiTermWarningTypePermanentlySilenceable
                                             window:weakSelf.view.window];

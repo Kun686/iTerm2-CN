@@ -475,16 +475,16 @@ NSString * const kTriggerVariableValueRegexKey = @"variableValueRegex";
 
 - (void)evaluationDidFailWithError:(NSError *)error {
     NSString *title =
-    [NSString stringWithFormat:@"The following parameter for a “%@” trigger could not be evaluated:\n\n%@\n\nThe error was:\n\n%@",
+    [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.the_following_parameter_for_a_trigger_could_not_be_evaluated_the_error_w.aad40fb7", nil, NSBundle.mainBundle, @"The following parameter for a “%@” trigger could not be evaluated:\n\n%@\n\nThe error was:\n\n%@", @"User-facing text in Trigger (indirect UI)."),
      [[self class] title],
      _evaluator.expression,
      error.localizedDescription];
     [iTermWarning showWarningWithTitle:title
-                               actions:@[ @"OK" ]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in Trigger (actions).") ]
                              accessory:nil
                             identifier:@"NoSyncErrorInTriggerParameter"
                            silenceable:kiTermWarningTypeTemporarilySilenceable
-                               heading:@"Error in Trigger Parameter"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.error_in_trigger_parameter.d2aaef08", nil, NSBundle.mainBundle, @"Error in Trigger Parameter", @"User-facing text in Trigger (heading).")
                                 window:nil];
 }
 
@@ -588,7 +588,7 @@ NSString * const kTriggerVariableValueRegexKey = @"variableValueRegex";
     NSString *instantEmoji = self.partialLine ? @"⚡︎ " : nil;
     id jobAttributedString = [NSNull null];
     if ([self.job stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0) {
-        jobAttributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Job: %@", self.job]
+        jobAttributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.job.0ac441de", nil, NSBundle.mainBundle, @"Job: %@", @"Trigger row job label. Preserve the placeholder."), self.job]
                                                               attributes:self.regularAttributes];
     }
     if ([self.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0) {
@@ -646,9 +646,9 @@ NSString * const kTriggerVariableValueRegexKey = @"variableValueRegex";
             return [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"/%@/", self.regex ?: @""]
                                                    attributes:monospacedAttributes];
         case iTermTriggerMatchTypePageContentRegex:
-            return [@[ [[NSAttributedString alloc] initWithString:@"Content: " attributes: plainAttributes],
+            return [@[ [[NSAttributedString alloc] initWithString:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.content.17caf7f5", nil, NSBundle.mainBundle, @"Content: ", @"User-facing text in Trigger (regexAttributedString).") attributes: plainAttributes],
                       [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"/%@/", self.contentRegex ?: @""] attributes:monospacedAttributes],
-                      [[NSAttributedString alloc] initWithString:@" URL: " attributes: plainAttributes],
+                      [[NSAttributedString alloc] initWithString:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.url.67cf8e33", nil, NSBundle.mainBundle, @" URL: ", @"User-facing text in Trigger (regexAttributedString).") attributes: plainAttributes],
                       [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"/%@/", self.regex ?: @""] attributes:monospacedAttributes]
                     ] attributedComponentsJoinedByAttributedString:nil];
         default:
@@ -669,54 +669,54 @@ NSString * const kTriggerVariableValueRegexKey = @"variableValueRegex";
         if ([exitCodeFilter isEqualToString:@"*"]) {
             // Don't add anything for "any" - it's the default
         } else if ([exitCodeFilter isEqualToString:@"0"]) {
-            [parts addObject:@"exit code 0"];
+            [parts addObject:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.exit_code_0.956bfd9f", nil, NSBundle.mainBundle, @"exit code 0", @"Trigger event-filter summary.")];
         } else if ([exitCodeFilter isEqualToString:@"!0"]) {
-            [parts addObject:@"non-zero exit code"];
+            [parts addObject:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.non_zero_exit_code.653605da", nil, NSBundle.mainBundle, @"non-zero exit code", @"Trigger event-filter summary.")];
         } else {
-            [parts addObject:[NSString stringWithFormat:@"exit code %@", exitCodeFilter]];
+            [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.exit_code.26080fc3", nil, NSBundle.mainBundle, @"exit code %@", @"Trigger event-filter summary. Preserve the placeholder."), exitCodeFilter]];
         }
     }
 
     // Timeout (for idle triggers)
     NSNumber *timeout = self.eventParams[@"timeout"];
     if (timeout) {
-        [parts addObject:[NSString stringWithFormat:@"after %@ seconds", timeout]];
+        [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.after_seconds.117e3c7d", nil, NSBundle.mainBundle, @"after %@ seconds", @"Trigger event-filter duration. Preserve the placeholder."), timeout]];
     }
 
     // Threshold (for long-running command triggers)
     NSNumber *threshold = self.eventParams[@"threshold"];
     if (threshold) {
-        [parts addObject:[NSString stringWithFormat:@"after %@ seconds", threshold]];
+        [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.after_seconds.117e3c7d", nil, NSBundle.mainBundle, @"after %@ seconds", @"Trigger event-filter duration. Preserve the placeholder."), threshold]];
     }
 
     // Sequence ID (for custom escape sequence triggers)
     NSString *sequenceId = self.eventParams[@"sequenceId"];
     if (sequenceId && sequenceId.length > 0) {
-        [parts addObject:[NSString stringWithFormat:@"id: %@", sequenceId]];
+        [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.id.74b470b8", nil, NSBundle.mainBundle, @"id: %@", @"Trigger event-filter identifier label. Preserve the placeholder."), sequenceId]];
     }
 
     // Directory regex (for directory changed triggers)
     NSString *directoryRegex = self.eventParams[@"directoryRegex"];
     if (directoryRegex && directoryRegex.length > 0) {
-        [parts addObject:[NSString stringWithFormat:@"matching /%@/", directoryRegex]];
+        [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.matching.c08e19a6", nil, NSBundle.mainBundle, @"matching /%@/", @"Trigger event-filter regex summary. Preserve the placeholder."), directoryRegex]];
     }
 
     // Host regex (for host changed triggers)
     NSString *hostRegex = self.eventParams[@"hostRegex"];
     if (hostRegex && hostRegex.length > 0) {
-        [parts addObject:[NSString stringWithFormat:@"matching /%@/", hostRegex]];
+        [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.matching.c08e19a6", nil, NSBundle.mainBundle, @"matching /%@/", @"Trigger event-filter regex summary. Preserve the placeholder."), hostRegex]];
     }
 
     // User regex (for user changed triggers)
     NSString *userRegex = self.eventParams[@"userRegex"];
     if (userRegex && userRegex.length > 0) {
-        [parts addObject:[NSString stringWithFormat:@"matching /%@/", userRegex]];
+        [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.matching.c08e19a6", nil, NSBundle.mainBundle, @"matching /%@/", @"Trigger event-filter regex summary. Preserve the placeholder."), userRegex]];
     }
 
     // Command regex (for long-running command triggers)
     NSString *commandRegex = self.eventParams[@"commandRegex"];
     if (commandRegex && commandRegex.length > 0) {
-        [parts addObject:[NSString stringWithFormat:@"command /%@/", commandRegex]];
+        [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.command.910473b5", nil, NSBundle.mainBundle, @"command /%@/", @"Trigger event-filter command regex summary. Preserve the placeholder."), commandRegex]];
     }
 
     // Variable name and value regex (for variable changed triggers)
@@ -726,16 +726,16 @@ NSString * const kTriggerVariableValueRegexKey = @"variableValueRegex";
     }
     NSString *variableValueRegex = self.eventParams[kTriggerVariableValueRegexKey];
     if (variableValueRegex && variableValueRegex.length > 0) {
-        [parts addObject:[NSString stringWithFormat:@"matching /%@/", variableValueRegex]];
+        [parts addObject:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.matching.c08e19a6", nil, NSBundle.mainBundle, @"matching /%@/", @"Trigger event-filter regex summary. Preserve the placeholder."), variableValueRegex]];
     }
 
     // Progress bar filter
     NSString *progressBarFilter = self.eventParams[@"progressBarFilter"];
     if (progressBarFilter) {
         if ([progressBarFilter isEqualToString:@"appeared"]) {
-            [parts addObject:@"appeared"];
+            [parts addObject:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.appeared.79159126", nil, NSBundle.mainBundle, @"appeared", @"Trigger event-filter summary.")];
         } else if ([progressBarFilter isEqualToString:@"disappeared"]) {
-            [parts addObject:@"disappeared"];
+            [parts addObject:NSLocalizedStringWithDefaultValue(@"ui.triggers.trigger.disappeared.af5e1459", nil, NSBundle.mainBundle, @"disappeared", @"Trigger event-filter summary.")];
         }
         // Don't add anything for "*" - it's the default (either)
     }

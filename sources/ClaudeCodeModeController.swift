@@ -167,8 +167,11 @@ class ClaudeCodeModeController: NSObject {
     }
 
     private func showAnnouncement(on session: PTYSession) {
-        let title = "Claude Code is running. Want to try the Claude Code integration?"
-        let actions = ["Try It Now", "Don't Show Again"]
+        let title = String(localized: "ui.swift.claudecodemodecontroller.claude_code_is_running_want_to_try_the.ba911ec7", defaultValue: "Claude Code is running. Want to try the Claude Code integration?", bundle: .main, comment: "User-facing text in ClaudeCodeModeController.")
+        let actions = [
+            String(localized: "ui.swift.claudecodemodecontroller.try_it_now.8491bd52", defaultValue: "Try It Now", bundle: .main, comment: "Action in the Claude Code integration announcement."),
+            String(localized: "ui.swift.claudecodemodecontroller.don_t_show_again.ed668c0d", defaultValue: "Don't Show Again", bundle: .main, comment: "Action in the Claude Code integration announcement.")
+        ]
         let announcement = iTermAnnouncementViewController.announcement(
             withTitle: title,
             style: .kiTermAnnouncementViewStyleQuestion,

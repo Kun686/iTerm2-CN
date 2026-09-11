@@ -178,7 +178,10 @@ class iTermBrowserReaderModeManager: NSObject {
                                                                     substitutions: [:])
         let readerModeJS = iTermBrowserTemplateLoader.loadTemplate(named: "reader-mode-with-styles",
                                                                   type: "js",
-                                                                  substitutions: ["READER_MODE_CSS": readerModeCSS])
+                                                                  substitutions: [
+                                                                    "READER_MODE_CSS": readerModeCSS,
+                                                                    "ARTICLE_FALLBACK_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.reader_mode.article_fallback", defaultValue: "Article")
+                                                                  ])
         
         let loadReadabilityScript = iTermBrowserTemplateLoader.loadTemplate(named: "load-readability",
                                                                            type: "js",

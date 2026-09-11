@@ -24,6 +24,13 @@ static NSString *const kOldStyleUrlHandlersUserDefaultsKey = @"URLHandlers";
     NSURL *_currentFileUrlForOpenPanel;
 }
 
++ (BOOL)handlerDisplayName:(NSString *)handlerDisplayName
+    matchesApplicationDisplayName:(NSString *)applicationDisplayName {
+    return [handlerDisplayName isEqualToString:@"iTerm 2"] ||
+        ([applicationDisplayName isEqualToString:@"iTerm2-CN"] &&
+         [handlerDisplayName isEqualToString:@"iTerm2-CN"]);
+}
+
 + (instancetype)sharedInstance {
     static id instance;
     static dispatch_once_t once;
@@ -76,24 +83,34 @@ static NSString *const kOldStyleUrlHandlersUserDefaultsKey = @"URLHandlers";
                                                         NULL);
     [appURL autorelease];
 
+    NSString *handlerDisplayName = appURL ? [[NSFileManager defaultManager] displayNameAtPath:appURL.path] : nil;
+    NSString *applicationDisplayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    const BOOL handlerIsThisApplication =
+        [self.class handlerDisplayName:handlerDisplayName
+         matchesApplicationDisplayName:applicationDisplayName];
+
     if (appURL == nil) {
         NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-        alert.messageText = [NSString stringWithFormat:@"iTerm is not the default handler for %@. "
-                             @"Would you like to set iTerm as the default handler?",
+        alert.messageText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.iterm_is_not_the_default_handler_for_would.a645bf0d", nil, NSBundle.mainBundle, @"iTerm is not the default handler for %@. "
+                             @"Would you like to set iTerm as the default handler?", @"User-facing text in iTermLaunchServices (messageText)."),
                              scheme];
-        alert.informativeText = @"There is currently no handler.";
-        [alert addButtonWithTitle:@"OK"];
-        [alert addButtonWithTitle:@"Cancel"];
+        alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.there_is_currently_no_handler.483cc1c7", nil, NSBundle.mainBundle, @"There is currently no handler.", @"User-facing text in iTermLaunchServices (informativeText).");
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermLaunchServices (addButtonWithTitle).")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermLaunchServices (addButtonWithTitle).")];
         set = ([alert runModal] == NSAlertFirstButtonReturn);
-    } else if (![[[NSFileManager defaultManager] displayNameAtPath:[appURL path]] isEqualToString:@"iTerm 2"]) {
-        NSString *theTitle = [NSString stringWithFormat:@"iTerm is not the default handler for %@. "
-                                                        @"Would you like to set iTerm as the default handler?", scheme];
+    } else if (!handlerIsThisApplication) {
+        NSString *theTitle = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.iterm_is_not_the_default_handler_for_would.a645bf0d",
+                                                                                           nil,
+                                                                                           NSBundle.mainBundle,
+                                                                                           @"iTerm is not the default handler for %@. Would you like to set iTerm as the default handler?",
+                                                                                           @"Prompt to make iTerm the default URL-scheme handler."),
+                              scheme];
         NSAlert *alert = [[[NSAlert alloc] init] autorelease];
         alert.messageText = theTitle;
-        alert.informativeText = [NSString stringWithFormat:@"The current handler is: %@",
-                                 [[NSFileManager defaultManager] displayNameAtPath:[appURL path]]];
-        [alert addButtonWithTitle:@"OK"];
-        [alert addButtonWithTitle:@"Cancel"];
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.the_current_handler_is.22350534", nil, NSBundle.mainBundle, @"The current handler is: %@", @"User-facing text in iTermLaunchServices (informativeText)."),
+                                 handlerDisplayName];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermLaunchServices (connectBookmarkWithGuid:toScheme:).")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermLaunchServices (connectBookmarkWithGuid:toScheme:).")];
         set = ([alert runModal] == NSAlertFirstButtonReturn);
     }
 
@@ -175,10 +192,10 @@ static NSString *const kOldStyleUrlHandlersUserDefaultsKey = @"URLHandlers";
 
 - (BOOL)offerToPickApplicationToOpenFile:(NSString *)fullPath {
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    alert.messageText = [NSString stringWithFormat:@"There is no application set to open the document “%@”", [fullPath lastPathComponent]];
-    alert.informativeText = @"Choose an application on your computer to open this file.";
-    [alert addButtonWithTitle:@"Choose Application…"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.there_is_no_application_set_to_open_the.56b3c8b2", nil, NSBundle.mainBundle, @"There is no application set to open the document “%@”", @"User-facing text in iTermLaunchServices (messageText)."), [fullPath lastPathComponent]];
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.choose_an_application_on_your_computer_to_open.9ca251aa", nil, NSBundle.mainBundle, @"Choose an application on your computer to open this file.", @"User-facing text in iTermLaunchServices (offerToPickApplicationToOpenFile:).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.choose_application.cc53a4fa", nil, NSBundle.mainBundle, @"Choose Application…", @"User-facing text in iTermLaunchServices (offerToPickApplicationToOpenFile:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.system.itermlaunchservices.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermLaunchServices (offerToPickApplicationToOpenFile:).")];
 
     DLog(@"Offer to pick an app to open %@", fullPath);
     if ([alert runModal] == NSAlertFirstButtonReturn) {

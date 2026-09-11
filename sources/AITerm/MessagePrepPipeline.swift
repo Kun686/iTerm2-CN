@@ -201,12 +201,12 @@ private extension MessagePrepPipeline {
         case .success(let id):
             try delegate?.publishNotice(
                 chatID: chatID,
-                message: "Upload of \(description) finished.")
+                message: String(localized: "ui.swift.aiterm.messagepreppipeline.upload_of_0_finished.fa56abc9", defaultValue: "Upload of \(description) finished.", bundle: .main, comment: "User-facing text in MessagePrepPipeline."))
             try completion(.success(.fileUploaded(id: id, name: fileName)))
         case .failure(let error):
             try delegate?.publishNotice(
                 chatID: chatID,
-                message: "Failed to upload \(fileName): \(error.localizedDescription)")
+                message: String(localized: "ui.swift.aiterm.messagepreppipeline.failed_to_upload_0_1.7396273b", defaultValue: "Failed to upload \(fileName): \(error.localizedDescription)", bundle: .main, comment: "User-facing text in MessagePrepPipeline."))
             try completion(.failure(error))
         }
     }
@@ -232,7 +232,7 @@ private extension MessagePrepPipeline {
                     } failure: { error in
                         try self?.delegate?.publishNotice(
                             chatID: chatID,
-                            message: "There was a problem creating a vector store database: \(error.localizedDescription)")
+                            message: String(localized: "ui.swift.aiterm.messagepreppipeline.there_was_a_problem_creating_a_vector_store.41d77715", defaultValue: "There was a problem creating a vector store database: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in MessagePrepPipeline."))
                         try? completion(.failure(error))
                     }
                 }
@@ -274,7 +274,7 @@ private extension MessagePrepPipeline {
             if let error {
                 try? self?.delegate?.publishNotice(
                     chatID: chatID,
-                    message: "There was a problem adding files to the vector store: \(error.localizedDescription)")
+                    message: String(localized: "ui.swift.aiterm.messagepreppipeline.there_was_a_problem_adding_files_to_the.f05412f2", defaultValue: "There was a problem adding files to the vector store: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in MessagePrepPipeline."))
                 try? completion(.failure(error))
             } else {
                 try? completion(.success(.filesAddedToVectorStore))
@@ -406,7 +406,7 @@ private extension MessagePrepPipeline {
         DLog("files=\(files.map(\.name).joined(separator: ", "))")
         DLog("text=\(text)")
         if !files.isEmpty {
-            try delegate?.publishNotice(chatID: chatID, message: "Uploading…")
+            try delegate?.publishNotice(chatID: chatID, message: String(localized: "ui.swift.aiterm.messagepreppipeline.uploading.5ce44dd7", defaultValue: "Uploading…", bundle: .main, comment: "User-facing text in MessagePrepPipeline."))
             currentBuilder = try ingestFiles(files: files,
                                              chatID: userMessage.chatID,
                                              addToVectorStore: false,

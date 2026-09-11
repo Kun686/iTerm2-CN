@@ -42,13 +42,13 @@
                completion:(void (^)(NSString *errorMessage, NSURL *zipURL))completion {
     NSURL *relativeURL = [self relativeURLFromFullURL:fullURL];
     if (!relativeURL) {
-        completion(@"Invalid location (not under Scripts folder).", nil);
+        completion(NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptexporter.invalid_location_not_under_scripts.52128789", nil, NSBundle.mainBundle, @"Invalid location (not under Scripts folder).", @"Error shown when exporting a script outside the Scripts folder."), nil);
         return;
     }
 
     BOOL fullEnvironment = NO;
     if (![self urlContainsScript:fullURL fullEnvironment:&fullEnvironment]) {
-        completion(@"No found script at selected location.", nil);
+        completion(NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptexporter.script_not_found_at_selected_location.184a93fc", nil, NSBundle.mainBundle, @"No found script at selected location.", @"Error shown when no script is found at the selected export location."), nil);
         return;
     }
     NSString *name = [fullURL.path lastPathComponent];
@@ -112,7 +112,7 @@
     NSString *absSetupPath = [fullURL URLByAppendingPathComponent:@"setup.cfg"].path;
     iTermSetupCfgParser *setupParser = [[iTermSetupCfgParser alloc] initWithPath:absSetupPath];
     if (setupParser.dependenciesError) {
-        completion(@"Could not parse install_requires in setup.cfg", nil);
+        completion(NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptexporter.could_not_parse_install_requires.f401649c", nil, NSBundle.mainBundle, @"Could not parse install_requires in setup.cfg", @"Error shown when exporting a script whose setup.cfg dependencies cannot be parsed."), nil);
         return;
     }
 
@@ -132,7 +132,7 @@
                   callbackQueue:callbackQueue
                      completion:^(BOOL ok) {
                          if (!ok) {
-                             completion(@"Failed to create zip file.", nil);
+                             completion(NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptexporter.failed_to_create_zip_file.3da3440f", nil, NSBundle.mainBundle, @"Failed to create zip file.", @"Error shown when a script export ZIP cannot be created."), nil);
                              return;
                          }
                          if (signingIdentity) {

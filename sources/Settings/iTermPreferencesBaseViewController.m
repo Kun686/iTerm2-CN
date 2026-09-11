@@ -570,16 +570,16 @@ NSString *const iTermPreferencesDidToggleIndicateNonDefaultValues = @"iTermPrefe
     NSString *team = [iTermAppSignatureValidator currentAppTeamID];
     NSString *message;
     if (!team) {
-        message = @"A required file appears to be missing or corrupted and iTerm2’s code signature could not be verified. You should download a fresh copy of the app and reinstall it.";
+        message = NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferencesbaseviewcontroller.a_required_file_appears_to_be_missing_or.165159f1", nil, NSBundle.mainBundle, @"A required file appears to be missing or corrupted and iTerm2’s code signature could not be verified. You should download a fresh copy of the app and reinstall it.", @"User-facing application signature error.");
     } else if (![team isEqualToString:@"H7V7XYVQ7D"]) {
-        message = @"A required file appears to be missing or corrupted and iTerm2’s code signature did not match that of the official distribution. You should download a fresh copy of the app and reinstall it.";
+        message = NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferencesbaseviewcontroller.a_required_file_appears_to_be_missing_or.b2368b26", nil, NSBundle.mainBundle, @"A required file appears to be missing or corrupted and iTerm2’s code signature did not match that of the official distribution. You should download a fresh copy of the app and reinstall it.", @"User-facing application signature error.");
     } else {
-        message = @"A required file appears to be missing or corrupted, yet against all odds the code signature for iTerm2 is valid. Please file a bug at https://iterm2.com/bugs";
+        message = NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferencesbaseviewcontroller.a_required_file_appears_to_be_missing_or.85976d5f", nil, NSBundle.mainBundle, @"A required file appears to be missing or corrupted, yet against all odds the code signature for iTerm2 is valid. Please file a bug at https://iterm2.com/bugs", @"User-facing application signature error.");
     }
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Application Corrupt"];
-    [alert setInformativeText:[NSString stringWithFormat:@"While trying to load the setting for “%@”: %@", key, message]];
-    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferencesbaseviewcontroller.application_corrupt.c446cbb1", nil, NSBundle.mainBundle, @"Application Corrupt", @"User-facing text in iTermPreferencesBaseViewController (checkAppSignatureForMissingControlWithKey:).")];
+    [alert setInformativeText:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferencesbaseviewcontroller.while_trying_to_load_the_setting_for.6541f20c", nil, NSBundle.mainBundle, @"While trying to load the setting for “%@”: %@", @"User-facing text in iTermPreferencesBaseViewController (setInformativeText)."), key, message]];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferencesbaseviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermPreferencesBaseViewController (checkAppSignatureForMissingControlWithKey:).")];
     [alert setAlertStyle:NSAlertStyleCritical];
     [alert runModal];
     exit(1);

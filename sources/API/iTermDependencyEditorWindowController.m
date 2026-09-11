@@ -344,9 +344,9 @@
     [textField setSelectable:YES];
 
     iTermWarning *warning = [[iTermWarning alloc] init];
-    warning.heading = @"Add Dependency";
-    warning.title = @"What dependency would you like to add?";
-    warning.actionLabels = @[ @"OK", @"Cancel" ];
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.add_dependency.50f0a75f", nil, NSBundle.mainBundle, @"Add Dependency", @"User-facing text in iTermDependencyEditorWindowController (heading).");
+    warning.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.what_dependency_would_you_like_to_add.cc6af951", nil, NSBundle.mainBundle, @"What dependency would you like to add?", @"User-facing text in iTermDependencyEditorWindowController (title).");
+    warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermDependencyEditorWindowController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermDependencyEditorWindowController (actionLabels).") ];
     warning.accessory = textField;
     warning.warningType = kiTermWarningTypePersistent;
     warning.window = self.window;
@@ -387,11 +387,11 @@
         return [anObject stringWithBackslashEscapedShellCharactersIncludingNewlines:YES];
     }] componentsJoinedByString:@" "]];
     iTermWarningSelection selection = [iTermWarning showWarningWithTitle:command
-                                                                 actions:@[ @"OK", @"Cancel" ]
+                                                                 actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermDependencyEditorWindowController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermDependencyEditorWindowController (actions).") ]
                                                                accessory:nil
                                                               identifier:@"DependencyEditorPip3Confirmation"
                                                              silenceable:kiTermWarningTypePersistent
-                                                                 heading:@"Run this Command?"
+                                                                 heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.run_this_command.fd55ac77", nil, NSBundle.mainBundle, @"Run this Command?", @"User-facing text in iTermDependencyEditorWindowController (heading).")
                                                                   window:self.window];
     if (selection == kiTermWarningSelection1) {
         return;
@@ -420,12 +420,12 @@
 }
 
 - (void)uninstallDidFailForPackage:(NSString *)package {
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Uninstall of %@ failed. Check the pip output for errors.",package]
-                               actions:@[ @"OK" ]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.uninstall_of_failed_check_the_pip_output_for.7cc43555", nil, NSBundle.mainBundle, @"Uninstall of %@ failed. Check the pip output for errors.", @"User-facing text in iTermDependencyEditorWindowController (showWarningWithTitle)."),package]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermDependencyEditorWindowController (actions).") ]
                              accessory:nil
                             identifier:@"DependencyEditorInstallationFailed"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Removal Failed"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.removal_failed.1bf55f77", nil, NSBundle.mainBundle, @"Removal Failed", @"User-facing text in iTermDependencyEditorWindowController (heading).")
                                 window:self.window];
 }
 
@@ -433,12 +433,12 @@
                   selectedScriptPath:(NSString *)selectedScriptPath
                    newDependencyName:(NSString *)newDependencyName {
     if (!ok) {
-        [iTermWarning showWarningWithTitle:@"Check the pip output for errors."
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.check_the_pip_output_for_errors.5f954975", nil, NSBundle.mainBundle, @"Check the pip output for errors.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermDependencyEditorWindowController (actions).") ]
                                  accessory:nil
                                 identifier:@"DependencyEditorInstallationFailed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Installation Failed"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.installation_failed.faa69b07", nil, NSBundle.mainBundle, @"Installation Failed", @"User-facing text in iTermDependencyEditorWindowController (heading).")
                                     window:self.window];
         return;
     }
@@ -482,9 +482,9 @@
     NSURL *folder = [[[NSURL fileURLWithPath:_selectedScriptItem.path] URLByDeletingLastPathComponent] URLByAppendingPathComponent:name];
     if ([[NSFileManager defaultManager] fileExistsAtPath:folder.path]) {
         iTermWarning *warning = [[iTermWarning alloc] init];
-        warning.title = [NSString stringWithFormat:@"Can’t upgrade because %@ already exists", folder.path];
-        warning.heading = @"Error";
-        warning.actionLabels = @[ @"OK" ];
+        warning.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.can_t_upgrade_because_already_exists.3e553583", nil, NSBundle.mainBundle, @"Can’t upgrade because %@ already exists", @"User-facing text in iTermDependencyEditorWindowController (title)."), folder.path];
+        warning.heading = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.error.54a0e8c1", nil, NSBundle.mainBundle, @"Error", @"User-facing text in iTermDependencyEditorWindowController (heading).");
+        warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermDependencyEditorWindowController (actionLabels).") ];
         warning.warningType = kiTermWarningTypePersistent;
         warning.window = self.window;
         [warning runModal];
@@ -505,8 +505,8 @@
                 return;
             }
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Installation Failed";
-            alert.informativeText = [NSString stringWithFormat:@"Please file a bug report at https://iterm2.com/bugs. The following error occurred while upgrading a dependency: %@", errorStatus.localizedDescription];
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.installation_failed.faa69b07", nil, NSBundle.mainBundle, @"Installation Failed", @"User-facing text in iTermDependencyEditorWindowController (source UI).");
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.please_file_a_bug_report_at_https_iterm2.de0c0bb5", nil, NSBundle.mainBundle, @"Please file a bug report at https://iterm2.com/bugs. The following error occurred while upgrading a dependency: %@", @"User-facing text in iTermDependencyEditorWindowController (informativeText)."), errorStatus.localizedDescription];
             [alert runModal];
             return;
         }
@@ -524,7 +524,7 @@
                                                                         dependencies:@[]
                                                                       createSetupCfg:YES
                                                                 provisioningDidBegin:^{
-            [progress showWithMessage:@"Setting up the Python environment…"];
+            [progress showWithMessage:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.setting_up_python_environment.32371e53", nil, NSBundle.mainBundle, @"Setting up the Python environment…", @"Progress message while setting up a script's Python environment.")];
         }
                                                                           completion:upgradeCompletion];
     } else {
@@ -548,8 +548,8 @@
                                  error:&error];
     if (error) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Installation Failed";
-        alert.informativeText = [NSString stringWithFormat:@"Error creating %@: %@", innerFolder, error.localizedDescription];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.installation_failed.faa69b07", nil, NSBundle.mainBundle, @"Installation Failed", @"User-facing text in iTermDependencyEditorWindowController (finishUpgradingScriptItem:toFullEnvironmentAt:).");
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.error_creating.afb7612f", nil, NSBundle.mainBundle, @"Error creating %@: %@", @"User-facing text in iTermDependencyEditorWindowController (informativeText)."), innerFolder, error.localizedDescription];
         [alert runModal];
         return;
     }
@@ -561,8 +561,8 @@
                           error:&error];
     if (error) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Installation Failed";
-        alert.informativeText = [NSString stringWithFormat:@"Error moving %@ to %@: %@", item.path, destination, error.localizedDescription];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.installation_failed.faa69b07", nil, NSBundle.mainBundle, @"Installation Failed", @"User-facing text in iTermDependencyEditorWindowController (finishUpgradingScriptItem:toFullEnvironmentAt:).");
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.error_moving_to.e465d251", nil, NSBundle.mainBundle, @"Error moving %@ to %@: %@", @"User-facing text in iTermDependencyEditorWindowController (informativeText)."), item.path, destination, error.localizedDescription];
         [alert runModal];
         return;
     }
@@ -660,9 +660,9 @@
     SUStandardVersionComparator *comparator = [[SUStandardVersionComparator alloc] init];
     if ([comparator compareVersion:selectedVersion toVersion:_pythonVersion] == NSOrderedAscending) {
         iTermWarning *warning = [[iTermWarning alloc] init];
-        warning.title = @"You have asked to downgrade to an older Python version. Dependencies will need to be reinstalled. This may go badly. Are you sure you want to do this?";
-        warning.heading = @"Confirm Python Downgrade";
-        warning.actionLabels = @[ @"OK", @"Cancel" ];
+        warning.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.you_have_asked_to_downgrade_to_an_older.c6e37fcf", nil, NSBundle.mainBundle, @"You have asked to downgrade to an older Python version. Dependencies will need to be reinstalled. This may go badly. Are you sure you want to do this?", @"User-facing text in iTermDependencyEditorWindowController (title).");
+        warning.heading = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.confirm_python_downgrade.ecad1e97", nil, NSBundle.mainBundle, @"Confirm Python Downgrade", @"User-facing text in iTermDependencyEditorWindowController (heading).");
+        warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermDependencyEditorWindowController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermDependencyEditorWindowController (actionLabels).") ];
         warning.identifier = @"DependencyEditorConfirmDowngrade";
         warning.warningType = kiTermWarningTypePersistent;
         warning.window = self.window;
@@ -674,9 +674,9 @@
         }
     } else {
         iTermWarning *warning = [[iTermWarning alloc] init];
-        warning.title = @"You have asked to upgrade to a newer Python version. Dependencies will need to be reinstalled. OK to continue?";
-        warning.heading = @"Confirm Python Upgrade";
-        warning.actionLabels = @[ @"OK", @"Cancel" ];
+        warning.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.you_have_asked_to_upgrade_to_a_newer.4b9defa8", nil, NSBundle.mainBundle, @"You have asked to upgrade to a newer Python version. Dependencies will need to be reinstalled. OK to continue?", @"User-facing text in iTermDependencyEditorWindowController (title).");
+        warning.heading = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.confirm_python_upgrade.d65a137b", nil, NSBundle.mainBundle, @"Confirm Python Upgrade", @"User-facing text in iTermDependencyEditorWindowController (heading).");
+        warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermDependencyEditorWindowController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermDependencyEditorWindowController (actionLabels).") ];
         warning.identifier = @"DependencyEditorConfirmUpgrade";
         warning.warningType = kiTermWarningTypePersistent;
         warning.window = self.window;
@@ -710,7 +710,7 @@
                                                                         dependencies:dependencies ?: @[]
                                                                       createSetupCfg:YES
                                                                 provisioningDidBegin:^{
-            [progress showWithMessage:@"Rebuilding the Python environment…"];
+            [progress showWithMessage:NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.rebuilding_the_python_environment.44036a59", nil, NSBundle.mainBundle, @"Rebuilding the Python environment…", @"Progress message while rebuilding a script environment.")];
         }
                                                                           completion:^(NSError *error) {
             [progress dismiss];
@@ -723,8 +723,8 @@
             [strongSelf setEditingControlsEnabled:YES];
             if (error != nil && ![iTermUvProvisioner isCancelationError:error]) {
                 NSAlert *alert = [[NSAlert alloc] init];
-                alert.messageText = @"Could Not Change Python Version";
-                alert.informativeText = error.localizedDescription ?: @"Unknown error";
+                alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.could_not_change_python_version.d53fe669", nil, NSBundle.mainBundle, @"Could Not Change Python Version", @"User-facing text in iTermDependencyEditorWindowController (source UI).");
+                alert.informativeText = error.localizedDescription ?: NSLocalizedStringWithDefaultValue(@"ui.api.itermdependencyeditorwindowcontroller.unknown_error.27c2ccd9", nil, NSBundle.mainBundle, @"Unknown error", @"Fallback error description when rebuilding a script environment fails.");
                 [alert runModal];
             }
             // Refresh the editor from the (rebuilt) environment and setup.cfg.

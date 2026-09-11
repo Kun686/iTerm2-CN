@@ -37,12 +37,14 @@
 
 - (void)setInstallUtilities:(BOOL)installUtilities {
     _installUtilities = installUtilities;
-    NSString *prefix = self.busy ? @"Waiting for this command to finish:" : @"Press “Continue” to run this command:";
+    NSString *prefix = self.busy
+        ? NSLocalizedStringWithDefaultValue(@"ui.shellintegrationinstaller.itermshellintegrationdownloadandrunviewcontroller.waiting_for_this_command_to_finish.8d0e39f7", nil, NSBundle.mainBundle, @"Waiting for this command to finish:", @"Status shown while the Shell Integration install command is running.")
+        : NSLocalizedStringWithDefaultValue(@"ui.shellintegrationinstaller.itermshellintegrationdownloadandrunviewcontroller.press_continue_to_run_this_command.ee83a63a", nil, NSBundle.mainBundle, @"Press “Continue” to run this command:", @"Instruction shown before running the Shell Integration install command.");
     self.textField.stringValue = [NSString stringWithFormat:@"%@\n%@", prefix, self.command];
 }
 
 - (void)showShellUnsupportedError {
-    self.textField.stringValue = @"😞 Your shell is not supported, or perhaps your $SHELL environment variable is not set correctly. Press “Continue” to try again.";
+    self.textField.stringValue = NSLocalizedStringWithDefaultValue(@"ui.shellintegrationinstaller.itermshellintegrationdownloadandrunviewcontroller.your_shell_is_not_supported_or_perhaps_your.915fbe26", nil, NSBundle.mainBundle, @"😞 Your shell is not supported, or perhaps your $SHELL environment variable is not set correctly. Press “Continue” to try again.", @"User-facing text in iTermShellIntegrationDownloadAndRunViewController (showShellUnsupportedError).");
 }
 
 - (IBAction)pipeCurlToBash:(id)sender {
@@ -62,4 +64,3 @@
 }
 
 @end
-

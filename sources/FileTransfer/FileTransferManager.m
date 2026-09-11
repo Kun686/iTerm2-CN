@@ -156,11 +156,11 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
 }
 
 - (AXUIElementRef)downloadsMenuElement {
-    return [self menuElementNamed:@"Downloads"];
+    return [self menuElementNamed:NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.downloads.d5fdc1af", nil, NSBundle.mainBundle, @"Downloads", @"Main menu title used to locate the downloads menu through Accessibility.")];
 }
 
 - (AXUIElementRef)uploadsMenuElement {
-    return [self menuElementNamed:@"Uploads"];
+    return [self menuElementNamed:NSLocalizedStringWithDefaultValue(@"ui.appkit.itermapplicationdelegate.uploads.d084236c", nil, NSBundle.mainBundle, @"Uploads", @"Main menu title used to locate the uploads menu through Accessibility.")];
 }
 
 - (AXUIElementRef)menuElementNamed:(NSString *)menuName {
@@ -274,7 +274,7 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
     [item setAction:@selector(itemSelected:)];
 
     NSMenu *submenu = [[[NSMenu alloc] init] autorelease];
-    NSMenuItem *subItem = [[[NSMenuItem alloc] initWithTitle:@"Stop"
+    NSMenuItem *subItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.stop.cae7d57b", nil, NSBundle.mainBundle, @"Stop", @"User-facing text in FileTransferManager (menuItemForTransferrableFile:).")
                                                       action:@selector(stop:)
                                                keyEquivalent:@""] autorelease];
     [subItem setTarget:controller];
@@ -282,7 +282,7 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
     controller.stopSubItem = subItem;
 
     if (transferrableFile.isDownloading) {
-        subItem = [[[NSMenuItem alloc] initWithTitle:@"Show in Finder"
+        subItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.show_in_finder.c2a9c77a", nil, NSBundle.mainBundle, @"Show in Finder", @"User-facing text in FileTransferManager (menuItemForTransferrableFile:).")
                                               action:@selector(showInFinder:)
                                        keyEquivalent:@""] autorelease];
         [subItem setTarget:controller];
@@ -290,7 +290,7 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
         controller.showInFinderSubItem = subItem;
     }
 
-    subItem = [[[NSMenuItem alloc] initWithTitle:@"Remove from List"
+    subItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.remove_from_list.04d73873", nil, NSBundle.mainBundle, @"Remove from List", @"User-facing text in FileTransferManager (menuItemForTransferrableFile:).")
                                           action:@selector(removeFromList:)
                                    keyEquivalent:@""] autorelease];
     [subItem setTarget:controller];
@@ -298,7 +298,7 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
     controller.removeFromListSubItem = subItem;
 
     if (transferrableFile.isDownloading) {
-        subItem = [[[NSMenuItem alloc] initWithTitle:@"Open"
+        subItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.open.ed077f3d", nil, NSBundle.mainBundle, @"Open", @"User-facing text in FileTransferManager (menuItemForTransferrableFile:).")
                                               action:@selector(open:)
                                        keyEquivalent:@""] autorelease];
         [subItem setTarget:controller];
@@ -306,7 +306,7 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
         controller.openSubItem = subItem;
     }
 
-    subItem = [[[NSMenuItem alloc] initWithTitle:@"Get Info"
+    subItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.get_info.68910cf5", nil, NSBundle.mainBundle, @"Get Info", @"User-facing text in FileTransferManager (menuItemForTransferrableFile:).")
                                           action:@selector(getInfo:)
                                    keyEquivalent:@""] autorelease];
     [subItem setTarget:controller];
@@ -388,15 +388,15 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
 - (void)transferrableFile:(TransferrableFile *)transferrableFile
         interactivePrompt:(NSString *)prompt
                completion:(void (^)(NSString *password))completion {
-    NSString *text = [NSString stringWithFormat:@"Authenticate %@", transferrableFile.authRequestor];
+    NSString *text = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.authenticate.4a827acf", nil, NSBundle.mainBundle, @"Authenticate %@", @"User-facing authentication alert title; preserve the remote account."), transferrableFile.authRequestor];
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     alert.messageText = text;
-    alert.informativeText = [NSString stringWithFormat:@"Please enter the %@ for %@ to begin %@.",
+    alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.please_enter_the_for_to_begin.e623f3b3", nil, NSBundle.mainBundle, @"Please enter the %@ for %@ to begin %@.", @"User-facing text in FileTransferManager (informativeText)."),
                              prompt, transferrableFile.authRequestor,
                              transferrableFile.protocolName];
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
-    [alert addButtonWithTitle:@"Password Manager…"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in FileTransferManager (transferrableFile:interactivePrompt:completion:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in FileTransferManager (transferrableFile:interactivePrompt:completion:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.password_manager.34e3c350", nil, NSBundle.mainBundle, @"Password Manager…", @"User-facing text in FileTransferManager (transferrableFile:interactivePrompt:completion:).")];
 
     NSSecureTextField *input =
         [[[NSSecureTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)] autorelease];
@@ -433,8 +433,8 @@ static const NSTimeInterval kMaximumTimeToKeepFinishedDownload = 24 * 60 * 60;
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     alert.messageText = title;
     alert.informativeText = message;
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in FileTransferManager (transferrableFile:title:confirmMessage:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.filetransfer.filetransfermanager.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in FileTransferManager (transferrableFile:title:confirmMessage:).")];
 
     [alert layout];
     NSInteger button = [alert runModal];

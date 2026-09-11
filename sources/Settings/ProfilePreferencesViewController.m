@@ -160,16 +160,16 @@ NSString *const kProfileSessionHotkeyDidChange = @"kProfileSessionHotkeyDidChang
     NSString *team = [iTermAppSignatureValidator currentAppTeamID];
     NSString *message;
     if (!team) {
-        message = @"A required user interface component is missing or corrupted and iTerm2\u2019s code signature could not be verified. You should download a fresh copy of the app and reinstall it.";
+        message = NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.a_required_user_interface_component_is_missing_or.1cb830a6", nil, NSBundle.mainBundle, @"A required user interface component is missing or corrupted and iTerm2\u2019s code signature could not be verified. You should download a fresh copy of the app and reinstall it.", @"User-facing text in ProfilePreferencesViewController (warnAboutCorruptNib).");
     } else if (![team isEqualToString:@"H7V7XYVQ7D"]) {
-        message = @"A required user interface component is missing or corrupted and iTerm2\u2019s code signature did not match that of the official distribution. You should download a fresh copy of the app and reinstall it.";
+        message = NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.a_required_user_interface_component_is_missing_or_corrupted_and.a8bb9f5b", nil, NSBundle.mainBundle, @"A required user interface component is missing or corrupted and iTerm2\u2019s code signature did not match that of the official distribution. You should download a fresh copy of the app and reinstall it.", @"User-facing text in ProfilePreferencesViewController (warnAboutCorruptNib).");
     } else {
-        message = @"A required user interface component is missing or corrupted, yet against all odds the code signature for iTerm2 is valid. Please file a bug at https://iterm2.com/bugs";
+        message = NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.a_required_user_interface_component_is_missing_or_corrupted_yet.b1a77f9f", nil, NSBundle.mainBundle, @"A required user interface component is missing or corrupted, yet against all odds the code signature for iTerm2 is valid. Please file a bug at https://iterm2.com/bugs", @"User-facing text in ProfilePreferencesViewController (warnAboutCorruptNib).");
     }
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Application Corrupt"];
+    [alert setMessageText:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.application_corrupt.c446cbb1", nil, NSBundle.mainBundle, @"Application Corrupt", @"User-facing text in ProfilePreferencesViewController (warnAboutCorruptNib).")];
     [alert setInformativeText:message];
-    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in ProfilePreferencesViewController (warnAboutCorruptNib).")];
     [alert setAlertStyle:NSAlertStyleCritical];
     [alert runModal];
     exit(1);
@@ -496,16 +496,16 @@ andEditComponentWithIdentifier:(NSString *)identifier
 }
 
 - (void)profileTableTagsVisibilityDidChange:(ProfileListView *)profileListView {
-    [_toggleTagsButton setTitle:profileListView.tagsVisible ? @"< Tags" : @"Tags >"];
+    [_toggleTagsButton setTitle:profileListView.tagsVisible ? NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.tags.2ec6c78c", nil, NSBundle.mainBundle, @"< Tags", @"User-facing text in ProfilePreferencesViewController (profileTableTagsVisibilityDidChange:).") : NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.tags.ceb515fa", nil, NSBundle.mainBundle, @"Tags >", @"User-facing text in ProfilePreferencesViewController (profileTableTagsVisibilityDidChange:).")];
 }
 
 #pragma mark - Private
 
 - (BOOL)confirmProfileDeletion:(Profile *)profile {
-    NSMutableString *question = [NSMutableString stringWithFormat:@"Delete profile %@?",
+    NSMutableString *question = [NSMutableString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.delete_profile.6eaac81d", nil, NSBundle.mainBundle, @"Delete profile %@?", @"User-facing text in ProfilePreferencesViewController (indirect UI)."),
                                  profile[KEY_NAME]];
     if ([iTermWarning showWarningWithTitle:question
-                                   actions:@[ @"Delete", @"Cancel" ]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.delete.e2d0a549", nil, NSBundle.mainBundle, @"Delete", @"User-facing action label in ProfilePreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in ProfilePreferencesViewController (actions).") ]
                                 identifier:@"DeleteProfile"
                                silenceable:kiTermWarningTypeTemporarilySilenceable
                                     window:self.view.window] == kiTermWarningSelection0) {
@@ -770,10 +770,10 @@ andEditComponentWithIdentifier:(NSString *)identifier
     }
 
     NSString *title =
-        [NSString stringWithFormat:@"Replace profile “%@” with the current session's settings?",
+        [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.replace_profile_with_the_current_session_s_settings.43b5531d", nil, NSBundle.mainBundle, @"Replace profile “%@” with the current session's settings?", @"User-facing text in ProfilePreferencesViewController (indirect UI)."),
             [iTermProfilePreferences stringForKey:KEY_NAME inProfile:destination]];
     if ([iTermWarning showWarningWithTitle:title
-                                   actions:@[ @"Replace", @"Cancel" ]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.replace.95e15439", nil, NSBundle.mainBundle, @"Replace", @"User-facing action label in ProfilePreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in ProfilePreferencesViewController (actions).") ]
                                  identifier:@"NoSyncReplaceProfileWarning"
                                silenceable:kiTermWarningTypePermanentlySilenceable
                                     window:self.view.window] == kiTermWarningSelection1) {
@@ -930,17 +930,17 @@ andEditComponentWithIdentifier:(NSString *)identifier
             for (NSURL *url in urls) {
                 NSError *error = nil;
                 if (![self tryToImportJSONProfileFromURL:url error:&error]) {
-                    NSArray<NSString *> *actions = @[ @"OK" ];
+                    NSArray<NSString *> *actions = @[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in ProfilePreferencesViewController (actions).") ];
                     if (![url isEqual:urls.lastObject]) {
-                        actions = [actions arrayByAddingObject:@"Abort"];
+                        actions = [actions arrayByAddingObject:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.abort.7a3a94a8", nil, NSBundle.mainBundle, @"Abort", @"User-facing action label in ProfilePreferencesViewController.")];
                     }
                     iTermWarningSelection selection =
-                    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Import from %@ failed: %@", url.path, error.localizedDescription]
+                    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.import_from_failed.6cb14470", nil, NSBundle.mainBundle, @"Import from %@ failed: %@", @"User-facing text in ProfilePreferencesViewController (showWarningWithTitle)."), url.path, error.localizedDescription]
                                                actions:actions
                                              accessory:nil
                                             identifier:@"NoSyncJSONImportFailed"
                                            silenceable:kiTermWarningTypeTemporarilySilenceable
-                                               heading:@"Could not Import Profile"
+                                               heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.could_not_import_profile.bddd7cab", nil, NSBundle.mainBundle, @"Could not Import Profile", @"User-facing text in ProfilePreferencesViewController (heading).")
                                                 window:self.view.window];
                     if (selection == kiTermWarningSelection1) {
                         return;
@@ -1040,8 +1040,8 @@ andEditComponentWithIdentifier:(NSString *)identifier
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 NSAlert *alert = [[NSAlert alloc] init];
-                alert.messageText = @"Error";
-                alert.informativeText = [NSString stringWithFormat:@"Couldn't save to “%@” on %@: %@",
+                alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.error.54a0e8c1", nil, NSBundle.mainBundle, @"Error", @"User-facing text in ProfilePreferencesViewController (source UI).");
+                alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.couldn_t_save_to_on.e495ad91", nil, NSBundle.mainBundle, @"Couldn't save to “%@” on %@: %@", @"User-facing text in ProfilePreferencesViewController (informativeText)."),
                                          item.filename,
                                          item.host.displayName,
                                          [error localizedDescription]];
@@ -1080,8 +1080,8 @@ andEditComponentWithIdentifier:(NSString *)identifier
     NSString *string = [self jsonForProfile:profile error:&error];
     if (!string) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Error";
-        alert.informativeText = [NSString stringWithFormat:@"Couldn't convert profile to JSON: %@",
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.error.54a0e8c1", nil, NSBundle.mainBundle, @"Error", @"User-facing text in ProfilePreferencesViewController (reallySaveProfile:asJSON:).");
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.couldn_t_convert_profile_to_json.f32ea8ce", nil, NSBundle.mainBundle, @"Couldn't convert profile to JSON: %@", @"User-facing text in ProfilePreferencesViewController (informativeText)."),
                                  [error localizedDescription]];
         [alert runModal];
         return;
@@ -1115,8 +1115,8 @@ andEditComponentWithIdentifier:(NSString *)identifier
     NSString *string = [self jsonForAllProfilesWithErrorCount:&errors];
     if (errors) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"Error";
-        alert.informativeText = [NSString stringWithFormat:@"Couldn't convert one or more profiles to JSON. Check Console.app for errors."];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.error.54a0e8c1", nil, NSBundle.mainBundle, @"Error", @"User-facing text in ProfilePreferencesViewController (reallySaveAllProfilesAsJSON:).");
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.couldn_t_convert_one_or_more_profiles_to.c0af1df5", nil, NSBundle.mainBundle, @"Couldn't convert one or more profiles to JSON. Check Console.app for errors.", @"User-facing text in ProfilePreferencesViewController (informativeText).")];
         [alert runModal];
         return;
     }
@@ -1214,17 +1214,27 @@ andEditComponentWithIdentifier:(NSString *)identifier
     if ([iTermProfilePreferences boolForKey:KEY_DYNAMIC_PROFILE_REWRITABLE inProfile:profile]) {
         return;
     }
-    NSString *profileName = [profile objectForKey:KEY_NAME] ?: @"(unknown name)";
-    NSString *message = [NSString stringWithFormat:@"The selected profile, “%@”, is a dynamic profile. These are generally only edited by hand.\n\niTerm2 is now able to write changes back to dynamic profiles when they are marked as “rewritable“. Rewriting can cause the order of values to change.", profileName];
+    NSString *profileName = [profile objectForKey:KEY_NAME] ?:
+        NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.unknown_profile_name",
+                                          nil,
+                                          NSBundle.mainBundle,
+                                          @"(unknown name)",
+                                          @"Fallback name for a dynamic profile.");
+    NSString *message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.dynamic_profile_warning",
+                                                                                      nil,
+                                                                                      NSBundle.mainBundle,
+                                                                                      @"The selected profile, “%@”, is a dynamic profile. These are generally only edited by hand.\n\niTerm2 is now able to write changes back to dynamic profiles when they are marked as “rewritable“. Rewriting can cause the order of values to change.",
+                                                                                      @"Warning before editing a non-rewritable dynamic profile."),
+                         profileName];
     // "Reveal in Finder" is a one-time navigation action and shouldn't be remembered.
     iTermWarning *warning = [[iTermWarning alloc] init];
     warning.title = message;
-    warning.actionLabels = @[ @"Mark as Rewritable", @"Reveal in Finder", @"Cancel" ];
+    warning.actionLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.mark_as_rewritable.bff4593d", nil, NSBundle.mainBundle, @"Mark as Rewritable", @"User-facing action label in ProfilePreferencesViewController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.reveal_in_finder.cc849385", nil, NSBundle.mainBundle, @"Reveal in Finder", @"User-facing action label in ProfilePreferencesViewController (actionLabels)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in ProfilePreferencesViewController (actionLabels).") ];
     warning.identifier = @"NoSyncDynamicProfileChangeWillBeLost";
     warning.warningType = kiTermWarningTypeTemporarilySilenceable;
-    warning.heading = @"Changes Will Be Lost";
+    warning.heading = NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.changes_will_be_lost.41d8a997", nil, NSBundle.mainBundle, @"Changes Will Be Lost", @"User-facing text in ProfilePreferencesViewController (heading).");
     warning.window = self.view.window;
-    warning.doNotRememberLabels = @[ @"Reveal in Finder" ];
+    warning.doNotRememberLabels = @[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilepreferencesviewcontroller.reveal_in_finder.cc849385", nil, NSBundle.mainBundle, @"Reveal in Finder", @"User-facing action label in ProfilePreferencesViewController (doNotRememberLabels).") ];
     const iTermWarningSelection selection = [warning runModal];
     switch (selection) {
         case kiTermWarningSelection0:

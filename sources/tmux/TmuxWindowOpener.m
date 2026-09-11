@@ -334,8 +334,8 @@ NSString *const kTmuxWindowOpenerWindowOptionStyleValueFullScreen = @"FullScreen
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Error: malformed history line from tmux.";
-            alert.informativeText = @"See Console.app for details";
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.tmux.tmuxwindowopener.error_malformed_history_line_from_tmux.ddaf5924", nil, NSBundle.mainBundle, @"Error: malformed history line from tmux.", @"User-facing text in TmuxWindowOpener (source UI).");
+            alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.tmux.tmuxwindowopener.see_console_app_for_details.13242dc6", nil, NSBundle.mainBundle, @"See Console.app for details", @"User-facing text in TmuxWindowOpener (source UI).");
             [alert runModal];
         });
     }

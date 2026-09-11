@@ -53,7 +53,7 @@ enum SafetyTranscript {
                 // agent prose, so they're safe to include and are exactly the
                 // action context the classifier is designed to weigh.
                 out.append(.toolCall(name: payload.name,
-                                     input: payload.markdownDescription))
+                                     input: payload.safetyTranscriptDescription))
 
             default:
                 // Everything else (agent responses, streaming fragments,

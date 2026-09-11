@@ -263,7 +263,7 @@ extension TerminalButton: NSViewToolTipOwner {
               point: NSPoint,
               userData data: UnsafeMutableRawPointer?) -> String {
         DLog("Returning \(tooltip) for \(self)")
-        return tooltip
+        return TerminalButtonTooltip.localized(tooltip)
     }
 }
 

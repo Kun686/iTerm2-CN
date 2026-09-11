@@ -600,11 +600,11 @@ static NSString * const kColorGalleryURL = @"https://www.iterm2.com/colorgallery
 
     [_presetsMenu addItem:[NSMenuItem separatorItem]];
 
-    [self addPresetItemWithTitle:@"Import…" action:@selector(importColorPreset:)];
-    [self addPresetItemWithTitle:@"Export…" action:@selector(exportColorPreset:)];
-    [self addPresetItemWithTitle:@"Save As…" action:@selector(saveColorPreset:)];
-    [self addPresetItemWithTitle:@"Delete Preset…" action:@selector(deleteColorPreset:)];
-    [self addPresetItemWithTitle:@"Visit Online Gallery" action:@selector(visitGallery:)];
+    [self addPresetItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.import.ea94509e", nil, NSBundle.mainBundle, @"Import…", @"User-facing text in ProfilesColorsPreferencesViewController (addPresetItemWithTitle:action:).") action:@selector(importColorPreset:)];
+    [self addPresetItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.export.4a4c59c5", nil, NSBundle.mainBundle, @"Export…", @"User-facing text in ProfilesColorsPreferencesViewController (addPresetItemWithTitle:action:).") action:@selector(exportColorPreset:)];
+    [self addPresetItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.save_as.a4b76af5", nil, NSBundle.mainBundle, @"Save As…", @"User-facing color preset menu item.") action:@selector(saveColorPreset:)];
+    [self addPresetItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.delete_preset.72adb099", nil, NSBundle.mainBundle, @"Delete Preset…", @"User-facing color preset menu item.") action:@selector(deleteColorPreset:)];
+    [self addPresetItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.visit_online_gallery.cc98a9d6", nil, NSBundle.mainBundle, @"Visit Online Gallery", @"User-facing color preset menu item.") action:@selector(visitGallery:)];
     _presetsMenu.delegate = self;
 }
 
@@ -706,8 +706,8 @@ static NSString * const kColorGalleryURL = @"https://www.iterm2.com/colorgallery
 - (void)showSaveColorPresetAlertWithItems:(NSArray<NSString *> *)items
                                completion:(void (^)(NSString *name))completion {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Save Color Preset";
-    alert.informativeText = @"Select preset name";
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.save_color_preset.d1ec5ba6", nil, NSBundle.mainBundle, @"Save Color Preset", @"User-facing text in ProfilesColorsPreferencesViewController (showSaveColorPresetAlertWithItems:completion:).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.select_preset_name.cd70f32b", nil, NSBundle.mainBundle, @"Select preset name", @"User-facing text in ProfilesColorsPreferencesViewController (showSaveColorPresetAlertWithItems:completion:).");
     alert.alertStyle = NSAlertStyleInformational;
 
     // Add the ComboBox
@@ -717,8 +717,8 @@ static NSString * const kColorGalleryURL = @"https://www.iterm2.com/colorgallery
 
     alert.accessoryView = comboBox;
 
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in ProfilesColorsPreferencesViewController (showSaveColorPresetAlertWithItems:completion:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in ProfilesColorsPreferencesViewController (showSaveColorPresetAlertWithItems:completion:).")];
 
     [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse response) {
         if (response == NSAlertFirstButtonReturn) {
@@ -749,17 +749,17 @@ static NSString * const kColorGalleryURL = @"https://www.iterm2.com/colorgallery
     iTermColorPresetDictionary *customPresets = [iTermColorPresets customColorPresets];
     if (!customPresets || [customPresets count] == 0) {
         NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"No deletable color presets.";
-        alert.informativeText = @"You cannot erase the built-in presets and no custom presets have been imported.";
-        [alert addButtonWithTitle:@"OK"];
+        alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.no_deletable_color_presets.4636fd53", nil, NSBundle.mainBundle, @"No deletable color presets.", @"User-facing text in ProfilesColorsPreferencesViewController (deleteColorPreset:).");
+        alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.you_cannot_erase_the_built_in_presets_and.8aa9511d", nil, NSBundle.mainBundle, @"You cannot erase the built-in presets and no custom presets have been imported.", @"User-facing text in ProfilesColorsPreferencesViewController (deleteColorPreset:).");
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in ProfilesColorsPreferencesViewController (deleteColorPreset:).")];
         [alert runModal];
         return;
     }
 
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Select a preset to delete:";
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.select_a_preset_to_delete.57d0d690", nil, NSBundle.mainBundle, @"Select a preset to delete:", @"User-facing text in ProfilesColorsPreferencesViewController (deleteColorPreset:).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in ProfilesColorsPreferencesViewController (deleteColorPreset:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in ProfilesColorsPreferencesViewController (deleteColorPreset:).")];
     NSPopUpButton *popUpButton = [[NSPopUpButton alloc] init];
     for (NSString *key in [[customPresets allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
         [popUpButton addItemWithTitle:key];
@@ -802,9 +802,9 @@ static NSString * const kColorGalleryURL = @"https://www.iterm2.com/colorgallery
     [theDict writeToSaveItem:item completionHandler:^(NSError *error) {
         if (error) {
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Save Failed.";
-            alert.informativeText = [NSString stringWithFormat:@"Could not save to %@", item.displayName];
-            [alert addButtonWithTitle:@"OK"];
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.save_failed.a1b57765", nil, NSBundle.mainBundle, @"Save Failed.", @"User-facing text in ProfilesColorsPreferencesViewController (source UI).");
+            alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.could_not_save_to.1c8b29b9", nil, NSBundle.mainBundle, @"Could not save to %@", @"User-facing text in ProfilesColorsPreferencesViewController (informativeText)."), item.displayName];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in ProfilesColorsPreferencesViewController (source UI).")];
             [alert runModal];
         } else {
             [item revealInFinderIfLocal];
@@ -821,32 +821,36 @@ static NSString * const kColorGalleryURL = @"https://www.iterm2.com/colorgallery
         if (!modes) {
             return YES;
         }
-        NSString *currentMode = currentModeIsDark ? @"Dark Mode" : @"Light Mode";
+        NSString *currentMode = currentModeIsDark
+            ? NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.dark_mode_label", nil, NSBundle.mainBundle, @"Dark Mode", @"User-facing appearance mode name in a color preset action.")
+            : NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.light_mode_label", nil, NSBundle.mainBundle, @"Light Mode", @"User-facing appearance mode name in a color preset action.");
         const iTermWarningSelection selection =
-        [iTermWarning showWarningWithTitle:@"This preset has colors for both light mode and dark mode."
-                                   actions:@[ @"Update Both Modes",
-                                              [NSString stringWithFormat:@"Update %@ Only", currentMode]]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.this_preset_has_colors_for_both_light_mode.7192c5aa", nil, NSBundle.mainBundle, @"This preset has colors for both light mode and dark mode.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.update_both_modes.402f7615", nil, NSBundle.mainBundle, @"Update Both Modes", @"User-facing action label in ProfilesColorsPreferencesViewController (actions)."),
+                                              [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.update_only.e79da5c8", nil, NSBundle.mainBundle, @"Update %@ Only", @"User-facing action label in ProfilesColorsPreferencesViewController (actions)."), currentMode]]
                              actionMapping:nil
                                  accessory:nil
                                 identifier:@"NoSyncUpdateWhichModes_PresetHasModes"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Update Which Modes?"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.update_which_modes.2a85c1b5", nil, NSBundle.mainBundle, @"Update Which Modes?", @"User-facing text in ProfilesColorsPreferencesViewController (heading).")
                                     window:self.view.window];
         return (selection == 0);
     }
     if (!modes) {
         return NO;
     }
-    NSString *currentMode = currentModeIsDark ? @"Dark Mode" : @"Light Mode";
+    NSString *currentMode = currentModeIsDark
+        ? NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.dark_mode_label", nil, NSBundle.mainBundle, @"Dark Mode", @"User-facing appearance mode name in a color preset action.")
+        : NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.light_mode_label", nil, NSBundle.mainBundle, @"Light Mode", @"User-facing appearance mode name in a color preset action.");
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:@"This preset does not have separate colors for light mode and dark mode."
-                               actions:@[ @"Update Both Modes",
-                                          [NSString stringWithFormat:@"Update %@ Only", currentMode]]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.this_preset_does_not_have_separate_colors_for.14f669a2", nil, NSBundle.mainBundle, @"This preset does not have separate colors for light mode and dark mode.", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.update_both_modes.402f7615", nil, NSBundle.mainBundle, @"Update Both Modes", @"User-facing action label in ProfilesColorsPreferencesViewController (actions)."),
+                                          [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.update_only.e79da5c8", nil, NSBundle.mainBundle, @"Update %@ Only", @"User-facing action label in ProfilesColorsPreferencesViewController (actions)."), currentMode]]
                          actionMapping:nil
                              accessory:nil
                             identifier:@"NoSyncUpdateWhichModes_PresetLacksModes"
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Update Which Modes?"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profilescolorspreferencesviewcontroller.update_which_modes.2a85c1b5", nil, NSBundle.mainBundle, @"Update Which Modes?", @"User-facing text in ProfilesColorsPreferencesViewController (heading).")
                                 window:self.view.window];
     return (selection == 0);
 }

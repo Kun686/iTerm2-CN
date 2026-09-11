@@ -101,11 +101,11 @@ private extension iTermBrowserPasswordWriter {
     }
 
     private func confirm() -> Bool {
-        let message = "The focused field is not a password field. Fill it anyway?"
+        let message = String(localized: "ui.swift.browser.passwordmanager.itermbrowserpasswordwriter.the_focused_field_is_not_a_password_field.3a78ecad", defaultValue: "The focused field is not a password field. Fill it anyway?", bundle: .main, comment: "User-facing text in iTermBrowserPasswordWriter.")
         let alert = NSAlert()
         alert.messageText = message
-        alert.addButton(withTitle: "OK")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.passwordmanager.itermbrowserpasswordwriter.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermBrowserPasswordWriter."))
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.passwordmanager.itermbrowserpasswordwriter.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermBrowserPasswordWriter."))
         return alert.runModal() == .alertFirstButtonReturn
     }
 

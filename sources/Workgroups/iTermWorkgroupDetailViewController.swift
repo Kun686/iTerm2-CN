@@ -45,12 +45,12 @@ class iTermWorkgroupDetailViewController: NSViewController {
         let root = NSView(frame: NSRect(x: 0, y: 0, width: 640, height: 420))
 
         emptyLabel = NSTextField(labelWithString:
-            "Select a workgroup on the left or click + to create one.")
+            String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.select_a_workgroup_on_the_left_or_click.153eb2e6", defaultValue: "Select a workgroup on the left or click + to create one.", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."))
         emptyLabel.textColor = .secondaryLabelColor
         emptyLabel.alignment = .center
         root.addSubview(emptyLabel)
 
-        whatIsButton = NSButton(title: "What is a Workgroup?",
+        whatIsButton = NSButton(title: String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.what_is_a_workgroup.9cd994d8", defaultValue: "What is a Workgroup?", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."),
                                 target: self,
                                 action: #selector(whatIsAWorkgroupClicked(_:)))
         whatIsButton.bezelStyle = .rounded
@@ -59,7 +59,7 @@ class iTermWorkgroupDetailViewController: NSViewController {
         root.addSubview(whatIsButton)
 
         nameField = NSTextField(frame: .zero)
-        nameField.placeholderString = "Workgroup name"
+        nameField.placeholderString = String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.workgroup_name.1bd3a631", defaultValue: "Workgroup name", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController.")
         nameField.delegate = self
         root.addSubview(nameField)
 
@@ -297,11 +297,7 @@ class iTermWorkgroupDetailViewController: NSViewController {
     // MARK: - + / − actions
 
     @objc private func whatIsAWorkgroupClicked(_ sender: NSButton) {
-        let markdown = "A **Workgroup** turns a single session into a "
-            + "coordinated set of related sessions, each with its own "
-            + "command and toolbar; see the "
-            + "[Workgroups documentation](https://iterm2.com/documentation-workgroups.html) "
-            + "for the full story."
+        let markdown = String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.a_workgroup_turns_a_single_session_into_a.ed29ba68", defaultValue: "A **Workgroup** turns a single session into a coordinated set of related sessions, each with its own command and toolbar; see the [Workgroups documentation](https://iterm2.com/documentation-workgroups.html) for the full story.", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController.")
         sender.it_showInformativeMessage(withMarkdown: markdown)
     }
 
@@ -319,18 +315,18 @@ class iTermWorkgroupDetailViewController: NSViewController {
         // Disable AppKit's target-based auto-enable so our own
         // isEnabled flags aren't overridden right before display.
         menu.autoenablesItems = false
-        let peer = menu.addItem(withTitle: "Add Peer",
+        let peer = menu.addItem(withTitle: String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.add_peer.d4ffe708", defaultValue: "Add Peer", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."),
                                 action: #selector(addPeer),
                                 keyEquivalent: "")
         peer.target = self
-        let split = menu.addItem(withTitle: "Add Split",
+        let split = menu.addItem(withTitle: String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.add_split.7a037631", defaultValue: "Add Split", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."),
                                  action: #selector(addSplit),
                                  keyEquivalent: "")
         split.target = self
         // No split from anywhere inside a peer group — that includes
         // both the host (ambiguous target) and the peers themselves.
         split.isEnabled = !sessionIsInPeerGroup(selID: selID)
-        let tab = menu.addItem(withTitle: "Add Tab",
+        let tab = menu.addItem(withTitle: String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.add_tab.145341f3", defaultValue: "Add Tab", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."),
                                action: #selector(addTab),
                                keyEquivalent: "")
         tab.target = self
@@ -417,7 +413,7 @@ class iTermWorkgroupDetailViewController: NSViewController {
             displayName: displayName)
         wg.sessions.append(newSession)
         enforceModeSwitcherInvariant(on: &wg)
-        parentEditor?.replaceSelectedWorkgroup(wg, actionName: "Add Session")
+        parentEditor?.replaceSelectedWorkgroup(wg, actionName: String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.add_session.702f5915", defaultValue: "Add Session", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."))
         // Select the newly-added session so the user can configure it
         // straight away (and so the visual preview shows it).
         if let row = outlineRow(forSessionID: newSession.uniqueIdentifier) {
@@ -444,7 +440,7 @@ class iTermWorkgroupDetailViewController: NSViewController {
         }
         wg.sessions.removeAll { toDelete.contains($0.uniqueIdentifier) }
         enforceModeSwitcherInvariant(on: &wg)
-        parentEditor?.replaceSelectedWorkgroup(wg, actionName: "Remove Session")
+        parentEditor?.replaceSelectedWorkgroup(wg, actionName: String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.remove_session.48ab3ca9", defaultValue: "Remove Session", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."))
     }
 
     // Each "peer group" is a non-peer session (the host) plus every
@@ -509,7 +505,7 @@ extension iTermWorkgroupDetailViewController: NSTextFieldDelegate {
               var wg = currentWorkgroup,
               wg.name != nameField.stringValue else { return }
         wg.name = nameField.stringValue
-        parentEditor?.replaceSelectedWorkgroup(wg, actionName: "Rename Workgroup")
+        parentEditor?.replaceSelectedWorkgroup(wg, actionName: String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.rename_workgroup.2b9ebc57", defaultValue: "Rename Workgroup", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."))
     }
 }
 
@@ -573,15 +569,15 @@ extension iTermWorkgroupDetailViewController: NSOutlineViewDataSource, NSOutline
     private func displayLabel(for session: iTermWorkgroupSessionConfig) -> String {
         switch session.kind {
         case .root:
-            return "Main session"
+            return String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.main_session.54d5c8a4", defaultValue: "Main session", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController.")
         case .peer:
-            return "Peer: \(session.displayName)"
+            return String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.peer_0.19252330", defaultValue: "Peer: \(session.displayName)", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController.")
         case .split(let s):
-            let dir = s.orientation == .vertical ? "Vertical" : "Horizontal"
+            let dir = s.orientation == .vertical ? String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.vertical.727cd3a6", defaultValue: "Vertical", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController.") : String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.horizontal.0abba441", defaultValue: "Horizontal", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController.")
             let pct = Int((s.location * 100).rounded())
-            return "Split: \(dir) \(pct)%"
+            return String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.split_0_1.aa244986", defaultValue: "Split: \(dir) \(pct)%", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController.")
         case .tab:
-            return "Tab"
+            return String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.tab.90ddf196", defaultValue: "Tab", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController.")
         }
     }
 }
@@ -619,6 +615,6 @@ extension iTermWorkgroupDetailViewController: WorkgroupVisualViewDelegate {
         }) else { return }
         wg.sessions[idx] = s
         parentEditor?.replaceSelectedWorkgroup(wg,
-                                               actionName: "Change Split Location")
+                                               actionName: String(localized: "ui.swift.workgroups.itermworkgroupdetailviewcontroller.change_split_location.7487dd71", defaultValue: "Change Split Location", bundle: .main, comment: "User-facing text in iTermWorkgroupDetailViewController."))
     }
 }

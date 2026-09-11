@@ -56,8 +56,21 @@ class iTermLocaleGuesser: NSObject {
 
     @objc(initWithEncoding:)
     convenience init(encoding: UInt) {
-        let locale = NSLocale.current
-        self.init(preferredLanguages: NSLocale.preferredLanguages,
+        let locale: Locale
+        let preferredLanguages: [String]
+        if Bundle.it_isCNCommunityBuild() {
+            // CN's AppleLanguages override is for UI resources, not the shell.
+            // Read the system preference domain explicitly so changing the UI
+            // language cannot alter the inputs to the existing locale algorithm.
+            let systemPreferences = iTermUserDefaults.userDefaults()
+                .persistentDomain(forName: UserDefaults.globalDomain) ?? [:]
+            locale = Locale(identifier: systemPreferences["AppleLocale"] as? String ?? "")
+            preferredLanguages = systemPreferences["AppleLanguages"] as? [String] ?? []
+        } else {
+            locale = NSLocale.current
+            preferredLanguages = NSLocale.preferredLanguages
+        }
+        self.init(preferredLanguages: preferredLanguages,
                   currentLocaleIdentifier: locale.identifier,
                   countryCode: (locale as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String,
                   encoding: String.Encoding(rawValue: encoding),

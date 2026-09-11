@@ -207,12 +207,12 @@ class AIModelCatalogUpdater: NSObject {
         askingConsent = true
         defer { askingConsent = false }
         let selection = iTermWarning.show(
-            withTitle: "iTerm2 can keep its built-in list of AI models current by periodically downloading a cryptographically signed list from iterm2.com. No terminal content or personal data is sent. Allow this?",
-            actions: ["Allow", "Don’t Allow"],
+            withTitle: String(localized: "ui.swift.aiterm.aimodelcatalogupdater.iterm2_can_keep_its_built_in_list_of.1b6a250d", defaultValue: "iTerm2 can keep its built-in list of AI models current by periodically downloading a cryptographically signed list from iterm2.com. No terminal content or personal data is sent. Allow this?", bundle: .main, comment: "User-facing text in AIModelCatalogUpdater."),
+            actions: [String(localized: "ui.swift.aiterm.aimodelcatalogupdater.allow.e213c161", defaultValue: "Allow", bundle: .main, comment: "User-facing text in AIModelCatalogUpdater."), String(localized: "ui.swift.aiterm.aimodelcatalogupdater.don_t_allow.5e0170d3", defaultValue: "Don’t Allow", bundle: .main, comment: "User-facing text in AIModelCatalogUpdater.")],
             accessory: nil,
             identifier: nil,
             silenceable: .kiTermWarningTypePersistent,
-            heading: "Check for AI Model Updates?",
+            heading: String(localized: "ui.swift.aiterm.aimodelcatalogupdater.check_for_ai_model_updates.0fe1780c", defaultValue: "Check for AI Model Updates?", bundle: .main, comment: "User-facing text in AIModelCatalogUpdater."),
             window: nil)
         switch selection {
         case .kiTermWarningSelection0:

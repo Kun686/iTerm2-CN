@@ -45,7 +45,7 @@ class iTermBookmarkTagEditorWindowController: NSWindowController {
                            styleMask: [.titled, .closable],
                            backing: .buffered,
                            defer: false)
-        panel.title = "Edit Bookmark"
+        panel.title = String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.edit_bookmark.6e598318", defaultValue: "Edit Bookmark", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController.")
         panel.isFloatingPanel = true
         panel.level = .modalPanel
         panel.center()
@@ -64,7 +64,7 @@ class iTermBookmarkTagEditorWindowController: NSWindowController {
         guard let contentView = window?.contentView else { return }
 
         // Create and configure UI elements
-        titleLabel = NSTextField(labelWithString: "Title:")
+        titleLabel = NSTextField(labelWithString: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.title.ecd11fd9", defaultValue: "Title:", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."))
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         let titleValueLabel = NSTextField(labelWithString: bookmarkTitle)
@@ -73,7 +73,7 @@ class iTermBookmarkTagEditorWindowController: NSWindowController {
         titleValueLabel.textColor = .secondaryLabelColor
         titleValueLabel.lineBreakMode = .byTruncatingTail
 
-        urlLabel = NSTextField(labelWithString: "URL:")
+        urlLabel = NSTextField(labelWithString: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.url.734fd77b", defaultValue: "URL:", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."))
         urlLabel.translatesAutoresizingMaskIntoConstraints = false
 
         let urlValueLabel = NSTextField(labelWithString: bookmarkURL)
@@ -82,25 +82,25 @@ class iTermBookmarkTagEditorWindowController: NSWindowController {
         urlValueLabel.textColor = .secondaryLabelColor
         urlValueLabel.lineBreakMode = .byTruncatingTail
 
-        let tagsLabel = NSTextField(labelWithString: "Tags:")
+        let tagsLabel = NSTextField(labelWithString: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.tags.865658f8", defaultValue: "Tags:", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."))
         tagsLabel.translatesAutoresizingMaskIntoConstraints = false
 
         tagsTokenField = NSTokenField()
         tagsTokenField.translatesAutoresizingMaskIntoConstraints = false
         tagsTokenField.delegate = self
-        tagsTokenField.placeholderString = "Enter tags..."
+        tagsTokenField.placeholderString = String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.enter_tags.8c54bee7", defaultValue: "Enter tags...", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController.")
 
         // Buttons
-        deleteButton = NSButton(title: "Delete Bookmark", target: self, action: #selector(deleteBookmark))
+        deleteButton = NSButton(title: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.delete_bookmark.719d1563", defaultValue: "Delete Bookmark", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."), target: self, action: #selector(deleteBookmark))
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.bezelStyle = .rounded
 
-        cancelButton = NSButton(title: "Cancel", target: self, action: #selector(cancel))
+        cancelButton = NSButton(title: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."), target: self, action: #selector(cancel))
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.bezelStyle = .rounded
         cancelButton.keyEquivalent = "\u{1b}" // Escape key
 
-        saveButton = NSButton(title: "Save", target: self, action: #selector(saveChanges))
+        saveButton = NSButton(title: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.save.1509f561", defaultValue: "Save", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."), target: self, action: #selector(saveChanges))
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.bezelStyle = .rounded
         saveButton.keyEquivalent = "\r"
@@ -221,10 +221,10 @@ class iTermBookmarkTagEditorWindowController: NSWindowController {
 
     @objc private func deleteBookmark() {
         let alert = NSAlert()
-        alert.messageText = "Delete Bookmark"
-        alert.informativeText = "Are you sure you want to delete this bookmark?"
-        alert.addButton(withTitle: "Delete")
-        alert.addButton(withTitle: "Cancel")
+        alert.messageText = String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.delete_bookmark.719d1563", defaultValue: "Delete Bookmark", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController.")
+        alert.informativeText = String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.are_you_sure_you_want_to_delete_this.8d83fd5b", defaultValue: "Are you sure you want to delete this bookmark?", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController.")
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.delete.e2d0a549", defaultValue: "Delete", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."))
+        alert.addButton(withTitle: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."))
         alert.alertStyle = .warning
 
         alert.beginSheetModal(for: window!) { response in
@@ -243,7 +243,7 @@ class iTermBookmarkTagEditorWindowController: NSWindowController {
 
         await MainActor.run {
             if success {
-                ToastWindowController.showToast(withMessage: "Bookmark Deleted")
+                ToastWindowController.showToast(withMessage: String(localized: "ui.swift.browser.bookmarks.itermbookmarktageditorwindowcontroller.bookmark_deleted.546866e1", defaultValue: "Bookmark Deleted", bundle: .main, comment: "User-facing text in iTermBookmarkTagEditorWindowController."))
             }
             self.close()
         }

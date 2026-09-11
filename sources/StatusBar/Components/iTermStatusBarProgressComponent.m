@@ -47,12 +47,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Progress Indicator";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarprogresscomponent.progress_indicator.74868700", nil, NSBundle.mainBundle, @"Progress Indicator", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
     [self doesNotRecognizeSelector:_cmd];
-    return @"Generic progress indicator";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarprogresscomponent.generic_progress_indicator.7bbe0db2", nil, NSBundle.mainBundle, @"Generic progress indicator", @"Status bar component description.");
 }
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {

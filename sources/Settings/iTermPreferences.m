@@ -642,12 +642,12 @@ static void iTermPreferencesRefreshFastCachesForKey(NSString *key);
         return;
     }
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:@"Load settings from Gitlab settings-like URL on pasteboard?"
-                               actions:@[ @"OK", @"Cancel" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferences.load_settings_from_gitlab_settings_like_url_on.65c5b09c", nil, NSBundle.mainBundle, @"Load settings from Gitlab settings-like URL on pasteboard?", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferences.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermPreferences (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferences.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermPreferences (actions).") ]
                              accessory:nil
                             identifier:nil
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Load Gitlab Settings"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.settings.itermpreferences.load_gitlab_settings.6137122c", nil, NSBundle.mainBundle, @"Load Gitlab Settings", @"User-facing text in iTermPreferences (heading).")
                                 window:nil];
     if (selection == kiTermWarningSelection0) {
         [ud setBool:YES forKey:kPreferenceKeyLoadPrefsFromCustomFolder];

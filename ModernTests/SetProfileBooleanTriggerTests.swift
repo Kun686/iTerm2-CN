@@ -37,4 +37,66 @@ final class SetProfileBooleanTriggerTests: XCTestCase {
         }
         wait(for: [exp], timeout: 5)
     }
+
+    func testUncachedBackgroundDescriptionRetainsOriginalDiagnosticText() throws {
+        let trigger = try XCTUnwrap(makeTrigger(key: "synthetic-unregistered-setting", on: true))
+        let dictionary = trigger.dictionaryValue()
+        let digest = trigger.digest
+        let expected = "Set “synthetic-unregistered-setting” to On"
+        let finished = expectation(description: "uncached diagnostic")
+        DispatchQueue.global().async {
+            XCTAssertEqual(trigger.description, expected)
+            XCTAssertEqual(String(format: "Consider %@", trigger), "Consider " + expected)
+            XCTAssertEqual(trigger.dictionaryValue() as NSDictionary, dictionary as NSDictionary)
+            XCTAssertEqual(trigger.digest, digest)
+            finished.fulfill()
+        }
+        wait(for: [finished], timeout: 5)
+    }
+
+    func testCachedBackgroundDescriptionLocalizesOnlySettingName() throws {
+        // Guard before forcing the Preferences nib. This reuses the catalog's
+        // existing read-only test seam, never a production suite or session.
+        guard Thread.isMainThread,
+              iTermUserDefaults.customSuiteName() == "iterm2-tests" else {
+            XCTFail("Profile catalog checks require main and the isolated ModernTests suite")
+            return
+        }
+        let language = try XCTUnwrap(Bundle.main.preferredLocalizations.first)
+        XCTAssertTrue(["en", "zh-Hans"].contains(language))
+        let englishLabel = "Prevent the system from sleeping while a session has this setting on."
+        let entry = try XCTUnwrap(ProfileBoolSettingCatalog.entries().first { $0.key == "Prevent Sleep" })
+        XCTAssertEqual(entry.label, language == "zh-Hans"
+                       ? "启用此设置的会话存在时，阻止系统睡眠。" : englishLabel)
+        let trigger = try XCTUnwrap(makeTrigger(key: "Prevent Sleep", on: true))
+        let dictionary = trigger.dictionaryValue()
+        let digest = trigger.digest
+        // The approved diagnostic exception is only the existing UI-derived
+        // setting name. The format, On/Off, raw key and stored action stay fixed.
+        let expected = "Set “\(entry.label)” to On"
+        // Warm the real per-instance cache on main, then use the same object on
+        // the background queue as the terminal's Foundation log formatter does.
+        XCTAssertEqual(trigger.description, expected)
+        let finished = expectation(description: "cached diagnostic")
+        DispatchQueue.global().async {
+            XCTAssertEqual(trigger.description, expected)
+            XCTAssertEqual(String(format: "Consider %@", trigger), "Consider " + expected)
+            XCTAssertEqual(trigger.dictionaryValue() as NSDictionary, dictionary as NSDictionary)
+            XCTAssertEqual(trigger.digest, digest)
+            finished.fulfill()
+        }
+        wait(for: [finished], timeout: 5)
+    }
+
+    func testOffAndMalformedParametersKeepOriginalDiagnosticFormat() throws {
+        let trigger = try XCTUnwrap(makeTrigger(key: "synthetic-unregistered-setting", on: false))
+        let finished = expectation(description: "off diagnostic")
+        DispatchQueue.global().async {
+            XCTAssertEqual(trigger.description, "Set “synthetic-unregistered-setting” to Off")
+            finished.fulfill()
+        }
+        wait(for: [finished], timeout: 5)
+        let malformed = try XCTUnwrap(makeTrigger(key: "", on: true))
+        XCTAssertEqual(malformed.description, "Set Profile Setting")
+    }
 }

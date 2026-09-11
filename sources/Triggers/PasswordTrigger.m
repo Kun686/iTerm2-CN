@@ -20,7 +20,7 @@ static NSString *PasswordTriggerPlaceholderString = @"Open Password Manager to U
 @implementation PasswordTrigger
 
 + (NSString *)title {
-    return @"Open Password Manager…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.passwordtrigger.open_password_manager.0c283969", nil, NSBundle.mainBundle, @"Open Password Manager…", @"Trigger action title.");
 }
 
 - (NSString *)description {
@@ -96,6 +96,11 @@ static NSString *PasswordTriggerPlaceholderString = @"Open Password Manager to U
     return [_accountNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
+- (NSArray *)objectsSortedByValueInDict:(NSDictionary *)dict {
+    // Match sortedAccountNames so localized labels cannot change saved keys.
+    return [[dict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+}
+
 - (NSInteger)indexForObject:(id)object {
     NSUInteger index = [[self sortedAccountNames] indexOfObject:object];
     if (index == NSNotFound) {
@@ -116,7 +121,9 @@ static NSString *PasswordTriggerPlaceholderString = @"Open Password Manager to U
     [self addUnlockToAccountNamesIfNeeded];
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
     for (NSString *name in _accountNames) {
-        result[name] = name;
+        result[name] = [name isEqual:PasswordTriggerPlaceholderString]
+            ? NSLocalizedStringWithDefaultValue(@"ui.triggers.passwordtrigger.open_password_manager_to_unlock.d7486d12", nil, NSBundle.mainBundle, @"Open Password Manager to Unlock", @"Password-trigger popup item. The dictionary key remains the stable persisted sentinel.")
+            : name;
     }
     return result;
 }

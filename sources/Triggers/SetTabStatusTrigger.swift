@@ -56,7 +56,7 @@ class SetTabStatusTrigger: Trigger, iTermColorSettable {
 
     // MARK: - Trigger overrides
 
-    override static var title: String { "Set Tab Status…" }
+    override static var title: String { String(localized: "ui.swift.triggers.settabstatustrigger.set_tab_status.c8a78b2f", defaultValue: "Set Tab Status…", bundle: .main, comment: "User-facing text in SetTabStatusTrigger.") }
 
     override func takesParameter() -> Bool { true }
 
@@ -101,15 +101,15 @@ class SetTabStatusTrigger: Trigger, iTermColorSettable {
 
     override func paramAttributedString() -> NSAttributedString? {
         let statusText = components.2
-        let text = statusText.isEmpty ? "(no status)" : statusText
+        let text = statusText.isEmpty ? String(localized: "ui.swift.triggers.settabstatustrigger.no_status.7bca9ad0", defaultValue: "(no status)", bundle: .main, comment: "User-facing text in SetTabStatusTrigger.") : statusText
         let result = NSMutableAttributedString(string: text, attributes: regularAttributes())
 
         if let dotColor = textColor {
-            result.append(NSAttributedString(string: "  Dot: ", attributes: regularAttributes()))
+            result.append(NSAttributedString(string: String(localized: "ui.swift.triggers.settabstatustrigger.dot.62ac35ee", defaultValue: "  Dot: ", bundle: .main, comment: "User-facing text in SetTabStatusTrigger."), attributes: regularAttributes()))
             appendColorSwatch(dotColor, to: result)
         }
         if let statusTextColor = backgroundColor {
-            result.append(NSAttributedString(string: "  Text: ", attributes: regularAttributes()))
+            result.append(NSAttributedString(string: String(localized: "ui.swift.triggers.settabstatustrigger.text.e44ba495", defaultValue: "  Text: ", bundle: .main, comment: "User-facing text in SetTabStatusTrigger."), attributes: regularAttributes()))
             appendColorSwatch(statusTextColor, to: result)
         }
         return result

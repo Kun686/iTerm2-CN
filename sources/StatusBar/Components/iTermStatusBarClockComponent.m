@@ -102,35 +102,35 @@ static NSString *const iTermStatusBarClockComponentSSHSyncTimeZoneKey = @"ssh_tz
 }
 
 - (NSString *)statusBarComponentShortDescription {
-    return @"Clock";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarclockcomponent.clock.93ff9273", nil, NSBundle.mainBundle, @"Clock", @"Status bar component name.");
 }
 
 - (NSString *)statusBarComponentDetailedDescription {
-    return @"Shows current date and time with a configurable format.";
+    return NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarclockcomponent.shows_current_date_and_time_with_a_configurable_format.0493e2b2", nil, NSBundle.mainBundle, @"Shows current date and time with a configurable format.", @"Status bar component description.");
 }
 
 - (NSArray<iTermStatusBarComponentKnob *> *)statusBarComponentKnobs {
     iTermStatusBarComponentKnob *formatKnob =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Date Format:"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarclockcomponent.date_format.a2c3d2e0", nil, NSBundle.mainBundle, @"Date Format:", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeText
-                                                   placeholder:@"Date Format (Unicode TR 35)"
+                                                   placeholder:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarclockcomponent.date_format_unicode_tr_35.8eb344dc", nil, NSBundle.mainBundle, @"Date Format (Unicode TR 35)", @"Status bar component setting placeholder.")
                                                   defaultValue:self.class.statusBarComponentDefaultKnobs[iTermStatusBarClockComponentFormatKey]
                                                            key:iTermStatusBarClockComponentFormatKey];
     formatKnob.helpURL = [NSURL URLWithString:@"https://iterm2.com/clock-status-bar-component-help"];
     iTermStatusBarComponentKnob *dateFormatIsTemplate =
-        [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Localize Date Format"
+        [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarclockcomponent.localize_date_format.4bcf7866", nil, NSBundle.mainBundle, @"Localize Date Format", @"Status bar component setting label.")
                                                           type:iTermStatusBarComponentKnobTypeCheckbox
                                                    placeholder:nil
                                                   defaultValue:@YES
                                                            key:iTermStatusBarClockComponentLocalizeKey];
     iTermStatusBarComponentKnob *syncKnob =
-    [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Show server time in SSH integration?"
+    [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarclockcomponent.show_server_time_in_ssh_integration.3ba57338", nil, NSBundle.mainBundle, @"Show server time in SSH integration?", @"Status bar component setting label.")
                                                       type:iTermStatusBarComponentKnobTypeCheckbox
                                                placeholder:nil
                                               defaultValue:@YES
                                                        key:iTermStatusBarClockComponentSSHSyncKey];
     iTermStatusBarComponentKnob *syncTimeZoneKnob =
-    [[iTermStatusBarComponentKnob alloc] initWithLabelText:@"Use server time zone in SSH integration?"
+    [[iTermStatusBarComponentKnob alloc] initWithLabelText:NSLocalizedStringWithDefaultValue(@"ui.statusbar.components.itermstatusbarclockcomponent.use_server_time_zone_in_ssh_integration.2f37fd26", nil, NSBundle.mainBundle, @"Use server time zone in SSH integration?", @"Status bar component setting label.")
                                                       type:iTermStatusBarComponentKnobTypeCheckbox
                                                placeholder:nil
                                               defaultValue:@YES

@@ -1,5 +1,186 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
+iTerm2-CN community localization:
+- Set explicit scrolling mode in two drag tests.
+- Run fork CI with the CN app build settings.
+- Translate the Composer help-button tooltip.
+- Localize last-use labels in history suggestions.
+- Translate relative times and byte-count labels
+  without changing calculations or history data.
+- Translate the hotkey-window reactivation help.
+- Keep live-test keys outside the repository;
+  clean up private configs on exit or timeout.
+- Translate the missing AI plugin status only
+  for display; preserve shared diagnostics.
+- Correct three Chinese settings-help quotes.
+- Localize Git file and line count labels without
+  changing the counts or repository state.
+- Localize tip actions and footer; preserve action
+  identifiers, shortcuts, and tip history.
+- Localize Shell Integration installation steps;
+  preserve commands and stage progression.
+- Preserve expression errors in API replies and
+  script logs; keep exported stats unchanged.
+- Localize the missing browser-name fallback;
+  preserve detected names and link targets.
+- Localize the browser toolbar's /dev/null help.
+- Preserve navigation, settings and source errors;
+  translate known reasons only in the error page.
+- Keep ad-block update errors and logs unchanged;
+  translate only the settings-page display copy.
+- Translate GPU status reasons only for display;
+  keep rendering decisions and diagnostics intact.
+- Localize job-list conjunctions in quit reasons
+  without changing job order or quit decisions.
+- Keep the original command-export fallback
+  filename when switching UI languages.
+- Keep the real Dynamic Profile Parent Name key
+  in translated hotkey migration instructions.
+- Keep password-trigger popup rows aligned with
+  saved account keys when translating Unlock.
+- Preserve stop/prompt trigger diagnostic text;
+  keep their action titles localized.
+- Show the active preferences file in manual
+  upload help, not the official app's file.
+- Localize Semantic History help while preserving
+  backreferences, variable names, and link targets.
+- Preserve settings-export failure diagnostics;
+  translate serialization errors for display.
+- Preserve AI provider names in shared errors;
+  translate the unknown name only for display.
+- Preserve the stored chat-fork title marker
+  across language changes, avoiding duplicate
+  suffixes without rewriting existing titles.
+- Preserve Cockpit status grouping and filter keys.
+  Translate only the missing-status display name,
+  never the status text reported by a session.
+- Keep plugin installer diagnostic names raw;
+  localize names only in error display text.
+- Localize built-in Toolbelt display names while
+  preserving actions, stored names and user tools.
+- Preserve trigger-editor input bindings while
+  translating regex, name, and job labels.
+- Localize Status Bar Advanced help text without
+  changing the original options or tooltip meaning.
+- Localize close-confirmation job lists without
+  changing process names or closing decisions.
+- Document the third-party Close Tab AX label
+  as a known untranslated accessibility name.
+- Keep download-finished diagnostics untranslated.
+- Localize Intel-only script errors at display
+  time while preserving Script Console history.
+- Preserve shared uv error fields and log text.
+- Localize uv download titles at display time.
+- Preserve script-import diagnostic messages.
+- Translate Python download status at display time.
+- Localize terminal tooltips at display time,
+  preserving their original diagnostic text.
+- Preserve Smart Selection and URL Handler log
+  titles while localizing failure notifications.
+- Preserve background-trigger diagnostic titles.
+- Keep localized Cancel actions from becoming
+  remembered warning choices.
+- Completes tab-group menu translations and
+  Password Manager placeholders and help text.
+- Keep legacy menu shortcuts working across UI
+  languages without rewriting saved parameters.
+- Keep profile-setting diagnostics in English,
+  except for the cached UI setting name.
+- This is an unofficial community localization
+  and is not affiliated with the official iTerm2
+  project.
+- Adds complete Simplified Chinese resources for
+  app-owned user interface text.
+- Adds Simplified Chinese, English, and Follow
+  System choices in General settings.
+- Language changes take effect after relaunch.
+- Keeps the CN language selector visible when
+  the Settings page resizes to its content.
+- CN builds disable Sparkle automatic updates.
+  Check for Updates opens the fork's GitHub
+  Releases page for manual updates.
+- Adds localization lint and language/update
+  policy tests.
+- Isolates update-policy tests from CN host
+  arguments and preserves existing overrides.
+- Localizes disclosure titles and explanations
+  in quit, migration, and diagnostic alerts.
+- Fits localized Profile labels and localizes
+  title preview samples without changing titles.
+- Pairs synthetic drag-test mouse events and
+  waits for native session cleanup between tests.
+- Localizes Advanced setting descriptions,
+  categories, and enum titles without changing
+  stored values. English terms and setting keys
+  remain searchable.
+- Applies the saved language before resolving
+  localized bundle metadata at startup.
+- Uses system locale inputs for CN shell locale
+  inference, independent of the UI language.
+  Locale selection and Profile rules are
+  unchanged.
+- Terminal emulation and terminal I/O behavior
+  are unchanged.
+- Keeps shared fork-failure diagnostics in
+  English in logs, terminal output, and the
+  notification body; its title is localized.
+- Preserves the in-memory transfer path marker
+  used by file actions, independent of UI
+  language.
+- Keeps shared SSH Integration transfer errors
+  unchanged in logs and completion callbacks.
+- Preserves shared SCP/terminal-download errors
+  and transfer-manager callback diagnostics.
+  Independent prompts and warnings are localized.
+- Preserves the SSH panel's default folder name
+  used for filesystem creation. Prompts and file
+  kinds stay localized; kind sorting uses the
+  displayed labels without changing file metadata.
+- Keeps SSH connection-closed and file-not-found
+  diagnostics unchanged in AI tool responses and
+  shared user notices. Other endpoint error
+  descriptions remain localized.
+- Keeps shared trigger diagnostics unchanged for
+  alerts, annotations, bells, output capture,
+  commands, text, directory, host, hyperlinks,
+  script functions, and titles. Import summaries
+  and unnamed-trigger fallbacks share that text;
+  independent titles and prompts stay localized.
+- Preserves shared bounce, mark, highlight,
+  password, and notification trigger diagnostics.
+  Popup labels remain localized without changing
+  numeric options, colors, or the unlock sentinel.
+- Keeps Untitled in workgroup trigger menus so
+  localization cannot change the implicit target.
+  Terminal and browser actions keep the original
+  selection algorithm and stored workgroup IDs.
+  Independent action titles remain localized.
+- Keeps SGR, named-mark, fold, injected-data,
+  user-variable, buffered-input, and workgroup-exit
+  trigger diagnostics unchanged. Independent
+  titles, prompts, and buffer menus stay localized.
+- Keeps terminal workgroup-entry diagnostics and
+  shared parameter-row fallbacks unchanged.
+  User-defined workgroup names are preserved.
+- Adds isolated browser-trigger localization checks
+  for stored parameters and terminal filtering.
+- Restoring the Show Tabs shortcut keeps its saved
+  menu parameter unchanged in either UI language.
+- Restores Toggle Setting selections after a UI
+  language change without rewriting saved
+  parameters.
+- CN uses the main application Bundle ID
+  com.kun686.iterm2-cn and its signing team's
+  matching Keychain access group.
+- Main preferences use the new Bundle ID.
+  Back up settings before using the existing
+  import/export tools; settings and protected
+  passwords are not automatically migrated.
+- Helper IDs, URL schemes, private preferences,
+  and Application Support paths remain shared
+  with upstream. Parallel use is not supported.
+  A new Bundle ID is not full data isolation.
+
 A note to beta users:
 An awful lot of features have been piling up here
 since the last release off the main branch was

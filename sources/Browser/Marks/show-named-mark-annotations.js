@@ -78,7 +78,7 @@
             word-wrap: break-word;
         `;
         collapsedView.textContent = mark.name;
-        collapsedView.title = 'Click to expand and edit name';
+        collapsedView.title = {{EXPAND_TOOLTIP_JSON}};
 
         // Create expanded view (input for name)
         var expandedView = document.createElement('div');
@@ -102,7 +102,7 @@
         var input = document.createElement('input');
         input.type = 'text';
         input.value = mark.name || '';
-        input.placeholder = 'Enter mark name';
+        input.placeholder = {{NAME_PLACEHOLDER_JSON}};
         input.style.cssText = `
             width: 100%;
             height: 30px;
@@ -123,7 +123,7 @@
         `;
 
         var saveButton = document.createElement('button');
-        saveButton.textContent = 'Save';
+        saveButton.textContent = {{SAVE_JSON}};
         saveButton.style.cssText = `
             padding: 4px 8px;
             font-size: 10px;
@@ -140,7 +140,7 @@
         `;
 
         var deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
+        deleteButton.textContent = {{DELETE_JSON}};
         deleteButton.style.cssText = `
             padding: 4px 8px;
             font-size: 10px;
@@ -157,7 +157,7 @@
         `;
 
         var collapseButton = document.createElement('button');
-        collapseButton.textContent = 'Close';
+        collapseButton.textContent = {{CLOSE_JSON}};
         collapseButton.style.cssText = `
             padding: 4px 8px;
             font-size: 10px;

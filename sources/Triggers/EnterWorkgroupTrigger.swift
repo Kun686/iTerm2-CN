@@ -16,7 +16,7 @@ import Foundation
 @objc(iTermEnterWorkgroupTrigger)
 class EnterWorkgroupTrigger: Trigger {
     override static var title: String {
-        return "Enter Workgroup…"
+        return String(localized: "ui.swift.triggers.enterworkgrouptrigger.enter_workgroup.c0c5d9bc", defaultValue: "Enter Workgroup…", bundle: .main, comment: "User-facing text in EnterWorkgroupTrigger.")
     }
 
     override var description: String {
@@ -84,6 +84,7 @@ class EnterWorkgroupTrigger: Trigger {
     override func menuItemsForPoupupButton() -> [AnyHashable: Any]? {
         var dict: [AnyHashable: Any] = [:]
         for wg in availableWorkgroups {
+            // This label's sort position selects the implicit action target.
             let label = wg.name.isEmpty ? "Untitled" : wg.name
             dict[wg.uniqueIdentifier] = label
         }

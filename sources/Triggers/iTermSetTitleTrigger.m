@@ -15,7 +15,7 @@
 
 + (NSString *)title
 {
-    return @"Set Title…";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermsettitletrigger.set_title.da667022", nil, NSBundle.mainBundle, @"Set Title…", @"Trigger action title.");
 }
 
 - (NSString *)description {
@@ -23,7 +23,7 @@
 }
 
 - (NSString *)triggerOptionalParameterPlaceholderWithInterpolation:(BOOL)interpolation {
-    return @"Enter new title";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermsettitletrigger.enter_new_title.02a2d812", nil, NSBundle.mainBundle, @"Enter new title", @"Trigger parameter placeholder.");
 }
 
 - (BOOL)isIdempotent {

@@ -236,7 +236,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSView *)fontPanelAccessory {
     NSButton *button = [[NSButton alloc] init];
-    button.title = @"Reset to System Font";
+    button.title = NSLocalizedStringWithDefaultValue(@"ui.statusbar.setup.itermstatusbarsetupviewcontroller.reset_to_system_font.90efbdae", nil, NSBundle.mainBundle, @"Reset to System Font", @"User-facing text in iTermStatusBarSetupViewController (fontPanelAccessory).");
     button.buttonType = NSButtonTypeMomentaryPushIn;
     button.bezelStyle = NSBezelStyleRounded;
     button.target = self;
@@ -281,10 +281,10 @@ NS_ASSUME_NONNULL_BEGIN
     _layout.advancedConfiguration.font = font;
 
     if ([font isEqual:[iTermStatusBarAdvancedConfiguration defaultFont]]) {
-        _fontLabel.stringValue = @"System Font";
+        _fontLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.statusbar.setup.itermstatusbarsetupviewcontroller.system_font.a8520e17", nil, NSBundle.mainBundle, @"System Font", @"User-facing text in iTermStatusBarSetupViewController (setFont:).");
         return;
     }
-    _fontLabel.stringValue = [NSString stringWithFormat:@"%@pt %@", @(font.pointSize), font.fontName];
+    _fontLabel.stringValue = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.statusbar.setup.itermstatusbarsetupviewcontroller.pt.ef687290", nil, NSBundle.mainBundle, @"%@pt %@", @"User-facing text in iTermStatusBarSetupViewController (stringValue)."), @(font.pointSize), font.fontName];
 }
 
 - (IBAction)ok:(id)sender {

@@ -87,8 +87,8 @@ struct iTermHistogramBarChart: View {
                                         Spacer()
                                     }
                                     VStack(alignment: .leading, spacing: 2) {
-                                        Text("Duration: \(bucket.range.lowerBound, specifier: "%.1f")µs–\(bucket.range.upperBound, specifier: "%.1f")µs")
-                                        Text("Count: \(bucket.y)")
+                                        Text(String(localized: "ui.swift.metrology.itermhistogramvisualizationview.duration_0_s_1_s.ce2fc9a6", defaultValue: "Duration: \(bucket.range.lowerBound, specifier: "%.1f")µs–\(bucket.range.upperBound, specifier: "%.1f")µs", bundle: .main, comment: "User-facing text in iTermHistogramVisualizationView."))
+                                        Text(String(localized: "ui.swift.metrology.itermhistogramvisualizationview.count_0.0342f8bc", defaultValue: "Count: \(bucket.y)", bundle: .main, comment: "User-facing text in iTermHistogramVisualizationView."))
                                     }
                                     .font(.caption)
                                     .padding(4)
@@ -132,7 +132,7 @@ struct iTermHistogramBarChart: View {
                     AxisGridLine()
                     AxisValueLabel {
                         if let µs = value.as(Double.self) {
-                            Text("\(µs, specifier: "%.0f")µs")
+                            Text(String(localized: "ui.swift.metrology.itermhistogramvisualizationview.0_s.e8e689a7", defaultValue: "\(µs, specifier: "%.0f")µs", bundle: .main, comment: "User-facing text in iTermHistogramVisualizationView."))
                         }
                     }
                 }

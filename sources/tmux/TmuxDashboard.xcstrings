@@ -10,6 +10,12 @@
             "state": "new",
             "value": "tmux Dashboard"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tmux 仪表盘"
+          }
         }
       }
     },
@@ -22,16 +28,29 @@
             "state": "new",
             "value": "Session"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话"
+          }
         }
       }
     },
     "11.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"11\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -46,6 +65,12 @@
             "state": "new",
             "value": "Attach"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连接"
+          }
         }
       }
     },
@@ -58,10 +83,17 @@
             "state": "new",
             "value": "Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
         }
       }
     },
     "39.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"39\";",
       "extractionState": "extracted_with_value",
       "localizations": {
@@ -70,16 +102,29 @@
             "state": "new",
             "value": "Text Cell"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Cell"
+          }
         }
       }
     },
     "75.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"75\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Text Cell"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Text Cell"
           }
         }
@@ -94,6 +139,12 @@
             "state": "new",
             "value": "Open in Windows"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在窗口中打开"
+          }
         }
       }
     },
@@ -105,6 +156,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Hide"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐藏"
           }
         }
       }
@@ -118,6 +175,12 @@
             "state": "new",
             "value": "Open in Windows"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在窗口中打开"
+          }
         }
       }
     },
@@ -129,6 +192,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Open in Tabs"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在标签页中打开"
           }
         }
       }
@@ -142,6 +211,12 @@
             "state": "new",
             "value": "Detach"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "断开"
+          }
         }
       }
     },
@@ -154,16 +229,29 @@
             "state": "new",
             "value": "Open dashboard when attaching if there are hidden windows"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连接时如果存在隐藏窗口则打开仪表盘"
+          }
         }
       }
     },
     "Zbp-7h-4Gi.title": {
+      "shouldTranslate": false,
       "comment": "Class = \"NSMenu\"; title = \"OtherViews\"; ObjectID = \"Zbp-7h-4Gi\";",
       "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "OtherViews"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "OtherViews"
           }
         }
@@ -177,6 +265,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Don’t open windows when attaching if there are at least this many windows:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连接时如果窗口数达到此数量则不打开窗口："
           }
         }
       }

@@ -130,7 +130,7 @@
 }
 
 - (NSString *)displayName {
-    return @"Buried Sessions";
+    return NSLocalizedStringWithDefaultValue(@"ui.api.itermsessiontabwindowoutlinedelegate.buried_sessions.3bc1ad71", nil, NSBundle.mainBundle, @"Buried Sessions", @"User-facing group name in the session, tab, and window outline.");
 }
 
 - (iTermVariableScope *)scope {

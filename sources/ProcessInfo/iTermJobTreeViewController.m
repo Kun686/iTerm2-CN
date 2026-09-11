@@ -142,7 +142,7 @@ static int gSignalsToList[] = {
         i = kDefaultSignal;
     }
     [self setStringValue:signalNames[i]];
-    [self setToolTip:[NSString stringWithFormat:@"SIG%@ (%d)", signalNames[i], i]];
+    [self setToolTip:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.sig_d.f9214465", nil, NSBundle.mainBundle, @"SIG%@ (%d)", @"User-facing text in iTermJobTreeViewController (setToolTip)."), signalNames[i], i]];
 }
 
 - (BOOL)isValid {
@@ -332,7 +332,7 @@ static int gSignalsToList[] = {
 }
 
 - (void)awakeFromNib {
-    kill_.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolPlay) accessibilityDescription:@"Clear"];
+    kill_.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolPlay) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.clear.83b12c22", nil, NSBundle.mainBundle, @"Clear", @"Accessibility description for the clear button.")];
     _outlineView.style = NSTableViewStyleInset;
     _outlineView.backgroundColor = [NSColor clearColor];
     if (!_useVisualEffectView) {
@@ -348,11 +348,11 @@ static int gSignalsToList[] = {
         }
     }
     NSImage *magnifyingGlass = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolMagnifyingglass)
-                                    accessibilityDescription:@"Inspect"];
+                                                accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.inspect.e0723a86", nil, NSBundle.mainBundle, @"Inspect", @"Accessibility description for the inspect button.")];
     _inspectButton = [NSButton buttonWithImage:magnifyingGlass target:self action:@selector(inspect:)];
     _inspectButton.bordered = NO;
     _inspectButton.imageScaling = NSImageScaleProportionallyDown;
-    _inspectButton.toolTip = @"Inspect the selected process";
+    _inspectButton.toolTip = NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.inspect_the_selected_process.6b87f93a", nil, NSBundle.mainBundle, @"Inspect the selected process", @"User-facing text in iTermJobTreeViewController (awakeFromNib).");
     _inspectButton.refusesFirstResponder = YES;
     [self.view addSubview:_inspectButton];
     [self updateKillButtonEnabled];
@@ -415,25 +415,25 @@ static int gSignalsToList[] = {
     }
     if ([self anySelectedProcessHasChildren]) {
         if (count == 1) {
-            description = @"one process and its children";
+            description = NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.one_process_and_its_children.f5d6e962", nil, NSBundle.mainBundle, @"one process and its children", @"Process count phrase embedded in a termination confirmation.");
         } else {
-            description = [NSString stringWithFormat:@"%@ processes and their children", @(count)];
+            description = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.processes_and_their_children.ba114a10", nil, NSBundle.mainBundle, @"%@ processes and their children", @"Process count phrase embedded in a termination confirmation. Preserve the count placeholder."), @(count)];
         }
     } else {
         if (count == 1) {
-            description = @"one process";
+            description = NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.one_process.09d93897", nil, NSBundle.mainBundle, @"one process", @"Process count phrase embedded in a termination confirmation.");
         } else {
-            description = [NSString stringWithFormat:@"%@ processes", @(count)];
+            description = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.processes.c53402d8", nil, NSBundle.mainBundle, @"%@ processes", @"Process count phrase embedded in a termination confirmation. Preserve the count placeholder."), @(count)];
         }
     }
 
     const iTermWarningSelection selection =
-    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"Are you sure? This may terminate %@.", description]
-                               actions:@[ @"OK", @"Cancel"]
+    [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.are_you_sure_this_may_terminate.a772ba0b", nil, NSBundle.mainBundle, @"Are you sure? This may terminate %@.", @"User-facing text in iTermJobTreeViewController (showWarningWithTitle)."), description]
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermJobTreeViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing action label in iTermJobTreeViewController (actions).")]
                              accessory:nil
                             identifier:@"NoSyncSuppressSendSignal"
                            silenceable:kiTermWarningTypePermanentlySilenceable
-                               heading:@"Confirmation Needed"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.confirmation_needed.f4418810", nil, NSBundle.mainBundle, @"Confirmation Needed", @"User-facing text in iTermJobTreeViewController (heading).")
                                 window:self.view.window];
     return selection == kiTermWarningSelection0;
 }
@@ -772,7 +772,11 @@ static int gSignalsToList[] = {
     const BOOL monitored = (isJob && info.pid &&
                             [[iTermJobTerminationMonitor sharedInstance] isMonitoringProcessID:info.pid]);
     if (isJob) {
-        string = info.fullName ?: @"(terminated)";
+        string = info.fullName ?: NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.terminated.ea15d227",
+                                                                     nil,
+                                                                     NSBundle.mainBundle,
+                                                                     @"(terminated)",
+                                                                     @"Fallback process name after a process terminates.");
         NSImage *rawImage = [_graphicSource imageForJobName:info.name];
         if (rawImage) {
             image = [NSImage imageWithSize:rawImage.size flipped:NO drawingHandler:^BOOL(NSRect dstRect) {
@@ -817,13 +821,13 @@ static int gSignalsToList[] = {
     }
     // Hovering any cell in the row reveals the full, untruncated command (the
     // visible text is clipped to the column width and capped at 256 chars).
-    cell.toolTip = info.fullName ?: @"(terminated)";
+    cell.toolTip = info.fullName ?: NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.terminated.ea15d227", nil, NSBundle.mainBundle, @"(terminated)", @"User-facing text in iTermJobTreeViewController (outlineView:viewForTableColumn:item:).");
     return cell;
 }
 
 - (NSAttributedString *)monitorIndicatorPrefixWithFont:(NSFont *)font {
     NSImage *bell = [NSImage it_imageForSymbolName:@"bell"
-                            accessibilityDescription:@"Will notify when this job terminates"];
+                                                           accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.processinfo.itermjobtreeviewcontroller.will_notify_when_this_job_terminates.c0700b5b", nil, NSBundle.mainBundle, @"Will notify when this job terminates", @"Accessibility description for a job termination notification indicator.")];
     if (!bell) {
         return [[NSAttributedString alloc] initWithString:@""];
     }
@@ -981,4 +985,3 @@ static int gSignalsToList[] = {
     return NO;
 }
 @end
-

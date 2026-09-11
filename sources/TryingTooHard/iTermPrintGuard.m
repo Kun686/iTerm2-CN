@@ -36,12 +36,12 @@
     }
     if (willPrint && [self haveTriedToPrintRecently]) {
         iTermWarningSelection selection =
-        [iTermWarning showWarningWithTitle:@"There's a lot of printing going on. Want to keep allowing it?"
-                                   actions:@[ @"Allow", @"Disable Temporarily", @"Disable Permanently" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.tryingtoohard.itermprintguard.there_s_a_lot_of_printing_going_on.1e732eb3", nil, NSBundle.mainBundle, @"There's a lot of printing going on. Want to keep allowing it?", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.tryingtoohard.itermprintguard.allow.e213c161", nil, NSBundle.mainBundle, @"Allow", @"User-facing action label in iTermPrintGuard (actions)."), NSLocalizedStringWithDefaultValue(@"ui.tryingtoohard.itermprintguard.disable_temporarily.83810244", nil, NSBundle.mainBundle, @"Disable Temporarily", @"User-facing action label in iTermPrintGuard (actions)."), NSLocalizedStringWithDefaultValue(@"ui.tryingtoohard.itermprintguard.disable_permanently.ceecb56e", nil, NSBundle.mainBundle, @"Disable Permanently", @"User-facing action label in iTermPrintGuard (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncAllowPrinting"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Allow Printing?"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.tryingtoohard.itermprintguard.allow_printing.527be480", nil, NSBundle.mainBundle, @"Allow Printing?", @"User-facing text in iTermPrintGuard (heading).")
                                     window:window];
         switch (selection) {
             case kiTermWarningSelection0:

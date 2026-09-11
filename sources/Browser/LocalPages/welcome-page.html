@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to iTerm2 Browser</title>
+    <title>{{PAGE_TITLE}}</title>
     <style>
         {{COMMON_CSS}}
         
@@ -233,13 +233,13 @@
 <body>
     <div class="container">
         <div class="welcome-header">
-            <h1 class="welcome-title">Welcome Back</h1>
-            <p class="welcome-subtitle">Pick up where you left off</p>
+            <h1 class="welcome-title">{{WELCOME_BACK}}</h1>
+            <p class="welcome-subtitle">{{WELCOME_SUBTITLE}}</p>
         </div>
         
         <div class="section-header">
-            <h2 class="section-title">Top Sites</h2>
-            <button class="refresh-button" onclick="refreshTopSites()">Refresh</button>
+            <h2 class="section-title">{{TOP_SITES}}</h2>
+            <button class="refresh-button" onclick="refreshTopSites()">{{REFRESH}}</button>
         </div>
         
         <div id="top-sites-list">
@@ -247,23 +247,23 @@
         </div>
         
         <div class="quick-links">
-            <h3 class="quick-links-title">Quick Actions</h3>
+            <h3 class="quick-links-title">{{QUICK_ACTIONS}}</h3>
             <div class="quick-links-grid">
                 <a href="iterm2-about:bookmarks" class="quick-link">
                     <span>📚</span>
-                    <span>Bookmarks</span>
+                    <span>{{BOOKMARKS}}</span>
                 </a>
                 <a href="iterm2-about:history" class="quick-link">
                     <span>📜</span>
-                    <span>History</span>
+                    <span>{{HISTORY}}</span>
                 </a>
                 <a href="iterm2-about:settings" class="quick-link">
                     <span>⚙️</span>
-                    <span>Settings</span>
+                    <span>{{SETTINGS}}</span>
                 </a>
                 <a href="iterm2-about:permissions" class="quick-link">
                     <span>🔒</span>
-                    <span>Permissions</span>
+                    <span>{{PERMISSIONS}}</span>
                 </a>
             </div>
         </div>

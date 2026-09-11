@@ -330,12 +330,12 @@ static NSString *const kSnippetsDiscardedFallbackBackupKey = @"NoSyncSnippetsDis
         } else {
             [[iTermUserDefaults userDefaults] removeObjectForKey:kSnippetsFallbackPredecessorDigestKey];
         }
-        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:@"There was a problem saving snippets to “%@”.\n\nThe error was:\n%@", path, error.localizedDescription]
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.snippets.itermsnippetsmodel.there_was_a_problem_saving_snippets_to_the.febdbdca", nil, NSBundle.mainBundle, @"There was a problem saving snippets to “%@”.\n\nThe error was:\n%@", @"User-facing text in iTermSnippetsModel (showWarningWithTitle)."), path, error.localizedDescription]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.snippets.itermsnippetsmodel.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermSnippetsModel (actions).") ]
                                  accessory:nil
                                 identifier:@"NoSyncWriteSnippetsFailed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Problem Saving Snippets"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.snippets.itermsnippetsmodel.problem_saving_snippets.e454a3ec", nil, NSBundle.mainBundle, @"Problem Saving Snippets", @"User-facing text in iTermSnippetsModel (heading).")
                                     window:nil];
     } else {
         [[iTermUserDefaults userDefaults] removeObjectForKey:kPreferenceKeySnippets];

@@ -21,11 +21,11 @@ enum WorkgroupPresets {
     static let all: [WorkgroupPreset] = [
         WorkgroupPreset(
             identifier: "codingAgentPlusDiff",
-            displayName: "Coding Agent + Diff",
+            displayName: String(localized: "ui.swift.workgroups.workgrouppresets.coding_agent_diff.18cb8f77", defaultValue: "Coding Agent + Diff", bundle: .main, comment: "User-facing text in WorkgroupPresets."),
             build: buildCodingAgentPlusDiff),
         WorkgroupPreset(
             identifier: "codingAgentPlusDiffPlusCodeReview",
-            displayName: "Coding Agent + Diff + Code Review",
+            displayName: String(localized: "ui.swift.workgroups.workgrouppresets.coding_agent_diff_code_review.98421620", defaultValue: "Coding Agent + Diff + Code Review", bundle: .main, comment: "User-facing text in WorkgroupPresets."),
             build: { buildCodingAgentPlusDiffPlusCodeReview() })
     ]
 

@@ -132,7 +132,7 @@ NSObject *RLogRedact(id full, id redacted);
     if (!(condition)) { \
       DLog(@"Crashing because %s from:\n%@", #condition, [NSThread callStackSymbols]); \
       if (TurnOffDebugLoggingSilently()) { \
-        NSRunAlertPanel(@"Critical Error", @"A critical error occurred and a debug log was created. Please send /tmp/debuglog.txt to the developers.", @"OK", nil, nil); \
+        NSRunAlertPanel(NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.critical_error.f4bd27ae", nil, NSBundle.mainBundle, @"Critical Error", @"Critical error alert title."), NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.a_critical_error_occurred_and_a_debug_log_was_created.85204c2b", nil, NSBundle.mainBundle, @"A critical error occurred and a debug log was created. Please send /tmp/debuglog.txt to the developers.", @"Critical error alert explanation."), NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"Critical error alert button."), nil, nil); \
       } \
       assert(NO, "ITAssert: " #condition); \
     } \
@@ -160,9 +160,9 @@ NSObject *RLogRedact(id full, id redacted);
       if (TurnOffDebugLoggingSilently()) { \
         dispatch_async(dispatch_get_main_queue(), ^{ \
           NSAlert *alert = ITCriticalErrorCreateAlert; \
-          alert.messageText = @"Critical Error"; \
-          alert.informativeText =  @"A critical error occurred and a debug log was created. Please send /tmp/debuglog.txt to the developers."; \
-          [alert addButtonWithTitle:@"OK"]; \
+          alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.critical_error.f4bd27ae", nil, NSBundle.mainBundle, @"Critical Error", @"Critical error alert title."); \
+          alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.a_critical_error_occurred_and_a_debug_log_was_created.85204c2b", nil, NSBundle.mainBundle, @"A critical error occurred and a debug log was created. Please send /tmp/debuglog.txt to the developers.", @"Critical error alert explanation."); \
+          [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.logging.debuglogging.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"Critical error alert button.")]; \
           [alert runModal]; \
         }); \
       } \

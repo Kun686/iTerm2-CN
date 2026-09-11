@@ -231,7 +231,7 @@ class CommandInfoViewController: NSViewController {
         if let codeNumber = _returnCode.maybeValue {
             commandDidFinish(returnCode: codeNumber.intValue)
         } else {
-            returnCode.stringValue = "Still Running"
+            returnCode.stringValue = String(localized: "ui.swift.terminalview.commandinfoviewcontroller.still_running.96cbd115", defaultValue: "Still Running", bundle: .main, comment: "User-facing text in CommandInfoViewController.")
             if _startDate != nil {
                 timer = Timer.scheduledTimer(withTimeInterval: 0.017, repeats: true) { [weak self] timer in
                     self?.timerDidFire()
@@ -244,12 +244,21 @@ class CommandInfoViewController: NSViewController {
         if let _runningTime {
             runningTime.stringValue = String(_runningTime.formattedHMS)
         } else {
-            runningTime.stringValue = "Unknown"
+            runningTime.stringValue = String(localized: "ui.swift.terminalview.commandinfoviewcontroller.unknown.b764cdc0", defaultValue: "Unknown", bundle: .main, comment: "User-facing text in CommandInfoViewController.")
         }
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         let formattedLines = numberFormatter.string(from: NSNumber(value: _lines)) ?? "\(_lines)"
-        output.stringValue = NSString.stringWithHumanReadableSize(UInt64(_size)) as String + " (\(formattedLines) line\(_lines != 1 ? "s" : ""))"
+        let formattedSize = NSString.stringWithHumanReadableSize(UInt64(_size)) as String
+        output.stringValue = _lines != 1
+            ? String(localized: "ui.terminal.command_info.output.multiple_lines",
+                     defaultValue: "\(formattedSize) (\(formattedLines) lines)",
+                     bundle: .main,
+                     comment: "Command output size and plural line count.")
+            : String(localized: "ui.terminal.command_info.output.one_line",
+                     defaultValue: "\(formattedSize) (\(formattedLines) line)",
+                     bundle: .main,
+                     comment: "Command output size and singular line count.")
         copyOutput.isEnabled = false
         progressIndicator.isHidden = false
         _outputProgress.addObserver(owner: self, queue: .main) { [weak self] progress in
@@ -261,7 +270,12 @@ class CommandInfoViewController: NSViewController {
             }
         }
         if let _startDate {
-            startedAt.stringValue = "Started at " + formattedDate(_startDate)
+            startedAt.stringValue = String(
+                localized: "ui.terminal.command_info.started_at",
+                defaultValue: "Started at \(formattedDate(_startDate))",
+                bundle: .main,
+                comment: "Introduces the localized date and time when a command started."
+            )
         } else {
             startedAtStackView.isHidden = true
             stackView.removeArrangedSubview(startedAtStackView)
@@ -278,7 +292,7 @@ class CommandInfoViewController: NSViewController {
                                                             locale: .current)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy"
-        return "\(timeFormatter.string(from: date)) on \(dateFormatter.string(from: date))"
+        return String(localized: "ui.swift.terminalview.commandinfoviewcontroller.0_on_1.9c00c3d9", defaultValue: "\(timeFormatter.string(from: date)) on \(dateFormatter.string(from: date))", bundle: .main, comment: "User-facing text in CommandInfoViewController.")
     }
 
     private func updateOutputProgress(_ progress: Double) {
@@ -335,11 +349,11 @@ class CommandInfoViewController: NSViewController {
                              event: NSEvent,
                              view: NSView) {
         let menu = SimpleContextMenu()
-        menu.addItem(title: "Add Command as Snippet") {
+        menu.addItem(title: String(localized: "ui.swift.terminalview.commandinfoviewcontroller.add_command_as_snippet.1d7e8a18", defaultValue: "Add Command as Snippet", bundle: .main, comment: "User-facing text in CommandInfoViewController.")) {
             let snippet = iTermSnippet(title: command, value: command, guid: UUID().uuidString, tags: [], escaping: .none, version: iTermSnippet.currentVersion())
             iTermSnippetsModel.sharedInstance().addSnippet(snippet)
             if let window = view.window {
-                ToastWindowController.showToast(withMessage: "Snippet Added",
+                ToastWindowController.showToast(withMessage: String(localized: "ui.swift.terminalview.commandinfoviewcontroller.snippet_added.0a54b0a6", defaultValue: "Snippet Added", bundle: .main, comment: "User-facing text in CommandInfoViewController."),
                                                 duration: 1,
                                                 screenCoordinate: window.convertPoint(toScreen: event.locationInWindow), pointSize: 12.0)
             }
@@ -363,10 +377,10 @@ class CommandInfoViewController: NSViewController {
             return
         }
 
-        menu.addItem(title: "Copy Command URL to Clipboard") {
+        menu.addItem(title: String(localized: "ui.swift.terminalview.commandinfoviewcontroller.copy_command_url_to_clipboard.f165a68f", defaultValue: "Copy Command URL to Clipboard", bundle: .main, comment: "User-facing text in CommandInfoViewController.")) {
             Self.copyURL(url)
         }
-        menu.addItem(title: "Open Share Sheet…") {
+        menu.addItem(title: String(localized: "ui.swift.terminalview.commandinfoviewcontroller.open_share_sheet.9f9fb3b0", defaultValue: "Open Share Sheet…", bundle: .main, comment: "User-facing text in CommandInfoViewController.")) {
             let viewRect = NSRect(origin: event.locationInWindow, size: .zero)
             let picker = NSSharingServicePicker(items: [url])
             picker.show(relativeTo: viewRect, of: view, preferredEdge: .minY)

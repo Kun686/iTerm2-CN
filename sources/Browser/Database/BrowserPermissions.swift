@@ -18,17 +18,17 @@ enum BrowserPermissionType: String, CaseIterable, Hashable {
     var displayName: String {
         switch self {
         case .notification:
-            return "Notifications"
+            return String(localized: "ui.swift.browser.database.browserpermissions.notifications.78801183", defaultValue: "Notifications", bundle: .main, comment: "User-facing text in BrowserPermissions.")
         case .camera:
-            return "Camera"
+            return String(localized: "ui.swift.browser.database.browserpermissions.camera.03494b0d", defaultValue: "Camera", bundle: .main, comment: "User-facing text in BrowserPermissions.")
         case .microphone:
-            return "Microphone"
+            return String(localized: "ui.swift.browser.database.browserpermissions.microphone.186352a8", defaultValue: "Microphone", bundle: .main, comment: "User-facing text in BrowserPermissions.")
         case .cameraAndMicrophone:
-            return "Camera and Microphone"
+            return String(localized: "ui.swift.browser.database.browserpermissions.camera_and_microphone.43f95e4a", defaultValue: "Camera and Microphone", bundle: .main, comment: "User-facing text in BrowserPermissions.")
         case .geolocation:
-            return "Location"
+            return String(localized: "ui.swift.browser.database.browserpermissions.location.15b61974", defaultValue: "Location", bundle: .main, comment: "User-facing text in BrowserPermissions.")
         case .audioPlayback:
-            return "Audio Playback"
+            return String(localized: "ui.swift.browser.database.browserpermissions.audio_playback.5f52387f", defaultValue: "Audio Playback", bundle: .main, comment: "User-facing text in BrowserPermissions.")
         }
     }
 }
@@ -40,9 +40,9 @@ enum BrowserPermissionDecision: String, CaseIterable {
     var displayName: String {
         switch self {
         case .granted:
-            return "Allowed"
+            return String(localized: "ui.swift.browser.database.browserpermissions.allowed.1bb201d1", defaultValue: "Allowed", bundle: .main, comment: "User-facing text in BrowserPermissions.")
         case .denied:
-            return "Blocked"
+            return String(localized: "ui.swift.browser.database.browserpermissions.blocked.18f2a094", defaultValue: "Blocked", bundle: .main, comment: "User-facing text in BrowserPermissions.")
         }
     }
 }

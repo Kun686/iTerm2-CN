@@ -13,11 +13,11 @@
 @implementation iTermShellPromptTrigger
 
 + (NSString *)title {
-    return @"Prompt Detected";
+    return NSLocalizedStringWithDefaultValue(@"ui.triggers.itermshellprompttrigger.prompt_detected.138fc2a1", nil, NSBundle.mainBundle, @"Prompt Detected", @"Trigger action title.");
 }
 
 - (NSString *)description {
-    return [iTermShellPromptTrigger title];
+    return @"Prompt Detected";
 }
 
 - (BOOL)takesParameter {

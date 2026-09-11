@@ -103,7 +103,7 @@
 
     {
         NSImage *image = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolMagnifyingglass)
-                                   accessibilityDescription:@"Search icon"];
+                                                        accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.openquickly.itermopenquicklywindowcontroller.search_icon.edfdb08d", nil, NSBundle.mainBundle, @"Search icon", @"Accessibility description for the search icon.")];
         NSImageSymbolConfiguration *config =
         [NSImageSymbolConfiguration configurationWithPointSize:21
                                                         weight:NSFontWeightRegular];
@@ -114,7 +114,7 @@
         [NSImageSymbolConfiguration configurationWithPointSize:14
                                                         weight:NSFontWeightRegular];
         NSImage *image = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolXmarkCircleFill)
-                                   accessibilityDescription:@"Clear search query"];
+                                                       accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.openquickly.itermopenquicklywindowcontroller.clear_search_query.e35d6b7a", nil, NSBundle.mainBundle, @"Clear search query", @"Accessibility description for the clear-search button.")];
         [_xButton setImage:[image imageWithSymbolConfiguration:config]];
         NSRect frame = _xButton.frame;
         const CGFloat delta = 2;
@@ -493,9 +493,9 @@
                                                          window:nil];
                     } else {
                         NSAlert *alert = [[NSAlert alloc] init];
-                        [alert setMessageText:@"Function Call Result"];
-                        [alert setInformativeText:[NSString stringWithFormat:@"%@ returned:\n%@", item.identifier, [value description]]];
-                        [alert addButtonWithTitle:@"OK"];
+                        [alert setMessageText:NSLocalizedStringWithDefaultValue(@"ui.openquickly.itermopenquicklywindowcontroller.function_call_result.603be702", nil, NSBundle.mainBundle, @"Function Call Result", @"User-facing text in iTermOpenQuicklyWindowController (source UI).")];
+                        [alert setInformativeText:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.openquickly.itermopenquicklywindowcontroller.returned.9fb18637", nil, NSBundle.mainBundle, @"%@ returned:\n%@", @"User-facing text in iTermOpenQuicklyWindowController (setInformativeText)."), item.identifier, [value description]]];
+                        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.openquickly.itermopenquicklywindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermOpenQuicklyWindowController (source UI).")];
                         [alert runModal];
                     }
                 }];
@@ -552,7 +552,7 @@
     result.imageView.image = item.icon;
 
     result.textField.attributedStringValue =
-        item.title ?: [[NSAttributedString alloc] initWithString:@"Untitled" attributes:@{}];
+        item.title ?: [[NSAttributedString alloc] initWithString:NSLocalizedStringWithDefaultValue(@"ui.openquickly.itermopenquicklywindowcontroller.untitled.f59ab8d1", nil, NSBundle.mainBundle, @"Untitled", @"User-facing text in iTermOpenQuicklyWindowController (tableView:viewForTableColumn:row:).") attributes:@{}];
     [result.textField.cell setLineBreakMode:NSLineBreakByTruncatingTail];
     if (item.detail) {
         result.detailTextField.attributedStringValue = item.detail;

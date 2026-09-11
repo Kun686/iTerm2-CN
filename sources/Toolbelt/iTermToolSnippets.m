@@ -118,13 +118,13 @@ static NSButton *iTermToolSnippetsNewButton(NSString *imageName, NSString *title
 - (instancetype)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _icon = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolTextBubbleFill) accessibilityDescription:@"Snippet icon"];
-        _folderIcon = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolFolderFill) accessibilityDescription:@"Folder icon"];
-        _applyButton = iTermToolSnippetsNewButton(@"play", @"Send", self, @selector(apply:), frame);
-        _addButton = iTermToolSnippetsNewButton(@"plus", @"Add", self, @selector(add:), frame);
-        _removeButton = iTermToolSnippetsNewButton(@"minus", @"Remove", self, @selector(remove:), frame);
-        _editButton = iTermToolSnippetsNewButton(@"square.and.pencil", @"Edit", self, @selector(edit:), frame);
-        _advancedPasteButton = iTermToolSnippetsNewButton(@"rectangle.and.pencil.and.ellipsis", @"Open in Advanced Paste", self, @selector(openInAdvancedPaste:), frame);
+        _icon = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolTextBubbleFill) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolsnippets.snippet_icon.4e468432", nil, NSBundle.mainBundle, @"Snippet icon", @"Accessibility description for a snippet icon.")];
+        _folderIcon = [NSImage imageWithSystemSymbolName:SFSymbolGetString(SFSymbolFolderFill) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolsnippets.folder_icon.3836e797", nil, NSBundle.mainBundle, @"Folder icon", @"Accessibility description for a folder icon.")];
+        _applyButton = iTermToolSnippetsNewButton(@"play", NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolsnippets.send.f6f4688f", nil, NSBundle.mainBundle, @"Send", @"Accessibility label for the Send Snippet button."), self, @selector(apply:), frame);
+        _addButton = iTermToolSnippetsNewButton(@"plus", NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolsnippets.add.9fd728c6", nil, NSBundle.mainBundle, @"Add", @"Accessibility label for the Add Snippet button."), self, @selector(add:), frame);
+        _removeButton = iTermToolSnippetsNewButton(@"minus", NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolsnippets.remove.c3812fc4", nil, NSBundle.mainBundle, @"Remove", @"Accessibility label for the Remove Snippet button."), self, @selector(remove:), frame);
+        _editButton = iTermToolSnippetsNewButton(@"square.and.pencil", NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolsnippets.edit.464c4ffd", nil, NSBundle.mainBundle, @"Edit", @"Accessibility label for the Edit Snippet button."), self, @selector(edit:), frame);
+        _advancedPasteButton = iTermToolSnippetsNewButton(@"rectangle.and.pencil.and.ellipsis", NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolsnippets.open_in_advanced_paste.129127ec", nil, NSBundle.mainBundle, @"Open in Advanced Paste", @"Accessibility label for the Advanced Paste button."), self, @selector(openInAdvancedPaste:), frame);
         [self addSubview:_advancedPasteButton];
         [self addSubview:_applyButton];
         [self addSubview:_addButton];
@@ -565,7 +565,7 @@ static NSButton *iTermToolSnippetsNewButton(NSString *imageName, NSString *title
     iTermToolWrapper *wrapper = self.toolWrapper;
     switch (action) {
         case iTermToolSnippetsActionSend: {
-            iTermAction *action = [[iTermAction alloc] initWithTitle:@"Send Snippet"
+            iTermAction *action = [[iTermAction alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.itermtoolsnippets.send_snippet.9edb9820", nil, NSBundle.mainBundle, @"Send Snippet", @"User-facing text in iTermToolSnippets (initWithTitle).")
                                                               action:KEY_ACTION_SEND_SNIPPET
                                                            parameter:snippet.actionKey
                                                             escaping:snippet.escaping

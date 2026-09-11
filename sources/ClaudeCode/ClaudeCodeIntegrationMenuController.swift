@@ -40,14 +40,11 @@ final class ClaudeCodeIntegrationMenuController: NSObject {
 
     @objc func uninstall(_ sender: Any?) {
         let confirm = NSAlert()
-        confirm.messageText = "Uninstall Claude Code Integration?"
-        confirm.informativeText = "This removes the cc-status hook from "
-            + "~/.claude/settings.json, the Claude Code workgroup from your "
-            + "settings, and the Enter/Exit Workgroup triggers from every "
-            + "profile. You can reinstall any time using iTerm2 > Install Claude Code Integration."
+        confirm.messageText = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.uninstall_claude_code_integration.bb98cf97", defaultValue: "Uninstall Claude Code Integration?", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
+        confirm.informativeText = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.this_removes_the_cc_status_hook_from_claude.4226d9b8", defaultValue: "This removes the cc-status hook from ~/.claude/settings.json, the Claude Code workgroup from your settings, and the Enter/Exit Workgroup triggers from every profile. You can reinstall any time using iTerm2 > Install Claude Code Integration.", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
         confirm.alertStyle = .warning
-        confirm.addButton(withTitle: "Uninstall")
-        confirm.addButton(withTitle: "Cancel")
+        confirm.addButton(withTitle: String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.uninstall.fe199528", defaultValue: "Uninstall", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController."))
+        confirm.addButton(withTitle: String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController."))
         guard confirm.runModal() == .alertFirstButtonReturn else { return }
 
         // Hooks first — they're the only step that can fail (disk).
@@ -61,28 +58,22 @@ final class ClaudeCodeIntegrationMenuController: NSObject {
             let detail: String
             switch hookResult {
             case .unreadable:
-                detail = "Could not read ~/.claude/settings.json — check "
-                    + "the file\u{2019}s permissions."
+                detail = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.could_not_read_claude_settings_json_check_the.787bff90", defaultValue: "Could not read ~/.claude/settings.json — check the file’s permissions.", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
             case .malformed:
-                detail = "~/.claude/settings.json couldn\u{2019}t be parsed "
-                    + "as JSON. Open it in a text editor and check it for "
-                    + "syntax errors."
+                detail = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.claude_settings_json_couldn_t_be_parsed_as.b6b30bdd", defaultValue: "~/.claude/settings.json couldn’t be parsed as JSON. Open it in a text editor and check it for syntax errors.", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
             case .writeFailed:
-                detail = "Could not write to ~/.claude/settings.json — "
-                    + "check the file\u{2019}s permissions."
+                detail = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.could_not_write_to_claude_settings_json_check.8931206d", defaultValue: "Could not write to ~/.claude/settings.json — check the file’s permissions.", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
             case .success:
                 detail = ""  // unreachable; covered by outer guard
             @unknown default:
                 detail = ""
             }
             let failure = NSAlert()
-            failure.messageText = "Couldn\u{2019}t Remove Hooks"
-            failure.informativeText = "\(detail) Continue removing the "
-                + "workgroup and triggers anyway? cc-status will keep "
-                + "running until you fix the underlying issue and try again."
+            failure.messageText = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.couldn_t_remove_hooks.a676ac9d", defaultValue: "Couldn\u{2019}t Remove Hooks", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
+            failure.informativeText = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.0_continue_removing_the_workgroup_and_triggers_anyway.a9eccd35", defaultValue: "\(detail) Continue removing the workgroup and triggers anyway? cc-status will keep running until you fix the underlying issue and try again.", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
             failure.alertStyle = .warning
-            failure.addButton(withTitle: "Continue")
-            failure.addButton(withTitle: "Cancel")
+            failure.addButton(withTitle: String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.continue.31fbef16", defaultValue: "Continue", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController."))
+            failure.addButton(withTitle: String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController."))
             guard failure.runModal() == .alertFirstButtonReturn else { return }
         }
 
@@ -101,12 +92,10 @@ final class ClaudeCodeIntegrationMenuController: NSObject {
         // to offer).
         if iTermAPIHelper.isEnabled() {
             let apiAlert = NSAlert()
-            apiAlert.messageText = "Disable the Python API?"
-            apiAlert.informativeText = "The installer enabled iTerm2\u{2019}s "
-                + "Python API. Other scripts or integrations may be using "
-                + "it now. Leave it enabled, or turn it off?"
-            apiAlert.addButton(withTitle: "Leave Enabled")
-            apiAlert.addButton(withTitle: "Disable")
+            apiAlert.messageText = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.disable_the_python_api.ef671576", defaultValue: "Disable the Python API?", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
+            apiAlert.informativeText = String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.the_installer_enabled_iterm2_s_python_api_other.1840cf46", defaultValue: "The installer enabled iTerm2’s Python API. Other scripts or integrations may be using it now. Leave it enabled, or turn it off?", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController.")
+            apiAlert.addButton(withTitle: String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.leave_enabled.2350465f", defaultValue: "Leave Enabled", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController."))
+            apiAlert.addButton(withTitle: String(localized: "ui.swift.claudecode.claudecodeintegrationmenucontroller.disable.b7e3e4aa", defaultValue: "Disable", bundle: .main, comment: "User-facing text in ClaudeCodeIntegrationMenuController."))
             if apiAlert.runModal() == .alertSecondButtonReturn {
                 iTermAPIHelper.setEnabled(false)
             }

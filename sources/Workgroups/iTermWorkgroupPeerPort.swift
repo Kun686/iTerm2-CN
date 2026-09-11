@@ -91,7 +91,7 @@ final class iTermWorkgroupPeerPort: PTYSessionPeerPort {
         self.codeReviewSessionCount = codeReviewSessionCount
         self.peerMembers = peerConfigs.map { cfg in
             (identifier: cfg.uniqueIdentifier,
-             label: cfg.displayName.isEmpty ? "Peer" : cfg.displayName,
+             label: cfg.displayName.isEmpty ? String(localized: "ui.swift.workgroups.itermworkgrouppeerport.peer.f8e77246", defaultValue: "Peer", bundle: .main, comment: "User-facing text in iTermWorkgroupPeerPort.") : cfg.displayName,
              shortcut: cfg.peerSwitchShortcut)
         }
         self.leaderScope = leaderScope

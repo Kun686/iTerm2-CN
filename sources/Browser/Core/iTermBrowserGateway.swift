@@ -64,13 +64,14 @@ class iTermBrowserGateway: NSObject {
     @objc(didLocateBundleManually:)
     static func didLocateBundleManually(_ url: URL) -> String? {
         guard let bundle = Bundle(url: url) else {
-            return "The file at \(url.path) is not a valid app bundle."
+            return String(localized: "ui.swift.browser.core.itermbrowsergateway.the_file_at_0_is_not_a_valid.b9dc8a97", defaultValue: "The file at \(url.path) is not a valid app bundle.", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")
         }
         if bundle.bundleIdentifier != Self.bundleID {
-            return "This is not the browser plugin. This file’s bundle ID is “\(bundle.bundleIdentifier ?? "not set")”.\n The expected ID is “\(Self.bundleID)”."
+            let bundleIdentifier = bundle.bundleIdentifier ?? String(localized: "ui.swift.browser.core.itermbrowsergateway.not_set.1aef9399", defaultValue: "not set", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")
+            return String(localized: "ui.swift.browser.core.itermbrowsergateway.this_is_not_the_browser_plugin_this_file.9864ffd8", defaultValue: "This is not the browser plugin. This file’s bundle ID is “\(bundleIdentifier)”.\n The expected ID is “\(Self.bundleID)”.", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")
         }
         if !verifyCodeSignature(at: url, teamID: teamID) {
-            return "The code signature of the plugin at \(url.path) is invalid. Download it again, and ensure your anti-virus does not quarantine it."
+            return String(localized: "ui.swift.browser.core.itermbrowsergateway.the_code_signature_of_the_plugin_at_0.9bb5c1ab", defaultValue: "The code signature of the plugin at \(url.path) is invalid. Download it again, and ensure your anti-virus does not quarantine it.", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")
         }
         iTermAdvancedSettingsModel.setBrowserPluginPathHint(url.path)
         cached.expire()
@@ -107,12 +108,12 @@ class iTermBrowserGateway: NSObject {
 
     @objc
     static func offerPlugin() {
-        let selection = iTermWarning.show(withTitle: "You must install the Browser Plugin first. Download it now?",
-                                          actions: ["OK", "Cancel"],
+        let selection = iTermWarning.show(withTitle: String(localized: "ui.swift.browser.core.itermbrowsergateway.you_must_install_the_browser_plugin_first_download.a10591f3", defaultValue: "You must install the Browser Plugin first. Download it now?", bundle: .main, comment: "User-facing text in iTermBrowserGateway."),
+                                          actions: [String(localized: "ui.swift.browser.core.itermbrowsergateway.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in iTermBrowserGateway."), String(localized: "ui.swift.browser.core.itermbrowsergateway.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")],
                                           accessory: nil,
                                           identifier: nil,
                                           silenceable: .kiTermWarningTypePersistent,
-                                          heading: "Plugin Required",
+                                          heading: String(localized: "ui.swift.browser.core.itermbrowsergateway.plugin_required.68601576", defaultValue: "Plugin Required", bundle: .main, comment: "User-facing text in iTermBrowserGateway."),
                                           window: nil)
         if selection == .kiTermWarningSelection0 {
             NSWorkspace.shared.open(URL(string: "https://iterm2.com/browser-plugin.html")!)
@@ -138,12 +139,12 @@ class iTermBrowserGateway: NSObject {
         // would cause an infinite loop since the plugin would still not be installed.
         // Remembering "Cancel" is also not useful.
         let warning = iTermWarning()
-        warning.title = "iTerm2 can display web pages! But first you must download the Browser Plugin."
-        warning.actionLabels = ["Download", "Use System Browser", "Cancel"]
+        warning.title = String(localized: "ui.swift.browser.core.itermbrowsergateway.iterm2_can_display_web_pages_but_first_you.592b7c7a", defaultValue: "iTerm2 can display web pages! But first you must download the Browser Plugin.", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")
+        warning.actionLabels = [String(localized: "ui.swift.browser.core.itermbrowsergateway.download.d6eafe82", defaultValue: "Download", bundle: .main, comment: "User-facing text in iTermBrowserGateway."), String(localized: "ui.swift.browser.core.itermbrowsergateway.use_system_browser.3e75d58a", defaultValue: "Use System Browser", bundle: .main, comment: "User-facing text in iTermBrowserGateway."), String(localized: "ui.swift.browser.core.itermbrowsergateway.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")]
         warning.identifier = upsellWarningIdentifier
         warning.warningType = .kiTermWarningTypePermanentlySilenceable
-        warning.heading = "Plugin Required"
-        warning.doNotRememberLabels = ["Download", "Cancel"]
+        warning.heading = String(localized: "ui.swift.browser.core.itermbrowsergateway.plugin_required.68601576", defaultValue: "Plugin Required", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")
+        warning.doNotRememberLabels = [String(localized: "ui.swift.browser.core.itermbrowsergateway.download.d6eafe82", defaultValue: "Download", bundle: .main, comment: "User-facing text in iTermBrowserGateway."), String(localized: "ui.swift.browser.core.itermbrowsergateway.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in iTermBrowserGateway.")]
         let selection = warning.runModal()
         switch selection {
         case .kiTermWarningSelection0:

@@ -377,15 +377,15 @@
             iTermLocaleGuesser *guesser = [[iTermLocaleGuesser alloc] initWithEncoding:[self unsignedIntegerForKey:KEY_CHARACTER_ENCODING]];
             NSDictionary *env = guesser.dictionaryWithLC_CTYPE;
             if (!env) {
-                _localeName.stringValue = @"Invalid encoding: neither $LC_CTYPE nor $LANG set.";
+                _localeName.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.invalid_encoding_neither_lc_ctype_nor_lang_set.38c07278", nil, NSBundle.mainBundle, @"Invalid encoding: neither $LC_CTYPE nor $LANG set.", @"User-facing text in ProfilesTerminalPreferencesViewController (updateCustomLocaleControls).");
                 break;
             }
             NSString *ctype = [[guesser dictionaryWithLC_CTYPE] objectForKey:@"LC_CTYPE"];
             if (ctype) {
-                _localeName.stringValue = [NSString stringWithFormat:@"LC_CTYPE=%@", ctype];
+                _localeName.stringValue = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.lc_ctype.dd43b9ed", nil, NSBundle.mainBundle, @"LC_CTYPE=%@", @"User-facing text in ProfilesTerminalPreferencesViewController (stringValue)."), ctype];
             } else {
                 RLog(@"enc=%@ %@", @([self unsignedIntegerForKey:KEY_CHARACTER_ENCODING]), [guesser dictionaryWithLC_CTYPE]);
-                _localeName.stringValue = @"Unexpectedly missing LC_CTYPE. Report a bug.";
+                _localeName.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.unexpectedly_missing_lc_ctype_report_a_bug.27324106", nil, NSBundle.mainBundle, @"Unexpectedly missing LC_CTYPE. Report a bug.", @"User-facing text in ProfilesTerminalPreferencesViewController (updateCustomLocaleControls).");
             }
             break;
         }
@@ -394,7 +394,7 @@
             if ([self stringForKey:KEY_CUSTOM_LOCALE].length) {
                 _localeName.attributedStringValue = [self attributedStringForLocale:[self stringForKey:KEY_CUSTOM_LOCALE]];
             } else {
-                _localeName.stringValue = @"No locale selected.";
+                _localeName.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.no_locale_selected.e704308d", nil, NSBundle.mainBundle, @"No locale selected.", @"User-facing text in ProfilesTerminalPreferencesViewController (updateCustomLocaleControls).");
             }
             break;
         }
@@ -405,13 +405,13 @@
             if (lang.length) {
                 _localeName.attributedStringValue = [self attributedStringForLocale:lang];
             } else {
-                _localeName.stringValue = @"No valid locale exists for this machine’s language and country.";
+                _localeName.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.no_valid_locale_exists_for_this_machine_s.3e856d7a", nil, NSBundle.mainBundle, @"No valid locale exists for this machine’s language and country.", @"User-facing text in ProfilesTerminalPreferencesViewController (updateCustomLocaleControls).");
             }
             break;
         }
         case iTermSetLocalVarsModeDoNotSet:
             _changeLocale.hidden = YES;
-            _localeName.stringValue = @"$LANG will not be set.";
+            _localeName.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.lang_will_not_be_set.42ade553", nil, NSBundle.mainBundle, @"$LANG will not be set.", @"User-facing text in ProfilesTerminalPreferencesViewController (updateCustomLocaleControls).");
             break;
     }
 }
@@ -481,19 +481,19 @@ static NSInteger CompareEncodingByLocalizedName(id a, id b, void *unused) {
 - (IBAction)changeCustomLocale:(id)sender {
     iTermLocalePrompt *prompt = [[iTermLocalePrompt alloc] initWithEncoding:[self unsignedIntegerForKey:KEY_CHARACTER_ENCODING]];
     prompt.defaultLocale = [self stringForKey:KEY_CUSTOM_LOCALE];
-    prompt.message = @"Select your preferred locale:";
+    prompt.message = NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.select_your_preferred_locale.51d04d98", nil, NSBundle.mainBundle, @"Select your preferred locale:", @"User-facing locale selection prompt.");
     prompt.allowRemember = NO;
     [prompt requestLocaleFromUserForProfile:nil inWindow:self.view.window cancelUsesC:NO];
     NSString *locale = prompt.selectedLocale;
     if (locale && [self unsignedIntegerForKey:KEY_CHARACTER_ENCODING] == NSUTF8StringEncoding && ![locale containsString:@"UTF-8"]) {
         NSString *guid = [self stringForKey:KEY_GUID] ?: @"";
         const iTermWarningSelection selection =
-        [iTermWarning showWarningWithTitle:@"Warning! This profile uses a custom locale that doesn't use UTF-8 as its character encoding, but your profile *is* using UTF-8. This can cause error messages and non-ASCII text to appear wrong."
-                                   actions:@[ @"Change Locale", @"Keep This Locale"]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.warning_this_profile_uses_a_custom_locale_that.550ec792", nil, NSBundle.mainBundle, @"Warning! This profile uses a custom locale that doesn't use UTF-8 as its character encoding, but your profile *is* using UTF-8. This can cause error messages and non-ASCII text to appear wrong.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.change_locale.29c8933a", nil, NSBundle.mainBundle, @"Change Locale", @"User-facing action label in ProfilesTerminalPreferencesViewController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.keep_this_locale.ccc8a1b5", nil, NSBundle.mainBundle, @"Keep This Locale", @"User-facing action label in ProfilesTerminalPreferencesViewController (actions).")]
                                  accessory:nil
                                 identifier:[@"NoSyncUTF8Mismatch_" stringByAppendingString:guid]
                                silenceable:kiTermWarningTypePermanentlySilenceable
-                                   heading:@"Wrong Encoding Detected"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.settings.profilesterminalpreferencesviewcontroller.wrong_encoding_detected.446992aa", nil, NSBundle.mainBundle, @"Wrong Encoding Detected", @"User-facing text in ProfilesTerminalPreferencesViewController (heading).")
                                     window:self.view.window];
         if (selection == kiTermWarningSelection0) {
             [self changeCustomLocale:sender];

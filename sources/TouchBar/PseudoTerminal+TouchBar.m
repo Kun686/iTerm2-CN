@@ -86,7 +86,7 @@ ITERM_IGNORE_PARTIAL_BEGIN
         iTermTouchBarButton *button = (iTermTouchBarButton *)item.view;
         NSString *touchBarStatusString = self.currentSession.keyLabels[@"status"];
         if (touchBarStatusString == nil) {
-            button.title = @"Status";
+            button.title = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.status.920e413c", nil, NSBundle.mainBundle, @"Status", @"User-facing text in PseudoTerminal+TouchBar (updateStatus).");
             button.enabled = NO;
             item.visibilityPriority = NSTouchBarItemPriorityLow;
         } else {
@@ -289,7 +289,7 @@ ITERM_IGNORE_PARTIAL_BEGIN
         // Constrain last button's right to document view's right
         [self constrainButton:previous toRightOfSuperview:documentView];
     }
-    item.customizationLabel = @"Function Keys";
+    item.customizationLabel = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.function_keys.75a7793c", nil, NSBundle.mainBundle, @"Function Keys", @"User-facing Touch Bar customization label.");
     return item;
 }
 
@@ -399,7 +399,7 @@ ITERM_IGNORE_PARTIAL_BEGIN
         NSScrubber *scrubber;
         if (!self.tabsTouchBarItem) {
             self.tabsTouchBarItem = [[[NSCustomTouchBarItem alloc] initWithIdentifier:identifier] autorelease];
-            self.tabsTouchBarItem.customizationLabel = @"Full Screen Tab Bar";
+            self.tabsTouchBarItem.customizationLabel = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.full_screen_tab_bar.bae81a07", nil, NSBundle.mainBundle, @"Full Screen Tab Bar", @"User-facing Touch Bar customization label.");
 
             scrubber = [[NSScrubber alloc] initWithFrame:NSMakeRect(0, 0, 320, 30)];
             scrubber.delegate = self;   // So we can respond to selection.
@@ -434,7 +434,7 @@ ITERM_IGNORE_PARTIAL_BEGIN
     } else if ([identifier isEqualToString:iTermTouchBarIdentifierAutocomplete]) {
         self.autocompleteCandidateListItem = [[[NSCandidateListTouchBarItem alloc] initWithIdentifier:identifier] autorelease];
         self.autocompleteCandidateListItem.delegate = self;
-        self.autocompleteCandidateListItem.customizationLabel = @"Autocomplete Suggestions";
+        self.autocompleteCandidateListItem.customizationLabel = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.autocomplete_suggestions.06161d6a", nil, NSBundle.mainBundle, @"Autocomplete Suggestions", @"User-facing Touch Bar customization label.");
         NSAttributedString *(^commandUseToAttributedString)(NSString *commandUse,
                                                             NSInteger index) = ^(NSString *command,
                                                                                  NSInteger index) {
@@ -450,26 +450,26 @@ ITERM_IGNORE_PARTIAL_BEGIN
 
     if ([identifier isEqualToString:iTermTouchBarIdentifierManPage]) {
         selector = @selector(manPageTouchBarItemSelected:);
-        label = @"Man Page";
+        label = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.man_page.26999b77", nil, NSBundle.mainBundle, @"Man Page", @"User-facing text in PseudoTerminal+TouchBar (touchBar:makeItemForIdentifier:).");
     } else if ([identifier isEqualToString:iTermTouchBarIdentifierStatus]) {
         selector = @selector(statusTouchBarItemSelected:);
-        label = @"Your Message Here";
+        label = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.your_message_here.581eb871", nil, NSBundle.mainBundle, @"Your Message Here", @"User-facing text in PseudoTerminal+TouchBar (touchBar:makeItemForIdentifier:).");
     } else if ([identifier isEqualToString:iTermTouchBarIdentifierAddMark]) {
         image = [[NSImage it_imageNamed:@"Add Mark Touch Bar Icon" forClass:self.class] imageWithColor:[NSColor labelColor]];
         selector = @selector(addMarkTouchBarItemSelected:);
-        label = @"Add Mark";
+        label = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.add_mark.c46c453f", nil, NSBundle.mainBundle, @"Add Mark", @"User-facing Touch Bar label.");
     } else if ([identifier isEqualToString:iTermTouchBarIdentifierNextMark]) {
         image = [NSImage imageNamed:NSImageNameTouchBarGoDownTemplate];
         selector = @selector(nextMarkTouchBarItemSelected:);
-        label = @"Next Mark";
+        label = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.next_mark.a40862be", nil, NSBundle.mainBundle, @"Next Mark", @"User-facing Touch Bar label.");
     } else if ([identifier isEqualToString:iTermTouchBarIdentifierPreviousMark]) {
         image = [NSImage imageNamed:NSImageNameTouchBarGoUpTemplate];
         selector = @selector(previousMarkTouchBarItemSelected:);
-        label = @"Previous Mark";
+        label = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.previous_mark.e1704756", nil, NSBundle.mainBundle, @"Previous Mark", @"User-facing Touch Bar label.");
     } else if ([identifier isEqualToString:iTermTouchBarIdentifierColorPreset]) {
         image = [NSImage imageNamed:NSImageNameTouchBarColorPickerFill];
         NSPopoverTouchBarItem *item = [[[NSPopoverTouchBarItem alloc] initWithIdentifier:identifier] autorelease];
-        item.customizationLabel = @"Color Preset";
+        item.customizationLabel = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.color_preset.a9829d39", nil, NSBundle.mainBundle, @"Color Preset", @"User-facing Touch Bar customization label.");
         item.showsCloseButton = YES;
         item.collapsedRepresentationImage = image;
 
@@ -481,7 +481,7 @@ ITERM_IGNORE_PARTIAL_BEGIN
     } else if ([identifier isEqualToString:iTermTouchBarIdentifierFunctionKeys]) {
         image = [NSImage it_imageNamed:@"Touch Bar Function Keys" forClass:self.class];
         NSPopoverTouchBarItem *item = [[[NSPopoverTouchBarItem alloc] initWithIdentifier:identifier] autorelease];
-        item.customizationLabel = @"Function Keys Popover";
+        item.customizationLabel = NSLocalizedStringWithDefaultValue(@"ui.touchbar.pseudoterminal_touchbar.function_keys_popover.82c69f6f", nil, NSBundle.mainBundle, @"Function Keys Popover", @"User-facing Touch Bar customization label.");
         item.showsCloseButton = YES;
         item.collapsedRepresentationImage = image;
 
@@ -699,4 +699,3 @@ ITERM_IGNORE_PARTIAL_BEGIN
 @end
 
 ITERM_IGNORE_PARTIAL_END
-

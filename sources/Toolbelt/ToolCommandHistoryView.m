@@ -73,7 +73,7 @@ static const CGFloat kMargin = 5;
         clear_ = [[NSButton alloc] initWithFrame:NSMakeRect(0, frame.size.height - kButtonHeight, frame.size.width, kButtonHeight)];
         clear_.bezelStyle = NSBezelStyleRegularSquare;
         clear_.bordered = NO;
-        clear_.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolTrash) accessibilityDescription:@"Clear"];
+        clear_.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolTrash) accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolcommandhistoryview.clear.83b12c22", nil, NSBundle.mainBundle, @"Clear", @"Accessibility description for the clear button.")];
         clear_.imagePosition = NSImageOnly;
         clear_.frame = NSMakeRect(0, 0, 22, 22);
         [clear_ setTarget:self];
@@ -312,10 +312,10 @@ static const CGFloat kMargin = 5;
 
 - (void)clear:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Erase Command History";
-    alert.informativeText = @"Command history for all hosts will be erased. Continue?";
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolcommandhistoryview.erase_command_history.f302056d", nil, NSBundle.mainBundle, @"Erase Command History", @"User-facing text in ToolCommandHistoryView (clear:).");
+    alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolcommandhistoryview.command_history_for_all_hosts_will_be_erased.ae8e7847", nil, NSBundle.mainBundle, @"Command history for all hosts will be erased. Continue?", @"User-facing text in ToolCommandHistoryView (clear:).");
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolcommandhistoryview.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in ToolCommandHistoryView (clear:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.toolbelt.toolcommandhistoryview.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in ToolCommandHistoryView (clear:).")];
     if ([alert runModal] == NSAlertFirstButtonReturn) {
         [[iTermShellHistoryController sharedInstance] eraseCommandHistory:YES directories:NO];
     }

@@ -10,26 +10,43 @@ import CoreText
 
 enum NerdFontInstallerError: LocalizedError {
     case userDeniedPermission
-    case downloadFailed(reason: String)
+    case downloadFailed(reason: String, diagnosticReason: String)
     case saveDownloadFailed(reason: String)
     case unzipFailed(reason: String)
     case missingRequiredFonts
-    case fontInstallationFailed(reason: String)
+    case fontInstallationFailed(reason: String, diagnosticReason: String)
 
     var errorDescription: String? {
         switch self {
         case .userDeniedPermission:
+            return String(localized: "ui.swift.settings.nerdfontinstaller.user_denied_permission.13950e32", defaultValue: "User denied permission", bundle: .main, comment: "User-facing text in NerdFontInstaller.")
+        case .downloadFailed(let reason, _):
+            return String(localized: "ui.swift.settings.nerdfontinstaller.download_failed_0.7f360187", defaultValue: "Download failed: \(reason)", bundle: .main, comment: "User-facing text in NerdFontInstaller.")
+        case .saveDownloadFailed(let reason):
+            return String(localized: "ui.swift.settings.nerdfontinstaller.downloaded_file_could_not_be_saved_0.14dc22ae", defaultValue: "Downloaded file could not be saved: \(reason)", bundle: .main, comment: "User-facing text in NerdFontInstaller.")
+        case .unzipFailed(let reason):
+            return String(localized: "ui.swift.settings.nerdfontinstaller.unzip_failed_0.da6f9340", defaultValue: "Unzip failed: \(reason)", bundle: .main, comment: "User-facing text in NerdFontInstaller.")
+        case .missingRequiredFonts:
+            return String(localized: "ui.swift.settings.nerdfontinstaller.the_downloaded_bundle_is_missing_some_required_fonts.08184346", defaultValue: "The downloaded bundle is missing some required fonts", bundle: .main, comment: "User-facing text in NerdFontInstaller.")
+        case .fontInstallationFailed(let reason, _):
+            return String(localized: "ui.swift.settings.nerdfontinstaller.installation_of_downloaded_fonts_failed_0.809ae864", defaultValue: "Installation of downloaded fonts failed: \(reason)", bundle: .main, comment: "User-facing text in NerdFontInstaller.")
+        }
+    }
+
+    var diagnosticDescription: String {
+        switch self {
+        case .userDeniedPermission:
             return "User denied permission"
-        case .downloadFailed(let reason):
-            return "Download failed: \(reason)"
+        case .downloadFailed(_, let diagnosticReason):
+            return "Download failed: \(diagnosticReason)"
         case .saveDownloadFailed(let reason):
             return "Downloaded file could not be saved: \(reason)"
         case .unzipFailed(let reason):
             return "Unzip failed: \(reason)"
         case .missingRequiredFonts:
             return "The downloaded bundle is missing some required fonts"
-        case .fontInstallationFailed(let reason):
-            return "Installation of downloaded fonts failed: \(reason)"
+        case .fontInstallationFailed(_, let diagnosticReason):
+            return "Installation of downloaded fonts failed: \(diagnosticReason)"
         }
     }
 }
@@ -73,7 +90,7 @@ class NerdFontInstaller {
             case .unzipping(from: let from, to: let todir): return "unzipping from \(from.absoluteString) to \(todir.absoluteString)"
             case .updatingProfile: return "updating profile"
             case .successful: return "successful"
-            case .failed(let nerdError): return "error \(nerdError.errorDescription ?? "unknown")"
+            case .failed(let nerdError): return "error \(nerdError.diagnosticDescription)"
             case .installing(folder: let folder): return "installing to \(folder)"
             }
         }
@@ -122,12 +139,12 @@ class NerdFontInstaller {
 
     private func askUserForPermissionToDownload() -> Bool {
         let selection = iTermWarning.show(
-            withTitle: "To install the Nerd Font Bundle iTerm2 must first download and install these fonts: \(neededFontPostscriptNames.joined(separator: ", ")).",
-            actions: ["Download", "Cancel"],
+            withTitle: String(localized: "ui.swift.settings.nerdfontinstaller.to_install_the_nerd_font_bundle_iterm2_must.e92f7248", defaultValue: "To install the Nerd Font Bundle iTerm2 must first download and install these fonts: \(neededFontPostscriptNames.joined(separator: ", ")).", bundle: .main, comment: "User-facing text in NerdFontInstaller."),
+            actions: [String(localized: "ui.swift.settings.nerdfontinstaller.download.d6eafe82", defaultValue: "Download", bundle: .main, comment: "User-facing text in NerdFontInstaller."), String(localized: "ui.swift.settings.nerdfontinstaller.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in NerdFontInstaller.")],
             accessory: nil,
             identifier: "SpecialExceptionsMissingFontsForNerdBundle",
             silenceable: .kiTermWarningTypePersistent,
-            heading: "Download Needed",
+            heading: String(localized: "ui.swift.settings.nerdfontinstaller.download_needed.20fbc9f5", defaultValue: "Download Needed", bundle: .main, comment: "User-facing text in NerdFontInstaller."),
             window: window)
         return selection == .kiTermWarningSelection0
     }
@@ -153,9 +170,12 @@ class NerdFontInstaller {
     private func downloadDidComplete(location: URL?, response: URLResponse?, error: Error?) {
         NSLog("Download completed. error=\(String(describing: error))")
         if let error {
+            let diagnosticReason = "The Nerd Font Bundle download failed with an error: \(error.localizedDescription)"
+            let localizedReason = String(localized: "ui.swift.settings.nerdfontinstaller.the_nerd_font_bundle_download_failed_with_an.3d38087e", defaultValue: "The Nerd Font Bundle download failed with an error: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in NerdFontInstaller.")
             DispatchQueue.main.async {
                 self.state = .failed(NerdFontInstallerError.downloadFailed(
-                    reason: "The Nerd Font Bundle download failed with an error: \(error.localizedDescription)"))
+                    reason: localizedReason,
+                    diagnosticReason: diagnosticReason))
             }
             return
         }
@@ -265,13 +285,16 @@ class NerdFontInstaller {
                 }
                 return true
             }
-            var reason = fatalErrors.compactMap { CFErrorCopyDescription($0) as String? }.joined(separator: ", ")
-            if reason.isEmpty {
-                reason = "Unknown errors occurred"
-            }
-            RLog("\(reason)")
+            let describedReason = fatalErrors.compactMap { CFErrorCopyDescription($0) as String? }.joined(separator: ", ")
+            let diagnosticReason = describedReason.isEmpty ? "Unknown errors occurred" : describedReason
+            let localizedReason = describedReason.isEmpty
+                ? String(localized: "ui.swift.settings.nerdfontinstaller.unknown_errors_occurred.93a82287", defaultValue: "Unknown errors occurred", bundle: .main, comment: "User-facing text in NerdFontInstaller.")
+                : describedReason
+            RLog("\(diagnosticReason)")
             DispatchQueue.main.async {
-                completion(NerdFontInstallerError.fontInstallationFailed(reason: reason))
+                completion(NerdFontInstallerError.fontInstallationFailed(
+                    reason: localizedReason,
+                    diagnosticReason: diagnosticReason))
             }
             return false
         }

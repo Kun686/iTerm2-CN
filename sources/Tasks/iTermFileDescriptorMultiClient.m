@@ -785,7 +785,7 @@ static NSString *iTermMultiServerStringForMessageFromClient(iTermMultiServerClie
         [rateLimit performRateLimitedBlock:^{
             DLog(@"Called");
             NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = @"Problem Starting iTerm2 Daemon";
+            alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.tasks.itermfiledescriptormulticlient.problem_starting_iterm2_daemon.51ae05b5", nil, NSBundle.mainBundle, @"Problem Starting iTerm2 Daemon", @"User-facing text in iTermFileDescriptorMultiClient (source UI).");
             alert.informativeText = message;
             [alert runModal];
         }];
@@ -849,10 +849,10 @@ static NSString *iTermMultiServerStringForMessageFromClient(iTermMultiServerClie
         if (!sourcePath || ![fileManager fileExistsAtPath:sourcePath]) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];
-                alert.messageText = @"Required File Missing";
-                alert.informativeText = @"The iTermServer executable is missing from the application bundle. This indicates iTerm2 is corrupted or incomplete. Please reinstall iTerm2 from the official website.";
+                alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.tasks.itermfiledescriptormulticlient.required_file_missing.1d40241a", nil, NSBundle.mainBundle, @"Required File Missing", @"User-facing text in iTermFileDescriptorMultiClient (source UI).");
+                alert.informativeText = NSLocalizedStringWithDefaultValue(@"ui.tasks.itermfiledescriptormulticlient.the_itermserver_executable_is_missing_from_the_application.07e35836", nil, NSBundle.mainBundle, @"The iTermServer executable is missing from the application bundle. This indicates iTerm2 is corrupted or incomplete. Please reinstall iTerm2 from the official website.", @"User-facing text in iTermFileDescriptorMultiClient (source UI).");
                 alert.alertStyle = NSAlertStyleCritical;
-                [alert addButtonWithTitle:@"Quit"];
+                [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.tasks.itermfiledescriptormulticlient.quit.b3eb37ac", nil, NSBundle.mainBundle, @"Quit", @"User-facing text in iTermFileDescriptorMultiClient (source UI).")];
                 [alert runModal];
 
                 // Terminate the application

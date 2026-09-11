@@ -12,7 +12,7 @@ class FoldTrigger: Trigger {
     }
 
     override static var title: String {
-        return "Fold to Named Mark"
+        return String(localized: "ui.swift.triggers.foldtrigger.fold_to_named_mark.9e6ddad5", defaultValue: "Fold to Named Mark", bundle: .main, comment: "User-facing text in FoldTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -26,7 +26,7 @@ class FoldTrigger: Trigger {
     }
 
     override func triggerOptionalParameterPlaceholder(withInterpolation interpolation: Bool) -> String? {
-        return "Name of Mark"
+        return String(localized: "ui.swift.triggers.foldtrigger.name_of_mark.2570d97f", defaultValue: "Name of Mark", bundle: .main, comment: "User-facing text in FoldTrigger.")
     }
 
     override func performAction(withCapturedStrings strings: [String],

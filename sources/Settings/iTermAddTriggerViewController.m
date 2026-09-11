@@ -429,7 +429,7 @@ static const CGFloat kLabelWidth = 124;
     // Create label
     NSTextField *performanceLabel = [[NSTextField alloc] init];
     performanceLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    performanceLabel.stringValue = @"CPU Time:";
+    performanceLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.cpu_time.5119267e", nil, NSBundle.mainBundle, @"CPU Time:", @"User-facing text in iTermAddTriggerViewController (createViews).");
     performanceLabel.editable = NO;
     performanceLabel.bordered = NO;
     performanceLabel.backgroundColor = [NSColor clearColor];
@@ -597,14 +597,18 @@ static const CGFloat kLabelWidth = 124;
     textField.delegate = self;
     [row addSubview:textField];
     
+    // The original labels identify the input fields; translate only their display.
     if ([labelText isEqualToString:@"Regular Expression:"]) {
         _regexTextField = textField;
         _regexLabel = label;
+        label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.regular_expression.8182fd85", nil, NSBundle.mainBundle, @"Regular Expression:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).");
     } else if ([labelText isEqualToString:@"Name:"]) {
         _nameTextField = textField;
+        label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.name.2683cad4", nil, NSBundle.mainBundle, @"Name:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).");
     } else if ([labelText isEqualToString:@"Job:"]) {
         _jobTextField = textField;
-        _jobTextField.placeholderString = @"Trigger enabled only for this job (e.g., emacs)";
+        label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.job.34b0e24b", nil, NSBundle.mainBundle, @"Job:", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).");
+        _jobTextField.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.trigger_enabled_only_for_this_job_e_g.4303877d", nil, NSBundle.mainBundle, @"Trigger enabled only for this job (e.g., emacs)", @"User-facing text in iTermAddTriggerViewController (createRowWithLabelText:hasVisualizationButton:).");
     }
     
     // Add visualization button if needed
@@ -614,7 +618,7 @@ static const CGFloat kLabelWidth = 124;
         _toggleVisualizationButton.bezelStyle = NSBezelStyleRounded;
         _toggleVisualizationButton.bordered = YES;
         _toggleVisualizationButton.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolFlowchart)
-                                                  accessibilityDescription:@"Show visualization"
+                                                              accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.show_visualization.f1168681", nil, NSBundle.mainBundle, @"Show visualization", @"Accessibility description for showing a trigger visualization.")
                                                          fallbackImageName:@"flowchart"
                                                                   forClass:[self class]];
         _toggleVisualizationButton.target = self;
@@ -781,7 +785,7 @@ static const CGFloat kLabelWidth = 124;
     // Create label
     NSTextField *label = [[NSTextField alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.stringValue = @"Match Against:";
+    label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.match_against.0ba1fe07", nil, NSBundle.mainBundle, @"Match Against:", @"User-facing text in iTermAddTriggerViewController (createMatchTypeRow).");
     label.editable = NO;
     label.bordered = NO;
     label.backgroundColor = [NSColor clearColor];
@@ -793,12 +797,12 @@ static const CGFloat kLabelWidth = 124;
     // Create popup button for match type
     _matchTypeButton = [[NSPopUpButton alloc] init];
     _matchTypeButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [_matchTypeButton it_addItemWithTitle:@"Regular Expression" tag:iTermTriggerMatchTypeRegex];
+    [_matchTypeButton it_addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.regular_expression.2aa42833", nil, NSBundle.mainBundle, @"Regular Expression", @"Trigger match type.") tag:iTermTriggerMatchTypeRegex];
 
     if (_browserMode) {
         // Browser-specific match types
-        [_matchTypeButton it_addItemWithTitle:@"URL" tag:iTermTriggerMatchTypeURLRegex];
-        [_matchTypeButton it_addItemWithTitle:@"Page Content" tag:iTermTriggerMatchTypePageContentRegex];
+        [_matchTypeButton it_addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.url.e7a241de", nil, NSBundle.mainBundle, @"URL", @"Trigger match type.") tag:iTermTriggerMatchTypeURLRegex];
+        [_matchTypeButton it_addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.page_content.fce9c5d4", nil, NSBundle.mainBundle, @"Page Content", @"Trigger match type.") tag:iTermTriggerMatchTypePageContentRegex];
     } else {
         // Terminal-specific event types, sorted alphabetically by display name
         [[_matchTypeButton menu] addItem:[NSMenuItem separatorItem]];
@@ -881,7 +885,7 @@ static const CGFloat kLabelWidth = 124;
     // Create label
     NSTextField *label = [[NSTextField alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.stringValue = @"Content Regex:";
+    label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.content_regex.8b83d0f7", nil, NSBundle.mainBundle, @"Content Regex:", @"User-facing text in iTermAddTriggerViewController (createContentRegexRow).");
     label.editable = NO;
     label.bordered = NO;
     label.backgroundColor = [NSColor clearColor];
@@ -904,7 +908,7 @@ static const CGFloat kLabelWidth = 124;
     _contentRegexVisualizationButton.bezelStyle = NSBezelStyleRounded;
     _contentRegexVisualizationButton.bordered = YES;
     _contentRegexVisualizationButton.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolFlowchart)
-                                                    accessibilityDescription:@"Show content regex visualization"
+                                                                  accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.show_content_regex_visualization.2aa61694", nil, NSBundle.mainBundle, @"Show content regex visualization", @"Accessibility description for showing a content regular-expression visualization.")
                                                            fallbackImageName:@"flowchart"
                                                                     forClass:[self class]];
     _contentRegexVisualizationButton.target = self;
@@ -1010,7 +1014,7 @@ static const CGFloat kLabelWidth = 124;
     // Create label
     NSTextField *label = [[NSTextField alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.stringValue = @"Parameters:";
+    label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.parameters.03acaf78", nil, NSBundle.mainBundle, @"Parameters:", @"User-facing text in iTermAddTriggerViewController (createEventParamRow).");
     label.editable = NO;
     label.bordered = NO;
     label.backgroundColor = [NSColor clearColor];
@@ -1093,7 +1097,7 @@ static const CGFloat kLabelWidth = 124;
     _instantButton = [[NSButton alloc] init];
     _instantButton.translatesAutoresizingMaskIntoConstraints = NO;
     _instantButton.buttonType = NSButtonTypeSwitch;
-    _instantButton.title = @"Instant";
+    _instantButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.instant.e2861894", nil, NSBundle.mainBundle, @"Instant", @"User-facing text in iTermAddTriggerViewController (createButtonsRow).");
     _instantButton.target = self;
     _instantButton.action = @selector(instantDidChange:);
     [row addSubview:_instantButton];
@@ -1101,7 +1105,7 @@ static const CGFloat kLabelWidth = 124;
     _enabledButton = [[NSButton alloc] init];
     _enabledButton.translatesAutoresizingMaskIntoConstraints = NO;
     _enabledButton.buttonType = NSButtonTypeSwitch;
-    _enabledButton.title = @"Enabled";
+    _enabledButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.enabled.92c1cdfd", nil, NSBundle.mainBundle, @"Enabled", @"User-facing text in iTermAddTriggerViewController (createButtonsRow).");
     _enabledButton.target = self;
     _enabledButton.action = @selector(enabledDidChange:);
     [row addSubview:_enabledButton];
@@ -1109,7 +1113,7 @@ static const CGFloat kLabelWidth = 124;
     _updateProfileButton = [[NSButton alloc] init];
     _updateProfileButton.translatesAutoresizingMaskIntoConstraints = NO;
     _updateProfileButton.buttonType = NSButtonTypeSwitch;
-    _updateProfileButton.title = @"Update Profile";
+    _updateProfileButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.update_profile.6c33ed13", nil, NSBundle.mainBundle, @"Update Profile", @"User-facing text in iTermAddTriggerViewController (createButtonsRow).");
     [row addSubview:_updateProfileButton];
     
     // Add leading spacer to align with text fields
@@ -1195,8 +1199,8 @@ static const CGFloat kLabelWidth = 124;
     _leaderOnlyButton = [[NSButton alloc] init];
     _leaderOnlyButton.translatesAutoresizingMaskIntoConstraints = NO;
     _leaderOnlyButton.buttonType = NSButtonTypeSwitch;
-    _leaderOnlyButton.title = @"Only on the workgroup leader";
-    _leaderOnlyButton.toolTip = @"When set, the trigger fires only for the workgroup leader (the session that originally entered the workgroup). Peers such as the Code Review and Diff sessions do not, so reloading or quitting one keeps the workgroup open.";
+    _leaderOnlyButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.only_on_the_workgroup_leader.85f3c87d", nil, NSBundle.mainBundle, @"Only on the workgroup leader", @"User-facing text in iTermAddTriggerViewController (createLeaderOnlyRow).");
+    _leaderOnlyButton.toolTip = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.when_set_the_trigger_fires_only_for_the.c9314a30", nil, NSBundle.mainBundle, @"When set, the trigger fires only for the workgroup leader (the session that originally entered the workgroup). Peers such as the Code Review and Diff sessions do not, so reloading or quitting one keeps the workgroup open.", @"User-facing text in iTermAddTriggerViewController (createLeaderOnlyRow).");
     _leaderOnlyButton.target = self;
     _leaderOnlyButton.action = @selector(leaderOnlyDidChange:);
     [row addSubview:_leaderOnlyButton];
@@ -1258,7 +1262,7 @@ static const CGFloat kLabelWidth = 124;
     // Create label
     NSTextField *label = [[NSTextField alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.stringValue = @"Action:";
+    label.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.action.7d9fda4e", nil, NSBundle.mainBundle, @"Action:", @"User-facing text in iTermAddTriggerViewController (createActionRow).");
     label.editable = NO;
     label.bordered = NO;
     label.backgroundColor = [NSColor clearColor];
@@ -1337,7 +1341,7 @@ static const CGFloat kLabelWidth = 124;
     _cancelButton = [[NSButton alloc] init];
     _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
     _cancelButton.bezelStyle = NSBezelStyleRounded;
-    _cancelButton.title = @"Cancel";
+    _cancelButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermAddTriggerViewController (createOkCancelRow).");
     _cancelButton.target = self;
     _cancelButton.action = @selector(cancel:);
     _cancelButton.keyEquivalent = @"\e"; // Escape key
@@ -1346,7 +1350,7 @@ static const CGFloat kLabelWidth = 124;
     _okButton = [[NSButton alloc] init];
     _okButton.translatesAutoresizingMaskIntoConstraints = NO;
     _okButton.bezelStyle = NSBezelStyleRounded;
-    _okButton.title = @"OK";
+    _okButton.title = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermAddTriggerViewController (createOkCancelRow).");
     _okButton.target = self;
     _okButton.action = @selector(ok:);
     _okButton.keyEquivalent = @"\r"; // Return key
@@ -1473,14 +1477,14 @@ static const CGFloat kLabelWidth = 124;
         _popover = popover;
 
         button.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolFlowchartFill)
-                             accessibilityDescription:@"Hide visualization"
+                                                  accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.hide_visualization.7405ee33", nil, NSBundle.mainBundle, @"Hide visualization", @"Accessibility description for hiding a trigger visualization.")
                                     fallbackImageName:@"flowchart.fill"
                                              forClass:[self class]];
     } else {
         [_popover close];
         _popover = nil;
         button.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolFlowchart)
-              accessibilityDescription:@"Show visualization"
+                                                  accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.show_visualization.f1168681", nil, NSBundle.mainBundle, @"Show visualization", @"Accessibility description for showing a trigger visualization.")
                      fallbackImageName:@"flowchart"
                               forClass:[self class]];
     }
@@ -1596,7 +1600,7 @@ static const CGFloat kLabelWidth = 124;
                               _matchType == iTermTriggerMatchTypeEventJobEnded);
     _jobTextField.enabled = !jobFieldRedundant;
     if (jobFieldRedundant) {
-        _jobTextField.placeholderString = @"Set job above";
+        _jobTextField.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.set_job_above.eafff9d1", nil, NSBundle.mainBundle, @"Set job above", @"User-facing text in iTermAddTriggerViewController (updateEventTriggerVisibility).");
         // Clear so we don't serialize a stale trigger.job from a
         // previously-selected match type. The job-started/ended
         // evaluator ignores trigger.job entirely (it reads from
@@ -1604,7 +1608,7 @@ static const CGFloat kLabelWidth = 124;
         // would confuse future callers.
         _jobTextField.stringValue = @"";
     } else {
-        _jobTextField.placeholderString = @"Trigger enabled only for this job (e.g., emacs)";
+        _jobTextField.placeholderString = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.trigger_enabled_only_for_this_job_e_g.4303877d", nil, NSBundle.mainBundle, @"Trigger enabled only for this job (e.g., emacs)", @"User-facing text in iTermAddTriggerViewController (updateEventTriggerVisibility).");
     }
 }
 
@@ -1618,7 +1622,7 @@ static const CGFloat kLabelWidth = 124;
     [_matchTypeButton removeAllItems];
 
     // Always add regex
-    [_matchTypeButton it_addItemWithTitle:@"Regular Expression" tag:iTermTriggerMatchTypeRegex];
+    [_matchTypeButton it_addItemWithTitle:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.regular_expression.2aa42833", nil, NSBundle.mainBundle, @"Regular Expression", @"Trigger match type.") tag:iTermTriggerMatchTypeRegex];
 
     // Add all event types, sorted alphabetically by display name
     NSArray<NSNumber *> *sortedEventTypes = [[iTermEventTriggerMatchTypeHelper allEventTypes] sortedArrayUsingComparator:^NSComparisonResult(NSNumber *a, NSNumber *b) {
@@ -1841,7 +1845,7 @@ static const CGFloat kLabelWidth = 124;
     _popover = nil;
     _visualizationViewController = nil;
     _toggleVisualizationButton.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolFlowchart)
-                                             accessibilityDescription:@"Show visualization"
+                                                              accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.show_visualization.f1168681", nil, NSBundle.mainBundle, @"Show visualization", @"Accessibility description for showing a trigger visualization.")
                                                     fallbackImageName:@"flowchart"
                                                              forClass:[self class]];
     
@@ -1850,7 +1854,7 @@ static const CGFloat kLabelWidth = 124;
     _contentRegexVisualizationViewController = nil;
     if (_contentRegexVisualizationButton) {
         _contentRegexVisualizationButton.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolFlowchart)
-                                                         accessibilityDescription:@"Show content regex visualization"
+                                                               accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.show_content_regex_visualization.2aa61694", nil, NSBundle.mainBundle, @"Show content regex visualization", @"Accessibility description for showing a content regular-expression visualization.")
                                                                 fallbackImageName:@"flowchart"
                                                                          forClass:[self class]];
     }
@@ -1867,9 +1871,9 @@ static const CGFloat kLabelWidth = 124;
     // Update the regex label text based on match type
     if (_regexLabel) {
         if (_matchType == iTermTriggerMatchTypePageContentRegex) {
-            _regexLabel.stringValue = @"URL Regex:";
+            _regexLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.url_regex.5d966436", nil, NSBundle.mainBundle, @"URL Regex:", @"User-facing text in iTermAddTriggerViewController (updateContentRegexVisibility).");
         } else {
-            _regexLabel.stringValue = @"Regular Expression:";
+            _regexLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.regular_expression.8182fd85", nil, NSBundle.mainBundle, @"Regular Expression:", @"User-facing text in iTermAddTriggerViewController (updateContentRegexVisibility).");
         }
     }
 }
@@ -1886,14 +1890,14 @@ static const CGFloat kLabelWidth = 124;
         _contentRegexPopover = popover;
 
         button.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolFlowchartFill)
-                             accessibilityDescription:@"Hide content regex visualization"
+                                                                 accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.hide_content_regex_visualization.8b7f52e4", nil, NSBundle.mainBundle, @"Hide content regex visualization", @"Accessibility description for hiding a content regular-expression visualization.")
                                     fallbackImageName:@"flowchart.fill"
                                              forClass:[self class]];
     } else {
         [_contentRegexPopover close];
         _contentRegexPopover = nil;
         button.image = [NSImage it_imageForSymbolName:SFSymbolGetString(SFSymbolFlowchart)
-              accessibilityDescription:@"Show content regex visualization"
+                                                                 accessibilityDescription:NSLocalizedStringWithDefaultValue(@"ui.settings.itermaddtriggerviewcontroller.show_content_regex_visualization.2aa61694", nil, NSBundle.mainBundle, @"Show content regex visualization", @"Accessibility description for showing a content regular-expression visualization.")
                      fallbackImageName:@"flowchart"
                               forClass:[self class]];
     }

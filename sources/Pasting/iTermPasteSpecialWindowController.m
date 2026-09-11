@@ -408,11 +408,17 @@
         linesFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     }
 
-    _statsLabel.stringValue = [NSString stringWithFormat:@"%@ byte%@ in %@ line%@.",
+    NSString *byteUnit = numBytes == 1
+        ? NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastespecialwindowcontroller.byte_unit.1c31626f", nil, NSBundle.mainBundle, @"byte", @"Singular byte unit in paste statistics.")
+        : NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastespecialwindowcontroller.bytes_unit.277089d9", nil, NSBundle.mainBundle, @"bytes", @"Plural byte unit in paste statistics.");
+    NSString *lineUnit = numberOfLines == 1
+        ? NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastespecialwindowcontroller.line_unit.38a9c1e7", nil, NSBundle.mainBundle, @"line", @"Singular line unit in paste statistics.")
+        : NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastespecialwindowcontroller.lines_unit.5ea44c39", nil, NSBundle.mainBundle, @"lines", @"Plural line unit in paste statistics.");
+    _statsLabel.stringValue = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastespecialwindowcontroller.byte_in_line.d9f4e68c", nil, NSBundle.mainBundle, @"%@ %@ in %@ %@.", @"User-facing text in iTermPasteSpecialWindowController (stringValue)."),
                                [[bytesFormatter stringFromNumber:@(numBytes)] stringWithFirstLetterCapitalized],
-                               numBytes == 1 ? @"" : @"s",
+                               byteUnit,
                                [linesFormatter stringFromNumber:@(numberOfLines)],
-                               numberOfLines == 1 ? @"" : @"s"];
+                               lineUnit];
     [self updateDuration];
 }
 
@@ -427,7 +433,7 @@
         duration = ceil(duration);
     }
     if (duration < 0.01) {
-        _estimatedDuration.stringValue = @"Instant";
+        _estimatedDuration.stringValue = NSLocalizedStringWithDefaultValue(@"ui.pasting.itermpastespecialwindowcontroller.instant.e2861894", nil, NSBundle.mainBundle, @"Instant", @"User-facing text in iTermPasteSpecialWindowController (updateDuration).");
     } else {
         _estimatedDuration.stringValue = [_pasteSpecialViewController descriptionForDuration:duration];
     }

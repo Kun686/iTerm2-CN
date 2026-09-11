@@ -83,7 +83,7 @@
             if (name) {
                 name = [NSString stringWithFormat:@"“%@”", name];
             } else {
-                name = @"Unnamed Profile";
+                name = NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.unnamed_profile.e4dd0ac7", nil, NSBundle.mainBundle, @"Unnamed Profile", @"User-facing phrase fragment in iTermHotKeyMigrationHelper.");
             }
             [childrensNames addObject:name];
         }
@@ -91,10 +91,10 @@
     if (childrensNames.count) {
         RLog(@"Warning about children of hotkey profile");
         NSString *concatenatedNames = [childrensNames componentsJoinedWithOxfordComma];
-        NSString *title = [NSString stringWithFormat:@"You have dynamic profiles whose “Dynamic Profile Parent Name” is set to your hotkey window's profile, “%@.” Because multiple hotkey windows are now supported, the hotkey will now toggle a separate window for each of these profiles. Please update your dynamic profiles appropriately. The affected profiles are:\n%@",
+        NSString *title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.you_have_dynamic_profiles_whose_dynamic_profile_parent_name_is_set_to_yo.bb8eb57d", nil, NSBundle.mainBundle, @"You have dynamic profiles whose “Dynamic Profile Parent Name” is set to your hotkey window's profile, “%@.” Because multiple hotkey windows are now supported, the hotkey will now toggle a separate window for each of these profiles. Please update your dynamic profiles appropriately. The affected profiles are:\n%@", @"User-facing text in iTermHotKeyMigrationHelper (indirect UI)."),
                            profile[KEY_NAME], concatenatedNames];
         [iTermWarning showWarningWithTitle:title
-                                   actions:@[ @"OK" ]
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermHotKeyMigrationHelper (actions).") ]
                                 identifier:nil
                                silenceable:kiTermWarningTypePersistent
                                     window:nil];
@@ -104,7 +104,7 @@
 
 - (void)migrateDynamicProfileHotKeySettings:(Profile *)profile {
     RLog(@"Have a dynamic profile to migrate");
-    NSString *title = [NSString stringWithFormat:@"Your hotkey window‘s profile is a dynamic profile named “%@.” It needs to be updated for this version of iTerm2 because hotkey settings are now stored in the profile.", profile[KEY_NAME]];
+    NSString *title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.your_hotkey_window_s_profile_is_a_dynamic_profile_named_it_needs_to_be_u.995d8a3d", nil, NSBundle.mainBundle, @"Your hotkey window‘s profile is a dynamic profile named “%@.” It needs to be updated for this version of iTerm2 because hotkey settings are now stored in the profile.", @"User-facing text in iTermHotKeyMigrationHelper (indirect UI)."), profile[KEY_NAME]];
 
     NSArray *actions;
     NSData *replacementFile = [self modifiedDynamicProfileFileWithNewHotKeySettingsFromProfile:profile];
@@ -115,10 +115,10 @@
     if (replacementFile) {
         update = kiTermWarningSelection0;
         show = kiTermWarningSelection1;
-        actions = @[ @"Update File", @"Show Me What to Add", @"Remove Hotkey" ];
+        actions = @[ NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.update_file.40b49f9b", nil, NSBundle.mainBundle, @"Update File", @"User-facing action label in iTermHotKeyMigrationHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.show_me_what_to_add.cc467a3a", nil, NSBundle.mainBundle, @"Show Me What to Add", @"User-facing action label in iTermHotKeyMigrationHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.remove_hotkey.1bdfde8f", nil, NSBundle.mainBundle, @"Remove Hotkey", @"User-facing action label in iTermHotKeyMigrationHelper (actions).") ];
     } else {
         show = kiTermWarningSelection0;
-        actions = @[ @"Show Me What to Add", @"Remove Hotkey" ];
+        actions = @[ NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.show_me_what_to_add.cc467a3a", nil, NSBundle.mainBundle, @"Show Me What to Add", @"User-facing action label in iTermHotKeyMigrationHelper (actions)."), NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.remove_hotkey.1bdfde8f", nil, NSBundle.mainBundle, @"Remove Hotkey", @"User-facing action label in iTermHotKeyMigrationHelper (actions).") ];
     }
 
     iTermWarningSelection selection = [iTermWarning showWarningWithTitle:title
@@ -126,7 +126,7 @@
                                                                accessory:nil
                                                               identifier:nil
                                                              silenceable:kiTermWarningTypePersistent
-                                                                 heading:@"Problem Updating Hotkey Window"
+                                                                 heading:NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.problem_updating_hotkey_window.d9afdb6b", nil, NSBundle.mainBundle, @"Problem Updating Hotkey Window", @"User-facing text in iTermHotKeyMigrationHelper (heading).")
                                                                   window:nil];
     if (selection == update) {
         NSString *filename = profile[KEY_DYNAMIC_PROFILE_FILENAME];
@@ -202,13 +202,13 @@
 
     }
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    alert.messageText = @"Changes to Make";
-    alert.informativeText = [NSString stringWithFormat:@"Add these settings to the profile named “%@” in “%@”:\n%@",
+    alert.messageText = NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.changes_to_make.3443dafc", nil, NSBundle.mainBundle, @"Changes to Make", @"User-facing text in iTermHotKeyMigrationHelper (showNeededChangesForHotKeyMigrationOfDynamicProfile:).");
+    alert.informativeText = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.add_these_settings_to_the_profile_named_in.2b016f3c", nil, NSBundle.mainBundle, @"Add these settings to the profile named “%@” in “%@”:\n%@", @"User-facing text in iTermHotKeyMigrationHelper (informativeText)."),
                              profile[KEY_NAME],
                              filename,
                              lines];
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Copy to Pasteboard"];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermHotKeyMigrationHelper (showNeededChangesForHotKeyMigrationOfDynamicProfile:).")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"ui.hotkey.itermhotkeymigrationhelper.copy_to_pasteboard.5dcf9264", nil, NSBundle.mainBundle, @"Copy to Pasteboard", @"User-facing text in iTermHotKeyMigrationHelper (showNeededChangesForHotKeyMigrationOfDynamicProfile:).")];
     if ([alert runModal] == NSAlertSecondButtonReturn) {
         NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
         [pasteBoard declareTypes:@[ NSPasteboardTypeString ] owner:self];

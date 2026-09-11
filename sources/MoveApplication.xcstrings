@@ -1,0 +1,142 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Could not move to Applications folder": {
+      "comment": "LetsMove error shown when relocating the application fails.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not move to Applications folder"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法移到“应用程序”文件夹"
+          }
+        }
+      }
+    },
+    "Do Not Move": {
+      "comment": "LetsMove button that keeps the application in its current location.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do Not Move"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不移动"
+          }
+        }
+      }
+    },
+    "I can move myself to the Applications folder if you'd like.": {
+      "comment": "LetsMove explanation shown before relocating the application.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I can move myself to the Applications folder if you'd like."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "如有需要，我可以将自己移到“应用程序”文件夹。"
+          }
+        }
+      }
+    },
+    "Move to Applications Folder": {
+      "comment": "LetsMove button that relocates the application.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move to Applications Folder"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移到“应用程序”文件夹"
+          }
+        }
+      }
+    },
+    "Move to Applications folder in your Home folder?": {
+      "comment": "LetsMove title when the application can be relocated to the user's Applications folder.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move to Applications folder in your Home folder?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要移到个人文件夹中的“应用程序”文件夹吗？"
+          }
+        }
+      }
+    },
+    "Move to Applications folder?": {
+      "comment": "LetsMove title when the application can be relocated to the system Applications folder.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move to Applications folder?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要移到“应用程序”文件夹吗？"
+          }
+        }
+      }
+    },
+    "Note that this will require an administrator password.": {
+      "comment": "LetsMove note shown when relocation needs administrator authorization.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note that this will require an administrator password."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请注意，此操作需要管理员密码。"
+          }
+        }
+      }
+    },
+    "This will allow auto-update to function.": {
+      "comment": "LetsMove note shown when the application is launched from Downloads.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This will allow auto-update to function."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这样可让自动更新功能正常运行。"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

@@ -43,17 +43,17 @@
         case iTermGitRepoStateNone:
             break;
         case iTermGitRepoStateMerge:
-            return [self attributedStringWithString:@"Merging"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.merging.a975de4f", nil, NSBundle.mainBundle, @"Merging", @"User-facing Git repository state.")];
         case iTermGitRepoStateRevert:
-            return [self attributedStringWithString:@"Reverting"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.reverting.f2441a6c", nil, NSBundle.mainBundle, @"Reverting", @"User-facing Git repository state.")];
         case iTermGitRepoStateCherrypick:
-            return [self attributedStringWithString:@"Cherrypicking"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.cherrypicking.ea14391c", nil, NSBundle.mainBundle, @"Cherrypicking", @"User-facing Git repository state.")];
         case iTermGitRepoStateBisect:
-            return [self attributedStringWithString:@"Bisecting"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.bisecting.675fd45e", nil, NSBundle.mainBundle, @"Bisecting", @"User-facing Git repository state.")];
         case iTermGitRepoStateRebase:
-            return [self attributedStringWithString:@"Rebasing"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.rebasing.276cd31a", nil, NSBundle.mainBundle, @"Rebasing", @"User-facing text in iTermGitStringMaker (attributedStringWithString:).")];
         case iTermGitRepoStateApply:
-            return [self attributedStringWithString:@"Applying"];
+            return [self attributedStringWithString:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.applying.8a9bd1be", nil, NSBundle.mainBundle, @"Applying", @"User-facing text in iTermGitStringMaker (attributedStringWithString:).")];
     }
     static NSAttributedString *upImage;
     static NSAttributedString *downImage;
@@ -101,25 +101,25 @@
         NSMutableArray<NSAttributedString *> *parts = [NSMutableArray array];
         if (filesAdded > 0 || filesDeleted > 0) {
             if (filesAdded == 0) {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"-%@ files",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.files_deleted", nil, NSBundle.mainBundle, @"-%@ files", @"Deleted file count in the Git status display."),
                                                                                  @(filesDeleted)]]];
             } else if (filesDeleted == 0) {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"+%@ files",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.files_added", nil, NSBundle.mainBundle, @"+%@ files", @"Added file count in the Git status display."),
                                                                                  @(filesAdded)]]];
             } else {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"+%@/-%@ files",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.files_added_deleted", nil, NSBundle.mainBundle, @"+%@/-%@ files", @"Added and deleted file counts in the Git status display."),
                                                                                  @(filesAdded), @(filesDeleted)]]];
             }
         }
         if (linesInserted > 0 || linesDeleted > 0) {
             if (linesInserted == 0) {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"-%@ lines",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.lines_deleted", nil, NSBundle.mainBundle, @"-%@ lines", @"Deleted line count in the Git status display."),
                                                                                  @(linesDeleted)]]];
             } else if (linesDeleted == 0) {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"+%@ lines",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.lines_added", nil, NSBundle.mainBundle, @"+%@ lines", @"Added line count in the Git status display."),
                                                                                  @(linesInserted)]]];
             } else {
-                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:@"+%@/-%@ lines",
+                [parts addObject:[self attributedStringWithString:[NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.itermgitstringmaker.stats.lines_added_deleted", nil, NSBundle.mainBundle, @"+%@/-%@ lines", @"Added and deleted line counts in the Git status display."),
                                                                                  @(linesInserted), @(linesDeleted)]]];
 
             }

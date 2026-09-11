@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browser Settings</title>
+    <title>{{PAGE_TITLE}}</title>
     <style>
         {{COMMON_CSS}}
         
@@ -511,75 +511,75 @@
     <div class="container">
         <div class="header">
             <div class="header-content">
-                <h1>Browser Settings</h1>
+                <h1>{{PAGE_TITLE}}</h1>
             </div>
         </div>
         
         <div class="privacy-section">
             <div class="section">
-                <h2>Privacy & Data</h2>
+                <h2>{{PRIVACY_AND_DATA}}</h2>
                 <div class="setting-item dev-null-note" style="{{DEV_NULL_NOTE}}">
                     <div class="setting-info">
-                        <h3>🔒 /dev/null Mode Active</h3>
-                        <p>This profile is in /dev/null mode. Cookies, history, and all other browser data are stored in RAM and will be lost when the tab is closed.</p>
+                        <h3>🔒 {{DEV_NULL_TITLE}}</h3>
+                        <p>{{DEV_NULL_DESCRIPTION}}</p>
                     </div>
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Clear All Cookies</h3>
-                        <p>Remove all stored cookies from websites</p>
+                        <h3>{{CLEAR_ALL_COOKIES_TITLE}}</h3>
+                        <p>{{CLEAR_ALL_COOKIES_DESCRIPTION}}</p>
                     </div>
-                    <button class="button small danger" onclick="clearCookies()">Clear Cookies</button>
+                    <button class="button small danger" onclick="clearCookies()">{{CLEAR_COOKIES}}</button>
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Clear Website Data</h3>
-                        <p>Remove cookies, cache, and local storage</p>
+                        <h3>{{CLEAR_WEBSITE_DATA_TITLE}}</h3>
+                        <p>{{CLEAR_WEBSITE_DATA_DESCRIPTION}}</p>
                     </div>
-                    <button class="button small danger" onclick="clearAllData()">Clear All Data</button>
+                    <button class="button small danger" onclick="clearAllData()">{{CLEAR_ALL_DATA}}</button>
                 </div>
             </div>
         </div>
         
         <div class="permissions-section">
             <div class="section">
-                <h2>Site Permissions</h2>
+                <h2>{{SITE_PERMISSIONS}}</h2>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Manage Site Permissions</h3>
-                        <p>View and revoke permissions granted to websites (camera, microphone, location, notifications)</p>
+                        <h3>{{MANAGE_SITE_PERMISSIONS_TITLE}}</h3>
+                        <p>{{MANAGE_SITE_PERMISSIONS_DESCRIPTION}}</p>
                     </div>
-                    <button class="button small" onclick="openPermissions()">Manage Permissions</button>
+                    <button class="button small" onclick="openPermissions()">{{MANAGE_PERMISSIONS}}</button>
                 </div>
             </div>
         </div>
 
         <div class="permissions-section">
             <div class="section">
-                <h2>Saved Passwords</h2>
+                <h2>{{SAVED_PASSWORDS}}</h2>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Manage Saved Passwords</h3>
-                        <p>Open the password manager to view or remove website usernames and passwords, including those remembered for HTTP authentication</p>
+                        <h3>{{MANAGE_SAVED_PASSWORDS_TITLE}}</h3>
+                        <p>{{MANAGE_SAVED_PASSWORDS_DESCRIPTION}}</p>
                     </div>
-                    <button class="button small" onclick="openPasswordManager()">Manage Passwords</button>
+                    <button class="button small" onclick="openPasswordManager()">{{MANAGE_PASSWORDS}}</button>
                 </div>
             </div>
         </div>
 
         <div class="link-opening-section">
             <div class="section">
-                <h2>Link Opening</h2>
+                <h2>{{LINK_OPENING}}</h2>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Open Links From Terminal</h3>
-                        <p>Choose where links from the terminal should open</p>
+                        <h3>{{OPEN_LINKS_FROM_TERMINAL_TITLE}}</h3>
+                        <p>{{OPEN_LINKS_FROM_TERMINAL_DESCRIPTION}}</p>
                     </div>
                     <div class="search-engine-selector">
                         <select id="linkOpeningSelect" onchange="updateLinkOpeningPreference()">
-                            <option value="ask">Always Ask</option>
-                            <option value="builtin">Built-in Browser</option>
-                            <option value="default">Default Browser</option>
+                            <option value="ask">{{ALWAYS_ASK}}</option>
+                            <option value="builtin">{{BUILT_IN_BROWSER}}</option>
+                            <option value="default">{{DEFAULT_BROWSER}}</option>
                         </select>
                     </div>
                 </div>
@@ -588,11 +588,11 @@
         
         <div class="search-section">
             <div class="section">
-                <h2>Search Engine</h2>
+                <h2>{{SEARCH_ENGINE}}</h2>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Default Search Engine</h3>
-                        <p>Choose your preferred search engine for web searches</p>
+                        <h3>{{DEFAULT_SEARCH_ENGINE_TITLE}}</h3>
+                        <p>{{DEFAULT_SEARCH_ENGINE_DESCRIPTION}}</p>
                     </div>
                     <div class="search-engine-selector">
                         <select id="searchEngineSelect" onchange="updateSearchEngine()">
@@ -600,14 +600,14 @@
                             <option value="duckduckgo">DuckDuckGo</option>
                             <option value="bing">Bing</option>
                             <option value="kagi">Kagi</option>
-                            <option value="custom">Custom</option>
+                            <option value="custom">{{CUSTOM}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="setting-item" id="customSearchURLItem" style="display: none;">
                     <div class="setting-info">
-                        <h3>Custom Search URL</h3>
-                        <p>Enter a custom search URL template. Use %@ where the search query should be inserted.</p>
+                        <h3>{{CUSTOM_SEARCH_URL_TITLE}}</h3>
+                        <p>{{CUSTOM_SEARCH_URL_DESCRIPTION}}</p>
                     </div>
                     <div class="input-group">
                         <input type="url" id="customSearchURL" value="" placeholder="https://example.com/search?q=%@" onchange="updateCustomSearchURL(this.value)">
@@ -615,8 +615,8 @@
                 </div>
                 <div class="setting-item" id="customSuggestURLItem" style="display: none;">
                     <div class="setting-info">
-                        <h3>Custom Search Suggestions URL</h3>
-                        <p>Optional: Enter a URL template for search suggestions (OpenSearch format). Use %@ where the search query should be inserted.</p>
+                        <h3>{{CUSTOM_SUGGEST_URL_TITLE}}</h3>
+                        <p>{{CUSTOM_SUGGEST_URL_DESCRIPTION}}</p>
                     </div>
                     <div class="input-group">
                         <input type="url" id="customSuggestURL" value="" placeholder="https://example.com/suggest?q=%@" onchange="updateCustomSuggestURL(this.value)">
@@ -627,11 +627,11 @@
         
         <div class="adblock-section">
             <div class="section">
-                <h2>Ad Blocking</h2>
+                <h2>{{AD_BLOCKING}}</h2>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Enable WebKit Ad Blocking</h3>
-                        <p>Block ads using WebKit content rules (list-based blocking)</p>
+                        <h3>{{ENABLE_AD_BLOCKING_TITLE}}</h3>
+                        <p>{{ENABLE_AD_BLOCKING_DESCRIPTION}}</p>
                     </div>
                     <label class="toggle">
                         <input type="checkbox" id="adblockEnabled" {{ADBLOCK_ENABLED}} onchange="toggleAdblock(this.checked)">
@@ -640,12 +640,12 @@
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Filter List URL</h3>
-                        <p>URL for downloading WebKit ad blocking rules (updates daily)</p>
+                        <h3>{{FILTER_LIST_URL_TITLE}}</h3>
+                        <p>{{FILTER_LIST_URL_DESCRIPTION}}</p>
                     </div>
                     <div class="input-group">
                         <input type="url" id="adblockURL" value="{{ADBLOCK_URL}}" placeholder="https://easylist-downloads.adblockplus.org/easylist_content_blocker.json" onchange="updateAdblockURL(this.value)">
-                        <button class="button small" onclick="forceAdblockUpdate()">Update Now</button>
+                        <button class="button small" onclick="forceAdblockUpdate()">{{UPDATE_NOW}}</button>
                     </div>
                 </div>
                 <div class="setting-item">
@@ -655,8 +655,8 @@
                 </div>
                 <div class="setting-item" id="adblockStats">
                     <div class="setting-info">
-                        <h3>WebKit Filter Statistics</h3>
-                        <p id="adblockStatsText">Loading filter statistics…</p>
+                        <h3>{{FILTER_STATISTICS_TITLE}}</h3>
+                        <p id="adblockStatsText">{{LOADING_FILTER_STATISTICS}}</p>
                     </div>
                 </div>
             </div>
@@ -664,11 +664,11 @@
         
         <div class="proxy-section">
             <div class="section">
-                <h2>Proxy Settings</h2>
+                <h2>{{PROXY_SETTINGS}}</h2>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Enable HTTP Proxy</h3>
-                        <p>Route browser traffic through a CONNECT proxy server.</p>
+                        <h3>{{ENABLE_HTTP_PROXY_TITLE}}</h3>
+                        <p>{{ENABLE_HTTP_PROXY_DESCRIPTION}}</p>
                     </div>
                     <label class="toggle">
                         <input type="checkbox" id="proxyEnabled" onchange="toggleProxy(this.checked)">
@@ -677,8 +677,8 @@
                 </div>
                 <div class="setting-item">
                     <div class="setting-info">
-                        <h3>Proxy Server</h3>
-                        <p>HTTP CONNECT proxy address and port</p>
+                        <h3>{{PROXY_SERVER_TITLE}}</h3>
+                        <p>{{PROXY_SERVER_DESCRIPTION}}</p>
                     </div>
                     <div class="input-group">
                         <input type="text" id="proxyHost" value="127.0.0.1" placeholder="127.0.0.1" onchange="updateProxyHost(this.value)" style="width: 150px;">
@@ -693,8 +693,8 @@
             <div class="section collapsible-section" id="extensionsSection">
                 <div class="collapsible-header" onclick="toggleExtensionsSection()">
                     <div class="collapsible-title">
-                        <h2>Browser Extensions</h2>
-                        <p class="collapsible-subtitle">This feature is still in development. It is not intended for general use yet.</p>
+                        <h2>{{BROWSER_EXTENSIONS}}</h2>
+                        <p class="collapsible-subtitle">{{BROWSER_EXTENSIONS_BETA}}</p>
                     </div>
                     <div class="collapse-indicator">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -705,10 +705,10 @@
                 <div class="collapsible-content">
                     <div class="setting-item">
                         <div class="setting-info">
-                            <h3>Extensions Directory</h3>
-                            <p>Manage your browser extensions directory location and install new extensions</p>
+                            <h3>{{EXTENSIONS_DIRECTORY_TITLE}}</h3>
+                            <p>{{EXTENSIONS_DIRECTORY_DESCRIPTION}}</p>
                         </div>
-                        <button class="button small" onclick="revealExtensionsDirectory()">Reveal in Finder</button>
+                        <button class="button small" onclick="revealExtensionsDirectory()">{{REVEAL_IN_FINDER}}</button>
                     </div>
                     <div id="extensionsContainer">
                         <!-- Extensions will be populated by JavaScript -->
@@ -720,8 +720,40 @@
     </div>
     
     <script>
+        const localized = {
+            clearCookiesPrompt: {{CLEAR_COOKIES_PROMPT_JSON}},
+            clearAllDataPrompt: {{CLEAR_ALL_DATA_PROMPT_JSON}},
+            updatingAdBlockRules: {{UPDATING_AD_BLOCK_RULES_JSON}},
+            noFilterRules: {{NO_FILTER_RULES_JSON}},
+            filterRulesLoadedFormat: {{FILTER_RULES_LOADED_FORMAT_JSON}},
+            updatedLastHour: {{UPDATED_LAST_HOUR_JSON}},
+            updatedHoursAgoFormat: {{UPDATED_HOURS_AGO_FORMAT_JSON}},
+            updatedDaysAgoFormat: {{UPDATED_DAYS_AGO_FORMAT_JSON}},
+            noExtensionsTitle: {{NO_EXTENSIONS_TITLE_JSON}},
+            noExtensionsDescription: {{NO_EXTENSIONS_DESCRIPTION_JSON}},
+            noDescription: {{NO_DESCRIPTION_JSON}},
+            unknownVersion: {{UNKNOWN_VERSION_JSON}},
+            versionFormat: {{VERSION_FORMAT_JSON}},
+            permissionsFormat: {{PERMISSIONS_FORMAT_JSON}},
+            hostPermissionsFormat: {{HOST_PERMISSIONS_FORMAT_JSON}}
+        };
+
+        function formatLocalized(format, values) {
+            values.forEach((value, index) => {
+                format = format.split(`%${index + 1}$@`).join(value);
+                format = format.split(`%${index + 1}$lld`).join(value);
+            });
+            return format;
+        }
+
+        function escapeHtml(value) {
+            const div = document.createElement('div');
+            div.textContent = String(value);
+            return div.innerHTML;
+        }
+
         function clearCookies() {
-            if (confirm('This will remove all cookies. Continue?')) {
+            if (confirm(localized.clearCookiesPrompt)) {
                 window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
                     action: 'clearCookies',
                     sessionSecret: sessionSecret
@@ -730,7 +762,7 @@
         }
         
         function clearAllData() {
-            if (confirm('This will remove all browsing data including cookies, cache, and local storage. Continue?')) {
+            if (confirm(localized.clearAllDataPrompt)) {
                 window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
                     action: 'clearAllData',
                     sessionSecret: sessionSecret
@@ -757,7 +789,7 @@
         }
         
         function forceAdblockUpdate() {
-            showStatus('Updating ad block rules…', 'info');
+            showStatus(localized.updatingAdBlockRules, 'info');
             window.webkit.messageHandlers['iterm2-about:settings'].postMessage({
                 action: 'forceAdblockUpdate',
                 sessionSecret: sessionSecret
@@ -984,11 +1016,11 @@
             const lastUpdate = stats.lastUpdate;
             
             if (ruleCount === 0) {
-                statsText.textContent = 'No filter rules loaded';
+                statsText.textContent = localized.noFilterRules;
                 return;
             }
             
-            let text = `${ruleCount.toLocaleString()} filter rules loaded`;
+            let text = formatLocalized(localized.filterRulesLoadedFormat, [ruleCount.toLocaleString()]);
             
             if (lastUpdate > 0) {
                 const lastUpdateDate = new Date(lastUpdate * 1000);
@@ -996,12 +1028,12 @@
                 const diffHours = Math.floor((now - lastUpdateDate) / (1000 * 60 * 60));
                 
                 if (diffHours < 1) {
-                    text += ' (updated in the last hour)';
+                    text += ` ${localized.updatedLastHour}`;
                 } else if (diffHours < 24) {
-                    text += ` (updated ${diffHours} hours ago)`;
+                    text += ` ${formatLocalized(localized.updatedHoursAgoFormat, [diffHours])}`;
                 } else {
                     const diffDays = Math.floor(diffHours / 24);
-                    text += ` (updated ${diffDays} days ago)`;
+                    text += ` ${formatLocalized(localized.updatedDaysAgoFormat, [diffDays])}`;
                 }
             }
             
@@ -1089,8 +1121,8 @@
             if (!extensions || extensions.length === 0) {
                 container.innerHTML = `
                     <div class="no-extensions">
-                        <h4>No Extensions Found</h4>
-                        <p>No browser extensions are currently installed. Extensions should be placed in your extensions directory as configured in your profile preferences.</p>
+                        <h4>${escapeHtml(localized.noExtensionsTitle)}</h4>
+                        <p>${escapeHtml(localized.noExtensionsDescription)}</p>
                     </div>
                 `;
                 return;
@@ -1102,8 +1134,8 @@
                 const extensionBox = document.createElement('div');
                 extensionBox.className = 'extension-box';
                 
-                const description = extension.description || 'No description available';
-                const version = extension.version || 'Unknown version';
+                const description = extension.description || localized.noDescription;
+                const version = extension.version || localized.unknownVersion;
                 const permissions = extension.permissions || [];
                 const hostPermissions = extension.hostPermissions || [];
                 
@@ -1122,18 +1154,18 @@
                     <div class="extension-details">
                         <div class="extension-detail">
                             <span>📦</span>
-                            <span>Version ${version}</span>
+                            <span>${formatLocalized(localized.versionFormat, [version])}</span>
                         </div>
                         ${permissions.length > 0 ? `
                         <div class="extension-detail">
                             <span>🔑</span>
-                            <span>${permissions.length} permissions</span>
+                            <span>${formatLocalized(localized.permissionsFormat, [permissions.length])}</span>
                         </div>
                         ` : ''}
                         ${hostPermissions.length > 0 ? `
                         <div class="extension-detail">
                             <span>🌐</span>
-                            <span>${hostPermissions.length} host permissions</span>
+                            <span>${formatLocalized(localized.hostPermissionsFormat, [hostPermissions.length])}</span>
                         </div>
                         ` : ''}
                     </div>

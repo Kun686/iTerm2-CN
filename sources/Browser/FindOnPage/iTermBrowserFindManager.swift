@@ -350,7 +350,11 @@ class iTermBrowserFindManager: NSObject {
                             "SCROLL_BEHAVIOR": "smooth",
                             "TEST_FUNCTIONS": "",
                             "TEST_IMPLS": "",
-                            "TEST_FREEZE": "" ])
+                            "TEST_FREEZE": "",
+                            "INVALID_URL_PREFIX_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.find.invalid_url_prefix", defaultValue: "Not a valid URL: "),
+                            "FAILED_TO_OPEN_URL_PREFIX_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.find.failed_to_open_url_prefix", defaultValue: "Failed to open URL: "),
+                            "COPIED_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.find.copied", defaultValue: "Copied"),
+                            "FAILED_TO_COPY_JSON": iTermBrowserTemplateLoader.localizedJavaScriptStringLiteral("ui.browser.script.find.failed_to_copy", defaultValue: "Failed to copy") ])
         return script
     }
 

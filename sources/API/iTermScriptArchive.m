@@ -140,25 +140,25 @@ NSString *const iTermScriptMetadataName = @"metadata.json";
 }
 
 - (BOOL)userAcceptsTrustedScriptAutoLaunchInstall {
-    NSString *body = [NSString stringWithFormat:@"“%@” would like to launch automatically when iTerm2 starts. Would you like to allow that?", self.name];
+    NSString *body = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptarchive.would_like_to_launch_automatically_when_iterm2_starts_would_you_like_to.e84213f0", nil, NSBundle.mainBundle, @"“%@” would like to launch automatically when iTerm2 starts. Would you like to allow that?", @"User-facing text in iTermScriptArchive (indirect UI)."), self.name];
     const iTermWarningSelection selection = [iTermWarning showWarningWithTitle:body
-                                                                       actions:@[ @"Launch Automatically", @"Lauch Manually" ]
+                                                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptarchive.launch_automatically.0df09230", nil, NSBundle.mainBundle, @"Launch Automatically", @"User-facing action label in iTermScriptArchive (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptarchive.lauch_manually.6b8068d9", nil, NSBundle.mainBundle, @"Lauch Manually", @"User-facing action label in iTermScriptArchive (actions).") ]
                                                                      accessory:nil
                                                                     identifier:nil
                                                                    silenceable:kiTermWarningTypePersistent
-                                                                       heading:@"Allow Auto-Launch?"
+                                                                       heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptarchive.allow_auto_launch.0aa7a8a4", nil, NSBundle.mainBundle, @"Allow Auto-Launch?", @"User-facing text in iTermScriptArchive (heading).")
                                                                         window:nil];
     return (selection == kiTermWarningSelection0);
 }
 
 - (BOOL)userAcceptsExplicitAutoLaunchInstall {
-    NSString *body = [NSString stringWithFormat:@"“%@” can launch automatically when iTerm2 starts. Would you like to allow that?", self.name];
+    NSString *body = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptarchive.can_launch_automatically_when_iterm2_starts_would_you_like_to_allow_that.a80ec525", nil, NSBundle.mainBundle, @"“%@” can launch automatically when iTerm2 starts. Would you like to allow that?", @"User-facing text in iTermScriptArchive (indirect UI)."), self.name];
     const iTermWarningSelection selection = [iTermWarning showWarningWithTitle:body
-                                                                       actions:@[ @"Launch Automatically", @"Lauch Manually" ]
+                                                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptarchive.launch_automatically.0df09230", nil, NSBundle.mainBundle, @"Launch Automatically", @"User-facing action label in iTermScriptArchive (actions)."), NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptarchive.lauch_manually.6b8068d9", nil, NSBundle.mainBundle, @"Lauch Manually", @"User-facing action label in iTermScriptArchive (actions).") ]
                                                                      accessory:nil
                                                                     identifier:nil
                                                                    silenceable:kiTermWarningTypePersistent
-                                                                       heading:@"Allow Auto-Launch?"
+                                                                       heading:NSLocalizedStringWithDefaultValue(@"ui.api.itermscriptarchive.allow_auto_launch.0aa7a8a4", nil, NSBundle.mainBundle, @"Allow Auto-Launch?", @"User-facing text in iTermScriptArchive (heading).")
                                                                         window:nil];
     return (selection == kiTermWarningSelection0);
 }

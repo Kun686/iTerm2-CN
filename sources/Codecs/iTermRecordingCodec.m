@@ -35,20 +35,20 @@
     NSError *error = nil;
     NSData *gzipped = [NSData dataWithContentsOfURL:url options:0 error:&error];
     if (!gzipped) {
-        [iTermWarning showWarningWithTitle:error.localizedDescription ?: @"Unknown error"
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:error.localizedDescription ?: NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.unknown_error.27c2ccd9", nil, NSBundle.mainBundle, @"Unknown error", @"Fallback error description when a recording cannot be read.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRecordingCodec (actions).") ]
                                  accessory:nil
                                 identifier:@"RecordingMalformed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Could not read the file: its envelope was malformed."
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.could_not_read_the_file_its_envelope_was.f3270b0d", nil, NSBundle.mainBundle, @"Could not read the file: its envelope was malformed.", @"User-facing text in iTermRecordingCodec (heading).")
                                     window:nil];
         return;
     }
 
     NSData *data = [gzipped gunzippedData];
     if (!data) {
-        [iTermWarning showWarningWithTitle:@"Could not read the file: decompression failed."
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.could_not_read_the_file_decompression_failed.a0a9e99d", nil, NSBundle.mainBundle, @"Could not read the file: decompression failed.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRecordingCodec (actions).") ]
                                 identifier:@"RecordingMalformed"
                                silenceable:kiTermWarningTypePersistent
                                     window:nil];
@@ -59,8 +59,8 @@
     // a bug like this, but I can't come up with a better explanation :(
     NSDictionary *dict = [data it_unarchivedObjectOfClasses:@[ [NSDictionary class], [NSArray class] ]];
     if (![dict isKindOfClass:[NSDictionary class]]) {
-        [iTermWarning showWarningWithTitle:@"Could not read the file: unarchiving decompressed data failed."
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.could_not_read_the_file_unarchiving_decompressed_data.cc9d8e41", nil, NSBundle.mainBundle, @"Could not read the file: unarchiving decompressed data failed.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRecordingCodec (actions).") ]
                                 identifier:@"RecordingMalformed"
                                silenceable:kiTermWarningTypePersistent
                                     window:nil];
@@ -70,13 +70,13 @@
     // This is the outer version. It is set in [-iTermRecordingCodec exportRecording:from:to:window:].
     NSArray<NSNumber *> *supportedVersions = @[ @1, @2, @3, @4 ];
     if (![supportedVersions containsObject:dict[@"version"]]) {
-        [iTermWarning showWarningWithTitle:@"This recording is from a newer version of iTerm2 and cannot be replayed in this version."
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.this_recording_is_from_a_newer_version_of.cca79cb6", nil, NSBundle.mainBundle, @"This recording is from a newer version of iTerm2 and cannot be replayed in this version.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRecordingCodec (actions).") ]
                              actionMapping:nil
                                  accessory:nil
                                 identifier:@"RecordingMalformed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Can’t Load Recording"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.can_t_load_recording.92bc4962", nil, NSBundle.mainBundle, @"Can’t Load Recording", @"User-facing text in iTermRecordingCodec (heading).")
                                     window:nil];
         return;
     }
@@ -84,13 +84,13 @@
     NSDictionary *dvrDict = dict[@"dvr"];
     Profile *dictProfile = dict[@"profile"];
     if (!dvrDict || !dictProfile) {
-        [iTermWarning showWarningWithTitle:@"This recording could not be loaded because it is missing critical information."
-                                   actions:@[ @"OK" ]
+        [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.this_recording_could_not_be_loaded_because_it.1ac7932f", nil, NSBundle.mainBundle, @"This recording could not be loaded because it is missing critical information.", @"User-facing warning message.")
+                                   actions:@[ NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRecordingCodec (actions).") ]
                              actionMapping:nil
                                  accessory:nil
                                 identifier:@"RecordingMalformed"
                                silenceable:kiTermWarningTypePersistent
-                                   heading:@"Can’t Load Recording"
+                                   heading:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.can_t_load_recording.92bc4962", nil, NSBundle.mainBundle, @"Can’t Load Recording", @"User-facing text in iTermRecordingCodec (heading).")
                                     window:nil];
         return;
     }
@@ -113,12 +113,12 @@
         PTYSession *newSession = [[PTYSession alloc] initSynthetic:YES];
         newSession.profile = profile;
         if (![newSession.screen.dvr loadDictionary:dvrDict]) {
-            [iTermWarning showWarningWithTitle:@"The recording could not be loaded. It might be corrupted."
-                                       actions:@[ @"OK" ]
+            [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.the_recording_could_not_be_loaded_it_might.9e2fba35", nil, NSBundle.mainBundle, @"The recording could not be loaded. It might be corrupted.", @"User-facing warning message.")
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRecordingCodec (actions).") ]
                                      accessory:nil
                                     identifier:@"NoSyncCouldNotLoadRecording"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Error Loading Recording"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.error_loading_recording.9f986fd1", nil, NSBundle.mainBundle, @"Error Loading Recording", @"User-facing text in iTermRecordingCodec (heading).")
                                         window:nil];
             makeSessionCompletion(nil);
             return;
@@ -187,18 +187,18 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (error) {
                             [iTermWarning showWarningWithTitle:error.localizedDescription
-                                                       actions:@[ @"OK" ]
+                                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRecordingCodec (actions).") ]
                                                      accessory:nil
                                                     identifier:@"ErrorSavingRecording"
                                                    silenceable:kiTermWarningTypePersistent
-                                                       heading:@"The recording could not be saved."
+                                                       heading:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.the_recording_could_not_be_saved.9f4f0fce", nil, NSBundle.mainBundle, @"The recording could not be saved.", @"User-facing text in iTermRecordingCodec (heading).")
                                                         window:nil];
                         }
                     });
                 }];
             } else {
-                [iTermWarning showWarningWithTitle:@"Error encoding recording."
-                                           actions:@[ @"OK" ]
+                [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.error_encoding_recording.978bede5", nil, NSBundle.mainBundle, @"Error encoding recording.", @"User-facing warning message.")
+                                           actions:@[ NSLocalizedStringWithDefaultValue(@"ui.codecs.itermrecordingcodec.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermRecordingCodec (actions).") ]
                                         identifier:@"ErrorSavingRecording"
                                        silenceable:kiTermWarningTypePersistent
                                             window:nil];

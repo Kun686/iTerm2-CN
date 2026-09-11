@@ -13,11 +13,11 @@ import Foundation
 @objc(iTermEnterWorkgroupBrowserTrigger)
 class EnterWorkgroupBrowserTrigger: Trigger {
     override static var title: String {
-        return "Enter Workgroup…"
+        return String(localized: "ui.swift.triggers.enterworkgroupbrowsertrigger.enter_workgroup.c0c5d9bc", defaultValue: "Enter Workgroup…", bundle: .main, comment: "User-facing text in EnterWorkgroupBrowserTrigger.")
     }
 
     override var description: String {
-        return "Enter Workgroup “\(displayLabel(forID: effectiveID))”"
+        return String(localized: "ui.swift.triggers.enterworkgroupbrowsertrigger.enter_workgroup_0.30052a49", defaultValue: "Enter Workgroup “\(displayLabel(forID: effectiveID))”", bundle: .main, comment: "User-facing text in EnterWorkgroupBrowserTrigger.")
     }
 
     override func takesParameter() -> Bool {
@@ -63,16 +63,17 @@ class EnterWorkgroupBrowserTrigger: Trigger {
     }
 
     private func displayLabel(forID id: String?) -> String {
-        guard let id, !id.isEmpty else { return "(unset)" }
+        guard let id, !id.isEmpty else { return String(localized: "ui.swift.triggers.enterworkgroupbrowsertrigger.unset.4d993827", defaultValue: "(unset)", bundle: .main, comment: "User-facing text in EnterWorkgroupBrowserTrigger.") }
         if let wg = availableWorkgroups.first(where: { $0.uniqueIdentifier == id }) {
-            return wg.name.isEmpty ? "Untitled" : wg.name
+            return wg.name.isEmpty ? String(localized: "ui.swift.triggers.enterworkgroupbrowsertrigger.untitled.f59ab8d1", defaultValue: "Untitled", bundle: .main, comment: "User-facing text in EnterWorkgroupBrowserTrigger.") : wg.name
         }
-        return "(missing)"
+        return String(localized: "ui.swift.triggers.enterworkgroupbrowsertrigger.missing.12954e60", defaultValue: "(missing)", bundle: .main, comment: "User-facing text in EnterWorkgroupBrowserTrigger.")
     }
 
     override func menuItemsForPoupupButton() -> [AnyHashable: Any]? {
         var dict: [AnyHashable: Any] = [:]
         for wg in availableWorkgroups {
+            // This label's sort position selects the implicit action target.
             let label = wg.name.isEmpty ? "Untitled" : wg.name
             dict[wg.uniqueIdentifier] = label
         }

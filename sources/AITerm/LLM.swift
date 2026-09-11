@@ -509,17 +509,17 @@ extension LLM.Message.StatusUpdate {
     var displayString: String {
         switch self {
         case .webSearchStarted:
-            "Searching the web…"
+            String(localized: "ui.swift.aiterm.llm.searching_the_web.f1acf3c9", defaultValue: "Searching the web…", bundle: .main, comment: "User-facing AI status update.")
         case .webSearchFinished(let query):
             if let query {
-                "Finished searching the web for \(query)."
+                String(localized: "ui.swift.aiterm.llm.finished_searching_the_web_for_0.40841c3c", defaultValue: "Finished searching the web for \(query).", bundle: .main, comment: "User-facing AI status update.")
             } else {
-                "Finished searching the web."
+                String(localized: "ui.swift.aiterm.llm.finished_searching_the_web.4a14a066", defaultValue: "Finished searching the web.", bundle: .main, comment: "User-facing AI status update.")
             }
         case .codeInterpreterStarted:
-            "Executing code…"
+            String(localized: "ui.swift.aiterm.llm.executing_code.b7a07877", defaultValue: "Executing code…", bundle: .main, comment: "User-facing AI status update.")
         case .codeInterpreterFinished:
-            "Finished executing code"
+            String(localized: "ui.swift.aiterm.llm.finished_executing_code.cef8e474", defaultValue: "Finished executing code", bundle: .main, comment: "User-facing AI status update.")
         case .reasoningSummaryUpdate(let text): text
         case .multipart(let subparts):
             Self.subpartsForDisplay(subparts).map { $0.displayString }.joined(separator: "\n")

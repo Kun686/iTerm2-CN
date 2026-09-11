@@ -14,6 +14,27 @@
 
 @import Sparkle;
 
+// These values also appear in diagnostic descriptions and logs. Keep their
+// stored form unchanged and translate only the independent AppKit display copy.
+static NSString *iTermLocalizedPythonDownloadDisplayString(NSString *diagnostic) {
+    if ([diagnostic isEqualToString:@"Finding latest version…"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.finding_latest_version.5a55d9a0", nil, NSBundle.mainBundle, @"Finding latest version…", @"User-facing text in iTermOptionalComponentDownloadWindowController (title).");
+    }
+    if ([diagnostic isEqualToString:@"Downloading Python runtime…"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.downloading_python_runtime.e8cebee4", nil, NSBundle.mainBundle, @"Downloading Python runtime…", @"User-facing text in iTermOptionalComponentDownloadWindowController (title).");
+    }
+    if ([diagnostic isEqualToString:@"Downloading uv…"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.swift.api.itermuvprovisioner.downloading_uv.cc5d76da", nil, NSBundle.mainBundle, @"Downloading uv…", @"User-facing uv download title.");
+    }
+    if ([diagnostic isEqualToString:@"Download Finished"]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermpythonruntimedownloader.download_finished.04bd45b4", nil, NSBundle.mainBundle, @"Download Finished", @"User-facing text in iTermPythonRuntimeDownloader (title).");
+    }
+    if ([diagnostic isEqualToString:@"✅ The Python runtime is up to date."]) {
+        return NSLocalizedStringWithDefaultValue(@"ui.api.itermpythonruntimedownloader.the_python_runtime_is_up_to_date.94dca225", nil, NSBundle.mainBundle, @"✅ The Python runtime is up to date.", @"User-facing Python runtime status message.");
+    }
+    return diagnostic;
+}
+
 // SEE ALSO iTermWebSocketConnectionMinimumPythonLibraryVersion
 // NOTE: This forces upgrades of full-environment scripts.
 // Increasing this makes everyone download a new version.
@@ -61,7 +82,7 @@ const int iTermMinimumPythonEnvironmentVersion = 72;
 }
 
 - (NSString *)progressString {
-    return @"Connecting…";
+    return NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.connecting.72021eb7", nil, NSBundle.mainBundle, @"Connecting…", @"User-facing text in iTermOptionalComponentDownloadWindowController (beginPhase:).");
 }
 
 - (BOOL)buttonEnabled {
@@ -414,7 +435,7 @@ didCompleteWithError:(nullable NSError *)error {
     // and it routes through the phase-cancel/completion logic correctly.
     self.window.styleMask &= ~NSWindowStyleMaskClosable;
 
-    _titleLabel.stringValue = @"Initializing…";
+    _titleLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.initializing.5015fd15", nil, NSBundle.mainBundle, @"Initializing…", @"User-facing text in iTermOptionalComponentDownloadWindowController (windowDidLoad).");
     _progressLabel.stringValue = [NSString stringWithFormat:@""];
 }
 
@@ -438,21 +459,21 @@ didCompleteWithError:(nullable NSError *)error {
         _firstPhase = phase;
     }
     _currentPhase = phase;
-    _titleLabel.stringValue = phase.title;
+    _titleLabel.stringValue = iTermLocalizedPythonDownloadDisplayString(phase.title);
     phase.delegate = self;
     [phase download];
     _progressLabel.stringValue = phase.progressString;
     _button.enabled = phase.buttonEnabled;
-    _button.title = @"Cancel";
+    _button.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.cancel.19766ed6", nil, NSBundle.mainBundle, @"Cancel", @"User-facing text in iTermOptionalComponentDownloadWindowController (beginPhase:).");
 }
 
 - (void)showMessage:(NSString *)message {
     DLog(@"message=%@", message);
     _showingMessage = YES;
-    _titleLabel.stringValue = message;
+    _titleLabel.stringValue = iTermLocalizedPythonDownloadDisplayString(message);
     _progressLabel.stringValue = @"";
     _button.enabled = YES;
-    _button.title = @"OK";
+    _button.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing text in iTermOptionalComponentDownloadWindowController (showMessage:).");
 }
 
 - (IBAction)button:(id)sender {
@@ -471,13 +492,13 @@ didCompleteWithError:(nullable NSError *)error {
 - (void)downloadDidFailWithError:(NSError *)error {
     RLog(@"error=%@ %@", error, self);
     _button.enabled = YES;
-    _button.title = @"Try Again";
+    _button.title = NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.try_again.df0fe9e0", nil, NSBundle.mainBundle, @"Try Again", @"User-facing text in iTermOptionalComponentDownloadWindowController (downloadDidFailWithError:).");
     if (error.code == -999 && [error.domain isEqualToString:@"com.iterm2"]) {
-        _progressLabel.stringValue = @"Canceled";
+        _progressLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.canceled.13ca2ee2", nil, NSBundle.mainBundle, @"Canceled", @"User-facing text in iTermOptionalComponentDownloadWindowController (downloadDidFailWithError:).");
         _titleLabel.stringValue = @"";
     } else {
         _progressLabel.stringValue = error.localizedDescription;
-        _titleLabel.stringValue = @"Download Failed";
+        _titleLabel.stringValue = NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.download_failed.e1475b51", nil, NSBundle.mainBundle, @"Download Failed", @"User-facing text in iTermOptionalComponentDownloadWindowController (downloadDidFailWithError:).");
     }
     _progressIndicator.doubleValue = 0;
     iTermOptionalComponentDownloadPhase *phase = _currentPhase;
@@ -511,7 +532,7 @@ didCompleteWithError:(nullable NSError *)error {
                                ofTotal:(double)totalBytes {
     DLog(@"downloaded %@/%@ %@", @(bytesWritten), @(totalBytes), self);
     self->_progressIndicator.doubleValue = bytesWritten / totalBytes;
-    self->_progressLabel.stringValue = [NSString stringWithFormat:@"%@ of %@",
+    self->_progressLabel.stringValue = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.api.itermoptionalcomponentdownloadwindowcontroller.of.88e3976c", nil, NSBundle.mainBundle, @"%@ of %@", @"User-facing text in iTermOptionalComponentDownloadWindowController (stringValue)."),
                                         [NSString it_formatBytes:bytesWritten],
                                         [NSString it_formatBytes:totalBytes]];
 }

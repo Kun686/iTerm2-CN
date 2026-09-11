@@ -293,12 +293,12 @@ extension PTYSession: iTermBrowserViewControllerDelegate {
     }
 
     func browserViewController(_ controller: iTermBrowserViewController, runCommand command: String) {
-        guard iTermWarning.show(withTitle: "OK to run:\n\(command)",
-                                actions: ["OK", "Cancel"],
+        guard iTermWarning.show(withTitle: String(localized: "ui.swift.ptysession.ptysession_browser.ok_to_run_0.2171b07a", defaultValue: "OK to run:\n\(command)", bundle: .main, comment: "User-facing text in PTYSession+Browser."),
+                                actions: [String(localized: "ui.swift.ptysession.ptysession_browser.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in PTYSession+Browser."), String(localized: "ui.swift.ptysession.ptysession_browser.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in PTYSession+Browser.")],
                                 accessory: nil,
                                 identifier: nil,
                                 silenceable: .kiTermWarningTypePersistent,
-                                heading: "Run command?",
+                                heading: String(localized: "ui.swift.ptysession.ptysession_browser.run_command.f44bd344", defaultValue: "Run command?", bundle: .main, comment: "User-facing text in PTYSession+Browser."),
                                 window: view?.window) == .kiTermWarningSelection0 else {
             return
         }
@@ -328,12 +328,12 @@ extension PTYSession: iTermBrowserViewControllerDelegate {
     }
 
     func browserViewController(_ controller: iTermBrowserViewController, openFile file: String) {
-        guard iTermWarning.show(withTitle: "OK to open this file?\n\(file)",
-                                actions: ["OK", "Cancel"],
+        guard iTermWarning.show(withTitle: String(localized: "ui.swift.ptysession.ptysession_browser.ok_to_open_this_file_0.e7393dec", defaultValue: "OK to open this file?\n\(file)", bundle: .main, comment: "User-facing text in PTYSession+Browser."),
+                                actions: [String(localized: "ui.swift.ptysession.ptysession_browser.ok.565339bc", defaultValue: "OK", bundle: .main, comment: "User-facing text in PTYSession+Browser."), String(localized: "ui.swift.ptysession.ptysession_browser.cancel.19766ed6", defaultValue: "Cancel", bundle: .main, comment: "User-facing text in PTYSession+Browser.")],
                                 accessory: nil,
                                 identifier: nil,
                                 silenceable: .kiTermWarningTypePersistent,
-                                heading: "Open file?",
+                                heading: String(localized: "ui.swift.ptysession.ptysession_browser.open_file.578fccc5", defaultValue: "Open file?", bundle: .main, comment: "User-facing text in PTYSession+Browser."),
                                 window: view?.window) == .kiTermWarningSelection0 else {
             return
         }

@@ -11,11 +11,11 @@ import Foundation
 @objc(iTermExitWorkgroupBrowserTrigger)
 class ExitWorkgroupBrowserTrigger: Trigger {
     override static var title: String {
-        return "Exit Workgroup"
+        return String(localized: "ui.swift.triggers.exitworkgroupbrowsertrigger.exit_workgroup.ad1c7dcb", defaultValue: "Exit Workgroup", bundle: .main, comment: "User-facing text in ExitWorkgroupBrowserTrigger.")
     }
 
     override var description: String {
-        return "Exit Workgroup"
+        return String(localized: "ui.swift.triggers.exitworkgroupbrowsertrigger.exit_workgroup.ad1c7dcb", defaultValue: "Exit Workgroup", bundle: .main, comment: "User-facing text in ExitWorkgroupBrowserTrigger.")
     }
 
     override func takesParameter() -> Bool {

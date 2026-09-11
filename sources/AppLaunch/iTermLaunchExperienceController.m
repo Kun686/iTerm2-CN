@@ -8,6 +8,7 @@
 #import "iTermLaunchExperienceController.h"
 
 #import "NSArray+iTerm.h"
+#import "NSBundle+iTerm.h"
 #import "NSStringITerm.h"
 #import "PFMoveApplication.h"
 #import "PTYSession.h"
@@ -114,7 +115,9 @@ typedef NS_ENUM(NSUInteger, iTermLaunchExperienceChoice) {
             return self;
         }
         const NSInteger runCount = [iTermLaunchExperienceController incrementRunCount];
-        if (runCount == 2 && ![[SUUpdater sharedUpdater] automaticallyChecksForUpdates]) {
+        if (runCount == 2 &&
+            ![NSBundle it_isCNCommunityBuild] &&
+            ![[SUUpdater sharedUpdater] automaticallyChecksForUpdates]) {
             // Sparkle will do its thing this launch.
             _choice = iTermLaunchExperienceChoiceNone;
         } else if ([iTermLaunchExperienceController quelled]) {
@@ -220,14 +223,14 @@ typedef NS_ENUM(NSUInteger, iTermLaunchExperienceChoice) {
             command = @"pip3 install --user --upgrade iterm2";
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *message = [NSString stringWithFormat:@"The system Python's iterm2 module is out of date and won't work with this version of iTerm2. Run `%@` to fix it.", command];
+            NSString *message = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermlaunchexperiencecontroller.the_system_python_s_iterm2_module_is_out_of_date_and_won_t_work_with_thi.a6ccb56e", nil, NSBundle.mainBundle, @"The system Python's iterm2 module is out of date and won't work with this version of iTerm2. Run `%@` to fix it.", @"User-facing text in iTermLaunchExperienceController (indirect UI)."), command];
             const iTermWarningSelection selection =
             [iTermWarning showWarningWithTitle:message
-                                       actions:@[ @"Copy Command", @"Ignore", @"Remind me Later"]
+                                       actions:@[ NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermlaunchexperiencecontroller.copy_command.3bdd0fd9", nil, NSBundle.mainBundle, @"Copy Command", @"User-facing action label in iTermLaunchExperienceController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermlaunchexperiencecontroller.ignore.fce77c34", nil, NSBundle.mainBundle, @"Ignore", @"User-facing action label in iTermLaunchExperienceController (actions)."), NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermlaunchexperiencecontroller.remind_me_later.9d52543f", nil, NSBundle.mainBundle, @"Remind me Later", @"User-facing action label in iTermLaunchExperienceController (actions).")]
                                      accessory:nil
                                     identifier:@"SystemPythonModuleOutdated"
                                    silenceable:kiTermWarningTypePersistent
-                                       heading:@"Upgrade system Python iterm2 module?"
+                                       heading:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermlaunchexperiencecontroller.upgrade_system_python_iterm2_module.21fdadf9", nil, NSBundle.mainBundle, @"Upgrade system Python iterm2 module?", @"User-facing text in iTermLaunchExperienceController (heading).")
                                         window:nil];
             switch (selection) {
                 case kiTermWarningSelection0: {
@@ -274,12 +277,12 @@ typedef NS_ENUM(NSUInteger, iTermLaunchExperienceChoice) {
 }
 
 - (void)warnAboutChangeToDefaultPasteBehavior {
-    [iTermWarning showWarningWithTitle:@"iTerm2 no longer warns before a multi-line paste, unless you are at the shell prompt."
-                               actions:@[ @"OK" ]
+    [iTermWarning showWarningWithTitle:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermlaunchexperiencecontroller.iterm2_no_longer_warns_before_a_multi_line.d746780b", nil, NSBundle.mainBundle, @"iTerm2 no longer warns before a multi-line paste, unless you are at the shell prompt.", @"User-facing warning message.")
+                               actions:@[ NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermlaunchexperiencecontroller.ok.565339bc", nil, NSBundle.mainBundle, @"OK", @"User-facing action label in iTermLaunchExperienceController (actions).") ]
                              accessory:nil
                             identifier:nil
                            silenceable:kiTermWarningTypePersistent
-                               heading:@"Important Change"
+                               heading:NSLocalizedStringWithDefaultValue(@"ui.applaunch.itermlaunchexperiencecontroller.important_change.b1e8812a", nil, NSBundle.mainBundle, @"Important Change", @"User-facing text in iTermLaunchExperienceController (heading).")
                                 window:nil];
     [[iTermUserDefaults userDefaults] setBool:YES forKey:kHaveWarnedAboutPasteConfirmationChange];
 }

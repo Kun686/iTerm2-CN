@@ -10,6 +10,12 @@
             "state": "new",
             "value": "Drag a component from the menu to Active Components to add it to your status bar."
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从菜单中拖拽组件到“活跃组件”以将其添加到状态栏。"
+          }
         }
       }
     },
@@ -21,6 +27,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Prefer tight packing to stable positioning"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "紧凑排列优先于稳定定位"
           }
         }
       }
@@ -34,6 +46,12 @@
             "state": "new",
             "value": "OK"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
+          }
         }
       }
     },
@@ -45,6 +63,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Active Components"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "活跃组件"
           }
         }
       }
@@ -58,6 +82,12 @@
             "state": "new",
             "value": "Window"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "窗口"
+          }
         }
       }
     },
@@ -69,6 +99,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Draw separator between status bar and terminal"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在状态栏与终端之间绘制分隔线"
           }
         }
       }
@@ -82,6 +118,12 @@
             "state": "new",
             "value": "Automatic"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动"
+          }
         }
       }
     },
@@ -93,6 +135,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Status Bar Component Menu"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状态栏组件菜单"
           }
         }
       }
@@ -106,6 +154,12 @@
             "state": "new",
             "value": "🌈 Auto-Rainbow:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🌈 自动彩虹："
+          }
         }
       }
     },
@@ -117,6 +171,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Configure Component"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配置组件"
           }
         }
       }
@@ -130,6 +190,12 @@
             "state": "new",
             "value": "Separator Color:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分隔符颜色："
+          }
         }
       }
     },
@@ -141,6 +207,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Cancel"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
           }
         }
       }
@@ -154,6 +226,12 @@
             "state": "new",
             "value": "Font:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "字体："
+          }
         }
       }
     },
@@ -165,6 +243,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Background Color:"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "背景颜色："
           }
         }
       }
@@ -178,6 +262,12 @@
             "state": "new",
             "value": "Disabled"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已禁用"
+          }
         }
       }
     },
@@ -189,6 +279,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Remove components with empty values"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除值为空的组件"
           }
         }
       }
@@ -202,16 +298,53 @@
             "state": "new",
             "value": "Advanced…"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "高级…"
+          }
         }
+      }
+    },
+    "h3F-Ct-TxA.ibShadowedToolTip": {
+      "comment": "Class = \"NSButton\"; toolTip for tight packing; ObjectID = \"h3F-Ct-TxA\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The tight packing algorithm allows more status bar components to be visible at a time but they tend to jump around more." } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "紧凑排列算法可同时显示更多状态栏组件，但组件的位置也更容易发生变动。" } }
+      }
+    },
+    "kXu-5A-6d1.ibShadowedToolTip": {
+      "comment": "Class = \"NSButton\"; preserve the existing shared tight-packing help text; ObjectID = \"kXu-5A-6d1\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The tight packing algorithm allows more status bar components to be visible at a time but they tend to jump around more." } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "紧凑排列算法可同时显示更多状态栏组件，但组件的位置也更容易发生变动。" } }
+      }
+    },
+    "ZqX-2h-twi.ibShadowedToolTip": {
+      "comment": "Class = \"NSButton\"; toolTip for the separator; ObjectID = \"ZqX-2h-twi\";",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Draws a thin line between the status bar and the terminal content." } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "在状态栏与终端内容之间绘制一条细线。" } }
       }
     },
     "hYG-rt-3qI.title": {
       "comment": "Class = \"NSTextFieldCell\"; title = \"Font name goes here\"; ObjectID = \"hYG-rt-3qI\";",
       "extractionState": "extracted_with_value",
+      "shouldTranslate": false,
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "new",
+            "value": "Font name goes here"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
             "value": "Font name goes here"
           }
         }
@@ -226,6 +359,12 @@
             "state": "new",
             "value": "Change"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更改"
+          }
         }
       }
     },
@@ -237,6 +376,12 @@
           "stringUnit": {
             "state": "new",
             "value": "Dark Colors"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深色配色"
           }
         }
       }
@@ -250,6 +395,12 @@
             "state": "new",
             "value": "Default Text Color:"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "默认文本颜色："
+          }
         }
       }
     },
@@ -262,6 +413,12 @@
             "state": "new",
             "value": "Light Colors"
           }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浅色配色"
+          }
         }
       }
     },
@@ -273,6 +430,12 @@
           "stringUnit": {
             "state": "new",
             "value": "OK"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
           }
         }
       }

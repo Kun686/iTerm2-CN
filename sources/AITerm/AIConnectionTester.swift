@@ -68,7 +68,7 @@ class AIConnectionTester: NSObject {
         // The reviewer placeholder key contacts no service, so a live probe would
         // fail. Report success and explain, matching the runtime short-circuit.
         if apiKey == AITermController.reviewPlaceholderAPIKey {
-            completion(.success, "Placeholder key in use: AI responses are simulated for App Review and no external service is contacted.")
+            completion(.success, String(localized: "ui.swift.aiterm.aiconnectiontester.placeholder_key_in_use_ai_responses_are_simulated.3a6ad74b", defaultValue: "Placeholder key in use: AI responses are simulated for App Review and no external service is contacted.", bundle: .main, comment: "User-facing text in AIConnectionTester."))
             return
         }
         var features = Set<AIMetadata.Model.Feature>()
@@ -96,7 +96,7 @@ class AIConnectionTester: NSObject {
         model.customHeaders = customHeaders
         let provider = LLMProvider(model: model)
         guard provider.urlIsValid else {
-            completion(.failure, "The URL is not valid.")
+            completion(.failure, String(localized: "ui.swift.aiterm.aiconnectiontester.the_url_is_not_valid.34088ca6", defaultValue: "The URL is not valid.", bundle: .main, comment: "User-facing text in AIConnectionTester."))
             return
         }
         let builder = LLMRequestBuilder(provider: provider,
@@ -108,7 +108,7 @@ class AIConnectionTester: NSObject {
         do {
             request = try builder.webRequest()
         } catch {
-            completion(.failure, "Could not build a request: \(error.localizedDescription)")
+            completion(.failure, String(localized: "ui.swift.aiterm.aiconnectiontester.could_not_build_a_request_0.20966816", defaultValue: "Could not build a request: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in AIConnectionTester."))
             return
         }
         _ = iTermAIClient.instance.request(webRequest: request, stream: nil) { result in
@@ -139,9 +139,9 @@ class AIConnectionTester: NSObject {
         var parser = provider.responseParser()
         do {
             _ = try parser.parse(data: response.data.lossyData)
-            return (.success, "The connection succeeded. The model responded normally.")
+            return (.success, String(localized: "ui.swift.aiterm.aiconnectiontester.the_connection_succeeded_the_model_responded_normally.7bf46371", defaultValue: "The connection succeeded. The model responded normally.", bundle: .main, comment: "User-facing text in AIConnectionTester."))
         } catch {
-            return (.failure, "The server responded but its reply could not be understood: \(error.localizedDescription)")
+            return (.failure, String(localized: "ui.swift.aiterm.aiconnectiontester.the_server_responded_but_its_reply_could_not.42bdcd86", defaultValue: "The server responded but its reply could not be understood: \(error.localizedDescription)", bundle: .main, comment: "User-facing text in AIConnectionTester."))
         }
     }
 }
