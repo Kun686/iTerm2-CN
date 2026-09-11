@@ -314,6 +314,11 @@ final class PSMTabGroupDragTests: XCTestCase {
     // wide window into a narrow stretch-to-fit window must open a slot at the
     // destination's (much smaller) on-drop size.
     func testDropSlotSizedForDestinationNotSource() {
+        let key = kPreferenceKeyScrollableSideTabBar
+        let savedValue = iTermUserDefaults.userDefaults().object(forKey: key)
+        iTermPreferences.setBool(false, forKey: key)
+        defer { iTermPreferences.setObject(savedValue, forKey: key) }
+
         let (chip, members) = makeGroupedBar()   // source unit ≈ 280pt wide
         let event = mouseDownEvent(at: NSPoint(x: 20, y: 12))
         PSMTabDragAssistant.shared().startDraggingGroup(withChip: chip,
@@ -431,6 +436,11 @@ final class PSMTabGroupDragTests: XCTestCase {
     // the slot grows past the trailing edge where it is invisible (field bug:
     // dragging a group into another window's full bar showed no gap at all).
     func testForeignDragIntoFullBarShrinksTabsToOpenGap() {
+        let key = kPreferenceKeyScrollableSideTabBar
+        let savedValue = iTermUserDefaults.userDefaults().object(forKey: key)
+        iTermPreferences.setBool(false, forKey: key)
+        defer { iTermPreferences.setObject(savedValue, forKey: key) }
+
         let (chip, members) = makeGroupedBar()
         let event = mouseDownEvent(at: NSPoint(x: 20, y: 12))
         PSMTabDragAssistant.shared().startDraggingGroup(withChip: chip,

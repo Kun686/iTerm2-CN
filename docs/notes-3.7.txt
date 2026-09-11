@@ -1,6 +1,7 @@
 Version 3.7.0beta1 was built on April 20, 2026
 
 iTerm2-CN community localization:
+- Set explicit scrolling mode in two drag tests.
 - Run fork CI with the CN app build settings.
 - Translate the Composer help-button tooltip.
 - Localize last-use labels in history suggestions.
